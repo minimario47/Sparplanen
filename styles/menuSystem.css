@@ -1,0 +1,236 @@
+/* Menu System Styles */
+.menu-system {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu-button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.menu-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.menu-button:active {
+    transform: translateY(0);
+}
+
+.menu-button .menu-icon {
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.menu-button.active .menu-icon {
+    transform: rotate(180deg);
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    min-width: 280px;
+    max-width: 320px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    margin-top: 0.5rem;
+}
+
+.menu-dropdown.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.menu-category {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.menu-category:last-child {
+    border-bottom: none;
+}
+
+.menu-category-header {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu-category-header .category-icon {
+    font-size: 1rem;
+}
+
+.menu-category-items {
+    padding: 0.5rem 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.menu-item:hover {
+    background: #f8f9fa;
+    color: var(--primary-color);
+}
+
+.menu-item:active {
+    background: #e9ecef;
+}
+
+.menu-item .item-icon {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+    opacity: 0.7;
+}
+
+.menu-item:hover .item-icon {
+    opacity: 1;
+}
+
+.menu-item-content {
+    flex: 1;
+}
+
+.menu-item-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.menu-item-description {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.3;
+}
+
+.menu-item-shortcut {
+    font-size: 0.75rem;
+    color: #999;
+    background: #f5f5f5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+.menu-item:hover .menu-item-shortcut {
+    background: #e9ecef;
+    color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .menu-dropdown {
+        min-width: 260px;
+        left: auto;
+        right: 0;
+    }
+    
+    .menu-item {
+        padding: 0.875rem 1rem;
+    }
+    
+    .menu-item-description {
+        display: none;
+    }
+}
+
+/* Animation for menu items */
+.menu-category-items .menu-item {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: slideInItems 0.3s ease forwards;
+}
+
+.menu-category-items .menu-item:nth-child(1) { animation-delay: 0.05s; }
+.menu-category-items .menu-item:nth-child(2) { animation-delay: 0.1s; }
+.menu-category-items .menu-item:nth-child(3) { animation-delay: 0.15s; }
+.menu-category-items .menu-item:nth-child(4) { animation-delay: 0.2s; }
+
+@keyframes slideInItems {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.menu-item.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.menu-item.loading .item-icon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.menu-close {
+    display: none;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #999;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.menu-close:hover {
+    background: #f0f0f0;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .menu-close {
+        display: block;
+    }
+} 

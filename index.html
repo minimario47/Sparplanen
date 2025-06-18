@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spårplannen - Göteborg C</title>
+    <!-- CSS Variables and Foundation -->
+    <link rel="stylesheet" href="styles/variables.css">
+    <link rel="stylesheet" href="styles/themes.css">
+    <link rel="stylesheet" href="styles/base.css">
+    
+    <!-- Layout and Structure -->
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/header.css">
+    
+    <!-- Components -->
+    <link rel="stylesheet" href="styles/buttons.css">
+    <link rel="stylesheet" href="styles/timeline.css">
+    <link rel="stylesheet" href="styles/trains.css">
+    <link rel="stylesheet" href="styles/modals.css">
+    <link rel="stylesheet" href="styles/context-menu.css">
+    <link rel="stylesheet" href="styles/panels.css">
+    <link rel="stylesheet" href="styles/notifications.css">
+    <link rel="stylesheet" href="styles/menuSystem.css">
+    
+    <!-- Behavior and Responsive -->
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+
+    <div class="app-container" id="appContainer">
+        <header class="app-header">
+            <div class="app-brand">
+                <div class="brand-icon">🚄</div>
+                <div class="brand-text">
+                    <h1>Spårplannen</h1>
+                    <div class="brand-subtitle">TågX</div>
+                </div>
+                <!-- Delay Connection Status -->
+                <div id="delayConnectionStatus" class="delay-connection-status connecting" 
+                     title="Anslutningsstatus för förseningsdata">
+                    Ansluter...
+                </div>
+            </div>
+
+            <!-- Essential Controls Row -->
+            <div class="essential-controls">
+                <!-- Primary Action -->
+                <button class="button success large" id="addTrainButton" aria-label="Lägg till nytt tåg">
+                    <span>➕</span> Lägg till tåg
+                </button>
+
+                <!-- Menu System Container (populated by menuSystem.js) -->
+                <div class="main-controls">
+                    <!-- Menu items will be inserted here -->
+                </div>
+
+                <!-- Time Navigation -->
+                <div class="time-controls">
+                    <button class="button primary" id="prevTimeButton" aria-label="Föregående tidsperiod">
+                        <span>◀</span>
+                    </button>
+                    <span id="currentTimeRange" role="status" aria-live="polite">00:00 - 03:00</span>
+                    <button class="button primary" id="nextTimeButton" aria-label="Nästa tidsperiod">
+                        <span>▶</span>
+                    </button>
+                </div>
+
+                <!-- View Control -->
+                <div class="view-controls">
+                    <label for="viewHoursSelect">Visa:</label>
+                    <select id="viewHoursSelect" class="view-hours-select" aria-label="Välj antal timmar att visa">
+                        <option value="1">1h</option>
+                        <option value="2">2h</option>
+                        <option value="3" selected>3h</option>
+                        <option value="4">4h</option>
+                        <option value="6">6h</option>
+                        <option value="8">8h</option>
+                        <option value="12">12h</option>
+                        <option value="24">24h</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Keep original buttons hidden for backwards compatibility -->
+        <div style="display: none;">
+            <button id="exportButton"></button>
+            <button id="saveButton"></button>
+            <button id="importButton"></button>
+            <button id="undoButton"></button>
+            <button id="redoButton"></button>
+            <button id="historyButton"></button>
+            <button id="helpButton"></button>
+        </div>
+
+        <div class="main-content">
+            <div class="track-labels" id="trackLabels"></div>
+            <div class="schedule-view" id="scheduleView">
+                <div class="timeline-header" id="timelineHeader"></div>
+                <div class="schedule-grid" id="scheduleGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals and Context Menus -->
+    <div id="trainModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 id="modalTitle">Lägg till nytt tåg</h2>
+            <form id="trainForm">
+                <input type="hidden" id="trainId">
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="arrivalTrainNumber">Ankomst tågnummer</label>
+                        <input type="text" id="arrivalTrainNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="departureTrainNumber">Avgång tågnummer</label>
+                        <input type="text" id="departureTrainNumber" required>
+                    </div>
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="origin">Från</label>
+                        <input type="text" id="origin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Till</label>
+                        <input type="text" id="destination" required>
+                    </div>
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="startTime">Ankomsttid (HH:MM)</label>
+                        <input type="time" id="startTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endTime">Avgångstid (HH:MM)</label>
+                        <input type="time" id="endTime" required>
+                    </div>
+                </div>
+
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="vehicleTypeSelect">Fordonstyp</label>
+                        <select id="vehicleTypeSelect" required>
+                            <option value="">Välj fordonstyp</option>
+                        </select>
+                        <div id="vehicleTypeInfo" class="vehicle-type-info" style="display: none;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleCount">Antal enheter</label>
+                        <input type="number" id="vehicleCount" min="1" max="3" value="1" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="trackSelect">Spår</label>
+                    <select id="trackSelect" required></select>
+                    <div id="trackCapacityInfo" class="track-capacity-info" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="color">Färg (valfri överstyrning)</label>
+                    <input type="color" id="color" value="#3498db">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="button" id="cancelButton" aria-label="Avbryt och stäng dialog">
+                        <span>✕</span> Avbryt
+                    </button>
+                    <button type="submit" class="button success" aria-label="Spara tågtjänst">
+                        <span>✓</span> Spara tjänst
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="contextMenu">
+        <ul>
+            <li data-action="edit">Redigera detaljer...</li>
+            <li data-action="swap">Byt plats med annat tåg</li>
+            <li data-action="split">Dela tåg</li>
+            <li data-action="find-alternative">Hitta alternativ plats</li>
+            <li class="separator"></li>
+            <li data-action="delete" class="danger">Ta bort tåg</li>
+        </ul>
+    </div>
+
+    <!-- History Panel -->
+    <div id="historyPanel" class="history-panel">
+        <div class="history-panel-header">
+            <span>Åtgärdshistorik</span>
+            <button id="closeHistoryPanelButton" style="background: none; border: none; cursor: pointer; font-size: 1.2em;">✕</button>
+        </div>
+        <div id="historyContent">
+            <!-- History items will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Track Data Panel -->
+    <div id="trackDataPanel" class="history-panel">
+        <div class="history-panel-header">
+            <span id="trackDataTitle">Spårdata</span>
+            <button id="closeTrackDataPanelButton" style="background: none; border: none; cursor: pointer; font-size: 1.2em;">✕</button>
+        </div>
+        <div id="trackDataContent">
+            <!-- Track data will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Train Data Panel -->
+    <div id="trainDataPanel" class="history-panel">
+        <div class="history-panel-header">
+            <span id="trainDataTitle">Tågdata</span>
+            <button id="closeTrainDataPanelButton" style="background: none; border: none; cursor: pointer; font-size: 1.2em;">✕</button>
+        </div>
+        <div id="trainDataContent">
+            <!-- Train data will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+
+    <!-- External Libraries and Data -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="vehicleTypes.js"></script>
+    <script src="tracks.js"></script>
+    <script src="trains.js"></script>
+    <script src="persistenceEngine.js"></script>
+    <script src="historyEngine.js"></script>
+
+    <script src="utils.js"></script>
+    <script src="renderer.js"></script>
+    <script src="modalManager.js"></script>
+    <!-- Event Handler Modules -->
+    <script src="events/mouseEvents.js"></script>
+    <script src="events/contextMenu.js"></script>
+    <script src="events/timeNavigation.js"></script>
+    <script src="events/trainActions.js"></script>
+    <script src="events/fileOperations.js"></script>
+    <script src="events/historyOperations.js"></script>
+    <script src="events/keyboardShortcuts.js"></script>
+    <script src="events/trackData.js"></script>
+    <script src="events/eventSetup.js"></script>
+    <script src="menuSystem.js"></script>
+    <!-- Train Delay Integration -->
+    <script src="TrainData/train_delay_integration.js"></script>
+    <script src="app.js"></script>
+    
+</body>
+</html>

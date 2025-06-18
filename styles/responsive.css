@@ -1,0 +1,93 @@
+/* Responsive Design and Media Queries */
+
+@media (max-width: 1024px) {
+    .essential-controls {
+        gap: 0.75rem;
+    }
+    
+    .time-controls button span {
+        display: none;
+    }
+    
+    .view-controls label {
+        display: none;
+    }
+    
+    .view-hours-select {
+        min-width: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .essential-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+    }
+    
+    .main-controls {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 1200px) {
+    .brand-subtitle {
+        display: none;
+    }
+    
+    .app-header {
+        padding: var(--spacing-3) var(--spacing-4);
+        gap: var(--spacing-3);
+    }
+}
+
+@media (max-width: 768px) {
+    .brand-icon {
+        font-size: var(--font-size-xl);
+    }
+    
+    .app-header h1 {
+        font-size: var(--font-size-lg);
+    }
+    
+    .history-panel {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .modal-content {
+        margin: var(--spacing-4);
+        padding: var(--spacing-6);
+    }
+}
+
+[data-theme="dark"] .hour-marker {
+    background: var(--surface-secondary);
+}
+
+[data-theme="dark"] .track-container:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="dark"] .app-header h1 {
+    background: linear-gradient(135deg, var(--primary-400) 0%, var(--primary-600) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-theme="high-contrast"] .train-bar {
+    border-width: 3px;
+    font-weight: var(--font-weight-bold);
+}
+
+[data-theme="high-contrast"] .button {
+    border-width: 2px;
+    font-weight: var(--font-weight-bold);
+}
+
+.elevation-1 { box-shadow: var(--shadow-sm); }
+.elevation-2 { box-shadow: var(--shadow-md); }
+.elevation-3 { box-shadow: var(--shadow-lg); }
+.elevation-4 { box-shadow: var(--shadow-xl); }
+.elevation-5 { box-shadow: var(--shadow-2xl); } 

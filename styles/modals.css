@@ -1,0 +1,138 @@
+/* Modern Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--surface-overlay);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    visibility: hidden;
+    opacity: 0;
+    transition: all var(--transition-normal);
+}
+
+.modal-overlay.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--surface-elevated);
+    padding: var(--spacing-8);
+    border-radius: var(--border-radius-lg);
+    width: 400px;
+    max-width: 90vw;
+    box-shadow: var(--shadow-2xl);
+    border: 1px solid var(--border-primary);
+    color: var(--text-primary);
+    transform: scale(0.95);
+    transition: transform var(--transition-normal);
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-6);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
+}
+
+.form-group {
+    margin-bottom: var(--spacing-5);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-2);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.025em;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: var(--spacing-3);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-md);
+    box-sizing: border-box;
+    background-color: var(--surface-primary);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-fast);
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: var(--shadow-glow);
+}
+
+.form-group input:hover, .form-group select:hover {
+    border-color: var(--border-secondary);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-6);
+    padding-top: var(--spacing-4);
+    border-top: 1px solid var(--border-primary);
+}
+
+.form-group-row {
+    display: flex;
+    gap: var(--spacing-4);
+}
+
+.form-group-row .form-group {
+    flex: 1;
+    margin-bottom: var(--spacing-4);
+}
+
+.vehicle-type-info {
+    background: var(--surface-tertiary);
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    margin-top: var(--spacing-2);
+    border: 1px solid var(--border-primary);
+}
+
+.track-capacity-info {
+    font-size: var(--font-size-xs);
+    margin-top: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--border-radius-md);
+    font-weight: var(--font-weight-medium);
+}
+
+.track-capacity-info.ok {
+    background: var(--success-50);
+    color: var(--success-700);
+    border: 1px solid var(--success-200);
+}
+
+.track-capacity-info.warning {
+    background: var(--warning-50);
+    color: var(--warning-700);
+    border: 1px solid var(--warning-200);
+}
+
+.track-capacity-info.impossible {
+    background: var(--error-50);
+    color: var(--error-700);
+    border: 1px solid var(--error-200);
+} 

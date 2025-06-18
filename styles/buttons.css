@@ -1,0 +1,244 @@
+
+.button {
+    padding: var(--spacing-3) var(--spacing-4);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background-color: var(--interactive-primary);
+    color: var(--text-inverse);
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    min-height: 40px;
+    box-shadow: var(--shadow-sm);
+    user-select: none;
+    white-space: nowrap;
+    font-family: inherit;
+}
+
+.button:hover:not(:disabled) {
+    background-color: var(--interactive-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.button:active:not(:disabled) {
+    background-color: var(--interactive-primary-active);
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+.button:focus:not(:disabled) {
+    box-shadow: var(--shadow-glow);
+}
+
+.button:disabled {
+    background-color: var(--interactive-secondary);
+    color: var(--text-disabled);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.button:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.button.primary {
+    background-color: var(--primary-600);
+    border-color: var(--primary-600);
+}
+
+.button.primary:hover:not(:disabled) {
+    background-color: var(--primary-700);
+    border-color: var(--primary-700);
+}
+
+.button.primary:active:not(:disabled) {
+    background-color: var(--primary-800);
+    border-color: var(--primary-800);
+}
+
+.button.secondary {
+    background-color: var(--surface-elevated);
+    color: var(--text-primary);
+    border-color: var(--border-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.button.secondary:hover:not(:disabled) {
+    background-color: var(--interactive-secondary-hover);
+    border-color: var(--border-secondary);
+}
+
+.button.success {
+    background-color: var(--success-600);
+    border-color: var(--success-600);
+}
+
+.button.success:hover:not(:disabled) {
+    background-color: var(--success-700);
+    border-color: var(--success-700);
+}
+
+.button.warning {
+    background-color: var(--warning-600);
+    border-color: var(--warning-600);
+}
+
+.button.warning:hover:not(:disabled) {
+    background-color: var(--warning-700);
+    border-color: var(--warning-700);
+}
+
+.button.danger {
+    background-color: var(--error-600);
+    border-color: var(--error-600);
+}
+
+.button.danger:hover:not(:disabled) {
+    background-color: var(--error-700);
+    border-color: var(--error-700);
+}
+
+.button.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.button.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: button-spin 0.8s linear infinite;
+}
+
+.button.icon-only {
+    padding: 8px;
+    min-width: 36px;
+    border-radius: 50%;
+}
+
+.button.small {
+    padding: 6px 12px;
+    font-size: 12px;
+    min-height: 28px;
+}
+
+.button.large {
+    padding: 14px 24px;
+    font-size: 16px;
+    min-height: 48px;
+    font-weight: 600;
+}
+
+#addTrainButton {
+    background: linear-gradient(135deg, var(--success-600) 0%, var(--success-500) 100%);
+    font-weight: var(--font-weight-semibold);
+    box-shadow: var(--shadow-md);
+}
+
+#addTrainButton:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--success-700) 0%, var(--success-600) 100%);
+    box-shadow: var(--shadow-lg);
+}
+
+#exportButton {
+    background: linear-gradient(135deg, var(--info-600) 0%, var(--info-500) 100%);
+    box-shadow: var(--shadow-md);
+}
+
+#exportButton:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--info-700) 0%, var(--info-600) 100%);
+    box-shadow: var(--shadow-lg);
+}
+
+#saveButton {
+    background: linear-gradient(135deg, var(--success-600) 0%, var(--success-500) 100%);
+    box-shadow: var(--shadow-md);
+}
+
+#saveButton:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--success-700) 0%, var(--success-600) 100%);
+    box-shadow: var(--shadow-lg);
+}
+
+#importButton {
+    background: linear-gradient(135deg, var(--warning-600) 0%, var(--warning-500) 100%);
+    box-shadow: var(--shadow-md);
+}
+
+#importButton:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--warning-700) 0%, var(--warning-600) 100%);
+    box-shadow: var(--shadow-lg);
+}
+
+#historyButton {
+    background: linear-gradient(135deg, var(--secondary-600) 0%, var(--secondary-500) 100%);
+    box-shadow: var(--shadow-md);
+}
+
+#historyButton:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--secondary-700) 0%, var(--secondary-600) 100%);
+    box-shadow: var(--shadow-lg);
+}
+
+#prevTimeButton,
+#nextTimeButton {
+    background-color: var(--primary-color);
+    min-width: 120px;
+}
+
+#prevTimeButton:hover:not(:disabled),
+#nextTimeButton:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+#undoButton:not(:disabled) {
+    background-color: var(--warning-color);
+}
+
+#undoButton:hover:not(:disabled) {
+    background-color: var(--warning-hover);
+}
+
+#redoButton:not(:disabled) {
+    background-color: var(--warning-color);
+}
+
+#redoButton:hover:not(:disabled) {
+    background-color: var(--warning-hover);
+}
+
+.action-button {
+    background: var(--interactive-primary);
+    color: var(--interactive-primary-text);
+    border: none;
+    padding: var(--spacing-3) var(--spacing-4);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+}
+
+.action-button:hover {
+    background: var(--interactive-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+} 

@@ -1,0 +1,63 @@
+/* Application Layout Components */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+    /* Enhanced main content */
+.main-content {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    height: calc(100vh - var(--header-height));
+    background-color: var(--main-bg);
+}
+
+.track-labels {
+    width: var(--track-label-width);
+    background: var(--surface-elevated);
+    border-right: 1px solid var(--border-primary);
+    padding-top: var(--timeline-height);
+    position: sticky;
+    left: 0;
+    z-index: 999;
+    flex-shrink: 0;
+    height: 100%;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(8px);
+}
+
+.schedule-view {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.essential-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.main-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    justify-content: flex-start;
+}
+
+.train-bar,
+.current-time-line,
+.timeline-current-time {
+    will-change: transform, left, top;
+} 
