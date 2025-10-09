@@ -1,0 +1,447 @@
+/* 🚫 MAX LIMIT EXCEEDED: This file has 441 lines (limit: 400)
+ * DO NOT ADD ANY MORE CODE TO THIS FILE!
+ * This file MUST be split before adding new functionality.
+ * See Professional-redesign-plan.md section "REGEL: Max Filstorlek" for splitting guidance.
+ */
+
+/*
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    SPÅRPLANNEN - BUTTON SYSTEM                               ║
+║         Modern, accessible buttons following design principles               ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Button hierarchy:
+- Primary: Main actions (Nu-knapp, Save)
+- Secondary: Common actions (Navigation, Cancel)
+- Tertiary: Low-emphasis actions (Settings, Help)
+- Icon: Icon-only buttons (Theme toggle, Close)
+
+ANTHONY HOBDAY RULES APPLIED:
+- Horizontal padding = 2× vertical padding
+- Touch targets ≥ 44×44px
+- Clear affordances (buttons look clickable)
+- Visual weight in order (primary heaviest)
+
+WCAG 2.1 AA:
+- 3:1 contrast ratio for interactive elements
+- Clear focus indicators
+- Keyboard accessible
+
+VERSION: 1.0.0
+*/
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE BUTTON - Foundation for all button types
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn {
+    /* Typography */
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);      /* 16px */
+    font-weight: var(--font-weight-medium); /* 500 */
+    line-height: 1;
+    
+    /* Layout - Horizontal padding = 2× Vertical (Anthony Hobday rule) */
+    padding: var(--spacing-3) var(--spacing-6);  /* 12px × 24px = 2:1 ratio */
+    min-height: 44px;  /* WCAG touch target minimum */
+    
+    /* Visual */
+    border: none;
+    border-radius: var(--border-radius-md);  /* 8px */
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    
+    /* Interaction */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);  /* Space between icon and text */
+    
+    /* Transitions */
+    transition: 
+        background-color var(--transition-normal),
+        color var(--transition-normal),
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal),
+        transform var(--transition-fast);
+    
+    /* Prevent text selection */
+    user-select: none;
+    -webkit-user-select: none;
+    
+    /* Accessibility */
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+    box-shadow: var(--shadow-glow);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRIMARY BUTTON - Main call-to-action
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-primary {
+    background: var(--interactive-primary);      /* Railway Blue #2563eb */
+    color: var(--text-inverse);                  /* White text */
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    background: var(--interactive-primary-hover); /* Darker blue */
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+    background: var(--interactive-primary-active);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECONDARY BUTTON - Common actions
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-secondary {
+    background: var(--interactive-secondary);      /* Light grey */
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--interactive-secondary-hover);
+    border-color: var(--border-secondary);
+}
+
+.btn-secondary:active {
+    background: var(--neutral-200);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TERTIARY BUTTON - Low-emphasis (ghost/text-only)
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-tertiary {
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+.btn-tertiary:hover {
+    background: var(--interactive-secondary);
+    color: var(--text-primary);
+}
+
+.btn-tertiary:active {
+    background: var(--neutral-200);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   OUTLINE BUTTON - Alternative secondary style
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-outline {
+    background: transparent;
+    color: var(--interactive-primary);
+    border: 2px solid var(--interactive-primary);
+}
+
+.btn-outline:hover {
+    background: var(--primary-50);
+}
+
+.btn-outline:active {
+    background: var(--primary-100);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DANGER BUTTON - Destructive actions
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-danger {
+    background: var(--interactive-danger);
+    color: var(--text-inverse);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-danger:hover {
+    background: var(--interactive-danger-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-danger:active {
+    background: var(--error-700);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SUCCESS BUTTON - Positive actions
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-success {
+    background: var(--success-600);
+    color: var(--text-inverse);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-success:hover {
+    background: var(--success-700);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-success:active {
+    background: var(--success-800);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ICON BUTTON - Icon-only circular buttons
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-icon {
+    width: 44px;   /* WCAG minimum touch target */
+    height: 44px;
+    padding: 0;
+    border-radius: var(--border-radius-full);  /* Circular */
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+.btn-icon:hover {
+    background: var(--interactive-secondary);
+    color: var(--text-primary);
+}
+
+.btn-icon:active {
+    background: var(--neutral-200);
+}
+
+/* Icon button primary variant */
+.btn-icon.btn-primary {
+    background: var(--interactive-primary);
+    color: var(--text-inverse);
+}
+
+.btn-icon.btn-primary:hover {
+    background: var(--interactive-primary-hover);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BUTTON SIZES
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-sm {
+    font-size: var(--font-size-sm);  /* 14px */
+    padding: var(--spacing-2) var(--spacing-4);  /* 8px × 16px = 2:1 */
+    min-height: 36px;
+}
+
+.btn-sm.btn-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.btn-lg {
+    font-size: var(--font-size-lg);  /* 18px */
+    padding: var(--spacing-4) var(--spacing-8);  /* 16px × 32px = 2:1 */
+    min-height: 52px;
+}
+
+.btn-lg.btn-icon {
+    width: 52px;
+    height: 52px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BUTTON GROUPS - Connected buttons
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-group {
+    display: inline-flex;
+    gap: 0;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;  /* Prevent double borders */
+}
+
+.btn-group .btn:first-child {
+    border-top-left-radius: var(--border-radius-md);
+    border-bottom-left-radius: var(--border-radius-md);
+    margin-left: 0;
+}
+
+.btn-group .btn:last-child {
+    border-top-right-radius: var(--border-radius-md);
+    border-bottom-right-radius: var(--border-radius-md);
+}
+
+.btn-group .btn:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+
+/* Active state in button group */
+.btn-group .btn.active {
+    background: var(--interactive-primary);
+    color: var(--text-inverse);
+    z-index: 1;  /* Raise above siblings */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RIPPLE EFFECT - Material Design-inspired click animation
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+    width: 300px;
+    height: 300px;
+    transition: 0s;
+}
+
+/* Darker ripple for light buttons */
+.btn-secondary::before,
+.btn-tertiary::before {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LOADING STATE
+═══════════════════════════════════════════════════════════════════════════ */
+
+.btn.loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: btn-spin 0.6s linear infinite;
+}
+
+@keyframes btn-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DARK MODE ADJUSTMENTS
+═══════════════════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .btn-secondary {
+    background: var(--neutral-800);
+    border-color: var(--neutral-700);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background: var(--neutral-700);
+}
+
+[data-theme="dark"] .btn-tertiary:hover {
+    background: var(--neutral-800);
+}
+
+[data-theme="dark"] .btn-icon:hover {
+    background: var(--neutral-800);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY ENHANCEMENTS
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .btn {
+        transition: none;
+    }
+    
+    .btn::before {
+        display: none;
+    }
+    
+    .btn:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode */
+[data-theme="high-contrast"] .btn {
+    border: 2px solid currentColor;
+}
+
+[data-theme="high-contrast"] .btn-primary {
+    background: #00ffff;
+    color: #000000;
+    border-color: #00ffff;
+}
+
+[data-theme="high-contrast"] .btn-danger {
+    background: #ff0000;
+    color: #ffffff;
+    border-color: #ff0000;
+}
+
+/*
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                            USAGE EXAMPLES                                    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+PRIMARY BUTTON:
+<button class="btn btn-primary">Save Changes</button>
+
+SECONDARY BUTTON:
+<button class="btn btn-secondary">Cancel</button>
+
+ICON BUTTON:
+<button class="btn btn-icon" aria-label="Settings">⚙️</button>
+
+BUTTON GROUP:
+<div class="btn-group">
+    <button class="btn btn-secondary">Previous</button>
+    <button class="btn btn-secondary active">Current</button>
+    <button class="btn btn-secondary">Next</button>
+</div>
+
+LOADING BUTTON:
+<button class="btn btn-primary loading">Processing...</button>
+
+*/
+

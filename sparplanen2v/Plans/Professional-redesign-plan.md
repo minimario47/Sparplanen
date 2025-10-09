@@ -59,7 +59,7 @@ sparplanen2v/
 │   ├── trains.js
 │   └── vehicleTypes.js
 └── docs/
-    └── README.md
+    └── Never write text files, write in the chat instead if you want to tell developer something
 ```
 
 #### REGEL: Auto-Organisation av Filer
@@ -232,14 +232,36 @@ modules/warnings/
 └── warningDisplay.js         (100 rader - UI rendering)
 ```
 
-**⚠️ ABSOLUT VIKTIGAST: Varje gång AI skapar en fil, kontrollera att:**
+**REGEL: Automatisk Max-Varning**
+
+När en fil når 380 rader (approaching limit), lägg till detta i toppen av filen:
+
+```
+/* ⚠️ WARNING: This file is approaching the 400-line limit (currently at XXX lines)
+ * DO NOT add more code to this file without splitting it first!
+ * See Professional-redesign-plan.md section "REGEL: Max Filstorlek" for guidance.
+ */
+```
+
+När en fil når 400+ rader (limit exceeded), uppdatera varningen:
+
+```
+/* 🚫 MAX LIMIT EXCEEDED: This file has XXX lines (limit: 400)
+ * DO NOT ADD ANY MORE CODE TO THIS FILE!
+ * This file MUST be split before adding new functionality.
+ * See Professional-redesign-plan.md section "REGEL: Max Filstorlek" for splitting guidance.
+ */
+```
+
+**⚠️ ABSOLUT VIKTIGAST: Varje gång AI skapar/redigerar en fil, kontrollera att:**
 1. ✅ Filen är i sparplanen2v/
 2. ✅ Filen är i rätt subfolder
 3. ✅ Filen är UNDER 400 rader kod
-4. ✅ Om över 400 rader → dela upp enligt ovan
-5. ✅ index.html är uppdaterad med länk till filen
-6. ✅ Ordningen är korrekt i index.html
-7. ✅ Filen kan testas genom att öppna index.html i browser
+4. ✅ Om approaching 380 rader → lägg till approaching-warning
+5. ✅ Om över 400 rader → lägg till max-exceeded warning OCH dela upp filen
+6. ✅ index.html är uppdaterad med länk till filen
+7. ✅ Ordningen är korrekt i index.html
+8. ✅ Filen kan testas genom att öppna index.html i browser
 
 ---
 
@@ -430,20 +452,52 @@ modules/warnings/
 
 ### VI. DOCUMENTATION REQUIREMENTS
 
-#### Inline Documentation
+#### Inline Documentation - KEEP IT MINIMAL!
 
-- **Document complex logic** - explain the "why"
-- **Document assumptions** - what must be true for this to work
-- **Document TODOs** - with context and priority
-- **Document hacks** - why needed, when can be removed
+**❌ FÖRBJUDET:**
+- **NO USAGE EXAMPLES** in code files - waste of tokens/space
+- **NO LONG EXPLANATORY COMMENTS** - code should be self-documenting
+- **NO DECORATIVE BOXES** - simple /* */ comments only
+- **NO PHILOSOPHY SECTIONS** - just code
+- **NO "How to use" sections** - obvious from code
 
-#### Component Documentation
+**✅ TILLÅTET (bara när nödvändigt):**
+- **File header:** 1-2 lines max stating file purpose
+- **Complex logic:** Short "why" comment (not "what")
+- **TODO comments:** With ticket/issue number
+- **Hacks/Workarounds:** Brief explanation why needed
 
-- **Purpose** - what does this component do?
-- **Props/Parameters** - what inputs does it take?
-- **State** - what state does it manage?
-- **Events** - what events does it emit/handle?
-- **Examples** - basic usage examples
+**EXEMPEL PÅ KORREKT MINIMAL KOMMENTERING:**
+```css
+/* Header styles - 70px fixed height */
+.app-header { 
+  height: var(--header-height);
+}
+```
+
+**EXEMPEL PÅ FEL (för mycket):**
+```css
+/*
+╔══════════════════════════════════════════════════════════════╗
+║                    HEADER COMPONENT                          ║
+║   Modern, professional header with navigation                ║
+╚══════════════════════════════════════════════════════════════╝
+
+PHILOSOPHY:
+- Clean and minimal
+- Easy to read
+... 20 more lines ...
+
+USAGE EXAMPLES:
+<header class="app-header">...</header>
+*/
+```
+
+#### README Files
+
+- Documentation belongs in **README.md**, NOT in code files
+- Usage examples go in **docs/** folder
+- Keep code files LEAN
 
 ---
 
