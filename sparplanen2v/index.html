@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spårplannen 2.0 - Professionell Tågtrafikledning</title>
+    
+    <!-- 1. Design System Foundation -->
+    <link rel="stylesheet" href="styles/design-system.css">
+    <link rel="stylesheet" href="styles/typography.css">
+    <link rel="stylesheet" href="styles/variables.css">
+    
+    <!-- 2. Themes -->
+    <link rel="stylesheet" href="styles/themes.css">
+    
+    <!-- 3. Base & Layout -->
+    <link rel="stylesheet" href="styles/base.css">
+    
+    <style>
+        /* Temporary demo styles to show off our design system */
+        .demo-container {
+            padding: var(--spacing-8);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .demo-section {
+            margin-bottom: var(--spacing-12);
+            padding: var(--spacing-6);
+            background: var(--surface-primary);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .demo-section h2 {
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-4);
+            border-bottom: 2px solid var(--border-primary);
+            padding-bottom: var(--spacing-2);
+        }
+        
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--spacing-4);
+            margin-top: var(--spacing-4);
+        }
+        
+        .color-swatch {
+            height: 80px;
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: flex-end;
+            padding: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .button-demo {
+            display: flex;
+            gap: var(--spacing-4);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-4);
+        }
+        
+        .btn {
+            padding: var(--spacing-3) var(--spacing-6);
+            border: none;
+            border-radius: var(--border-radius-md);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+        
+        .btn-primary {
+            background: var(--interactive-primary);
+            color: var(--text-inverse);
+        }
+        
+        .btn-primary:hover {
+            background: var(--interactive-primary-hover);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: var(--interactive-secondary);
+            color: var(--text-primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--interactive-secondary-hover);
+        }
+        
+        .btn-success {
+            background: var(--success-600);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: var(--success-700);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-warning {
+            background: var(--warning-500);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background: var(--warning-600);
+        }
+        
+        .btn-danger {
+            background: var(--interactive-danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: var(--interactive-danger-hover);
+        }
+        
+        .typography-demo p {
+            margin: var(--spacing-2) 0;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: var(--spacing-4);
+            right: var(--spacing-4);
+            z-index: 1000;
+            padding: var(--spacing-3) var(--spacing-5);
+            background: var(--surface-elevated);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            gap: var(--spacing-3);
+        }
+        
+        .theme-btn {
+            padding: var(--spacing-2) var(--spacing-4);
+            border: 2px solid var(--border-primary);
+            background: var(--surface-secondary);
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            transition: all var(--transition-fast);
+        }
+        
+        .theme-btn:hover {
+            background: var(--interactive-primary);
+            color: white;
+            border-color: var(--interactive-primary);
+        }
+        
+        .theme-btn.active {
+            background: var(--interactive-primary);
+            color: white;
+            border-color: var(--interactive-primary);
+        }
+        
+        .spacing-demo {
+            display: flex;
+            gap: var(--spacing-2);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-4);
+        }
+        
+        .spacing-box {
+            background: var(--primary-200);
+            border: 2px solid var(--primary-600);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            color: var(--primary-800);
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle">
+        <button class="theme-btn active" onclick="setTheme('light')">☀️ Light</button>
+        <button class="theme-btn" onclick="setTheme('dark')">🌙 Dark</button>
+        <button class="theme-btn" onclick="setTheme('high-contrast')">🔆 High Contrast</button>
+    </div>
+
+    <div class="demo-container">
+        <header style="text-align: center; margin-bottom: var(--spacing-12);">
+            <h1 style="font-size: var(--font-size-3xl); color: var(--text-primary); margin-bottom: var(--spacing-2);">
+                🚄 Spårplannen 2.0
+            </h1>
+            <p style="font-size: var(--font-size-lg); color: var(--text-secondary);">
+                Professionell Tågtrafikledning - Design System Demo
+            </p>
+        </header>
+
+        <!-- Typography Demo -->
+        <section class="demo-section">
+            <h2>📝 Typography System</h2>
+            <div class="typography-demo">
+                <h1 style="margin: var(--spacing-3) 0;">H1: Huvudrubrik (3xl - 30px)</h1>
+                <h2 style="margin: var(--spacing-3) 0;">H2: Sekundär rubrik (2xl - 24px)</h2>
+                <h3 style="margin: var(--spacing-3) 0;">H3: Underrubrik (xl - 20px)</h3>
+                <p style="font-size: var(--font-size-lg);">Large body text (lg - 18px)</p>
+                <p style="font-size: var(--font-size-base);">Normal body text (base - 16px) - Detta är standard text-storlek</p>
+                <p style="font-size: var(--font-size-sm); color: var(--text-secondary);">Small text (sm - 14px) - Används för mindre viktig information</p>
+                <p style="font-size: var(--font-size-xs); color: var(--text-tertiary);">Extra small text (xs - 12px) - Metadata och timestamps</p>
+            </div>
+        </section>
+
+        <!-- Color System Demo -->
+        <section class="demo-section">
+            <h2>🎨 Color Palette</h2>
+            
+            <h3 style="margin-top: var(--spacing-6); margin-bottom: var(--spacing-3); color: var(--text-secondary);">Primary (Railway Blue)</h3>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: var(--primary-500);">500 - Main</div>
+                <div class="color-swatch" style="background: var(--primary-600);">600 - Primary</div>
+                <div class="color-swatch" style="background: var(--primary-700);">700 - Hover</div>
+                <div class="color-swatch" style="background: var(--primary-800);">800 - Active</div>
+            </div>
+            
+            <h3 style="margin-top: var(--spacing-6); margin-bottom: var(--spacing-3); color: var(--text-secondary);">Semantic Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: var(--success-600);">Success</div>
+                <div class="color-swatch" style="background: var(--warning-500);">Warning</div>
+                <div class="color-swatch" style="background: var(--error-600);">Error</div>
+                <div class="color-swatch" style="background: var(--info-600);">Info</div>
+            </div>
+        </section>
+
+        <!-- Buttons Demo -->
+        <section class="demo-section">
+            <h2>🔘 Button System</h2>
+            <div class="button-demo">
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-secondary">Secondary Button</button>
+                <button class="btn btn-success">Success Button</button>
+                <button class="btn btn-warning">Warning Button</button>
+                <button class="btn btn-danger">Danger Button</button>
+            </div>
+        </section>
+
+        <!-- Spacing Demo -->
+        <section class="demo-section">
+            <h2>📏 Spacing Scale (8px Grid System)</h2>
+            <div class="spacing-demo">
+                <div class="spacing-box" style="width: var(--spacing-2); height: var(--spacing-2);">2</div>
+                <div class="spacing-box" style="width: var(--spacing-3); height: var(--spacing-3);">3</div>
+                <div class="spacing-box" style="width: var(--spacing-4); height: var(--spacing-4);">4</div>
+                <div class="spacing-box" style="width: var(--spacing-5); height: var(--spacing-5);">5</div>
+                <div class="spacing-box" style="width: var(--spacing-6); height: var(--spacing-6);">6</div>
+                <div class="spacing-box" style="width: var(--spacing-8); height: var(--spacing-8);">8</div>
+                <div class="spacing-box" style="width: var(--spacing-10); height: var(--spacing-10);">10</div>
+                <div class="spacing-box" style="width: var(--spacing-12); height: var(--spacing-12);">12</div>
+            </div>
+            <p style="margin-top: var(--spacing-4); color: var(--text-secondary); font-size: var(--font-size-sm);">
+                Spacing-2 = 8px, Spacing-3 = 12px, Spacing-4 = 16px, Spacing-5 = 20px, Spacing-6 = 24px, Spacing-8 = 32px, etc.
+            </p>
+        </section>
+
+        <!-- Shadow Demo -->
+        <section class="demo-section">
+            <h2>✨ Shadow System (Blur = 2× Distance)</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-6); margin-top: var(--spacing-4);">
+                <div style="padding: var(--spacing-6); background: var(--surface-primary); border-radius: var(--border-radius-md); box-shadow: var(--shadow-sm);">
+                    <strong>Shadow SM</strong><br>
+                    <span style="font-size: var(--font-size-xs); color: var(--text-tertiary);">Subtle depth</span>
+                </div>
+                <div style="padding: var(--spacing-6); background: var(--surface-primary); border-radius: var(--border-radius-md); box-shadow: var(--shadow-md);">
+                    <strong>Shadow MD</strong><br>
+                    <span style="font-size: var(--font-size-xs); color: var(--text-tertiary);">Cards, panels</span>
+                </div>
+                <div style="padding: var(--spacing-6); background: var(--surface-primary); border-radius: var(--border-radius-md); box-shadow: var(--shadow-lg);">
+                    <strong>Shadow LG</strong><br>
+                    <span style="font-size: var(--font-size-xs); color: var(--text-tertiary);">Elevated elements</span>
+                </div>
+                <div style="padding: var(--spacing-6); background: var(--surface-primary); border-radius: var(--border-radius-md); box-shadow: var(--shadow-xl);">
+                    <strong>Shadow XL</strong><br>
+                    <span style="font-size: var(--font-size-xs); color: var(--text-tertiary);">Modals, dropdowns</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status Indicator -->
+        <section class="demo-section" style="text-align: center; background: linear-gradient(135deg, var(--success-50), var(--primary-50));">
+            <h2 style="color: var(--success-700);">✅ Design System Laddat!</h2>
+            <p style="color: var(--text-secondary); margin-top: var(--spacing-2);">
+                Alla CSS-filer är korrekt länkade och ordnade. Öppna Console (F12) för att verifiera inga errors.
+            </p>
+            <p style="color: var(--text-tertiary); font-size: var(--font-size-sm); margin-top: var(--spacing-4);">
+                <strong>Nästa steg:</strong> Implementera base.css och fortsätt med layout-komponenter
+            </p>
+        </section>
+    </div>
+
+    <script>
+        // Theme switcher
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            
+            // Update active button
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Save to localStorage
+            localStorage.setItem('sparplannen-theme', theme);
+            
+            console.log(`✅ Theme switched to: ${theme}`);
+        }
+        
+        // Load saved theme on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('sparplannen-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            // Update active button
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(savedTheme)) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            console.log('🎨 Spårplannen 2.0 Design System loaded successfully!');
+            console.log('📋 CSS files loaded in correct order:');
+            console.log('  1. design-system.css');
+            console.log('  2. typography.css');
+            console.log('  3. variables.css');
+            console.log('  4. themes.css');
+            console.log('  5. base.css');
+            console.log(`🌓 Current theme: ${savedTheme}`);
+        });
+    </script>
+</body>
+</html>
+

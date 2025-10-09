@@ -1,0 +1,379 @@
+/*
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                      SPÅRPLANNEN DESIGN SYSTEM                               ║
+║                 Professional Train Dispatch Interface                        ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+DESIGN PHILOSOPHY:
+- Modern minimalist aesthetic with professional depth
+- Inspired by Material Design 3, Tailwind, and Anthony Hobday's principles
+- Railway context: Reliability, precision, clarity
+- User-centric: Controllers need clear, quick information
+- Accessible: WCAG 2.1 AA compliant throughout
+
+CORE PRINCIPLES FOLLOWED:
+1. Near-black (#1a1a1a) and near-white (#fafafa) instead of pure black/white
+2. Saturated neutrals with <5% primary color for coherent palette
+3. Distinct brightness values in color scales - no competing colors
+4. 8px-based spacing scale for mathematical relationship
+5. Shadow blur = 2× distance for realistic depth
+6. Everything deliberately chosen and documented
+
+COLOR TEMPERATURE: COOL
+- We use cool-toned greys (slight blue saturation) to match railway/tech context
+- Professional, trustworthy, modern feel
+- Maintains coherence across all neutrals
+
+MATHEMATICAL RELATIONSHIPS:
+- Spacing: 4px base unit, exponential scale (4, 8, 12, 16, 20, 24, 32, 40, 48, 64)
+- Shadows: distance × 2 = blur (1px → 2px blur, 4px → 8px blur)
+- Border radius: 2px base, double progression (2, 4, 8, 12, 16)
+- Transitions: 150ms base, increments of 50ms or 100ms
+
+VERSION: 1.0.0
+LAST UPDATED: 2025-01-09
+*/
+
+:root {
+  /* ═══════════════════════════════════════════════════════════════════════════
+     COLOR SYSTEM - PRIMARY PALETTE
+     Railway Blue: Professional, trustworthy, technical
+     Selected for railway context: signals, technology, precision
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  /* Primary - Railway Blue with distinct brightness levels */
+  --primary-50: #eff6ff;    /* Lightest - backgrounds, hover states */
+  --primary-100: #dbeafe;   /* Very light - subtle backgrounds */
+  --primary-200: #bfdbfe;   /* Light - selection backgrounds */
+  --primary-300: #93c5fd;   /* Medium light - borders, inactive states */
+  --primary-400: #60a5fa;   /* Medium - secondary actions */
+  --primary-500: #3b82f6;   /* Base - primary actions, main brand */
+  --primary-600: #2563eb;   /* Medium dark - hover states */
+  --primary-700: #1d4ed8;   /* Dark - active states */
+  --primary-800: #1e40af;   /* Very dark - pressed states, text on light */
+  --primary-900: #1e3a8a;   /* Darkest - strong emphasis */
+
+  /* Secondary - Slate Grey for professional depth */
+  --secondary-50: #f8fafc;
+  --secondary-100: #f1f5f9;
+  --secondary-200: #e2e8f0;
+  --secondary-300: #cbd5e1;
+  --secondary-400: #94a3b8;
+  --secondary-500: #64748b;  /* Base secondary */
+  --secondary-600: #475569;
+  --secondary-700: #334155;
+  --secondary-800: #1e293b;
+  --secondary-900: #0f172a;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     NEUTRALS - Saturated with cool tone (<5% saturation)
+     Using cool temperature (blue-tinted) for tech/railway context
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  --neutral-50: #fafafa;    /* Near-white - NOT pure white (#ffffff) */
+  --neutral-100: #f5f5f6;   /* Very light grey with cool tone */
+  --neutral-200: #e5e7eb;   /* Light grey - subtle dividers */
+  --neutral-300: #d4d6db;   /* Medium light - borders */
+  --neutral-400: #9ca3af;   /* Medium - disabled states */
+  --neutral-500: #6b7280;   /* Base neutral - secondary text */
+  --neutral-600: #4b5563;   /* Medium dark - body text */
+  --neutral-700: #374151;   /* Dark - headings */
+  --neutral-800: #252a31;   /* Very dark - strong text */
+  --neutral-900: #1a1a1a;   /* Near-black - NOT pure black (#000000) */
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC COLORS - Status and feedback
+     All colors have 4.5:1 contrast ratio for text, 3:1 for UI components
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  /* Success - Green for confirmations, success states */
+  --success-50: #f0fdf4;
+  --success-100: #dcfce7;
+  --success-200: #bbf7d0;
+  --success-300: #86efac;
+  --success-400: #4ade80;
+  --success-500: #22c55e;   /* Base success */
+  --success-600: #16a34a;
+  --success-700: #15803d;
+  --success-800: #166534;
+  --success-900: #14532d;
+
+  /* Warning - Orange/Amber for cautions, warnings */
+  --warning-50: #fffbeb;
+  --warning-100: #fef3c7;
+  --warning-200: #fde68a;
+  --warning-300: #fcd34d;
+  --warning-400: #fbbf24;
+  --warning-500: #f59e0b;   /* Base warning */
+  --warning-600: #d97706;
+  --warning-700: #b45309;
+  --warning-800: #92400e;
+  --warning-900: #78350f;
+
+  /* Danger - Red for errors, critical warnings, destructive actions */
+  --danger-50: #fef2f2;
+  --danger-100: #fee2e2;
+  --danger-200: #fecaca;
+  --danger-300: #fca5a5;
+  --danger-400: #f87171;
+  --danger-500: #ef4444;    /* Base danger */
+  --danger-600: #dc2626;
+  --danger-700: #b91c1c;
+  --danger-800: #991b1b;
+  --danger-900: #7f1d1d;
+
+  /* Info - Blue for informational messages, tips */
+  --info-50: #eff6ff;
+  --info-100: #dbeafe;
+  --info-200: #bfdbfe;
+  --info-300: #93c5fd;
+  --info-400: #60a5fa;
+  --info-500: #3b82f6;      /* Base info */
+  --info-600: #2563eb;
+  --info-700: #1d4ed8;
+  --info-800: #1e40af;
+  --info-900: #1e3a8a;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SPACING SCALE - 8px base grid system
+     Mathematically related: 4px base unit
+     Usage: margin, padding, gaps
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  --space-0: 0;             /* No space */
+  --space-px: 1px;          /* 1px - hairline */
+  --space-0-5: 2px;         /* 0.5 × 4px */
+  --space-1: 4px;           /* 1 × 4px - minimal spacing */
+  --space-2: 8px;           /* 2 × 4px - tight spacing */
+  --space-3: 12px;          /* 3 × 4px - compact spacing */
+  --space-4: 16px;          /* 4 × 4px - normal spacing */
+  --space-5: 20px;          /* 5 × 4px - comfortable spacing */
+  --space-6: 24px;          /* 6 × 4px - spacious */
+  --space-7: 28px;          /* 7 × 4px */
+  --space-8: 32px;          /* 8 × 4px - large spacing */
+  --space-9: 36px;          /* 9 × 4px */
+  --space-10: 40px;         /* 10 × 4px - extra large */
+  --space-11: 44px;         /* 11 × 4px */
+  --space-12: 48px;         /* 12 × 4px - huge spacing */
+  --space-14: 56px;         /* 14 × 4px */
+  --space-16: 64px;         /* 16 × 4px - massive spacing */
+  --space-20: 80px;         /* 20 × 4px - section spacing */
+  --space-24: 96px;         /* 24 × 4px - large section spacing */
+  --space-32: 128px;        /* 32 × 4px - page spacing */
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SHADOW SYSTEM - Layered depth with blur = 2× distance
+     Anthony Hobday's rule: shadow blur should be double the distance
+     Light mode only - dark mode uses borders/highlights
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  /* Light mode shadows - realistic depth */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);                    /* 1px distance → 2px blur */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 
+               0 1px 2px -1px rgba(0, 0, 0, 0.1);                   /* Subtle elevation */
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+               0 2px 4px -2px rgba(0, 0, 0, 0.1);                   /* 4px distance → 8px blur (approx) */
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+               0 4px 6px -4px rgba(0, 0, 0, 0.1);                   /* Medium elevation */
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+               0 8px 10px -6px rgba(0, 0, 0, 0.1);                  /* High elevation */
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);             /* Highest elevation - modals */
+  
+  /* Special shadows */
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);           /* Pressed/inset effect */
+  --shadow-glow: 0 0 0 3px rgba(59, 130, 246, 0.5);                /* Focus indicator */
+  --shadow-glow-success: 0 0 0 3px rgba(34, 197, 94, 0.5);
+  --shadow-glow-warning: 0 0 0 3px rgba(245, 158, 11, 0.5);
+  --shadow-glow-danger: 0 0 0 3px rgba(239, 68, 68, 0.5);
+
+  /* Dark mode alternatives - borders and highlights instead of shadows */
+  --border-light-dark-mode: 1px solid rgba(255, 255, 255, 0.1);    /* Subtle highlight */
+  --border-medium-dark-mode: 1px solid rgba(255, 255, 255, 0.15);
+  --border-heavy-dark-mode: 1px solid rgba(255, 255, 255, 0.2);
+  --highlight-top-dark-mode: rgba(255, 255, 255, 0.05);             /* Top highlight */
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     GLASSMORPHISM - Frosted glass effects for modern UI
+     Usage: overlays, modals, floating panels
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  --glass-blur-light: blur(8px);          /* Light frosted effect */
+  --glass-blur-medium: blur(12px);        /* Medium frosted effect */
+  --glass-blur-heavy: blur(16px);         /* Heavy frosted effect */
+  --glass-blur-extreme: blur(24px);       /* Extreme blur for backdrops */
+  
+  --glass-bg-light: rgba(255, 255, 255, 0.7);         /* Light glass background */
+  --glass-bg-medium: rgba(255, 255, 255, 0.5);        /* Medium transparency */
+  --glass-bg-heavy: rgba(255, 255, 255, 0.3);         /* More transparent */
+  
+  --glass-bg-dark-light: rgba(26, 26, 26, 0.7);       /* Dark mode glass */
+  --glass-bg-dark-medium: rgba(26, 26, 26, 0.5);
+  --glass-bg-dark-heavy: rgba(26, 26, 26, 0.3);
+  
+  --glass-border: 1px solid rgba(255, 255, 255, 0.18);  /* Glass edge */
+  --glass-border-dark: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     BORDER RADIUS - Nested corners with mathematical relationship
+     Formula for nested corners: inner radius = outer radius - gap distance
+     Example: outer 12px, gap 8px → inner 4px
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  --radius-none: 0;             /* Sharp corners */
+  --radius-sm: 2px;             /* Subtle rounding */
+  --radius-md: 4px;             /* Small rounding */
+  --radius-DEFAULT: 6px;        /* Default rounding */
+  --radius-lg: 8px;             /* Medium rounding */
+  --radius-xl: 12px;            /* Large rounding */
+  --radius-2xl: 16px;           /* Extra large rounding */
+  --radius-3xl: 24px;           /* Huge rounding */
+  --radius-full: 9999px;        /* Perfect circle/pill shape */
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     BORDER WIDTH & STYLES
+     Borders must contrast with BOTH container and background
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  --border-width-thin: 1px;
+  --border-width-DEFAULT: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 3px;
+  --border-width-heavy: 4px;
+
+  /* Border colors - lighter than both container and background (light mode) */
+  --border-subtle: var(--neutral-200);      /* Very subtle borders */
+  --border-DEFAULT: var(--neutral-300);     /* Default borders */
+  --border-medium: var(--neutral-400);      /* Medium emphasis borders */
+  --border-strong: var(--neutral-500);      /* Strong borders */
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     TRANSITIONS & ANIMATIONS
+     Smooth, professional feel - 200-300ms sweet spot
+     Using ease-in-out for natural movement
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  /* Transition durations */
+  --transition-faster: 100ms;   /* Very quick - micro-interactions */
+  --transition-fast: 150ms;     /* Quick - hover states */
+  --transition-DEFAULT: 200ms;  /* Default - most interactions */
+  --transition-base: 250ms;     /* Base - standard animations */
+  --transition-slow: 300ms;     /* Slow - emphasized transitions */
+  --transition-slower: 400ms;   /* Slower - large elements */
+  --transition-slowest: 500ms;  /* Slowest - major state changes */
+
+  /* Easing functions */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);              /* Accelerating */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);             /* Decelerating */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);        /* Smooth both ends */
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);  /* Playful bounce */
+  --ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);         /* Sharp, purposeful */
+
+  /* Common transition properties */
+  --transition-all: all var(--transition-DEFAULT) var(--ease-in-out);
+  --transition-colors: color var(--transition-fast) var(--ease-in-out),
+                       background-color var(--transition-fast) var(--ease-in-out),
+                       border-color var(--transition-fast) var(--ease-in-out);
+  --transition-transform: transform var(--transition-DEFAULT) var(--ease-in-out);
+  --transition-opacity: opacity var(--transition-DEFAULT) var(--ease-in-out);
+  --transition-shadow: box-shadow var(--transition-DEFAULT) var(--ease-in-out);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     Z-INDEX SCALE - Layering system
+     Organized by purpose for predictable stacking
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  --z-base: 0;              /* Default layer */
+  --z-above: 1;             /* Just above base */
+  --z-below: -1;            /* Below base (backgrounds) */
+  --z-dropdown: 1000;       /* Dropdown menus */
+  --z-sticky: 1100;         /* Sticky headers */
+  --z-fixed: 1200;          /* Fixed positioning elements */
+  --z-overlay: 1300;        /* Modal overlays/backdrops */
+  --z-modal: 1400;          /* Modal content */
+  --z-popover: 1500;        /* Popovers, tooltips */
+  --z-toast: 1600;          /* Toast notifications */
+  --z-tooltip: 1700;        /* Tooltips (highest) */
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SURFACE COLORS - Backgrounds and containers
+     Light mode: 7% brightness difference between layers
+     Dark mode: 12% brightness difference between layers
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  /* Light mode surfaces */
+  --surface-base: var(--neutral-50);           /* Base background (near-white) */
+  --surface-elevated: #ffffff;                 /* Cards, elevated surfaces */
+  --surface-sunken: var(--neutral-100);        /* Inset areas, wells */
+  --surface-overlay: rgba(255, 255, 255, 0.95);  /* Overlays, dropdowns */
+
+  /* Dark mode surfaces (to be applied via data-theme="dark") */
+  --surface-base-dark: var(--neutral-900);     /* Base dark background */
+  --surface-elevated-dark: var(--neutral-800); /* Elevated in dark mode */
+  --surface-sunken-dark: #0a0a0a;              /* Even darker sunken */
+  --surface-overlay-dark: rgba(26, 26, 26, 0.95);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     TEXT COLORS - Hierarchy and contrast
+     All colors meet WCAG AA standards (4.5:1 for text, 3:1 for UI)
+  ═══════════════════════════════════════════════════════════════════════════ */
+  
+  /* Light mode text */
+  --text-primary: var(--neutral-900);        /* Primary text - near-black */
+  --text-secondary: var(--neutral-600);      /* Secondary text */
+  --text-tertiary: var(--neutral-500);       /* Tertiary text - labels */
+  --text-disabled: var(--neutral-400);       /* Disabled state */
+  --text-inverse: var(--neutral-50);         /* Text on dark backgrounds */
+  --text-link: var(--primary-600);           /* Links */
+  --text-link-hover: var(--primary-700);     /* Link hover */
+
+  /* Dark mode text */
+  --text-primary-dark: var(--neutral-50);
+  --text-secondary-dark: var(--neutral-400);
+  --text-tertiary-dark: var(--neutral-500);
+  --text-disabled-dark: var(--neutral-600);
+  --text-inverse-dark: var(--neutral-900);
+  --text-link-dark: var(--primary-400);
+  --text-link-hover-dark: var(--primary-300);
+}
+
+/*
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                           USAGE EXAMPLES                                     ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+NESTED CORNERS:
+.outer-container {
+  border-radius: var(--radius-xl);       // 12px
+  padding: var(--space-4);               // 16px
+}
+.inner-element {
+  border-radius: var(--radius-md);       // 4px (12px - 8px gap)
+}
+
+GLASSMORPHISM CARD:
+.glass-card {
+  background: var(--glass-bg-light);
+  backdrop-filter: var(--glass-blur-medium);
+  border: var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+BUTTON PADDING (horizontal = 2× vertical):
+.button {
+  padding: var(--space-3) var(--space-6);  // 12px vertical, 24px horizontal
+}
+
+SHADOW PROGRESSION:
+.card { box-shadow: var(--shadow-md); }
+.card:hover { box-shadow: var(--shadow-lg); }
+
+SPACING RHYTHM:
+.section {
+  padding: var(--space-8);              // 32px all around
+  gap: var(--space-4);                  // 16px between items
+}
+
+*/
+
