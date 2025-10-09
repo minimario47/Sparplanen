@@ -6,7 +6,7 @@
 
 /*
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║                    SPÅRPLANNEN - HEADER & NAVIGATION                         ║
+║                    SPÅRPLANV2 - HEADER & NAVIGATION                          ║
 ║         Modern, professional header with time controls                       ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
@@ -471,7 +471,7 @@ HEADER HTML STRUCTURE:
         <a href="/" class="header-logo">
             <span class="header-logo-icon">🚄</span>
             <div>
-                <h1 class="header-title">Spårplannen</h1>
+                <h1 class="header-title">SpårplanV2</h1>
                 <p class="header-subtitle">Professionell Tågtrafikledning</p>
             </div>
         </a>

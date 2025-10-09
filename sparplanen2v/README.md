@@ -1,4 +1,4 @@
-# 🚄 Spårplannen 2.0
+# 🚄 SpårplanV2
 
 **Professionell Tågtrafikledning - Ny Design**
 
@@ -6,7 +6,7 @@
 
 ## 📋 Om Projektet
 
-Detta är den fullständiga omdesignen av Spårplannen, byggd från grunden med moderna design principles och best practices.
+Detta är den fullständiga omdesignen av SpårplanV2, byggd från grunden med moderna design principles och best practices.
 
 **Status:** Subfas 1.1 - Design System & CSS Foundation ✅ KOMPLETT
 
@@ -53,7 +53,7 @@ Testa i:
 2. Kontrollera att det INTE finns några errors eller warnings
 3. Du bör se:
    ```
-   🎨 Spårplannen 2.0 Design System loaded successfully!
+   🎨 SpårplanV2 Design System loaded successfully!
    📋 CSS files loaded in correct order:
      1. design-system.css
      2. typography.css
@@ -286,7 +286,7 @@ Om du hittar ett problem:
 
 Design system loggar automatiskt vid page load:
 ```javascript
-console.log('🎨 Spårplannen 2.0 Design System loaded successfully!');
+console.log('🎨 SpårplanV2 Design System loaded successfully!');
 ```
 
 Detta kan tas bort i production eller styras via debug mode.
