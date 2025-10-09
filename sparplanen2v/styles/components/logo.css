@@ -1,0 +1,23 @@
+/* Logo theming - adaptive color based on theme */
+
+.app-logo {
+  height: 48px;
+  width: auto;
+  transition: filter var(--transition-normal);
+}
+
+/* Dark mode: Invert black stickman to white */
+[data-theme="dark"] .app-logo {
+  filter: invert(1);
+}
+
+/* High-contrast mode: Invert for visibility */
+[data-theme="high-contrast"] .app-logo {
+  filter: invert(1);
+}
+
+/* Light mode: Original black (no filter) */
+[data-theme="light"] .app-logo {
+  filter: none;
+}
+
