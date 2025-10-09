@@ -1,0 +1,157 @@
+/* Track labels - modern card design */
+
+.track-row {
+  display: flex;
+  align-items: center;
+  min-width: 120px;
+  max-width: 200px;
+  width: clamp(120px, 15vw, 200px);
+  height: 64px;
+  padding: var(--spacing-3);
+  background: var(--neutral-white);
+  border-bottom: 1px solid var(--neutral-200);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+}
+
+.track-row:hover {
+  background: var(--neutral-50);
+  box-shadow: inset 3px 0 0 var(--primary-500);
+}
+
+[data-theme="dark"] .track-row {
+  background: var(--neutral-850);
+  border-color: var(--neutral-750);
+}
+
+[data-theme="dark"] .track-row:hover {
+  background: var(--neutral-800);
+}
+
+.track-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  flex: 1;
+  min-width: 0;
+}
+
+.track-name {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.track-type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--spacing-2);
+  background: var(--primary-100);
+  color: var(--primary-700);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+[data-theme="dark"] .track-type-badge {
+  background: var(--primary-900);
+  color: var(--primary-300);
+}
+
+.track-type-badge.main {
+  background: var(--primary-100);
+  color: var(--primary-700);
+}
+
+.track-type-badge.side {
+  background: var(--secondary-100);
+  color: var(--secondary-700);
+}
+
+[data-theme="dark"] .track-type-badge.main {
+  background: var(--primary-900);
+  color: var(--primary-300);
+}
+
+[data-theme="dark"] .track-type-badge.side {
+  background: var(--secondary-900);
+  color: var(--secondary-300);
+}
+
+.track-length {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-tertiary);
+}
+
+.track-length-icon::before {
+  content: "↔";
+  font-size: var(--text-sm);
+}
+
+.track-notes-indicator {
+  position: absolute;
+  top: var(--spacing-2);
+  right: var(--spacing-2);
+  width: 8px;
+  height: 8px;
+  background: var(--warning-500);
+  border-radius: 50%;
+  border: 2px solid var(--neutral-white);
+}
+
+[data-theme="dark"] .track-notes-indicator {
+  border-color: var(--neutral-850);
+}
+
+.track-row.has-conflict {
+  border-left: 3px solid var(--error-500);
+}
+
+.track-row.selected {
+  background: var(--primary-50);
+  box-shadow: inset 3px 0 0 var(--primary-600);
+}
+
+[data-theme="dark"] .track-row.selected {
+  background: var(--primary-950);
+}
+
+@media (max-width: 640px) {
+  .track-row {
+    min-width: 100px;
+    max-width: 100px;
+    width: 100px;
+    height: 56px;
+    padding: var(--spacing-2);
+  }
+  
+  .track-name {
+    font-size: var(--text-sm);
+  }
+  
+  .track-info {
+    gap: var(--spacing-1);
+  }
+  
+  .track-type-badge,
+  .track-length {
+    display: none;
+  }
+}
+

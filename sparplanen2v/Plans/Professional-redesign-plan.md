@@ -162,6 +162,83 @@ När AI skapar en ny fil MÅSTE den:
 - **Status updates** i UI när saker händer
 - **Debug mode** toggle för extra verbosity
 
+#### REGEL: Dynamic Responsiveness - ALLTID Adaptera till Browser Layout
+
+**KRITISKT: Varje feature MÅSTE fungera i ALLA browser-storlekar och layouts**
+
+**Browser Layout Scenarios att ALLTID testa:**
+- ✅ Fullscreen (1920×1080, 2560×1440)
+- ✅ Half screen vertical split (960×1080)
+- ✅ Half screen horizontal split (1920×540)
+- ✅ Quarter screen (960×540)
+- ✅ Mobile portrait (375×667, 414×896)
+- ✅ Mobile landscape (667×375, 896×414)
+- ✅ Tablet (768×1024, 1024×768)
+- ✅ Resizing in real-time (smooth adaptation)
+
+**Implementation Requirements:**
+
+1. **Flexible Layouts**
+   - Använd `flexbox` och `CSS Grid` - ALDRIG fasta bredder
+   - Containers ska använda `min-width`, `max-width`, `width: 100%`
+   - Height ska anpassas till `viewport height` (`vh`) när relevant
+   - ALDRIG hårdkodat `width: 800px` - använd `width: min(800px, 100%)`
+
+2. **Content Adaptation**
+   - Information ska prioriteras - viktigast först
+   - Vid mindre utrymme: dölj mindre viktig info, visa tooltips
+   - Horizontal scroll TILLÅTET för timeline (men visa scroll hint)
+   - Vertical scroll för långa listor (tracks)
+
+3. **Real-time Resize Handling**
+   - Lyssna på `window.resize` event med debounce (150ms)
+   - Recalculate layout vid resize
+   - Smooth transitions vid layout-changes (200ms)
+   - Testa genom att dra browser-fönstret medans appen körs
+
+4. **Breakpoints Strategy**
+   - Mobile: < 640px
+   - Tablet: 640px - 1024px
+   - Desktop Small: 1024px - 1440px
+   - Desktop Large: > 1440px
+   - Men ÄVEN testa mellanliggande storlekar!
+
+5. **Testing Protocol**
+   - VARJE gång CSS/layout ändras: testa i alla scenarios
+   - Använd Chrome DevTools responsive mode
+   - Testa genom att resize browser window manuellt
+   - Verifiera att inget bryts vid ANY window size
+
+**Exempel på KORREKT responsiv CSS:**
+```css
+.schedule-container {
+  width: 100%;
+  max-width: 2000px;
+  height: min(600px, calc(100vh - var(--header-height) - 64px));
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.track-label {
+  min-width: 120px;
+  max-width: 200px;
+  width: clamp(120px, 15vw, 200px);
+}
+```
+
+**Exempel på FEL (hårda värden):**
+```css
+.schedule-container {
+  width: 1200px;  /* ❌ Bryts vid smaller screens */
+  height: 600px;  /* ❌ Inte responsive till viewport */
+}
+```
+
+**⚠️ ABSOLUT VIKTIGT:**
+- Testa VARJE feature genom att resize browser till olika storlekar
+- Om något ser konstigt ut vid half-screen → fixa OMEDELBART
+- User ska kunna ha browser i ANY size och appen ska fungera perfekt
+
 #### Migration av Existerande Filer
 
 Filer som redan skapats i denna session måste flyttas till sparplanen2v/:
