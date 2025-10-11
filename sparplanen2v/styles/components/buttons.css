@@ -1,76 +1,24 @@
-/* 🚫 MAX LIMIT EXCEEDED: This file has 441 lines (limit: 400)
- * DO NOT ADD ANY MORE CODE TO THIS FILE!
- * This file MUST be split before adding new functionality.
- * See Professional-redesign-plan.md section "REGEL: Max Filstorlek" for splitting guidance.
- */
-
-/*
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                    SPÅRPLANNEN - BUTTON SYSTEM                               ║
-║         Modern, accessible buttons following design principles               ║
-╚══════════════════════════════════════════════════════════════════════════════╝
-
-Button hierarchy:
-- Primary: Main actions (Nu-knapp, Save)
-- Secondary: Common actions (Navigation, Cancel)
-- Tertiary: Low-emphasis actions (Settings, Help)
-- Icon: Icon-only buttons (Theme toggle, Close)
-
-ANTHONY HOBDAY RULES APPLIED:
-- Horizontal padding = 2× vertical padding
-- Touch targets ≥ 44×44px
-- Clear affordances (buttons look clickable)
-- Visual weight in order (primary heaviest)
-
-WCAG 2.1 AA:
-- 3:1 contrast ratio for interactive elements
-- Clear focus indicators
-- Keyboard accessible
-
-VERSION: 1.0.0
-*/
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   BASE BUTTON - Foundation for all button types
-═══════════════════════════════════════════════════════════════════════════ */
+/* Buttons - 2:1 padding ratio, 44px touch targets, WCAG 2.1 AA */
 
 .btn {
-    /* Typography */
     font-family: var(--font-sans);
-    font-size: var(--font-size-base);      /* 16px */
-    font-weight: var(--font-weight-medium); /* 500 */
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
     line-height: 1;
-    
-    /* Layout - Horizontal padding = 2× Vertical (Anthony Hobday rule) */
-    padding: var(--spacing-3) var(--spacing-6);  /* 12px × 24px = 2:1 ratio */
-    min-height: 44px;  /* WCAG touch target minimum */
-    
-    /* Visual */
+    padding: var(--spacing-3) var(--spacing-6);
+    min-height: 44px;
     border: none;
-    border-radius: var(--border-radius-md);  /* 8px */
+    border-radius: var(--border-radius-md);
     background: none;
     color: inherit;
     cursor: pointer;
-    
-    /* Interaction */
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--spacing-2);  /* Space between icon and text */
-    
-    /* Transitions */
-    transition: 
-        background-color var(--transition-normal),
-        color var(--transition-normal),
-        border-color var(--transition-normal),
-        box-shadow var(--transition-normal),
-        transform var(--transition-fast);
-    
-    /* Prevent text selection */
+    gap: var(--spacing-2);
+    transition: background-color var(--transition-normal), color var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal), transform var(--transition-fast);
     user-select: none;
     -webkit-user-select: none;
-    
-    /* Accessibility */
     position: relative;
     overflow: hidden;
 }
@@ -418,30 +366,3 @@ VERSION: 1.0.0
     color: #ffffff;
     border-color: #ff0000;
 }
-
-/*
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                            USAGE EXAMPLES                                    ║
-╚══════════════════════════════════════════════════════════════════════════════╝
-
-PRIMARY BUTTON:
-<button class="btn btn-primary">Save Changes</button>
-
-SECONDARY BUTTON:
-<button class="btn btn-secondary">Cancel</button>
-
-ICON BUTTON:
-<button class="btn btn-icon" aria-label="Settings">⚙️</button>
-
-BUTTON GROUP:
-<div class="btn-group">
-    <button class="btn btn-secondary">Previous</button>
-    <button class="btn btn-secondary active">Current</button>
-    <button class="btn btn-secondary">Next</button>
-</div>
-
-LOADING BUTTON:
-<button class="btn btn-primary loading">Processing...</button>
-
-*/
-

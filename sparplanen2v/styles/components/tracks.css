@@ -1,32 +1,27 @@
-/* Track labels - modern card design */
+/* Track labels - consistent, clear, and aligned */
 
 .track-row {
   display: flex;
-  align-items: center;
-  min-width: 120px;
-  max-width: 200px;
-  width: clamp(120px, 15vw, 200px);
-  height: 64px;
-  padding: var(--spacing-3);
-  background: var(--neutral-white);
-  border-bottom: 1px solid var(--neutral-200);
-  transition: all var(--transition-normal);
-  cursor: pointer;
-  position: relative;
+  align-items: center; /* Vertically center content */
+  height: auto; /* Allow height to be set dynamically by JS */
+  min-height: 48px; /* Minimum height for a single train (reduced to fit all 16 tracks) */
+  padding: var(--spacing-2) var(--spacing-4);
+  border-bottom: 2px solid var(--neutral-400); /* Darker and thicker track separator */
+  background: var(--surface-primary);
+  transition: background var(--transition-fast);
 }
 
 .track-row:hover {
-  background: var(--neutral-50);
-  box-shadow: inset 3px 0 0 var(--primary-500);
+  background: var(--surface-hover);
 }
 
 [data-theme="dark"] .track-row {
   background: var(--neutral-850);
-  border-color: var(--neutral-750);
+  border-bottom: 2px solid var(--neutral-800); /* Darker track separator in dark mode */
 }
 
 [data-theme="dark"] .track-row:hover {
-  background: var(--neutral-800);
+  background: var(--neutral-1000);
 }
 
 .track-content {
@@ -154,4 +149,5 @@
     display: none;
   }
 }
+
 

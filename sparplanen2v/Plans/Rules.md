@@ -1,6 +1,3 @@
-# Fullständig Omdesign av Spårplannen
-
----
 
 ## 🎯 DESIGN & DEVELOPMENT PRINCIPLES
 
@@ -59,7 +56,7 @@ sparplanen2v/
 │   ├── trains.js
 │   └── vehicleTypes.js
 └── docs/
-    └── README.md
+    └── Never write text files, write in the chat instead if you want to tell developer something
 ```
 
 #### REGEL: Auto-Organisation av Filer
@@ -162,6 +159,316 @@ När AI skapar en ny fil MÅSTE den:
 - **Status updates** i UI när saker händer
 - **Debug mode** toggle för extra verbosity
 
+#### REGEL: Chrome DevTools MCP - AI-Assisted Testing & Debugging
+
+**KRITISKT: AI MÅSTE använda Chrome DevTools MCP för att verifiera all kod**
+
+**⚠️ VIKTIGT: Använd Chrome, INTE Safari!**
+- **macOS default browser är Safari** - men MCP fungerar ENDAST med Chrome
+- **AI måste explicit använda MCP Chrome DevTools tools** för testing
+- **File protocol path:** `file:///Users/mikailyenigun/Desktop/Spårplannen/sparplanen2v/index.html`
+
+---
+
+### MCP Capabilities - Vad AI Kan Göra
+
+Chrome DevTools MCP ger AI superkrafter att faktiskt SE och TESTA koden:
+
+#### 1. **Öppna & Navigera Sidor**
+```javascript
+// AI kan öppna index.html i Chrome automatiskt
+mcp_chrome-devtools_new_page(url: "file:///Users/.../sparplanen2v/index.html")
+mcp_chrome-devtools_navigate_page(url: "http://localhost:8080")
+```
+
+#### 2. **Ta Snapshots (DOM Inspection)**
+```javascript
+// Få hela DOM-strukturen som accessibility tree med unique IDs
+mcp_chrome-devtools_take_snapshot()
+// Visar alla element med uid (t.ex. uid=1_14 för theme toggle button)
+// Perfect för att hitta element att interagera med
+```
+
+#### 3. **Ta Screenshots**
+```javascript
+// Se hur sidan FAKTISKT ser ut visuellt
+mcp_chrome-devtools_take_screenshot(format: "png")
+// Kan ta fullPage screenshots eller specific elements
+// Jämför före/efter ändringar visuellt
+```
+
+#### 4. **Läs Console Logs & Errors**
+```javascript
+// Se ALLA console.log(), errors, warnings
+mcp_chrome-devtools_list_console_messages()
+// Example output:
+// ✅ Settings controls initialized
+// 🎨 Theme initialized: light
+// 📅 Schedule initialized with 11 trains on 12 tracks
+```
+
+#### 5. **Inspektera Network Requests**
+```javascript
+// Lista ALLA nätverks-requests (CSS, JS, images)
+mcp_chrome-devtools_list_network_requests()
+// Se vilka filer som laddades (200 success eller 404 error)
+// Diagnostisera varför resources inte laddar
+```
+
+#### 6. **Interagera med Sidan**
+```javascript
+// Klicka på buttons, links, elements
+mcp_chrome-devtools_click(uid: "1_14")  // Klicka theme toggle
+
+// Fyll i formulär
+mcp_chrome-devtools_fill(uid: "2_5", value: "Test input")
+
+// Hover över element
+mcp_chrome-devtools_hover(uid: "3_10")
+
+// Simulera komplett user flows
+```
+
+#### 7. **Evaluera JavaScript Live**
+```javascript
+// Kör JavaScript direkt på sidan
+mcp_chrome-devtools_evaluate_script(function: `() => {
+  return {
+    currentTheme: document.documentElement.getAttribute('data-theme'),
+    totalTrains: document.querySelectorAll('[class*="train"]').length,
+    viewportWidth: window.innerWidth
+  };
+}`)
+// Returns live data från sidan!
+```
+
+#### 8. **Performance Testing**
+```javascript
+// Starta performance trace
+mcp_chrome-devtools_performance_start_trace(reload: true, autoStop: true)
+
+// Stoppa och analysera
+mcp_chrome-devtools_performance_stop_trace()
+
+// Få Core Web Vitals (LCP, FID, CLS) och performance insights
+```
+
+---
+
+### Mandatory MCP Testing Workflow
+
+**AI MÅSTE FÖLJA DENNA PROCESS efter varje kod-ändring:**
+
+#### ✅ STEG 1: Öppna i Chrome
+```
+mcp_chrome-devtools_new_page("file:///.../sparplanen2v/index.html")
+```
+
+#### ✅ STEG 2: Verifiera Inga Errors
+```
+mcp_chrome-devtools_list_console_messages()
+// Ska INTE visa errors, endast success logs
+```
+
+#### ✅ STEG 3: Kontrollera Network Loads
+```
+mcp_chrome-devtools_list_network_requests()
+// Alla CSS/JS files ska vara 200 (success), INTE 404
+```
+
+#### ✅ STEG 4: Ta Screenshot
+```
+mcp_chrome-devtools_take_screenshot()
+// Verifiera att design ser korrekt ut visuellt
+```
+
+#### ✅ STEG 5: Testa Interaktioner
+```
+mcp_chrome-devtools_take_snapshot()  // Få element UIDs
+mcp_chrome-devtools_click(uid: "...")  // Testa buttons
+// Verifiera att klicks fungerar som förväntat
+```
+
+#### ✅ STEG 6: Inspect State (om relevant)
+```
+mcp_chrome-devtools_evaluate_script(...)
+// Kontrollera att JavaScript state är korrekt
+```
+
+---
+
+### Praktiska MCP Exempel
+
+#### Exempel 1: Verifiera Theme Toggle
+```
+1. mcp_chrome-devtools_new_page(index.html)
+2. mcp_chrome-devtools_take_screenshot()  // Se light mode
+3. mcp_chrome-devtools_take_snapshot()    // Hitta theme button uid
+4. mcp_chrome-devtools_click(uid: "1_14") // Klicka theme toggle
+5. mcp_chrome-devtools_list_console_messages()  // Se "Theme changed to: dark"
+6. mcp_chrome-devtools_take_screenshot()  // Verifiera dark mode visuellt
+```
+
+#### Exempel 2: Debug Varför CSS Inte Laddar
+```
+1. mcp_chrome-devtools_new_page(index.html)
+2. mcp_chrome-devtools_list_network_requests()
+   // Se om CSS file är 404 (file not found)
+3. mcp_chrome-devtools_take_screenshot()
+   // Se visuellt om styles saknas
+4. mcp_chrome-devtools_list_console_messages()
+   // Kolla efter "Failed to load resource" errors
+```
+
+#### Exempel 3: Testa Settings Modal
+```
+1. mcp_chrome-devtools_new_page(index.html)
+2. mcp_chrome-devtools_take_snapshot()
+3. mcp_chrome-devtools_click(uid: "1_15")  // Öppna settings
+4. mcp_chrome-devtools_take_screenshot()   // Se att modal öppnade
+5. mcp_chrome-devtools_take_snapshot()     // Se modal content struktur
+6. mcp_chrome-devtools_evaluate_script(`() => {
+     return document.querySelector('.settings-modal').style.display;
+   }`)  // Verifiera modal är synlig
+```
+
+---
+
+### När AI MÅSTE Använda MCP
+
+**OBLIGATORISKT att testa med MCP i dessa situationer:**
+
+1. ✅ **Efter VARJE ny CSS file skapats** - verifiera den laddas och applys korrekt
+2. ✅ **Efter VARJE ny JS file skapats** - verifiera no errors i console
+3. ✅ **Efter layout/design ändringar** - ta screenshot, verifiera visuellt
+4. ✅ **Efter ny interactive feature** - testa med clicks/fills
+5. ✅ **Efter bug fix** - verifiera att bug är fixad
+6. ✅ **Vid responsive design** - resize viewport och verifiera
+7. ✅ **Vid theme changes** - verifiera light/dark modes ser rätt ut
+8. ✅ **Vid performance optimizations** - kör performance trace
+
+---
+
+### MCP vs Manual Testing
+
+| Scenario | AI med MCP | Utan MCP |
+|----------|------------|----------|
+| Verifiera CSS laddar | ✅ Ser network requests, tar screenshot | ❌ Gissar, kan missa fel |
+| Testa button clicks | ✅ Klickar faktiskt, ser resultat | ❌ Kan bara anta det fungerar |
+| Debug console errors | ✅ Läser faktiska errors | ❌ Kan inte se errors |
+| Kontrollera theme toggle | ✅ Klickar, tar screenshot före/efter | ❌ Kan inte verifiera |
+| Verifiera responsiveness | ✅ Ändrar viewport, tar screenshots | ❌ Kan bara skriva kod och hoppas |
+
+---
+
+### MCP Best Practices för AI
+
+1. **Ta ALLTID screenshot efter ändringar** - visualisera results
+2. **Läs ALLTID console efter page load** - catch errors tidigt
+3. **Verifiera network requests** - alla resources ska vara 200 OK
+4. **Testa user flows** - klicka, fyll i, navigera som en riktig användare
+5. **Använd evaluate_script för state inspection** - se faktisk JavaScript state
+6. **Jämför före/efter screenshots** - visuell regression testing
+7. **Testa i OLIKA viewport sizes** - resize page, verifiera responsive
+
+---
+
+### Felsökning med MCP
+
+| Problem | MCP Solution |
+|---------|--------------|
+| "Vit sida" | `list_network_requests()` - kolla om CSS/JS laddar |
+| "Button gör inget" | `list_console_messages()` - se JavaScript errors |
+| "Fel färger" | `take_screenshot()` + `evaluate_script()` - inspektera theme |
+| "Layout trasig" | `take_snapshot()` - se DOM struktur, hitta CSS issues |
+| "Långsam" | `performance_start_trace()` - se bottlenecks |
+
+---
+
+**Referens:** [Chrome DevTools MCP Documentation](https://developer.chrome.com/blog/chrome-devtools-mcp)
+
+**⚠️ ABSOLUT KRITISKT:**
+- AI ska ALLTID använda MCP för verification
+- ALDRIG anta att kod fungerar utan att testa i Chrome
+- MCP är INTE optional - det är MANDATORY för quality assurance
+
+#### REGEL: Dynamic Responsiveness - ALLTID Adaptera till Browser Layout
+
+**KRITISKT: Varje feature MÅSTE fungera i ALLA browser-storlekar och layouts**
+
+**Browser Layout Scenarios att ALLTID testa:**
+- ✅ Fullscreen (1920×1080, 2560×1440)
+- ✅ Half screen vertical split (960×1080)
+- ✅ Half screen horizontal split (1920×540)
+- ✅ Quarter screen (960×540)
+- ✅ Mobile portrait (375×667, 414×896)
+- ✅ Mobile landscape (667×375, 896×414)
+- ✅ Tablet (768×1024, 1024×768)
+- ✅ Resizing in real-time (smooth adaptation)
+
+**Implementation Requirements:**
+
+1. **Flexible Layouts**
+   - Använd `flexbox` och `CSS Grid` - ALDRIG fasta bredder
+   - Containers ska använda `min-width`, `max-width`, `width: 100%`
+   - Height ska anpassas till `viewport height` (`vh`) när relevant
+   - ALDRIG hårdkodat `width: 800px` - använd `width: min(800px, 100%)`
+
+2. **Content Adaptation**
+   - Information ska prioriteras - viktigast först
+   - Vid mindre utrymme: dölj mindre viktig info, visa tooltips
+   - Horizontal scroll TILLÅTET för timeline (men visa scroll hint)
+   - Vertical scroll för långa listor (tracks)
+
+3. **Real-time Resize Handling**
+   - Lyssna på `window.resize` event med debounce (150ms)
+   - Recalculate layout vid resize
+   - Smooth transitions vid layout-changes (200ms)
+   - Testa genom att dra browser-fönstret medans appen körs
+
+4. **Breakpoints Strategy**
+   - Mobile: < 640px
+   - Tablet: 640px - 1024px
+   - Desktop Small: 1024px - 1440px
+   - Desktop Large: > 1440px
+   - Men ÄVEN testa mellanliggande storlekar!
+
+5. **Testing Protocol**
+   - VARJE gång CSS/layout ändras: testa i alla scenarios
+   - Använd Chrome DevTools responsive mode
+   - Testa genom att resize browser window manuellt
+   - Verifiera att inget bryts vid ANY window size
+
+**Exempel på KORREKT responsiv CSS:**
+```css
+.schedule-container {
+  width: 100%;
+  max-width: 2000px;
+  height: min(600px, calc(100vh - var(--header-height) - 64px));
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.track-label {
+  min-width: 120px;
+  max-width: 200px;
+  width: clamp(120px, 15vw, 200px);
+}
+```
+
+**Exempel på FEL (hårda värden):**
+```css
+.schedule-container {
+  width: 1200px;  /* ❌ Bryts vid smaller screens */
+  height: 600px;  /* ❌ Inte responsive till viewport */
+}
+```
+
+**⚠️ ABSOLUT VIKTIGT:**
+- Testa VARJE feature genom att resize browser till olika storlekar
+- Om något ser konstigt ut vid half-screen → fixa OMEDELBART
+- User ska kunna ha browser i ANY size och appen ska fungera perfekt
+
 #### Migration av Existerande Filer
 
 Filer som redan skapats i denna session måste flyttas till sparplanen2v/:
@@ -232,14 +539,36 @@ modules/warnings/
 └── warningDisplay.js         (100 rader - UI rendering)
 ```
 
-**⚠️ ABSOLUT VIKTIGAST: Varje gång AI skapar en fil, kontrollera att:**
+**REGEL: Automatisk Max-Varning**
+
+När en fil når 380 rader (approaching limit), lägg till detta i toppen av filen:
+
+```
+/* ⚠️ WARNING: This file is approaching the 400-line limit (currently at XXX lines)
+ * DO NOT add more code to this file without splitting it first!
+ * See Professional-redesign-plan.md section "REGEL: Max Filstorlek" for guidance.
+ */
+```
+
+När en fil når 400+ rader (limit exceeded), uppdatera varningen:
+
+```
+/* 🚫 MAX LIMIT EXCEEDED: This file has XXX lines (limit: 400)
+ * DO NOT ADD ANY MORE CODE TO THIS FILE!
+ * This file MUST be split before adding new functionality.
+ * See Professional-redesign-plan.md section "REGEL: Max Filstorlek" for splitting guidance.
+ */
+```
+
+**⚠️ ABSOLUT VIKTIGAST: Varje gång AI skapar/redigerar en fil, kontrollera att:**
 1. ✅ Filen är i sparplanen2v/
 2. ✅ Filen är i rätt subfolder
 3. ✅ Filen är UNDER 400 rader kod
-4. ✅ Om över 400 rader → dela upp enligt ovan
-5. ✅ index.html är uppdaterad med länk till filen
-6. ✅ Ordningen är korrekt i index.html
-7. ✅ Filen kan testas genom att öppna index.html i browser
+4. ✅ Om approaching 380 rader → lägg till approaching-warning
+5. ✅ Om över 400 rader → lägg till max-exceeded warning OCH dela upp filen
+6. ✅ index.html är uppdaterad med länk till filen
+7. ✅ Ordningen är korrekt i index.html
+8. ✅ Filen kan testas genom att öppna index.html i browser
 
 ---
 
@@ -430,20 +759,21 @@ modules/warnings/
 
 ### VI. DOCUMENTATION REQUIREMENTS
 
-#### Inline Documentation
+#### Inline Documentation - KEEP IT MINIMAL!
 
-- **Document complex logic** - explain the "why"
-- **Document assumptions** - what must be true for this to work
-- **Document TODOs** - with context and priority
-- **Document hacks** - why needed, when can be removed
+**❌ FÖRBJUDET:**
+- **NO USAGE EXAMPLES** in code files - waste of tokens/space
+- **NO LONG EXPLANATORY COMMENTS** - code should be self-documenting
+- **NO DECORATIVE BOXES** - simple /* */ comments only
+- **NO PHILOSOPHY SECTIONS** - just code
+- **NO "How to use" sections** - obvious from code
 
-#### Component Documentation
+**✅ TILLÅTET (bara när nödvändigt):**
+- **File header:** 1-2 lines max stating file purpose
+- **Complex logic:** Short "why" comment (not "what")
+- **TODO comments:** With ticket/issue number
+- **Hacks/Workarounds:** Brief explanation why needed
 
-- **Purpose** - what does this component do?
-- **Props/Parameters** - what inputs does it take?
-- **State** - what state does it manage?
-- **Events** - what events does it emit/handle?
-- **Examples** - basic usage examples
 
 ---
 
@@ -929,661 +1259,6 @@ Studera och ta inspiration från:
 
 ## FASE 1: Visuell Redesign & Foundation (Prioritet 1)
 
-**🔔 REMINDER: Följ alla Design & Development Principles ovan genom hela denna fas.**
+**🔔 REMINDER: Följ alla Design & Development Principles i filen Rules.md genom hela denna fas.**
 
 **📁 CRITICAL: Alla filer för denna fas skapas i `/Users/mikailyenigun/Desktop/Spårplannen/sparplanen2v/`**
-
-### Subfas 1.1: Design System & CSS Foundation
-
-**Mål**: Skapa ett modernt, professionellt designsystem baserat på Material Design-principer
-
-**📁 FOLDER**: Alla CSS-filer för denna subfas → `sparplanen2v/styles/`
-
-**🔔 REMINDER CHECKLIST för denna subfas:**
-- ✅ Alla filer skapas i `sparplanen2v/styles/`
-- ✅ index.html uppdateras med nya CSS-länkar i KORREKT ordning
-- ✅ Användaren kan öppna `sparplanen2v/index.html` och se resultatet
-- ✅ Console är ren (zero errors/warnings)
-- ✅ Alla Design & Development Principles följs
-- ✅ Commit efter subfas är klar
-
-**Åtgärder**: 
-
-- Skapa nytt `styles/design-system.css` med moderna CSS-variabler för färger, typografi, spacing, shadows
-- Implementera glassmorfism-effekter och moderna skuggor för djup
-- Uppdatera `styles/variables.css` med professionellt färgschema (primär, sekundär, accent, success, warning, danger, info)
-- Skapa `styles/typography.css` med moderna fontskalor och hierarki
-- Definiera konsistenta border-radius, transitions, och animations
-
-**Filer att ändra**: `styles/variables.css`, `styles/themes.css`, `styles/base.css`
-
-**Nya filer**: `styles/design-system.css`, `styles/typography.css`
-
-### Subfas 1.2: Header & Navigation Redesign
-
-**Mål**: Modernisera header med bättre layout, visuell hierarki och tillgänglighet
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Redesigna `.app-header` med modern gradient, shadows och spacing
-- Skapa nya button-styles med hover-effekter, ripple-animations
-- Förbättra tidskontroller med större, tydligare knappar
-- Lägg till visuella indikatorer för aktiv status
-- Uppdatera delay-connection-status med modern badge-design
-
-**Filer att ändra**: `styles/header.css`, `styles/buttons.css`, `index.html`
-
-### Subfas 1.3: Schedule View Redesign
-
-**Mål**: Skapa en vacker, professionell schemavy med bättre visuell separation
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Redesigna `.track-labels` med modern card-design, hover-effekter
-- Uppdatera `.timeline-header` med subtila gradients och bättre typografi
-- Förbättra `.train-bar` visuellt: modernare färger, shadows, hover-states
-- Lägg till smooth transitions för alla interaktioner
-- Förbättra conflict/warning visualisering med moderna ikoner och färger
-
-**Filer att ändra**: `styles/layout.css`, `styles/trains.css`, `styles/timeline.css`, `renderer.js`
-
-### Subfas 1.4: Modal & Form Redesign
-
-**Mål**: Modernisera alla modaler och formulär för bättre UX
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Redesigna `.modal-overlay` med modern backdrop blur
-- Uppdatera `.modal-content` med card-design, shadows, animations
-- Förbättra form-inputs med moderna styles (outlined, filled)
-- Lägg till input validation visuellt (success/error states)
-- Skapa nya dropdown-styles och select-komponenter
-
-**Filer att ändra**: `styles/modals.css`, `modalManager.js`, `index.html`
-
-### Subfas 1.5: Responsive Layout Foundation
-
-**Mål**: Säkerställa att alla nya visuella element fungerar responsivt
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Uppdatera `styles/responsive.css` för nya designelement
-- Implementera flexbox/grid för bättre layout på alla skärmstorlekar
-- Testa och justera breakpoints för tablets och mobiler
-- Säkerställa att färger, spacing fungerar på alla devices
-
-**Filer att ändra**: `styles/responsive.css`, `styles/layout.css`
-
----
-
-## FASE 2: Enhanced Responsiveness & View Controls
-
-### Subfas 2.1: Advanced Zoom Controls
-
-**Mål**: Implementera fullständig zoom-kontroll för X och Y axlar
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa zoom-kontroller i UI (zoom in/out knappar, zoom-slider)
-- Uppdatera `calculateDynamicSizing()` i `app.js` för dynamisk zoom
-- Implementera zoom-state i AppState
-- Lägg till zoom-shortcuts (Ctrl +/-, pinch-to-zoom)
-- Spara zoom-preferenser i localStorage
-
-**Filer att ändra**: `app.js`, `renderer.js`, `events/keyboardShortcuts.js`
-
-**Nya filer**: `ui/ZoomControls.js`
-
-### Subfas 2.2: "Now Mode" med Auto-scroll
-
-**Mål**: Implementera live-läge där röd linje är centrerad och schemat scrollar
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa "Nu"-knapp i header som aktiverar now-mode
-- Implementera auto-scroll logik i `renderer.js`
-- Uppdatera `updateCurrentTimeLine()` för centered positioning i now-mode
-- Skapa smooth scroll-animation när tiden uppdateras
-- Lägg till toggle för att pausa/återuppta now-mode
-
-**Filer att ändra**: `app.js`, `renderer.js`, `index.html`
-
-### Subfas 2.3: Compact View Toggle
-
-**Mål**: Skapa kompakt vy för mindre skärmar med färre detaljer
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa toggle-knapp för compact view
-- Implementera compact CSS-klasser med mindre text, mindre spacing
-- Dölj mindre viktig information i compact mode (längd, detaljerad info)
-- Behåll kritisk information synlig (tågnummer, tid, konflikter)
-- Automatisk aktivering på små skärmar med manual override
-
-**Filer att ändra**: `styles/responsive.css`, `app.js`, `index.html`
-
-**Nya filer**: `styles/compact-view.css`
-
-### Subfas 2.4: Touch & Mobile Optimization
-
-**Mål**: Optimera för touch-enheter
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Implementera touch event handlers för drag, resize, zoom
-- Förstora touch-targets (minst 44x44px)
-- Lägg till touch-feedback (ripple effects)
-- Optimera context menu för touch (long-press)
-- Testa och förbättra mobile performance
-
-**Filer att ändra**: `events/mouseEvents.js`
-
-**Nya filer**: `events/touchEvents.js`
-
----
-
-## FASE 3: Advanced Warning System
-
-### Subfas 3.1: Warning Engine Architecture
-
-**Mål**: Skapa flexibel warning-engine för customizable regler
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa `warningEngine.js` med pluggable rule system
-- Definiera warning rule interface/struktur
-- Implementera rule evaluation engine
-- Skapa warning priority system (critical, high, medium, low)
-- Implementera warning persistence i localStorage
-
-**Nya filer**: `warningEngine.js`, `warningRules.js`
-
-### Subfas 3.2: Built-in Warning Rules
-
-**Mål**: Implementera specifika warning-regler för Göteborg C
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- **Rule 1**: Departure before arrival deadlock (tåg A avgår innan tåg B som ska anlända)
-- **Rule 2**: Platform length exceeded (total tåglängd > spårlängd)
-- **Rule 3**: Unidirectional flow violation (norr till norr logik)
-- **Rule 4**: Temporal overlap conflicts
-- **Rule 5**: Train type vs platform type mismatch
-- Implementera varje regel som separat modul i `warningRules.js`
-
-**Filer att ändra**: `warningRules.js`, `renderer.js`
-
-### Subfas 3.3: Custom Warning Builder UI
-
-**Mål**: UI för att skapa, redigera och ta bort egna warning-regler
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa "Warning Manager" modal med lista över alla regler
-- Implementera "Add Rule" formulär med dropdown för regel-typ
-- Skapa regel-editor med parameters (tid, längd, spår-typ etc)
-- Lägg till enable/disable toggle för varje regel
-- Implementera delete med confirmation
-
-**Nya filer**: `ui/WarningManager.js`, `styles/warning-manager.css`
-
-### Subfas 3.4: Warning Silence System
-
-**Mål**: Flexibelt system för att tysta warnings
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Implementera silence-state i warning engine
-- Skapa UI för silence options:
-  - Tysta specifik warning permanent
-  - Tysta alla warnings för X minuter/timmar
-  - Tysta per warning-typ (längd, konflikt, etc)
-- Lägg till "Snooze" knapp på varje warning
-- Visa silenced warnings i separat lista
-- Auto-unsilence när problemet är löst
-
-**Filer att ändra**: `warningEngine.js`
-
-**Nya filer**: `ui/WarningSilencer.js`
-
-### Subfas 3.5: Warning Display & Notifications
-
-**Mål**: Professionell visualisering av warnings
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa warning panel/sidebar med alla aktiva warnings
-- Implementera warning badges på train-bars med ikoner
-- Lägg till sound notifications (toggleable) för critical warnings
-- Skapa warning severity colors (orange, red, purple)
-- Implementera blinking/pulsing för kritiska warnings
-- Lägg till warning history log
-
-**Filer att ändra**: `styles/notifications.css`, `renderer.js`
-
-**Nya filer**: `ui/WarningPanel.js`
-
----
-
-## FASE 4: Conflict Resolution System
-
-### Subfas 4.1: Conflict Detection Engine
-
-**Mål**: Intelligent konflikt-detection som förstår Göteborg C logik
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa `conflictResolver.js` med detection algoritmer
-- Implementera graph-based track analysis för flow
-- Detektera temporal conflicts med consideration för vändtid
-- Analysera capacity conflicts (längd + antal tåg)
-- Beräkna conflict severity score
-
-**Nya filer**: `conflictResolver.js`
-
-### Subfas 4.2: Solution Generator
-
-**Mål**: AI-liknande system som genererar konfliktlösningar
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Implementera algoritm för att generera lösningsförslag:
-  - Byt spår för tåg
-  - Justera ankomst/avgångstid (minimal förändring först)
-  - Flytta till alternativt subtrack
-  - Split/merge tjänster
-- Rankera lösningar baserat på:
-  - Minsta förändring från original
-  - Fewest warnings violated
-  - Passenger impact (om data finns)
-- Respektera warning rules vid lösningsförslag
-
-**Filer att ändra**: `conflictResolver.js`
-
-### Subfas 4.3: Suggestion UI & Navigation
-
-**Mål**: Snygg UI för att visa och navigera mellan lösningsförslag
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa "Conflict Resolution" panel (toggleable)
-- Visa aktuell konflikt highlightad på schemat
-- Lista lösningsförslag med:
-  - Visual preview
-  - Impact score
-  - Ändringar som krävs
-- Implementera "Next Solution" / "Previous Solution" navigation
-- Preview solution på schemat med transparency
-- Lägg till "Apply Solution" knapp
-
-**Nya filer**: `ui/ConflictResolutionPanel.js`, `styles/conflict-resolution.css`
-
-### Subfas 4.4: Apply Solution Mechanism
-
-**Mål**: Säkert applicera lösningsförslag med undo
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Implementera solution application med validation
-- Integrera med history engine för undo
-- Animera train-bar changes när solution appliceras
-- Visa confirmation med changes summary
-- Auto re-check för nya konflikter efter apply
-
-**Filer att ändra**: `conflictResolver.js`, `historyEngine.js`, `events/trainActions.js`
-
----
-
-## FASE 5: Notes & Communication System
-
-### Subfas 5.1: Data Structure & Storage
-
-**Mål**: Robust data-struktur för notes
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Definiera note schema:
-  ```js
-  {
-    id, type (track/train/shift), 
-    attachedTo (trackId/trainId/null),
-    content, author, timestamp,
-    priority (normal/high/critical),
-    resolved (bool), tags[]
-  }
-  ```
-
-- Skapa `notesEngine.js` för CRUD operations
-- Implementera persistence i localStorage + optional server sync
-- Lägg till note search/filter funktionalitet
-
-**Nya filer**: `notesEngine.js`
-
-### Subfas 5.2: Track Notes UI
-
-**Mål**: Anteckningar kopplade till specifika spår
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Lägg till notes-ikon på track labels
-- Skapa popover/modal för att visa track notes
-- Implementera "Add Note" formulär för spår
-- Visa note count badge på tracks med notes
-- Färgkoda tracks med high-priority notes (subtle highlight)
-
-**Nya filer**: `ui/TrackNotes.js`, `styles/notes.css`
-
-### Subfas 5.3: Train Notes UI
-
-**Mål**: Anteckningar kopplade till specifika tåg
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Lägg till notes-ikon på train context menu
-- Visa note indicator på train-bars (small badge)
-- Implementera train note modal med tjänstspecifik info
-- Koppla notes till både arrival och departure tågnummer
-- Auto-visa notes när tåg är valt/editerat
-
-**Nya filer**: `ui/TrainNotes.js`
-
-### Subfas 5.4: Shift Communication Panel
-
-**Mål**: Global kommunikation mellan skift
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa "Shift Log" panel (toggleable sidebar)
-- Implementera timeline-vy av shift notes
-- Lägg till "Handover Notes" special category
-- Implementera markdown support för formaterad text
-- Lägg till attachments (images, files) support
-- Skapa "Important" pinning för kritiska meddelanden
-
-**Nya filer**: `ui/ShiftLogPanel.js`, `styles/shift-log.css`
-
-### Subfas 5.5: Search & Filter
-
-**Mål**: Kraftfull sökning över alla notes
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa global note search
-- Implementera filters:
-  - By type (track/train/shift)
-  - By priority
-  - By date range
-  - By author
-  - By resolved status
-- Highlight search results på schemat
-- Export notes to PDF/CSV
-
-**Filer att ändra**: `notesEngine.js`
-
-**Nya filer**: `ui/NoteSearch.js`
-
----
-
-## FASE 6: Settings & Customization
-
-### Subfas 6.1: Settings Panel Architecture
-
-**Mål**: Omfattande settings-system för fullständig kontroll
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa `settingsEngine.js` för settings management
-- Definiera settings schema med categories:
-  - View Settings
-  - Warning Settings
-  - Notification Settings
-  - API Settings
-  - Display Settings
-  - Behavior Settings
-- Implementera settings persistence med versioning
-- Skapa settings modal med tab-navigation
-
-**Nya filer**: `settingsEngine.js`, `ui/SettingsPanel.js`, `styles/settings.css`
-
-### Subfas 6.2: View Preferences
-
-**Mål**: Anpassa alla visuella aspekter
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Default zoom level (X och Y)
-- Default time window (1h, 3h, 6h etc)
-- Show/hide elements (track length, vehicle info, time indicators)
-- Color scheme preferences
-- Compact view auto-activation threshold
-- Grid density settings
-
-**Filer att ändra**: `settingsEngine.js`, `ui/SettingsPanel.js`
-
-### Subfas 6.3: Warning Preferences
-
-**Mål**: Fullständig kontroll över warning-systemet
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Enable/disable warnings globally
-- Configure warning thresholds (proximity minutes, length percentage)
-- Set default silence durations
-- Configure notification sounds
-- Warning severity customization
-
-**Filer att ändra**: `settingsEngine.js`, `warningEngine.js`
-
-### Subfas 6.4: Profile & Presets
-
-**Mål**: Spara olika profiler för olika situationer
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa "Profiles" system (Morning Shift, Evening Shift, Weekend etc)
-- Implementera quick profile switching
-- Auto-activate profile based på tid på dygnet
-- Import/export profiles
-- Share profiles mellan användare
-
-**Filer att ändra**: `settingsEngine.js`
-
-**Nya filer**: `ui/ProfileManager.js`
-
-### Subfas 6.5: Import/Export Settings
-
-**Mål**: Backup och delning av settings
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Export alla settings till JSON
-- Import settings från fil
-- Reset till defaults med confirmation
-- Cloud sync settings (optional, future)
-
-**Filer att ändra**: `settingsEngine.js`, `ui/SettingsPanel.js`
-
----
-
-## FASE 7: API Integration & Automation
-
-### Subfas 7.1: Settings-based API Control
-
-**Mål**: Flytta API-kontroller till settings
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa API Settings tab i settings panel
-- Flytta start/stop kontroller från header till settings
-- Lägg till API URL konfiguration
-- Implementera update interval settings
-- Visa detailed connection status i settings
-
-**Filer att ändra**: `settingsEngine.js`, `TrainData/train_delay_integration.js`
-
-### Subfas 7.2: Auto-start Configuration
-
-**Mål**: Automatisk start av API vid sidladdning
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Lägg till "Auto-start API on load" checkbox i settings
-- Implementera auto-start logic i `train_delay_integration.js`
-- Lägg till retry logic vid failed connection
-- Visa loading indicator under initial connection
-- Notification när auto-start lyckas/misslyckas
-
-**Filer att ändra**: `TrainData/train_delay_integration.js`, `settingsEngine.js`
-
-### Subfas 7.3: Connection Status & Monitoring
-
-**Mål**: Professionell statusövervakning
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Förbättra connection status badge i header
-- Lägg till detaljerad status i settings (last update, train count, errors)
-- Implementera connection health monitoring
-- Warning när connection är lost
-- Auto-reconnect med exponential backoff
-
-**Filer att ändra**: `TrainData/train_delay_integration.js`, `styles/header.css`
-
-### Subfas 7.4: Error Handling & Retry
-
-**Mål**: Robust error handling
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Implementera comprehensive error catching
-- Visa user-friendly error messages
-- Lägg till manual retry button
-- Log errors för debugging
-- Fallback till cached data vid API failure
-
-**Filer att ändra**: `TrainData/train_delay_integration.js`
-
----
-
-## FASE 8: Additional Professional Tools
-
-### Subfas 8.1: Quick Actions Toolbar
-
-**Mål**: Snabb tillgång till vanliga operationer
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa floating action button (FAB) eller quick toolbar
-- Lägg till quick actions:
-  - Add train
-  - Jump to now
-  - Find conflicts
-  - Open notes
-  - Export schedule
-- Customizable quick actions i settings
-
-**Nya filer**: `ui/QuickActions.js`, `styles/quick-actions.css`
-
-### Subfas 8.2: Keyboard Shortcuts System
-
-**Mål**: Fullständigt keyboard navigation
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Skapa comprehensive shortcut system:
-  - Ctrl+N: New train
-  - Ctrl+F: Find/search
-  - Ctrl+Z/Y: Undo/redo
-  - Space: Toggle now mode
-  - Arrow keys: Navigate trains
-  - +/-: Zoom
-  - Etc.
-- Skapa keyboard shortcut cheat sheet modal (?)
-- Customizable shortcuts i settings
-
-**Filer att ändra**: `events/keyboardShortcuts.js`
-
-**Nya filer**: `ui/ShortcutHelper.js`
-
-### Subfas 8.3: Undo/Redo Enhancement
-
-**Mål**: Förbättra undo/redo med preview
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Visa undo/redo stack i UI
-- Preview av vad undo/redo kommer göra
-- Selective undo (undo specifik action mitt i history)
-- Clear history option
-- Undo/redo for bulk operations
-
-**Filer att ändra**: `historyEngine.js`, `events/historyOperations.js`
-
-### Subfas 8.4: Accessibility Features
-
-**Mål**: WCAG 2.1 AA compliance
-
-**Åtgärder** - **⚠️ PÅMINNELSE: Dessa principer är MANDATORY för VARJE fas och subfas. Vid tveksamhet, referera tillbaka till dessa regler.**
-:
-
-- Implementera proper ARIA labels på alla element
-- Keyboard navigation för alla features
-- Screen reader support
-- High contrast mode
-- Focus indicators
-- Color blind friendly color schemes
-
-**Filer att ändra**: Alla UI-filer, CSS-filer
-
----
-
-## IMPLEMENTERINGSSTRATEGI
-
-**Fas 1** kommer göras först (visuell redesign) enligt prioritet.
-
-För varje subfas:
-
-1. Du säger "Start subfas X.Y"
-2. Jag skapar detaljerade todos för den subfasen
-3. Jag implementerar alla todos
-4. Du godkänner och vi går vidare till nästa
-
-**Estimerad tidsåtgång**: Detta är ett stort projekt som kan ta flera dagar/veckor beroende på komplexitet och testning.
-
-**Testning**: Efter varje subfas testar vi i browsern för att säkerställa kvalitet.
-
-**Backup**: Vi committar till git efter varje completad subfas.

@@ -1,43 +1,114 @@
-/* CSS Variables and Root Configuration */
+/*
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                  SPÅRPLANNEN - APPLICATION VARIABLES                         ║
+║           Legacy compatibility layer for existing codebase                   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+This file maintains backward compatibility with existing code.
+New code should import and use design-system.css directly.
+
+MIGRATION STATUS:
+- Colors migrated to design-system.css (near-black/near-white)
+- Spacing migrated to 8px grid system
+- Shadows migrated with blur = 2× distance rule
+- Typography moved to typography.css
+
+These variables map old names to new design system values.
+*/
+
 :root {
+    /* ═══════════════════════════════════════════════════════════════════════
+       LAYOUT DIMENSIONS - Application specific measurements
+    ═══════════════════════════════════════════════════════════════════════ */
     --track-height: 40px;
-    --header-height: 60px;
-    --timeline-height: 40px;
-    --track-label-width: 120px;
-    --border-color: #ccc;
-    --grid-line-color: #eaeaea;
-    --main-bg: #fdfdfd;
-    --train-bg: #3498db;
-    --train-border: #2980b9;
-    --train-text: #fff;
-    --conflict-bg: #e74c3c;
-    --conflict-border: #c0392b;
-    --swapping-bg: #f1c40f;
-    --swapping-border: #f39c12;
-    --selected-glow: 0 0 15px rgba(52, 152, 219, 0.8);
+    --header-height: 70px;              /* Increased for better touch targets */
+    --timeline-height: 45px;
+    --track-label-width: 140px;
     
-    --primary-color: #3498db;
-    --primary-hover: #2980b9;
-    --primary-active: #21618c;
-    --secondary-color: #2c3e50;
-    --secondary-hover: #34495e;
-    --success-color: #27ae60;
-    --success-hover: #229954;
-    --warning-color: #f39c12;
-    --warning-hover: #d68910;
-    --danger-color: #e74c3c;
-    --danger-hover: #c0392b;
-    --disabled-color: #95a5a6;
-    --disabled-bg: #ecf0f1;
-    --text-color: #2c3e50;
-    --text-light: #7f8c8d;
-    --border-radius: 6px;
-    --transition-fast: 0.15s ease;
-    --transition-normal: 0.3s ease;
-    --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
-    --shadow-medium: 0 4px 8px rgba(0,0,0,0.15);
-    --shadow-heavy: 0 8px 16px rgba(0,0,0,0.2);
-    
+    /* Grid calculations - dynamic, set by JavaScript */
     --hour-grid-size: 240px;
     --quarter-hour-grid-size: 60px;
-} 
+    
+    /* ═══════════════════════════════════════════════════════════════════════
+       LEGACY COLOR MAPPINGS - Map old variable names to design system
+       Use design-system.css variables in new code
+    ═══════════════════════════════════════════════════════════════════════ */
+    
+    /* Main background - near-white, NOT pure white */
+    --main-bg: var(--surface-base);
+    
+    /* Border colors - map to new system */
+    --border-color: var(--border-DEFAULT);
+    --grid-line-color: var(--border-subtle);
+    
+    /* Primary colors - Railway Blue */
+    --primary-color: var(--primary-600);
+    --primary-hover: var(--primary-700);
+    --primary-active: var(--primary-800);
+    
+    /* Secondary colors - Professional grey */
+    --secondary-color: var(--secondary-700);
+    --secondary-hover: var(--secondary-800);
+    
+    /* Semantic colors */
+    --success-color: var(--success-600);
+    --success-hover: var(--success-700);
+    --warning-color: var(--warning-500);
+    --warning-hover: var(--warning-600);
+    --danger-color: var(--danger-500);
+    --danger-hover: var(--danger-600);
+    
+    /* Disabled states */
+    --disabled-color: var(--neutral-400);
+    --disabled-bg: var(--neutral-100);
+    
+    /* Text colors - near-black, NOT pure black */
+    --text-color: var(--text-primary);
+    --text-light: var(--text-secondary);
+    
+    /* Train-specific colors */
+    --train-bg: var(--primary-500);
+    --train-border: var(--primary-600);
+    --train-text: var(--text-inverse);
+    
+    /* State colors */
+    --conflict-bg: var(--danger-500);
+    --conflict-border: var(--danger-600);
+    --swapping-bg: var(--warning-500);
+    --swapping-border: var(--warning-600);
+    --selected-glow: var(--shadow-glow);
+    
+    /* ═══════════════════════════════════════════════════════════════════════
+       LEGACY SPACING - Map to new 8px grid system
+    ═══════════════════════════════════════════════════════════════════════ */
+    
+    --border-radius: var(--radius-DEFAULT);
+    
+    /* ═══════════════════════════════════════════════════════════════════════
+       LEGACY TRANSITIONS - Map to new timing system
+    ═══════════════════════════════════════════════════════════════════════ */
+    
+    --transition-fast: var(--transition-faster) var(--ease-in-out);
+    --transition-normal: var(--transition-DEFAULT) var(--ease-in-out);
+    
+    /* ═══════════════════════════════════════════════════════════════════════
+       LEGACY SHADOWS - Map to new shadow system
+       NOTE: New system follows blur = 2× distance rule
+    ═══════════════════════════════════════════════════════════════════════ */
+    
+    --shadow-light: var(--shadow-sm);
+    --shadow-medium: var(--shadow-md);
+    --shadow-heavy: var(--shadow-lg);
+}
+
+/*
+MIGRATION GUIDE for developers:
+Old → New
+--main-bg → var(--surface-base) or var(--neutral-50)
+--text-color → var(--text-primary) or var(--neutral-900)
+--primary-color → var(--primary-600)
+--border-radius → var(--radius-DEFAULT) or specific radius
+--transition-normal → var(--transition-DEFAULT) var(--ease-in-out)
+
+See design-system.css and typography.css for full variable reference.
+*/ 

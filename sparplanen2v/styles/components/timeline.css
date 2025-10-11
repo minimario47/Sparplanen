@@ -12,9 +12,8 @@
 }
 
 .timeline-hours {
-  display: flex;
-  height: 48px;
   position: relative;
+  height: 48px;
   background: linear-gradient(to bottom, var(--neutral-100), var(--neutral-50));
   border-bottom: 2px solid var(--neutral-200);
 }
@@ -25,6 +24,9 @@
 }
 
 .timeline-hour {
+  position: absolute;
+  top: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,7 +36,6 @@
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
   border-right: 1px solid var(--neutral-200);
-  position: relative;
 }
 
 [data-theme="dark"] .timeline-hour {
@@ -71,24 +72,6 @@
   pointer-events: none;
 }
 
-.timeline-grid-line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--neutral-200);
-}
-
-.timeline-grid-line.hour {
-  background: var(--neutral-300);
-  width: 2px;
-}
-
-.timeline-grid-line.half-hour {
-  background: var(--neutral-200);
-  opacity: 0.5;
-}
-
 [data-theme="dark"] .timeline-grid-line {
   background: var(--neutral-750);
 }
@@ -97,38 +80,102 @@
   background: var(--neutral-700);
 }
 
-.timeline-current-time {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--error-500);
-  z-index: 5;
-  pointer-events: none;
-  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
-  animation: pulse 2s ease-in-out infinite;
+/* This is now just a fallback, as grid lines will be drawn inside each track row */
+.timeline-grid-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--neutral-200);
+    opacity: 1; /* More visible */
 }
 
-@keyframes pulse {
+.timeline-current-time {
+  position: absolute;
+  top: 0; /* Position set by JavaScript */
+  left: 0; /* Position set by JavaScript */
+  width: 4px;
+  /* height set by JavaScript to span full canvas */
+  background: var(--error-500);
+  opacity: 0.95;
+  z-index: 200;
+  pointer-events: none;
+  box-shadow:
+    0 0 20px rgba(239, 68, 68, 1),
+    0 0 40px rgba(239, 68, 68, 0.8),
+    0 0 60px rgba(239, 68, 68, 0.5);
+  animation: pulse-strong 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-strong {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+    box-shadow:
+      0 0 16px rgba(239, 68, 68, 0.9),
+      0 0 32px rgba(239, 68, 68, 0.6),
+      0 0 48px rgba(239, 68, 68, 0.3);
   }
   50% {
-    box-shadow: 0 0 16px rgba(239, 68, 68, 0.8);
+    box-shadow:
+      0 0 24px rgba(239, 68, 68, 1),
+      0 0 48px rgba(239, 68, 68, 0.8),
+      0 0 72px rgba(239, 68, 68, 0.5);
   }
 }
 
 .timeline-current-time::before {
   content: "";
   position: absolute;
-  top: -6px;
-  left: -5px;
-  width: 12px;
-  height: 12px;
+  top: -10px;
+  left: -7px;
+  width: 18px;
+  height: 18px;
   background: var(--error-500);
   border-radius: 50%;
-  border: 2px solid var(--neutral-white);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 4px solid var(--neutral-white);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(239, 68, 68, 0.8),
+    0 0 24px rgba(239, 68, 68, 0.6);
+}
+
+/* Red time label in timeline hours row - added via JavaScript */
+.current-time-label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  
+  /* Much stronger blurry glass effect with no visible edges */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+
+  color: var(--text-primary);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: 20px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+  
+  /* Very soft, gradual mask to eliminate all edges */
+  mask-image: radial-gradient(ellipse 120% 100% at center, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 120% 100% at center, black 40%, transparent 85%);
+
+  z-index: 250;
+  height: auto;
+  min-height: 28px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .current-time-label {
+    background: rgba(20, 20, 20, 0.25);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    color: var(--text-primary);
 }
 
 [data-theme="dark"] .timeline-current-time::before {
@@ -137,8 +184,9 @@
 
 .timeline-track-row {
   position: relative;
-  height: 64px;
-  border-bottom: 1px solid var(--neutral-100);
+  height: auto; /* Allow height to be set dynamically */
+  min-height: 48px; /* Reduced to fit all 16 tracks on screen */
+  border-bottom: 2px solid var(--neutral-300); /* Darker and thicker track separator */
   transition: background var(--transition-fast);
 }
 
@@ -151,7 +199,7 @@
 }
 
 [data-theme="dark"] .timeline-track-row {
-  border-color: var(--neutral-850);
+  border-bottom: 2px solid var(--neutral-600); /* Darker track separator in dark mode */
 }
 
 [data-theme="dark"] .timeline-track-row:nth-child(even) {
@@ -160,6 +208,34 @@
 
 [data-theme="dark"] .timeline-track-row:hover {
   background: var(--neutral-850);
+}
+
+/* NEW: Grid lines inside each track row */
+.timeline-track-row .grid-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--neutral-200); /* Light gray for 15-min lines */
+    opacity: 1; /* Fully visible for better readability */
+}
+
+/* Hour lines - darker and thicker */
+.timeline-track-row .grid-line-hour {
+    background-color: var(--neutral-400); /* Darker for hour lines */
+}
+
+[data-theme="dark"] .timeline-track-row .grid-line {
+    background-color: var(--neutral-700); /* Light gray for dark mode */
+}
+
+[data-theme="dark"] .timeline-track-row .grid-line-hour {
+    background-color: var(--neutral-500); /* Lighter in dark mode for contrast */
+}
+
+[data-theme="high-contrast"] .timeline-track-row .grid-line {
+    background-color: var(--neutral-950);
+    opacity: 0.3;
 }
 
 @media (max-width: 1024px) {
@@ -172,7 +248,7 @@
   }
   
   .timeline-track-row {
-    height: 56px;
+    min-height: 44px;
   }
 }
 
@@ -194,7 +270,7 @@
   }
   
   .timeline-track-row {
-    height: 56px;
+    min-height: 40px;
   }
 }
 

@@ -590,6 +590,18 @@ const initialServiceData = [
         trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
+        id: 500,
+        arrivalTrainNumber: '3709',
+        departureTrainNumber: '3746',
+        origin: 'Uddevalla',
+        destination: 'Uddevalla',
+        scheduledArrivalTime: '11:00',
+        scheduledDepartureTime: '11:40',
+        trackId: 11,
+        subTrackIndex: 0,
+        trainSet: { vehicleTypeID: "X2", count: 1 }
+    },
+    {
         id: 50,
         arrivalTrainNumber: '3739',
         departureTrainNumber: '3746',

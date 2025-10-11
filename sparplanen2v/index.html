@@ -18,12 +18,21 @@
     
     <!-- 4. Components -->
     <link rel="stylesheet" href="styles/components/buttons.css">
-    <link rel="stylesheet" href="styles/components/header.css">
+    <link rel="stylesheet" href="styles/components/header-base.css">
+    <link rel="stylesheet" href="styles/components/header-time-controls.css">
+    <link rel="stylesheet" href="styles/components/header-status.css">
     <link rel="stylesheet" href="styles/components/logo.css">
     <link rel="stylesheet" href="styles/components/schedule.css">
+    <link rel="stylesheet" href="styles/components/settings-modal.css">
+    <link rel="stylesheet" href="styles/components/settings-controls.css">
     <link rel="stylesheet" href="styles/components/tracks.css">
     <link rel="stylesheet" href="styles/components/timeline.css">
     <link rel="stylesheet" href="styles/components/trains.css">
+    
+    <!-- Data Files -->
+    <script src="../vehicleTypes.js"></script>
+    <script src="../tracks.js"></script>
+    <script src="../trains.js"></script>
     
     <style>
         /* Temporary demo styles to show off our design system */
@@ -213,8 +222,11 @@
         <nav class="header-center" aria-label="Tidskontroller">
             <div class="time-controls">
                 <div class="time-nav">
-                    <button class="btn btn-secondary btn-icon" aria-label="Föregående timme" title="Föregående timme">
-                        <span style="font-size: 18px;">←</span>
+                    <button id="time-nav-prev" class="btn btn-secondary btn-icon" aria-label="Föregående tidsintervall" title="Föregående tidsintervall">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" /></svg>
+                    </button>
+                    <button id="time-nav-next" class="btn btn-secondary btn-icon" aria-label="Nästa tidsintervall" title="Nästa tidsintervall">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg>
                     </button>
                 </div>
                 
@@ -226,12 +238,6 @@
                 <button class="btn btn-primary btn-now" id="now-button">
                     <span>Nu</span>
                 </button>
-                
-                <div class="time-nav">
-                    <button class="btn btn-secondary btn-icon" aria-label="Nästa timme" title="Nästa timme">
-                        <span style="font-size: 18px;">→</span>
-                    </button>
-                </div>
                 
                 <div class="time-range-selector">
                     <button class="btn btn-secondary btn-sm time-range-button" id="time-range-btn" aria-label="Välj tidsintervall">
@@ -266,455 +272,182 @@
     </header>
 
       <!-- Main Content -->
-      <main id="main-content" style="margin-top: var(--header-height); padding: var(--spacing-8);">
-          
+      <main id="main-content" style="margin-top: var(--header-height); padding: 0; overflow: hidden;">
+
           <!-- Schedule View - Subfas 1.3 -->
-          <div class="schedule-container" id="schedule-container" role="region" aria-label="Tågschema">
-              <!-- Corner cell -->
-              <div class="schedule-corner">Spår</div>
-              
-              <!-- Timeline header -->
-              <div class="schedule-timeline-header">
-                  <div class="timeline-hours" id="timeline-hours">
-                      <!-- Dynamically generated time markers -->
-                  </div>
-              </div>
-              
-              <!-- Track labels -->
-              <div class="schedule-track-labels" id="track-labels">
-                  <!-- Dynamically generated track rows -->
-              </div>
-              
-              <!-- Timeline grid area -->
-              <div class="schedule-grid-area" id="schedule-grid">
-                  <div class="timeline-canvas" id="timeline-canvas">
-                      <div class="timeline-grid" id="timeline-grid">
-                          <!-- Grid lines generated dynamically -->
+          <div class="schedule-wrapper">
+              <div class="schedule-container" id="schedule-container" role="region" aria-label="Tågschema">
+                  <!-- Corner cell -->
+                  <div class="schedule-corner">Spår</div>
+
+                  <!-- Timeline header -->
+                  <div class="schedule-timeline-header">
+                      <div class="timeline-hours" id="timeline-hours">
+                          <!-- Dynamically generated time markers -->
                       </div>
-                      <!-- Train bars generated dynamically -->
-                      <div class="timeline-current-time" id="current-time-line"></div>
                   </div>
+
+                  <!-- Track labels -->
+                  <div class="schedule-track-labels" id="track-labels">
+                      <!-- Dynamically generated track rows -->
+                  </div>
+
+                  <!-- Timeline grid area -->
+                  <div class="schedule-grid-area" id="schedule-grid">
+                      <div class="timeline-canvas" id="timeline-canvas">
+                          <!-- Track rows and train bars are rendered here by JS -->
+                      </div>
+                  </div>
+  
+                  <div class="schedule-scroll-hint">← Scrolla horisontellt →</div>
               </div>
-              
-              <div class="schedule-scroll-hint">← Scrolla horisontellt →</div>
           </div>
-          
-          <div class="demo-container" style="margin-top: var(--spacing-8)">
-        <div style="text-align: center; margin-bottom: var(--spacing-8);">
-            <h2 style="font-size: var(--font-size-2xl); color: var(--text-primary); margin-bottom: var(--spacing-2);">
-                Design System Demo
-            </h2>
-            <p style="font-size: var(--font-size-base); color: var(--text-secondary);">
-                Nu med professionell header & navigation!
-            </p>
+      </main>
+
+    <!-- Settings Modal -->
+    <div id="settings-backdrop" class="settings-backdrop hidden" role="dialog" aria-labelledby="settings-title" aria-modal="true">
+        <div id="settings-modal" class="settings-modal">
+            <!-- Header -->
+            <div class="settings-header">
+                <h2 id="settings-title" class="settings-title">Inställningar</h2>
+                <button id="settings-close-btn" class="settings-close-btn" aria-label="Stäng inställningar">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="settings-tabs" role="tablist">
+                <button class="settings-tab active" data-tab="time" role="tab" aria-selected="true" aria-controls="panel-time">
+                    Tidshantering
+                </button>
+                <button class="settings-tab" data-tab="display" role="tab" aria-selected="false" aria-controls="panel-display">
+                    Visning
+                </button>
+                <button class="settings-tab" data-tab="data" role="tab" aria-selected="false" aria-controls="panel-data">
+                    Data
+                </button>
+                <button class="settings-tab" data-tab="about" role="tab" aria-selected="false" aria-controls="panel-about">
+                    Om
+                </button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="settings-content">
+                <!-- Time Management Tab -->
+                <div id="panel-time" class="settings-tab-panel active" data-tab-panel="time" role="tabpanel">
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Nu-knapp Inställningar</h3>
+                        <div class="settings-section-content">
+                            <!-- Offset Slider -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="offset-slider">Röd linje position</label>
+                                <div class="settings-slider-container">
+                                    <div class="settings-slider-wrapper">
+                                        <div id="offset-slider" class="settings-slider">
+                                            <div id="offset-slider-track" class="settings-slider-track"></div>
+                                            <div id="offset-slider-thumb" class="settings-slider-thumb"></div>
+                                        </div>
+                                        <span id="offset-value" class="settings-slider-value">20%</span>
+                                    </div>
+                                </div>
+                                <p class="setting-help">Position för röd linje från vänsterkanten (0-50%). Vid 20% är linjen nära vänster kant, vid 50% i mitten.</p>
+                            </div>
+
+                            <!-- Follow Mode Toggle -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="follow-mode">Aktivera följ-läge</label>
+                                <div class="setting-control">
+                                    <div class="settings-toggle-wrapper">
+                                        <button id="follow-mode" class="settings-toggle" aria-label="Aktivera följ-läge">
+                                            <span class="settings-toggle-knob"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="setting-help">Aktiverar automatisk scrollning som följer tiden.</p>
+                            </div>
+
+                            <!-- Update Interval Select -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="update-interval">Uppdateringsintervall</label>
+                                <div class="settings-select-wrapper">
+                                    <select id="update-interval" class="settings-select" aria-label="Uppdateringsintervall">
+                                        <option value="30">30 sekunder</option>
+                                        <option value="60" selected>60 sekunder</option>
+                                        <option value="120">120 sekunder</option>
+                                        <option value="300">5 minuter</option>
+                                    </select>
+                                </div>
+                                <p class="setting-help">Hur ofta vyn ska uppdateras i följ-läge.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Display Tab -->
+                <div id="panel-display" class="settings-tab-panel" data-tab-panel="display" role="tabpanel" hidden>
+                    <div class="settings-empty">
+                        <p>Kommer snart</p>
+                    </div>
+                </div>
+
+                <!-- Data Tab -->
+                <div id="panel-data" class="settings-tab-panel" data-tab-panel="data" role="tabpanel" hidden>
+                    <div class="settings-empty">
+                        <p>Kommer snart</p>
+                    </div>
+                </div>
+
+                <!-- About Tab -->
+                <div id="panel-about" class="settings-tab-panel" data-tab-panel="about" role="tabpanel" hidden>
+                    <div class="settings-section">
+                        <div class="settings-section-content">
+                            <div class="setting-item">
+                                <h3 class="setting-label">SpårplanV2</h3>
+                                <p class="setting-help">Professionellt järnvägstrafikledningssystem</p>
+                            </div>
+                            <div class="setting-item">
+                                <p class="setting-help" style="font-size: var(--text-xs);">Version 2.0.0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="settings-footer">
+                <button id="settings-reset-btn" class="btn btn-secondary">
+                    Återställ standardvärden
+                </button>
+                <div class="settings-footer-actions">
+                    <button id="settings-cancel-btn" class="btn btn-secondary">
+                        Avbryt
+                    </button>
+                    <button id="settings-save-btn" class="btn btn-primary">
+                        Spara ändringar
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <!-- Typography Demo -->
-        <section class="demo-section">
-            <h2>📝 Typography System</h2>
-            <div class="typography-demo">
-                <h1 style="margin: var(--spacing-3) 0;">H1: Huvudrubrik (3xl - 30px)</h1>
-                <h2 style="margin: var(--spacing-3) 0;">H2: Sekundär rubrik (2xl - 24px)</h2>
-                <h3 style="margin: var(--spacing-3) 0;">H3: Underrubrik (xl - 20px)</h3>
-                <p style="font-size: var(--font-size-lg);">Large body text (lg - 18px)</p>
-                <p style="font-size: var(--font-size-base);">Normal body text (base - 16px) - Detta är standard text-storlek</p>
-                <p style="font-size: var(--font-size-sm); color: var(--text-secondary);">Small text (sm - 14px) - Används för mindre viktig information</p>
-                <p style="font-size: var(--font-size-xs); color: var(--text-tertiary);">Extra small text (xs - 12px) - Metadata och timestamps</p>
-            </div>
-        </section>
-
-        <!-- Color System Demo -->
-        <section class="demo-section">
-            <h2>🎨 Color Palette</h2>
-            
-            <h3 style="margin-top: var(--spacing-6); margin-bottom: var(--spacing-3); color: var(--text-secondary);">Primary (Railway Blue)</h3>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--primary-500);">500 - Main</div>
-                <div class="color-swatch" style="background: var(--primary-600);">600 - Primary</div>
-                <div class="color-swatch" style="background: var(--primary-700);">700 - Hover</div>
-                <div class="color-swatch" style="background: var(--primary-800);">800 - Active</div>
-            </div>
-            
-            <h3 style="margin-top: var(--spacing-6); margin-bottom: var(--spacing-3); color: var(--text-secondary);">Semantic Colors</h3>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--success-600);">Success</div>
-                <div class="color-swatch" style="background: var(--warning-500);">Warning</div>
-                <div class="color-swatch" style="background: var(--error-600);">Error</div>
-                <div class="color-swatch" style="background: var(--info-600);">Info</div>
-            </div>
-        </section>
-
-        <!-- Buttons Demo -->
-        <section class="demo-section">
-            <h2>🔘 Button System</h2>
-            <div class="button-demo">
-                <button class="btn btn-primary">Primary Button</button>
-                <button class="btn btn-secondary">Secondary Button</button>
-                <button class="btn btn-success">Success Button</button>
-                <button class="btn btn-warning">Warning Button</button>
-                <button class="btn btn-danger">Danger Button</button>
-            </div>
-        </section>
-
-        <!-- Spacing Demo -->
-        <section class="demo-section">
-            <h2>📏 Spacing Scale (8px Grid System)</h2>
-            <div class="spacing-demo">
-                <div class="spacing-box" style="width: var(--spacing-2); height: var(--spacing-2);">2</div>
-                <div class="spacing-box" style="width: var(--spacing-3); height: var(--spacing-3);">3</div>
-                <div class="spacing-box" style="width: var(--spacing-4); height: var(--spacing-4);">4</div>
-                <div class="spacing-box" style="width: var(--spacing-5); height: var(--spacing-5);">5</div>
-                <div class="spacing-box" style="width: var(--spacing-6); height: var(--spacing-6);">6</div>
-                <div class="spacing-box" style="width: var(--spacing-8); height: var(--spacing-8);">8</div>
-                <div class="spacing-box" style="width: var(--spacing-10); height: var(--spacing-10);">10</div>
-                <div class="spacing-box" style="width: var(--spacing-12); height: var(--spacing-12);">12</div>
-            </div>
-            <p style="margin-top: var(--spacing-4); color: var(--text-secondary); font-size: var(--font-size-sm);">
-                Spacing-2 = 8px, Spacing-3 = 12px, Spacing-4 = 16px, Spacing-5 = 20px, Spacing-6 = 24px, Spacing-8 = 32px, etc.
-            </p>
-        </section>
-
-        <!-- Shadow Demo -->
-        <section class="demo-section">
-            <h2>✨ Shadow System (Blur = 2× Distance)</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-6); margin-top: var(--spacing-4);">
-                <div style="padding: var(--spacing-6); background: var(--surface-primary); border-radius: var(--border-radius-md); box-shadow: var(--shadow-sm);">
-                    <strong>Shadow SM</strong><br>
-                    <span style="font-size: var(--font-size-xs); color: var(--text-tertiary);">Subtle depth</span>
-                </div>
-                <div style="padding: var(--spacing-6); background: var(--surface-primary); border-radius: var(--border-radius-md); box-shadow: var(--shadow-md);">
-                    <strong>Shadow MD</strong><br>
-                    <span style="font-size: var(--font-size-xs); color: var(--text-tertiary);">Cards, panels</span>
-                </div>
-                <div style="padding: var(--spacing-6); background: var(--surface-primary); border-radius: var(--border-radius-md); box-shadow: var(--shadow-lg);">
-                    <strong>Shadow LG</strong><br>
-                    <span style="font-size: var(--font-size-xs); color: var(--text-tertiary);">Elevated elements</span>
-                </div>
-                <div style="padding: var(--spacing-6); background: var(--surface-primary); border-radius: var(--border-radius-md); box-shadow: var(--shadow-xl);">
-                    <strong>Shadow XL</strong><br>
-                    <span style="font-size: var(--font-size-xs); color: var(--text-tertiary);">Modals, dropdowns</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Status Indicator -->
-        <section class="demo-section" style="text-align: center; background: linear-gradient(135deg, var(--success-50), var(--primary-50));">
-            <h2 style="color: var(--success-700);">✅ Design System Laddat!</h2>
-            <p style="color: var(--text-secondary); margin-top: var(--spacing-2);">
-                Alla CSS-filer är korrekt länkade och ordnade. Öppna Console (F12) för att verifiera inga errors.
-            </p>
-            <p style="color: var(--text-tertiary); font-size: var(--font-size-sm); margin-top: var(--spacing-4);">
-                <strong>Nästa steg:</strong> Implementera base.css och fortsätt med layout-komponenter
-            </p>
-        </section>
     </div>
 
+    <!-- JavaScript Files - Load in correct order -->
+    <script src="js/theme.js"></script>
+    <script src="js/modules/time-manager.js"></script>
+    <script src="js/components/settings-controls.js"></script>
+    <script src="js/components/settings-modal.js"></script>
+    <script src="js/modules/header-controls.js"></script>
+    <script src="js/modules/schedule-renderer.js"></script>
+    <script src="js/app.js"></script>
+    
     <script>
-        // Theme switcher
+        // Legacy theme switcher function for compatibility
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('sparplannen-theme', theme);
             console.log(`✅ Theme switched to: ${theme}`);
         }
-        
-        // Initialize application
-        window.addEventListener('DOMContentLoaded', () => {
-            // Load saved theme
-            const savedTheme = localStorage.getItem('sparplannen-theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            
-            // Header functionality
-            initializeHeader();
-            
-            // Update time display
-            updateTimeDisplay();
-            setInterval(updateTimeDisplay, 60000); // Update every minute
-            
-            // Initialize schedule view
-            initializeSchedule();
-            
-            console.log('🎨 SpårplanV2 loaded successfully!');
-            console.log('📋 CSS files loaded:');
-            console.log('  1. design-system.css - schedule.css');
-            console.log('  4. themes.css');
-            console.log('  5. base.css');
-            console.log('  6. components/*.css');
-            console.log(`🌓 Current theme: ${savedTheme}`);
-        });
-        
-        // Schedule initialization with sample data
-        function initializeSchedule() {
-            const currentHour = new Date().getHours();
-            const timeRange = 6; // Show 6 hours
-            const pixelsPerHour = 200;
-            
-            // Sample tracks
-            const tracks = [
-                { id: 1, name: 'Spår 1', type: 'main', length: 400 },
-                { id: 2, name: 'Spår 2', type: 'main', length: 380 },
-                { id: 3, name: 'Spår 3', type: 'side', length: 320 },
-                { id: 4, name: 'Spår 4', type: 'side', length: 280 },
-                { id: 5, name: 'Spår 5', type: 'main', length: 420 }
-            ];
-            
-            // Sample trains
-            const now = new Date();
-            const trains = [
-                { id: 1, number: 'SJ 301', type: 'regional', trackId: 1, 
-                  arrTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour, 15),
-                  depTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour + 1, 30),
-                  origin: 'Stockholm C', dest: 'Göteborg C', status: 'on-time' },
-                { id: 2, number: 'SJ 445', type: 'long-distance', trackId: 2,
-                  arrTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour + 1, 0),
-                  depTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour + 2, 45),
-                  origin: 'Malmö C', dest: 'Oslo S', status: 'delayed', hasConflict: true },
-                { id: 3, number: 'GC 789', type: 'freight', trackId: 3,
-                  arrTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour + 2, 10),
-                  depTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour + 3, 15),
-                  origin: 'Göteborg C', dest: 'Borås', status: 'on-time' },
-                { id: 4, number: 'SJ 102', type: 'regional', trackId: 1,
-                  arrTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour + 3, 20),
-                  depTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour + 4, 5),
-                  origin: 'Halmstad C', dest: 'Stockholm C', status: 'on-time' },
-                { id: 5, number: 'SJ 550', type: 'long-distance', trackId: 4,
-                  arrTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour + 4, 30),
-                  depTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour + 5, 20),
-                  origin: 'København H', dest: 'Stockholm C', status: 'on-time' }
-            ];
-            
-            // Render timeline hours
-            const timelineHours = document.getElementById('timeline-hours');
-            for (let i = 0; i < timeRange; i++) {
-                const hour = (currentHour + i) % 24;
-                const hourDiv = document.createElement('div');
-                hourDiv.className = 'timeline-hour' + (hour === currentHour ? ' current' : '');
-                hourDiv.style.minWidth = pixelsPerHour + 'px';
-                hourDiv.innerHTML = `
-                    <span class="timeline-hour-label">${hour.toString().padStart(2, '0')}:00</span>
-                `;
-                timelineHours.appendChild(hourDiv);
-            }
-            
-            // Render track labels
-            const trackLabels = document.getElementById('track-labels');
-            tracks.forEach(track => {
-                const trackDiv = document.createElement('div');
-                trackDiv.className = 'track-row';
-                trackDiv.innerHTML = `
-                    <div class="track-content">
-                        <div class="track-name">${track.name}</div>
-                        <div class="track-info">
-                            <span class="track-type-badge ${track.type}">${track.type === 'main' ? 'Huvudspår' : 'Sidospår'}</span>
-                            <span class="track-length">
-                                <span class="track-length-icon"></span>
-                                ${track.length}m
-                            </span>
-                        </div>
-                    </div>
-                `;
-                trackLabels.appendChild(trackDiv);
-            });
-            
-            // Render timeline track rows
-            const timelineCanvas = document.getElementById('timeline-canvas');
-            timelineCanvas.style.minWidth = (timeRange * pixelsPerHour) + 'px';
-            timelineCanvas.style.height = (tracks.length * 64) + 'px';
-            
-            // Render grid lines
-            const timelineGrid = document.getElementById('timeline-grid');
-            for (let i = 0; i <= timeRange * 2; i++) {
-                const gridLine = document.createElement('div');
-                gridLine.className = 'timeline-grid-line' + (i % 2 === 0 ? ' hour' : ' half-hour');
-                gridLine.style.left = (i * pixelsPerHour / 2) + 'px';
-                timelineGrid.appendChild(gridLine);
-            }
-            
-            // Add track row backgrounds
-            tracks.forEach((track, index) => {
-                const trackRow = document.createElement('div');
-                trackRow.className = 'timeline-track-row';
-                trackRow.style.top = (index * 64) + 'px';
-                trackRow.style.width = '100%';
-                trackRow.style.position = 'absolute';
-                timelineCanvas.appendChild(trackRow);
-            });
-            
-            // Render trains
-            const startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentHour, 0);
-            
-            trains.forEach(train => {
-                const trackIndex = tracks.findIndex(t => t.id === train.trackId);
-                if (trackIndex === -1) return;
-                
-                const arrMinutes = (train.arrTime - startTime) / (1000 * 60);
-                const depMinutes = (train.depTime - startTime) / (1000 * 60);
-                const duration = depMinutes - arrMinutes;
-                
-                const left = (arrMinutes / 60) * pixelsPerHour;
-                const width = (duration / 60) * pixelsPerHour;
-                
-                const trainDiv = document.createElement('div');
-                trainDiv.className = `train-bar type-${train.type}` + (train.hasConflict ? ' has-conflict' : '');
-                trainDiv.style.left = left + 'px';
-                trainDiv.style.width = width + 'px';
-                trainDiv.style.top = (trackIndex * 64) + 'px';
-                trainDiv.setAttribute('role', 'button');
-                trainDiv.setAttribute('aria-label', `Tåg ${train.number}, ${train.origin} till ${train.dest}`);
-                trainDiv.setAttribute('tabindex', '0');
-                
-                trainDiv.innerHTML = `
-                    <div class="train-bar-content">
-                        <span class="train-number">${train.number}</span>
-                        <span class="train-times">
-                            ${train.arrTime.getHours().toString().padStart(2,'0')}:${train.arrTime.getMinutes().toString().padStart(2,'0')}
-                            <span class="train-time-separator">→</span>
-                            ${train.depTime.getHours().toString().padStart(2,'0')}:${train.depTime.getMinutes().toString().padStart(2,'0')}
-                        </span>
-                        <span class="train-route">
-                            <span>${train.origin}</span>
-                            <span class="train-route-arrow">→</span>
-                            <span>${train.dest}</span>
-                        </span>
-                    </div>
-                    <div class="train-status-indicator ${train.status}"></div>
-                    ${train.hasConflict ? '<div class="train-conflict-badge"></div>' : ''}
-                    <div class="train-tooltip">
-                        ${train.number}: ${train.origin} → ${train.dest}<br>
-                        Ankomst: ${train.arrTime.toLocaleTimeString('sv-SE', {hour: '2-digit', minute: '2-digit'})}<br>
-                        Avgång: ${train.depTime.toLocaleTimeString('sv-SE', {hour: '2-digit', minute: '2-digit'})}<br>
-                        Status: ${train.status === 'on-time' ? 'I tid' : train.status === 'delayed' ? 'Försenad' : 'Inställd'}
-                    </div>
-                `;
-                
-                timelineCanvas.appendChild(trainDiv);
-            });
-            
-            // Position current time line
-            const nowMinutes = (now - startTime) / (1000 * 60);
-            const currentTimeLine = document.getElementById('current-time-line');
-            currentTimeLine.style.left = ((nowMinutes / 60) * pixelsPerHour) + 'px';
-            
-            // Update current time line every minute
-            setInterval(() => {
-                const now = new Date();
-                const minutes = (now - startTime) / (1000 * 60);
-                currentTimeLine.style.left = ((minutes / 60) * pixelsPerHour) + 'px';
-            }, 60000);
-            
-            console.log('📅 Schedule initialized with', trains.length, 'trains on', tracks.length, 'tracks');
-        }
-        
-        function initializeHeader() {
-            // Theme toggle button
-            const themeToggleBtn = document.getElementById('theme-toggle-btn');
-            if (themeToggleBtn) {
-                themeToggleBtn.addEventListener('click', () => {
-                    const currentTheme = document.documentElement.getAttribute('data-theme');
-                    const newTheme = currentTheme === 'light' ? 'dark' : 
-                                    currentTheme === 'dark' ? 'high-contrast' : 'light';
-                    setTheme(newTheme);
-                });
-            }
-            
-            // Now button
-            const nowButton = document.getElementById('now-button');
-            if (nowButton) {
-                nowButton.addEventListener('click', () => {
-                    updateTimeDisplay();
-                    console.log('🕐 Now button clicked - centering on current time');
-                    // TODO: Implement scroll to current time functionality
-                });
-            }
-            
-            // Time range selector
-            const timeRangeBtn = document.getElementById('time-range-btn');
-            const timeRangeDropdown = document.getElementById('time-range-dropdown');
-            
-            if (timeRangeBtn && timeRangeDropdown) {
-                timeRangeBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    timeRangeDropdown.classList.toggle('active');
-                });
-                
-                // Close dropdown when clicking outside
-                document.addEventListener('click', () => {
-                    timeRangeDropdown.classList.remove('active');
-                });
-                
-                // Time range options
-                document.querySelectorAll('.time-range-option').forEach(option => {
-                    option.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const hours = option.getAttribute('data-hours');
-                        
-                        // Update active state
-                        document.querySelectorAll('.time-range-option').forEach(opt => {
-                            opt.classList.remove('active');
-                        });
-                        option.classList.add('active');
-                        
-                        // Update button text
-                        timeRangeBtn.querySelector('span').textContent = `${hours}h`;
-                        
-                        // Close dropdown
-                        timeRangeDropdown.classList.remove('active');
-                        
-                        // Update time range display
-                        updateTimeRangeDisplay(parseInt(hours));
-                        
-                        console.log(`📏 Time range changed to ${hours} hours`);
-                    });
-                });
-            }
-            
-            // Previous/Next hour buttons
-            const prevButtons = document.querySelectorAll('.time-nav button:first-child');
-            const nextButtons = document.querySelectorAll('.time-nav button:last-child');
-            
-            prevButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    console.log('⏮ Previous hour');
-                    // TODO: Implement navigation
-                });
-            });
-            
-            nextButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    console.log('⏭ Next hour');
-                    // TODO: Implement navigation
-                });
-            });
-        }
-        
-        function updateTimeDisplay() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            
-            const currentTimeEl = document.getElementById('current-time-display');
-            if (currentTimeEl) {
-                currentTimeEl.textContent = `${hours}:${minutes}`;
-            }
-            
-            // Update range (default 4 hours)
-            const activeRange = document.querySelector('.time-range-option.active');
-            const rangeHours = activeRange ? parseInt(activeRange.getAttribute('data-hours')) : 4;
-            updateTimeRangeDisplay(rangeHours);
-        }
-        
-        function updateTimeRangeDisplay(hours) {
-            const now = new Date();
-            const startHour = now.getHours();
-            const endHour = (startHour + hours) % 24;
-            
-            const timeRangeEl = document.getElementById('time-range-display');
-            if (timeRangeEl) {
-                const startStr = `${String(startHour).padStart(2, '0')}:00`;
-                const endStr = `${String(endHour).padStart(2, '0')}:00`;
-                timeRangeEl.textContent = `${startStr} - ${endStr}`;
-            }
-        }
     </script>
 </body>
 </html>
-

@@ -1,0 +1,268 @@
+/* Settings Controls - Slider, Toggle, Select components */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SLIDER COMPONENT
+═══════════════════════════════════════════════════════════════════════════ */
+
+.settings-slider-container {
+    width: 100%;
+}
+
+.settings-slider-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.settings-slider {
+    flex: 1;
+    height: 4px;
+    background: var(--border-secondary);
+    border-radius: var(--radius-full);
+    position: relative;
+    cursor: pointer;
+}
+
+.settings-slider-track {
+    height: 100%;
+    background: var(--interactive-primary);
+    border-radius: var(--radius-full);
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+}
+
+.settings-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--interactive-primary);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm-active);
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    transition: var(--transition-transform), var(--transition-shadow);
+}
+
+.settings-slider-thumb:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    box-shadow: var(--shadow-md-active);
+}
+
+.settings-slider-thumb:active {
+    cursor: grabbing;
+    box-shadow: var(--shadow-lg-active);
+}
+
+.settings-slider-thumb:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+}
+
+.settings-slider-value {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--text-primary);
+    min-width: 80px;
+    text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOGGLE SWITCH COMPONENT
+═══════════════════════════════════════════════════════════════════════════ */
+
+.settings-toggle {
+    width: 48px;
+    height: 24px;
+    background: var(--border-primary);
+    border-radius: var(--radius-full);
+    position: relative;
+    cursor: pointer;
+    transition: var(--transition-colors);
+    border: none;
+    padding: 0;
+}
+
+.settings-toggle:hover {
+    background: var(--border-tertiary);
+}
+
+.settings-toggle.checked {
+    background: var(--interactive-primary);
+}
+
+.settings-toggle.checked:hover {
+    background: var(--interactive-primary-hover);
+}
+
+.settings-toggle:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+}
+
+.settings-toggle-knob {
+    width: 20px;
+    height: 20px;
+    background: var(--surface-secondary);
+    border-radius: var(--radius-full);
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform var(--transition-default) var(--ease-in-out);
+    box-shadow: var(--shadow-sm-active);
+}
+
+.settings-toggle.checked .settings-toggle-knob {
+    transform: translateX(24px);
+}
+
+/* Ensure minimum touch target */
+.settings-toggle-wrapper {
+    display: inline-flex;
+    align-items: center;
+    min-width: 48px;
+    min-height: 44px;
+    padding: var(--space-2) 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SELECT/DROPDOWN COMPONENT
+═══════════════════════════════════════════════════════════════════════════ */
+
+.settings-select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+}
+
+.settings-select {
+    width: 100%;
+    height: 44px;
+    min-height: 44px;
+    padding: var(--space-3) var(--space-10) var(--space-3) var(--space-3);
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-DEFAULT);
+    font-size: var(--text-base);
+    font-weight: var(--font-normal);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition-colors);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.settings-select:hover {
+    border-color: var(--interactive-primary);
+}
+
+.settings-select:focus {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+    border-color: var(--border-focus);
+}
+
+.settings-select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Dropdown icon */
+.settings-select-wrapper::after {
+    content: '';
+    position: absolute;
+    right: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--text-secondary);
+    pointer-events: none;
+}
+
+.settings-select:focus + .settings-select-wrapper::after {
+    border-top-color: var(--interactive-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   INPUT TEXT (for future use)
+═══════════════════════════════════════════════════════════════════════════ */
+
+.settings-input {
+    width: 100%;
+    height: 44px;
+    min-height: 44px;
+    padding: var(--space-3);
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-DEFAULT);
+    font-size: var(--text-base);
+    font-weight: var(--font-normal);
+    color: var(--text-primary);
+    transition: var(--transition-colors);
+}
+
+.settings-input:hover {
+    border-color: var(--interactive-primary);
+}
+
+.settings-input:focus {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+    border-color: var(--border-focus);
+}
+
+.settings-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.settings-input::placeholder {
+    color: var(--text-disabled);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DARK MODE ADJUSTMENTS
+   No explicit overrides needed - theme variables handle everything
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* All colors automatically adapt via CSS variables */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY
+═══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+    .settings-slider-thumb,
+    .settings-toggle,
+    .settings-toggle-knob,
+    .settings-select,
+    .settings-input {
+        transition: none;
+    }
+}
+
+/* High contrast mode */
+[data-theme="high-contrast"] .settings-toggle,
+[data-theme="high-contrast"] .settings-select,
+[data-theme="high-contrast"] .settings-input {
+    border: 2px solid var(--border-primary);
+}
+
+[data-theme="high-contrast"] .settings-slider-thumb {
+    border: 3px solid var(--border-primary);
+}
+
+[data-theme="high-contrast"] .settings-slider {
+    height: 6px;
+}
+
+[data-theme="high-contrast"] .settings-toggle {
+    border-width: 3px;
+}
+
