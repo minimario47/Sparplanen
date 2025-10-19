@@ -7,6 +7,7 @@ let currentPixelsPerHour = 200;
 let cachedTracks = [];
 let cachedTrains = [];
 let timelineStart = null; // Global timeline start (midnight)
+let userSettings = null; // Settings impacting rendering (colors, buckets)
 
 function initializeSchedule() {
     if (!window.TimeManager) {
@@ -18,6 +19,23 @@ function initializeSchedule() {
     
     // Listen to TimeManager state changes
     window.TimeManager.addListener(handleTimeManagerChange);
+    
+    // Load visual settings (train coloring, buckets) and listen to changes
+    loadUserSettings();
+    window.addEventListener('settingsChanged', (e) => {
+        console.log('🔄 settingsChanged event received:', e.detail);
+        userSettings = e.detail || userSettings;
+        applyTrainColorSettings();
+        // Rebuild train data to recalculate buckets if needed
+        prepareTrainData();
+        // Force full re-render
+        cachedTrains = [];
+        cachedTracks = [];
+        prepareTrackData();
+        prepareTrainData();
+        renderFullSchedule();
+        console.log('✅ Settings applied and schedule re-rendered');
+    });
     
     // Prepare data
     prepareTrackData();
@@ -66,10 +84,70 @@ function prepareTrainData() {
     const trainData = initialServiceData
         .filter(service => service.trackId >= 1 && service.trackId <= 16)
         .map(service => {
-            const arrTime = parseTimeToDate(service.scheduledArrivalTime, now);
-            const depTime = parseTimeToDate(service.scheduledDepartureTime, now);
+            let arrTime = parseTimeToDate(service.scheduledArrivalTime, now);
+            let depTime = parseTimeToDate(service.scheduledDepartureTime, now);
+            
+            // Handle trains that cross midnight
+            // Logic: If a train arrives at 23:33 and departs at 00:03, the departure is NEXT day
+            //        If a train has only arrival time in early morning (00:00-05:59), it's from previous day
+            if (arrTime && depTime) {
+                // Both times exist - check if departure is before arrival in clock time
+                if (depTime < arrTime) {
+                    // Departure time is numerically smaller (e.g. arr=23:33, dep=00:03)
+                    // This means departure is NEXT day
+                    const oldDep = depTime.toTimeString().substring(0, 5);
+                    depTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
+                    console.log(`🌙 Tåg ${service.arrivalTrainNumber || '?'}→${service.departureTrainNumber || '?'} går över midnatt: arr ${service.scheduledArrivalTime} → dep ${oldDep} (avgång justerad till nästa dag)`);
+                }
+                // Normal case: arrival before departure on same day - do nothing
+            } else if (arrTime && !depTime) {
+                // Arrival only - check if it's early morning (00:00-05:59)
+                // These trains likely arrived late night and stay until morning
+                const arrHour = parseInt(service.scheduledArrivalTime.split(':')[0]);
+                if (arrHour >= 0 && arrHour < 6) {
+                    // Don't add 24h here - it's a terminus train that arrived early morning
+                    // Keep original time
+                    console.log(`🌙 Tåg ${service.arrivalTrainNumber || '?'} anländer tidigt på morgonen: ${service.scheduledArrivalTime} (stannar på spår)`);
+                }
+            } else if (!arrTime && depTime) {
+                // Departure only - check if it's early morning (00:00-05:59)
+                // These trains start their journey in the morning
+                const depHour = parseInt(service.scheduledDepartureTime.split(':')[0]);
+                if (depHour >= 0 && depHour < 6) {
+                    // Add 24h to show it's next day
+                    depTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
+                    console.log(`🌙 Tåg ${service.departureTrainNumber || '?'} avgår tidigt nästa morgon: ${service.scheduledDepartureTime} (avgång nästa dag)`);
+                }
+            }
             
             let type = 'regional';
+            let lengthMeters = 0; // total consist length (for info)
+            let baseUnitLengthMeters = 0; // vehicle base length (for coloring if chosen)
+            try {
+                if (service.trainSet) {
+                    lengthMeters = calculateTrainSetLength(service.trainSet) || 0;
+                    if (service.trainSet.vehicleTypeID) {
+                        const vDef = getVehicleDefinition(service.trainSet.vehicleTypeID);
+                        baseUnitLengthMeters = vDef ? (vDef.baseLengthMeters || 0) : 0;
+                    } else if (service.trainSet.customComposition && service.trainSet.customComposition.length > 0) {
+                        const first = service.trainSet.customComposition[0];
+                        const vDefFirst = getVehicleDefinition(first.vehicleTypeID);
+                        baseUnitLengthMeters = vDefFirst ? (vDefFirst.baseLengthMeters || 0) : 0;
+                    }
+                }
+            } catch (e) {
+                lengthMeters = 0;
+            }
+            // Determine effective length for coloring (base unit vs total consist)
+            const effectiveLengthForColor = (userSettings && userSettings.trainColorDimension === 'total')
+                ? lengthMeters
+                : (baseUnitLengthMeters || lengthMeters);
+
+            // Compute 5-length bucket by nearest canonical lengths (user-configurable)
+            const canonical = (userSettings && Array.isArray(userSettings.canonicalLengths) && userSettings.canonicalLengths.length === 5)
+                ? userSettings.canonicalLengths
+                : [50, 75, 80, 107, 135];
+            const lengthClass = computeNearestBucket(effectiveLengthForColor, canonical);
             if (service.trainSet && service.trainSet.vehicleTypeID) {
                 const vehicleDef = getVehicleDefinition(service.trainSet.vehicleTypeID);
                 if (vehicleDef) {
@@ -84,6 +162,8 @@ function prepareTrainData() {
                 arrivalTrainNumber: service.arrivalTrainNumber || '',
                 departureTrainNumber: service.departureTrainNumber || '',
                 type: type,
+                lengthMeters: lengthMeters,
+                lengthClass: lengthClass,
                 trackId: service.trackId,
                 arrTime: arrTime,
                 depTime: depTime,
@@ -118,6 +198,199 @@ function prepareTrainData() {
 }
 
 /**
+ * Load user settings from localStorage or fall back to defaults
+ */
+function loadUserSettings() {
+    const defaults = {
+        trainColorMode: 'length', // 'length' | 'single'
+        trainColorDimension: 'base', // 'base' | 'total'
+        canonicalLengths: [50, 75, 80, 107, 135],
+        lenColors: {
+            b1: { bg: null, border: null, text: null },
+            b2: { bg: null, border: null, text: null },
+            b3: { bg: null, border: null, text: null },
+            b4: { bg: null, border: null, text: null },
+            b5: { bg: null, border: null, text: null }
+        },
+        singleColor: { bg: null, border: null, text: null }
+    };
+    try {
+        const saved = localStorage.getItem('sparplannen-settings');
+        userSettings = saved ? { ...defaults, ...JSON.parse(saved) } : defaults;
+    } catch (e) {
+        userSettings = defaults;
+    }
+    applyTrainColorSettings();
+}
+
+/**
+ * Apply train coloring settings to DOM (data attributes and CSS variables)
+ */
+function applyTrainColorSettings() {
+    const root = document.documentElement;
+    if (!userSettings) return;
+    // Data attribute for single color mode
+    const mode = userSettings.trainColorMode || 'length';
+    root.setAttribute('data-train-color-mode', mode === 'single' ? 'single' : 'length');
+
+    // Custom colors for buckets (if provided)
+    const setVar = (name, value) => { if (value) root.style.setProperty(name, value); };
+    const lc = userSettings.lenColors || {};
+    if (lc.b1) { setVar('--len-b1-bg', lc.b1.bg); setVar('--len-b1-border', lc.b1.border); setVar('--len-b1-text', lc.b1.text); }
+    if (lc.b2) { setVar('--len-b2-bg', lc.b2.bg); setVar('--len-b2-border', lc.b2.border); setVar('--len-b2-text', lc.b2.text); }
+    if (lc.b3) { setVar('--len-b3-bg', lc.b3.bg); setVar('--len-b3-border', lc.b3.border); setVar('--len-b3-text', lc.b3.text); }
+    if (lc.b4) { setVar('--len-b4-bg', lc.b4.bg); setVar('--len-b4-border', lc.b4.border); setVar('--len-b4-text', lc.b4.text); }
+    if (lc.b5) { setVar('--len-b5-bg', lc.b5.bg); setVar('--len-b5-border', lc.b5.border); setVar('--len-b5-text', lc.b5.text); }
+
+    // Single-color variables
+    const sc = userSettings.singleColor || {};
+    setVar('--train-single-bg', sc.bg);
+    setVar('--train-single-border', sc.border);
+    setVar('--train-single-text', sc.text);
+}
+
+/**
+ * Map a numeric length to one of five buckets b1..b5 by nearest canonical
+ */
+function computeNearestBucket(value, canonicalArray) {
+    if (!Array.isArray(canonicalArray) || canonicalArray.length !== 5) return 'b3';
+    let nearestIdx = 0;
+    let nearestDist = Number.POSITIVE_INFINITY;
+    for (let i = 0; i < canonicalArray.length; i++) {
+        const dist = Math.abs(value - canonicalArray[i]);
+        if (dist < nearestDist) { nearestDist = dist; nearestIdx = i; }
+    }
+    // Buckets: index 0..4 => b1..b5
+    return 'b' + (nearestIdx + 1);
+}
+
+/**
+ * Apply dynamic text contrast to ensure WCAG AA compliance (4.5:1)
+ * Reads actual background color and sets text to black or white for best contrast
+ * ONLY applies if user hasn't set a custom text color in settings
+ */
+function applyDynamicTextContrast(trainElement) {
+    if (!trainElement) return;
+    
+    const visual = trainElement.querySelector('.train-bar-visual');
+    const numbers = trainElement.querySelector('.train-numbers');
+    if (!visual || !numbers) return;
+    
+    try {
+        // Check if user has set custom text color in settings
+        const bucket = trainElement.dataset.bucket;
+        const colorMode = userSettings.trainColorMode || 'length';
+        
+        let hasCustomTextColor = false;
+        
+        if (colorMode === 'single') {
+            // Check if user set a custom text color for single mode
+            hasCustomTextColor = userSettings.singleColor && userSettings.singleColor.text && userSettings.singleColor.text.startsWith('#');
+        } else if (bucket) {
+            // Check if user set a custom text color for this bucket
+            hasCustomTextColor = userSettings.lenColors && 
+                                 userSettings.lenColors[bucket] && 
+                                 userSettings.lenColors[bucket].text && 
+                                 userSettings.lenColors[bucket].text.startsWith('#');
+        }
+        
+        // If user has set a custom text color, respect it and don't override
+        if (hasCustomTextColor) {
+            return;
+        }
+        
+        // Otherwise, calculate optimal contrast automatically
+        // Get computed background color
+        const styles = getComputedStyle(visual);
+        const bgColor = styles.backgroundColor;
+        const borderColor = styles.borderColor;
+        
+        // Calculate luminance
+        const bgLum = getRelativeLuminance(bgColor);
+        const borderLum = getRelativeLuminance(borderColor);
+        
+        // Use the darker of bg/border for conservative calculation
+        const effectiveLum = Math.min(bgLum, borderLum);
+        
+        // Calculate contrast ratios
+        const whiteLum = 1.0;
+        const blackLum = 0.0;
+        const whiteContrast = getContrastRatio(effectiveLum, whiteLum);
+        const blackContrast = getContrastRatio(effectiveLum, blackLum);
+        
+        // Choose color with best contrast (prefer white if both are similar)
+        const useWhite = whiteContrast >= 4.5 || (whiteContrast > blackContrast && blackContrast < 4.5);
+        const textColor = useWhite ? '#ffffff' : '#000000';
+        
+        // Apply inline (overrides CSS for custom colors)
+        numbers.style.color = textColor;
+        
+    } catch (e) {
+        console.warn('Error applying dynamic contrast:', e);
+    }
+}
+
+/**
+ * Get relative luminance from CSS color string (WCAG 2.1 formula)
+ */
+function getRelativeLuminance(colorString) {
+    if (!colorString || colorString === 'transparent') return 0.5;
+    
+    const rgb = parseColorToRGB(colorString);
+    if (!rgb) return 0.5;
+    
+    // Convert to 0-1 range
+    const r = rgb.r / 255;
+    const g = rgb.g / 255;
+    const b = rgb.b / 255;
+    
+    // Apply sRGB companding
+    const rsRGB = r <= 0.03928 ? r / 12.92 : Math.pow((r + 0.055) / 1.055, 2.4);
+    const gsRGB = g <= 0.03928 ? g / 12.92 : Math.pow((g + 0.055) / 1.055, 2.4);
+    const bsRGB = b <= 0.03928 ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4);
+    
+    // Calculate relative luminance
+    return 0.2126 * rsRGB + 0.7152 * gsRGB + 0.0722 * bsRGB;
+}
+
+/**
+ * Parse CSS color string to RGB object
+ */
+function parseColorToRGB(colorString) {
+    // Match rgb(r, g, b) or rgba(r, g, b, a)
+    const rgbMatch = colorString.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (rgbMatch) {
+        return { r: parseInt(rgbMatch[1]), g: parseInt(rgbMatch[2]), b: parseInt(rgbMatch[3]) };
+    }
+    
+    // Match hex #RRGGBB or #RGB
+    const hexMatch = colorString.match(/#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})/i);
+    if (hexMatch) {
+        return { r: parseInt(hexMatch[1], 16), g: parseInt(hexMatch[2], 16), b: parseInt(hexMatch[3], 16) };
+    }
+    
+    const shortHexMatch = colorString.match(/#([a-f\d])([a-f\d])([a-f\d])/i);
+    if (shortHexMatch) {
+        return {
+            r: parseInt(shortHexMatch[1] + shortHexMatch[1], 16),
+            g: parseInt(shortHexMatch[2] + shortHexMatch[2], 16),
+            b: parseInt(shortHexMatch[3] + shortHexMatch[3], 16)
+        };
+    }
+    
+    return null;
+}
+
+/**
+ * Calculate WCAG contrast ratio between two luminance values
+ */
+function getContrastRatio(lum1, lum2) {
+    const L1 = Math.max(lum1, lum2);
+    const L2 = Math.min(lum1, lum2);
+    return (L1 + 0.05) / (L2 + 0.05);
+}
+
+/**
  * Handle TimeManager state changes
  */
 function handleTimeManagerChange(event) {
@@ -147,15 +420,16 @@ function renderFullSchedule() {
     const state = window.TimeManager.getState();
     const { viewTime, timeRange } = state;
     
-    // CONTINUOUS TIMELINE: Create a 24-hour canvas (full day)
-    const timelineStartHours = 24; // Hours of timeline content
+    // CONTINUOUS TIMELINE: Create a 30-hour canvas to handle trains crossing midnight
+    // 00:00 today -> 06:00 tomorrow (to show late-night trains that extend into next day)
+    const timelineStartHours = 30; // Extended to 30 hours to handle overnight trains
     const now = new Date();
     
     // Timeline base starts at midnight of today
     timelineStart = new Date(now);
     timelineStart.setHours(0, 0, 0, 0);
     
-    // Timeline extends for 24 hours
+    // Timeline extends for 30 hours (to 06:00 next day)
     const timelineEnd = new Date(timelineStart);
     timelineEnd.setHours(timelineEnd.getHours() + timelineStartHours);
     
@@ -167,11 +441,13 @@ function renderFullSchedule() {
     // --- NEW: Pre-calculate track layouts and heights ---
     const trackLayouts = calculateTrackLayouts(cachedTracks, cachedTrains);
     
+    // Filter trains to show all trains that overlap with the extended timeline
     const allTrains = cachedTrains.filter(train => {
         if (!train.arrTime && !train.depTime) return false;
         const trainStart = train.arrTime || train.depTime;
         const trainEnd = train.depTime || train.arrTime;
-        return trainStart >= timelineStart && trainEnd <= timelineEnd;
+        // Show train if it starts before timeline ends AND ends after timeline starts
+        return trainStart < timelineEnd && trainEnd >= timelineStart;
     });
     
     // Render components with FULL timeline and dynamic layouts
@@ -185,10 +461,11 @@ function renderFullSchedule() {
     
     // Log rendering statistics with case information
     const caseStats = analyzeCases(allTrains);
-    console.log(`🔄 Schedule rendered: Full 24h timeline, zoomed to ${timeRange}h view`);
+    console.log(`🔄 Schedule rendered: ${timelineStartHours}h timeline (00:00-06:00+1), zoomed to ${timeRange}h view`);
     console.log(`📊 Tåg statistik:`, caseStats);
     console.log(`🎯 Max samtidiga tåg per spår:`, caseStats.maxTrainsOnTrack);
     console.log(`✅ Dynamisk höjd: Varje tåg får korrekt höjd baserat på sina verkliga överlapp i tid`);
+    console.log(`🌙 Tåg som visas: ${allTrains.length} av ${cachedTrains.length} (inkl. tåg över midnatt)`);
 }
 
 /**
@@ -425,7 +702,6 @@ function renderTrackLabels(trackLayouts) {
             <div class="track-content">
                 <div class="track-name">${trackInfo.name}</div>
                 <div class="track-info">
-                    <span class="track-type-badge ${trackInfo.type}">${trackInfo.type === 'main' ? 'Huvudspår' : 'Sidospår'}</span>
                     <span class="track-length">
                         <span class="track-length-icon"></span>
                         ${trackInfo.length}m
@@ -687,7 +963,8 @@ function renderTrains(trains, trackLayouts, startTime, pixelsPerHour) {
             trainDiv.style.width = `${width}px`;
             
             // Add 3px vertical padding to prevent overlap with adjacent tracks
-            const verticalPadding = 3;
+            // Reduce inner vertical padding when multiple trains are stacked to unlock more text space
+            const verticalPadding = totalTrainsInGroup >= 3 ? 1 : (totalTrainsInGroup === 2 ? 2 : 3);
             trainDiv.style.height = `${Math.max(trainHeight - verticalPadding * 2, 8)}px`;
             trainDiv.style.top = `${trackLayout.top + (trackLayout.height - bottomOffset - trainHeight) + verticalPadding}px`;
             trainDiv.style.zIndex = 10 + position;
@@ -728,8 +1005,16 @@ function renderTrains(trains, trackLayouts, startTime, pixelsPerHour) {
 
             // Build number display HTML
             let numbersHTML = '';
+            let singleAlignClass = '';
             if (displaySingleNumber) {
-                // Single centered number
+                // Single number aligned by type (arrival left, departure right)
+                if (hasArrival && !hasDeparture) {
+                    singleAlignClass = 'single-left';
+                } else if (!hasArrival && hasDeparture) {
+                    singleAlignClass = 'single-right';
+                } else {
+                    singleAlignClass = 'single-centered';
+                }
                 numbersHTML = `<div class="train-number-value">${singleNumber || ''}</div>`;
             } else {
                 // CASE 8 & 9: Handle arrival-only or departure-only
@@ -767,16 +1052,22 @@ function renderTrains(trains, trackLayouts, startTime, pixelsPerHour) {
             ` : '';
 
             // --- Build Complete Train Bar HTML ---
+        // Determine density class for CSS tweaks (borders, text readability)
+        const densityClass = totalTrainsInGroup >= 3 ? 'density-3' : (totalTrainsInGroup === 2 ? 'density-2' : 'density-1');
+
         trainDiv.innerHTML = `
                 <div class="train-bar-visual">
                     ${statusIconHTML}
                     ${connectionIconHTML}
-                    <div class="train-numbers ${displaySingleNumber ? 'single-centered' : ''}" style="font-size: ${fontSize};">
+                    <div class="train-numbers ${displaySingleNumber ? singleAlignClass : ''}" style="font-size: ${fontSize};">
                         ${numbersHTML}
             </div>
             </div>
                 ${tooltipHTML}
             `;
+
+            // Apply length and density classes for theming
+            trainDiv.classList.add(`len-${train.lengthClass}`, densityClass);
 
             // --- Add Interactive Event Listeners ---
             trainDiv.addEventListener('mouseenter', () => {
@@ -803,6 +1094,10 @@ function renderTrains(trains, trackLayouts, startTime, pixelsPerHour) {
             });
         
         timelineCanvas.appendChild(trainDiv);
+        
+        // Apply dynamic text contrast after element is in DOM
+        // Use setTimeout to ensure styles are computed
+        setTimeout(() => applyDynamicTextContrast(trainDiv), 0);
     });
 }
 }

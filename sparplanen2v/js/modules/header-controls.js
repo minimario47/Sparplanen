@@ -318,12 +318,39 @@ function updateCurrentTimeDisplay() {
 */
 
 /**
- * Show notification (temporary - will be replaced with proper notification system)
+ * Show notification with visual toast
  */
 function showNotification(message, type = 'info') {
     console.log(`📢 [${type.toUpperCase()}] ${message}`);
-    // TODO: Implement visual notification system
+    
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    notification.setAttribute('role', 'status');
+    notification.setAttribute('aria-live', 'polite');
+    
+    // Add to body
+    document.body.appendChild(notification);
+    
+    // Trigger animation after a small delay to ensure styles are applied
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
 }
+
+// Export globally
+window.showNotification = showNotification;
 
 /**
  * Format time for display

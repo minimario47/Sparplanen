@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="styles/components/header-time-controls.css">
     <link rel="stylesheet" href="styles/components/header-status.css">
     <link rel="stylesheet" href="styles/components/logo.css">
+    <link rel="stylesheet" href="styles/components/notifications.css">
     <link rel="stylesheet" href="styles/components/schedule.css">
     <link rel="stylesheet" href="styles/components/settings-modal.css">
     <link rel="stylesheet" href="styles/components/settings-controls.css">
@@ -71,7 +72,7 @@
             align-items: flex-end;
             padding: var(--spacing-2);
             font-size: var(--font-size-sm);
-            color: white;
+            color: var(--text-inverse);
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
             box-shadow: var(--shadow-sm);
         }
@@ -83,63 +84,6 @@
             margin-top: var(--spacing-4);
         }
         
-        .btn {
-            padding: var(--spacing-3) var(--spacing-6);
-            border: none;
-            border-radius: var(--border-radius-md);
-            font-size: var(--font-size-base);
-            font-weight: var(--font-weight-medium);
-            cursor: pointer;
-            transition: all var(--transition-normal);
-        }
-        
-        .btn-primary {
-            background: var(--interactive-primary);
-            color: var(--text-inverse);
-        }
-        
-        .btn-primary:hover {
-            background: var(--interactive-primary-hover);
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-1px);
-        }
-        
-        .btn-secondary {
-            background: var(--interactive-secondary);
-            color: var(--text-primary);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--interactive-secondary-hover);
-        }
-        
-        .btn-success {
-            background: var(--success-600);
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background: var(--success-700);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .btn-warning {
-            background: var(--warning-500);
-            color: white;
-        }
-        
-        .btn-warning:hover {
-            background: var(--warning-600);
-        }
-        
-        .btn-danger {
-            background: var(--interactive-danger);
-            color: white;
-        }
-        
-        .btn-danger:hover {
-            background: var(--interactive-danger-hover);
-        }
         
         .typography-demo p {
             margin: var(--spacing-2) 0;
@@ -171,13 +115,13 @@
         
         .theme-btn:hover {
             background: var(--interactive-primary);
-            color: white;
+            color: var(--text-inverse);
             border-color: var(--interactive-primary);
         }
         
         .theme-btn.active {
             background: var(--interactive-primary);
-            color: white;
+            color: var(--text-inverse);
             border-color: var(--interactive-primary);
         }
         
@@ -211,8 +155,16 @@
         <div class="header-left">
             <a href="/" class="header-logo">
                 <img src="assets/logo.png" alt="SpårplanV2 Logo" class="app-logo">
-                <div>
+                <div class="header-title-block">
                     <h1 class="header-title">SpårplanV2</h1>
+                    <div class="network-status" id="api-status" title="Connection Status">
+                        <div class="network-nodes">
+                            <div class="node node-1"></div>
+                            <div class="node node-2"></div>
+                            <div class="connection-line"></div>
+                            <div class="node node-3"></div>
+                        </div>
+                    </div>
                     <p class="header-subtitle">Professionell Tågtrafikledning</p>
                 </div>
             </a>
@@ -221,7 +173,7 @@
         <!-- Center Section: Time Controls -->
         <nav class="header-center" aria-label="Tidskontroller">
             <div class="time-controls">
-                <div class="time-nav">
+                <div class="time-nav btn-group">
                     <button id="time-nav-prev" class="btn btn-secondary btn-icon" aria-label="Föregående tidsintervall" title="Föregående tidsintervall">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" /></svg>
                     </button>
@@ -230,44 +182,40 @@
                     </button>
                 </div>
                 
-                <div class="time-display">
-                    <div class="time-display-current" id="current-time-display">14:30</div>
-                    <div class="time-display-range" id="time-range-display">14:00 - 18:00</div>
-                </div>
-                
-                <button class="btn btn-primary btn-now" id="now-button">
-                    <span>Nu</span>
-                </button>
-                
-                <div class="time-range-selector">
-                    <button class="btn btn-secondary btn-sm time-range-button" id="time-range-btn" aria-label="Välj tidsintervall">
+                <div class="time-center btn-group">
+                    <button class="btn btn-primary btn-now" id="now-button">
+                        <span>Nu</span>
+                    </button>
+                    <div class="time-display group-segment">
+                        <div class="time-display-current" id="current-time-display">14:30</div>
+                        <div class="time-display-range" id="time-range-display">14:00 - 18:00</div>
+                    </div>
+                    <button class="btn btn-secondary time-range-button" id="time-range-btn" aria-label="Välj tidsintervall">
                         <span>4h</span>
                     </button>
-                    <div class="time-range-dropdown" id="time-range-dropdown">
-                        <div class="time-range-option" data-hours="1">1 timme</div>
-                        <div class="time-range-option" data-hours="3">3 timmar</div>
-                        <div class="time-range-option active" data-hours="4">4 timmar</div>
-                        <div class="time-range-option" data-hours="6">6 timmar</div>
-                        <div class="time-range-option" data-hours="8">8 timmar</div>
-                        <div class="time-range-option" data-hours="12">12 timmar</div>
-                    </div>
+                </div>
+                
+                <div class="time-range-dropdown" id="time-range-dropdown">
+                    <div class="time-range-option" data-hours="1">1 timme</div>
+                    <div class="time-range-option" data-hours="3">3 timmar</div>
+                    <div class="time-range-option active" data-hours="4">4 timmar</div>
+                    <div class="time-range-option" data-hours="6">6 timmar</div>
+                    <div class="time-range-option" data-hours="8">8 timmar</div>
+                    <div class="time-range-option" data-hours="12">12 timmar</div>
                 </div>
             </div>
         </nav>
         
         <!-- Right Section: Status & Settings -->
         <div class="header-right">
-            <div class="status-badge connected" id="api-status" title="API-status">
-                <span class="status-badge-text">Ansluten</span>
+            <div class="btn-group header-actions">
+                <button class="btn btn-secondary btn-icon theme-toggle" id="theme-toggle-btn" aria-label="Byt tema" title="Byt tema">
+                    <span style="font-size: 20px;">🌓</span>
+                </button>
+                <button class="btn btn-secondary btn-icon settings-button" aria-label="Inställningar" title="Inställningar">
+                    <span style="font-size: 20px;">⚙️</span>
+                </button>
             </div>
-            
-            <button class="btn btn-icon theme-toggle" id="theme-toggle-btn" aria-label="Byt tema" title="Byt tema">
-                <span style="font-size: 20px;">🌓</span>
-            </button>
-            
-            <button class="btn btn-icon settings-button" aria-label="Inställningar" title="Inställningar">
-                <span style="font-size: 20px;">⚙️</span>
-            </button>
         </div>
     </header>
 
@@ -387,8 +335,134 @@
 
                 <!-- Display Tab -->
                 <div id="panel-display" class="settings-tab-panel" data-tab-panel="display" role="tabpanel" hidden>
-                    <div class="settings-empty">
-                        <p>Kommer snart</p>
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Tågfärger (enkelt)</h3>
+                        <div class="settings-section-content">
+                            <div class="setting-item">
+                                <label class="setting-label" for="train-color-mode">Färgläge</label>
+                                <div class="settings-select-wrapper">
+                                    <select id="train-color-mode" class="settings-select" aria-label="Färgläge">
+                                        <option value="length">Efter längd</option>
+                                        <option value="single">Enfärgad</option>
+                                    </select>
+                                </div>
+                                <p class="setting-help">Färgkoda efter tåglängd eller använd samma färg för alla.</p>
+                            </div>
+
+                            <div class="setting-item" id="length-theme-controls">
+                                <label class="setting-label" for="length-theme">Färgtema (efter längd)</label>
+                                <div class="settings-select-wrapper">
+                                    <select id="length-theme" class="settings-select" aria-label="Färgtema för längd">
+                                        <option value="standard">Standard (tema-anpassad)</option>
+                                        <option value="modern">Modern (ljust grå)</option>
+                                        <option value="highvis">Högsynlighet</option>
+                                        <option value="dark">Mörka färger</option>
+                                        <option value="simon">Simon färger 💀</option>
+                                    </select>
+                                </div>
+                                <p class="setting-help">Välj ett färdigt tema eller anpassa manuellt nedan.</p>
+                            </div>
+
+                            <div class="setting-item" id="single-color-controls" style="display:none;">
+                                <label class="setting-label" for="single-theme">Färgtema (enfärgat)</label>
+                                <div class="settings-select-wrapper">
+                                    <select id="single-theme" class="settings-select" aria-label="Färgtema enfärgat">
+                                        <option value="standard">Standard (tema-anpassad)</option>
+                                        <option value="neutral">Grå</option>
+                                        <option value="blue">Blå</option>
+                                        <option value="green">Grön</option>
+                                        <option value="amber">Ggul</option>
+                                        <option value="simon">Simon färger 💀</option>
+                                    </select>
+                                </div>
+                                <div class="settings-color-row-simple" style="margin-top: var(--space-3);">
+                                    <label class="color-simple-label">Bakgrund <input id="single-bg" type="color" class="settings-color-simple"></label>
+                                    <label class="color-simple-label">Kant <input id="single-border" type="color" class="settings-color-simple"></label>
+                                    <label class="color-simple-label">Text <input id="single-text" type="color" class="settings-color-simple"></label>
+                                </div>
+                                <p class="setting-help">Välj tema eller anpassa färger manuellt.</p>
+                            </div>
+
+                            <div class="setting-item">
+                                <label class="setting-label">Förhandsvisning</label>
+                                <div id="train-preview" class="train-preview">
+                                    <div class="preview-train" data-bucket="b1">b1</div>
+                                    <div class="preview-train" data-bucket="b2">b2</div>
+                                    <div class="preview-train" data-bucket="b3">b3</div>
+                                    <div class="preview-train" data-bucket="b4">b4</div>
+                                    <div class="preview-train" data-bucket="b5">b5</div>
+                                </div>
+                                <p class="setting-help">Så här ser dina färger ut.</p>
+                            </div>
+
+                            <div class="setting-item">
+                                <button id="show-advanced-btn" class="btn btn-secondary btn-sm">
+                                    Visa avancerat
+                                </button>
+                            </div>
+
+                            <div id="advanced-train-colors" class="advanced-section" style="display:none;">
+                                <div class="setting-item">
+                                    <label class="setting-label" for="train-color-dimension">Längdmått</label>
+                                    <div class="settings-select-wrapper">
+                                        <select id="train-color-dimension" class="settings-select" aria-label="Längdmått">
+                                            <option value="base">Fordonstyp</option>
+                                            <option value="total">Total tåglängd</option>
+                                        </select>
+                                    </div>
+                                    <p class="setting-help">Färgning baserad på fordonets längd eller hela sättets längd.</p>
+                                </div>
+
+                                <div class="setting-item">
+                                    <label class="setting-label">Kanoniska längder (m)</label>
+                                    <div class="settings-grid-5-compact">
+                                        <input id="len-canon-1" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="50">
+                                        <input id="len-canon-2" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="75">
+                                        <input id="len-canon-3" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="80">
+                                        <input id="len-canon-4" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="107">
+                                        <input id="len-canon-5" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="135">
+                                    </div>
+                                    <p class="setting-help">Längdintervall för b1–b5 (system väljer närmaste).</p>
+                                </div>
+
+                                <div class="setting-item">
+                                    <label class="setting-label">Anpassa färger per bucket</label>
+                                    <div class="settings-color-grid-compact">
+                                        <div class="color-row-compact">
+                                            <span class="color-label-compact">b1</span>
+                                            <input id="len-b1-bg" type="color" class="settings-color-compact">
+                                            <input id="len-b1-border" type="color" class="settings-color-compact">
+                                            <input id="len-b1-text" type="color" class="settings-color-compact">
+                                        </div>
+                                        <div class="color-row-compact">
+                                            <span class="color-label-compact">b2</span>
+                                            <input id="len-b2-bg" type="color" class="settings-color-compact">
+                                            <input id="len-b2-border" type="color" class="settings-color-compact">
+                                            <input id="len-b2-text" type="color" class="settings-color-compact">
+                                        </div>
+                                        <div class="color-row-compact">
+                                            <span class="color-label-compact">b3</span>
+                                            <input id="len-b3-bg" type="color" class="settings-color-compact">
+                                            <input id="len-b3-border" type="color" class="settings-color-compact">
+                                            <input id="len-b3-text" type="color" class="settings-color-compact">
+                                        </div>
+                                        <div class="color-row-compact">
+                                            <span class="color-label-compact">b4</span>
+                                            <input id="len-b4-bg" type="color" class="settings-color-compact">
+                                            <input id="len-b4-border" type="color" class="settings-color-compact">
+                                            <input id="len-b4-text" type="color" class="settings-color-compact">
+                                        </div>
+                                        <div class="color-row-compact">
+                                            <span class="color-label-compact">b5</span>
+                                            <input id="len-b5-bg" type="color" class="settings-color-compact">
+                                            <input id="len-b5-border" type="color" class="settings-color-compact">
+                                            <input id="len-b5-text" type="color" class="settings-color-compact">
+                                        </div>
+                                    </div>
+                                    <p class="setting-help">Lämna standard eller anpassa manuellt (bg/kant/text).</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -425,7 +499,7 @@
                         Avbryt
                     </button>
                     <button id="settings-save-btn" class="btn btn-primary">
-                        Spara ändringar
+                        Spara
                     </button>
                 </div>
             </div>

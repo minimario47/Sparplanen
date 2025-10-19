@@ -73,6 +73,38 @@ LAST UPDATED: 2025-01-09
     
     /* No borders for depth in light mode (shadows handle it) */
     --elevation-border: transparent;
+
+    /* Additions: selection/tooltip/current-time tokens for consistent theming */
+    --selection-bg: var(--primary-200);
+    --selection-fg: var(--primary-800);
+    --surface-tooltip: var(--neutral-900);
+    --tooltip-text: var(--neutral-50);
+    --current-time-color: var(--danger-500);
+    --current-time-glow-1: rgba(239, 68, 68, 1);
+    --current-time-glow-2: rgba(239, 68, 68, 0.8);
+    --current-time-glow-3: rgba(239, 68, 68, 0.5);
+
+    /* Default length bucket variables (light) */
+    --len-b1-bg: var(--primary-100);
+    --len-b1-border: var(--primary-300);
+    --len-b1-text: var(--primary-800);
+    --len-b2-bg: var(--info-100);
+    --len-b2-border: var(--info-300);
+    --len-b2-text: var(--info-800);
+    --len-b3-bg: var(--success-100);
+    --len-b3-border: var(--success-300);
+    --len-b3-text: var(--success-800);
+    --len-b4-bg: var(--warning-100);
+    --len-b4-border: var(--warning-300);
+    --len-b4-text: var(--warning-800);
+    --len-b5-bg: var(--danger-100);
+    --len-b5-border: var(--danger-300);
+    --len-b5-text: var(--danger-800);
+
+    /* Single-color mode defaults (light) */
+    --train-single-bg: var(--primary-200);
+    --train-single-border: var(--primary-500);
+    --train-single-text: var(--neutral-900);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -126,6 +158,38 @@ LAST UPDATED: 2025-01-09
     --success-color-dark: var(--success-400);
     --warning-color-dark: var(--warning-400);
     --danger-color-dark: var(--danger-400);
+
+    /* Additions: selection/tooltip/current-time tokens (desaturated for dark) */
+    --selection-bg: var(--primary-700);
+    --selection-fg: var(--primary-100);
+    --surface-tooltip: var(--neutral-800);
+    --tooltip-text: var(--neutral-50);
+    --current-time-color: var(--danger-400);
+    --current-time-glow-1: rgba(239, 68, 68, 0.9);
+    --current-time-glow-2: rgba(239, 68, 68, 0.6);
+    --current-time-glow-3: rgba(239, 68, 68, 0.3);
+
+    /* Default length bucket variables (dark) */
+    --len-b1-bg: var(--neutral-800);
+    --len-b1-border: var(--primary-400);
+    --len-b1-text: var(--text-primary);
+    --len-b2-bg: var(--neutral-800);
+    --len-b2-border: var(--info-400);
+    --len-b2-text: var(--text-primary);
+    --len-b3-bg: var(--neutral-800);
+    --len-b3-border: var(--success-400);
+    --len-b3-text: var(--text-primary);
+    --len-b4-bg: var(--neutral-800);
+    --len-b4-border: var(--warning-400);
+    --len-b4-text: var(--text-primary);
+    --len-b5-bg: var(--neutral-800);
+    --len-b5-border: var(--danger-400);
+    --len-b5-text: var(--text-primary);
+
+    /* Single-color mode defaults (dark) */
+    --train-single-bg: var(--neutral-700);
+    --train-single-border: var(--primary-400);
+    --train-single-text: var(--text-primary);
 }
 
 /* Dark mode: Replace shadows with borders */
@@ -202,6 +266,38 @@ LAST UPDATED: 2025-01-09
     /* Thick borders for high contrast */
     --border-width-DEFAULT: 2px;
     --border-width-thick: 4px;
+
+    /* Additions: selection/tooltip/current-time tokens (explicit high contrast) */
+    --selection-bg: #00ffff;
+    --selection-fg: #000000;
+    --surface-tooltip: #ffffff;
+    --tooltip-text: #000000;
+    --current-time-color: #ff0000;
+    --current-time-glow-1: #ff0000;
+    --current-time-glow-2: #ff0000;
+    --current-time-glow-3: #ff0000;
+
+    /* Default length bucket variables (high contrast) */
+    --len-b1-bg: #000000;
+    --len-b1-border: var(--primary-500);
+    --len-b1-text: #ffffff;
+    --len-b2-bg: #0a0a0a;
+    --len-b2-border: var(--info-500);
+    --len-b2-text: #ffffff;
+    --len-b3-bg: #111111;
+    --len-b3-border: var(--success-500);
+    --len-b3-text: #ffffff;
+    --len-b4-bg: #141414;
+    --len-b4-border: var(--warning-500);
+    --len-b4-text: #ffffff;
+    --len-b5-bg: #1a1a1a;
+    --len-b5-border: var(--danger-500);
+    --len-b5-text: #ffffff;
+
+    /* Single-color mode defaults (high-contrast) */
+    --train-single-bg: #000000;
+    --train-single-border: #00ccff;
+    --train-single-text: #ffffff;
 }
 
 /* High contrast: Force thick borders everywhere */
@@ -217,7 +313,7 @@ LAST UPDATED: 2025-01-09
 }
 
 [data-theme="high-contrast"] .train-bar {
-    border: 3px solid #ffffff !important;
+    border: 3px solid var(--border-primary) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

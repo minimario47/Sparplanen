@@ -11,6 +11,8 @@
   contain: content; /* Performance optimization */
 }
 
+/* Length bucket variables are defined per-theme in themes.css */
+
 /* The visible, styled part of the train bar */
 .train-bar-visual {
   position: relative;
@@ -175,8 +177,11 @@
 .train-numbers.single-centered {
   justify-content: center;
 }
+.train-numbers.single-left { justify-content: flex-start; }
+.train-numbers.single-right { justify-content: flex-end; }
 
 /* Text colors per type and theme */
+/* Default per type (kept), overridden by length classes below */
 .train-bar.type-regional .train-numbers { color: var(--train-regional); }
 .train-bar.type-long-distance .train-numbers { color: var(--train-long-distance); }
 .train-bar.type-freight .train-numbers { color: var(--train-freight); }
@@ -193,6 +198,83 @@
 [data-theme="high-contrast"] .train-numbers {
   font-weight: 700;
 }
+
+/* Density readability tweaks */
+.train-bar.density-2 .train-bar-visual { border-width: 2px; }
+.train-bar.density-3 .train-bar-visual { border-width: 2px; }
+.train-bar.density-2 .train-numbers { padding: 0 var(--spacing-1); }
+.train-bar.density-3 .train-numbers { padding: 0 var(--spacing-1); font-size: 10px; }
+
+/* Length-based coloring (uses length classes set by JS) */
+/* Light */
+.train-bar.len-s .train-bar-visual { background-color: var(--primary-100); border-color: var(--primary-300); }
+.train-bar.len-m .train-bar-visual { background-color: var(--info-100); border-color: var(--info-300); }
+.train-bar.len-l .train-bar-visual { background-color: var(--success-100); border-color: var(--success-300); }
+.train-bar.len-xl .train-bar-visual { background-color: var(--warning-100); border-color: var(--warning-300); }
+.train-bar.len-s .train-numbers { color: var(--primary-800); }
+.train-bar.len-m .train-numbers { color: var(--info-800); }
+.train-bar.len-l .train-numbers { color: var(--success-800); }
+.train-bar.len-xl .train-numbers { color: var(--warning-800); }
+
+/* New length buckets b1–b5 using CSS variables (user-configurable) */
+.train-bar.len-b1 .train-bar-visual { background-color: var(--len-b1-bg); border-color: var(--len-b1-border); }
+.train-bar.len-b2 .train-bar-visual { background-color: var(--len-b2-bg); border-color: var(--len-b2-border); }
+.train-bar.len-b3 .train-bar-visual { background-color: var(--len-b3-bg); border-color: var(--len-b3-border); }
+.train-bar.len-b4 .train-bar-visual { background-color: var(--len-b4-bg); border-color: var(--len-b4-border); }
+.train-bar.len-b5 .train-bar-visual { background-color: var(--len-b5-bg); border-color: var(--len-b5-border); }
+.train-bar.len-b1 .train-numbers { color: var(--len-b1-text); }
+.train-bar.len-b2 .train-numbers { color: var(--len-b2-text); }
+.train-bar.len-b3 .train-numbers { color: var(--len-b3-text); }
+.train-bar.len-b4 .train-numbers { color: var(--len-b4-text); }
+.train-bar.len-b5 .train-numbers { color: var(--len-b5-text); }
+
+/* Dark */
+[data-theme="dark"] .train-bar.len-s .train-bar-visual { background-color: var(--neutral-800); border-color: var(--primary-400); }
+[data-theme="dark"] .train-bar.len-m .train-bar-visual { background-color: var(--neutral-800); border-color: var(--info-400); }
+[data-theme="dark"] .train-bar.len-l .train-bar-visual { background-color: var(--neutral-800); border-color: var(--success-400); }
+[data-theme="dark"] .train-bar.len-xl .train-bar-visual { background-color: var(--neutral-800); border-color: var(--warning-400); }
+[data-theme="dark"] .train-bar.len-s .train-numbers { color: var(--primary-400); }
+[data-theme="dark"] .train-bar.len-m .train-numbers { color: var(--info-400); }
+[data-theme="dark"] .train-bar.len-l .train-numbers { color: var(--success-400); }
+[data-theme="dark"] .train-bar.len-xl .train-numbers { color: var(--warning-400); }
+
+/* Dark theme: bucket classes use theme variables */
+[data-theme="dark"] .train-bar.len-b1 .train-bar-visual { background-color: var(--len-b1-bg); border-color: var(--len-b1-border); }
+[data-theme="dark"] .train-bar.len-b2 .train-bar-visual { background-color: var(--len-b2-bg); border-color: var(--len-b2-border); }
+[data-theme="dark"] .train-bar.len-b3 .train-bar-visual { background-color: var(--len-b3-bg); border-color: var(--len-b3-border); }
+[data-theme="dark"] .train-bar.len-b4 .train-bar-visual { background-color: var(--len-b4-bg); border-color: var(--len-b4-border); }
+[data-theme="dark"] .train-bar.len-b5 .train-bar-visual { background-color: var(--len-b5-bg); border-color: var(--len-b5-border); }
+[data-theme="dark"] .train-bar.len-b1 .train-numbers { color: var(--len-b1-text); }
+[data-theme="dark"] .train-bar.len-b2 .train-numbers { color: var(--len-b2-text); }
+[data-theme="dark"] .train-bar.len-b3 .train-numbers { color: var(--len-b3-text); }
+[data-theme="dark"] .train-bar.len-b4 .train-numbers { color: var(--len-b4-text); }
+[data-theme="dark"] .train-bar.len-b5 .train-numbers { color: var(--len-b5-text); }
+
+/* Single-color mode overrides (applies in all themes) */
+[data-train-color-mode="single"] .train-bar .train-bar-visual { background-color: var(--train-single-bg) !important; border-color: var(--train-single-border) !important; }
+[data-train-color-mode="single"] .train-bar .train-numbers { color: var(--train-single-text) !important; }
+
+/* High contrast */
+[data-theme="high-contrast"] .train-bar.len-s .train-bar-visual { background-color: var(--surface-primary); border-color: var(--primary-500); }
+[data-theme="high-contrast"] .train-bar.len-m .train-bar-visual { background-color: var(--surface-primary); border-color: var(--info-500); }
+[data-theme="high-contrast"] .train-bar.len-l .train-bar-visual { background-color: var(--surface-primary); border-color: var(--success-500); }
+[data-theme="high-contrast"] .train-bar.len-xl .train-bar-visual { background-color: var(--surface-primary); border-color: var(--warning-500); }
+[data-theme="high-contrast"] .train-bar.len-s .train-numbers,
+[data-theme="high-contrast"] .train-bar.len-m .train-numbers,
+[data-theme="high-contrast"] .train-bar.len-l .train-numbers,
+[data-theme="high-contrast"] .train-bar.len-xl .train-numbers { color: var(--text-primary); }
+
+/* High-contrast: bucket classes inherit the same readable scheme */
+[data-theme="high-contrast"] .train-bar.len-b1 .train-bar-visual { background-color: var(--len-b1-bg); border-color: var(--len-b1-border); }
+[data-theme="high-contrast"] .train-bar.len-b2 .train-bar-visual { background-color: var(--len-b2-bg); border-color: var(--len-b2-border); }
+[data-theme="high-contrast"] .train-bar.len-b3 .train-bar-visual { background-color: var(--len-b3-bg); border-color: var(--len-b3-border); }
+[data-theme="high-contrast"] .train-bar.len-b4 .train-bar-visual { background-color: var(--len-b4-bg); border-color: var(--len-b4-border); }
+[data-theme="high-contrast"] .train-bar.len-b5 .train-bar-visual { background-color: var(--len-b5-bg); border-color: var(--len-b5-border); }
+[data-theme="high-contrast"] .train-bar.len-b1 .train-numbers { color: var(--len-b1-text); }
+[data-theme="high-contrast"] .train-bar.len-b2 .train-numbers { color: var(--len-b2-text); }
+[data-theme="high-contrast"] .train-bar.len-b3 .train-numbers { color: var(--len-b3-text); }
+[data-theme="high-contrast"] .train-bar.len-b4 .train-numbers { color: var(--len-b4-text); }
+[data-theme="high-contrast"] .train-bar.len-b5 .train-numbers { color: var(--len-b5-text); }
 
 /* Tooltip for very narrow bars */
 .train-tooltip {
@@ -222,13 +304,13 @@
 
 /* Theme-specific tooltip colors */
 [data-theme="dark"] .train-tooltip {
-  background-color: #1f2937;
-  color: #ffffff;
-  border: 1px solid #374151;
+  background-color: var(--surface-tooltip);
+  color: var(--tooltip-text);
+  border: 1px solid var(--border-primary);
 }
 [data-theme="high-contrast"] .train-tooltip {
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid #000000;
+  background-color: var(--surface-tooltip);
+  color: var(--tooltip-text);
+  border: 1px solid var(--border-primary);
 }
 

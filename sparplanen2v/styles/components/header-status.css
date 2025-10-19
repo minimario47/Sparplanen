@@ -1,15 +1,7 @@
 /* Status Badges, Theme Toggle, and Settings */
 
-.status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    padding: var(--spacing-2) var(--spacing-4);
-    border-radius: var(--border-radius-full);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    transition: all var(--transition-fast);
-}
+/* Deprecated: Status in right cluster; now using compact chip under title */
+.status-badge { display: none; }
 
 .status-badge::before {
     content: '';
@@ -124,7 +116,5 @@
 
 /* High Contrast */
 
-[data-theme="high-contrast"] .status-badge {
-    border: 2px solid currentColor;
-}
+[data-theme="high-contrast"] .status-chip { border: 2px solid currentColor; }
 

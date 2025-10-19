@@ -3,8 +3,8 @@
 .time-controls {
     display: flex;
     align-items: center;
-    gap: var(--spacing-3);
-    padding: var(--spacing-2);
+    gap: 0;
+    padding: var(--spacing-1);
     background: var(--surface-primary);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-sm);
@@ -40,9 +40,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 var(--spacing-2);
+    justify-content: center;
+    padding: 0 var(--spacing-1);
     min-width: 80px;
     max-width: 120px;
+    height: 44px;
     flex-shrink: 1;
 }
 
@@ -94,6 +96,10 @@
     white-space: nowrap;
     transition: all var(--transition-normal);
     position: relative;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Following mode active state */
@@ -148,14 +154,12 @@
     .btn-now {
         min-width: 56px;
         max-width: 80px;
-        padding: var(--spacing-2) var(--spacing-3);
-        font-size: var(--font-size-xs);
     }
 }
 
 .time-nav {
     display: flex;
-    gap: var(--spacing-2);
+    gap: 0;
     flex-shrink: 0;
 }
 
@@ -177,24 +181,27 @@
     }
 }
 
-.time-range-selector {
-    position: relative;
+/* center group connects now, display, and 4h */
+.time-center.btn-group .group-segment {
+    border-left: 1px solid var(--border-primary);
+    border-right: 1px solid var(--border-primary);
 }
 
 .time-range-button {
     min-width: 60px;
     max-width: 80px;
-    font-size: var(--font-size-sm);
     flex-shrink: 1;
     white-space: nowrap;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (max-width: 768px) {
     .time-range-button {
         min-width: 48px;
         max-width: 64px;
-        padding: var(--spacing-1) var(--spacing-2);
-        font-size: var(--font-size-xs);
     }
 }
 

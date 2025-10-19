@@ -1,0 +1,144 @@
+/* Notification Toast System */
+
+.notification {
+    position: fixed;
+    top: calc(var(--space-6) + 60px); /* Below header */
+    right: var(--space-6);
+    z-index: 9999;
+    
+    min-width: 280px;
+    max-width: 400px;
+    padding: var(--space-4) var(--space-5);
+    
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
+    color: var(--text-primary);
+    
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.3s var(--ease-out);
+    
+    /* Prevent text selection */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Notification types */
+.notification-success {
+    border-left: 4px solid var(--success-500);
+    background: var(--success-50);
+    color: var(--success-800);
+}
+
+[data-theme="dark"] .notification-success {
+    background: var(--success-900);
+    color: var(--success-100);
+    border-color: var(--success-400);
+}
+
+[data-theme="high-contrast"] .notification-success {
+    background: #001a00;
+    color: #00ff00;
+    border-color: #00ff00;
+}
+
+.notification-error {
+    border-left: 4px solid var(--danger-500);
+    background: var(--danger-50);
+    color: var(--danger-800);
+}
+
+[data-theme="dark"] .notification-error {
+    background: var(--danger-900);
+    color: var(--danger-100);
+    border-color: var(--danger-400);
+}
+
+[data-theme="high-contrast"] .notification-error {
+    background: #1a0000;
+    color: #ff0000;
+    border-color: #ff0000;
+}
+
+.notification-warning {
+    border-left: 4px solid var(--warning-500);
+    background: var(--warning-50);
+    color: var(--warning-800);
+}
+
+[data-theme="dark"] .notification-warning {
+    background: var(--warning-900);
+    color: var(--warning-100);
+    border-color: var(--warning-400);
+}
+
+[data-theme="high-contrast"] .notification-warning {
+    background: #1a1a00;
+    color: #ffff00;
+    border-color: #ffff00;
+}
+
+.notification-info {
+    border-left: 4px solid var(--info-500);
+    background: var(--info-50);
+    color: var(--info-800);
+}
+
+[data-theme="dark"] .notification-info {
+    background: var(--info-900);
+    color: var(--info-100);
+    border-color: var(--info-400);
+}
+
+[data-theme="high-contrast"] .notification-info {
+    background: #00001a;
+    color: #00ccff;
+    border-color: #00ccff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .notification {
+        top: var(--space-4);
+        right: var(--space-4);
+        left: var(--space-4);
+        min-width: auto;
+        max-width: none;
+    }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .notification {
+        transition: opacity 0.2s ease;
+        transform: none;
+    }
+    
+    .notification.show {
+        transform: none;
+    }
+}
+
+/* Dark mode: remove shadows, use borders */
+[data-theme="dark"] .notification {
+    box-shadow: none;
+    border: 2px solid var(--border-primary);
+}
+
+/* High contrast: strong borders */
+[data-theme="high-contrast"] .notification {
+    box-shadow: none;
+    border: 3px solid;
+    font-weight: var(--font-bold);
+}
+

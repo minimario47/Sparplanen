@@ -371,7 +371,7 @@ const initialServiceData = [
         scheduledDepartureTime: '06:19',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 32,
@@ -383,7 +383,7 @@ const initialServiceData = [
         scheduledDepartureTime: '09:20',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 33,
@@ -395,7 +395,7 @@ const initialServiceData = [
         scheduledDepartureTime: '10:20',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 34,
@@ -407,7 +407,7 @@ const initialServiceData = [
         scheduledDepartureTime: '11:22',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 35,
@@ -419,7 +419,7 @@ const initialServiceData = [
         scheduledDepartureTime: '12:22',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 36,
@@ -431,7 +431,7 @@ const initialServiceData = [
         scheduledDepartureTime: '13:20',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 37,
@@ -443,7 +443,7 @@ const initialServiceData = [
         scheduledDepartureTime: '14:20',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 38,
@@ -455,7 +455,7 @@ const initialServiceData = [
         scheduledDepartureTime: '15:21',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 39,
@@ -467,7 +467,7 @@ const initialServiceData = [
         scheduledDepartureTime: '16:22',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 40,
@@ -479,7 +479,7 @@ const initialServiceData = [
         scheduledDepartureTime: '17:20',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 41,
@@ -491,7 +491,7 @@ const initialServiceData = [
         scheduledDepartureTime: '18:20',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 42,
@@ -515,7 +515,7 @@ const initialServiceData = [
         scheduledDepartureTime: '20:50',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 44,
@@ -527,7 +527,7 @@ const initialServiceData = [
         scheduledDepartureTime: '22:20',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 45,
@@ -539,7 +539,7 @@ const initialServiceData = [
         scheduledDepartureTime: '23:20',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 46,
@@ -551,7 +551,7 @@ const initialServiceData = [
         scheduledDepartureTime: '00:03',
         trackId: 10,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 47,
@@ -563,7 +563,7 @@ const initialServiceData = [
         scheduledDepartureTime: '00:21',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 48,
@@ -575,7 +575,7 @@ const initialServiceData = [
         scheduledDepartureTime: '08:39',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 49,
@@ -599,7 +599,7 @@ const initialServiceData = [
         scheduledDepartureTime: '11:40',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 50,
@@ -611,7 +611,7 @@ const initialServiceData = [
         scheduledDepartureTime: '11:40',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 51,
@@ -647,7 +647,7 @@ const initialServiceData = [
         scheduledDepartureTime: '15:40',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 54,
@@ -659,7 +659,7 @@ const initialServiceData = [
         scheduledDepartureTime: '16:49',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 55,
@@ -683,7 +683,7 @@ const initialServiceData = [
         scheduledDepartureTime: '19:40',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 57,
@@ -695,7 +695,7 @@ const initialServiceData = [
         scheduledDepartureTime: '21:20',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 58,
@@ -707,7 +707,7 @@ const initialServiceData = [
         scheduledDepartureTime: '21:40',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 59,
@@ -719,7 +719,7 @@ const initialServiceData = [
         scheduledDepartureTime: '22:50',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 60,
@@ -731,7 +731,7 @@ const initialServiceData = [
         scheduledDepartureTime: '23:50',
         trackId: 11,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 61,
@@ -755,7 +755,7 @@ const initialServiceData = [
         scheduledDepartureTime: '13:39',
         trackId: 12,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 63,
@@ -767,7 +767,7 @@ const initialServiceData = [
         scheduledDepartureTime: '16:40',
         trackId: 12,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 64,
@@ -779,7 +779,7 @@ const initialServiceData = [
         scheduledDepartureTime: '17:40',
         trackId: 12,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "ORESUND", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 65,
@@ -791,7 +791,7 @@ const initialServiceData = [
         scheduledDepartureTime: '20:44',
         trackId: 12,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 66,
@@ -815,7 +815,7 @@ const initialServiceData = [
         scheduledDepartureTime: '23:39',
         trackId: 12,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 68,
@@ -839,7 +839,7 @@ const initialServiceData = [
         scheduledDepartureTime: '10:45',
         trackId: 13,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 70,
@@ -875,7 +875,7 @@ const initialServiceData = [
         scheduledDepartureTime: '01:15',
         trackId: 14,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 73,
@@ -887,7 +887,7 @@ const initialServiceData = [
         scheduledDepartureTime: '09:45',
         trackId: 14,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 74,
@@ -899,7 +899,7 @@ const initialServiceData = [
         scheduledDepartureTime: '21:45',
         trackId: 14,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 75,
@@ -935,7 +935,7 @@ const initialServiceData = [
         scheduledDepartureTime: '03:21',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 78,
@@ -947,7 +947,7 @@ const initialServiceData = [
         scheduledDepartureTime: '06:15',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 79,
@@ -959,7 +959,7 @@ const initialServiceData = [
         scheduledDepartureTime: '08:15',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 80,
@@ -971,7 +971,7 @@ const initialServiceData = [
         scheduledDepartureTime: '09:15',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 81,
@@ -983,7 +983,7 @@ const initialServiceData = [
         scheduledDepartureTime: '11:16',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 82,
@@ -995,7 +995,7 @@ const initialServiceData = [
         scheduledDepartureTime: '12:15',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 83,
@@ -1007,7 +1007,7 @@ const initialServiceData = [
         scheduledDepartureTime: '13:15',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 84,
@@ -1019,7 +1019,7 @@ const initialServiceData = [
         scheduledDepartureTime: '14:15',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 85,
@@ -1031,7 +1031,7 @@ const initialServiceData = [
         scheduledDepartureTime: '15:15',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 86,
@@ -1043,7 +1043,7 @@ const initialServiceData = [
         scheduledDepartureTime: '16:16',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 87,
@@ -1055,7 +1055,7 @@ const initialServiceData = [
         scheduledDepartureTime: '17:16',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 88,
@@ -1067,7 +1067,7 @@ const initialServiceData = [
         scheduledDepartureTime: '18:17',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 89,
@@ -1079,7 +1079,7 @@ const initialServiceData = [
         scheduledDepartureTime: '19:16',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 90,
@@ -1091,7 +1091,7 @@ const initialServiceData = [
         scheduledDepartureTime: '20:45',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 91,
@@ -1103,7 +1103,7 @@ const initialServiceData = [
         scheduledDepartureTime: '22:45',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 92,
@@ -1115,7 +1115,7 @@ const initialServiceData = [
         scheduledDepartureTime: '23:45',
         trackId: 15,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 93,
@@ -1163,7 +1163,7 @@ const initialServiceData = [
         scheduledDepartureTime: '00:15',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 97,
@@ -1175,7 +1175,7 @@ const initialServiceData = [
         scheduledDepartureTime: '02:15',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 98,
@@ -1187,7 +1187,7 @@ const initialServiceData = [
         scheduledDepartureTime: '05:15',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 99,
@@ -1199,7 +1199,7 @@ const initialServiceData = [
         scheduledDepartureTime: '07:17',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 100,
@@ -1211,7 +1211,7 @@ const initialServiceData = [
         scheduledDepartureTime: '08:45',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 101,
@@ -1223,7 +1223,7 @@ const initialServiceData = [
         scheduledDepartureTime: '10:18',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 102,
@@ -1235,7 +1235,7 @@ const initialServiceData = [
         scheduledDepartureTime: '11:45',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 103,
@@ -1247,7 +1247,7 @@ const initialServiceData = [
         scheduledDepartureTime: '12:45',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 104,
@@ -1259,7 +1259,7 @@ const initialServiceData = [
         scheduledDepartureTime: '13:45',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 105,
@@ -1271,7 +1271,7 @@ const initialServiceData = [
         scheduledDepartureTime: '14:45',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 106,
@@ -1283,7 +1283,7 @@ const initialServiceData = [
         scheduledDepartureTime: '15:45',
         trackId: 16,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 107,
@@ -1463,7 +1463,7 @@ const initialServiceData = [
         scheduledDepartureTime: '09:06',
         trackId: 2,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "PENDELTAG", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 122,
@@ -1499,7 +1499,7 @@ const initialServiceData = [
         scheduledDepartureTime: '12:15',
         trackId: 2,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X403", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 125,
@@ -1511,7 +1511,7 @@ const initialServiceData = [
         scheduledDepartureTime: '14:31',
         trackId: 2,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 126,
@@ -1535,7 +1535,7 @@ const initialServiceData = [
         scheduledDepartureTime: '17:30',
         trackId: 2,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 128,
@@ -1631,7 +1631,7 @@ const initialServiceData = [
         scheduledDepartureTime: '00:21',
         trackId: 2,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 3 }
+        trainSet: { vehicleTypeID: "X2", count: 3 }
     },
     {
         id: 136,
@@ -1655,7 +1655,7 @@ const initialServiceData = [
         scheduledDepartureTime: '07:59',
         trackId: 3,
         subTrackIndex: 1,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 138,
@@ -1847,7 +1847,7 @@ const initialServiceData = [
         scheduledDepartureTime: '13:02',
         trackId: 4,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 154,
@@ -1955,7 +1955,7 @@ const initialServiceData = [
         scheduledDepartureTime: '09:08',
         trackId: 5,
         subTrackIndex: 2,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 163,
@@ -1967,7 +1967,7 @@ const initialServiceData = [
         scheduledDepartureTime: '10:02',
         trackId: 5,
         subTrackIndex: 1,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 164,
@@ -2015,7 +2015,7 @@ const initialServiceData = [
         scheduledDepartureTime: '18:49',
         trackId: 5,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 168,
@@ -2027,7 +2027,7 @@ const initialServiceData = [
         scheduledDepartureTime: '20:22',
         trackId: 5,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 169,
@@ -2075,7 +2075,7 @@ const initialServiceData = [
         scheduledDepartureTime: '11:02',
         trackId: 6,
         subTrackIndex: 3,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 173,
@@ -2183,7 +2183,7 @@ const initialServiceData = [
         scheduledDepartureTime: '10:15',
         trackId: 7,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X403", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 182,
@@ -2207,7 +2207,7 @@ const initialServiceData = [
         scheduledDepartureTime: '12:04',
         trackId: 7,
         subTrackIndex: 3,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 184,
@@ -2363,7 +2363,7 @@ const initialServiceData = [
         scheduledDepartureTime: '22:40',
         trackId: 8,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 197,
@@ -2411,7 +2411,7 @@ const initialServiceData = [
         scheduledDepartureTime: '00:40',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "X40", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 201,
@@ -2423,7 +2423,7 @@ const initialServiceData = [
         scheduledDepartureTime: '01:22',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 202,
@@ -2435,7 +2435,7 @@ const initialServiceData = [
         scheduledDepartureTime: '02:20',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 203,
@@ -2447,7 +2447,7 @@ const initialServiceData = [
         scheduledDepartureTime: '05:20',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 204,
@@ -2459,7 +2459,7 @@ const initialServiceData = [
         scheduledDepartureTime: '06:49',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 205,
@@ -2471,7 +2471,7 @@ const initialServiceData = [
         scheduledDepartureTime: '07:50',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 206,
@@ -2483,7 +2483,7 @@ const initialServiceData = [
         scheduledDepartureTime: '08:50',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 207,
@@ -2495,7 +2495,7 @@ const initialServiceData = [
         scheduledDepartureTime: '09:49',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 208,
@@ -2507,7 +2507,7 @@ const initialServiceData = [
         scheduledDepartureTime: '10:50',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 209,
@@ -2519,7 +2519,7 @@ const initialServiceData = [
         scheduledDepartureTime: '11:49',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 210,
@@ -2531,7 +2531,7 @@ const initialServiceData = [
         scheduledDepartureTime: '12:50',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 211,
@@ -2543,7 +2543,7 @@ const initialServiceData = [
         scheduledDepartureTime: '13:50',
         trackId: 9,
         subTrackIndex: 1,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 212,
@@ -2555,7 +2555,7 @@ const initialServiceData = [
         scheduledDepartureTime: '14:49',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 213,
@@ -2567,7 +2567,7 @@ const initialServiceData = [
         scheduledDepartureTime: '15:49',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 214,
@@ -2579,7 +2579,7 @@ const initialServiceData = [
         scheduledDepartureTime: '17:50',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 215,
@@ -2591,7 +2591,7 @@ const initialServiceData = [
         scheduledDepartureTime: '19:50',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 216,
@@ -2615,7 +2615,7 @@ const initialServiceData = [
         scheduledDepartureTime: '21:50',
         trackId: 9,
         subTrackIndex: 0,
-        trainSet: { vehicleTypeID: "REGINA", count: 1 }
+        trainSet: { vehicleTypeID: "X2", count: 1 }
     },
     {
         id: 218,

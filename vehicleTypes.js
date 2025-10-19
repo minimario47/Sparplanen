@@ -17,6 +17,30 @@ const vehicleDefinitions = {
         defaultColor: "#27ae60",
         category: "regional"
     },
+    "X40": {
+        name: "X40",
+        baseLengthMeters: 50,
+        canBeMultiple: true,
+        description: "Regional train unit",
+        defaultColor: "#27ae60",
+        category: "regional"
+    },
+    "X403": {
+        name: "X403",
+        baseLengthMeters: 50,
+        canBeMultiple: true,
+        description: "Regional train unit",
+        defaultColor: "#27ae60",
+        category: "regional"
+    },
+    "REGINAX53": {
+        name: "Regina x53",
+        baseLengthMeters: 75,
+        canBeMultiple: true,
+        description: "Regional train unit",
+        defaultColor: "#27ae60",
+        category: "regional"
+    },
     "SJ3000": {
         name: "SJ 3000",
         baseLengthMeters: 107,
@@ -35,7 +59,15 @@ const vehicleDefinitions = {
     },
     "PENDELTAG": {
         name: "Pendeltåg",
-        baseLengthMeters: 68,
+        baseLengthMeters: 70,
+        canBeMultiple: true,
+        description: "Commuter train unit",
+        defaultColor: "#7f8c8d",
+        category: "commuter"
+    },
+    "KALMAR": {
+        name: "RC11",
+        baseLengthMeters: 160,
         canBeMultiple: true,
         description: "Commuter train unit",
         defaultColor: "#7f8c8d",

@@ -385,7 +385,6 @@ mcp_chrome-devtools_evaluate_script(...)
 
 ---
 
-**Referens:** [Chrome DevTools MCP Documentation](https://developer.chrome.com/blog/chrome-devtools-mcp)
 
 **⚠️ ABSOLUT KRITISKT:**
 - AI ska ALLTID använda MCP för verification

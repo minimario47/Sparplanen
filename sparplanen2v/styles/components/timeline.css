@@ -22,6 +22,10 @@
   background: linear-gradient(to bottom, var(--neutral-800), var(--neutral-850));
   border-color: var(--neutral-700);
 }
+[data-theme="high-contrast"] .timeline-hours {
+  background: var(--surface-primary);
+  border-bottom: 3px solid var(--border-primary);
+}
 
 .timeline-hour {
   position: absolute;
@@ -41,12 +45,17 @@
 [data-theme="dark"] .timeline-hour {
   border-color: var(--neutral-700);
 }
+[data-theme="high-contrast"] .timeline-hour {
+  color: var(--text-primary);
+  border-right: 2px solid var(--border-primary);
+}
 
 .timeline-hour-label {
   font-size: var(--text-base);
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
 }
+[data-theme="high-contrast"] .timeline-hour-label { color: var(--text-primary); }
 
 .timeline-hour-period {
   font-size: var(--text-2xs);
@@ -96,29 +105,29 @@
   left: 0; /* Position set by JavaScript */
   width: 4px;
   /* height set by JavaScript to span full canvas */
-  background: var(--error-500);
+  background: var(--current-time-color);
   opacity: 0.95;
   z-index: 200;
   pointer-events: none;
   box-shadow:
-    0 0 20px rgba(239, 68, 68, 1),
-    0 0 40px rgba(239, 68, 68, 0.8),
-    0 0 60px rgba(239, 68, 68, 0.5);
+    0 0 20px var(--current-time-glow-1),
+    0 0 40px var(--current-time-glow-2),
+    0 0 60px var(--current-time-glow-3);
   animation: pulse-strong 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse-strong {
   0%, 100% {
     box-shadow:
-      0 0 16px rgba(239, 68, 68, 0.9),
-      0 0 32px rgba(239, 68, 68, 0.6),
-      0 0 48px rgba(239, 68, 68, 0.3);
+      0 0 16px var(--current-time-glow-1),
+      0 0 32px var(--current-time-glow-2),
+      0 0 48px var(--current-time-glow-3);
   }
   50% {
     box-shadow:
-      0 0 24px rgba(239, 68, 68, 1),
-      0 0 48px rgba(239, 68, 68, 0.8),
-      0 0 72px rgba(239, 68, 68, 0.5);
+      0 0 24px var(--current-time-glow-1),
+      0 0 48px var(--current-time-glow-2),
+      0 0 72px var(--current-time-glow-3);
   }
 }
 
@@ -129,13 +138,13 @@
   left: -7px;
   width: 18px;
   height: 18px;
-  background: var(--error-500);
+  background: var(--current-time-color);
   border-radius: 50%;
   border: 4px solid var(--neutral-white);
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.4),
-    0 0 16px rgba(239, 68, 68, 0.8),
-    0 0 24px rgba(239, 68, 68, 0.6);
+    0 0 16px var(--current-time-glow-2),
+    0 0 24px var(--current-time-glow-3);
 }
 
 /* Red time label in timeline hours row - added via JavaScript */
@@ -169,6 +178,8 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  /* Add outer glass aura */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 0 0 10px rgba(255,255,255,0.08);
 }
 
 [data-theme="dark"] .current-time-label {
@@ -176,6 +187,14 @@
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     color: var(--text-primary);
+    box-shadow: 0 0 0 10px rgba(0,0,0,0.25); /* dark aura */
+}
+[data-theme="high-contrast"] .current-time-label {
+  background: var(--surface-primary);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 2px solid var(--border-primary);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .timeline-current-time::before {
