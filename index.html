@@ -3,254 +3,647 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spårplannen - Göteborg C</title>
-    <!-- CSS Variables and Foundation -->
+    <title>SpårplanV2</title>
+    
+    <!-- 1. Design System Foundation -->
+    <link rel="stylesheet" href="styles/design-system.css">
+    <link rel="stylesheet" href="styles/typography.css">
     <link rel="stylesheet" href="styles/variables.css">
+    
+    <!-- 2. Themes -->
     <link rel="stylesheet" href="styles/themes.css">
+    
+    <!-- 3. Base & Layout -->
     <link rel="stylesheet" href="styles/base.css">
     
-    <!-- Layout and Structure -->
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="styles/header.css">
+    <!-- 4. Components -->
+    <link rel="stylesheet" href="styles/components/buttons.css">
+    <link rel="stylesheet" href="styles/components/header-base.css">
+    <link rel="stylesheet" href="styles/components/header-time-controls.css">
+    <link rel="stylesheet" href="styles/components/header-status.css">
+    <link rel="stylesheet" href="styles/components/logo.css">
+    <link rel="stylesheet" href="styles/components/theme-switch.css">
+    <link rel="stylesheet" href="styles/components/notifications.css">
+    <link rel="stylesheet" href="styles/components/schedule.css">
+    <link rel="stylesheet" href="styles/components/settings-modal.css">
+    <link rel="stylesheet" href="styles/components/settings-controls.css">
+    <link rel="stylesheet" href="styles/components/search-highlights.css">
+    <link rel="stylesheet" href="styles/components/search-inline.css">
+    <link rel="stylesheet" href="styles/components/tracks.css">
+    <link rel="stylesheet" href="styles/components/timeline.css">
+    <link rel="stylesheet" href="styles/components/trains.css">
+    <link rel="stylesheet" href="styles/components/track-tooltip.css">
+    <link rel="stylesheet" href="styles/components/train-tooltip.css">
+    <link rel="stylesheet" href="styles/components/delay-visualization.css">
+    <link rel="stylesheet" href="styles/components/debug-logs.css">
     
-    <!-- Components -->
-    <link rel="stylesheet" href="styles/buttons.css">
-    <link rel="stylesheet" href="styles/timeline.css">
-    <link rel="stylesheet" href="styles/trains.css">
-    <link rel="stylesheet" href="styles/modals.css">
-    <link rel="stylesheet" href="styles/context-menu.css">
-    <link rel="stylesheet" href="styles/panels.css">
-    <link rel="stylesheet" href="styles/notifications.css">
-    <link rel="stylesheet" href="styles/menuSystem.css">
-    
-    <!-- Behavior and Responsive -->
-    <link rel="stylesheet" href="styles/animations.css">
-    <link rel="stylesheet" href="styles/responsive.css">
-</head>
-<body>
-
-    <div class="app-container" id="appContainer">
-        <header class="app-header">
-            <div class="app-brand">
-                <div class="brand-icon">🚄</div>
-                <div class="brand-text">
-                    <h1>Spårplannen</h1>
-                    <div class="brand-subtitle">TågX</div>
-                </div>
-                <!-- Delay Connection Status -->
-                <div id="delayConnectionStatus" class="delay-connection-status connecting" 
-                     title="Anslutningsstatus för förseningsdata">
-                    Ansluter...
-                </div>
-            </div>
-
-            <!-- Essential Controls Row -->
-            <div class="essential-controls">
-                <!-- Primary Action -->
-                <button class="button success large" id="addTrainButton" aria-label="Lägg till nytt tåg">
-                    <span>➕</span> Lägg till tåg
-                </button>
-
-                <!-- Menu System Container (populated by menuSystem.js) -->
-                <div class="main-controls">
-                    <!-- Menu items will be inserted here -->
-                </div>
-
-                <!-- Time Navigation -->
-                <div class="time-controls">
-                    <button class="button primary" id="prevTimeButton" aria-label="Föregående tidsperiod">
-                        <span>◀</span>
-                    </button>
-                    <span id="currentTimeRange" role="status" aria-live="polite">00:00 - 03:00</span>
-                    <button class="button primary" id="nextTimeButton" aria-label="Nästa tidsperiod">
-                        <span>▶</span>
-                    </button>
-                </div>
-
-                <!-- View Control -->
-                <div class="view-controls">
-                    <label for="viewHoursSelect">Visa:</label>
-                    <select id="viewHoursSelect" class="view-hours-select" aria-label="Välj antal timmar att visa">
-                        <option value="1">1h</option>
-                        <option value="2">2h</option>
-                        <option value="3" selected>3h</option>
-                        <option value="4">4h</option>
-                        <option value="6">6h</option>
-                        <option value="8">8h</option>
-                        <option value="12">12h</option>
-                        <option value="24">24h</option>
-                    </select>
-                </div>
-            </div>
-        </header>
-
-        <!-- Keep original buttons hidden for backwards compatibility -->
-        <div style="display: none;">
-            <button id="exportButton"></button>
-            <button id="saveButton"></button>
-            <button id="importButton"></button>
-            <button id="undoButton"></button>
-            <button id="redoButton"></button>
-            <button id="historyButton"></button>
-            <button id="helpButton"></button>
-        </div>
-
-        <div class="main-content">
-            <div class="track-labels" id="trackLabels"></div>
-            <div class="schedule-view" id="scheduleView">
-                <div class="timeline-header" id="timelineHeader"></div>
-                <div class="schedule-grid" id="scheduleGrid"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modals and Context Menus -->
-    <div id="trainModal" class="modal-overlay">
-        <div class="modal-content">
-            <h2 id="modalTitle">Lägg till nytt tåg</h2>
-            <form id="trainForm">
-                <input type="hidden" id="trainId">
-                <div class="form-group-row">
-                    <div class="form-group">
-                        <label for="arrivalTrainNumber">Ankomst tågnummer</label>
-                        <input type="text" id="arrivalTrainNumber" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="departureTrainNumber">Avgång tågnummer</label>
-                        <input type="text" id="departureTrainNumber" required>
-                    </div>
-                </div>
-
-                <div class="form-group-row">
-                    <div class="form-group">
-                        <label for="origin">Från</label>
-                        <input type="text" id="origin" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="destination">Till</label>
-                        <input type="text" id="destination" required>
-                    </div>
-                </div>
-
-                <div class="form-group-row">
-                    <div class="form-group">
-                        <label for="startTime">Ankomsttid (HH:MM)</label>
-                        <input type="time" id="startTime" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="endTime">Avgångstid (HH:MM)</label>
-                        <input type="time" id="endTime" required>
-                    </div>
-                </div>
-
-                <div class="form-group-row">
-                    <div class="form-group">
-                        <label for="vehicleTypeSelect">Fordonstyp</label>
-                        <select id="vehicleTypeSelect" required>
-                            <option value="">Välj fordonstyp</option>
-                        </select>
-                        <div id="vehicleTypeInfo" class="vehicle-type-info" style="display: none;"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="vehicleCount">Antal enheter</label>
-                        <input type="number" id="vehicleCount" min="1" max="3" value="1" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="trackSelect">Spår</label>
-                    <select id="trackSelect" required></select>
-                    <div id="trackCapacityInfo" class="track-capacity-info" style="display: none;"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="color">Färg (valfri överstyrning)</label>
-                    <input type="color" id="color" value="#3498db">
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="button" id="cancelButton" aria-label="Avbryt och stäng dialog">
-                        <span>✕</span> Avbryt
-                    </button>
-                    <button type="submit" class="button success" aria-label="Spara tågtjänst">
-                        <span>✓</span> Spara tjänst
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="contextMenu">
-        <ul>
-            <li data-action="edit">Redigera detaljer...</li>
-            <li data-action="swap">Byt plats med annat tåg</li>
-            <li data-action="split">Dela tåg</li>
-            <li data-action="find-alternative">Hitta alternativ plats</li>
-            <li class="separator"></li>
-            <li data-action="delete" class="danger">Ta bort tåg</li>
-        </ul>
-    </div>
-
-    <!-- History Panel -->
-    <div id="historyPanel" class="history-panel">
-        <div class="history-panel-header">
-            <span>Åtgärdshistorik</span>
-            <button id="closeHistoryPanelButton" style="background: none; border: none; cursor: pointer; font-size: 1.2em;">✕</button>
-        </div>
-        <div id="historyContent">
-            <!-- History items will be populated by JavaScript -->
-        </div>
-    </div>
-
-    <!-- Track Data Panel -->
-    <div id="trackDataPanel" class="history-panel">
-        <div class="history-panel-header">
-            <span id="trackDataTitle">Spårdata</span>
-            <button id="closeTrackDataPanelButton" style="background: none; border: none; cursor: pointer; font-size: 1.2em;">✕</button>
-        </div>
-        <div id="trackDataContent">
-            <!-- Track data will be populated by JavaScript -->
-        </div>
-    </div>
-
-    <!-- Train Data Panel -->
-    <div id="trainDataPanel" class="history-panel">
-        <div class="history-panel-header">
-            <span id="trainDataTitle">Tågdata</span>
-            <button id="closeTrainDataPanelButton" style="background: none; border: none; cursor: pointer; font-size: 1.2em;">✕</button>
-        </div>
-        <div id="trainDataContent">
-            <!-- Train data will be populated by JavaScript -->
-        </div>
-    </div>
-
-    <!-- Hidden file input for import -->
-    <input type="file" id="importFileInput" accept=".json" style="display: none;">
-
-    <!-- External Libraries and Data -->
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <!-- Data Files -->
     <script src="vehicleTypes.js"></script>
     <script src="tracks.js"></script>
     <script src="trains.js"></script>
-    <script src="persistenceEngine.js"></script>
-    <script src="historyEngine.js"></script>
-
-    <script src="utils.js"></script>
-    <script src="renderer.js"></script>
-    <script src="modalManager.js"></script>
-    <!-- Event Handler Modules -->
-    <script src="events/mouseEvents.js"></script>
-    <script src="events/contextMenu.js"></script>
-    <script src="events/timeNavigation.js"></script>
-    <script src="events/trainActions.js"></script>
-    <script src="events/fileOperations.js"></script>
-    <script src="events/historyOperations.js"></script>
-    <script src="events/keyboardShortcuts.js"></script>
-    <script src="events/trackData.js"></script>
-    <script src="events/eventSetup.js"></script>
-    <script src="menuSystem.js"></script>
-    <!-- Train Delay Integration -->
-    <script src="TrainData/train_delay_integration.js"></script>
-    <script src="app.js"></script>
     
+    <style>
+        /* Temporary demo styles to show off our design system */
+        .demo-container {
+            padding: var(--spacing-8);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .demo-section {
+            margin-bottom: var(--spacing-12);
+            padding: var(--spacing-6);
+            background: var(--surface-primary);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .demo-section h2 {
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-4);
+            border-bottom: 2px solid var(--border-primary);
+            padding-bottom: var(--spacing-2);
+        }
+        
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--spacing-4);
+            margin-top: var(--spacing-4);
+        }
+        
+        .color-swatch {
+            height: 80px;
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: flex-end;
+            padding: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            color: var(--text-inverse);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .button-demo {
+            display: flex;
+            gap: var(--spacing-4);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-4);
+        }
+        
+        
+        .typography-demo p {
+            margin: var(--spacing-2) 0;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: var(--spacing-4);
+            right: var(--spacing-4);
+            z-index: 1000;
+            padding: var(--spacing-3) var(--spacing-5);
+            background: var(--surface-elevated);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            gap: var(--spacing-3);
+        }
+        
+        .theme-btn {
+            padding: var(--spacing-2) var(--spacing-4);
+            border: 2px solid var(--border-primary);
+            background: var(--surface-secondary);
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            transition: all var(--transition-fast);
+        }
+        
+        .theme-btn:hover {
+            background: var(--interactive-primary);
+            color: var(--text-inverse);
+            border-color: var(--interactive-primary);
+        }
+        
+        .theme-btn.active {
+            background: var(--interactive-primary);
+            color: var(--text-inverse);
+            border-color: var(--interactive-primary);
+        }
+        
+        .spacing-demo {
+            display: flex;
+            gap: var(--spacing-2);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-4);
+        }
+        
+        .spacing-box {
+            background: var(--primary-200);
+            border: 2px solid var(--primary-600);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            color: var(--primary-800);
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-to-main">Hoppa till huvudinnehåll</a>
+    
+    <!-- Main Application Header -->
+    <header class="app-header" role="banner">
+        <!-- Left Section: Logo & Title -->
+        <div class="header-left">
+            <a href="/" class="header-logo">
+                <img src="assets/logo.png" alt="SpårplanV2 Logo" class="app-logo">
+                <div class="header-title-block">
+                    <h1 class="header-title">SpårplanV2</h1>
+                    <div class="network-status" id="api-status" title="Connection Status">
+                        <div class="network-nodes">
+                            <div class="node node-1"></div>
+                            <div class="node node-2"></div>
+                            <div class="connection-line"></div>
+                            <div class="node node-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Center Section: Time Controls -->
+        <nav class="header-center" aria-label="Tidskontroller">
+            <div class="time-controls">
+                <div class="time-nav btn-group">
+                    <button id="time-nav-prev" class="btn btn-secondary btn-icon" aria-label="Föregående tidsintervall" title="Föregående tidsintervall">
+                        <img src="assets/Icons/next.png" alt="Previous" class="icon-svg" style="transform: scaleX(-1);">
+                    </button>
+                    <button id="time-nav-next" class="btn btn-secondary btn-icon" aria-label="Nästa tidsintervall" title="Nästa tidsintervall">
+                        <img src="assets/Icons/next.png" alt="Next" class="icon-svg">
+                    </button>
+                </div>
+                
+                <div class="time-center btn-group">
+                    <button class="btn btn-primary btn-now" id="now-button">
+                        <span>Nu</span>
+                    </button>
+                    <div class="time-display group-segment">
+                        <div class="time-display-current" id="current-time-display">14:30</div>
+                        <div class="time-display-range" id="time-range-display">14:00 - 18:00</div>
+                    </div>
+                    <button class="btn btn-secondary time-range-button" id="time-range-btn" aria-label="Välj tidsintervall">
+                        <span>4h</span>
+                    </button>
+                </div>
+                
+                <div class="time-range-dropdown" id="time-range-dropdown">
+                    <div class="time-range-option" data-hours="1">1 timme</div>
+                    <div class="time-range-option" data-hours="3">3 timmar</div>
+                    <div class="time-range-option active" data-hours="4">4 timmar</div>
+                    <div class="time-range-option" data-hours="6">6 timmar</div>
+                    <div class="time-range-option" data-hours="8">8 timmar</div>
+                    <div class="time-range-option" data-hours="12">12 timmar</div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Right Section: Status & Settings -->
+        <div class="header-right">
+            <div class="btn-group header-actions">
+                <div class="search" id="search-form" role="search" aria-label="Sök tågnummer">
+                    <input type="text" id="search-input" placeholder=" " aria-label="Sök tågnummer" autocomplete="off" spellcheck="false" />
+                    <div>
+                        <svg>
+                            <use xlink:href="#search-path"></use>
+                        </svg>
+                    </div>
+                </div>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 28" id="search-path">
+                        <path d="M32.9418651,-20.6880772 C37.9418651,-20.6880772 40.9418651,-16.6880772 40.9418651,-12.6880772 C40.9418651,-8.68807717 37.9418651,-4.68807717 32.9418651,-4.68807717 C27.9418651,-4.68807717 24.9418651,-8.68807717 24.9418651,-12.6880772 C24.9418651,-16.6880772 27.9418651,-20.6880772 32.9418651,-20.6880772 L32.9418651,-29.870624 C32.9418651,-30.3676803 33.3448089,-30.770624 33.8418651,-30.770624 C34.08056,-30.770624 34.3094785,-30.6758029 34.4782612,-30.5070201 L141.371843,76.386562" transform="translate(83.156854, 22.171573) rotate(-225.000000) translate(-83.156854, -22.171573)"></path>
+                    </symbol>
+                </svg>
+                <button class="btn btn-secondary btn-icon theme-toggle" id="theme-toggle-btn" aria-label="Byt tema" title="Byt tema">
+                    <span style="font-size: 20px;">🌓</span>
+                </button>
+                <button class="btn btn-secondary btn-icon settings-button" aria-label="Inställningar" title="Inställningar">
+                    <img src="assets/Icons/settings.png" alt="Settings" class="icon-svg">
+                </button>
+            </div>
+        </div>
+    </header>
+
+      <!-- Main Content -->
+      <main id="main-content" style="margin-top: var(--header-height); padding: 0; overflow: hidden;">
+
+          <!-- Schedule View - Subfas 1.3 -->
+          <div class="schedule-wrapper">
+              <div class="schedule-container" id="schedule-container" role="region" aria-label="Tågschema">
+                  <!-- Corner cell -->
+                  <div class="schedule-corner">Spår</div>
+
+                  <!-- Timeline header -->
+                  <div class="schedule-timeline-header">
+                      <div class="timeline-hours" id="timeline-hours">
+                          <!-- Dynamically generated time markers -->
+                      </div>
+                  </div>
+
+                  <!-- Track labels -->
+                  <div class="schedule-track-labels" id="track-labels">
+                      <!-- Dynamically generated track rows -->
+                  </div>
+
+                  <!-- Timeline grid area -->
+                  <div class="schedule-grid-area" id="schedule-grid">
+                      <div class="timeline-canvas" id="timeline-canvas">
+                          <!-- Track rows and train bars are rendered here by JS -->
+                      </div>
+                  </div>
+  
+                  <div class="schedule-scroll-hint">← Scrolla horisontellt →</div>
+              </div>
+          </div>
+      </main>
+
+    <!-- Settings Modal -->
+    <div id="settings-backdrop" class="settings-backdrop hidden" role="dialog" aria-labelledby="settings-title" aria-modal="true">
+        <div id="settings-modal" class="settings-modal">
+            <!-- Header -->
+            <div class="settings-header">
+                <h2 id="settings-title" class="settings-title">Inställningar</h2>
+                <button id="settings-close-btn" class="settings-close-btn" aria-label="Stäng inställningar">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="settings-tabs" role="tablist">
+                <button class="settings-tab active" data-tab="time" role="tab" aria-selected="true" aria-controls="panel-time">
+                    Tidshantering
+                </button>
+                <button class="settings-tab" data-tab="display" role="tab" aria-selected="false" aria-controls="panel-display">
+                    Visning
+                </button>
+                <button class="settings-tab" data-tab="delays" role="tab" aria-selected="false" aria-controls="panel-delays">
+                    Förseningar
+                </button>
+                <button class="settings-tab" data-tab="data" role="tab" aria-selected="false" aria-controls="panel-data">
+                    Data
+                </button>
+                <button class="settings-tab" data-tab="about" role="tab" aria-selected="false" aria-controls="panel-about">
+                    Om
+                </button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="settings-content">
+                <!-- Time Management Tab -->
+                <div id="panel-time" class="settings-tab-panel active" data-tab-panel="time" role="tabpanel">
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Nu-knapp Inställningar</h3>
+                        <div class="settings-section-content">
+                            <!-- Offset Slider -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="offset-slider">Röd linje position</label>
+                                <div class="settings-slider-container">
+                                    <div class="settings-slider-wrapper">
+                                        <div id="offset-slider" class="settings-slider">
+                                            <div id="offset-slider-track" class="settings-slider-track"></div>
+                                            <div id="offset-slider-thumb" class="settings-slider-thumb"></div>
+                                        </div>
+                                        <span id="offset-value" class="settings-slider-value">20%</span>
+                                    </div>
+                                </div>
+                                <p class="setting-help">Position för röd linje från vänsterkanten (0-50%). Vid 20% är linjen nära vänster kant, vid 50% i mitten av skärmen.</p>
+                            </div>
+
+                            <!-- Follow Mode Toggle -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="follow-mode">Aktivera följ-läge</label>
+                                <div class="setting-control">
+                                    <div class="settings-toggle-wrapper">
+                                        <button id="follow-mode" class="settings-toggle" aria-label="Aktivera följ-läge">
+                                            <span class="settings-toggle-knob"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="setting-help">Aktiverar automatisk scrollning som följer tiden.</p>
+                            </div>
+
+                            <!-- Update Interval Select -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="update-interval">Uppdateringsintervall</label>
+                                <div class="settings-select-wrapper">
+                                    <select id="update-interval" class="settings-select" aria-label="Uppdateringsintervall">
+                                        <option value="30">30 sekunder</option>
+                                        <option value="60" selected>60 sekunder</option>
+                                        <option value="120">120 sekunder</option>
+                                        <option value="300">5 minuter</option>
+                                    </select>
+                                </div>
+                                <p class="setting-help">Hur ofta vyn ska uppdateras i följ-läge.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Display Tab -->
+                <div id="panel-display" class="settings-tab-panel" data-tab-panel="display" role="tabpanel" hidden>
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Tågfärger (enkelt)</h3>
+                        <div class="settings-section-content">
+                            <div class="setting-item">
+                                <label class="setting-label" for="train-color-mode">Färgläge</label>
+                                <div class="settings-select-wrapper">
+                                    <select id="train-color-mode" class="settings-select" aria-label="Färgläge">
+                                        <option value="length">Efter längd</option>
+                                        <option value="single">Enfärgad</option>
+                                    </select>
+                                </div>
+                                <p class="setting-help">Färgkoda efter tåglängd eller använd samma färg för alla.</p>
+                            </div>
+
+                            <div class="setting-item" id="length-theme-controls">
+                                <label class="setting-label" for="length-theme">Färgtema (efter längd)</label>
+                                <div class="settings-select-wrapper">
+                                    <select id="length-theme" class="settings-select" aria-label="Färgtema för längd">
+                                        <option value="standard">Standard (tema-anpassad)</option>
+                                        <option value="modern">Modern (ljust grå)</option>
+                                        <option value="highvis">Högsynlighet</option>
+                                        <option value="dark">Mörka färger</option>
+                                        <option value="simon">Simon färger 💀</option>
+                                    </select>
+                                </div>
+                                <p class="setting-help">Välj ett färdigt tema eller anpassa manuellt nedan.</p>
+                            </div>
+
+                            <div class="setting-item" id="single-color-controls" style="display:none;">
+                                <label class="setting-label" for="single-theme">Färgtema (enfärgat)</label>
+                                <div class="settings-select-wrapper">
+                                    <select id="single-theme" class="settings-select" aria-label="Färgtema enfärgat">
+                                        <option value="standard">Standard (tema-anpassad)</option>
+                                        <option value="neutral">Grå</option>
+                                        <option value="blue">Blå</option>
+                                        <option value="green">Grön</option>
+                                        <option value="amber">Ggul</option>
+                                        <option value="simon">Simon färger 💀</option>
+                                    </select>
+                                </div>
+                                <div class="settings-color-row-simple" style="margin-top: var(--space-3);">
+                                    <label class="color-simple-label">Bakgrund <input id="single-bg" type="color" class="settings-color-simple"></label>
+                                    <label class="color-simple-label">Kant <input id="single-border" type="color" class="settings-color-simple"></label>
+                                    <label class="color-simple-label">Text <input id="single-text" type="color" class="settings-color-simple"></label>
+                                </div>
+                                <p class="setting-help">Välj tema eller anpassa färger manuellt.</p>
+                            </div>
+
+                            <div class="setting-item">
+                                <label class="setting-label">Förhandsvisning</label>
+                                <div id="train-preview" class="train-preview">
+                                    <div class="preview-train" data-bucket="b1">b1</div>
+                                    <div class="preview-train" data-bucket="b2">b2</div>
+                                    <div class="preview-train" data-bucket="b3">b3</div>
+                                    <div class="preview-train" data-bucket="b4">b4</div>
+                                    <div class="preview-train" data-bucket="b5">b5</div>
+                                </div>
+                                <p class="setting-help">Så här ser dina färger ut.</p>
+                            </div>
+
+                            <div class="setting-item">
+                                <button id="show-advanced-btn" class="btn btn-secondary btn-sm">
+                                    Visa avancerat
+                                </button>
+                            </div>
+
+                            <div id="advanced-train-colors" class="advanced-section" style="display:none;">
+                                <div class="setting-item">
+                                    <label class="setting-label" for="train-color-dimension">Längdmått</label>
+                                    <div class="settings-select-wrapper">
+                                        <select id="train-color-dimension" class="settings-select" aria-label="Längdmått">
+                                            <option value="base">Fordonstyp</option>
+                                            <option value="total">Total tåglängd</option>
+                                        </select>
+                                    </div>
+                                    <p class="setting-help">Färgning baserad på fordonets längd eller hela sättets längd.</p>
+                                </div>
+
+                                <div class="setting-item">
+                                    <label class="setting-label">Kanoniska längder (m)</label>
+                                    <div class="settings-grid-5-compact">
+                                        <input id="len-canon-1" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="50">
+                                        <input id="len-canon-2" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="75">
+                                        <input id="len-canon-3" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="80">
+                                        <input id="len-canon-4" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="107">
+                                        <input id="len-canon-5" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="135">
+                                    </div>
+                                    <p class="setting-help">Längdintervall för b1–b5 (system väljer närmaste).</p>
+                                </div>
+
+                                <div class="setting-item">
+                                    <label class="setting-label">Anpassa färger per bucket</label>
+                                    <div class="settings-color-grid-compact">
+                                        <div class="color-row-compact">
+                                            <span class="color-label-compact">b1</span>
+                                            <input id="len-b1-bg" type="color" class="settings-color-compact">
+                                            <input id="len-b1-border" type="color" class="settings-color-compact">
+                                            <input id="len-b1-text" type="color" class="settings-color-compact">
+                                        </div>
+                                        <div class="color-row-compact">
+                                            <span class="color-label-compact">b2</span>
+                                            <input id="len-b2-bg" type="color" class="settings-color-compact">
+                                            <input id="len-b2-border" type="color" class="settings-color-compact">
+                                            <input id="len-b2-text" type="color" class="settings-color-compact">
+                                        </div>
+                                        <div class="color-row-compact">
+                                            <span class="color-label-compact">b3</span>
+                                            <input id="len-b3-bg" type="color" class="settings-color-compact">
+                                            <input id="len-b3-border" type="color" class="settings-color-compact">
+                                            <input id="len-b3-text" type="color" class="settings-color-compact">
+                                        </div>
+                                        <div class="color-row-compact">
+                                            <span class="color-label-compact">b4</span>
+                                            <input id="len-b4-bg" type="color" class="settings-color-compact">
+                                            <input id="len-b4-border" type="color" class="settings-color-compact">
+                                            <input id="len-b4-text" type="color" class="settings-color-compact">
+                                        </div>
+                                        <div class="color-row-compact">
+                                            <span class="color-label-compact">b5</span>
+                                            <input id="len-b5-bg" type="color" class="settings-color-compact">
+                                            <input id="len-b5-border" type="color" class="settings-color-compact">
+                                            <input id="len-b5-text" type="color" class="settings-color-compact">
+                                        </div>
+                                    </div>
+                                    <p class="setting-help">Lämna standard eller anpassa manuellt (bg/kant/text).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delays Tab -->
+                <div id="panel-delays" class="settings-tab-panel" data-tab-panel="delays" role="tabpanel" hidden>
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Försenkningsvisualisering</h3>
+                        <div class="settings-section-content">
+                            <!-- Visualization Mode -->
+                            <div class="setting-item">
+                                <label class="setting-label">Visualiseringsläge</label>
+                                <div class="setting-control">
+                                    <label class="settings-radio">
+                                        <input type="radio" name="delay-mode" value="offset" checked>
+                                        <span>Overlay (visar försening som färgad overlay)</span>
+                                    </label>
+                                    <label class="settings-radio">
+                                        <input type="radio" name="delay-mode" value="icon">
+                                        <span>Ikon (visar försening som badge)</span>
+                                    </label>
+                                    <label class="settings-radio">
+                                        <input type="radio" name="delay-mode" value="both">
+                                        <span>Båda (overlay + badge)</span>
+                                    </label>
+                                </div>
+                                <p class="setting-help">Välj hur förseningar ska visas på tågstaplar</p>
+                            </div>
+
+                            <!-- Turnaround Time -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="delay-turnaround-time">Vändtid</label>
+                                <div class="settings-slider-container">
+                                    <div class="settings-slider-wrapper">
+                                        <input id="delay-turnaround-time" type="range" min="5" max="30" value="10" class="settings-slider">
+                                        <span id="delay-turnaround-value" class="settings-slider-value">10 min</span>
+                                    </div>
+                                </div>
+                                <p class="setting-help">Buffert för tömning, personalbyte och påfyllning</p>
+                            </div>
+
+                            <!-- Conflict Tolerance -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="delay-conflict-tolerance">Konflikttolerans</label>
+                                <div class="settings-slider-container">
+                                    <div class="settings-slider-wrapper">
+                                        <input id="delay-conflict-tolerance" type="range" min="0" max="15" value="5" class="settings-slider">
+                                        <span id="delay-tolerance-value" class="settings-slider-value">5 min</span>
+                                    </div>
+                                </div>
+                                <p class="setting-help">Tidsfönster för varningsmeddelanden</p>
+                            </div>
+
+                            <!-- Show Warnings -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="delay-show-warnings">Visa konfliktvarningar</label>
+                                <div class="setting-control">
+                                    <div class="settings-toggle-wrapper">
+                                        <button id="delay-show-warnings" class="settings-toggle active" aria-label="Visa konfliktvarningar">
+                                            <span class="settings-toggle-knob"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="setting-help">Visa varning när försenade tåg påverkar andra tåg</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Tab -->
+                <div id="panel-data" class="settings-tab-panel" data-tab-panel="data" role="tabpanel" hidden>
+                    <div class="settings-empty">
+                        <p>Kommer snart</p>
+                    </div>
+                </div>
+
+                <!-- About Tab -->
+                <div id="panel-about" class="settings-tab-panel" data-tab-panel="about" role="tabpanel" hidden>
+                    <div class="settings-section">
+                        <div class="settings-section-content">
+                            <div class="setting-item">
+                                <h3 class="setting-label">SpårplanV2</h3>
+                                <p class="setting-help"></p>
+                            </div>
+                            <div class="setting-item">
+                                <p class="setting-help" style="font-size: var(--text-xs);">Version 2.0.0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="settings-footer">
+                <button id="settings-reset-btn" class="btn btn-secondary">
+                    Återställ standardvärden
+                </button>
+                <div class="settings-footer-actions">
+                    <button id="settings-cancel-btn" class="btn btn-secondary">
+                        Avbryt
+                    </button>
+                    <button id="settings-save-btn" class="btn btn-primary">
+                        Spara
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- JavaScript Files - Load in correct order -->
+    <!-- 1. Core utilities -->
+    <script src="js/utils/debug-logger.js"></script>
+    
+    <!-- 2. Theme system -->
+    <script src="js/theme.js"></script>
+    
+    <!-- 3. Time management -->
+    <script src="js/modules/time-manager.js"></script>
+    
+    <!-- 4. Settings -->
+    <script src="js/components/settings-controls.js"></script>
+    <script src="js/components/settings-modal.js"></script>
+    <script src="js/components/settings-delay.js"></script>
+    
+    <!-- 5. Delay API & Data -->
+    <script src="js/api/delay-api-client.js"></script>
+    <script src="js/api/delay-data-manager.js"></script>
+    
+    <!-- 6. Delay Logic -->
+    <script src="js/delay/conflict-detector.js"></script>
+    <script src="js/delay/visualizers/offset-visualizer.js"></script>
+    <script src="js/delay/visualizers/icon-visualizer.js"></script>
+    <script src="js/delay/visualizers/combined-visualizer.js"></script>
+    <script src="js/delay/delay-integration.js"></script>
+    
+    <!-- 7. Header & Schedule -->
+    <script src="js/modules/header-controls.js"></script>
+    <script src="js/modules/schedule-renderer.js"></script>
+    
+    <!-- 8. Main app -->
+    <script src="js/app.js"></script>
+    
+    <!-- 9. UI Components -->
+    <script src="js/components/theme-switch.js"></script>
+    <script src="js/components/search-inline.js"></script>
+    <script src="js/components/search-trains.js"></script>
+    <script src="js/components/track-tooltip.js"></script>
+    <script src="js/components/train-tooltip.js"></script>
+    <script src="js/components/debug-logs.js"></script>
+    
+    <script>
+        // Legacy theme switcher function for compatibility
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('sparplannen-theme', theme);
+            console.log(`✅ Theme switched to: ${theme}`);
+        }
+    </script>
 </body>
 </html>

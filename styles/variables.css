@@ -71,18 +71,69 @@ These variables map old names to new design system values.
     --train-border: var(--primary-600);
     --train-text: var(--text-inverse);
     
+    /* NEW: Train Type Colors (Complete theme support from React design) */
+    /* Based on railway signaling colors with professional saturation levels */
+
+    /* Regional Trains - Calming, professional blue */
+    --train-regional: #16a34a;
+    --train-regional-bg: #dcfce7;
+    --train-regional-border: #86efac;
+
+    /* Long-Distance Trains - Priority, stable green */
+    --train-long-distance: #2563eb;
+    --train-long-distance-bg: #dbeafe;
+    --train-long-distance-border: #93c5fd;
+
+    /* Freight Trains - Heavy, industrial amber */
+    --train-freight: #ea580c;
+    --train-freight-bg: #ffedd5;
+    --train-freight-border: #fdba74;
+
     /* State colors */
     --conflict-bg: var(--danger-500);
     --conflict-border: var(--danger-600);
     --swapping-bg: var(--warning-500);
     --swapping-border: var(--warning-600);
     --selected-glow: var(--shadow-glow);
+
+    /* Dark Mode Train Colors */
+    --train-regional-dark: #4ade80;
+    --train-regional-bg-dark: #14532d;
+    --train-regional-border-dark: #166534;
+    --train-long-distance-dark: #60a5fa;
+    --train-long-distance-bg-dark: #1e3a8a;
+    --train-long-distance-border-dark: #1e40af;
+    --train-freight-dark: #fb923c;
+    --train-freight-bg-dark: #7c2d12;
+    --train-freight-border-dark: #9a3412;
+
+    /* High Contrast Train Colors */
+    --train-regional-hc: #008000;
+    --train-regional-bg-hc: #ffffff;
+    --train-regional-border-hc: #000000;
+    --train-long-distance-hc: #0000ff;
+    --train-long-distance-bg-hc: #ffffff;
+    --train-long-distance-border-hc: #000000;
+    --train-freight-hc: #ff6600;
+    --train-freight-bg-hc: #ffffff;
+    --train-freight-border-hc: #000000;
     
     /* ═══════════════════════════════════════════════════════════════════════
        LEGACY SPACING - Map to new 8px grid system
     ═══════════════════════════════════════════════════════════════════════ */
-    
+
     --border-radius: var(--radius-DEFAULT);
+
+    /* Spacing scale - maps to design system space-* variables */
+    --spacing-1: var(--space-1);     /* 4px */
+    --spacing-2: var(--space-2);     /* 8px */
+    --spacing-3: var(--space-3);     /* 12px */
+    --spacing-4: var(--space-4);     /* 16px */
+    --spacing-5: var(--space-5);     /* 20px */
+    --spacing-6: var(--space-6);     /* 24px */
+    --spacing-8: var(--space-8);     /* 32px */
+    --spacing-10: var(--space-10);   /* 40px */
+    --spacing-12: var(--space-12);   /* 48px */
     
     /* ═══════════════════════════════════════════════════════════════════════
        LEGACY TRANSITIONS - Map to new timing system

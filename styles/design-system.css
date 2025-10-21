@@ -1,3 +1,9 @@
+/* 🚫 MAX LIMIT EXCEEDED: This file has 590 lines (limit: 400)
+ * DO NOT ADD ANY MORE CODE TO THIS FILE!
+ * This file MUST be split before adding new functionality.
+ * See Professional-redesign-plan.md section "REGEL: Max Filstorlek" for splitting guidance.
+ */
+
 /*
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                      SPÅRPLANNEN DESIGN SYSTEM                               ║
@@ -79,6 +85,7 @@ LAST UPDATED: 2025-01-09
   --neutral-600: #4b5563;   /* Medium dark - body text */
   --neutral-700: #374151;   /* Dark - headings */
   --neutral-800: #252a31;   /* Very dark - strong text */
+  --neutral-850: #1f2329;   /* Darker than 800, lighter than 900 - dark mode gradients */
   --neutral-900: #1a1a1a;   /* Near-black - NOT pure black (#000000) */
 
   /* ═══════════════════════════════════════════════════════════════════════════
