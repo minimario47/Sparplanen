@@ -176,7 +176,7 @@
     background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
     z-index: 999;
     pointer-events: none;
-    opacity: 0.9;
+    opacity: 0.99;
     box-shadow: 
         0 0 8px rgba(231, 76, 60, 0.6),
         0 0 3px rgba(231, 76, 60, 0.8);

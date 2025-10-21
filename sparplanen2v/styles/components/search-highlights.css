@@ -1,0 +1,17 @@
+/* Train Search Highlights */
+
+.train-bar.is-highlighted {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.train-bar.is-dimmed {
+  opacity: 0.25;
+}
+
+/* High contrast */
+[data-theme="high-contrast"] .train-bar.is-highlighted {
+  outline: 3px solid var(--border-primary);
+  box-shadow: none;
+}

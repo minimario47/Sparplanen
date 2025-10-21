@@ -8,7 +8,8 @@
   position: absolute;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  contain: content; /* Performance optimization */
+  contain: layout style; /* Performance optimization - NOT 'content' to allow delay overlays to extend */
+  overflow: visible; /* CRITICAL: Allow delay overlays to extend beyond train bar boundaries */
 }
 
 /* Length bucket variables are defined per-theme in themes.css */

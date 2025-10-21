@@ -1,0 +1,256 @@
+/* track-tooltip.css - Beautiful tooltip styling for track information */
+
+.track-tooltip {
+    position: fixed;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+
+    padding: var(--space-6);
+    min-width: 320px;
+    max-width: 400px;
+
+    /* Glass morphism shadow */
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        0 0 0 20px rgba(255, 255, 255, 0.1);
+
+    /* Smooth entrance animation */
+    transform: scale(0.9) translateY(10px);
+    opacity: 0;
+    transition: all var(--transition-base) var(--ease-out);
+
+    pointer-events: none;
+    font-family: var(--font-family-primary);
+}
+
+.track-tooltip.visible {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Header styling */
+.track-tooltip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.track-tooltip-title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.track-number {
+    color: var(--primary-600);
+    font-weight: var(--font-weight-bold);
+}
+
+.track-tooltip-close {
+    background: none;
+    border: none;
+    font-size: var(--font-size-xl);
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: var(--space-1);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast) var(--ease-in-out);
+    line-height: 1;
+}
+
+.track-tooltip-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+}
+
+/* Content sections */
+.track-tooltip-section {
+    margin-bottom: var(--space-4);
+}
+
+.track-tooltip-section:last-child {
+    margin-bottom: 0;
+}
+
+.track-tooltip-section h4 {
+    margin: 0 0 var(--space-3) 0;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Info grid */
+.track-info-grid {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.track-info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2);
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: var(--radius-md);
+}
+
+.track-info-label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+}
+
+.track-info-value {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+/* Properties */
+.track-properties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+.track-property {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    background: var(--primary-50);
+    color: var(--primary-700);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Description */
+.track-description {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .track-tooltip {
+    background: rgba(26, 26, 26, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .track-tooltip-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .track-info-item {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .track-property {
+    background: var(--primary-900);
+    color: var(--primary-300);
+}
+
+[data-theme="dark"] .track-tooltip-close:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* High contrast theme support */
+[data-theme="high-contrast"] .track-tooltip {
+    background: var(--surface-primary);
+    border: 2px solid var(--border-primary);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="high-contrast"] .track-tooltip-header {
+    border-bottom: 2px solid var(--border-primary);
+}
+
+[data-theme="high-contrast"] .track-tooltip-close {
+    color: var(--text-primary-high-contrast);
+}
+
+[data-theme="high-contrast"] .track-tooltip-close:hover {
+    background: var(--surface-secondary);
+}
+
+[data-theme="high-contrast"] .track-info-item {
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+}
+
+[data-theme="high-contrast"] .track-property {
+    background: var(--surface-secondary);
+    color: var(--text-primary-high-contrast);
+    border: 1px solid var(--border-primary);
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .track-tooltip {
+        min-width: 280px;
+        max-width: calc(100vw - 20px);
+        left: 10px !important;
+        right: 10px !important;
+        transform: translateX(0) translateY(10px);
+    }
+
+    .track-tooltip.visible {
+        transform: translateX(0) translateY(0);
+    }
+
+    .track-info-grid {
+        gap: var(--space-2);
+    }
+
+    .track-info-item {
+        padding: var(--space-2);
+    }
+
+    .track-properties {
+        gap: var(--space-1);
+    }
+
+    .track-property {
+        padding: var(--space-1) var(--space-2);
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* Animation for smooth appearance */
+@keyframes tooltipFadeIn {
+    0% {
+        transform: scale(0.9) translateY(10px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.track-tooltip.visible {
+    animation: tooltipFadeIn var(--transition-base) var(--ease-out);
+}

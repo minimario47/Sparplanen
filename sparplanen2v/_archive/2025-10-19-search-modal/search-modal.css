@@ -1,0 +1,407 @@
+/* Search Modal - Train Number Search Interface */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODAL BACKDROP & CONTAINER
+═══════════════════════════════════════════════════════════════════════════ */
+
+.search-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: var(--glass-blur-medium);
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: calc(var(--header-height) + var(--space-8));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal) var(--ease-in-out);
+}
+
+.search-modal-backdrop.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODAL CONTENT - Inspired by search-form-fun expansion
+═══════════════════════════════════════════════════════════════════════════ */
+
+.search-modal {
+    background: var(--surface-elevated);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-2xl-active);
+    border: 1px solid var(--border-primary);
+    width: 90%;
+    max-width: 600px;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-20px) scale(0.95);
+    opacity: 0;
+    transition: transform var(--transition-normal) var(--ease-bounce),
+                opacity var(--transition-normal) var(--ease-in-out);
+}
+
+.search-modal-backdrop.open .search-modal {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SEARCH INPUT AREA
+═══════════════════════════════════════════════════════════════════════════ */
+
+.search-modal-header {
+    padding: var(--space-6);
+    border-bottom: 1px solid var(--border-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    background: var(--surface-primary);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.search-input-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input-icon {
+    position: absolute;
+    left: var(--space-3);
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-tertiary);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    pointer-events: none;
+    transition: stroke var(--transition-fast);
+}
+
+.search-modal-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-10);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.search-modal-input:focus {
+    border-color: var(--interactive-primary);
+    box-shadow: var(--shadow-glow-active);
+}
+
+.search-modal-input:focus + .search-input-icon {
+    stroke: var(--interactive-primary);
+}
+
+.search-modal-input::placeholder {
+    color: var(--text-disabled);
+}
+
+/* Clear button */
+.search-clear-btn {
+    position: absolute;
+    right: var(--space-2);
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: var(--interactive-secondary);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0);
+    transition: all var(--transition-fast);
+}
+
+.search-clear-btn.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.search-clear-btn:hover {
+    background: var(--interactive-danger);
+    color: var(--text-inverse);
+    transform: scale(1.1);
+}
+
+/* Close modal button */
+.search-close-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: var(--radius-DEFAULT);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.search-close-btn:hover {
+    background: var(--interactive-secondary);
+    color: var(--text-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SEARCH RESULTS AREA
+═══════════════════════════════════════════════════════════════════════════ */
+
+.search-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-4);
+}
+
+.search-results-info {
+    padding: var(--space-4);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.search-results-count {
+    color: var(--text-tertiary);
+    font-size: var(--font-size-xs);
+    padding: 0 var(--space-4) var(--space-2);
+}
+
+.search-results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-result-item {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-2);
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: search-result-fade-in 0.3s ease-out backwards;
+}
+
+@keyframes search-result-fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.search-result-item:nth-child(1) { animation-delay: 0.05s; }
+.search-result-item:nth-child(2) { animation-delay: 0.1s; }
+.search-result-item:nth-child(3) { animation-delay: 0.15s; }
+.search-result-item:nth-child(4) { animation-delay: 0.2s; }
+.search-result-item:nth-child(5) { animation-delay: 0.25s; }
+
+.search-result-item:hover {
+    background: var(--interactive-secondary);
+    border-color: var(--interactive-primary);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md-active);
+}
+
+.search-result-item:active {
+    transform: translateX(2px);
+}
+
+.search-result-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.search-result-number {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+.search-result-details {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.search-result-track {
+    color: var(--interactive-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+.search-result-time {
+    color: var(--text-tertiary);
+}
+
+.search-result-arrow {
+    color: var(--text-tertiary);
+    font-size: var(--font-size-xl);
+    transition: transform var(--transition-fast);
+}
+
+.search-result-item:hover .search-result-arrow {
+    transform: translateX(4px);
+    color: var(--interactive-primary);
+}
+
+/* Empty state */
+.search-empty-state {
+    text-align: center;
+    padding: var(--space-12);
+    color: var(--text-tertiary);
+}
+
+.search-empty-icon {
+    font-size: 48px;
+    margin-bottom: var(--space-4);
+    opacity: 0.5;
+}
+
+.search-empty-text {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-2);
+}
+
+.search-empty-hint {
+    font-size: var(--font-size-sm);
+    color: var(--text-disabled);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOOTER WITH KEYBOARD HINTS
+═══════════════════════════════════════════════════════════════════════════ */
+
+.search-modal-footer {
+    padding: var(--space-3) var(--space-6);
+    border-top: 1px solid var(--border-primary);
+    background: var(--surface-primary);
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.search-hint {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.search-hint-key {
+    padding: 2px var(--space-2);
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-sm);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THEME ADJUSTMENTS
+═══════════════════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .search-modal-backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .search-modal {
+    box-shadow: none;
+    border-color: var(--border-primary);
+}
+
+[data-theme="high-contrast"] .search-modal {
+    border: 3px solid var(--border-primary);
+}
+
+[data-theme="high-contrast"] .search-modal-input {
+    border-width: 3px;
+}
+
+[data-theme="high-contrast"] .search-result-item {
+    border-width: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    .search-modal {
+        width: 95%;
+        max-height: 80vh;
+    }
+    
+    .search-modal-header {
+        padding: var(--space-4);
+    }
+    
+    .search-modal-input {
+        font-size: var(--font-size-base);
+    }
+    
+    .search-modal-footer {
+        padding: var(--space-2) var(--space-4);
+    }
+    
+    .search-hint {
+        font-size: 10px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+    .search-modal-backdrop,
+    .search-modal,
+    .search-result-item,
+    .search-clear-btn {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .search-modal-backdrop.open .search-modal {
+        transform: none;
+    }
+    
+    .search-result-item:hover {
+        transform: none;
+    }
+}
+

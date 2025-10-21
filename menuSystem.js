@@ -466,7 +466,7 @@ Teknisk information:
         const themeNames = {
             'light': 'Ljust tema',
             'dark': 'Mörkt tema',
-            'high-contrast': 'Högkontrast tema'
+            'high-contrast': 'Simon läge'
         };
         
         if (typeof showNotification === 'function') {

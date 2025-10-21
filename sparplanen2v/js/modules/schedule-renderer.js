@@ -3,9 +3,9 @@
  * Integrated with TimeManager for dynamic time navigation
  */
 
-let currentPixelsPerHour = 200;
+window.currentPixelsPerHour = 200; // Make globally accessible for delay visualization
 let cachedTracks = [];
-let cachedTrains = [];
+window.cachedTrains = []; // Make globally accessible for delay integration
 let timelineStart = null; // Global timeline start (midnight)
 let userSettings = null; // Settings impacting rendering (colors, buckets)
 
@@ -29,7 +29,7 @@ function initializeSchedule() {
         // Rebuild train data to recalculate buckets if needed
         prepareTrainData();
         // Force full re-render
-        cachedTrains = [];
+        window.cachedTrains = [];
         cachedTracks = [];
         prepareTrackData();
         prepareTrainData();
@@ -194,7 +194,7 @@ function prepareTrainData() {
         }
     });
     
-    cachedTrains = trainData;
+    window.cachedTrains = trainData;
 }
 
 /**
@@ -405,9 +405,44 @@ function handleTimeManagerChange(event) {
             break;
             
         case 'following_update':
-            // In following mode, the viewTime has changed, so a full re-render is needed
-            // to show the new time window correctly.
+            // In following mode, only scroll the view - DON'T re-render everything
+            // This preserves user state (selected trains, tooltips, open modals, etc.)
+            console.log('🔄 [Following Mode Update] Triggered at', new Date().toLocaleTimeString());
+            console.log('   - timelineStart:', timelineStart ? 'defined' : 'UNDEFINED');
+            console.log('   - currentPixelsPerHour:', window.currentPixelsPerHour || 'UNDEFINED');
+            console.log('   - state.viewTime:', state?.viewTime);
+            
+            // Check if schedule has been rendered (timelineStart exists)
+            if (!timelineStart || !window.currentPixelsPerHour) {
+                console.warn('⚠️ Following mode update but schedule not yet rendered - doing full render');
                 renderFullSchedule();
+                break;
+            }
+            
+            const strategy = data?.strategy || 'smooth';
+            console.log('🔄 Following mode update - scrolling view WITHOUT re-render (strategy:', strategy + ')');
+            
+            try {
+                scrollToViewTime(
+                    state.viewTime, 
+                    timelineStart, 
+                    window.currentPixelsPerHour, 
+                    true, // isFollowingMode
+                    state.offsetPercentage
+                );
+                console.log('   ✅ Scroll completed successfully');
+                
+                // Update the current time line position
+                updateCurrentTimeLine();
+                console.log('   ✅ Time line updated successfully');
+                console.log('   ✅ Following mode update complete - NO PAGE RELOAD');
+            } catch (error) {
+                console.error('❌ Error during following mode update:', error);
+                console.error('   Error stack:', error.stack);
+                // Fall back to full render if something goes wrong
+                console.warn('⚠️ Falling back to full render due to error');
+                renderFullSchedule();
+            }
             break;
     }
 }
@@ -434,15 +469,15 @@ function renderFullSchedule() {
     timelineEnd.setHours(timelineEnd.getHours() + timelineStartHours);
     
     const targetViewportWidth = 1400; 
-    currentPixelsPerHour = targetViewportWidth / timeRange;
+    window.currentPixelsPerHour = targetViewportWidth / timeRange;
     
-    const totalCanvasWidth = timelineStartHours * currentPixelsPerHour;
+    const totalCanvasWidth = timelineStartHours * window.currentPixelsPerHour;
     
     // --- NEW: Pre-calculate track layouts and heights ---
-    const trackLayouts = calculateTrackLayouts(cachedTracks, cachedTrains);
+    const trackLayouts = calculateTrackLayouts(cachedTracks, window.cachedTrains);
     
     // Filter trains to show all trains that overlap with the extended timeline
-    const allTrains = cachedTrains.filter(train => {
+    const allTrains = window.cachedTrains.filter(train => {
         if (!train.arrTime && !train.depTime) return false;
         const trainStart = train.arrTime || train.depTime;
         const trainEnd = train.depTime || train.arrTime;
@@ -451,13 +486,19 @@ function renderFullSchedule() {
     });
     
     // Render components with FULL timeline and dynamic layouts
-    renderTimelineHours(timelineStart, timelineStartHours, currentPixelsPerHour);
+    renderTimelineHours(timelineStart, timelineStartHours, window.currentPixelsPerHour);
     renderTrackLabels(trackLayouts);
+
+    // Re-attach track tooltip listeners after rendering
+    if (typeof window.reattachTrackTooltipListeners === 'function') {
+        window.reattachTrackTooltipListeners();
+    }
+
     renderTimelineGrid(trackLayouts, totalCanvasWidth);
-    renderTrains(allTrains, trackLayouts, timelineStart, currentPixelsPerHour);
+    renderTrains(allTrains, trackLayouts, timelineStart, window.currentPixelsPerHour);
     updateCurrentTimeLine();
     
-    scrollToViewTime(viewTime, timelineStart, currentPixelsPerHour, state.isFollowingMode, state.offsetPercentage);
+    scrollToViewTime(viewTime, timelineStart, window.currentPixelsPerHour, state.isFollowingMode, state.offsetPercentage);
     
     // Log rendering statistics with case information
     const caseStats = analyzeCases(allTrains);
@@ -465,7 +506,14 @@ function renderFullSchedule() {
     console.log(`📊 Tåg statistik:`, caseStats);
     console.log(`🎯 Max samtidiga tåg per spår:`, caseStats.maxTrainsOnTrack);
     console.log(`✅ Dynamisk höjd: Varje tåg får korrekt höjd baserat på sina verkliga överlapp i tid`);
-    console.log(`🌙 Tåg som visas: ${allTrains.length} av ${cachedTrains.length} (inkl. tåg över midnatt)`);
+    console.log(`🌙 Tåg som visas: ${allTrains.length} av ${window.cachedTrains.length} (inkl. tåg över midnatt)`);
+    
+    // Apply delay visualizations after trains are rendered
+    if (window.delayIntegration && window.delayIntegration.isInitialized) {
+        setTimeout(() => {
+            window.delayIntegration.updateAllVisualizations();
+        }, 100); // Small delay to ensure DOM is fully updated
+    }
 }
 
 /**
@@ -728,7 +776,7 @@ function renderTimelineGrid(trackLayouts, totalWidth) {
     timelineCanvas.style.height = totalHeight + 'px';
     
     // Total hours is inferred from totalWidth and pixelsPerHour
-    const totalHours = totalWidth / currentPixelsPerHour;
+    const totalHours = totalWidth / window.currentPixelsPerHour;
 
     // Add track row backgrounds and their internal grid lines
     trackLayouts.forEach(layout => {
@@ -1271,7 +1319,7 @@ function updateCurrentTimeLine() {
 
     // --- Calculate the line's position from midnight ---
     const nowMinutes = (now.getTime() - timelineStart.getTime()) / 60000;
-    const linePositionOnCanvas = (nowMinutes / 60) * currentPixelsPerHour;
+    const linePositionOnCanvas = (nowMinutes / 60) * window.currentPixelsPerHour;
 
     // Position the line to span the full canvas height
     const canvasHeight = timelineCanvas.offsetHeight;

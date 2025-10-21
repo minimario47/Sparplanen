@@ -1,0 +1,308 @@
+/**
+ * Debug Logs Modal Styles
+ * Real-time log viewer with filtering and export
+ */
+
+.debug-logs-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.2s var(--ease-in-out);
+}
+
+.debug-logs-modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.debug-logs-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.debug-logs-container {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    height: 80vh;
+    background-color: var(--surface-elevated);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.debug-logs-header {
+    padding: var(--spacing-4);
+    border-bottom: 2px solid var(--border-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--surface-secondary);
+}
+
+.debug-logs-header h2 {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    color: var(--text-primary);
+}
+
+.debug-logs-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--spacing-2);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    transition: all 0.2s var(--ease-in-out);
+}
+
+.debug-logs-close:hover {
+    background-color: var(--surface-hover);
+    color: var(--text-primary);
+}
+
+/* Controls */
+.debug-logs-controls {
+    padding: var(--spacing-4);
+    border-bottom: 1px solid var(--border-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+    background-color: var(--surface-primary);
+}
+
+.debug-logs-filters {
+    display: flex;
+    gap: var(--spacing-4);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.debug-logs-filters label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.debug-logs-filters select {
+    padding: var(--spacing-1) var(--spacing-2);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-sm);
+    background-color: var(--surface-secondary);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+}
+
+.debug-logs-checkbox {
+    cursor: pointer;
+}
+
+.debug-logs-actions {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+/* Stats */
+.debug-logs-stats {
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: var(--surface-secondary);
+    border-bottom: 1px solid var(--border-primary);
+    display: flex;
+    gap: var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Content area */
+.debug-logs-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-2);
+    background-color: var(--surface-primary);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+}
+
+/* Log entries */
+.log-entry {
+    padding: var(--spacing-2);
+    border-bottom: 1px solid var(--border-secondary);
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: flex-start;
+    transition: background-color 0.1s ease;
+}
+
+.log-entry:hover {
+    background-color: var(--surface-hover);
+}
+
+.log-time {
+    color: var(--text-tertiary);
+    font-size: var(--font-size-xs);
+    min-width: 70px;
+}
+
+.log-category {
+    color: var(--primary-500);
+    font-weight: 600;
+    min-width: 120px;
+}
+
+.log-level {
+    font-weight: 700;
+    min-width: 60px;
+}
+
+.log-message {
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.log-data {
+    margin-top: var(--spacing-2);
+    padding: var(--spacing-2);
+    background-color: var(--surface-secondary);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    overflow-x: auto;
+    width: 100%;
+    color: var(--text-secondary);
+}
+
+/* Level colors */
+.log-level-info .log-level {
+    color: var(--info-500);
+}
+
+.log-level-warn .log-level {
+    color: var(--warning-500);
+}
+
+.log-level-error .log-level {
+    color: var(--danger-500);
+}
+
+.log-level-error {
+    background-color: rgba(220, 38, 38, 0.05);
+}
+
+.log-level-warn {
+    background-color: rgba(245, 158, 11, 0.05);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .debug-logs-container {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .log-level-error {
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+[data-theme="dark"] .log-level-warn {
+    background-color: rgba(245, 158, 11, 0.1);
+}
+
+/* High-contrast theme */
+[data-theme="high-contrast"] .debug-logs-container {
+    border: 3px solid var(--border-primary);
+}
+
+[data-theme="high-contrast"] .log-entry {
+    border-bottom: 2px solid var(--border-primary);
+}
+
+[data-theme="high-contrast"] .log-level {
+    font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .debug-logs-container {
+        width: 95%;
+        height: 90vh;
+    }
+    
+    .debug-logs-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .debug-logs-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .log-entry {
+        flex-direction: column;
+        gap: var(--spacing-1);
+    }
+    
+    .log-time,
+    .log-category,
+    .log-level {
+        min-width: auto;
+    }
+}
+
+/* Scrollbar styling */
+.debug-logs-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.debug-logs-content::-webkit-scrollbar-track {
+    background: var(--surface-secondary);
+}
+
+.debug-logs-content::-webkit-scrollbar-thumb {
+    background: var(--neutral-400);
+    border-radius: 4px;
+}
+
+.debug-logs-content::-webkit-scrollbar-thumb:hover {
+    background: var(--neutral-500);
+}
+
+/* Animation */
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.debug-logs-modal:not(.hidden) .debug-logs-container {
+    animation: slideIn 0.3s ease-out;
+}
+

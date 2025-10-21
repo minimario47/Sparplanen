@@ -178,6 +178,42 @@
     background: var(--neutral-200);
 }
 
+/* Dynamic icon color filtering for PNG icons */
+.btn-icon .icon-svg {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    transition: filter var(--transition-normal);
+}
+
+/* Light theme - default colors */
+[data-theme="light"] .btn-icon .icon-svg {
+    filter: brightness(0.6);
+}
+
+/* Dark theme - white icons */
+[data-theme="dark"] .btn-icon .icon-svg {
+    filter: brightness(0) invert(1);
+}
+
+/* High contrast theme - white icons */
+[data-theme="high-contrast"] .btn-icon .icon-svg {
+    filter: brightness(0) invert(1);
+}
+
+/* Hover states with enhanced contrast */
+.btn-icon:hover .icon-svg {
+    filter: brightness(0.8);
+}
+
+[data-theme="dark"] .btn-icon:hover .icon-svg {
+    filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+[data-theme="high-contrast"] .btn-icon:hover .icon-svg {
+    filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+}
+
 /* Icon button primary variant */
 .btn-icon.btn-primary {
     background: var(--interactive-primary);

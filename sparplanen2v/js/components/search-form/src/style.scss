@@ -1,0 +1,150 @@
+// adjust these variables and watch the icon restyle itself! Even the animation time is calculated.
+
+$initial-size:80px;
+$focus-scale:5;
+$icon-stroke:10;
+$transition-speed:1s;
+$icon-color:#494949;
+
+*,*:before,*:after {
+  transition:($transition-speed/2) ease-in-out;
+  outline:none;
+}
+
+body, html {
+  height:100%;
+}
+
+.search {
+  height:100%;
+  width:100%;
+  position:relative;
+  overflow:hidden;
+  * {
+    position:absolute;
+    display:block;
+    padding:0;
+    &.search-label {
+      border-radius:$initial-size/2;
+      height:$initial-size;
+      width:$initial-size;
+      top:50%;
+      left:50%;
+      margin-top:-$initial-size/2;
+      margin-left:-$initial-size/2;
+      transform:rotate(-25deg);
+      &:before {
+        content:'';
+        display:block;
+        position:absolute;
+        width:$icon-stroke+px;
+        height:($initial-size/2)+$icon-stroke;
+        background:$icon-color;
+        bottom:-(($initial-size/2)+($icon-stroke));
+        left:($initial-size/2)-($icon-stroke/2);
+        transition-delay:$transition-speed/2;
+        border-bottom-left-radius:$icon-stroke/2+px;
+        border-bottom-right-radius:$icon-stroke/2+px;
+      }
+      &:after {
+        content:'';
+        display:block;
+        position:absolute;
+        width:$initial-size;
+        height:$initial-size;
+        top:-$icon-stroke+px;
+        left:-$icon-stroke+px;
+        border-radius:($initial-size/2)+$icon-stroke;
+        border:$icon-stroke+px solid $icon-color;
+        transform:rotate(25deg);
+      }
+    }
+    &#search-input {
+      top:50%;
+      left:50%;
+      border-radius:$initial-size/2;
+      height:$initial-size;
+      width:$initial-size;
+      margin-top:-($initial-size/2);
+      margin-left:-($initial-size/2);
+      border:none;
+      box-sizing:border-box;
+      padding:$initial-size/4;
+      font-size:$initial-size/3;
+      color:transparent;
+      z-index:1;
+    }
+    &#reset-form {
+      height:$initial-size/2;
+      width:$initial-size/2;
+      border:none;
+      top:50%;
+      left:50%;
+      margin-top:-$initial-size/4;
+      margin-left:-$initial-size/4;
+      border-radius:100%;
+      opacity:1;
+      transition-delay:0s;
+      z-index:0;
+      background:transparent;
+      transform:rotate(45deg);
+      opacity:0;
+      &:before {
+        content:'';
+        display:block;
+        position:absolute;
+        height:100%;
+        width:$icon-stroke+px;
+        background:$icon-color;
+        top:0;
+        left:50%;
+        margin-left:-($icon-stroke/2)+px;
+        border-radius:$icon-stroke+px;
+      }
+      &:after {
+        content:'';
+        display:block;
+        position:absolute;
+        width:100%;
+        height:$icon-stroke+px;
+        background:$icon-color;
+        left:0;
+        top:50%;
+        margin-top:-($icon-stroke/2)+px;
+        border-radius:$icon-stroke+px;
+      }
+      &:hover {
+        cursor:pointer;
+        &:before,&:after {
+          background:red;
+        }
+      }
+    }
+  }
+  &.active {
+    .search-label {
+      &:before {
+        height:0;
+        bottom:0;
+        transition-delay:0s;
+      }
+      &:after {
+        width:$initial-size * $focus-scale;
+        left:-(($initial-size * $focus-scale)/2-($initial-size/2)+$icon-stroke);
+        transition-delay:$transition-speed/2;
+      }
+    }
+    #search-input {
+      width:$initial-size * $focus-scale;
+      margin-left:-(($initial-size * $focus-scale)/2);
+      transition-delay:$transition-speed/2;
+      color:$icon-color;
+    }
+    #reset-form {
+      opacity:1;
+      transition-delay:$transition-speed;
+      margin-left:(($initial-size*$focus-scale)/2)-($initial-size/2)-($initial-size/4);
+      z-index:2;
+    }
+  }
+}

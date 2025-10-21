@@ -1,6 +1,7 @@
 // tracks.js - Track Definitions for Göteborg Central
 
-const trackDefinitions = [
+// Make trackDefinitions globally available for tooltip functionality
+window.trackDefinitions = [
     { 
         trackID_Internal: 'GbgC-01', 
         publicTrackNumber: '1', 

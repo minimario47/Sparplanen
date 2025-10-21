@@ -38,25 +38,40 @@
 .schedule-corner {
   grid-row: 1;
   grid-column: 1;
-  background: var(--neutral-100);
-  border-right: 1px solid var(--neutral-200);
-  border-bottom: 1px solid var(--neutral-200);
-  z-index: 40; /* Highest z-index to stay on top of everything */
+  /* Match timeline-hour colors exactly */
+  background: linear-gradient(to bottom, var(--neutral-100), var(--neutral-50));
+  border-right: 2px solid var(--neutral-200);
+  border-bottom: 2px solid var(--neutral-200);
+  z-index: 120; /* Highest - above timeline-header and track-labels (110) */
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--spacing-2);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: var(--text-primary); /* Match timeline-hour */
   position: sticky;
   top: 0;
   left: 0;
+  /* Ensure solid, opaque background that blocks content underneath */
+  opacity: 1;
 }
 
 [data-theme="dark"] .schedule-corner {
-  background: var(--neutral-800);
+  /* Match timeline-hour gradient exactly - now with properly defined neutral-850 */
+  background: linear-gradient(to bottom, var(--neutral-800), var(--neutral-850));
   border-color: var(--neutral-700);
+  /* Force opaque background in dark mode */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  isolation: isolate; /* Create new stacking context */
+}
+
+[data-theme="high-contrast"] .schedule-corner {
+  background: var(--surface-primary);
+  border-right: 3px solid var(--border-primary);
+  border-bottom: 3px solid var(--border-primary);
+  color: var(--text-primary);
 }
 
 .schedule-timeline-header {
@@ -64,7 +79,7 @@
   grid-column: 2;
   position: sticky;
   top: 0;
-  z-index: 30; /* Above content, below corner */
+  z-index: 110; /* Above current-time-line (100), same as track-labels */
   overflow: hidden; /* No separate scrolling */
   background: var(--neutral-100);
   border-bottom: 1px solid var(--neutral-200);
@@ -81,7 +96,7 @@
   grid-column: 1;
   position: sticky;
   left: 0;
-  z-index: 20; /* Above content, below headers */
+  z-index: 110; /* Above current-time-line (100), above all content */
   overflow: hidden; /* No separate scrolling */
   background: var(--neutral-50);
   border-right: 1px solid var(--neutral-200);

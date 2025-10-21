@@ -1,5 +1,54 @@
 /* Status Badges, Theme Toggle, and Settings */
 
+/* API Connection Status - Network Status Indicator */
+.network-status {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.network-status:hover {
+    opacity: 0.8;
+}
+
+/* Connection state animations */
+.network-status.status-connected .node {
+    background-color: var(--success-500);
+}
+
+.network-status.status-connected .connection-line {
+    background-color: var(--success-500);
+}
+
+.network-status.status-disconnected .node {
+    background-color: var(--danger-500);
+}
+
+.network-status.status-disconnected .connection-line {
+    background-color: var(--danger-500);
+}
+
+.network-status.status-error .node {
+    background-color: var(--warning-500);
+}
+
+.network-status.status-error .connection-line {
+    background-color: var(--warning-500);
+}
+
+.network-status.status-connecting .node {
+    background-color: var(--info-500);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.network-status.status-connecting .connection-line {
+    background-color: var(--info-500);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
 /* Deprecated: Status in right cluster; now using compact chip under title */
 .status-badge { display: none; }
 

@@ -1,0 +1,364 @@
+/* Search Button Component - Minimalist search trigger in header */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE SEARCH BUTTON STYLING
+   Extends .btn .btn-secondary .btn-icon from buttons.css
+   Maintains consistency with theme switcher and settings buttons
+═══════════════════════════════════════════════════════════════════════════ */
+
+.search-button {
+    /* Inherits all base styles from .btn .btn-secondary .btn-icon */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Search icon - SVG embedded in HTML */
+.search-button .search-icon {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    transition: transform var(--transition-normal) var(--ease-bounce), 
+                stroke-width var(--transition-fast),
+                opacity var(--transition-fast);
+}
+
+/* Idle pulse animation - subtle attention grabber */
+@keyframes search-idle-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+.search-button:not(.active):not(:hover) .search-icon {
+    animation: search-idle-pulse 3s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   INTERACTION STATES - Inspired by search-form-fun
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* Hover - bounce scale with rotation hint */
+.search-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md-active);
+}
+
+.search-button:hover .search-icon {
+    transform: scale(1.15) rotate(-5deg);
+    stroke-width: 2.5;
+    animation: none;
+}
+
+/* Active/Pressed - scale down for tactile feedback */
+.search-button:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm-active);
+}
+
+.search-button:active .search-icon {
+    transform: scale(0.9) rotate(0deg);
+}
+
+/* Active state (when search is open) - with glow animation */
+.search-button.active {
+    background: var(--interactive-primary);
+    color: var(--text-inverse);
+    border-color: var(--interactive-primary);
+    animation: search-active-glow 2s ease-in-out infinite;
+}
+
+@keyframes search-active-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+    }
+}
+
+.search-button.active:hover {
+    background: var(--interactive-primary-hover);
+    animation: none;
+}
+
+.search-button.active .search-icon {
+    animation: search-active-spin 1s ease-in-out;
+}
+
+@keyframes search-active-spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THEME-AWARE STYLING
+   Light mode uses default colors, dark and high-contrast adjust
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* Light mode (default) - inherits from buttons.css */
+[data-theme="light"] .search-button {
+    /* Uses default .btn-secondary styles */
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .search-button:hover {
+    color: var(--text-primary);
+}
+
+/* Dark mode - adjusted for visibility */
+[data-theme="dark"] .search-button {
+    background: var(--neutral-800);
+    border-color: var(--neutral-700);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .search-button:hover {
+    background: var(--neutral-700);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .search-button.active {
+    background: var(--interactive-primary);
+    color: var(--text-inverse);
+}
+
+/* High contrast mode - maximum visibility */
+[data-theme="high-contrast"] .search-button {
+    border: 2px solid var(--border-primary);
+    color: var(--text-primary);
+}
+
+[data-theme="high-contrast"] .search-button:hover {
+    background: var(--interactive-primary);
+    color: var(--text-inverse);
+    border-color: var(--interactive-primary);
+}
+
+[data-theme="high-contrast"] .search-button .search-icon {
+    stroke-width: 3;
+}
+
+[data-theme="high-contrast"] .search-button:focus-visible {
+    outline: 4px solid var(--border-focus);
+    outline-offset: 3px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BUTTON GROUP INTEGRATION
+   Search button is first in group, theme switcher middle, settings last
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* Override button group margin for clean integration */
+.header-actions .search-button {
+    margin-left: 0 !important;
+}
+
+/* Ensure consistent sizing in button group */
+.header-actions .search-button {
+    width: 44px !important;
+    height: 44px !important;
+    padding: 0 !important;
+    flex: 0 0 44px !important;
+}
+
+/* Border radius handled by .btn-group rules in buttons.css */
+/* First child (search button) gets left rounded corners automatically */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LOADING STATE (for future use when search is processing)
+═══════════════════════════════════════════════════════════════════════════ */
+
+.search-button.loading .search-icon {
+    animation: search-loading 1s linear infinite;
+}
+
+@keyframes search-loading {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(360deg);
+        opacity: 0.6;
+    }
+}
+
+/* Ripple effect on click - enhanced */
+.search-button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: var(--border-radius-full);
+    background: radial-gradient(circle, currentColor 10%, transparent 10.01%);
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.search-button:active::after {
+    transform: scale(2.5);
+    opacity: 0.3;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOOLTIP (inherited from buttons.css focus, but custom positioning)
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* Tooltip styling inherited, but we can add custom tooltip if needed */
+.search-button[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--space-2) var(--space-3);
+    background: var(--neutral-900);
+    color: var(--text-inverse);
+    font-size: var(--font-size-xs);
+    border-radius: var(--radius-DEFAULT);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+    z-index: var(--z-tooltip);
+    animation: tooltip-fade-in 0.2s ease-out 0.5s forwards;
+}
+
+@keyframes tooltip-fade-in {
+    to {
+        opacity: 1;
+    }
+}
+
+[data-theme="dark"] .search-button[title]:hover::after {
+    background: var(--neutral-800);
+    border: 1px solid var(--border-primary);
+}
+
+[data-theme="high-contrast"] .search-button[title]:hover::after {
+    background: var(--surface-tooltip);
+    color: var(--tooltip-text);
+    border: 2px solid var(--border-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY ENHANCEMENTS
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* Focus indicator - inherits from .btn:focus-visible */
+.search-button:focus-visible {
+    /* 2px outline from buttons.css */
+    /* We ensure it's visible in all themes */
+}
+
+/* Screen reader only text for extra context */
+.search-button .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REDUCED MOTION SUPPORT
+   Respect user's motion preferences
+═══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+    .search-button .search-icon,
+    .search-button,
+    .search-button::after {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .search-button:hover .search-icon {
+        transform: scale(1.1);
+    }
+    
+    .search-button:active .search-icon {
+        transform: scale(0.95);
+    }
+    
+    .search-button:hover {
+        transform: none;
+    }
+    
+    .search-button:active {
+        transform: none;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE ADJUSTMENTS
+   Maintain 44px touch target at all breakpoints (WCAG requirement)
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* Desktop (default) - 44×44px */
+@media (min-width: 1025px) {
+    .search-button {
+        /* Default sizing applies */
+    }
+}
+
+/* Tablet */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .search-button {
+        /* Maintain 44×44px - critical for touch targets */
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .search-button {
+        /* Still 44×44px - WCAG requires minimum touch target */
+    }
+    
+    /* Icon might be slightly smaller on very small screens */
+    .search-button .search-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRINT STYLES
+   Hide interactive elements when printing
+═══════════════════════════════════════════════════════════════════════════ */
+
+@media print {
+    .search-button {
+        display: none !important;
+    }
+}
+

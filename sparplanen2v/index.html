@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpårplanV2 - Professionell Tågtrafikledning</title>
+    <title>SpårplanV2</title>
     
     <!-- 1. Design System Foundation -->
     <link rel="stylesheet" href="styles/design-system.css">
@@ -22,13 +22,20 @@
     <link rel="stylesheet" href="styles/components/header-time-controls.css">
     <link rel="stylesheet" href="styles/components/header-status.css">
     <link rel="stylesheet" href="styles/components/logo.css">
+    <link rel="stylesheet" href="styles/components/theme-switch.css">
     <link rel="stylesheet" href="styles/components/notifications.css">
     <link rel="stylesheet" href="styles/components/schedule.css">
     <link rel="stylesheet" href="styles/components/settings-modal.css">
     <link rel="stylesheet" href="styles/components/settings-controls.css">
+    <link rel="stylesheet" href="styles/components/search-highlights.css">
+    <link rel="stylesheet" href="styles/components/search-inline.css">
     <link rel="stylesheet" href="styles/components/tracks.css">
     <link rel="stylesheet" href="styles/components/timeline.css">
     <link rel="stylesheet" href="styles/components/trains.css">
+    <link rel="stylesheet" href="styles/components/track-tooltip.css">
+    <link rel="stylesheet" href="styles/components/train-tooltip.css">
+    <link rel="stylesheet" href="styles/components/delay-visualization.css">
+    <link rel="stylesheet" href="styles/components/debug-logs.css">
     
     <!-- Data Files -->
     <script src="../vehicleTypes.js"></script>
@@ -165,7 +172,6 @@
                             <div class="node node-3"></div>
                         </div>
                     </div>
-                    <p class="header-subtitle">Professionell Tågtrafikledning</p>
                 </div>
             </a>
         </div>
@@ -175,10 +181,10 @@
             <div class="time-controls">
                 <div class="time-nav btn-group">
                     <button id="time-nav-prev" class="btn btn-secondary btn-icon" aria-label="Föregående tidsintervall" title="Föregående tidsintervall">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" /></svg>
+                        <img src="assets/Icons/next.png" alt="Previous" class="icon-svg" style="transform: scaleX(-1);">
                     </button>
                     <button id="time-nav-next" class="btn btn-secondary btn-icon" aria-label="Nästa tidsintervall" title="Nästa tidsintervall">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg>
+                        <img src="assets/Icons/next.png" alt="Next" class="icon-svg">
                     </button>
                 </div>
                 
@@ -209,11 +215,25 @@
         <!-- Right Section: Status & Settings -->
         <div class="header-right">
             <div class="btn-group header-actions">
+                <div class="search" id="search-form" role="search" aria-label="Sök tågnummer">
+                    <input type="text" id="search-input" placeholder=" " aria-label="Sök tågnummer" autocomplete="off" spellcheck="false" />
+                    <div>
+                        <svg>
+                            <use xlink:href="#search-path"></use>
+                        </svg>
+                    </div>
+                </div>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 28" id="search-path">
+                        <path d="M32.9418651,-20.6880772 C37.9418651,-20.6880772 40.9418651,-16.6880772 40.9418651,-12.6880772 C40.9418651,-8.68807717 37.9418651,-4.68807717 32.9418651,-4.68807717 C27.9418651,-4.68807717 24.9418651,-8.68807717 24.9418651,-12.6880772 C24.9418651,-16.6880772 27.9418651,-20.6880772 32.9418651,-20.6880772 L32.9418651,-29.870624 C32.9418651,-30.3676803 33.3448089,-30.770624 33.8418651,-30.770624 C34.08056,-30.770624 34.3094785,-30.6758029 34.4782612,-30.5070201 L141.371843,76.386562" transform="translate(83.156854, 22.171573) rotate(-225.000000) translate(-83.156854, -22.171573)"></path>
+                    </symbol>
+                </svg>
                 <button class="btn btn-secondary btn-icon theme-toggle" id="theme-toggle-btn" aria-label="Byt tema" title="Byt tema">
                     <span style="font-size: 20px;">🌓</span>
                 </button>
                 <button class="btn btn-secondary btn-icon settings-button" aria-label="Inställningar" title="Inställningar">
-                    <span style="font-size: 20px;">⚙️</span>
+                    <img src="assets/Icons/settings.png" alt="Settings" class="icon-svg">
                 </button>
             </div>
         </div>
@@ -273,6 +293,9 @@
                 <button class="settings-tab" data-tab="display" role="tab" aria-selected="false" aria-controls="panel-display">
                     Visning
                 </button>
+                <button class="settings-tab" data-tab="delays" role="tab" aria-selected="false" aria-controls="panel-delays">
+                    Förseningar
+                </button>
                 <button class="settings-tab" data-tab="data" role="tab" aria-selected="false" aria-controls="panel-data">
                     Data
                 </button>
@@ -300,7 +323,7 @@
                                         <span id="offset-value" class="settings-slider-value">20%</span>
                                     </div>
                                 </div>
-                                <p class="setting-help">Position för röd linje från vänsterkanten (0-50%). Vid 20% är linjen nära vänster kant, vid 50% i mitten.</p>
+                                <p class="setting-help">Position för röd linje från vänsterkanten (0-50%). Vid 20% är linjen nära vänster kant, vid 50% i mitten av skärmen.</p>
                             </div>
 
                             <!-- Follow Mode Toggle -->
@@ -466,6 +489,71 @@
                     </div>
                 </div>
 
+                <!-- Delays Tab -->
+                <div id="panel-delays" class="settings-tab-panel" data-tab-panel="delays" role="tabpanel" hidden>
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Försenkningsvisualisering</h3>
+                        <div class="settings-section-content">
+                            <!-- Visualization Mode -->
+                            <div class="setting-item">
+                                <label class="setting-label">Visualiseringsläge</label>
+                                <div class="setting-control">
+                                    <label class="settings-radio">
+                                        <input type="radio" name="delay-mode" value="offset" checked>
+                                        <span>Overlay (visar försening som färgad overlay)</span>
+                                    </label>
+                                    <label class="settings-radio">
+                                        <input type="radio" name="delay-mode" value="icon">
+                                        <span>Ikon (visar försening som badge)</span>
+                                    </label>
+                                    <label class="settings-radio">
+                                        <input type="radio" name="delay-mode" value="both">
+                                        <span>Båda (overlay + badge)</span>
+                                    </label>
+                                </div>
+                                <p class="setting-help">Välj hur förseningar ska visas på tågstaplar</p>
+                            </div>
+
+                            <!-- Turnaround Time -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="delay-turnaround-time">Vändtid</label>
+                                <div class="settings-slider-container">
+                                    <div class="settings-slider-wrapper">
+                                        <input id="delay-turnaround-time" type="range" min="5" max="30" value="10" class="settings-slider">
+                                        <span id="delay-turnaround-value" class="settings-slider-value">10 min</span>
+                                    </div>
+                                </div>
+                                <p class="setting-help">Buffert för tömning, personalbyte och påfyllning</p>
+                            </div>
+
+                            <!-- Conflict Tolerance -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="delay-conflict-tolerance">Konflikttolerans</label>
+                                <div class="settings-slider-container">
+                                    <div class="settings-slider-wrapper">
+                                        <input id="delay-conflict-tolerance" type="range" min="0" max="15" value="5" class="settings-slider">
+                                        <span id="delay-tolerance-value" class="settings-slider-value">5 min</span>
+                                    </div>
+                                </div>
+                                <p class="setting-help">Tidsfönster för varningsmeddelanden</p>
+                            </div>
+
+                            <!-- Show Warnings -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="delay-show-warnings">Visa konfliktvarningar</label>
+                                <div class="setting-control">
+                                    <div class="settings-toggle-wrapper">
+                                        <button id="delay-show-warnings" class="settings-toggle active" aria-label="Visa konfliktvarningar">
+                                            <span class="settings-toggle-knob"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="setting-help">Visa varning när försenade tåg påverkar andra tåg</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Data Tab -->
                 <div id="panel-data" class="settings-tab-panel" data-tab-panel="data" role="tabpanel" hidden>
                     <div class="settings-empty">
@@ -479,7 +567,7 @@
                         <div class="settings-section-content">
                             <div class="setting-item">
                                 <h3 class="setting-label">SpårplanV2</h3>
-                                <p class="setting-help">Professionellt järnvägstrafikledningssystem</p>
+                                <p class="setting-help"></p>
                             </div>
                             <div class="setting-item">
                                 <p class="setting-help" style="font-size: var(--text-xs);">Version 2.0.0</p>
@@ -506,14 +594,48 @@
         </div>
     </div>
 
+    
+
     <!-- JavaScript Files - Load in correct order -->
+    <!-- 1. Core utilities -->
+    <script src="js/utils/debug-logger.js"></script>
+    
+    <!-- 2. Theme system -->
     <script src="js/theme.js"></script>
+    
+    <!-- 3. Time management -->
     <script src="js/modules/time-manager.js"></script>
+    
+    <!-- 4. Settings -->
     <script src="js/components/settings-controls.js"></script>
     <script src="js/components/settings-modal.js"></script>
+    <script src="js/components/settings-delay.js"></script>
+    
+    <!-- 5. Delay API & Data -->
+    <script src="js/api/delay-api-client.js"></script>
+    <script src="js/api/delay-data-manager.js"></script>
+    
+    <!-- 6. Delay Logic -->
+    <script src="js/delay/conflict-detector.js"></script>
+    <script src="js/delay/visualizers/offset-visualizer.js"></script>
+    <script src="js/delay/visualizers/icon-visualizer.js"></script>
+    <script src="js/delay/visualizers/combined-visualizer.js"></script>
+    <script src="js/delay/delay-integration.js"></script>
+    
+    <!-- 7. Header & Schedule -->
     <script src="js/modules/header-controls.js"></script>
     <script src="js/modules/schedule-renderer.js"></script>
+    
+    <!-- 8. Main app -->
     <script src="js/app.js"></script>
+    
+    <!-- 9. UI Components -->
+    <script src="js/components/theme-switch.js"></script>
+    <script src="js/components/search-inline.js"></script>
+    <script src="js/components/search-trains.js"></script>
+    <script src="js/components/track-tooltip.js"></script>
+    <script src="js/components/train-tooltip.js"></script>
+    <script src="js/components/debug-logs.js"></script>
     
     <script>
         // Legacy theme switcher function for compatibility

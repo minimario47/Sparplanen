@@ -1,0 +1,111 @@
+/* Inline Search - SVG animated search bar */
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the icon */
+    position: relative;
+    width: 44px; /* Match other header buttons */
+    height: 44px; /* Match other header buttons */
+    transition: width 0.6s ease;
+}
+
+.search input {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    min-width: 0;
+    padding: 0 8px; /* Add some padding */
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    line-height: 44px;
+    font-size: 14px;
+    -webkit-appearance: none;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--text-primary);
+    opacity: 0; /* Hidden until active */
+    transition: opacity 0.3s ease 0.3s; /* Delay opacity transition */
+}
+
+/* Container for the SVG to control its position and size */
+.search input + div {
+    position: absolute;
+    height: 44px; /* Match parent height */
+    width: 160px; /* Full width for positioning */
+    top: 0;
+    right: 7px; /* Nudge left to center the icon */
+    pointer-events: none; /* Let clicks pass through to the input */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: right 0.6s ease; /* Animate the position */
+}
+
+.search input + div svg {
+    display: block;
+    height: 44px; /* Make the SVG taller */
+    width: 160px;
+    fill: none;
+    stroke: var(--text-primary);
+    stroke-width: 1.5px;
+    stroke-dashoffset: 271.908;
+    stroke-dasharray: 59 212.908;
+    transition: all 0.6s ease;
+}
+
+/* When the container has focus-within, expand it */
+.search:focus-within {
+    width: 160px;
+}
+
+/* When active, show the text input */
+.search:focus-within input {
+    opacity: 1; /* Show input text field */
+    cursor: text;
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+
+/* When active, slide container back to the edge */
+.search:focus-within input + div {
+    right: 0;
+}
+
+/* Animate the SVG when active */
+.search:focus-within input + div svg {
+    stroke-dasharray: 150 212.908;
+    stroke-dashoffset: 300;
+}
+
+/* Theme adjustments */
+[data-theme="dark"] .search input {
+    color: var(--text-primary-dark);
+}
+
+[data-theme="dark"] .search input + div svg {
+    stroke: var(--text-primary-dark);
+}
+
+[data-theme="high-contrast"] .search input + div svg {
+    stroke: var(--text-primary);
+    stroke-width: 2.5px;
+}
+
+/* Header button group integration */
+.header-actions .search {
+    margin-left: 0 !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .search input,
+    .search input + div svg {
+        transition: none !important;
+    }
+}
