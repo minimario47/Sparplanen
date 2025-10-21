@@ -286,74 +286,300 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   THEME-SPECIFIC ADJUSTMENTS
+   THEME-SPECIFIC ADJUSTMENTS - COMPLETE REDESIGN
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* Light theme - softer overlays */
+/* Light theme - optimized for light backgrounds */
 [data-theme="light"] .delay-overlay-main {
     mix-blend-mode: multiply;
+    opacity: 0.8;
+}
+
+/* Light theme: Early trains get distinct green color */
+[data-theme="light"] .delay-overlay-main.severity-early {
+    background-color: #22C55E !important; /* Green for early trains */
+    border-color: #22C55E !important;
+    opacity: 0.7;
 }
 
 [data-theme="light"] .delay-overlay-turnaround {
-    /* Lighter diagonal lines in light mode */
-    opacity: 0.3;
+    opacity: 0.4;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 4px,
+        var(--overlay-color, #FF8C00) 4px,
+        var(--overlay-color, #FF8C00) 6px
+    );
+}
+
+[data-theme="light"] .delay-overlay-turnaround::before {
+    background: rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="light"] .delay-overlay-tolerance {
-    /* More visible dashed border in light mode */
-    opacity: 0.5;
-}
-
-/* Dark theme - brighter overlays for visibility */
-[data-theme="dark"] .delay-overlay-main {
-    mix-blend-mode: screen;
-}
-
-[data-theme="dark"] .delay-overlay-turnaround {
-    /* Brighter diagonal lines in dark mode */
-    opacity: 0.45;
-}
-
-[data-theme="dark"] .delay-overlay-turnaround::before {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-[data-theme="dark"] .delay-overlay-tolerance {
-    /* More visible dashed border in dark mode */
-    opacity: 0.7;
+    opacity: 0.6;
     border-width: 2px;
 }
 
-[data-theme="dark"] .cancellation-overlay {
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+[data-theme="light"] .delay-badge-icon {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* High-contrast theme - maximum visibility */
+[data-theme="light"] .conflict-warning-icon {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark theme - completely redesigned for visibility */
+[data-theme="dark"] .delay-overlay-main {
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Dark theme: Early trains get distinct green color */
+[data-theme="dark"] .delay-overlay-main.severity-early {
+    background-color: #22C55E !important; /* Green for early trains */
+    border-color: #22C55E !important;
+    opacity: 0.8;
+}
+
+[data-theme="dark"] .delay-overlay-turnaround {
+    opacity: 0.6;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 3px,
+        var(--overlay-color, #FFB347) 3px,
+        var(--overlay-color, #FFB347) 5px
+    );
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .delay-overlay-turnaround::before {
+    background: rgba(255, 255, 255, 0.25);
+    width: 3px;
+}
+
+[data-theme="dark"] .delay-overlay-tolerance {
+    opacity: 0.8;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .delay-overlay-tolerance::after {
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 6px,
+        rgba(255, 255, 255, 0.3) 6px,
+        rgba(255, 255, 255, 0.3) 7px
+    );
+    opacity: 0.3;
+}
+
+[data-theme="dark"] .delay-badge-icon {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .conflict-warning-icon {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .cancellation-overlay {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* High-contrast theme - maximum visibility and accessibility */
 [data-theme="high-contrast"] .delay-overlay-main {
-    opacity: 0.85 !important;
-    border: 3px solid #FFFFFF;
+    opacity: 0.9 !important;
+    border: 3px solid #FFFFFF !important;
+    background-color: var(--delay-severe) !important;
+    box-shadow: 0 0 0 1px #000000;
+    z-index: 2 !important; /* Below train content */
 }
 
 [data-theme="high-contrast"] .delay-overlay-turnaround {
-    opacity: 0.6 !important;
-    border: 2px solid #FFFFFF;
-    border-left-width: 3px;
+    opacity: 0.85 !important;
+    border: 3px solid #FFFFFF !important;
+    border-left-width: 4px !important;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 2px,
+        var(--overlay-color, #FF8C00) 2px,
+        var(--overlay-color, #FF8C00) 4px
+    ) !important;
+    box-shadow: 0 0 0 1px #000000;
+    z-index: 2 !important; /* Below train content */
+}
+
+[data-theme="high-contrast"] .delay-overlay-turnaround::before {
+    background: #FFFFFF !important;
+    width: 4px !important;
+    box-shadow: 0 0 0 1px #000000;
 }
 
 [data-theme="high-contrast"] .delay-overlay-tolerance {
-    opacity: 0.9 !important;
-    border: 3px dashed #FFFFFF;
-    border-left-style: solid;
+    opacity: 0.8 !important;
+    border: 4px dashed #FFFFFF !important;
+    border-left-style: solid !important;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 4px,
+        #FFFFFF 4px,
+        #FFFFFF 5px
+    ) !important;
+    box-shadow: 0 0 0 2px #000000;
+    z-index: 2 !important; /* Below train content */
+}
+
+[data-theme="high-contrast"] .delay-overlay-tolerance::after {
+    background: repeating-linear-gradient(
+        90deg,
+        #000000,
+        #000000 4px,
+        #FFFFFF 4px,
+        #FFFFFF 5px
+    ) !important;
+    opacity: 1 !important;
 }
 
 [data-theme="high-contrast"] .delay-badge-icon {
-    font-size: 11px;
-    padding: 3px 7px;
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 0 0 0 1px #000000;
+    font-weight: 900 !important;
+}
+
+[data-theme="high-contrast"] .conflict-warning-icon {
+    width: 24px !important;
+    height: 24px !important;
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 0 0 0 2px #000000;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+}
+
+[data-theme="high-contrast"] .conflict-warning-icon.severity-red {
+    background-color: #FF0000 !important;
+    color: #FFFFFF !important;
+}
+
+[data-theme="high-contrast"] .conflict-warning-icon.severity-orange {
+    background-color: #FF8C00 !important;
+    color: #000000 !important;
+}
+
+[data-theme="high-contrast"] .conflict-warning-icon.severity-yellow {
+    background-color: #FFFF00 !important;
+    color: #000000 !important;
 }
 
 [data-theme="high-contrast"] .cancellation-overlay {
-    border: 3px solid #fff;
-    box-shadow: 0 0 0 2px #000, 0 4px 8px rgba(0, 0, 0, 0.8);
+    border: 4px solid #FFFFFF !important;
+    box-shadow: 0 0 0 3px #000000, 0 6px 12px rgba(0, 0, 0, 1) !important;
+    background-color: #FF0000 !important;
+    color: #FFFFFF !important;
+    font-size: 24px !important;
+    font-weight: 900 !important;
+}
+
+[data-theme="high-contrast"] .cancellation-overlay.is-replaced {
+    background-color: #FF8C00 !important;
+    color: #000000 !important;
+}
+
+/* High-contrast theme: Early trains get distinct green color */
+[data-theme="high-contrast"] .delay-overlay-main.severity-early {
+    background-color: #00FF00 !important; /* Bright green for early trains */
+    border-color: #00FF00 !important;
+    box-shadow: 0 0 0 2px #000000;
+}
+
+/* High-contrast: Early train turnaround gets green pattern */
+[data-theme="high-contrast"] .delay-overlay-turnaround.severity-early {
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 2px,
+        #00FF00 2px,
+        #00FF00 4px
+    ) !important;
+    border-color: #00FF00 !important;
+}
+
+/* High-contrast: Early train tolerance gets green pattern */
+[data-theme="high-contrast"] .delay-overlay-tolerance.severity-early {
+    border-color: #00FF00 !important;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 4px,
+        #00FF00 4px,
+        #00FF00 5px
+    ) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ADDITIONAL THEME INTEGRATION
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Ensure delay overlays work with train bar themes */
+[data-theme="dark"] .train-bar .delay-overlay-offset {
+    z-index: 3; /* Above train bar content */
+}
+
+[data-theme="high-contrast"] .train-bar .delay-overlay-offset {
+    z-index: 2; /* Below train content but above background */
+}
+
+/* Ensure train content is always visible above overlays */
+[data-theme="high-contrast"] .train-bar .train-number,
+[data-theme="high-contrast"] .train-bar .train-bar-visual,
+[data-theme="high-contrast"] .train-bar .train-bar-content {
+    position: relative;
+    z-index: 5 !important; /* Above all delay overlays */
+    background-color: #000000 !important; /* Black background for text */
+    color: #FFFFFF !important; /* White text */
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Theme-aware hover states */
+[data-theme="light"] .delay-overlay-offset:hover {
+    opacity: 0.9;
+    transform: scaleY(1.05);
+}
+
+[data-theme="dark"] .delay-overlay-offset:hover {
+    opacity: 1;
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scaleY(1.05);
+}
+
+[data-theme="high-contrast"] .delay-overlay-offset:hover {
+    box-shadow: 0 0 0 3px #00FFFF;
+    transform: scaleY(1.1);
+}
+
+/* Animation improvements for different themes */
+[data-theme="dark"] .delay-overlay-offset.new {
+    animation: delayFadeIn 0.4s ease-out;
+}
+
+[data-theme="high-contrast"] .delay-overlay-offset.new {
+    animation: delayFadeIn 0.5s ease-out;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -375,6 +601,23 @@
         height: 16px;
         font-size: 12px;
         right: -20px;
+    }
+    
+    /* Theme-specific mobile adjustments */
+    [data-theme="dark"] .delay-badge-icon {
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    [data-theme="high-contrast"] .delay-badge-icon {
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 0 0 1px #000000;
+    }
+    
+    [data-theme="high-contrast"] .conflict-warning-icon {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 0 0 1px #000000;
     }
 }
 
