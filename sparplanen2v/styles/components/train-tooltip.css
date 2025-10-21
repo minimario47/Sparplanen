@@ -1,0 +1,360 @@
+/* Professional Train Tooltip Styles */
+
+/* Make trains look clickable */
+.train-bar {
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.train-bar:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.train-bar:active {
+    transform: translateY(0);
+}
+
+.train-info-tooltip {
+    position: fixed;
+    z-index: 10000;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    padding: 0;
+    min-width: 320px;
+    max-width: 420px;
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto;
+    font-size: 14px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.train-info-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Close Button */
+.tooltip-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    transition: all 0.2s ease;
+    z-index: 1;
+}
+
+.tooltip-close-btn:hover {
+    background: rgba(220, 38, 38, 0.1);
+    color: #DC2626;
+    transform: scale(1.05);
+}
+
+.tooltip-close-btn:active {
+    transform: scale(0.95);
+}
+
+/* Header with Status */
+.tooltip-header {
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.status-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.status-text {
+    flex: 1;
+}
+
+/* Status colors */
+.tooltip-header.status-on-time {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(34, 197, 94, 0.04));
+    color: #059669;
+}
+
+.tooltip-header.status-early {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(34, 197, 94, 0.04));
+    color: #059669;
+}
+
+.tooltip-header.status-delayed-minor {
+    background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), rgba(234, 179, 8, 0.04));
+    color: #D97706;
+}
+
+.tooltip-header.status-delayed-moderate {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.08), rgba(249, 115, 22, 0.04));
+    color: #EA580C;
+}
+
+.tooltip-header.status-delayed-severe {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.08), rgba(220, 38, 38, 0.04));
+    color: #DC2626;
+}
+
+.tooltip-header.status-canceled {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.08), rgba(220, 38, 38, 0.04));
+    color: #DC2626;
+}
+
+.tooltip-header.status-replaced {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.04));
+    color: #2563EB;
+}
+
+/* Train Number */
+.tooltip-train-number {
+    padding: 0 20px 16px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+}
+
+/* Schedule Section */
+.tooltip-schedule {
+    padding: 20px;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.schedule-item:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.schedule-label {
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.schedule-time {
+    font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+/* Delay Info */
+.tooltip-delay {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tooltip-delay.delayed {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.08), rgba(220, 38, 38, 0.04));
+    color: #DC2626;
+}
+
+.tooltip-delay.early {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(34, 197, 94, 0.04));
+    color: #059669;
+}
+
+.delay-text {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* Route Information */
+.tooltip-route {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.route-from,
+.route-to {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+.route-arrow {
+    margin: 0 12px;
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+/* Technical Details */
+.tooltip-details {
+    padding: 16px 20px;
+    background: var(--bg-subtle);
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+}
+
+.detail-item:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-label {
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+
+/* Conflict Section */
+.conflict-section {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.affected-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.affected-item {
+    padding: 12px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.affected-item:hover {
+    background: var(--bg-subtle);
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+}
+
+.affected-train {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.train-number {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+.zone-badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.zone-badge.red {
+    background: rgba(220, 38, 38, 0.15);
+    color: #DC2626;
+    border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.zone-badge.orange {
+    background: rgba(249, 115, 22, 0.15);
+    color: #F97316;
+    border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.zone-badge.yellow {
+    background: rgba(234, 179, 8, 0.15);
+    color: #EAB308;
+    border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.overlap-info {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .train-info-tooltip {
+        min-width: 280px;
+        max-width: calc(100vw - 24px);
+        font-size: 13px;
+    }
+    
+    .tooltip-train-number {
+        font-size: 20px;
+    }
+    
+    .tooltip-header {
+        padding: 12px 16px 8px;
+    }
+    
+    .tooltip-schedule,
+    .tooltip-delay,
+    .tooltip-route,
+    .tooltip-details,
+    .conflict-section {
+        padding: 16px;
+    }
+    
+    .affected-list {
+        gap: 6px;
+    }
+    
+    .affected-item {
+        padding: 10px;
+    }
+}
+

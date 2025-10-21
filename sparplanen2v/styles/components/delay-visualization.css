@@ -1,0 +1,413 @@
+/**
+ * Delay Visualization Styles
+ * Supports three modes: Offset, Icon, and Both
+ * Theme-aware with light/dark/high-contrast support
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════
+   OFFSET MODE - Semi-transparent overlay showing delay extent
+   NOW WITH THREE DISTINCT PARTS: Delay, Turnaround, Tolerance
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.delay-overlay-offset {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2; /* Below train bar visual content */
+    border-radius: var(--radius-md);
+    transition: all 0.2s var(--ease-in-out);
+    /* CRITICAL: No overflow hidden - this allows the overlay to extend beyond train bar */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PART 1: MAIN DELAY OVERLAY - Solid fill showing actual delay
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.delay-overlay-main {
+    /* Solid color background set via inline styles */
+    border-radius: var(--radius-md) 0 0 var(--radius-md); /* Rounded on left only */
+}
+
+/* When main delay has conflict, add thick border on right edge */
+.delay-overlay-main.has-conflict {
+    border-right: 3px solid currentColor;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PART 2: TURNAROUND TIME OVERLAY - Diagonal hatched lines (vändtid)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.delay-overlay-turnaround {
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 4px,
+        var(--overlay-color, #FFA500) 4px,
+        var(--overlay-color, #FFA500) 6px
+    );
+    opacity: 0.35;
+    border-radius: 0; /* No rounding */
+}
+
+/* Add subtle left border to separate from main delay */
+.delay-overlay-turnaround::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PART 3: TOLERANCE OVERLAY - Dotted outline (konfliktolerans)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.delay-overlay-tolerance {
+    background: transparent;
+    border: 2px dashed currentColor;
+    border-left-style: solid; /* Solid left edge connects to turnaround */
+    border-radius: 0 var(--radius-md) var(--radius-md) 0; /* Rounded on right only */
+    opacity: 0.6;
+}
+
+/* Subtle inner shadow to show it's a "warning zone" */
+.delay-overlay-tolerance::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 8px,
+        currentColor 8px,
+        currentColor 9px
+    );
+    opacity: 0.15;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Delay severity colors (will be overridden by inline styles from JS)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.delay-severity-minor { background-color: var(--delay-minor); }
+.delay-severity-moderate { background-color: var(--delay-moderate); }
+.delay-severity-significant { background-color: var(--delay-significant); }
+.delay-severity-severe { background-color: var(--delay-severe); }
+.delay-severity-early { background-color: var(--delay-early); }
+
+/* Animation for new overlays */
+@keyframes delayFadeIn {
+    from {
+        opacity: 0;
+        transform: scaleX(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+.delay-overlay-offset.new {
+    animation: delayFadeIn 0.3s ease-out;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ICON MODE - Small badge indicators
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.delay-badge-icon {
+    position: absolute;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s var(--ease-in-out);
+}
+
+/* Badge colors by severity */
+.delay-badge-icon.severity-minor { background-color: #FFA500; color: #fff; }
+.delay-badge-icon.severity-moderate { background-color: #FF8C00; color: #fff; }
+.delay-badge-icon.severity-significant { background-color: #FF4500; color: #fff; }
+.delay-badge-icon.severity-severe { background-color: #DC143C; color: #fff; }
+.delay-badge-icon.severity-early { background-color: #22C55E; color: #fff; }
+
+/* Dark theme adjustments */
+[data-theme="dark"] .delay-badge-icon {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* High-contrast theme adjustments */
+[data-theme="high-contrast"] .delay-badge-icon {
+    border: 2px solid currentColor;
+    font-weight: 800;
+}
+
+/* Arrival badge positioning (left side) */
+.delay-badge-arrival {
+    top: -18px;
+    left: 4px;
+}
+
+/* Departure badge positioning (right side) */
+.delay-badge-departure {
+    top: -18px;
+    right: 4px;
+}
+
+/* Adjust for narrow train bars */
+.train-bar.density-2 .delay-badge-icon,
+.train-bar.density-3 .delay-badge-icon {
+    font-size: 9px;
+    padding: 1px 4px;
+    top: -16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CONFLICT WARNING ICONS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.conflict-warning-icon {
+    position: absolute;
+    top: 50%;
+    right: -24px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--conflict-warning);
+    color: #000;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    z-index: 15;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: help;
+    transition: all 0.2s var(--ease-in-out);
+}
+
+.conflict-warning-icon:hover {
+    transform: translateY(-50%) scale(1.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.conflict-warning-icon.severity-red {
+    background-color: var(--conflict-error);
+    color: #fff;
+}
+
+.conflict-warning-icon.severity-orange {
+    background-color: #F97316;
+    color: #fff;
+}
+
+.conflict-warning-icon.severity-yellow {
+    background-color: var(--conflict-warning);
+    color: #000;
+}
+
+/* Warning icon animation */
+@keyframes warningPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.conflict-warning-icon.severity-red {
+    animation: warningPulse 1.5s ease-in-out infinite;
+}
+
+.conflict-warning-icon.severity-orange {
+    animation: warningPulse 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CANCELLATION INDICATOR
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.train-bar.is-canceled .train-bar-visual,
+.train-bar.is-replaced .train-bar-visual {
+    opacity: 0.5;
+    filter: grayscale(30%);
+}
+
+.cancellation-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(220, 20, 60, 0.9);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    z-index: 20;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+
+.cancellation-overlay::before {
+    content: '✕';
+}
+
+.cancellation-overlay.is-replaced {
+    background-color: rgba(255, 165, 0, 0.9);
+}
+
+.cancellation-overlay.is-replaced::before {
+    content: '🚌';
+    font-size: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DELAY TOOLTIP ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.delay-tooltip-line {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: var(--font-size-xs);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   THEME-SPECIFIC ADJUSTMENTS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Light theme - softer overlays */
+[data-theme="light"] .delay-overlay-main {
+    mix-blend-mode: multiply;
+}
+
+[data-theme="light"] .delay-overlay-turnaround {
+    /* Lighter diagonal lines in light mode */
+    opacity: 0.3;
+}
+
+[data-theme="light"] .delay-overlay-tolerance {
+    /* More visible dashed border in light mode */
+    opacity: 0.5;
+}
+
+/* Dark theme - brighter overlays for visibility */
+[data-theme="dark"] .delay-overlay-main {
+    mix-blend-mode: screen;
+}
+
+[data-theme="dark"] .delay-overlay-turnaround {
+    /* Brighter diagonal lines in dark mode */
+    opacity: 0.45;
+}
+
+[data-theme="dark"] .delay-overlay-turnaround::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .delay-overlay-tolerance {
+    /* More visible dashed border in dark mode */
+    opacity: 0.7;
+    border-width: 2px;
+}
+
+[data-theme="dark"] .cancellation-overlay {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* High-contrast theme - maximum visibility */
+[data-theme="high-contrast"] .delay-overlay-main {
+    opacity: 0.85 !important;
+    border: 3px solid #FFFFFF;
+}
+
+[data-theme="high-contrast"] .delay-overlay-turnaround {
+    opacity: 0.6 !important;
+    border: 2px solid #FFFFFF;
+    border-left-width: 3px;
+}
+
+[data-theme="high-contrast"] .delay-overlay-tolerance {
+    opacity: 0.9 !important;
+    border: 3px dashed #FFFFFF;
+    border-left-style: solid;
+}
+
+[data-theme="high-contrast"] .delay-badge-icon {
+    font-size: 11px;
+    padding: 3px 7px;
+}
+
+[data-theme="high-contrast"] .cancellation-overlay {
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #000, 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   RESPONSIVE ADJUSTMENTS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* For very narrow train bars, hide text badges and show only dots */
+@media (max-width: 768px) {
+    .delay-badge-icon {
+        font-size: 0;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        padding: 0;
+    }
+    
+    .conflict-warning-icon {
+        width: 16px;
+        height: 16px;
+        font-size: 12px;
+        right: -20px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   COMBINED MODE - Both overlay and badges
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.delay-mode-both .delay-overlay-offset {
+    opacity: 0.4; /* Reduce overlay opacity when badges are also shown */
+}
+
+.delay-mode-both .delay-badge-icon {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border: 1px solid currentColor;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+    .delay-overlay-offset,
+    .delay-badge-icon,
+    .conflict-warning-icon {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* Focus indicators for keyboard navigation */
+.train-bar:focus-visible .delay-overlay-offset {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
