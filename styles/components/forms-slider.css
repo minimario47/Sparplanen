@@ -1,0 +1,174 @@
+/* Custom Slider - Beautiful, accessible range input with visual feedback */
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.slider-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.slider {
+    flex: 1;
+    position: relative;
+    height: 6px;
+    background: var(--neutral-200);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+/* Slider track (filled portion) */
+.slider::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    background: var(--interactive-primary);
+    border-radius: 3px;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Thumb (the draggable handle) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--interactive-primary);
+    cursor: grab;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: var(--shadow-glow);
+}
+
+.slider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+}
+
+/* Firefox thumb styling */
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--interactive-primary);
+    cursor: grab;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Firefox track styling */
+.slider::-moz-range-track {
+    background: transparent;
+    border: none;
+}
+
+.slider::-moz-range-progress {
+    background: var(--interactive-primary);
+    border-radius: 3px;
+    height: 100%;
+}
+
+.slider-value {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    min-width: 45px;
+    text-align: right;
+}
+
+/* Dark mode */
+[data-theme="dark"] .slider {
+    background: var(--neutral-800);
+}
+
+[data-theme="dark"] .slider::before {
+    background: var(--primary-400);
+}
+
+[data-theme="dark"] .slider::-webkit-slider-thumb {
+    background: var(--neutral-300);
+    border-color: var(--primary-400);
+    box-shadow: none;
+    border: 2px solid var(--primary-400);
+}
+
+[data-theme="dark"] .slider::-moz-range-thumb {
+    background: var(--neutral-300);
+    border-color: var(--primary-400);
+    box-shadow: none;
+    border: 2px solid var(--primary-400);
+}
+
+[data-theme="dark"] .slider::-moz-range-progress {
+    background: var(--primary-400);
+}
+
+/* High contrast mode */
+[data-theme="high-contrast"] .slider {
+    background: black;
+    border: 2px solid white;
+    height: 8px;
+}
+
+[data-theme="high-contrast"] .slider::before {
+    background: #0066ff;
+}
+
+[data-theme="high-contrast"] .slider::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+    background: white;
+    border: 3px solid #0066ff;
+    box-shadow: none;
+}
+
+[data-theme="high-contrast"] .slider::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.3);
+}
+
+[data-theme="high-contrast"] .slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: white;
+    border: 3px solid #0066ff;
+    box-shadow: none;
+}
+
+[data-theme="high-contrast"] .slider::-moz-range-progress {
+    background: #0066ff;
+    border: none;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .slider::-webkit-slider-thumb,
+    .slider::-moz-range-thumb {
+        transition: none;
+    }
+    
+    .slider::-webkit-slider-thumb:hover {
+        transform: none;
+    }
+}

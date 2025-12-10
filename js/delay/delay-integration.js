@@ -150,18 +150,8 @@ class DelayIntegration {
      * Handle settings change
      */
     handleSettingsChange(newSettings) {
-        // Check if showWarnings setting changed from true to false
-        const showWarningsChangedToFalse = oldSettings?.showWarnings === true && newSettings.showWarnings === false;
-
-        // Store old settings to track changes
-        const oldSettings = this.settings;
         this.settings = newSettings;
-
-        // If showWarnings was turned off, remove all existing warning icons first
-        if (showWarningsChangedToFalse) {
-            this.removeAllWarningIcons();
-        }
-
+        
         // Recreate visualizer if mode changed
         const currentMode = this.visualizer.constructor.name.toLowerCase().replace('visualizer', '');
         if (newSettings.mode !== currentMode) {
@@ -178,33 +168,13 @@ class DelayIntegration {
                 conflictTolerance: newSettings.conflictTolerance
             });
         }
-
+        
         // Re-apply visualizations with new settings
         this.updateAllVisualizations();
-
+        
         logger.info('Integration', 'Settings applied and visualizations updated');
     }
     
-    /**
-     * Remove all conflict warning icons from all train bars
-     */
-    removeAllWarningIcons() {
-        const trainBars = document.querySelectorAll('.train-bar');
-        let removedCount = 0;
-
-        trainBars.forEach(trainBar => {
-            const warningIcons = trainBar.querySelectorAll('.conflict-warning-icon');
-            warningIcons.forEach(icon => {
-                if (icon && icon.parentNode) {
-                    icon.parentNode.removeChild(icon);
-                    removedCount++;
-                }
-            });
-        });
-
-        logger.info('Integration', `Removed ${removedCount} existing warning icons`);
-    }
-
     /**
      * Update all train visualizations
      */

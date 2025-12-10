@@ -27,6 +27,12 @@
     <link rel="stylesheet" href="styles/components/schedule.css">
     <link rel="stylesheet" href="styles/components/settings-modal.css">
     <link rel="stylesheet" href="styles/components/settings-controls.css">
+    <!-- New Form Components -->
+    <link rel="stylesheet" href="styles/components/forms-base.css">
+    <link rel="stylesheet" href="styles/components/forms-toggle.css">
+    <link rel="stylesheet" href="styles/components/forms-slider.css">
+    <link rel="stylesheet" href="styles/components/forms-select.css">
+    <link rel="stylesheet" href="styles/components/forms-radio-group.css">
     <link rel="stylesheet" href="styles/components/search-highlights.css">
     <link rel="stylesheet" href="styles/components/search-inline.css">
     <link rel="stylesheet" href="styles/components/tracks.css">
@@ -309,48 +315,52 @@
                 <!-- Time Management Tab -->
                 <div id="panel-time" class="settings-tab-panel active" data-tab-panel="time" role="tabpanel">
                     <div class="settings-section">
-                        <h3 class="settings-section-title">Nu-knapp Inställningar</h3>
+                        <h3 class="settings-section-title">Nu-knapp & Tidshantering</h3>
                         <div class="settings-section-content">
                             <!-- Offset Slider -->
-                            <div class="setting-item">
-                                <label class="setting-label" for="offset-slider">Röd linje position</label>
-                                <div class="settings-slider-container">
-                                    <div class="settings-slider-wrapper">
-                                        <div id="offset-slider" class="settings-slider">
-                                            <div id="offset-slider-track" class="settings-slider-track"></div>
-                                            <div id="offset-slider-thumb" class="settings-slider-thumb"></div>
-                                        </div>
-                                        <span id="offset-value" class="settings-slider-value">20%</span>
-                                    </div>
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label" for="offset-slider">Röd linje position</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
-                                <p class="setting-help">Position för röd linje från vänsterkanten (0-50%). Vid 20% är linjen nära vänster kant, vid 50% i mitten av skärmen.</p>
+                                <div class="slider-wrapper">
+                                    <input id="offset-slider" type="range" min="0" max="50" value="20" class="slider" data-unit="%">
+                                    <span class="slider-value">20%</span>
+                                </div>
+                                <p class="form-help">Position för röd linje från vänsterkanten (0-50%). Vid 20% är linjen nära vänster kant, vid 50% i mitten av skärmen.</p>
                             </div>
 
                             <!-- Follow Mode Toggle -->
-                            <div class="setting-item">
-                                <label class="setting-label" for="follow-mode">Aktivera följ-läge</label>
-                                <div class="setting-control">
-                                    <div class="settings-toggle-wrapper">
-                                        <button id="follow-mode" class="settings-toggle" aria-label="Aktivera följ-läge">
-                                            <span class="settings-toggle-knob"></span>
-                                        </button>
-                                    </div>
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label">Aktivera följ-läge</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
-                                <p class="setting-help">Aktiverar automatisk scrollning som följer tiden.</p>
+                                <div class="toggle-switch" id="follow-mode" role="switch" aria-checked="false" tabindex="0">
+                                    <div class="toggle-thumb"></div>
+                                </div>
+                                <p class="form-help">Aktiverar automatisk scrollning som följer tiden. Går även att aktivera/inaktivera genom att dubbelklicka på "Nu" knappen.</p>
                             </div>
 
                             <!-- Update Interval Select -->
-                            <div class="setting-item">
-                                <label class="setting-label" for="update-interval">Uppdateringsintervall</label>
-                                <div class="settings-select-wrapper">
-                                    <select id="update-interval" class="settings-select" aria-label="Uppdateringsintervall">
-                                        <option value="30">30 sekunder</option>
-                                        <option value="60" selected>60 sekunder</option>
-                                        <option value="120">120 sekunder</option>
-                                        <option value="300">5 minuter</option>
-                                    </select>
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label">Uppdateringsintervall</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
-                                <p class="setting-help">Hur ofta vyn ska uppdateras i följ-läge.</p>
+                                <div class="custom-select">
+                                    <button class="custom-select-button" id="update-interval" aria-expanded="false">
+                                        60 sekunder
+                                        <div class="custom-select-chevron">▼</div>
+                                    </button>
+                                    <div class="custom-select-menu">
+                                        <div class="custom-select-option" data-value="30">30 sekunder</div>
+                                        <div class="custom-select-option selected" data-value="60">60 sekunder</div>
+                                        <div class="custom-select-option" data-value="120">120 sekunder</div>
+                                        <div class="custom-select-option" data-value="300">5 minuter</div>
+                                    </div>
+                                </div>
+                                <p class="form-help">Hur ofta vyn ska uppdateras i följ-läge.</p>
                             </div>
                     </div>
                     </div>
@@ -359,55 +369,83 @@
                 <!-- Display Tab -->
                 <div id="panel-display" class="settings-tab-panel" data-tab-panel="display" role="tabpanel" hidden>
                     <div class="settings-section">
-                        <h3 class="settings-section-title">Tågfärger (enkelt)</h3>
+                        <h3 class="settings-section-title">Tågfärger</h3>
                         <div class="settings-section-content">
-                            <div class="setting-item">
-                                <label class="setting-label" for="train-color-mode">Färgläge</label>
-                                <div class="settings-select-wrapper">
-                                    <select id="train-color-mode" class="settings-select" aria-label="Färgläge">
-                                        <option value="length">Efter längd</option>
-                                        <option value="single">Enfärgad</option>
-                                    </select>
+                            <!-- Color Mode Select -->
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label" for="train-color-mode">Färgläge</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
-                                <p class="setting-help">Färgkoda efter tåglängd eller använd samma färg för alla.</p>
+                                <div class="custom-select">
+                                    <button class="custom-select-button" id="train-color-mode" aria-expanded="false">
+                                        Efter längd
+                                        <div class="custom-select-chevron">▼</div>
+                                    </button>
+                                    <div class="custom-select-menu">
+                                        <div class="custom-select-option selected" data-value="length">Efter längd</div>
+                                        <div class="custom-select-option" data-value="single">Enfärgad</div>
+                                    </div>
+                                </div>
+                                <p class="form-help">Färgkoda efter tåglängd eller använd samma färg för alla.</p>
                             </div>
 
-                            <div class="setting-item" id="length-theme-controls">
-                                <label class="setting-label" for="length-theme">Färgtema (efter längd)</label>
-                                <div class="settings-select-wrapper">
-                                    <select id="length-theme" class="settings-select" aria-label="Färgtema för längd">
-                                        <option value="standard">Standard (tema-anpassad)</option>
-                                        <option value="modern">Modern (ljust grå)</option>
-                                        <option value="highvis">Högsynlighet</option>
-                                        <option value="dark">Mörka färger</option>
-                                        <option value="simon">Simon färger 💀</option>
-                                    </select>
+                            <!-- Length Theme Select -->
+                            <div class="form-control" id="length-theme-controls">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label" for="length-theme">Färgtema (efter längd)</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
-                                <p class="setting-help">Välj ett färdigt tema eller anpassa manuellt nedan.</p>
+                                <div class="custom-select">
+                                    <button class="custom-select-button" id="length-theme" aria-expanded="false">
+                                        Modern (ljust grå)
+                                        <div class="custom-select-chevron">▼</div>
+                                    </button>
+                                    <div class="custom-select-menu">
+                                        <div class="custom-select-option" data-value="custom">Anpassad</div>
+                                        <div class="custom-select-option selected" data-value="modern">Modern (ljust grå)</div>
+                                        <div class="custom-select-option" data-value="highvis">Högsynlighet</div>
+                                        <div class="custom-select-option" data-value="dark">Mörka färger</div>
+                                        <div class="custom-select-option" data-value="simon">Simon färger 💀</div>
+                                    </div>
+                                </div>
+                                <p class="form-help">Välj ett färdigt tema eller anpassa manuellt nedan.</p>
                             </div>
 
-                            <div class="setting-item" id="single-color-controls" style="display:none;">
-                                <label class="setting-label" for="single-theme">Färgtema (enfärgat)</label>
-                                <div class="settings-select-wrapper">
-                                    <select id="single-theme" class="settings-select" aria-label="Färgtema enfärgat">
-                                        <option value="standard">Standard (tema-anpassad)</option>
-                                        <option value="neutral">Grå</option>
-                                        <option value="blue">Blå</option>
-                                        <option value="green">Grön</option>
-                                        <option value="amber">Ggul</option>
-                                        <option value="simon">Simon färger 💀</option>
-                                    </select>
+                            <!-- Single Theme Select -->
+                            <div class="form-control" id="single-color-controls" style="display:none;">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label" for="single-theme">Färgtema (enfärgat)</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
-                                <div class="settings-color-row-simple" style="margin-top: var(--space-3);">
+                                <div class="custom-select">
+                                    <button class="custom-select-button" id="single-theme" aria-expanded="false">
+                                        Neutral grå
+                                        <div class="custom-select-chevron">▼</div>
+                                    </button>
+                                    <div class="custom-select-menu">
+                                        <div class="custom-select-option" data-value="custom">Anpassad</div>
+                                        <div class="custom-select-option selected" data-value="neutral">Neutral grå</div>
+                                        <div class="custom-select-option" data-value="blue">Blå</div>
+                                        <div class="custom-select-option" data-value="green">Grön</div>
+                                        <div class="custom-select-option" data-value="amber">Gul</div>
+                                        <div class="custom-select-option" data-value="simon">Simon färger 💀</div>
+                                    </div>
+                                </div>
+                                <div class="settings-color-row-simple" style="margin-top: var(--spacing-3);">
                                     <label class="color-simple-label">Bakgrund <input id="single-bg" type="color" class="settings-color-simple"></label>
                                     <label class="color-simple-label">Kant <input id="single-border" type="color" class="settings-color-simple"></label>
                                     <label class="color-simple-label">Text <input id="single-text" type="color" class="settings-color-simple"></label>
                                 </div>
-                                <p class="setting-help">Välj tema eller anpassa färger manuellt.</p>
+                                <p class="form-help">Välj tema eller anpassa färger manuellt.</p>
                             </div>
 
-                            <div class="setting-item">
-                                <label class="setting-label">Förhandsvisning</label>
+                            <!-- Preview Section -->
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label">Förhandsvisning</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                </div>
                                 <div id="train-preview" class="train-preview">
                                     <div class="preview-train" data-bucket="b1">b1</div>
                                     <div class="preview-train" data-bucket="b2">b2</div>
@@ -415,74 +453,91 @@
                                     <div class="preview-train" data-bucket="b4">b4</div>
                                     <div class="preview-train" data-bucket="b5">b5</div>
                                 </div>
-                                <p class="setting-help">Så här ser dina färger ut.</p>
+                                <p class="form-help">Så här ser dina färger ut.</p>
                             </div>
 
-                            <div class="setting-item">
+                            <!-- Advanced Settings Button -->
+                            <div style="margin-top: var(--spacing-4);">
                                 <button id="show-advanced-btn" class="btn btn-secondary btn-sm">
                                     Visa avancerat
                                 </button>
                             </div>
 
-                            <div id="advanced-train-colors" class="advanced-section" style="display:none;">
-                                <div class="setting-item">
-                                    <label class="setting-label" for="train-color-dimension">Längdmått</label>
-                                    <div class="settings-select-wrapper">
-                                        <select id="train-color-dimension" class="settings-select" aria-label="Längdmått">
-                                            <option value="base">Fordonstyp</option>
-                                            <option value="total">Total tåglängd</option>
-                                        </select>
+                            <!-- Advanced Color Controls -->
+                            <div id="advanced-train-colors" style="display:none;">
+                                <div style="margin-top: var(--spacing-6); padding: var(--spacing-4); border-radius: var(--radius-lg); background: var(--surface-tertiary); border: 1px solid var(--border-secondary);">
+                                    <div class="form-control">
+                                        <div class="form-label-wrapper">
+                                            <label class="form-label" for="train-color-dimension">Längdmått</label>
+                                            <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                        </div>
+                                        <div class="custom-select">
+                                            <button class="custom-select-button" id="train-color-dimension" aria-expanded="false">
+                                                Fordonstyp
+                                                <div class="custom-select-chevron">▼</div>
+                                            </button>
+                                            <div class="custom-select-menu">
+                                                <div class="custom-select-option selected" data-value="base">Fordonstyp</div>
+                                                <div class="custom-select-option" data-value="total">Total tåglängd</div>
+                                            </div>
+                                        </div>
+                                        <p class="form-help">Färgning baserad på fordonets längd eller hela sättets längd.</p>
                                     </div>
-                                    <p class="setting-help">Färgning baserad på fordonets längd eller hela sättets längd.</p>
-                                </div>
 
-                                <div class="setting-item">
-                                    <label class="setting-label">Kanoniska längder (m)</label>
-                                    <div class="settings-grid-5-compact">
-                                        <input id="len-canon-1" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="50">
-                                        <input id="len-canon-2" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="75">
-                                        <input id="len-canon-3" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="80">
-                                        <input id="len-canon-4" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="107">
-                                        <input id="len-canon-5" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="135">
+                                    <div class="form-control">
+                                        <div class="form-label-wrapper">
+                                            <label class="form-label">Kanoniska längder (m)</label>
+                                            <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                        </div>
+                                        <div class="settings-grid-5-compact">
+                                            <input id="len-canon-1" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="50">
+                                            <input id="len-canon-2" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="75">
+                                            <input id="len-canon-3" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="80">
+                                            <input id="len-canon-4" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="107">
+                                            <input id="len-canon-5" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="135">
+                                        </div>
+                                        <p class="form-help">Längdintervall för b1–b5 (system väljer närmaste).</p>
                                     </div>
-                                    <p class="setting-help">Längdintervall för b1–b5 (system väljer närmaste).</p>
-                                </div>
 
-                                <div class="setting-item">
-                                    <label class="setting-label">Anpassa färger per bucket</label>
-                                    <div class="settings-color-grid-compact">
-                                        <div class="color-row-compact">
-                                            <span class="color-label-compact">b1</span>
-                                            <input id="len-b1-bg" type="color" class="settings-color-compact">
-                                            <input id="len-b1-border" type="color" class="settings-color-compact">
-                                            <input id="len-b1-text" type="color" class="settings-color-compact">
+                                    <div class="form-control">
+                                        <div class="form-label-wrapper">
+                                            <label class="form-label">Anpassa färger per bucket</label>
+                                            <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                         </div>
-                                        <div class="color-row-compact">
-                                            <span class="color-label-compact">b2</span>
-                                            <input id="len-b2-bg" type="color" class="settings-color-compact">
-                                            <input id="len-b2-border" type="color" class="settings-color-compact">
-                                            <input id="len-b2-text" type="color" class="settings-color-compact">
+                                        <div class="settings-color-grid-compact">
+                                            <div class="color-row-compact">
+                                                <span class="color-label-compact">b1</span>
+                                                <input id="len-b1-bg" type="color" class="settings-color-compact">
+                                                <input id="len-b1-border" type="color" class="settings-color-compact">
+                                                <input id="len-b1-text" type="color" class="settings-color-compact">
+                                            </div>
+                                            <div class="color-row-compact">
+                                                <span class="color-label-compact">b2</span>
+                                                <input id="len-b2-bg" type="color" class="settings-color-compact">
+                                                <input id="len-b2-border" type="color" class="settings-color-compact">
+                                                <input id="len-b2-text" type="color" class="settings-color-compact">
+                                            </div>
+                                            <div class="color-row-compact">
+                                                <span class="color-label-compact">b3</span>
+                                                <input id="len-b3-bg" type="color" class="settings-color-compact">
+                                                <input id="len-b3-border" type="color" class="settings-color-compact">
+                                                <input id="len-b3-text" type="color" class="settings-color-compact">
+                                            </div>
+                                            <div class="color-row-compact">
+                                                <span class="color-label-compact">b4</span>
+                                                <input id="len-b4-bg" type="color" class="settings-color-compact">
+                                                <input id="len-b4-border" type="color" class="settings-color-compact">
+                                                <input id="len-b4-text" type="color" class="settings-color-compact">
+                                            </div>
+                                            <div class="color-row-compact">
+                                                <span class="color-label-compact">b5</span>
+                                                <input id="len-b5-bg" type="color" class="settings-color-compact">
+                                                <input id="len-b5-border" type="color" class="settings-color-compact">
+                                                <input id="len-b5-text" type="color" class="settings-color-compact">
+                                            </div>
                                         </div>
-                                        <div class="color-row-compact">
-                                            <span class="color-label-compact">b3</span>
-                                            <input id="len-b3-bg" type="color" class="settings-color-compact">
-                                            <input id="len-b3-border" type="color" class="settings-color-compact">
-                                            <input id="len-b3-text" type="color" class="settings-color-compact">
-                                        </div>
-                                        <div class="color-row-compact">
-                                            <span class="color-label-compact">b4</span>
-                                            <input id="len-b4-bg" type="color" class="settings-color-compact">
-                                            <input id="len-b4-border" type="color" class="settings-color-compact">
-                                            <input id="len-b4-text" type="color" class="settings-color-compact">
-                                        </div>
-                                        <div class="color-row-compact">
-                                            <span class="color-label-compact">b5</span>
-                                            <input id="len-b5-bg" type="color" class="settings-color-compact">
-                                            <input id="len-b5-border" type="color" class="settings-color-compact">
-                                            <input id="len-b5-text" type="color" class="settings-color-compact">
-                                        </div>
+                                        <p class="form-help">Lämna standard eller anpassa manuellt (bg/kant/text).</p>
                                     </div>
-                                    <p class="setting-help">Lämna standard eller anpassa manuellt (bg/kant/text).</p>
                                 </div>
                             </div>
                     </div>
@@ -492,78 +547,94 @@
                 <!-- Delays Tab -->
                 <div id="panel-delays" class="settings-tab-panel" data-tab-panel="delays" role="tabpanel" hidden>
                     <div class="settings-section">
-                        <h3 class="settings-section-title">Försenkningsvisualisering</h3>
+                        <h3 class="settings-section-title">Varningar & Konflikter</h3>
                         <div class="settings-section-content">
-                            <!-- Visualization Mode -->
-                            <div class="setting-item">
-                                <label class="setting-label">Visualiseringsläge</label>
-                                <div class="setting-control">
-                                    <label class="settings-radio">
-                                        <input type="radio" name="delay-mode" value="offset" checked>
-                                        <span>Overlay (visar försening som färgad overlay)</span>
-                                    </label>
-                                    <label class="settings-radio">
-                                        <input type="radio" name="delay-mode" value="icon">
-                                        <span>Ikon (visar försening som badge)</span>
-                                    </label>
-                                    <label class="settings-radio">
-                                        <input type="radio" name="delay-mode" value="both">
-                                        <span>Båda (overlay + badge)</span>
-                                    </label>
+                            <!-- Show Warnings Toggle -->
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label">Visa konfliktvarningar</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
-                                <p class="setting-help">Välj hur förseningar ska visas på tågstaplar</p>
+                                <div class="toggle-switch" id="delay-show-warnings" role="switch" aria-checked="true" tabindex="0">
+                                    <div class="toggle-thumb"></div>
+                                </div>
+                                <p class="form-help">Visa varning när försenade tåg påverkar andra tåg</p>
                             </div>
 
-                            <!-- Turnaround Time -->
-                            <div class="setting-item">
-                                <label class="setting-label" for="delay-turnaround-time">Vändtid</label>
-                                <div class="settings-slider-container">
-                                    <div class="settings-slider-wrapper">
-                                        <input id="delay-turnaround-time" type="range" min="5" max="30" value="10" class="settings-slider">
-                                        <span id="delay-turnaround-value" class="settings-slider-value">10 min</span>
-                                    </div>
+                            <!-- Conflict Tolerance Slider -->
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label" for="delay-conflict-tolerance">Konflikttolerans</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
-                                <p class="setting-help">Buffert för tömning, personalbyte och påfyllning</p>
-                            </div>
-
-                            <!-- Conflict Tolerance -->
-                            <div class="setting-item">
-                                <label class="setting-label" for="delay-conflict-tolerance">Konflikttolerans</label>
-                                <div class="settings-slider-container">
-                                    <div class="settings-slider-wrapper">
-                                        <input id="delay-conflict-tolerance" type="range" min="0" max="15" value="5" class="settings-slider">
-                                        <span id="delay-tolerance-value" class="settings-slider-value">5 min</span>
-                                    </div>
+                                <div class="slider-wrapper">
+                                    <input id="delay-conflict-tolerance" type="range" min="0" max="15" value="5" class="slider" data-unit=" min">
+                                    <span class="slider-value">5 min</span>
                                 </div>
-                                <p class="setting-help">Tidsfönster för varningsmeddelanden</p>
+                                <p class="form-help">Tidsfönster för varningsmeddelanden</p>
                             </div>
-
-                            <!-- Visualization Style -->
-                            <div class="setting-item">
-                                <label class="setting-label" for="delay-visualization-style">Försening stil</label>
-                                <div class="setting-control">
-                                    <select id="delay-visualization-style" class="settings-select">
-                                        <option value="color-coded">Färgkodad (standard)</option>
-                                        <option value="transparent">Transparent</option>
-                                        <option value="dashed">Streckad kant</option>
-                                    </select>
-                                </div>
-                                <p class="setting-help">Hur förseningar visas på tågstapeln</p>
-                            </div>
-
-                            <!-- Show Warnings -->
-                            <div class="setting-item">
-                                <label class="setting-label" for="delay-show-warnings">Visa konfliktvarningar</label>
-                                <div class="setting-control">
-                                    <div class="settings-toggle-wrapper">
-                                        <button id="delay-show-warnings" class="settings-toggle active" aria-label="Visa konfliktvarningar">
-                                            <span class="settings-toggle-knob"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <p class="setting-help">Visa varning när försenade tåg påverkar andra tåg</p>
-                            </div>
+                        </div>
                     </div>
+
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Visualisering</h3>
+                        <div class="settings-section-content">
+                            <!-- Visualization Mode - Segmented Control -->
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label">Visualiseringsläge</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                </div>
+                                <div class="radio-group">
+                                    <div class="radio-group-option">
+                                        <input id="delay-mode-offset" type="radio" name="delay-mode" value="offset" checked class="radio-group-input">
+                                        <label for="delay-mode-offset" class="radio-group-label">Overlay</label>
+                                    </div>
+                                    <div class="radio-group-option">
+                                        <input id="delay-mode-icon" type="radio" name="delay-mode" value="icon" class="radio-group-input">
+                                        <label for="delay-mode-icon" class="radio-group-label">Ikon</label>
+                                    </div>
+                                    <div class="radio-group-option">
+                                        <input id="delay-mode-both" type="radio" name="delay-mode" value="both" class="radio-group-input">
+                                        <label for="delay-mode-both" class="radio-group-label">Båda</label>
+                                    </div>
+                                </div>
+                                <p class="form-help">Välj hur förseningar ska visas på tågstaplar</p>
+                            </div>
+
+                            <!-- Visualization Style - Custom Select -->
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label" for="delay-visualization-style">Försening stil</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                </div>
+                                <div class="custom-select">
+                                    <button class="custom-select-button" id="delay-visualization-style" aria-expanded="false">
+                                        Färgkodad (standard)
+                                        <div class="custom-select-chevron">▼</div>
+                                    </button>
+                                    <div class="custom-select-menu">
+                                        <div class="custom-select-option selected" data-value="color-coded">Färgkodad (standard)</div>
+                                        <div class="custom-select-option" data-value="transparent">Transparent</div>
+                                        <div class="custom-select-option" data-value="dashed">Streckad kant</div>
+                                    </div>
+                                </div>
+                                <p class="form-help">Hur förseningar visas på tågstapeln</p>
+                            </div>
+
+                            <!-- Turnaround Time Slider -->
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label" for="delay-turnaround-time">Vändtid (buffert)</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                </div>
+                                <div class="slider-wrapper">
+                                    <input id="delay-turnaround-time" type="range" min="5" max="30" value="10" class="slider" data-unit=" min">
+                                    <span class="slider-value">10 min</span>
+                                </div>
+                                <p class="form-help">Buffert för tömning, personalbyte och påfyllning</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -621,6 +692,7 @@
     
     <!-- 4. Settings -->
     <script src="js/components/settings-controls.js"></script>
+    <script src="js/components/forms.js"></script>
     <script src="js/components/settings-modal.js"></script>
     <script src="js/components/settings-delay.js"></script>
     
@@ -637,6 +709,11 @@
     
     <!-- 7. Header & Schedule -->
     <script src="js/modules/header-controls.js"></script>
+    <!-- Schedule renderer modules (load in dependency order) -->
+    <script src="js/modules/color-utils.js"></script>
+    <script src="js/modules/train-positioning.js"></script>
+    <script src="js/modules/timeline-renderer.js"></script>
+    <script src="js/modules/train-renderer.js"></script>
     <script src="js/modules/schedule-renderer.js"></script>
     
     <!-- 8. Main app -->
@@ -660,3 +737,4 @@
     </script>
 </body>
 </html>
+

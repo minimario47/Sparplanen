@@ -9,14 +9,14 @@
 
     // Predefined color themes for length-based coloring
     const lengthThemes = {
-        standard: {
-            name: 'Standard (tema-anpassad)',
+        custom: {
+            name: 'Anpassad',
             colors: {
-                b1: { bg: '', border: '', text: '' },
-                b2: { bg: '', border: '', text: '' },
-                b3: { bg: '', border: '', text: '' },
-                b4: { bg: '', border: '', text: '' },
-                b5: { bg: '', border: '', text: '' }
+                b1: { bg: '#f0f4f8', border: '#7c8c9e', text: '#1a2332' },
+                b2: { bg: '#e8eef5', border: '#6b7d91', text: '#1a2332' },
+                b3: { bg: '#dfe7f0', border: '#5a6d7f', text: '#1a2332' },
+                b4: { bg: '#d6e1eb', border: '#495e6d', text: '#1a2332' },
+                b5: { bg: '#cddae6', border: '#384e5b', text: '#1a2332' }
             }
         },
         modern: {
@@ -63,9 +63,9 @@
 
     // Predefined color themes for single-color mode
     const singleThemes = {
-        standard: {
-            name: 'Standard (tema-anpassad)',
-            color: { bg: '', border: '', text: '' }
+        custom: {
+            name: 'Anpassad',
+            color: { bg: '#e8eef5', border: '#6b7d91', text: '#1a2332' }
         },
         neutral: {
             name: 'Neutral grå',
@@ -98,16 +98,16 @@
         trainColorMode: 'length',       // 'length' | 'single'
         trainColorDimension: 'base',    // 'base' | 'total'
         canonicalLengths: [50, 75, 80, 107, 135],
-        lengthTheme: 'standard',
-        singleTheme: 'standard',
+        lengthTheme: 'modern',          // Default to modern colors
+        singleTheme: 'neutral',         // Default to neutral gray
         lenColors: {
-            b1: { bg: '', border: '', text: '' },
-            b2: { bg: '', border: '', text: '' },
-            b3: { bg: '', border: '', text: '' },
-            b4: { bg: '', border: '', text: '' },
-            b5: { bg: '', border: '', text: '' }
+            b1: { bg: '#f0f4f8', border: '#7c8c9e', text: '#1a2332' },
+            b2: { bg: '#e8eef5', border: '#6b7d91', text: '#1a2332' },
+            b3: { bg: '#dfe7f0', border: '#5a6d7f', text: '#1a2332' },
+            b4: { bg: '#d6e1eb', border: '#495e6d', text: '#1a2332' },
+            b5: { bg: '#cddae6', border: '#384e5b', text: '#1a2332' }
         },
-        singleColor: { bg: '', border: '', text: '' }
+        singleColor: { bg: '#e8eef5', border: '#6b7d91', text: '#1a2332' }
     };
 
     // Current settings (loaded from localStorage or defaults)
@@ -202,12 +202,28 @@
         // Listen for settings button click in header
         const settingsBtn = document.querySelector('.settings-button');
         if (settingsBtn) {
-            settingsBtn.addEventListener('click', openModal);
+            settingsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openModal();
+            });
         } else {
             console.warn('Settings button not found in DOM');
+            // Retry after a short delay in case DOM isn't fully ready
+            setTimeout(() => {
+                const retryBtn = document.querySelector('.settings-button');
+                if (retryBtn) {
+                    retryBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openModal();
+                    });
+                    console.log('✅ Settings button listener attached on retry');
+                }
+            }, 500);
         }
 
-        // Advanced toggle button
+        // Advanced toggle button - Only shown when theme is "standard"
         const showAdvancedBtn = document.getElementById('show-advanced-btn');
         const advancedSection = document.getElementById('advanced-train-colors');
         if (showAdvancedBtn && advancedSection) {
@@ -219,38 +235,75 @@
             });
         }
 
-        // Color mode change (show/hide single color controls and theme selectors)
-        const colorModeSelect = document.getElementById('train-color-mode');
-        const singleColorControls = document.getElementById('single-color-controls');
-        const lengthThemeControls = document.getElementById('length-theme-controls');
-        if (colorModeSelect) {
-            colorModeSelect.addEventListener('change', () => {
-                const isSingle = colorModeSelect.value === 'single';
-                if (singleColorControls) singleColorControls.style.display = isSingle ? 'block' : 'none';
-                if (lengthThemeControls) lengthThemeControls.style.display = isSingle ? 'none' : 'block';
-                updatePreview();
-            });
-        }
+        // Setup event listeners for display panel controls
+        setupDisplayPanelListeners();
+    }
 
-        // Theme selector change handlers
-        const lengthThemeSelect = document.getElementById('length-theme');
-        if (lengthThemeSelect) {
-            lengthThemeSelect.addEventListener('change', () => {
-                applyLengthTheme(lengthThemeSelect.value);
-            });
-        }
+    /**
+     * Setup event listeners for display panel controls
+     */
+    function setupDisplayPanelListeners() {
+        // Wait for DOM to be ready
+        setTimeout(() => {
+            // Color mode select
+            const colorModeContainer = document.querySelector('#train-color-mode')?.closest('.custom-select');
+            if (colorModeContainer) {
+                colorModeContainer.addEventListener('change', (e) => {
+                    e.stopPropagation(); // Prevent modal from closing
+                    const value = e.detail.value;
+                    currentSettings.trainColorMode = value;
+                    const isSingle = value === 'single';
+                    const themeToUse = isSingle ? currentSettings.singleTheme : currentSettings.lengthTheme;
+                    updateVisibility(value, themeToUse || 'modern');
+                    updatePreview();
+                    saveSettings();
+                    console.log('🎨 Color mode changed to:', value);
+                });
+            }
 
-        const singleThemeSelect = document.getElementById('single-theme');
-        if (singleThemeSelect) {
-            singleThemeSelect.addEventListener('change', () => {
-                applySingleTheme(singleThemeSelect.value);
-            });
-        }
+            // Length theme select
+            const lengthThemeContainer = document.querySelector('#length-theme')?.closest('.custom-select');
+            if (lengthThemeContainer) {
+                lengthThemeContainer.addEventListener('change', (e) => {
+                    e.stopPropagation(); // Prevent modal from closing
+                    const themeValue = e.detail.value;
+                    applyLengthTheme(themeValue);
+                    updateVisibility('length', themeValue);
+                    updatePreview();
+                    saveSettings();
+                    console.log('🎨 Length theme changed to:', themeValue);
+                });
+            }
 
-        // Update preview on any color input change
-        document.querySelectorAll('#panel-display input[type="color"]').forEach(input => {
-            input.addEventListener('input', updatePreview);
-        });
+            // Single theme select
+            const singleThemeContainer = document.querySelector('#single-theme')?.closest('.custom-select');
+            if (singleThemeContainer) {
+                singleThemeContainer.addEventListener('change', (e) => {
+                    e.stopPropagation(); // Prevent modal from closing
+                    const themeValue = e.detail.value;
+                    applySingleTheme(themeValue);
+                    updateVisibility('single', themeValue);
+                    updatePreview();
+                    saveSettings();
+                    console.log('🎨 Single theme changed to:', themeValue);
+                });
+            }
+
+            // Color inputs
+            document.querySelectorAll('#panel-display input[type="color"]').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    e.stopPropagation();
+                    updatePreview();
+                    // Mark as custom when user manually changes colors
+                    if (currentSettings.trainColorMode === 'single') {
+                        currentSettings.singleTheme = 'custom';
+                    } else {
+                        currentSettings.lengthTheme = 'custom';
+                    }
+                    saveSettings();
+                });
+            });
+        }, 100);
     }
 
     /**
@@ -263,7 +316,13 @@
         }
 
         isOpen = true;
+        
+        // Remove hidden class to make element visible
         elements.backdrop.classList.remove('hidden', 'closing');
+        
+        // Force reflow to ensure animation triggers
+        // Without this, the animation might not play when hidden was removed
+        void elements.backdrop.offsetHeight;
         
         // Load current settings into controls
         updateControlsFromSettings();
@@ -271,16 +330,15 @@
         // Update preview and visibility
         updatePreview();
         
-        // Show/hide controls based on mode
-        const colorMode = document.getElementById('train-color-mode')?.value;
-        const isSingle = colorMode === 'single';
-        const singleControls = document.getElementById('single-color-controls');
-        const lengthControls = document.getElementById('length-theme-controls');
-        if (singleControls) singleControls.style.display = isSingle ? 'block' : 'none';
-        if (lengthControls) lengthControls.style.display = isSingle ? 'none' : 'block';
+        // Show/hide controls based on saved settings
+        const selectedColorMode = currentSettings.trainColorMode || 'length';
+        const selectedTheme = selectedColorMode === 'single' ? currentSettings.singleTheme : currentSettings.lengthTheme;
+        updateVisibility(selectedColorMode, selectedTheme || 'modern');
 
         // Focus management
         trapFocus();
+        
+        console.log('✅ Settings modal opened');
     }
 
     /**
@@ -423,18 +481,9 @@
         if (confirm('Är du säker på att du vill återställa alla inställningar till standardvärden?')) {
             currentSettings = JSON.parse(JSON.stringify(defaultSettings));
             
-            // Reset colors to empty (theme defaults)
-            currentSettings.lenColors = {
-                b1: { bg: '', border: '', text: '' },
-                b2: { bg: '', border: '', text: '' },
-                b3: { bg: '', border: '', text: '' },
-                b4: { bg: '', border: '', text: '' },
-                b5: { bg: '', border: '', text: '' }
-            };
-            currentSettings.singleColor = { bg: '', border: '', text: '' };
-            
             updateControlsFromSettings();
             updatePreview();
+            updateVisibility(defaultSettings.trainColorMode, defaultSettings.lengthTheme);
             
             // Apply to UI immediately
             if (window.SettingsControls) {
@@ -443,7 +492,9 @@
                 window.SettingsControls.setSelectValue('update-interval', defaultSettings.updateInterval);
             }
             
-            console.log('⚙️ Settings reset to defaults');
+            saveSettings();
+            
+            console.log('⚙️ Settings reset to defaults (modern theme)');
         }
     }
 
@@ -602,6 +653,53 @@
             const hex = x.toString(16);
             return hex.length === 1 ? '0' + hex : hex;
         }).join('');
+    }
+
+    /**
+     * Update visibility of controls based on color mode and theme
+     */
+    function updateVisibility(colorMode, themeId) {
+        const singleColorControls = document.getElementById('single-color-controls');
+        const lengthThemeControls = document.getElementById('length-theme-controls');
+        const showAdvancedBtn = document.getElementById('show-advanced-btn');
+        const advancedSection = document.getElementById('advanced-train-colors');
+        
+        // Show/hide based on color mode (single vs length)
+        const isSingle = colorMode === 'single';
+        if (singleColorControls) {
+            singleColorControls.style.display = isSingle ? 'block' : 'none';
+        }
+        if (lengthThemeControls) {
+            lengthThemeControls.style.display = isSingle ? 'none' : 'block';
+        }
+        
+        // "Anpassad" (custom) theme = show advanced controls automatically
+        const isCustom = themeId === 'custom';
+        
+        if (showAdvancedBtn) {
+            // Hide button entirely when in custom mode (advanced is always shown)
+            // Only show button for preset themes in length mode
+            showAdvancedBtn.style.display = (!isSingle && !isCustom) ? 'block' : 'none';
+        }
+        
+        if (advancedSection) {
+            if (isSingle) {
+                // Never show advanced in single color mode
+                advancedSection.style.display = 'none';
+            } else if (isCustom) {
+                // Always show advanced for custom theme
+                advancedSection.style.display = 'block';
+                // Update button text if visible
+                if (showAdvancedBtn) {
+                    showAdvancedBtn.textContent = 'Dölj avancerat';
+                }
+            } else {
+                // For preset themes, hide by default (let button control it)
+                advancedSection.style.display = 'none';
+            }
+        }
+        
+        console.log(`🎨 Visibility: mode=${colorMode}, theme=${themeId}, custom=${isCustom}, advShown=${advancedSection?.style.display}`);
     }
 
     /**

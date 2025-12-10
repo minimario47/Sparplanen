@@ -7,63 +7,12 @@
 
 ### 0. PROJECT STRUCTURE & TESTABILITY (CRITICAL - READ FIRST!)
 
-**ABSOLUT VIKTIGAST - DETTA MÅSTE FÖLJAS VID VARJE FIL-SKAPANDE:**
-
-#### Projektstruktur
-
-**ALLA NYA FILER SKA SKAPAS I: `/Users/mikailyenigun/Desktop/Spårplannen/sparplanen2v/`**
-
-- Detta är det NYA programmet, helt separerat från gamla koden
-- Gamla koden i `/Users/mikailyenigun/Desktop/Spårplannen/` är ENDAST för referens
-- **SKAPA ALDRIG nya filer i root Spårplannen-foldern**
-- **SKAPA ALLTID nya filer i sparplanen2v/-foldern**
-
-#### Folder-Organisation inom sparplanen2v/
-
-```
-sparplanen2v/
-├── index.html                          # MAIN entry point - användaren kör detta
-├── styles/
-│   ├── design-system.css              # Design system variables
-│   ├── typography.css                 # Typography system
-│   ├── variables.css                  # Legacy compatibility
-│   ├── themes.css                     # Light/dark/high-contrast themes
-│   ├── base.css                       # Base HTML styling
-│   ├── layout.css                     # Layout components
-│   ├── components/                    # Component-specific styles
-│   │   ├── buttons.css
-│   │   ├── modals.css
-│   │   ├── forms.css
-│   │   └── ...
-│   └── ...
-├── js/
-│   ├── app.js                         # Main application
-│   ├── config.js                      # Configuration
-│   ├── modules/                       # Feature modules
-│   │   ├── timeline/
-│   │   ├── tracks/
-│   │   ├── trains/
-│   │   └── ...
-│   ├── components/                    # Reusable components
-│   ├── utils/                         # Utility functions
-│   └── ...
-├── assets/
-│   ├── icons/
-│   ├── images/
-│   └── fonts/
-├── data/
-│   ├── tracks.js
-│   ├── trains.js
-│   └── vehicleTypes.js
-└── docs/
-    └── Never write text files, write in the chat instead if you want to tell developer something
-```
 
 #### REGEL: Auto-Organisation av Filer
 
 När AI skapar en ny fil MÅSTE den:
 
-1. **Bestämma korrekt subfolder baserat på filtyp:**
+1. **Bestämma korrekt subfolder baserat på filtyp: (example)**
    - CSS → `sparplanen2v/styles/` (eller `styles/components/` för component-specific)
    - JavaScript → `sparplanen2v/js/` (eller lämplig subfolder: modules/, components/, utils/)
    - HTML → `sparplanen2v/` (root) eller `sparplanen2v/components/` för komponenter

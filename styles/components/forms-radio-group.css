@@ -1,0 +1,145 @@
+/* Radio Button Group - Segmented control style with smooth animations */
+
+.radio-group {
+    display: flex;
+    background: var(--neutral-200);
+    border-radius: var(--radius-md);
+    padding: 2px;
+    gap: 0;
+    position: relative;
+}
+
+.radio-group-option {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    min-height: 36px;
+}
+
+.radio-group-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.radio-group-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    user-select: none;
+    min-height: 36px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+.radio-group-input:hover + .radio-group-label {
+    color: var(--text-primary);
+}
+
+.radio-group-input:focus-visible + .radio-group-label {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+}
+
+/* Selected state - using pseudo-element for background slide */
+.radio-group-input:checked + .radio-group-label {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Background highlight that slides behind labels */
+.radio-group::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: calc(100% - 4px);
+    width: calc(33.333% - 2px);
+    background: white;
+    border-radius: calc(var(--radius-md) - 2px);
+    box-shadow: var(--shadow-sm);
+    transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Adjust highlight position based on which radio is checked */
+.radio-group-input:nth-of-type(1):checked ~ .radio-group::before {
+    left: 2px;
+}
+
+.radio-group-input:nth-of-type(2):checked ~ .radio-group::before {
+    left: calc(33.333% + 2px);
+}
+
+.radio-group-input:nth-of-type(3):checked ~ .radio-group::before {
+    left: calc(66.666% + 2px);
+}
+
+.radio-group-input:nth-of-type(4):checked ~ .radio-group::before {
+    left: calc(100% - 33.333% + 2px);
+}
+
+/* Dark mode */
+[data-theme="dark"] .radio-group {
+    background: var(--neutral-800);
+}
+
+[data-theme="dark"] .radio-group::before {
+    background: var(--neutral-700);
+    box-shadow: none;
+    border: 1px solid var(--neutral-600);
+}
+
+[data-theme="dark"] .radio-group-label {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .radio-group-input:hover + .radio-group-label {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .radio-group-input:checked + .radio-group-label {
+    color: var(--text-primary);
+}
+
+/* High contrast mode */
+[data-theme="high-contrast"] .radio-group {
+    background: black;
+    border: 2px solid white;
+    padding: 0;
+    gap: 2px;
+}
+
+[data-theme="high-contrast"] .radio-group::before {
+    display: none;
+}
+
+[data-theme="high-contrast"] .radio-group-label {
+    border: 2px solid white;
+    color: white;
+    background: black;
+}
+
+[data-theme="high-contrast"] .radio-group-input:checked + .radio-group-label {
+    background: #0066ff;
+    border: 2px solid #0066ff;
+    color: white;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .radio-group::before {
+        transition: none;
+    }
+}

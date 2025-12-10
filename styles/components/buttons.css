@@ -317,6 +317,11 @@
     background: rgba(0, 0, 0, 0.1);
 }
 
+/* Disable ripple effect for icon buttons to prevent visual issues */
+.btn-icon::before {
+    display: none;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    LOADING STATE
 ═══════════════════════════════════════════════════════════════════════════ */

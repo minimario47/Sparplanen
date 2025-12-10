@@ -1,0 +1,139 @@
+/* Squishy Toggle Switch - Beautiful, animated toggle with bounce effect */
+
+.toggle-switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    width: 56px;
+    background: var(--neutral-200);
+    border-radius: 16px;
+    border: 1px solid var(--border-secondary);
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    padding: 2px;
+}
+
+.toggle-switch:hover {
+    border-color: var(--border-primary);
+}
+
+.toggle-switch:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+}
+
+/* Track styling */
+.toggle-track {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+/* Thumb (the animated circle that moves) */
+.toggle-thumb {
+    position: relative;
+    z-index: 2;
+    width: 28px;
+    height: 28px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55), box-shadow 0.2s ease;
+    margin-left: 2px;
+}
+
+/* When toggled: grow and bounce effect */
+.toggle-switch.toggled-once .toggle-thumb {
+    animation: thumbGrowBounce 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.toggle-switch.checked .toggle-thumb {
+    margin-left: auto;
+    margin-right: 2px;
+}
+
+/* Active state (checked) */
+.toggle-switch.checked {
+    background: var(--interactive-primary);
+    border-color: var(--interactive-primary);
+}
+
+.toggle-switch.checked:hover {
+    background: var(--primary-600);
+}
+
+@keyframes thumbGrowBounce {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Dark mode */
+[data-theme="dark"] .toggle-switch {
+    background: var(--neutral-700);
+    border-color: var(--neutral-600);
+}
+
+[data-theme="dark"] .toggle-switch:hover {
+    border-color: var(--neutral-500);
+}
+
+[data-theme="dark"] .toggle-thumb {
+    background: var(--neutral-200);
+    box-shadow: none;
+    border: 1px solid var(--neutral-600);
+}
+
+[data-theme="dark"] .toggle-switch.checked {
+    background: var(--primary-400);
+    border-color: var(--primary-400);
+}
+
+[data-theme="dark"] .toggle-switch.checked .toggle-thumb {
+    border-color: var(--primary-300);
+}
+
+/* High contrast mode */
+[data-theme="high-contrast"] .toggle-switch {
+    background: black;
+    border: 3px solid white;
+}
+
+[data-theme="high-contrast"] .toggle-thumb {
+    background: white;
+    border: 2px solid black;
+    box-shadow: none;
+}
+
+[data-theme="high-contrast"] .toggle-switch.checked {
+    background: #0066ff;
+    border: 3px solid white;
+}
+
+[data-theme="high-contrast"] .toggle-switch.checked .toggle-thumb {
+    background: white;
+    border: 2px solid #0066ff;
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .toggle-switch,
+    .toggle-thumb {
+        transition: none;
+    }
+    
+    .toggle-switch.toggled-once .toggle-thumb {
+        animation: none;
+    }
+}
