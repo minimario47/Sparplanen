@@ -2,146 +2,156 @@
 
 .track-tooltip {
     position: fixed;
-    z-index: 1000;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-xl);
-
-    padding: var(--space-6);
+    z-index: 10000;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    padding: 0;
     min-width: 320px;
-    max-width: 400px;
-
-    /* Glass morphism shadow */
-    box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.15),
-        0 8px 16px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6),
-        0 0 0 20px rgba(255, 255, 255, 0.1);
-
-    /* Smooth entrance animation */
-    transform: scale(0.9) translateY(10px);
+    max-width: 420px;
     opacity: 0;
-    transition: all var(--transition-base) var(--ease-out);
-
-    pointer-events: none;
-    font-family: var(--font-family-primary);
+    transform: translateY(-8px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto;
+    font-size: 14px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 .track-tooltip.visible {
-    transform: scale(1) translateY(0);
     opacity: 1;
-    pointer-events: auto;
+    transform: translateY(0) scale(1);
 }
 
-/* Header styling */
-.track-tooltip-header {
+/* Close Button */
+.track-tooltip-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--space-4);
-    padding-bottom: var(--space-3);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    transition: all 0.2s ease;
+    z-index: 1;
+}
+
+.track-tooltip-close:hover {
+    background: rgba(220, 38, 38, 0.1);
+    color: #DC2626;
+    transform: scale(1.05);
+}
+
+.track-tooltip-close:active {
+    transform: scale(0.95);
+}
+
+/* Header with Status */
+.track-tooltip-header {
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .track-tooltip-title {
-    margin: 0;
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
     color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin: 0;
 }
 
 .track-number {
     color: var(--primary-600);
-    font-weight: var(--font-weight-bold);
-}
-
-.track-tooltip-close {
-    background: none;
-    border: none;
-    font-size: var(--font-size-xl);
-    color: var(--text-tertiary);
-    cursor: pointer;
-    padding: var(--space-1);
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast) var(--ease-in-out);
-    line-height: 1;
-}
-
-.track-tooltip-close:hover {
-    background: rgba(0, 0, 0, 0.05);
-    color: var(--text-primary);
+    font-weight: 700;
 }
 
 /* Content sections */
 .track-tooltip-section {
-    margin-bottom: var(--space-4);
+    padding: 20px;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .track-tooltip-section:last-child {
-    margin-bottom: 0;
+    border-bottom: none;
 }
 
 .track-tooltip-section h4 {
-    margin: 0 0 var(--space-3) 0;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
-    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 /* Info grid */
 .track-info-grid {
-    display: grid;
-    gap: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .track-info-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-2);
-    background: rgba(0, 0, 0, 0.02);
-    border-radius: var(--radius-md);
+    padding: 8px 0;
+}
+
+.track-info-item:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
 }
 
 .track-info-label {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
     color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .track-info-value {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
+    font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+    font-weight: 600;
     color: var(--text-primary);
+    font-size: 16px;
+    letter-spacing: 0.5px;
 }
 
 /* Properties */
 .track-properties {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-bottom: var(--space-3);
+    gap: 8px;
+    margin-bottom: 12px;
 }
 
 .track-property {
     display: inline-block;
-    padding: var(--space-1) var(--space-3);
-    background: var(--primary-50);
+    padding: 4px 12px;
+    background: var(--primary-100);
     color: var(--primary-700);
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* Description */
 .track-description {
     margin: 0;
-    font-size: var(--font-size-sm);
+    font-size: 14px;
     line-height: 1.5;
     color: var(--text-secondary);
     font-style: italic;
@@ -149,30 +159,23 @@
 
 /* Dark theme support */
 [data-theme="dark"] .track-tooltip {
-    background: rgba(26, 26, 26, 0.95);
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.4),
-        0 8px 16px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 0 20px rgba(0, 0, 0, 0.2);
+    background: var(--bg-elevated);
+    border-color: var(--border-color);
 }
 
-[data-theme="dark"] .track-tooltip-header {
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .track-info-item {
+[data-theme="dark"] .track-tooltip-close {
     background: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="dark"] .track-property {
-    background: var(--primary-900);
-    color: var(--primary-300);
+    color: var(--text-secondary);
 }
 
 [data-theme="dark"] .track-tooltip-close:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(220, 38, 38, 0.1);
+    color: #DC2626;
+}
+
+[data-theme="dark"] .track-property {
+    background: var(--primary-800);
+    color: var(--primary-200);
 }
 
 /* High contrast theme support */
@@ -181,76 +184,51 @@
     border: 2px solid var(--border-primary);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="high-contrast"] .track-tooltip-header {
-    border-bottom: 2px solid var(--border-primary);
 }
 
 [data-theme="high-contrast"] .track-tooltip-close {
-    color: var(--text-primary-high-contrast);
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-primary);
 }
 
 [data-theme="high-contrast"] .track-tooltip-close:hover {
-    background: var(--surface-secondary);
-}
-
-[data-theme="high-contrast"] .track-info-item {
-    background: var(--surface-secondary);
-    border: 1px solid var(--border-primary);
+    background: var(--interactive-primary);
+    color: var(--text-inverse);
 }
 
 [data-theme="high-contrast"] .track-property {
     background: var(--surface-secondary);
-    color: var(--text-primary-high-contrast);
-    border: 1px solid var(--border-primary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-primary);
 }
 
-/* Responsive design */
-@media (max-width: 640px) {
+/* Mobile adjustments */
+@media (max-width: 768px) {
     .track-tooltip {
         min-width: 280px;
-        max-width: calc(100vw - 20px);
-        left: 10px !important;
-        right: 10px !important;
-        transform: translateX(0) translateY(10px);
+        max-width: calc(100vw - 24px);
+        font-size: 13px;
     }
-
-    .track-tooltip.visible {
-        transform: translateX(0) translateY(0);
+    
+    .track-tooltip-title {
+        font-size: 20px;
     }
-
-    .track-info-grid {
-        gap: var(--space-2);
+    
+    .track-tooltip-header {
+        padding: 12px 16px 8px;
     }
-
-    .track-info-item {
-        padding: var(--space-2);
+    
+    .track-tooltip-section {
+        padding: 16px;
     }
-
+    
     .track-properties {
-        gap: var(--space-1);
+        gap: 6px;
     }
-
+    
     .track-property {
-        padding: var(--space-1) var(--space-2);
-        font-size: var(--font-size-xs);
+        padding: 3px 8px;
+        font-size: 11px;
     }
-}
-
-/* Animation for smooth appearance */
-@keyframes tooltipFadeIn {
-    0% {
-        transform: scale(0.9) translateY(10px);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-    }
-}
-
-.track-tooltip.visible {
-    animation: tooltipFadeIn var(--transition-base) var(--ease-out);
 }

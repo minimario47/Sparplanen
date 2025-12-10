@@ -6,6 +6,7 @@
 // Default delay settings
 const DEFAULT_DELAY_SETTINGS = {
     mode: 'offset', // 'offset' | 'icon' | 'both'
+    visualizationStyle: 'color-coded', // 'color-coded' | 'transparent' | 'dashed'
     turnaroundTime: 10, // minutes
     conflictTolerance: 5, // minutes
     showWarnings: true,
@@ -23,6 +24,38 @@ const DEFAULT_DELAY_SETTINGS = {
         early: '#22C55E'
     }
 };
+
+/**
+ * Ensure toggle UI reflects checked state, supporting both legacy markup and SettingsControls helper
+ */
+function setToggleChecked(toggleElement, value) {
+    if (!toggleElement) return;
+    
+    const checked = Boolean(value);
+
+    if (window.SettingsControls && typeof window.SettingsControls.setToggleValue === 'function') {
+        window.SettingsControls.setToggleValue(toggleElement.id, checked);
+    } else {
+        toggleElement.classList.toggle('checked', checked);
+        toggleElement.classList.toggle('active', checked);
+        toggleElement.setAttribute('aria-checked', checked ? 'true' : 'false');
+    }
+}
+
+/**
+ * Read toggle state, accounting for both SettingsControls helper and plain DOM usage
+ */
+function isToggleChecked(toggleElement) {
+    if (!toggleElement) return false;
+
+    if (window.SettingsControls && typeof window.SettingsControls.getToggleValue === 'function') {
+        return Boolean(window.SettingsControls.getToggleValue(toggleElement.id));
+    }
+
+    if (toggleElement.classList.contains('checked')) return true;
+    if (toggleElement.classList.contains('active')) return true;
+    return toggleElement.getAttribute('aria-checked') === 'true';
+}
 
 /**
  * Load delay settings from localStorage
@@ -88,6 +121,7 @@ function initializeDelaySettingsUI() {
     const turnaroundValue = document.getElementById('delay-turnaround-value');
     const toleranceSlider = document.getElementById('delay-conflict-tolerance');
     const toleranceValue = document.getElementById('delay-tolerance-value');
+    const visualizationStyleSelect = document.getElementById('delay-visualization-style');
     const showWarningsToggle = document.getElementById('delay-show-warnings');
     
     // Set initial values
@@ -109,8 +143,12 @@ function initializeDelaySettingsUI() {
         if (toleranceValue) toleranceValue.textContent = `${settings.conflictTolerance} min`;
     }
     
+    if (visualizationStyleSelect) {
+        visualizationStyleSelect.value = settings.visualizationStyle || 'color-coded';
+    }
+    
     if (showWarningsToggle) {
-        showWarningsToggle.checked = settings.showWarnings;
+        setToggleChecked(showWarningsToggle, settings.showWarnings);
     }
     
     // Add event listeners
@@ -146,14 +184,45 @@ function initializeDelaySettingsUI() {
         });
     }
     
-    if (showWarningsToggle) {
-        showWarningsToggle.addEventListener('change', () => {
-            settings.showWarnings = showWarningsToggle.checked;
+    if (visualizationStyleSelect) {
+        visualizationStyleSelect.addEventListener('change', () => {
+            settings.visualizationStyle = visualizationStyleSelect.value;
             saveDelaySettings(settings);
-            logger.info('DelaySettings', `Show warnings changed to: ${settings.showWarnings}`);
+            logger.info('DelaySettings', `Visualization style changed to: ${settings.visualizationStyle}`);
         });
     }
     
+    if (showWarningsToggle) {
+        const applyShowWarningsSetting = (checked) => {
+            settings.showWarnings = Boolean(checked);
+            setToggleChecked(showWarningsToggle, settings.showWarnings);
+            saveDelaySettings(settings);
+            logger.info('DelaySettings', `Show warnings changed to: ${settings.showWarnings}`);
+        };
+
+        showWarningsToggle.addEventListener('click', () => {
+            if (window.SettingsControls && typeof window.SettingsControls.getToggleValue === 'function') {
+                // Allow SettingsControls to update the visual state first
+                setTimeout(() => {
+                    applyShowWarningsSetting(isToggleChecked(showWarningsToggle));
+                }, 0);
+            } else {
+                // Fallback for environments without SettingsControls helper
+                const nextState = !isToggleChecked(showWarningsToggle);
+                applyShowWarningsSetting(nextState);
+            }
+        });
+
+        window.addEventListener('delay-settings-changed', (event) => {
+            const updatedSettings = event.detail;
+            if (!updatedSettings || typeof updatedSettings.showWarnings === 'undefined') return;
+
+            // Sync UI if external updates (e.g., reset) modify the setting
+            setToggleChecked(showWarningsToggle, updatedSettings.showWarnings);
+            settings.showWarnings = Boolean(updatedSettings.showWarnings);
+        });
+    }
+
     logger.info('DelaySettings', 'Delay settings UI initialized');
 }
 
@@ -170,4 +239,3 @@ if (document.readyState === 'loading') {
     // DOM already loaded
     setTimeout(initializeDelaySettingsUI, 100);
 }
-

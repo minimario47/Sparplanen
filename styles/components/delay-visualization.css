@@ -330,12 +330,6 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Early trains in dark mode - green for early */
-[data-theme="dark"] .delay-overlay-main.severity-early {
-    background-color: rgba(34, 197, 94, 0.7) !important;
-    border-color: rgba(34, 197, 94, 0.5) !important;
-}
-
 [data-theme="dark"] .delay-overlay-turnaround {
     opacity: 0.6;
     background: repeating-linear-gradient(
@@ -348,17 +342,6 @@
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* Early train turnaround in dark mode - green pattern */
-[data-theme="dark"] .delay-overlay-turnaround.severity-early {
-    background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 3px,
-        rgba(34, 197, 94, 0.6) 3px,
-        rgba(34, 197, 94, 0.6) 5px
-    ) !important;
-}
-
 [data-theme="dark"] .delay-overlay-turnaround::before {
     background: rgba(255, 255, 255, 0.25);
     width: 3px;
@@ -369,12 +352,6 @@
     border-width: 2px;
     border-color: rgba(255, 255, 255, 0.4);
     background: rgba(255, 255, 255, 0.05);
-}
-
-/* Early train tolerance in dark mode - green pattern */
-[data-theme="dark"] .delay-overlay-tolerance.severity-early {
-    border-color: rgba(34, 197, 94, 0.6) !important;
-    background: rgba(34, 197, 94, 0.1) !important;
 }
 
 [data-theme="dark"] .delay-overlay-tolerance::after {
@@ -409,31 +386,22 @@
 [data-theme="high-contrast"] .delay-overlay-main {
     opacity: 1 !important;
     border: 3px solid #FFFFFF !important;
+    background-color: var(--delay-severe) !important;
     box-shadow: 0 0 0 1px #000000;
-}
-
-/* Early trains in high contrast - bright green */
-[data-theme="high-contrast"] .delay-overlay-main.severity-early {
-    background-color: #00FF00 !important;
-    border-color: #00FF00 !important;
 }
 
 [data-theme="high-contrast"] .delay-overlay-turnaround {
     opacity: 1 !important;
     border: 3px solid #FFFFFF !important;
     border-left-width: 4px !important;
-    box-shadow: 0 0 0 1px #000000;
-}
-
-/* Early train turnaround in high contrast - green pattern */
-[data-theme="high-contrast"] .delay-overlay-turnaround.severity-early {
     background: repeating-linear-gradient(
         -45deg,
-        #00FF00,
-        #00FF00 2px,
+        #FFFFFF,
         #FFFFFF 2px,
-        #FFFFFF 4px
+        var(--overlay-color, #FF8C00) 2px,
+        var(--overlay-color, #FF8C00) 4px
     ) !important;
+    box-shadow: 0 0 0 1px #000000;
 }
 
 [data-theme="high-contrast"] .delay-overlay-turnaround::before {
@@ -442,29 +410,18 @@
     box-shadow: 0 0 0 1px #000000;
 }
 
-/* Early train turnaround separator in high contrast - green */
-[data-theme="high-contrast"] .delay-overlay-turnaround.severity-early::before {
-    background: #00FF00 !important;
-    box-shadow: 0 0 0 1px #000000;
-}
-
 [data-theme="high-contrast"] .delay-overlay-tolerance {
     opacity: 1 !important;
     border: 4px dashed #FFFFFF !important;
     border-left-style: solid !important;
-    box-shadow: 0 0 0 2px #000000;
-}
-
-/* Early train tolerance in high contrast - green pattern */
-[data-theme="high-contrast"] .delay-overlay-tolerance.severity-early {
-    border-color: #00FF00 !important;
     background: repeating-linear-gradient(
         90deg,
         transparent,
         transparent 4px,
-        #00FF00 4px,
-        #00FF00 5px
+        #FFFFFF 4px,
+        #FFFFFF 5px
     ) !important;
+    box-shadow: 0 0 0 2px #000000;
 }
 
 [data-theme="high-contrast"] .delay-overlay-tolerance::after {
@@ -530,33 +487,13 @@
    ADDITIONAL THEME INTEGRATION
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* Ensure delay overlays work with train bar themes - but keep train numbers visible */
+/* Ensure delay overlays work with train bar themes */
 [data-theme="dark"] .train-bar .delay-overlay-offset {
-    z-index: 1; /* Below train numbers */
+    z-index: 3; /* Above train bar content */
 }
 
 [data-theme="high-contrast"] .train-bar .delay-overlay-offset {
-    z-index: 1; /* Below train numbers */
-}
-
-/* Ensure train numbers are always above delay overlays */
-[data-theme="high-contrast"] .train-bar .train-numbers,
-[data-theme="high-contrast"] .train-bar .train-number-value {
-    position: relative;
-    z-index: 10 !important; /* Above all delay overlays */
-    background-color: #000000 !important; /* Black background for text */
-    color: #FFFFFF !important; /* White text */
-    padding: 2px 6px;
-    border-radius: 4px;
-    border: 2px solid #FFFFFF !important;
-    font-weight: 900 !important;
-    box-shadow: 0 0 0 1px #000000;
-}
-
-/* Make sure train visual content stays visible too */
-[data-theme="high-contrast"] .train-bar .train-bar-visual {
-    position: relative;
-    z-index: 5 !important;
+    z-index: 4; /* Highest priority in high contrast */
 }
 
 /* Theme-aware hover states */

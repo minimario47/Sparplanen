@@ -14,7 +14,8 @@ class OffsetVisualizer {
                 severe: '#DC143C',
                 early: '#22C55E'
             },
-            showWarnings: settings.showWarnings !== false
+            showWarnings: settings.showWarnings !== false,
+            visualizationStyle: settings.visualizationStyle || 'color-coded'
         };
         
         logger.info('Visualizer', 'OffsetVisualizer initialized', this.settings);
@@ -50,6 +51,38 @@ class OffsetVisualizer {
      */
     getColor(severity) {
         return this.settings.colors[severity] || '#999';
+    }
+    
+    /**
+     * Get user's border color from visual settings
+     */
+    getUserBorderColor() {
+        try {
+            // Try to get the current user's border color from visual settings
+            const savedSettings = localStorage.getItem('sparplannen-settings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                
+                // Check if single color mode is active
+                if (settings.trainColorMode === 'single' && settings.singleColor?.border) {
+                    return settings.singleColor.border;
+                }
+                
+                // Otherwise, try to get from length-based colors (use first available)
+                const lenColors = settings.lenColors || {};
+                for (let i = 1; i <= 5; i++) {
+                    const bucket = lenColors[`b${i}`];
+                    if (bucket?.border) {
+                        return bucket.border;
+                    }
+                }
+            }
+        } catch (error) {
+            logger.warn('Visualizer', 'Error getting user border color', error);
+        }
+        
+        // Fallback to default
+        return '#666666';
     }
     
     /**
@@ -95,6 +128,9 @@ class OffsetVisualizer {
         const color = this.getColor(severity);
         const opacity = this.getOpacity(severity);
         
+        // Get user's border color for dashed outline
+        const userBorderColor = this.getUserBorderColor();
+        
         // For delayed trains, calculate turnaround and tolerance
         let turnaroundMinutes = 0;
         let toleranceMinutes = 0;
@@ -123,13 +159,38 @@ class OffsetVisualizer {
             delayOverlay.style.width = `${delayPixels}px`;
         }
         
-        delayOverlay.style.backgroundColor = color;
-        delayOverlay.style.opacity = opacity;
+        // Apply visualization style based on user setting
+        const style = this.settings.visualizationStyle || 'color-coded';
         
-        // Check for conflicts - if delay overlaps another train, add border
+        if (style === 'color-coded') {
+            // Default: color-coded solid fill with dashed border around it
+            delayOverlay.style.backgroundColor = color;
+            delayOverlay.style.opacity = opacity;
+            delayOverlay.style.border = `2px dashed ${userBorderColor}`;
+            delayOverlay.style.borderRadius = '4px';
+        } else if (style === 'transparent') {
+            // Transparent with dashed border
+            delayOverlay.style.backgroundColor = 'transparent';
+            delayOverlay.style.border = `2px dashed ${userBorderColor}`;
+            delayOverlay.style.borderRadius = '4px';
+            delayOverlay.style.opacity = '0.6';
+        } else if (style === 'dashed') {
+            // Dashed border only, no fill
+            delayOverlay.style.backgroundColor = 'transparent';
+            delayOverlay.style.border = `2px dashed ${userBorderColor}`;
+            delayOverlay.style.borderRadius = '4px';
+            delayOverlay.style.opacity = '0.8';
+        }
+        
+        // Check for conflicts - if delay overlaps another train, enhance border
         if (conflicts && conflicts.hasConflict) {
             delayOverlay.classList.add('has-conflict');
-            delayOverlay.style.borderColor = color;
+            delayOverlay.style.borderColor = userBorderColor;
+            if (style === 'color-coded') {
+                delayOverlay.style.borderWidth = '3px';
+            } else {
+                delayOverlay.style.opacity = '0.8';
+            }
         }
         
         trainBar.appendChild(delayOverlay);
@@ -143,7 +204,12 @@ class OffsetVisualizer {
             
             turnaroundOverlay.style.left = `${delayPixels}px`;
             turnaroundOverlay.style.width = `${turnaroundPixels}px`;
-            turnaroundOverlay.style.setProperty('--overlay-color', color);
+            turnaroundOverlay.style.setProperty('--overlay-color', userBorderColor);
+
+            // Make turnaround overlay also use dashed border for consistency
+            if (style === 'color-coded') {
+                turnaroundOverlay.style.border = `1px dashed ${userBorderColor}`;
+            }
             
             trainBar.appendChild(turnaroundOverlay);
         }
@@ -158,12 +224,17 @@ class OffsetVisualizer {
             const toleranceStart = delayPixels + turnaroundPixels;
             toleranceOverlay.style.left = `${toleranceStart}px`;
             toleranceOverlay.style.width = `${tolerancePixels}px`;
-            toleranceOverlay.style.borderColor = color;
+            toleranceOverlay.style.borderColor = userBorderColor;
+
+            // Make tolerance overlay also use dashed border for consistency
+            if (style === 'color-coded') {
+                toleranceOverlay.style.borderStyle = 'dashed';
+            }
             
             trainBar.appendChild(toleranceOverlay);
         }
         
-        // Add conflict warning icon if needed
+        // Add conflict warning icon if needed - respect user setting
         if (conflicts && conflicts.hasConflict && this.settings.showWarnings) {
             this.addConflictWarning(trainBar, conflicts);
         }

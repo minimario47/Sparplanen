@@ -171,11 +171,11 @@
                             <div class="connection-line"></div>
                             <div class="node node-3"></div>
                         </div>
-                    </div>
+                </div>
                 </div>
             </a>
-        </div>
-        
+            </div>
+
         <!-- Center Section: Time Controls -->
         <nav class="header-center" aria-label="Tidskontroller">
             <div class="time-controls">
@@ -185,9 +185,9 @@
                     </button>
                     <button id="time-nav-next" class="btn btn-secondary btn-icon" aria-label="Nästa tidsintervall" title="Nästa tidsintervall">
                         <img src="assets/Icons/next.png" alt="Next" class="icon-svg">
-                    </button>
+                </button>
                 </div>
-                
+
                 <div class="time-center btn-group">
                     <button class="btn btn-primary btn-now" id="now-button">
                         <span>Nu</span>
@@ -200,7 +200,7 @@
                         <span>4h</span>
                     </button>
                 </div>
-                
+
                 <div class="time-range-dropdown" id="time-range-dropdown">
                     <div class="time-range-option" data-hours="1">1 timme</div>
                     <div class="time-range-option" data-hours="3">3 timmar</div>
@@ -222,8 +222,8 @@
                             <use xlink:href="#search-path"></use>
                         </svg>
                     </div>
-                </div>
-                
+        </div>
+
                 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
                     <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 28" id="search-path">
                         <path d="M32.9418651,-20.6880772 C37.9418651,-20.6880772 40.9418651,-16.6880772 40.9418651,-12.6880772 C40.9418651,-8.68807717 37.9418651,-4.68807717 32.9418651,-4.68807717 C27.9418651,-4.68807717 24.9418651,-8.68807717 24.9418651,-12.6880772 C24.9418651,-16.6880772 27.9418651,-20.6880772 32.9418651,-20.6880772 L32.9418651,-29.870624 C32.9418651,-30.3676803 33.3448089,-30.770624 33.8418651,-30.770624 C34.08056,-30.770624 34.3094785,-30.6758029 34.4782612,-30.5070201 L141.371843,76.386562" transform="translate(83.156854, 22.171573) rotate(-225.000000) translate(-83.156854, -22.171573)"></path>
@@ -264,9 +264,9 @@
                   <div class="schedule-grid-area" id="schedule-grid">
                       <div class="timeline-canvas" id="timeline-canvas">
                           <!-- Track rows and train bars are rendered here by JS -->
-                      </div>
-                  </div>
-  
+        </div>
+    </div>
+
                   <div class="schedule-scroll-hint">← Scrolla horisontellt →</div>
               </div>
           </div>
@@ -352,7 +352,7 @@
                                 </div>
                                 <p class="setting-help">Hur ofta vyn ska uppdateras i följ-läge.</p>
                             </div>
-                        </div>
+                    </div>
                     </div>
                 </div>
 
@@ -485,7 +485,7 @@
                                     <p class="setting-help">Lämna standard eller anpassa manuellt (bg/kant/text).</p>
                                 </div>
                             </div>
-                        </div>
+                    </div>
                     </div>
                 </div>
 
@@ -538,6 +538,19 @@
                                 <p class="setting-help">Tidsfönster för varningsmeddelanden</p>
                             </div>
 
+                            <!-- Visualization Style -->
+                            <div class="setting-item">
+                                <label class="setting-label" for="delay-visualization-style">Försening stil</label>
+                                <div class="setting-control">
+                                    <select id="delay-visualization-style" class="settings-select">
+                                        <option value="color-coded">Färgkodad (standard)</option>
+                                        <option value="transparent">Transparent</option>
+                                        <option value="dashed">Streckad kant</option>
+                                    </select>
+                                </div>
+                                <p class="setting-help">Hur förseningar visas på tågstapeln</p>
+                            </div>
+
                             <!-- Show Warnings -->
                             <div class="setting-item">
                                 <label class="setting-label" for="delay-show-warnings">Visa konfliktvarningar</label>
@@ -550,7 +563,7 @@
                                 </div>
                                 <p class="setting-help">Visa varning när försenade tåg påverkar andra tåg</p>
                             </div>
-                        </div>
+                    </div>
                     </div>
                 </div>
 
@@ -575,7 +588,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
 
             <!-- Footer -->
             <div class="settings-footer">
