@@ -99,7 +99,7 @@
 
 /* Header button group integration */
 .header-actions .search {
-    margin-left: 0 !important;
+    margin-left: 0;
 }
 
 /* Reduced motion */

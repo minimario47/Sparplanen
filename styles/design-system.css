@@ -199,26 +199,6 @@ LAST UPDATED: 2025-01-09
   --border-heavy-dark-mode: 1px solid rgba(255, 255, 255, 0.2);
   --highlight-top-dark-mode: rgba(255, 255, 255, 0.05);             /* Top highlight */
 
-  /* ═══════════════════════════════════════════════════════════════════════════
-     GLASSMORPHISM - Frosted glass effects for modern UI
-     Usage: overlays, modals, floating panels
-  ═══════════════════════════════════════════════════════════════════════════ */
-  
-  --glass-blur-light: blur(8px);          /* Light frosted effect */
-  --glass-blur-medium: blur(12px);        /* Medium frosted effect */
-  --glass-blur-heavy: blur(16px);         /* Heavy frosted effect */
-  --glass-blur-extreme: blur(24px);       /* Extreme blur for backdrops */
-  
-  --glass-bg-light: rgba(255, 255, 255, 0.7);         /* Light glass background */
-  --glass-bg-medium: rgba(255, 255, 255, 0.5);        /* Medium transparency */
-  --glass-bg-heavy: rgba(255, 255, 255, 0.3);         /* More transparent */
-  
-  --glass-bg-dark-light: rgba(26, 26, 26, 0.7);       /* Dark mode glass */
-  --glass-bg-dark-medium: rgba(26, 26, 26, 0.5);
-  --glass-bg-dark-heavy: rgba(26, 26, 26, 0.3);
-  
-  --glass-border: 1px solid rgba(255, 255, 255, 0.18);  /* Glass edge */
-  --glass-border-dark: 1px solid rgba(255, 255, 255, 0.1);
 
   /* ═══════════════════════════════════════════════════════════════════════════
      BORDER RADIUS - Nested corners with mathematical relationship
@@ -342,6 +322,36 @@ LAST UPDATED: 2025-01-09
   --text-inverse-dark: var(--neutral-900);
   --text-link-dark: var(--primary-400);
   --text-link-hover-dark: var(--primary-300);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     MISSING NEUTRALS - Extend the neutral scale with values used by components
+  ═══════════════════════════════════════════════════════════════════════════ */
+
+  --neutral-white: #ffffff;             /* Pure white (timeline canvas bg, etc.) */
+  --neutral-25: #fefefe;                /* Almost white - alternating row bg */
+  --neutral-750: #2d3340;               /* Between 700 and 800 - dark mode grid lines */
+  --neutral-950: #0a0a0a;               /* Near-black dark backgrounds */
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ERROR ALIASES - Map --error-* to --danger-* for components using old names
+  ═══════════════════════════════════════════════════════════════════════════ */
+
+  --error-50:  var(--danger-50);
+  --error-100: var(--danger-100);
+  --error-200: var(--danger-200);
+  --error-300: var(--danger-300);
+  --error-400: var(--danger-400);
+  --error-500: var(--danger-500);
+  --error-600: var(--danger-600);
+  --error-700: var(--danger-700);
+  --error-800: var(--danger-800);
+  --error-900: var(--danger-900);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     FOCUS RING - Used by delay-visualization and other components
+  ═══════════════════════════════════════════════════════════════════════════ */
+
+  --focus-ring: var(--primary-500);
 }
 
 /*
@@ -356,15 +366,6 @@ NESTED CORNERS:
 }
 .inner-element {
   border-radius: var(--radius-md);       // 4px (12px - 8px gap)
-}
-
-GLASSMORPHISM CARD:
-.glass-card {
-  background: var(--glass-bg-light);
-  backdrop-filter: var(--glass-blur-medium);
-  border: var(--glass-border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
 }
 
 BUTTON PADDING (horizontal = 2× vertical):

@@ -156,7 +156,7 @@
 
 /* Integration with header button group */
 .header-actions .theme-switcher {
-    margin-left: 0 !important;
+    margin-left: 0;
 }
 
 .header-actions .theme-switcher .theme-dial {

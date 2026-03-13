@@ -89,17 +89,17 @@
         }
     };
 
-    // Default settings
+    // Default settings (includes delay settings - single source of truth)
     const defaultSettings = {
         offsetPercentage: 20,
         followMode: false,
         updateInterval: '60',
-        // Train coloring settings
-        trainColorMode: 'length',       // 'length' | 'single'
-        trainColorDimension: 'base',    // 'base' | 'total'
+        // Train coloring
+        trainColorMode: 'length',
+        trainColorDimension: 'base',
         canonicalLengths: [50, 75, 80, 107, 135],
-        lengthTheme: 'modern',          // Default to modern colors
-        singleTheme: 'neutral',         // Default to neutral gray
+        lengthTheme: 'modern',
+        singleTheme: 'neutral',
         lenColors: {
             b1: { bg: '#f0f4f8', border: '#7c8c9e', text: '#1a2332' },
             b2: { bg: '#e8eef5', border: '#6b7d91', text: '#1a2332' },
@@ -107,13 +107,17 @@
             b4: { bg: '#d6e1eb', border: '#495e6d', text: '#1a2332' },
             b5: { bg: '#cddae6', border: '#384e5b', text: '#1a2332' }
         },
-        singleColor: { bg: '#e8eef5', border: '#6b7d91', text: '#1a2332' }
+        singleColor: { bg: '#e8eef5', border: '#6b7d91', text: '#1a2332' },
+        // Delay settings (merged from settings-delay.js)
+        delayMode: 'offset',
+        delayVisualizationStyle: 'color-coded',
+        turnaroundTime: 10,
+        conflictTolerance: 5,
+        showWarnings: true
     };
 
-    // Current settings (loaded from localStorage or defaults)
     let currentSettings = { ...defaultSettings };
 
-    // DOM elements (will be initialized on DOMContentLoaded)
     let elements = {
         backdrop: null,
         modal: null,
@@ -125,11 +129,13 @@
         saveBtn: null
     };
 
+    // Track mousedown origin for reliable backdrop-click-to-close
+    let _backdropMousedownTarget = null;
+
     /**
      * Initialize the settings modal
      */
     function init() {
-        // Get DOM elements
         elements.backdrop = document.getElementById('settings-backdrop');
         elements.modal = document.getElementById('settings-modal');
         elements.closeBtn = document.getElementById('settings-close-btn');
@@ -144,49 +150,123 @@
             return;
         }
 
-        // Load saved settings
         loadSettings();
-
-        // Set up event listeners
         setupEventListeners();
+        setupRadioGroupHighlights();
+        setupColorModeListener();
+        initSettingsViz();
 
         console.log('✅ Settings modal initialized');
+    }
+
+    /**
+     * Position the sliding highlight for all radio groups
+     */
+    function updateRadioGroupHighlight(group) {
+        if (!group) return;
+        const inputs = group.querySelectorAll('.radio-group-input');
+        inputs.forEach((input, idx) => {
+            if (input.checked) {
+                group.style.setProperty('--highlight-index', idx);
+            }
+        });
+    }
+
+    function setupRadioGroupHighlights() {
+        document.querySelectorAll('.radio-group').forEach(group => {
+            updateRadioGroupHighlight(group);
+            group.querySelectorAll('.radio-group-input').forEach(input => {
+                input.addEventListener('change', () => updateRadioGroupHighlight(group));
+            });
+        });
+    }
+
+    /**
+     * Set up event listeners for the color mode and theme selects
+     */
+    function setupColorModeListener() {
+        // Color mode: listen on native radio change (no dependency on forms.js timing)
+        document.querySelectorAll('input[name="train-color-mode"]').forEach(input => {
+            input.addEventListener('change', () => {
+                if (!input.checked) return;
+                currentSettings.trainColorMode = input.value;
+                const themeToUse = input.value === 'single' ? currentSettings.singleTheme : currentSettings.lengthTheme;
+                updateVisibility(input.value, themeToUse || 'modern');
+                updatePreview();
+            });
+        });
+
+        // Length theme select
+        const lengthThemeContainer = document.querySelector('#length-theme')?.closest('.custom-select');
+        if (lengthThemeContainer) {
+            lengthThemeContainer.addEventListener('change', (e) => {
+                e.stopPropagation();
+                applyLengthTheme(e.detail.value);
+                updateVisibility('length', e.detail.value);
+                updatePreview();
+            });
+        }
+
+        // Single theme select
+        const singleThemeContainer = document.querySelector('#single-theme')?.closest('.custom-select');
+        if (singleThemeContainer) {
+            singleThemeContainer.addEventListener('change', (e) => {
+                e.stopPropagation();
+                applySingleTheme(e.detail.value);
+                updateVisibility('single', e.detail.value);
+                updatePreview();
+            });
+        }
+
+        // Color inputs: update preview and mark as custom
+        document.querySelectorAll('#panel-display input[type="color"]').forEach(input => {
+            input.addEventListener('input', () => {
+                updatePreview();
+                if (currentSettings.trainColorMode === 'single') {
+                    currentSettings.singleTheme = 'custom';
+                } else {
+                    currentSettings.lengthTheme = 'custom';
+                }
+            });
+        });
     }
 
     /**
      * Set up all event listeners
      */
     function setupEventListeners() {
-        // Close button
         if (elements.closeBtn) {
             elements.closeBtn.addEventListener('click', closeModal);
         }
 
-        // Backdrop click (close modal)
+        // Scroll-safe backdrop close: only fire if BOTH mousedown and mouseup were on backdrop
         if (elements.backdrop) {
-            elements.backdrop.addEventListener('click', (e) => {
-                if (e.target === elements.backdrop) {
+            elements.backdrop.addEventListener('mousedown', (e) => {
+                _backdropMousedownTarget = e.target;
+            });
+            elements.backdrop.addEventListener('mouseup', (e) => {
+                if (
+                    _backdropMousedownTarget === elements.backdrop &&
+                    e.target === elements.backdrop
+                ) {
                     closeModal();
                 }
+                _backdropMousedownTarget = null;
             });
         }
 
-        // Escape key to close
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && isOpen) {
                 closeModal();
             }
         });
 
-        // Tab switching
         elements.tabs.forEach((tab) => {
             tab.addEventListener('click', () => {
-                const tabName = tab.getAttribute('data-tab');
-                switchTab(tabName);
+                switchTab(tab.getAttribute('data-tab'));
             });
         });
 
-        // Footer buttons
         if (elements.resetBtn) {
             elements.resetBtn.addEventListener('click', resetSettings);
         }
@@ -199,7 +279,7 @@
             elements.saveBtn.addEventListener('click', saveSettings);
         }
 
-        // Listen for settings button click in header
+        // Settings button in header
         const settingsBtn = document.querySelector('.settings-button');
         if (settingsBtn) {
             settingsBtn.addEventListener('click', (e) => {
@@ -208,8 +288,6 @@
                 openModal();
             });
         } else {
-            console.warn('Settings button not found in DOM');
-            // Retry after a short delay in case DOM isn't fully ready
             setTimeout(() => {
                 const retryBtn = document.querySelector('.settings-button');
                 if (retryBtn) {
@@ -218,12 +296,11 @@
                         e.stopPropagation();
                         openModal();
                     });
-                    console.log('✅ Settings button listener attached on retry');
                 }
             }, 500);
         }
 
-        // Advanced toggle button - Only shown when theme is "standard"
+        // Advanced toggle
         const showAdvancedBtn = document.getElementById('show-advanced-btn');
         const advancedSection = document.getElementById('advanced-train-colors');
         if (showAdvancedBtn && advancedSection) {
@@ -231,79 +308,9 @@
             showAdvancedBtn.addEventListener('click', () => {
                 advancedVisible = !advancedVisible;
                 advancedSection.style.display = advancedVisible ? 'block' : 'none';
-                showAdvancedBtn.textContent = advancedVisible ? 'Dölj avancerat' : 'Visa avancerat';
+                showAdvancedBtn.textContent = advancedVisible ? 'Dölj anpassning' : 'Anpassa färger manuellt';
             });
         }
-
-        // Setup event listeners for display panel controls
-        setupDisplayPanelListeners();
-    }
-
-    /**
-     * Setup event listeners for display panel controls
-     */
-    function setupDisplayPanelListeners() {
-        // Wait for DOM to be ready
-        setTimeout(() => {
-            // Color mode select
-            const colorModeContainer = document.querySelector('#train-color-mode')?.closest('.custom-select');
-            if (colorModeContainer) {
-                colorModeContainer.addEventListener('change', (e) => {
-                    e.stopPropagation(); // Prevent modal from closing
-                    const value = e.detail.value;
-                    currentSettings.trainColorMode = value;
-                    const isSingle = value === 'single';
-                    const themeToUse = isSingle ? currentSettings.singleTheme : currentSettings.lengthTheme;
-                    updateVisibility(value, themeToUse || 'modern');
-                    updatePreview();
-                    saveSettings();
-                    console.log('🎨 Color mode changed to:', value);
-                });
-            }
-
-            // Length theme select
-            const lengthThemeContainer = document.querySelector('#length-theme')?.closest('.custom-select');
-            if (lengthThemeContainer) {
-                lengthThemeContainer.addEventListener('change', (e) => {
-                    e.stopPropagation(); // Prevent modal from closing
-                    const themeValue = e.detail.value;
-                    applyLengthTheme(themeValue);
-                    updateVisibility('length', themeValue);
-                    updatePreview();
-                    saveSettings();
-                    console.log('🎨 Length theme changed to:', themeValue);
-                });
-            }
-
-            // Single theme select
-            const singleThemeContainer = document.querySelector('#single-theme')?.closest('.custom-select');
-            if (singleThemeContainer) {
-                singleThemeContainer.addEventListener('change', (e) => {
-                    e.stopPropagation(); // Prevent modal from closing
-                    const themeValue = e.detail.value;
-                    applySingleTheme(themeValue);
-                    updateVisibility('single', themeValue);
-                    updatePreview();
-                    saveSettings();
-                    console.log('🎨 Single theme changed to:', themeValue);
-                });
-            }
-
-            // Color inputs
-            document.querySelectorAll('#panel-display input[type="color"]').forEach(input => {
-                input.addEventListener('input', (e) => {
-                    e.stopPropagation();
-                    updatePreview();
-                    // Mark as custom when user manually changes colors
-                    if (currentSettings.trainColorMode === 'single') {
-                        currentSettings.singleTheme = 'custom';
-                    } else {
-                        currentSettings.lengthTheme = 'custom';
-                    }
-                    saveSettings();
-                });
-            });
-        }, 100);
     }
 
     /**
@@ -316,29 +323,20 @@
         }
 
         isOpen = true;
-        
-        // Remove hidden class to make element visible
         elements.backdrop.classList.remove('hidden', 'closing');
-        
-        // Force reflow to ensure animation triggers
-        // Without this, the animation might not play when hidden was removed
-        void elements.backdrop.offsetHeight;
-        
-        // Load current settings into controls
+        void elements.backdrop.offsetHeight; // force reflow for animation
+
         updateControlsFromSettings();
-
-        // Update preview and visibility
         updatePreview();
-        
-        // Show/hide controls based on saved settings
-        const selectedColorMode = currentSettings.trainColorMode || 'length';
-        const selectedTheme = selectedColorMode === 'single' ? currentSettings.singleTheme : currentSettings.lengthTheme;
-        updateVisibility(selectedColorMode, selectedTheme || 'modern');
 
-        // Focus management
+        const colorMode = currentSettings.trainColorMode || 'length';
+        const theme = colorMode === 'single' ? currentSettings.singleTheme : currentSettings.lengthTheme;
+        updateVisibility(colorMode, theme || 'modern');
+
+        // Re-sync radio group highlights after setting values
+        document.querySelectorAll('.radio-group').forEach(updateRadioGroupHighlight);
+
         trapFocus();
-        
-        console.log('✅ Settings modal opened');
     }
 
     /**
@@ -347,17 +345,12 @@
     function closeModal() {
         if (!elements.backdrop || !elements.modal) return;
 
-        // Add closing animation
         elements.backdrop.classList.add('closing');
-
-        // Wait for animation to finish before hiding
         setTimeout(() => {
             elements.backdrop.classList.add('hidden');
             elements.backdrop.classList.remove('closing');
             isOpen = false;
-        }, 200); // Match animation duration
-
-        console.log('Settings modal closed');
+        }, 200);
     }
 
     /**
@@ -365,44 +358,46 @@
      */
     function switchTab(tabName) {
         currentTab = tabName;
-
-        // Update tab buttons
         elements.tabs.forEach((tab) => {
-            if (tab.getAttribute('data-tab') === tabName) {
-                tab.classList.add('active');
-                tab.setAttribute('aria-selected', 'true');
-            } else {
-                tab.classList.remove('active');
-                tab.setAttribute('aria-selected', 'false');
-            }
+            const isActive = tab.getAttribute('data-tab') === tabName;
+            tab.classList.toggle('active', isActive);
+            tab.setAttribute('aria-selected', String(isActive));
         });
-
-        // Update tab panels
         elements.tabPanels.forEach((panel) => {
-            if (panel.getAttribute('data-tab-panel') === tabName) {
-                panel.classList.add('active');
+            const isActive = panel.getAttribute('data-tab-panel') === tabName;
+            panel.classList.toggle('active', isActive);
+            if (isActive) {
                 panel.removeAttribute('hidden');
             } else {
-                panel.classList.remove('active');
                 panel.setAttribute('hidden', 'true');
             }
         });
-
-        console.log(`Switched to tab: ${tabName}`);
     }
 
     /**
-     * Load settings from localStorage
+     * Load settings from localStorage. Migrates old delay settings key if present.
      */
     function loadSettings() {
         try {
             const saved = localStorage.getItem('sparplannen-settings');
             if (saved) {
                 currentSettings = { ...defaultSettings, ...JSON.parse(saved) };
-                console.log('✅ Settings loaded from localStorage', currentSettings);
             } else {
                 currentSettings = { ...defaultSettings };
-                console.log('Using default settings');
+            }
+
+            // Migrate old separate delay settings if they exist
+            const oldDelay = localStorage.getItem('sparplanen-delay-settings');
+            if (oldDelay) {
+                try {
+                    const parsed = JSON.parse(oldDelay);
+                    currentSettings.delayMode = parsed.mode ?? currentSettings.delayMode;
+                    currentSettings.delayVisualizationStyle = parsed.visualizationStyle ?? currentSettings.delayVisualizationStyle;
+                    currentSettings.turnaroundTime = parsed.turnaroundTime ?? currentSettings.turnaroundTime;
+                    currentSettings.conflictTolerance = parsed.conflictTolerance ?? currentSettings.conflictTolerance;
+                    currentSettings.showWarnings = parsed.showWarnings ?? currentSettings.showWarnings;
+                    localStorage.removeItem('sparplanen-delay-settings');
+                } catch (_) { /* ignore malformed old data */ }
             }
         } catch (error) {
             console.error('Error loading settings:', error);
@@ -411,22 +406,29 @@
     }
 
     /**
-     * Save settings to localStorage
+     * Save current control values to localStorage
      */
     function saveSettings() {
-        // Get current values from controls
         currentSettings = getSettingsFromControls();
 
         try {
             localStorage.setItem('sparplannen-settings', JSON.stringify(currentSettings));
-            console.log('✅ Settings saved', currentSettings);
 
-            // Dispatch event for other components to react to
             window.dispatchEvent(new CustomEvent('settingsChanged', {
                 detail: currentSettings
             }));
 
-            // Show success notification (if notification system exists)
+            // Keep delay-settings-changed event for any existing listeners
+            window.dispatchEvent(new CustomEvent('delay-settings-changed', {
+                detail: {
+                    mode: currentSettings.delayMode,
+                    visualizationStyle: currentSettings.delayVisualizationStyle,
+                    turnaroundTime: currentSettings.turnaroundTime,
+                    conflictTolerance: currentSettings.conflictTolerance,
+                    showWarnings: currentSettings.showWarnings
+                }
+            }));
+
             if (window.showNotification) {
                 window.showNotification('Inställningar sparade', 'success');
             }
@@ -445,16 +447,11 @@
      */
     function applyLengthTheme(themeId) {
         const theme = lengthThemes[themeId];
-        if (!theme) {
-            console.error('Unknown length theme:', themeId);
-            return;
-        }
-        
+        if (!theme) return;
         currentSettings.lengthTheme = themeId;
         currentSettings.lenColors = JSON.parse(JSON.stringify(theme.colors));
         updateControlsFromSettings();
         updatePreview();
-        console.log('🎨 Applied length theme:', theme.name);
     }
 
     /**
@@ -462,52 +459,55 @@
      */
     function applySingleTheme(themeId) {
         const theme = singleThemes[themeId];
-        if (!theme) {
-            console.error('Unknown single theme:', themeId);
-            return;
-        }
-        
+        if (!theme) return;
         currentSettings.singleTheme = themeId;
         currentSettings.singleColor = JSON.parse(JSON.stringify(theme.color));
         updateControlsFromSettings();
         updatePreview();
-        console.log('🎨 Applied single theme:', theme.name);
     }
 
     /**
-     * Reset settings to defaults
+     * Reset settings to defaults with inline confirm
      */
     function resetSettings() {
-        if (confirm('Är du säker på att du vill återställa alla inställningar till standardvärden?')) {
+        const btn = elements.resetBtn;
+        if (!btn) return;
+
+        if (btn.dataset.confirming === 'true') {
+            // Confirmed — reset
             currentSettings = JSON.parse(JSON.stringify(defaultSettings));
-            
             updateControlsFromSettings();
             updatePreview();
             updateVisibility(defaultSettings.trainColorMode, defaultSettings.lengthTheme);
-            
-            // Apply to UI immediately
-            if (window.SettingsControls) {
-                window.SettingsControls.setSliderValue(defaultSettings.offsetPercentage);
-                window.SettingsControls.setToggleValue('follow-mode', defaultSettings.followMode);
-                window.SettingsControls.setSelectValue('update-interval', defaultSettings.updateInterval);
-            }
-            
+            document.querySelectorAll('.radio-group').forEach(updateRadioGroupHighlight);
             saveSettings();
-            
-            console.log('⚙️ Settings reset to defaults (modern theme)');
+            btn.textContent = 'Återställ';
+            btn.dataset.confirming = 'false';
+        } else {
+            // Ask for confirmation
+            btn.textContent = 'Bekräfta återställning?';
+            btn.dataset.confirming = 'true';
+            // Auto-cancel after 4s if no response
+            setTimeout(() => {
+                if (btn.dataset.confirming === 'true') {
+                    btn.textContent = 'Återställ';
+                    btn.dataset.confirming = 'false';
+                }
+            }, 4000);
         }
     }
 
     /**
-     * Get current settings from controls
+     * Read current values from all controls
      */
     function getSettingsFromControls() {
-        // Read display panel controls if present
         const doc = document;
         const getVal = (id, fallback) => {
             const el = doc.getElementById(id);
             return el ? (el.type === 'checkbox' ? el.checked : el.value) : fallback;
         };
+        const getRadio = (name, fallback) =>
+            doc.querySelector(`input[name="${name}"]:checked`)?.value ?? fallback;
 
         const readColorTriple = (prefix) => ({
             bg: getVal(`${prefix}-bg`, ''),
@@ -524,10 +524,10 @@
         ];
 
         return {
-            offsetPercentage: window.SettingsControls ? window.SettingsControls.getSliderValue() : defaultSettings.offsetPercentage,
-            followMode: window.SettingsControls ? window.SettingsControls.getToggleValue('follow-mode') : defaultSettings.followMode,
-            updateInterval: window.SettingsControls ? window.SettingsControls.getSelectValue('update-interval') : defaultSettings.updateInterval,
-            trainColorMode: getVal('train-color-mode', defaultSettings.trainColorMode),
+            offsetPercentage: parseInt(doc.getElementById('offset-slider')?.value ?? defaultSettings.offsetPercentage, 10),
+            followMode: doc.getElementById('follow-mode')?.classList.contains('checked') ?? defaultSettings.followMode,
+            updateInterval: getRadio('update-interval', defaultSettings.updateInterval),
+            trainColorMode: getRadio('train-color-mode', defaultSettings.trainColorMode),
             trainColorDimension: getVal('train-color-dimension', defaultSettings.trainColorDimension),
             canonicalLengths: canonical,
             lengthTheme: getVal('length-theme', defaultSettings.lengthTheme),
@@ -539,56 +539,127 @@
                 b4: readColorTriple('len-b4'),
                 b5: readColorTriple('len-b5')
             },
-            singleColor: readColorTriple('single')
+            singleColor: readColorTriple('single'),
+            // Delay settings
+            delayMode: getRadio('delay-mode', defaultSettings.delayMode),
+            delayVisualizationStyle: getRadio('delay-style', defaultSettings.delayVisualizationStyle),
+            turnaroundTime: parseInt(doc.getElementById('delay-turnaround-time')?.value ?? defaultSettings.turnaroundTime, 10),
+            conflictTolerance: parseInt(doc.getElementById('delay-conflict-tolerance')?.value ?? defaultSettings.conflictTolerance, 10),
+            showWarnings: doc.getElementById('delay-show-warnings')?.classList.contains('checked') ?? defaultSettings.showWarnings
         };
     }
 
     /**
-     * Update controls to reflect current settings
+     * Programmatically select an option in a custom-select
+     */
+    function setSelectOption(buttonId, value) {
+        const button = document.getElementById(buttonId);
+        if (!button) return;
+        const select = button.closest('.custom-select');
+        if (!select) return;
+        const options = select.querySelectorAll('.custom-select-option');
+        options.forEach(opt => {
+            const isMatch = opt.getAttribute('data-value') === value;
+            opt.classList.toggle('selected', isMatch);
+            opt.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+            if (isMatch) {
+                button.textContent = opt.textContent.trim();
+                const chevron = document.createElement('div');
+                chevron.className = 'custom-select-chevron';
+                chevron.innerHTML = '▼';
+                button.appendChild(chevron);
+            }
+        });
+    }
+
+    /**
+     * Push current settings values into all controls
      */
     function updateControlsFromSettings() {
-        if (window.SettingsControls) {
-            window.SettingsControls.setSliderValue(currentSettings.offsetPercentage);
-            window.SettingsControls.setToggleValue('follow-mode', currentSettings.followMode);
-            window.SettingsControls.setSelectValue('update-interval', currentSettings.updateInterval);
+        // Offset slider
+        const offsetSlider = document.getElementById('offset-slider');
+        if (offsetSlider) {
+            offsetSlider.value = currentSettings.offsetPercentage;
+            offsetSlider.dispatchEvent(new Event('input'));
         }
-        // Push values into display tab controls if present
-        const doc = document;
-        const setVal = (id, value) => { const el = doc.getElementById(id); if (el) { if (el.type === 'checkbox') el.checked = !!value; else el.value = value; } };
-        setVal('train-color-mode', currentSettings.trainColorMode);
-        setVal('train-color-dimension', currentSettings.trainColorDimension);
-        setVal('length-theme', currentSettings.lengthTheme || defaultSettings.lengthTheme);
-        setVal('single-theme', currentSettings.singleTheme || defaultSettings.singleTheme);
+
+        // Follow mode toggle
+        const followToggle = document.getElementById('follow-mode');
+        if (followToggle) {
+            followToggle.classList.toggle('checked', !!currentSettings.followMode);
+            followToggle.setAttribute('aria-checked', String(!!currentSettings.followMode));
+        }
+
+        // Update interval radio group
+        const uiInput = document.querySelector(`input[name="update-interval"][value="${currentSettings.updateInterval}"]`);
+        if (uiInput) uiInput.checked = true;
+
+        // Train color mode radio group
+        const cmInput = document.querySelector(`input[name="train-color-mode"][value="${currentSettings.trainColorMode}"]`);
+        if (cmInput) cmInput.checked = true;
+
+        // Length and single theme selects
+        setSelectOption('length-theme', currentSettings.lengthTheme || defaultSettings.lengthTheme);
+        setSelectOption('single-theme', currentSettings.singleTheme || defaultSettings.singleTheme);
+
+        // Train color dimension select
+        setSelectOption('train-color-dimension', currentSettings.trainColorDimension);
+
+        // Canonical lengths
         const canon = currentSettings.canonicalLengths || defaultSettings.canonicalLengths;
-        setVal('len-canon-1', canon[0]);
-        setVal('len-canon-2', canon[1]);
-        setVal('len-canon-3', canon[2]);
-        setVal('len-canon-4', canon[3]);
-        setVal('len-canon-5', canon[4]);
-        
-        // Helper: convert stored color OR fetch computed CSS variable as hex
+        ['len-canon-1', 'len-canon-2', 'len-canon-3', 'len-canon-4', 'len-canon-5'].forEach((id, i) => {
+            const el = document.getElementById(id);
+            if (el) el.value = canon[i];
+        });
+
+        // Color picker helper
         const getColorHex = (stored, cssVar) => {
             if (stored && stored.startsWith('#')) return stored;
-            // Compute from CSS variable
             const computed = getComputedStyle(document.documentElement).getPropertyValue(cssVar).trim();
             return rgbToHex(computed) || '#000000';
         };
-        
+
         const writeColorTriple = (prefix, triple, cssVarPrefix) => {
             const bg = (triple && triple.bg) || getColorHex(null, `--${cssVarPrefix}-bg`);
             const border = (triple && triple.border) || getColorHex(null, `--${cssVarPrefix}-border`);
             const text = (triple && triple.text) || getColorHex(null, `--${cssVarPrefix}-text`);
-            setVal(`${prefix}-bg`, bg);
-            setVal(`${prefix}-border`, border);
-            setVal(`${prefix}-text`, text);
+            const setV = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+            setV(`${prefix}-bg`, bg);
+            setV(`${prefix}-border`, border);
+            setV(`${prefix}-text`, text);
         };
-        
-        writeColorTriple('len-b1', currentSettings.lenColors && currentSettings.lenColors.b1, 'len-b1');
-        writeColorTriple('len-b2', currentSettings.lenColors && currentSettings.lenColors.b2, 'len-b2');
-        writeColorTriple('len-b3', currentSettings.lenColors && currentSettings.lenColors.b3, 'len-b3');
-        writeColorTriple('len-b4', currentSettings.lenColors && currentSettings.lenColors.b4, 'len-b4');
-        writeColorTriple('len-b5', currentSettings.lenColors && currentSettings.lenColors.b5, 'len-b5');
+
+        writeColorTriple('len-b1', currentSettings.lenColors?.b1, 'len-b1');
+        writeColorTriple('len-b2', currentSettings.lenColors?.b2, 'len-b2');
+        writeColorTriple('len-b3', currentSettings.lenColors?.b3, 'len-b3');
+        writeColorTriple('len-b4', currentSettings.lenColors?.b4, 'len-b4');
+        writeColorTriple('len-b5', currentSettings.lenColors?.b5, 'len-b5');
         writeColorTriple('single', currentSettings.singleColor, 'train-single');
+
+        // Delay settings
+        const dmInput = document.querySelector(`input[name="delay-mode"][value="${currentSettings.delayMode}"]`);
+        if (dmInput) dmInput.checked = true;
+
+        const dsInput = document.querySelector(`input[name="delay-style"][value="${currentSettings.delayVisualizationStyle}"]`);
+        if (dsInput) dsInput.checked = true;
+
+        const turnaroundSlider = document.getElementById('delay-turnaround-time');
+        if (turnaroundSlider) {
+            turnaroundSlider.value = currentSettings.turnaroundTime;
+            turnaroundSlider.dispatchEvent(new Event('input'));
+        }
+
+        const toleranceSlider = document.getElementById('delay-conflict-tolerance');
+        if (toleranceSlider) {
+            toleranceSlider.value = currentSettings.conflictTolerance;
+            toleranceSlider.dispatchEvent(new Event('input'));
+        }
+
+        const warningsToggle = document.getElementById('delay-show-warnings');
+        if (warningsToggle) {
+            warningsToggle.classList.toggle('checked', !!currentSettings.showWarnings);
+            warningsToggle.setAttribute('aria-checked', String(!!currentSettings.showWarnings));
+        }
     }
 
     /**
@@ -604,15 +675,12 @@
         const firstFocusable = focusableElements[0];
         const lastFocusable = focusableElements[focusableElements.length - 1];
 
-        // Focus first element
         if (firstFocusable) {
             setTimeout(() => firstFocusable.focus(), 100);
         }
 
-        // Tab trap
         elements.modal.addEventListener('keydown', (e) => {
             if (e.key !== 'Tab') return;
-
             if (e.shiftKey) {
                 if (document.activeElement === firstFocusable) {
                     e.preventDefault();
@@ -635,81 +703,61 @@
     }
 
     /**
-     * Convert RGB/RGBA string to hex (for color inputs)
+     * Convert RGB/RGBA string to hex
      */
     function rgbToHex(rgb) {
         if (!rgb || rgb === 'transparent') return null;
-        // Match rgb(r, g, b) or rgba(r, g, b, a)
         const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
         if (!match) {
-            // Already hex or named color
             if (rgb.startsWith('#')) return rgb;
             return null;
         }
-        const r = parseInt(match[1]);
-        const g = parseInt(match[2]);
-        const b = parseInt(match[3]);
-        return '#' + [r, g, b].map(x => {
-            const hex = x.toString(16);
+        return '#' + [match[1], match[2], match[3]].map(x => {
+            const hex = parseInt(x).toString(16);
             return hex.length === 1 ? '0' + hex : hex;
         }).join('');
     }
 
     /**
-     * Update visibility of controls based on color mode and theme
+     * Show/hide controls based on color mode and theme
      */
     function updateVisibility(colorMode, themeId) {
         const singleColorControls = document.getElementById('single-color-controls');
         const lengthThemeControls = document.getElementById('length-theme-controls');
-        const showAdvancedBtn = document.getElementById('show-advanced-btn');
+        const advancedToggleWrapper = document.getElementById('advanced-toggle-wrapper');
         const advancedSection = document.getElementById('advanced-train-colors');
-        
-        // Show/hide based on color mode (single vs length)
+        const showAdvancedBtn = document.getElementById('show-advanced-btn');
+
         const isSingle = colorMode === 'single';
-        if (singleColorControls) {
-            singleColorControls.style.display = isSingle ? 'block' : 'none';
-        }
-        if (lengthThemeControls) {
-            lengthThemeControls.style.display = isSingle ? 'none' : 'block';
-        }
-        
-        // "Anpassad" (custom) theme = show advanced controls automatically
+        if (singleColorControls) singleColorControls.style.display = isSingle ? 'block' : 'none';
+        if (lengthThemeControls) lengthThemeControls.style.display = isSingle ? 'none' : 'block';
+
         const isCustom = themeId === 'custom';
-        
-        if (showAdvancedBtn) {
-            // Hide button entirely when in custom mode (advanced is always shown)
-            // Only show button for preset themes in length mode
-            showAdvancedBtn.style.display = (!isSingle && !isCustom) ? 'block' : 'none';
+
+        if (advancedToggleWrapper) {
+            advancedToggleWrapper.style.display = (!isSingle && !isCustom) ? 'block' : 'none';
         }
-        
+
         if (advancedSection) {
             if (isSingle) {
-                // Never show advanced in single color mode
                 advancedSection.style.display = 'none';
             } else if (isCustom) {
-                // Always show advanced for custom theme
                 advancedSection.style.display = 'block';
-                // Update button text if visible
-                if (showAdvancedBtn) {
-                    showAdvancedBtn.textContent = 'Dölj avancerat';
-                }
+                if (showAdvancedBtn) showAdvancedBtn.textContent = 'Dölj anpassning';
             } else {
-                // For preset themes, hide by default (let button control it)
                 advancedSection.style.display = 'none';
             }
         }
-        
-        console.log(`🎨 Visibility: mode=${colorMode}, theme=${themeId}, custom=${isCustom}, advShown=${advancedSection?.style.display}`);
     }
 
     /**
-     * Update preview trains in display tab
+     * Update color preview trains
      */
     function updatePreview() {
         const preview = document.getElementById('train-preview');
         if (!preview) return;
 
-        const mode = document.getElementById('train-color-mode')?.value || 'length';
+        const mode = document.querySelector('input[name="train-color-mode"]:checked')?.value || 'length';
         const trains = preview.querySelectorAll('.preview-train');
 
         trains.forEach((train, idx) => {
@@ -732,6 +780,101 @@
         });
     }
 
+    /**
+     * Initialize reactive visualizations inside settings controls
+     */
+    function initSettingsViz() {
+        // Viz 1 — Offset slider → now-line position
+        const offsetSlider = document.getElementById('offset-slider');
+        if (offsetSlider) {
+            offsetSlider.addEventListener('input', () => {
+                const pct = offsetSlider.value;
+                const line = document.getElementById('viz-offset-line');
+                const label = document.getElementById('viz-offset-label');
+                if (line) line.style.left = pct + '%';
+                if (label) label.textContent = pct + '%';
+            });
+        }
+
+        // Viz 2 — Follow mode toggle
+        const followToggle = document.getElementById('follow-mode');
+        if (followToggle) {
+            const updateFollowViz = () => {
+                const isChecked = followToggle.classList.contains('checked');
+                const viz = document.getElementById('viz-follow');
+                const caption = document.getElementById('viz-follow-caption');
+                if (viz) viz.dataset.follow = isChecked;
+                if (caption) caption.textContent = isChecked
+                    ? 'Auto — vyn följer nu-linjen automatiskt'
+                    : 'Manuellt — nu-linjen kan glida ur bild';
+            };
+            // Observe class changes on the toggle
+            const observer = new MutationObserver(updateFollowViz);
+            observer.observe(followToggle, { attributes: true, attributeFilter: ['class'] });
+            updateFollowViz();
+        }
+
+        // Viz 3 — Turnaround time slider
+        const turnaroundSlider = document.getElementById('delay-turnaround-time');
+        if (turnaroundSlider) {
+            turnaroundSlider.addEventListener('input', () => {
+                const val = parseInt(turnaroundSlider.value, 10);
+                const pct = 12 + ((val - 5) / 25) * 32;
+                const viz = document.getElementById('viz-turnaround');
+                const timer = document.getElementById('viz-ta-timer');
+                if (viz) viz.style.setProperty('--ta-zone-w', pct + '%');
+                if (timer) timer.textContent = val + ' min';
+            });
+        }
+
+        // Viz 4 — Conflict tolerance slider + show-warnings toggle
+        const conflictSlider = document.getElementById('delay-conflict-tolerance');
+        if (conflictSlider) {
+            conflictSlider.addEventListener('input', () => {
+                const val = parseInt(conflictSlider.value, 10);
+                const pct = (val / 15) * 28;
+                const viz = document.getElementById('viz-conflict');
+                const timer = document.getElementById('viz-conflict-timer');
+                if (viz) viz.style.setProperty('--conflict-zone-w', pct + '%');
+                if (timer) timer.textContent = val + ' min';
+            });
+        }
+
+        const warningsToggle = document.getElementById('delay-show-warnings');
+        if (warningsToggle) {
+            const updateWarningsViz = () => {
+                const isChecked = warningsToggle.classList.contains('checked');
+                const viz = document.getElementById('viz-conflict');
+                const caption = document.getElementById('viz-conflict-caption');
+                if (viz) viz.dataset.warnings = isChecked;
+                if (caption) caption.textContent = isChecked
+                    ? 'Tåg 3545 anländer för nära 3429'
+                    : 'Varningar inaktiverade — inga zoner visas';
+            };
+            const observer = new MutationObserver(updateWarningsViz);
+            observer.observe(warningsToggle, { attributes: true, attributeFilter: ['class'] });
+            updateWarningsViz();
+        }
+
+        // Viz 5 — Delay mode radio
+        document.querySelectorAll('input[name="delay-mode"]').forEach(input => {
+            input.addEventListener('change', () => {
+                if (!input.checked) return;
+                const viz = document.getElementById('viz-delay-mode');
+                if (viz) viz.dataset.mode = input.value;
+            });
+        });
+
+        // Viz 6 — Delay style radio
+        document.querySelectorAll('input[name="delay-style"]').forEach(input => {
+            input.addEventListener('change', () => {
+                if (!input.checked) return;
+                const viz = document.getElementById('viz-delay-style');
+                if (viz) viz.dataset.style = input.value;
+            });
+        });
+    }
+
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
@@ -739,13 +882,11 @@
         init();
     }
 
-    // Expose API
+    // Public API
     window.SettingsModal = {
         open: openModal,
         close: closeModal,
         getCurrentSettings: getCurrentSettings
     };
 
-
 })();
-

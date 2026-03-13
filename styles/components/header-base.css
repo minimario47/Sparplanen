@@ -16,7 +16,8 @@
     background: linear-gradient(to bottom, var(--surface-primary), var(--surface-secondary));
     border-bottom: 1px solid var(--border-primary);
     box-shadow: var(--shadow-sm);
-    transition: background var(--transition-normal), box-shadow var(--transition-normal);
+    transition: background-color var(--transition-DEFAULT) var(--ease-in-out),
+                box-shadow var(--transition-DEFAULT) var(--ease-in-out);
 }
 
 @media (max-width: 1024px) {
@@ -323,8 +324,8 @@
 
 /* Right-side actions: header buttons group */
 .header-actions.btn-group {
-    display: inline-flex !important;
-    gap: 0 !important;
+    display: inline-flex;
+    gap: 0;
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-sm);
     flex-shrink: 0;
@@ -333,44 +334,44 @@
 }
 
 .header-actions .btn {
-    width: 44px !important;
-    height: 44px !important;
-    padding: 0 !important;
-    flex: 0 0 44px !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    margin-left: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1 !important;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    flex: 0 0 44px;
+    border-radius: 0;
+    box-shadow: none;
+    margin-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 
 .header-actions .btn:first-child {
-    border-top-left-radius: var(--border-radius-md) !important;
-    border-bottom-left-radius: var(--border-radius-md) !important;
+    border-top-left-radius: var(--border-radius-md);
+    border-bottom-left-radius: var(--border-radius-md);
 }
 
 .header-actions .btn:last-child {
-    border-top-right-radius: var(--border-radius-md) !important;
-    border-bottom-right-radius: var(--border-radius-md) !important;
+    border-top-right-radius: var(--border-radius-md);
+    border-bottom-right-radius: var(--border-radius-md);
 }
 
 .header-actions .btn:hover,
 .header-actions .btn:active {
-    transform: none !important;
+    transform: none;
 }
 
-/* Override conflicting styles from header-status.css */
+/* .header-actions has higher specificity than header-status.css .theme-toggle/.settings-button */
 .header-actions .theme-toggle,
 .header-actions .settings-button {
-    position: static !important;
+    position: static;
 }
 
 .header-actions .btn > span {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 

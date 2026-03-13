@@ -345,15 +345,19 @@ LAST UPDATED: 2025-01-09
 
 /* ═══════════════════════════════════════════════════════════════════════════
    THEME TRANSITIONS
-   Smooth transitions when switching themes
+   Smooth transitions only while the user is switching themes.
+   The .theme-transitioning class is added by JS for ~300ms during a toggle,
+   then removed — so transitions never run on every element at idle time.
 ═══════════════════════════════════════════════════════════════════════════ */
 
-* {
-    transition: 
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+    transition:
         background-color var(--transition-DEFAULT) var(--ease-in-out),
         border-color var(--transition-DEFAULT) var(--ease-in-out),
         color var(--transition-DEFAULT) var(--ease-in-out),
-        box-shadow var(--transition-DEFAULT) var(--ease-in-out);
+        box-shadow var(--transition-DEFAULT) var(--ease-in-out) !important;
 }
 
 /* Faster transitions for interactive elements */
@@ -464,11 +468,68 @@ select,
 
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
-        /* Apply dark theme if no explicit theme is set */
+        /* Full dark theme fallback when JS hasn't run yet */
         --surface-primary: var(--surface-base-dark);
+        --surface-secondary: var(--surface-elevated-dark);
+        --surface-tertiary: var(--surface-sunken-dark);
+        --surface-overlay: var(--surface-overlay-dark);
+
         --text-primary: var(--text-primary-dark);
-        /* ... rest of dark theme variables ... */
-        /* This can be expanded or handled via JavaScript */
+        --text-secondary: var(--text-secondary-dark);
+        --text-tertiary: var(--text-tertiary-dark);
+        --text-inverse: var(--text-inverse-dark);
+        --text-disabled: var(--text-disabled-dark);
+
+        --border-primary: rgba(255, 255, 255, 0.12);
+        --border-secondary: rgba(255, 255, 255, 0.08);
+        --border-tertiary: rgba(255, 255, 255, 0.18);
+        --border-focus: var(--primary-400);
+
+        --interactive-primary: var(--primary-500);
+        --interactive-primary-hover: var(--primary-400);
+        --interactive-primary-active: var(--primary-300);
+        --interactive-secondary: var(--secondary-800);
+        --interactive-secondary-hover: var(--secondary-700);
+        --interactive-danger: var(--danger-500);
+        --interactive-danger-hover: var(--danger-400);
+
+        --shadow-sm-active: none;
+        --shadow-md-active: none;
+        --shadow-lg-active: none;
+        --shadow-xl-active: none;
+        --shadow-2xl-active: none;
+        --shadow-glow-active: 0 0 0 2px rgba(59, 130, 246, 0.4);
+
+        --elevation-border: var(--border-light-dark-mode);
+
+        --selection-bg: var(--primary-700);
+        --selection-fg: var(--primary-100);
+        --surface-tooltip: var(--neutral-800);
+        --tooltip-text: var(--neutral-50);
+        --current-time-color: var(--danger-400);
+        --current-time-glow-1: rgba(239, 68, 68, 0.9);
+        --current-time-glow-2: rgba(239, 68, 68, 0.6);
+        --current-time-glow-3: rgba(239, 68, 68, 0.3);
+
+        --len-b1-bg: var(--neutral-800);
+        --len-b1-border: var(--primary-400);
+        --len-b1-text: var(--text-primary-dark);
+        --len-b2-bg: var(--neutral-800);
+        --len-b2-border: var(--info-400);
+        --len-b2-text: var(--text-primary-dark);
+        --len-b3-bg: var(--neutral-800);
+        --len-b3-border: var(--success-400);
+        --len-b3-text: var(--text-primary-dark);
+        --len-b4-bg: var(--neutral-800);
+        --len-b4-border: var(--warning-400);
+        --len-b4-text: var(--text-primary-dark);
+        --len-b5-bg: var(--neutral-800);
+        --len-b5-border: var(--danger-400);
+        --len-b5-text: var(--text-primary-dark);
+
+        --train-single-bg: var(--neutral-700);
+        --train-single-border: var(--primary-400);
+        --train-single-text: var(--text-primary-dark);
     }
 }
 

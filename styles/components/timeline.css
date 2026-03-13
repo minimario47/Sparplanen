@@ -75,7 +75,7 @@
 [data-theme="high-contrast"] .timeline-hour.current {
   background: var(--neutral-700);
   border-right: 2px solid var(--border-primary);
-};
+}
 
 .timeline-grid {
   position: absolute;
@@ -114,6 +114,7 @@
   opacity: 0.95;
   z-index: 100; /* Above trains (10-15) and timeline-header (30) */
   pointer-events: none;
+  will-change: left, box-shadow; /* Promote to own layer: position updates every second, box-shadow pulses continuously */
   box-shadow:
     0 0 20px var(--current-time-glow-1),
     0 0 40px var(--current-time-glow-2),

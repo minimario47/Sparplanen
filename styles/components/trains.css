@@ -169,11 +169,15 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: var(--font-mono);
+  min-width: 0; /* Allow flex shrink below content size */
 }
 
 .train-number-value {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex-shrink: 1;
 }
 .train-numbers.single-centered {
   justify-content: center;

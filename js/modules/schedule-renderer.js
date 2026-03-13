@@ -297,7 +297,16 @@ function scrollToViewTime(viewTime, timelineStart, pixelsPerHour, isFollowingMod
     }
 }
 
+let cachedCanvasHeight = 0;
+
 function startCurrentTimeUpdater() {
+    const canvas = document.getElementById('timeline-canvas');
+    if (canvas && typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(entries => {
+            cachedCanvasHeight = entries[0].contentRect.height;
+        }).observe(canvas);
+        cachedCanvasHeight = canvas.offsetHeight;
+    }
     updateCurrentTimeLine();
     setInterval(updateCurrentTimeLine, 1000);
 }
@@ -327,7 +336,7 @@ function updateCurrentTimeLine() {
     const nowMinutes = (now.getTime() - timelineStart.getTime()) / 60000;
     const linePositionOnCanvas = (nowMinutes / 60) * window.currentPixelsPerHour;
 
-    const canvasHeight = timelineCanvas.offsetHeight;
+    const canvasHeight = cachedCanvasHeight || timelineCanvas.offsetHeight;
     currentTimeLine.style.left = `${linePositionOnCanvas}px`;
     currentTimeLine.style.top = '0px';
     currentTimeLine.style.height = `${canvasHeight}px`;

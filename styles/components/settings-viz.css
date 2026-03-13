@@ -1,0 +1,951 @@
+/* Settings Visualizations — Live mini-previews inside settings controls
+   Architecture: all layout uses % + calc() so nothing overflows the clipped container.
+   The one rule that prevents all clipping bugs: train + overlay must sum to < 90% of
+   the content box width. Do not use negative right/left offsets on children of .viz-*-train.
+*/
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SHARED BASE
+═══════════════════════════════════════════════════════════════════════════ */
+
+.setting-viz {
+    margin-top: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface-tertiary);
+    border: 1px solid var(--border-secondary);
+    padding: 10px 12px;
+    position: relative;
+}
+
+.viz-track-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--border-primary);
+    border-radius: 1px;
+}
+
+.viz-train-bar {
+    position: absolute;
+    height: 18px;
+    border-radius: 4px;
+    border: 1.5px solid var(--primary-300);
+    background: var(--primary-100);
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: var(--text-secondary);
+}
+
+.viz-tb--green { background: #dcfce7; border-color: #86efac; color: #15803d; }
+.viz-tb--orange { background: #ffedd5; border-color: #fdba74; color: #c2410c; }
+
+/* Shared hours row — reused by viz-offset and viz-follow */
+.viz-hours {
+    height: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9px;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono, monospace);
+    font-weight: 600;
+    padding: 0 2px;
+    border-bottom: 1px solid var(--border-secondary);
+    margin-bottom: 3px;
+    letter-spacing: 0.02em;
+}
+
+.viz-caption {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    margin: 6px 0 0;
+    text-align: center;
+    line-height: 1.4;
+    font-family: var(--font-mono, monospace);
+}
+
+.viz-caption strong {
+    color: var(--text-secondary);
+    font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIZ 1 — Nu-linje Position
+═══════════════════════════════════════════════════════════════════════════ */
+
+.viz-offset-track {
+    position: relative;
+    overflow: hidden;
+}
+
+.viz-trains-layer {
+    position: relative;
+    height: 28px;
+}
+
+/* The now-line spans from top of hours row through trains layer */
+.viz-now-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #ef4444;
+    transition: left 80ms ease;
+    z-index: 3;
+}
+
+.viz-now-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ef4444;
+    margin-left: -5px;
+    margin-top: -3px;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18);
+    animation: vizNowPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes vizNowPulse {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25); }
+    50%       { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.08); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIZ 2 — Följ automatiskt
+   Key fix: now-line is OUTSIDE .viz-follow-world so it doesn't scroll with
+   the world in follow-ON mode. The world pans under the fixed now-line.
+═══════════════════════════════════════════════════════════════════════════ */
+
+.viz-follow-viewport {
+    position: relative;
+    height: 28px;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+/* World is wider than viewport — trains extend into the "future" */
+.viz-follow-world {
+    position: absolute;
+    inset: 0;
+    width: 180%;
+    /* Subtle vertical hour-tick lines at 18.5% intervals (1h each) */
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent calc(18.5% - 1px),
+        var(--border-secondary) calc(18.5% - 1px),
+        var(--border-secondary) 18.5%
+    );
+}
+
+/* Now-line sits in the viewport at a fixed position — NOT inside the world */
+.viz-follow-now-line {
+    position: absolute;
+    top: 0;
+    left: 22%;
+    width: 2px;
+    height: 100%;
+    background: #ef4444;
+    z-index: 3;
+    box-shadow: 0 0 5px rgba(239, 68, 68, 0.4);
+}
+
+.viz-follow-now-line::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+    animation: vizNowPulse 1.8s ease-in-out infinite;
+}
+
+/* OFF: now-line drifts to the right and disappears off-screen */
+[data-follow="false"] .viz-follow-now-line {
+    animation: vizFollowDrift 4s cubic-bezier(0.4, 0, 0.8, 1) infinite;
+}
+
+[data-follow="false"] .viz-follow-world {
+    transform: translateX(0);
+}
+
+@keyframes vizFollowDrift {
+    0%   { left: 22%; opacity: 1; }
+    72%  { opacity: 1; }
+    88%  { left: 103%; opacity: 0; }
+    89%  { left: 22%; opacity: 0; }
+    97%  { opacity: 1; }
+    100% { left: 22%; opacity: 1; }
+}
+
+/* ON: the world (trains) scroll left — now-line stays at 22% of viewport */
+[data-follow="true"] .viz-follow-now-line {
+    animation: none;
+    left: 22%;
+    opacity: 1;
+}
+
+[data-follow="true"] .viz-follow-world {
+    animation: vizFollowPan 4s linear infinite;
+}
+
+@keyframes vizFollowPan {
+    0%   { transform: translateX(0); opacity: 1; }
+    75%  { transform: translateX(-35%); opacity: 1; }
+    82%  { opacity: 0; }
+    83%  { transform: translateX(0); opacity: 0; }
+    92%  { opacity: 1; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIZ 3 — Minsta vändtid
+   A 7-second looping animation with 3 phases: arrive → turnaround → depart.
+   An analog clock ticks during the turnaround phase.
+═══════════════════════════════════════════════════════════════════════════ */
+
+.viz-turnaround {
+    --ta-zone-w: 18%;
+}
+
+/* Header: phase label (left) + clock + timer (right) */
+.viz-ta-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 20px;
+    margin-bottom: 6px;
+}
+
+/* Stacked phase labels — only one visible at a time via opacity keyframes */
+.viz-ta-phases {
+    position: relative;
+    flex: 1;
+    height: 18px;
+    overflow: hidden;
+}
+
+.viz-ta-phases span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 10px;
+    font-weight: 600;
+    font-family: var(--font-mono, monospace);
+    white-space: nowrap;
+    opacity: 0;
+}
+
+.viz-ta-phase-1 {
+    color: var(--primary-500, #3b82f6);
+    animation: vizTaPhase1 7s ease-in-out infinite;
+}
+
+.viz-ta-phase-2 {
+    color: #d97706;
+    animation: vizTaPhase2 7s ease-in-out infinite;
+}
+
+.viz-ta-phase-3 {
+    color: #16a34a;
+    animation: vizTaPhase3 7s ease-in-out infinite;
+}
+
+@keyframes vizTaPhase1 {
+    0%    { opacity: 1; }
+    17%   { opacity: 1; }
+    23%   { opacity: 0; }
+    100%  { opacity: 0; }
+}
+
+@keyframes vizTaPhase2 {
+    0%, 22%  { opacity: 0; }
+    27%      { opacity: 1; }
+    70%      { opacity: 1; }
+    76%      { opacity: 0; }
+    100%     { opacity: 0; }
+}
+
+@keyframes vizTaPhase3 {
+    0%, 75%  { opacity: 0; }
+    80%      { opacity: 1; }
+    96%      { opacity: 1; }
+    100%     { opacity: 0; }
+}
+
+/* Clock + timer: fades in during turnaround phase */
+.viz-ta-clock-wrap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    opacity: 0;
+    animation: vizTaClockVisible 7s ease-in-out infinite;
+}
+
+@keyframes vizTaClockVisible {
+    0%, 24%  { opacity: 0; }
+    30%      { opacity: 1; }
+    70%      { opacity: 1; }
+    76%      { opacity: 0; }
+    100%     { opacity: 0; }
+}
+
+/* Analog clock face */
+.viz-ta-clock {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #fbbf24;
+    background: var(--surface-primary);
+    flex-shrink: 0;
+}
+
+/* Center dot */
+.viz-ta-clock::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #d97706;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+/* Clock hands — both pivot from bottom center of element */
+.viz-ta-clock-hour,
+.viz-ta-clock-min {
+    position: absolute;
+    bottom: 50%;
+    left: calc(50% - 0.75px);
+    width: 1.5px;
+    border-radius: 1px;
+    transform-origin: bottom center;
+}
+
+.viz-ta-clock-hour {
+    height: 5px;
+    background: #fbbf24;
+    animation: vizClockHour 7s linear infinite;
+}
+
+.viz-ta-clock-min {
+    height: 7px;
+    background: #92400e;
+    animation: vizClockMin 1.4s linear infinite;
+}
+
+@keyframes vizClockHour {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes vizClockMin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.viz-ta-timer-label {
+    font-size: 10px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: #d97706;
+    white-space: nowrap;
+}
+
+/* Track area */
+.viz-ta-track {
+    position: relative;
+    height: 32px;
+}
+
+/* Train — uses translateX so position + departure can use GPU-accelerated transform */
+.viz-turnaround-train {
+    position: absolute;
+    left: 10%;
+    top: 4px;
+    height: 22px;
+    width: 64px;
+    border-radius: 4px;
+    border: 1.5px solid var(--primary-300);
+    background: var(--primary-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: var(--text-secondary);
+    z-index: 2;
+    animation: vizTaTrainMove 7s ease-in-out infinite;
+}
+
+@keyframes vizTaTrainMove {
+    0%   { transform: translateX(-260px); opacity: 0; }
+    3%   { opacity: 1; }
+    20%  { transform: translateX(0); }          /* arrives */
+    72%  { transform: translateX(0); }          /* waits */
+    100% { transform: translateX(700px); opacity: 1; }  /* departs */
+}
+
+/* Turnaround zone — hatched, expands while train is parked */
+.viz-turnaround-zone {
+    position: absolute;
+    top: 4px;
+    left: calc(10% + 66px);
+    height: 22px;
+    width: 0;
+    border-radius: 0 4px 4px 0;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 4px,
+        rgba(251, 191, 36, 0.22) 4px,
+        rgba(251, 191, 36, 0.22) 7px
+    );
+    border: 1.5px solid #fbbf24;
+    border-left: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+    animation: vizTaZone 7s ease-in-out infinite;
+}
+
+@keyframes vizTaZone {
+    0%, 20%  { width: 0; opacity: 0; }
+    30%      { width: var(--ta-zone-w); opacity: 1; }
+    70%      { width: var(--ta-zone-w); opacity: 1; }
+    78%      { width: 0; opacity: 0; }
+    100%     { width: 0; opacity: 0; }
+}
+
+.viz-ta-zone-label {
+    font-size: 8px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: #d97706;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    animation: vizTaZoneLabel 7s ease-in-out infinite;
+}
+
+@keyframes vizTaZoneLabel {
+    0%, 32%  { opacity: 0; }
+    38%      { opacity: 1; }
+    68%      { opacity: 1; }
+    74%      { opacity: 0; }
+    100%     { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIZ 4 — Konfliktvarning
+   Two-element wrapper: outer handles position, inner handles conflict state.
+   This lets us animate left (position) and transform (shake) independently.
+═══════════════════════════════════════════════════════════════════════════ */
+
+.viz-conflict {
+    --conflict-zone-w: 9.3%;
+}
+
+.viz-conflict-track {
+    position: relative;
+    height: 42px;
+}
+
+.viz-conflict-train-a {
+    position: absolute;
+    top: 8px;
+    left: 6%;
+    width: 54px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1.5px solid var(--primary-300);
+    background: var(--primary-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: var(--text-secondary);
+    z-index: 2;
+}
+
+.viz-conflict-zone {
+    position: absolute;
+    top: 8px;
+    left: calc(6% + 56px);
+    height: 24px;
+    width: var(--conflict-zone-w);
+    border: 2px dashed #fbbf24;
+    background: rgba(251, 191, 36, 0.1);
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 150ms ease, border-color 400ms ease, background 400ms ease;
+    z-index: 1;
+    animation: vizConflictZoneState 3.6s ease-in-out infinite;
+}
+
+@keyframes vizConflictZoneState {
+    0%, 55%   { border-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
+    65%, 100% { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+}
+
+.viz-conflict-zone span {
+    font-size: 8px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: #b45309;
+    white-space: nowrap;
+}
+
+/* Outer wrapper: handles the approach position */
+.viz-conflict-b-wrap {
+    position: absolute;
+    top: 8px;
+    left: calc(6% + 56px + var(--conflict-zone-w) + 4px);
+    animation: vizTrainBApproach 3.6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+    z-index: 3;
+}
+
+@keyframes vizTrainBApproach {
+    0%          { transform: translateX(440px); }
+    55%, 100%   { transform: translateX(0); }
+}
+
+/* Inner: handles conflict color + shake */
+.viz-conflict-train-b-inner {
+    position: relative;
+    width: 54px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1.5px solid #fdba74;
+    background: #ffedd5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: var(--text-primary);
+    animation: vizTrainBConflict 3.6s ease-in-out infinite,
+               vizTrainBShake    3.6s ease-in-out infinite;
+}
+
+@keyframes vizTrainBConflict {
+    0%, 52%   { border-color: #fdba74; background: #ffedd5; box-shadow: none; }
+    60%       { border-color: #dc2626; background: #fee2e2; box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.22); }
+    68%, 100% { border-color: #dc2626; background: #fee2e2; box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.14); }
+}
+
+@keyframes vizTrainBShake {
+    0%, 53%  { transform: translateX(0); }
+    55%      { transform: translateX(-4px); }
+    57%      { transform: translateX(4px); }
+    59%      { transform: translateX(-3px); }
+    61%      { transform: translateX(2px); }
+    63%      { transform: translateX(0); }
+    100%     { transform: translateX(0); }
+}
+
+/* Conflict badge — pops in when train B enters the zone */
+.viz-conflict-badge {
+    position: absolute;
+    top: -16px;
+    left: -2px;
+    background: #dc2626;
+    color: #fff;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 8px;
+    font-weight: 800;
+    font-family: var(--font-mono, monospace);
+    white-space: nowrap;
+    letter-spacing: 0.06em;
+    opacity: 0;
+    z-index: 4;
+    animation: vizBadgeAppear 3.6s ease-in-out infinite;
+    box-shadow: 0 1px 4px rgba(220, 38, 38, 0.5);
+}
+
+@keyframes vizBadgeAppear {
+    0%, 54%   { opacity: 0; transform: scale(0.75) translateY(3px); }
+    62%       { opacity: 1; transform: scale(1.12) translateY(-2px); box-shadow: 0 0 0 5px rgba(220, 38, 38, 0.25); }
+    70%, 80%  { opacity: 1; transform: scale(1) translateY(0);   box-shadow: 0 1px 4px rgba(220, 38, 38, 0.5); }
+    78%       { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+    100%      { opacity: 1; }
+}
+
+/* When warnings are OFF: hide zone and badge, no animation on zone */
+[data-warnings="false"] .viz-conflict-zone,
+[data-warnings="false"] .viz-conflict-badge {
+    display: none;
+}
+
+[data-warnings="false"] .viz-conflict-b-wrap,
+[data-warnings="false"] .viz-conflict-train-b-inner {
+    animation: vizTrainBApproach 3.6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+[data-warnings="false"] .viz-conflict-train-b-inner {
+    animation: none;
+    border-color: #fdba74;
+    background: #ffedd5;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIZ 5 — Visningsläge (delay mode)
+   FIX: train + delay block laid out inline at known percentages — nothing
+   overflows the container. No negative left/right offsets.
+   Layout: [6%][─── 50% train ───][── 25% delay ──][icon badge right-aligned]
+═══════════════════════════════════════════════════════════════════════════ */
+
+.viz-dm-scene {
+    position: relative;
+    height: 44px;  /* extra headroom for icon badge above track level */
+}
+
+.viz-dm-track-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--border-primary);
+    border-radius: 1px;
+}
+
+.viz-dm-base-train {
+    position: absolute;
+    left: 6%;
+    top: 12px;
+    width: 50%;
+    height: 20px;
+    border-radius: 4px;
+    border: 1.5px solid var(--primary-300);
+    background: var(--primary-100);
+    display: flex;
+    align-items: center;
+    padding: 0 7px;
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: var(--text-secondary);
+}
+
+.viz-dm-delay-block {
+    position: absolute;
+    left: calc(6% + 50% + 1.5px);  /* immediately right of train, no gap */
+    top: 12px;
+    width: 25%;
+    height: 20px;
+    border-radius: 0 4px 4px 0;
+    transition: opacity 200ms ease;
+    overflow: hidden;
+}
+
+/* Overlay fill layer */
+.viz-dm-delay-block::before {
+    content: '+8 min';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: #9a3412;
+    z-index: 1;
+    line-height: 20px;
+    text-align: center;
+}
+
+/* Default state: no fill/border — set by data-mode selectors below */
+.viz-dm-delay-block {
+    background: transparent;
+    border: none;
+}
+
+/* Icon badge — right-aligned, above track level */
+.viz-dm-icon-badge {
+    position: absolute;
+    top: 1px;
+    right: 0;
+    font-size: 8px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: #ea580c;
+    background: #fff7ed;
+    border: 1px solid #fdba74;
+    border-radius: 4px;
+    padding: 2px 5px;
+    white-space: nowrap;
+    z-index: 3;
+    transition: opacity 200ms ease;
+    animation: vizIconPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes vizIconPulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.06); }
+}
+
+/* ─── mode: offset — orange fill overlay, no icon ─── */
+[data-mode="offset"] .viz-dm-delay-block {
+    background: rgba(251, 146, 60, 0.55);
+    border: 1.5px solid rgba(251, 146, 60, 0.9);
+    border-left: none;
+    opacity: 1;
+}
+[data-mode="offset"] .viz-dm-icon-badge {
+    opacity: 0;
+    animation: none;
+}
+
+/* ─── mode: icon — no overlay, icon visible ─── */
+[data-mode="icon"] .viz-dm-delay-block {
+    opacity: 0;
+}
+[data-mode="icon"] .viz-dm-icon-badge {
+    opacity: 1;
+}
+
+/* ─── mode: both — overlay + icon ─── */
+[data-mode="both"] .viz-dm-delay-block {
+    background: rgba(251, 146, 60, 0.55);
+    border: 1.5px solid rgba(251, 146, 60, 0.9);
+    border-left: none;
+    opacity: 1;
+}
+[data-mode="both"] .viz-dm-icon-badge {
+    opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIZ 6 — Utseende (delay style)
+   Same inline layout as Viz 5. Only the delay block's fill/border changes.
+═══════════════════════════════════════════════════════════════════════════ */
+
+.viz-ds-scene {
+    position: relative;
+    height: 34px;
+}
+
+.viz-ds-track-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--border-primary);
+    border-radius: 1px;
+}
+
+.viz-ds-base-train {
+    position: absolute;
+    left: 6%;
+    top: 6px;
+    width: 50%;
+    height: 22px;
+    border-radius: 4px;
+    border: 1.5px solid var(--primary-300);
+    background: var(--primary-100);
+    display: flex;
+    align-items: center;
+    padding: 0 7px;
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: var(--text-secondary);
+}
+
+.viz-ds-delay-block {
+    position: absolute;
+    left: calc(6% + 50% + 1.5px);
+    top: 6px;
+    width: 25%;
+    height: 22px;
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: #9a3412;
+    transition: background 280ms ease, border-color 280ms ease;
+}
+
+[data-style="color-coded"] .viz-ds-delay-block {
+    background: rgba(251, 146, 60, 0.55);
+    border: 1.5px solid rgba(251, 146, 60, 0.9);
+    border-left: none;
+}
+
+[data-style="transparent"] .viz-ds-delay-block {
+    background: transparent;
+    border: 1.5px solid rgba(251, 146, 60, 0.9);
+    border-left: none;
+    color: #9a3412;
+}
+
+[data-style="dashed"] .viz-ds-delay-block {
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 4px,
+        rgba(251, 146, 60, 0.38) 4px,
+        rgba(251, 146, 60, 0.38) 7px
+    );
+    border: 1.5px dashed rgba(251, 146, 60, 0.9);
+    border-left: none;
+    color: #9a3412;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIZ 7 — Train Preview Labels
+═══════════════════════════════════════════════════════════════════════════ */
+
+.viz-preview-labels {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.viz-preview-labels span {
+    flex: 1;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono, monospace);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DARK MODE
+═══════════════════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] .setting-viz {
+    background: rgba(0, 0, 0, 0.22);
+    border-color: var(--border-primary);
+}
+
+[data-theme="dark"] .viz-train-bar {
+    background: #1e3a5f;
+    border-color: #2563eb;
+    color: #93c5fd;
+}
+
+[data-theme="dark"] .viz-tb--green {
+    background: #14532d;
+    border-color: #22c55e;
+    color: #86efac;
+}
+
+[data-theme="dark"] .viz-tb--orange {
+    background: #431407;
+    border-color: #f97316;
+    color: #fdba74;
+}
+
+[data-theme="dark"] .viz-dm-base-train,
+[data-theme="dark"] .viz-ds-base-train,
+[data-theme="dark"] .viz-turnaround-train,
+[data-theme="dark"] .viz-conflict-train-a {
+    background: #1e3a5f;
+    border-color: #2563eb;
+    color: #93c5fd;
+}
+
+[data-theme="dark"] .viz-conflict-train-b-inner {
+    background: #431407;
+    border-color: #f97316;
+    color: #fdba74;
+}
+
+[data-theme="dark"] .viz-dm-delay-block::before,
+[data-theme="dark"] .viz-ds-delay-block {
+    color: #fdba74;
+}
+
+[data-theme="dark"] .viz-dm-icon-badge {
+    background: #1c1917;
+    border-color: #f97316;
+    color: #fdba74;
+}
+
+[data-theme="dark"] .viz-ta-clock {
+    background: var(--surface-secondary);
+}
+
+[data-theme="dark"] .viz-conflict-zone span {
+    color: #fbbf24;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HIGH CONTRAST
+═══════════════════════════════════════════════════════════════════════════ */
+
+[data-theme="high-contrast"] .viz-train-bar,
+[data-theme="high-contrast"] .viz-dm-base-train,
+[data-theme="high-contrast"] .viz-ds-base-train,
+[data-theme="high-contrast"] .viz-turnaround-train,
+[data-theme="high-contrast"] .viz-conflict-train-a,
+[data-theme="high-contrast"] .viz-conflict-train-b-inner {
+    border-width: 2px;
+}
+
+[data-theme="high-contrast"] .setting-viz {
+    border-width: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REDUCED MOTION — freeze all loops, show representative static state
+═══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+    .setting-viz *,
+    .setting-viz *::before,
+    .setting-viz *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    /* Show static mid-state for key elements */
+    .viz-follow-now-line           { left: 22%; opacity: 1; }
+    [data-follow="true"] .viz-follow-world { transform: translateX(-18%); }
+
+    .viz-turnaround-train          { transform: translateX(0); opacity: 1; }
+    .viz-turnaround-zone           { width: var(--ta-zone-w); opacity: 1; }
+    .viz-ta-clock-wrap             { opacity: 1; }
+    .viz-ta-phase-2                { opacity: 1; }
+    .viz-ta-zone-label             { opacity: 1; }
+
+    .viz-conflict-b-wrap           { transform: translateX(0); }
+    .viz-conflict-badge            { opacity: 1; transform: none; }
+    .viz-conflict-train-b-inner    { border-color: #dc2626; background: #fee2e2; }
+
+    .viz-dm-icon-badge             { transform: none; }
+}

@@ -124,6 +124,40 @@ These variables map old names to new design system values.
 
     --border-radius: var(--radius-DEFAULT);
 
+    /* ═══════════════════════════════════════════════════════════════════════
+       LEGACY FONT SIZE MAPPINGS - Map --font-size-* to --text-* system
+       Components written before migration use the --font-size-* naming
+    ═══════════════════════════════════════════════════════════════════════ */
+
+    --font-size-2xs: 0.625rem;              /* 10px - density labels */
+    --font-size-xs: var(--text-xs);         /* 12px */
+    --font-size-sm: var(--text-sm);         /* 14px */
+    --font-size-base: var(--text-base);     /* 16px */
+    --font-size-m: var(--text-base);        /* 16px - alias used in timeline */
+    --font-size-lg: var(--text-lg);         /* 18px */
+    --font-size-xl: var(--text-xl);         /* 20px */
+    --font-size-2xl: var(--text-2xl);       /* 24px */
+    --font-size-3xl: var(--text-3xl);       /* 30px */
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       LEGACY FONT WEIGHT MAPPINGS - Map --font-weight-* to --font-* system
+    ═══════════════════════════════════════════════════════════════════════ */
+
+    --font-weight-normal: var(--font-normal);       /* 400 */
+    --font-weight-medium: var(--font-medium);       /* 500 */
+    --font-weight-semibold: var(--font-semibold);   /* 600 */
+    --font-weight-bold: var(--font-bold);           /* 700 */
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       LEGACY BORDER RADIUS MAPPINGS - Map --border-radius-* to --radius-*
+    ═══════════════════════════════════════════════════════════════════════ */
+
+    --border-radius-sm: var(--radius-sm);           /* 2px */
+    --border-radius-md: var(--radius-DEFAULT);      /* 6px */
+    --border-radius-lg: var(--radius-lg);           /* 8px */
+    --border-radius-xl: var(--radius-xl);           /* 12px */
+    --border-radius-full: var(--radius-full);       /* 9999px */
+
     /* Spacing scale - maps to design system space-* variables */
     --spacing-1: var(--space-1);     /* 4px */
     --spacing-2: var(--space-2);     /* 8px */

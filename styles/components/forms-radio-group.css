@@ -1,6 +1,8 @@
 /* Radio Button Group - Segmented control style with smooth animations */
 
 .radio-group {
+    --radio-options: 3;
+    --highlight-index: 0;
     display: flex;
     background: var(--neutral-200);
     border-radius: var(--radius-md);
@@ -58,36 +60,22 @@
 }
 
 /* Background highlight that slides behind labels */
+/* Position and width are driven by JS-set CSS custom properties:
+   --highlight-index: 0-based index of selected option (set by JS)
+   --radio-options: total number of options (set inline on .radio-group) */
 .radio-group::before {
     content: '';
     position: absolute;
     top: 2px;
-    left: 2px;
+    left: calc(var(--highlight-index) * (100% / var(--radio-options)) + 2px);
     height: calc(100% - 4px);
-    width: calc(33.333% - 2px);
+    width: calc(100% / var(--radio-options) - 2px);
     background: white;
     border-radius: calc(var(--radius-md) - 2px);
     box-shadow: var(--shadow-sm);
     transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
     z-index: 0;
-}
-
-/* Adjust highlight position based on which radio is checked */
-.radio-group-input:nth-of-type(1):checked ~ .radio-group::before {
-    left: 2px;
-}
-
-.radio-group-input:nth-of-type(2):checked ~ .radio-group::before {
-    left: calc(33.333% + 2px);
-}
-
-.radio-group-input:nth-of-type(3):checked ~ .radio-group::before {
-    left: calc(66.666% + 2px);
-}
-
-.radio-group-input:nth-of-type(4):checked ~ .radio-group::before {
-    left: calc(100% - 33.333% + 2px);
 }
 
 /* Dark mode */
