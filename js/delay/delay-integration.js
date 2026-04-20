@@ -150,7 +150,7 @@ class DelayIntegration {
      * Handle settings change
      */
     handleSettingsChange(newSettings) {
-        this.settings = newSettings;
+        this.settings = { ...this.settings, ...newSettings };
         
         // Recreate visualizer if mode changed
         const currentMode = this.visualizer.constructor.name.toLowerCase().replace('visualizer', '');

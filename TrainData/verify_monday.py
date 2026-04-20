@@ -41,6 +41,7 @@ KNOWN_COLORS = {
     (0.396, 0.478, 0.529),
     (0.627, 0.729, 0.686),
     (0.878, 0.871, 0.796),
+    (0.902, 0.902, 0.902),    # light grey — low-frequency "stopped" train bars
 }
 
 

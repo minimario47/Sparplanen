@@ -1,14 +1,14 @@
 // Auto-generated — DO NOT EDIT MANUALLY
 // Source : Spårplaner Göteborg C, v.17 3tim.pdf Måndag.pdf
-// Created: 2026-04-20 08:57
+// Created: 2026-04-20 13:07
 
 const initialTrackClosures = [
   {
     "id": 1,
     "trackId": 4,
     "subTrackIndex": 0,
-    "startTime": "00:02",
-    "endTime": "00:27",
+    "startTime": "00:00",
+    "endTime": "00:25",
     "reason": "Spår stängt",
     "barColor": [
       0.925,
@@ -22,8 +22,8 @@ const initialTrackClosures = [
     "id": 2,
     "trackId": 5,
     "subTrackIndex": 0,
-    "startTime": "00:02",
-    "endTime": "00:27",
+    "startTime": "00:00",
+    "endTime": "00:25",
     "reason": "Spår stängt",
     "barColor": [
       0.925,
@@ -37,8 +37,8 @@ const initialTrackClosures = [
     "id": 3,
     "trackId": 5,
     "subTrackIndex": 0,
-    "startTime": "02:04",
-    "endTime": "02:24",
+    "startTime": "02:00",
+    "endTime": "02:20",
     "reason": "Spår stängt",
     "barColor": [
       0.925,
@@ -52,8 +52,8 @@ const initialTrackClosures = [
     "id": 4,
     "trackId": 5,
     "subTrackIndex": 1,
-    "startTime": "00:02",
-    "endTime": "02:19",
+    "startTime": "00:00",
+    "endTime": "02:15",
     "reason": "Spår stängt",
     "barColor": [
       0.925,
@@ -67,8 +67,8 @@ const initialTrackClosures = [
     "id": 5,
     "trackId": 6,
     "subTrackIndex": 0,
-    "startTime": "00:02",
-    "endTime": "00:27",
+    "startTime": "00:00",
+    "endTime": "00:25",
     "reason": "Spår stängt",
     "barColor": [
       0.925,
@@ -82,8 +82,8 @@ const initialTrackClosures = [
     "id": 6,
     "trackId": 6,
     "subTrackIndex": 0,
-    "startTime": "02:04",
-    "endTime": "02:24",
+    "startTime": "02:00",
+    "endTime": "02:20",
     "reason": "Spår stängt",
     "barColor": [
       0.925,
@@ -97,8 +97,8 @@ const initialTrackClosures = [
     "id": 7,
     "trackId": 6,
     "subTrackIndex": 1,
-    "startTime": "00:02",
-    "endTime": "02:19",
+    "startTime": "00:00",
+    "endTime": "02:15",
     "reason": "Spår stängt",
     "barColor": [
       0.925,
@@ -112,8 +112,8 @@ const initialTrackClosures = [
     "id": 8,
     "trackId": 7,
     "subTrackIndex": 0,
-    "startTime": "00:02",
-    "endTime": "00:27",
+    "startTime": "00:00",
+    "endTime": "00:25",
     "reason": "Spår stängt",
     "barColor": [
       0.925,
@@ -127,8 +127,8 @@ const initialTrackClosures = [
     "id": 9,
     "trackId": 7,
     "subTrackIndex": 0,
-    "startTime": "02:04",
-    "endTime": "02:24",
+    "startTime": "02:00",
+    "endTime": "02:20",
     "reason": "Spår stängt",
     "barColor": [
       0.925,
@@ -142,8 +142,8 @@ const initialTrackClosures = [
     "id": 10,
     "trackId": 7,
     "subTrackIndex": 1,
-    "startTime": "02:04",
-    "endTime": "03:28",
+    "startTime": "02:00",
+    "endTime": "03:30",
     "reason": "Spår stängt",
     "barColor": [
       0.925,
@@ -157,7 +157,7 @@ const initialTrackClosures = [
     "id": 11,
     "trackId": 4,
     "subTrackIndex": 0,
-    "startTime": "03:23",
+    "startTime": "03:25",
     "endTime": "04:00",
     "reason": "Spår stängt",
     "barColor": [
@@ -172,7 +172,7 @@ const initialTrackClosures = [
     "id": 12,
     "trackId": 5,
     "subTrackIndex": 0,
-    "startTime": "03:23",
+    "startTime": "03:25",
     "endTime": "04:00",
     "reason": "Spår stängt",
     "barColor": [
@@ -187,7 +187,7 @@ const initialTrackClosures = [
     "id": 13,
     "trackId": 6,
     "subTrackIndex": 0,
-    "startTime": "03:23",
+    "startTime": "03:25",
     "endTime": "04:00",
     "reason": "Spår stängt",
     "barColor": [
@@ -202,7 +202,7 @@ const initialTrackClosures = [
     "id": 14,
     "trackId": 7,
     "subTrackIndex": 0,
-    "startTime": "03:23",
+    "startTime": "03:25",
     "endTime": "04:00",
     "reason": "Spår stängt",
     "barColor": [

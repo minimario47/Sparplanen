@@ -6,51 +6,42 @@
       "severity": "MEDIUM",
       "code": "no_train_numbers",
       "message": "slot has neither arrival nor departure train number",
-      "slot_id": 108,
+      "slot_id": 112,
       "trackId": 14,
       "subTrackIndex": 2,
-      "arrivalTime": "08:02",
-      "departureTime": "08:18"
+      "arrivalTime": "08:00",
+      "departureTime": "08:15"
     },
     {
       "severity": "MEDIUM",
       "code": "no_train_numbers",
       "message": "slot has neither arrival nor departure train number",
-      "slot_id": 316,
+      "slot_id": 326,
       "trackId": 1,
       "subTrackIndex": 3,
-      "arrivalTime": "19:38",
-      "departureTime": "19:59"
+      "arrivalTime": "19:37",
+      "departureTime": "19:57"
     },
     {
       "severity": "MEDIUM",
       "code": "no_train_numbers",
       "message": "slot has neither arrival nor departure train number",
-      "slot_id": 328,
+      "slot_id": 341,
       "trackId": 6,
       "subTrackIndex": 1,
       "arrivalTime": "19:00",
       "departureTime": "19:20"
     },
     {
-      "severity": "MEDIUM",
-      "code": "physical_conflict",
-      "message": "slots 197 and 259 overlap by 1 min on track 8.2",
-      "slot_ids": [
-        197,
-        259
-      ]
-    },
-    {
       "severity": "INFO",
       "code": "summary",
       "message": "summary counters",
-      "slots_total": 410,
+      "slots_total": 428,
       "closures_total": 14,
-      "arrivals_with_numbers": 349,
-      "departures_with_numbers": 332,
-      "arrival_only": 75,
-      "departure_only": 58,
+      "arrivals_with_numbers": 364,
+      "departures_with_numbers": 347,
+      "arrival_only": 78,
+      "departure_only": 61,
       "per_track": {
         "1": 25,
         "2": 22,
@@ -63,25 +54,26 @@
         "11": 20,
         "13": 31,
         "14": 35,
-        "15": 32,
+        "15": 34,
         "16": 35,
+        "5": 20,
         "7": 23,
-        "12": 21,
-        "5": 4
+        "12": 21
       },
       "colors_found": {
         "[0.733, 0.71, 0.616]": 90,
-        "[0.0, 1.0, 1.0]": 68,
-        "[1.0, 0.6, 0.8]": 57,
-        "[0.8, 0.6, 1.0]": 57,
+        "[0.0, 1.0, 1.0]": 73,
+        "[1.0, 0.6, 0.8]": 59,
+        "[0.8, 0.6, 1.0]": 58,
         "[1.0, 0.949, 0.584]": 47,
         "[0.8, 1.0, 0.8]": 38,
-        "[1.0, 0.8, 0.6]": 14,
+        "[1.0, 0.8, 0.6]": 15,
+        "[0.984, 0.769, 0.192]": 13,
         "[0.6, 0.8, 1.0]": 12,
         "[1.0, 0.4, 0.0]": 9,
         "[0.396, 0.478, 0.529]": 8,
-        "[0.984, 0.769, 0.192]": 6,
         "[0.627, 0.729, 0.686]": 3,
+        "[0.902, 0.902, 0.902]": 2,
         "[0.878, 0.871, 0.796]": 1
       }
     }

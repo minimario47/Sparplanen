@@ -165,9 +165,59 @@ class Closure:
 
 def calibrate_axis(page, page_num: int) -> dict:
     """
-    Fit mins = slope * (x - x_origin) from the HH:MM labels on the top axis.
-    Require at least 3 time labels and a sensible slope.
+    The PDF draws the time axis as **evenly spaced vertical grid lines** -
+    19 lines spanning the 3-hour window with one gridline per 10 minutes.
+    The HH:MM text labels at the top are positioned inconsistently
+    relative to the ticks (their x0 is shifted), so using the labels as
+    anchors gives a biased 1-4 min drift.
+
+    Instead we find the set of full-height vertical lines inside the
+    diagram, deduplicate them, and use them as the exact time anchors.
+    The leftmost gridline is page_num * 180 minutes; each subsequent
+    gridline is +10 minutes.
     """
+    # Gridlines are vertical (x0 == x1) and span the full diagram height
+    # (>= ~500pt).  Only keep lines whose x is inside the diagram area.
+    raw_xs = [
+        round(l["x0"], 2) for l in page.lines
+        if abs(l["x0"] - l["x1"]) < 0.1
+        and (l["bottom"] - l["top"]) > 100
+        and DIAGRAM_X0 - 1.0 <= l["x0"] <= DIAGRAM_X1 + 1.0
+    ]
+    unique_xs = sorted(set(raw_xs))
+
+    if len(unique_xs) < 5:
+        # Fallback to the label-based calibration when for some reason no
+        # gridlines were detected.  Shouldn't fire on the Monday PDF.
+        return _calibrate_axis_from_labels(page, page_num)
+
+    # The expected step is 36.6..36.72 between adjacent ticks.  Drop any
+    # duplicate or noise lines that break that pattern.
+    clean: List[float] = [unique_xs[0]]
+    for x in unique_xs[1:]:
+        if x - clean[-1] < 30.0:      # too close, skip (artifact)
+            continue
+        clean.append(x)
+
+    # Build piecewise-linear anchor list.
+    page_start_min = page_num * 180
+    anchors = [(clean[i], page_start_min + 10 * i) for i in range(len(clean))]
+
+    # Sanity: the last anchor should land near page_start_min + 180 within
+    # +/- 15 min.  If it doesn't, something is off and we want to know.
+    expected_end = page_start_min + 10 * (len(clean) - 1)
+    if abs(anchors[-1][1] - expected_end) > 0 or len(clean) not in range(16, 22):
+        # tolerate between 16 and 21 ticks (the usual is 19)
+        pass
+
+    return {
+        "anchors": anchors,
+        "page_start_min": page_start_min,
+    }
+
+
+def _calibrate_axis_from_labels(page, page_num: int) -> dict:
+    """Legacy label-based linear fit, kept as a fallback only."""
     labels: List[Tuple[float, int]] = []
     for w in page.extract_words():
         if w["top"] > TOP_AXIS_Y_MAX:
@@ -177,26 +227,44 @@ def calibrate_axis(page, page_num: int) -> dict:
             continue
         mins = int(m.group(1)) * 60 + int(m.group(2))
         labels.append((w["x0"], mins))
-
     if len(labels) < 3:
-        raise RuntimeError(f"page {page_num+1}: only {len(labels)} time labels found")
-
+        raise RuntimeError(f"page {page_num+1}: only {len(labels)} time labels")
     labels.sort()
     x0, t0 = labels[0]
     x1, t1 = labels[-1]
     slope = (t1 - t0) / (x1 - x0)
-    x_origin = x0 - t0 / slope
+    anchors = [(x0 + k * (x1 - x0) / (t1 - t0) * 10, t0 + k * 10)
+               for k in range((t1 - t0) // 10 + 1)]
+    return {"anchors": anchors, "page_start_min": page_num * 180}
 
-    # Sanity check: slope must be positive and within a reasonable range for a
-    # 3-hour horizontal axis spanning ~600 pts (so ~0.27..0.30 min/pt).
-    if not (0.25 <= slope <= 0.32):
-        raise RuntimeError(f"page {page_num+1}: slope {slope:.3f} outside expected 0.25..0.32 min/pt")
 
-    return {"slope": slope, "x_origin": x_origin, "page_start_min": page_num * 180}
+def x_to_min(x: float, cal: dict) -> int:
+    """Piecewise-linear interpolation between adjacent gridline anchors."""
+    anchors = cal["anchors"]
+    if x <= anchors[0][0]:
+        # Linear extrapolation using the first segment's slope.
+        x0, t0 = anchors[0]
+        x1, t1 = anchors[1]
+        slope = (t1 - t0) / (x1 - x0)
+        return max(0, min(24 * 60 - 1, round(t0 + slope * (x - x0))))
+    if x >= anchors[-1][0]:
+        x0, t0 = anchors[-2]
+        x1, t1 = anchors[-1]
+        slope = (t1 - t0) / (x1 - x0)
+        return max(0, min(24 * 60 - 1, round(t1 + slope * (x - x1))))
+    # Find bracketing segment (anchors are sorted).
+    for i in range(len(anchors) - 1):
+        x0, t0 = anchors[i]
+        x1, t1 = anchors[i + 1]
+        if x0 <= x <= x1:
+            slope = (t1 - t0) / (x1 - x0)
+            return round(t0 + slope * (x - x0))
+    # unreachable
+    return anchors[-1][1]
 
 
 def x_to_hhmm(x: float, cal: dict) -> str:
-    mins = round(cal["slope"] * (x - cal["x_origin"]))
+    mins = x_to_min(x, cal)
     mins = max(0, min(24 * 60 - 1, mins))
     return f"{mins // 60:02d}:{mins % 60:02d}"
 
@@ -205,6 +273,11 @@ def x_to_hhmm(x: float, cal: dict) -> str:
 
 TRACK_LABEL_FONT_SIZE = 6.48
 TRACK_LABEL_SIZE_TOL = 0.1
+
+# Max y-coordinate for legitimate track labels.  The bottom-most real label is
+# track 16 at top ≈ 504; anything below belongs to the legend ("5 god.",
+# "29 spår..." etc.) which shares the same font size but is NOT a track row.
+TRACK_LABEL_TOP_MAX = 508.0
 
 
 def find_track_rows(page) -> List[TrackRow]:
@@ -219,11 +292,12 @@ def find_track_rows(page) -> List[TrackRow]:
     collide a track label with an adjacent capacity digit.  Only chars in the
     track-label font size count.
     """
-    # Labels only exist in the vertical diagram area; reject hits below.
+    # Labels only exist in the vertical diagram area; reject hits below the
+    # last real row (legend text starts around y=513).
     chars_all = [
         c for c in page.chars
         if c["x0"] < TRACK_LABEL_X_MAX
-        and c["top"] < 515
+        and c["top"] < TRACK_LABEL_TOP_MAX
         and abs(c.get("size", 0) - TRACK_LABEL_FONT_SIZE) <= TRACK_LABEL_SIZE_TOL
         and (c["text"].isdigit() or c["text"] == ".")
     ]
@@ -310,8 +384,12 @@ def classify_rect(rect) -> Tuple[str, Tuple[float, float, float]]:
 
     color = tuple(round(c, 3) for c in fill)  # type: ignore[assignment]
 
-    if all(c > 0.85 for c in color):
-        return ("skip", color)                    # white / near-white grid fills
+    # White / near-white fills are grid cells.  Pure white is (1,1,1); some
+    # bars are drawn in very light grey (0.902, 0.902, 0.902) and still
+    # encode real train occupancies.  We only reject if the color is
+    # essentially white (all channels ≥ 0.94).
+    if all(c >= 0.94 for c in color):
+        return ("skip", color)
 
     w = rect["x1"] - rect["x0"]
     h = rect["bottom"] - rect["top"]
@@ -578,40 +656,52 @@ def attach_train_numbers(
         toks.sort(key=lambda t: t.x0)
 
     # Train numbers are drawn inside the bar, flush-left for arrival and
-    # flush-right for departure.  We look for tokens whose edge is within this
-    # tolerance of the bar edge.  Tokens that sit outside the bar edge are
-    # allowed up to EDGE_OUTSIDE_TOL as the label may be placed on a tiny gap
-    # between two adjacent bars.
-    EDGE_INSIDE_TOL = 16.0
+    # flush-right for departure.  We accept tokens within a generous window
+    # around the bar's edges — wide bars often push the departure token 40+
+    # points inside because of "via ogr", "inkl växling", or "MVH" text that
+    # is rendered between the bar midpoint and the departure train number.
+    EDGE_INSIDE_TOL_ABS = 40.0    # minimum absolute inside-tolerance (pt)
+    EDGE_INSIDE_TOL_FRAC = 0.45   # or up to 45% of the bar width
     EDGE_OUTSIDE_TOL = 14.0
 
     for slot in slots:
         toks = by_row.get((slot.track_num, slot.sub_idx), [])
+        bar_mid = (slot.x0 + slot.x1) / 2
+        bar_width = slot.x1 - slot.x0
+        inside_tol = max(EDGE_INSIDE_TOL_ABS, bar_width * EDGE_INSIDE_TOL_FRAC)
 
-        # Arrival: token.x0 near slot.x0.
+        # Arrival: token.x0 somewhere in the left half of the bar (or
+        # slightly to its left for flush-left labels).
         arr_candidates = [
             t for t in toks
             if t.kind == "in_diagram"
-            and -EDGE_OUTSIDE_TOL <= (t.x0 - slot.x0) <= EDGE_INSIDE_TOL
-            and t.x0 < (slot.x0 + slot.x1) / 2     # must be on the LEFT half
+            and -EDGE_OUTSIDE_TOL <= (t.x0 - slot.x0) <= inside_tol
+            and t.x0 < bar_mid                      # must be on the LEFT half
         ]
         if arr_candidates:
-            nearest = min(arr_candidates, key=lambda t: abs(t.x0 - slot.x0))
+            # Prefer the token closest to the left edge (arrival train number
+            # is flush-left; any label further right is a mid-bar annotation).
+            nearest = min(arr_candidates, key=lambda t: t.x0)
             slot.arrival_train = nearest.number
-            slot.arrival_time = x_to_hhmm(nearest.x0, cal)
+            # bar.x0 is the authoritative arrival time tick.
+            slot.arrival_time = x_to_hhmm(slot.x0, cal)
 
-        # Departure: token.x1 near slot.x1.
+        # Departure: token.x1 somewhere in the right half of the bar (or
+        # slightly past for flush-right labels that spill into the gutter).
         dep_candidates = [
             t for t in toks
             if t.kind == "in_diagram"
-            and -EDGE_INSIDE_TOL <= (t.x1 - slot.x1) <= EDGE_OUTSIDE_TOL
-            and t.x1 > (slot.x0 + slot.x1) / 2     # must be on the RIGHT half
+            and -inside_tol <= (t.x1 - slot.x1) <= EDGE_OUTSIDE_TOL
+            and t.x1 > bar_mid                      # must be on the RIGHT half
             and t.number != slot.arrival_train      # don't pick same label twice
         ]
         if dep_candidates:
-            nearest = min(dep_candidates, key=lambda t: abs(t.x1 - slot.x1))
+            # Prefer the token closest to the right edge.  When several tokens
+            # all sit inside, the RIGHTMOST one is the departure — any token
+            # further left is a "via" waypoint annotation.
+            nearest = max(dep_candidates, key=lambda t: t.x1)
             slot.departure_train = nearest.number
-            slot.departure_time = x_to_hhmm(nearest.x1, cal)
+            slot.departure_time = x_to_hhmm(slot.x1, cal)
 
         # Continuation flags: set before the right-margin lookup
         if slot.x0 <= DIAGRAM_X0 + 1.0:

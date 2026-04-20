@@ -7,7 +7,7 @@ class PersistenceEngine {
         // storage keys embed the version so any stale v1/v2 state in users'
         // browsers is automatically ignored and re-seeded from the new
         // initialServiceData on first load.
-        this.SCHEMA_VERSION = 3;
+        this.SCHEMA_VERSION = 4;
         const suffix = `_v${this.SCHEMA_VERSION}`;
         this.storageKeys = {
             main: `gothenburgDispatchAppState${suffix}`,

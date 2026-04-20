@@ -27,12 +27,10 @@ class DelayAPIClient {
         
         try {
             const url = `${this.cloudFunctionUrl}?location=${location}`;
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            // No custom headers on GET: "Content-Type: application/json" triggers a CORS preflight
+            // (OPTIONS). If the function is down or cold, edge 503 responses often lack CORS headers,
+            // and the browser surfaces a generic "Load failed" instead of status text.
+            const response = await fetch(url, { method: 'GET' });
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -61,9 +59,17 @@ class DelayAPIClient {
             
         } catch (error) {
             this.retryCount++;
-            logger.error('DelayAPI', `Failed to fetch delay data (attempt ${this.retryCount}/${this.maxRetries})`, {
-                error: error.message
-            });
+            const message = error?.message || String(error);
+            const logData = {
+                error: message,
+                name: error?.name,
+                url: `${this.cloudFunctionUrl}?location=${location}`
+            };
+            if (message === 'Load failed') {
+                logData.hint =
+                    'Network request did not complete (common on Safari: open the app via http://localhost instead of file://, or check firewall/VPN/ad blockers).';
+            }
+            logger.error('DelayAPI', `Failed to fetch delay data (attempt ${this.retryCount}/${this.maxRetries})`, logData);
             
             if (this.retryCount >= this.maxRetries) {
                 this.setConnectionState('error');
