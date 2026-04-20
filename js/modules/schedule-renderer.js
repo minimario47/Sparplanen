@@ -262,6 +262,15 @@ function renderFullSchedule() {
 
     window.TimelineRenderer.renderTimelineGrid(trackLayouts, totalCanvasWidth, window.currentPixelsPerHour);
     window.TrainRenderer.renderTrains(visibleTrains, trackLayouts, timelineStart, window.currentPixelsPerHour, userSettings);
+    if (window.ClosureRenderer) {
+        window.ClosureRenderer.render(
+            trackLayouts,
+            timelineStart,
+            window.currentPixelsPerHour,
+            viewWindowStart,
+            viewWindowEnd
+        );
+    }
     updateCurrentTimeLine();
     
     scrollToViewTime(viewTime, timelineStart, window.currentPixelsPerHour, state.isFollowingMode, state.offsetPercentage);

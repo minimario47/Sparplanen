@@ -385,6 +385,11 @@
     margin-top: 2px;
 }
 
+.settings-tab-panel .form-control:has(.toggle-switch) .setting-viz {
+    flex: 0 0 100%;
+    width: 100%;
+}
+
 /* Slider controls */
 .settings-tab-panel .form-control:has(.slider) {
     padding: 14px 16px;
@@ -436,6 +441,103 @@
 .settings-tab-panel .form-control:has(.custom-select) .form-label {
     font-size: 13px;
     font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DISPLAY SETTINGS
+═══════════════════════════════════════════════════════════════════════════ */
+
+.display-settings-content {
+    gap: 16px;
+}
+
+.display-settings-brief,
+.display-preview-card,
+.display-tuning-card {
+    padding: 16px;
+    background: var(--surface-secondary);
+    border: 1.5px solid var(--border-secondary);
+    border-radius: 14px;
+}
+
+.display-settings-brief {
+    border-left: 3px solid var(--modal-accent);
+}
+
+.display-settings-kicker {
+    margin: 0 0 6px;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+.display-settings-summary {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-primary);
+}
+
+.display-settings-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.display-status-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border-secondary);
+    background: var(--surface-primary);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.display-settings-note {
+    margin: 12px 0 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.display-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.display-card-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.display-card-meta {
+    margin: 0;
+    max-width: 220px;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    text-align: right;
+}
+
+.display-tuning-card[hidden] {
+    display: none;
+}
+
+.display-preview-card .train-preview {
+    background: var(--surface-primary);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -501,6 +603,8 @@
 ═══════════════════════════════════════════════════════════════════════════ */
 
 #advanced-toggle-wrapper .btn {
+    width: 100%;
+    justify-content: center;
     font-size: 12px;
     font-weight: 500;
     color: var(--text-secondary);
@@ -549,6 +653,27 @@
     gap: 6px;
 }
 
+.settings-color-grid-head {
+    display: grid;
+    grid-template-columns: 32px 1fr 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.settings-color-grid-head span {
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    text-align: center;
+}
+
+.settings-color-grid-head span:first-child {
+    text-align: left;
+}
+
 .color-row-compact {
     display: grid;
     grid-template-columns: 32px 1fr 1fr 1fr;
@@ -575,25 +700,30 @@
 
 /* Single color row */
 .settings-color-row-simple {
-    display: flex;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
     margin-top: 10px;
 }
 
 .color-simple-label {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid var(--border-secondary);
+    border-radius: 10px;
+    background: var(--surface-primary);
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-secondary);
 }
 
 .settings-color-simple {
-    width: 56px;
-    height: 36px;
+    width: 100%;
+    height: 42px;
     border: 1px solid var(--border-secondary);
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     padding: 1px;
 }
@@ -700,6 +830,12 @@
 }
 
 [data-theme="dark"] .train-preview {
+    background: var(--surface-tertiary);
+}
+
+[data-theme="dark"] .display-status-chip,
+[data-theme="dark"] .display-preview-card .train-preview,
+[data-theme="dark"] .color-simple-label {
     background: var(--surface-tertiary);
 }
 
@@ -820,6 +956,16 @@
 
     .settings-tab-panel {
         padding: 16px;
+    }
+
+    .display-card-head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .display-card-meta {
+        max-width: none;
+        text-align: left;
     }
 }
 

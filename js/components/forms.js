@@ -23,7 +23,8 @@
                 }
 
                 const formControl = toggle.closest('.form-control');
-                const helpText = formControl.querySelector('.form-help');
+                const settingViz = formControl?.querySelector('.setting-viz');
+                const helpText = formControl?.querySelector('.form-help');
 
                 // Wire aria-describedby: assign an ID to the help text element and
                 // point the associated interactive control(s) at it so screen readers
@@ -40,7 +41,7 @@
                 // Click handler
                 toggle.addEventListener('click', () => {
                     const isExpanded = toggle.classList.contains('expanded');
-                    this.toggleHelp(toggle, helpText, !isExpanded);
+                    this.toggleHelp(toggle, helpText, settingViz, !isExpanded);
                 });
 
                 // Keyboard support
@@ -56,14 +57,16 @@
         /**
          * Toggle help text visibility
          */
-        toggleHelp(toggle, helpText, show) {
+        toggleHelp(toggle, helpText, settingViz, show) {
             if (show) {
                 toggle.classList.add('expanded');
-                helpText.classList.add('visible');
+                helpText?.classList.add('visible');
+                settingViz?.classList.add('visible');
                 toggle.setAttribute('aria-expanded', 'true');
             } else {
                 toggle.classList.remove('expanded');
-                helpText.classList.remove('visible');
+                helpText?.classList.remove('visible');
+                settingViz?.classList.remove('visible');
                 toggle.setAttribute('aria-expanded', 'false');
             }
         },

@@ -2,10 +2,17 @@
 
 class PersistenceEngine {
     constructor() {
+        // SCHEMA_VERSION is bumped whenever the shape of trains.js or the
+        // application state changes in a backwards-incompatible way.  The
+        // storage keys embed the version so any stale v1/v2 state in users'
+        // browsers is automatically ignored and re-seeded from the new
+        // initialServiceData on first load.
+        this.SCHEMA_VERSION = 3;
+        const suffix = `_v${this.SCHEMA_VERSION}`;
         this.storageKeys = {
-            main: 'gothenburgDispatchAppState',
-            backup: 'gothenburgDispatchAppState_backup',
-            settings: 'gothenburgDispatchAppSettings'
+            main: `gothenburgDispatchAppState${suffix}`,
+            backup: `gothenburgDispatchAppState_backup${suffix}`,
+            settings: `gothenburgDispatchAppSettings${suffix}`
         };
         this.debounceTimeout = null;
         this.debounceDelay = 1000; // 1 second delay for batching saves

@@ -1,0 +1,128 @@
+.display-custom-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 14px 0 0;
+    border-top: 1px solid var(--border-secondary);
+}
+
+.display-custom-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.display-dimension-group .radio-group-label {
+    min-height: 42px;
+}
+
+.display-length-ruler {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 18px;
+}
+
+.display-length-ruler-rail {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 8px;
+    height: 2px;
+    background: var(--border-secondary);
+}
+
+.display-length-stop {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+}
+
+.display-length-stop::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 2px;
+    height: 16px;
+    transform: translateX(-50%);
+    background: var(--length-mark-color, var(--border-primary));
+}
+
+.display-length-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid var(--length-pill-border, var(--border-primary));
+    background: var(--length-pill-bg, var(--surface-primary));
+    color: var(--length-pill-text, var(--text-primary));
+    font-size: 10px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    letter-spacing: 0.04em;
+}
+
+.display-class-head,
+.display-class-row {
+    display: grid;
+    grid-template-columns: 66px 1fr 1fr 1fr;
+    gap: 8px;
+    align-items: center;
+}
+
+.display-class-head {
+    margin-bottom: 8px;
+}
+
+.display-class-head span {
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    text-align: center;
+}
+
+.display-class-head span:first-child {
+    text-align: left;
+}
+
+.display-class-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.display-class-row {
+    padding: 6px 0;
+}
+
+.display-class-swatch {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+}
+
+.display-class-bar {
+    height: 16px;
+    border-radius: 5px;
+    border: 1px solid;
+    background: var(--display-bar-bg, var(--surface-primary));
+    border-color: var(--display-bar-border, var(--border-primary));
+}
+
+.display-class-code {
+    font-size: 10px;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+}

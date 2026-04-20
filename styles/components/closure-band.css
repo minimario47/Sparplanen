@@ -1,0 +1,149 @@
+/*
+ * Closure Band
+ * ============
+ * Diagonal-stripe band drawn on top of a track row to indicate the track
+ * is physically closed (red lines in the source PDF).
+ *
+ * Design goals:
+ *   - Readable at any zoom level (labels hide automatically on narrow bands).
+ *   - Unambiguously "NOT a train" — it uses a striped pattern that the
+ *     train bars never use, and it is monochrome so the length-bucket
+ *     colours keep their semantics for real trains.
+ *   - Screenreader-accessible via role="img" + aria-label set in JS.
+ */
+
+.closure-band {
+    position: absolute;
+    z-index: 6;                       /* below trains (zIndex >= 10) */
+    border-radius: 6px;
+    overflow: hidden;
+    pointer-events: auto;             /* let tooltip hover work */
+    cursor: not-allowed;
+    isolation: isolate;
+    background: var(--closure-band-bg, rgba(60, 64, 72, 0.82));
+    box-shadow: inset 0 0 0 1px var(--closure-band-border, rgba(15, 18, 24, 0.55));
+}
+
+.closure-band__stripes {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.14) 0 6px,
+        rgba(255, 255, 255, 0)    6px 14px
+    );
+    mix-blend-mode: screen;
+}
+
+.closure-band__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 100%;
+    padding: 0 10px;
+    color: var(--closure-band-text, #f1f3f5);
+    font-family: var(--font-ui, -apple-system, system-ui, sans-serif);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.closure-band__icon {
+    font-size: 14px;
+    line-height: 1;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
+}
+
+.closure-band__label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.closure-band__time {
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.closure-band__tooltip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 18, 24, 0.96);
+    color: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.35;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+    z-index: 20;
+}
+
+.closure-band__tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: rgba(15, 18, 24, 0.96);
+}
+
+.closure-band__tooltip-meta {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.closure-band:hover .closure-band__tooltip,
+.closure-band:focus-within .closure-band__tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px);
+}
+
+/* Light theme variant */
+[data-theme="light"] .closure-band {
+    background: var(--closure-band-bg, rgba(108, 117, 125, 0.72));
+    box-shadow: inset 0 0 0 1px var(--closure-band-border, rgba(52, 58, 64, 0.45));
+}
+
+[data-theme="light"] .closure-band__stripes {
+    background-image: repeating-linear-gradient(
+        135deg,
+        rgba(33, 37, 41, 0.18) 0 6px,
+        rgba(33, 37, 41, 0)    6px 14px
+    );
+    mix-blend-mode: multiply;
+}
+
+[data-theme="light"] .closure-band__content {
+    color: #212529;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+/* Keep selectors and conflict badges out of closure areas */
+.closure-band + .train-bar,
+.closure-band ~ .train-bar {
+    /* purely semantic: JS must ensure closures aren't inserted into train
+       selector lists, because closures don't appear in cachedTrains.
+       No CSS hack needed. */
+}
+
+/* When closures overlap trains (should not happen in valid data), push
+   the closure to the back so real services win visually. */
+.train-bar {
+    z-index: 10;
+}

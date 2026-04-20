@@ -9,6 +9,9 @@
 ═══════════════════════════════════════════════════════════════════════════ */
 
 .setting-viz {
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
     margin-top: 12px;
     border-radius: 8px;
     overflow: hidden;
@@ -16,6 +19,10 @@
     border: 1px solid var(--border-secondary);
     padding: 10px 12px;
     position: relative;
+}
+
+.setting-viz.visible {
+    display: block;
 }
 
 .viz-track-line {
@@ -120,8 +127,35 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    VIZ 2 — Följ automatiskt
    Key fix: now-line is OUTSIDE .viz-follow-world so it doesn't scroll with
-   the world in follow-ON mode. The world pans under the fixed now-line.
+   the world in follow-ON mode. The world and hour scale pan together under
+   the fixed now-line.
 ═══════════════════════════════════════════════════════════════════════════ */
+
+.viz-follow-hours-window {
+    overflow: hidden;
+}
+
+.viz-follow-hours-track {
+    display: block;
+    position: relative;
+    width: 180%;
+    height: 18px;
+    margin-bottom: 3px;
+    padding: 0 2px;
+}
+
+.viz-follow-hours-track span {
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+}
+
+.viz-follow-hours-track span:nth-child(1) { left: 0; transform: none; }
+.viz-follow-hours-track span:nth-child(2) { left: 18.5%; transform: translateX(-50%); }
+.viz-follow-hours-track span:nth-child(3) { left: 37%; transform: translateX(-50%); }
+.viz-follow-hours-track span:nth-child(4) { left: 55.5%; transform: translateX(-50%); }
+.viz-follow-hours-track span:nth-child(5) { left: 74%; transform: translateX(-50%); }
+.viz-follow-hours-track span:nth-child(6) { left: 92.5%; transform: translateX(-100%); }
 
 .viz-follow-viewport {
     position: relative;
@@ -175,6 +209,7 @@
     animation: vizFollowDrift 4s cubic-bezier(0.4, 0, 0.8, 1) infinite;
 }
 
+[data-follow="false"] .viz-follow-hours-track,
 [data-follow="false"] .viz-follow-world {
     transform: translateX(0);
 }
@@ -195,6 +230,7 @@
     opacity: 1;
 }
 
+[data-follow="true"] .viz-follow-hours-track,
 [data-follow="true"] .viz-follow-world {
     animation: vizFollowPan 4s linear infinite;
 }

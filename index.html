@@ -44,7 +44,10 @@
     <link rel="stylesheet" href="styles/components/theme-switch.css">
     <link rel="stylesheet" href="styles/components/notifications.css">
     <link rel="stylesheet" href="styles/components/schedule.css">
+    <link rel="stylesheet" href="styles/components/closure-band.css">
     <link rel="stylesheet" href="styles/components/settings-modal.css">
+    <link rel="stylesheet" href="styles/components/settings-display.css">
+    <link rel="stylesheet" href="styles/components/settings-display-detail.css">
     <link rel="stylesheet" href="styles/components/settings-controls.css">
     <!-- New Form Components -->
     <link rel="stylesheet" href="styles/components/forms-base.css">
@@ -67,6 +70,7 @@
     <script src="vehicleTypes.js"></script>
     <script src="tracks.js"></script>
     <script src="trains.js"></script>
+    <script src="closures.js"></script>
     
 </head>
 <body>
@@ -287,8 +291,10 @@
                                 </div>
                                 <p class="form-help">Scrollar tidslinjen automatiskt med tidens gång. Kan också aktiveras genom att dubbelklicka på "Nu"-knappen.</p>
                                 <div class="setting-viz viz-follow" id="viz-follow" data-follow="false" aria-hidden="true">
-                                    <div class="viz-hours">
-                                        <span>12:00</span><span>13:00</span><span>14:00</span><span>15:00</span>
+                                    <div class="viz-follow-hours-window" aria-hidden="true">
+                                        <div class="viz-hours viz-follow-hours-track">
+                                            <span>12:00</span><span>13:00</span><span>14:00</span><span>15:00</span><span>16:00</span><span>17:00</span>
+                                        </div>
                                     </div>
                                     <div class="viz-follow-viewport">
                                         <div class="viz-follow-world">
@@ -341,118 +347,91 @@
 
                 <!-- Utseende Tab -->
                 <div id="panel-display" class="settings-tab-panel" data-tab-panel="display" role="tabpanel" aria-labelledby="tab-display" hidden>
-                    <div class="settings-section">
+                    <div class="settings-section display-settings-section">
                         <h3 class="settings-section-title">Tågfärger</h3>
-                        <div class="settings-section-content">
-                            <!-- Color Mode Radio Group -->
-                            <div class="form-control">
+                        <div class="settings-section-content display-settings-flow">
+                            <div class="display-stage" id="display-stage" aria-hidden="true">
+                                <div class="display-stage-window">
+                                    <div class="display-stage-bars">
+                                        <div class="display-stage-bar" data-stage-bucket="b1"></div>
+                                        <div class="display-stage-bar" data-stage-bucket="b2"></div>
+                                        <div class="display-stage-bar" data-stage-bucket="b3"></div>
+                                        <div class="display-stage-bar" data-stage-bucket="b4"></div>
+                                        <div class="display-stage-bar" data-stage-bucket="b5"></div>
+                                    </div>
+                                    <div class="display-stage-rail"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-control display-mode-control">
                                 <div class="form-label-wrapper">
                                     <label class="form-label">Färgsättning</label>
                                     <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
-                                <div class="radio-group" id="color-mode-group" style="--radio-options: 2">
+                                <div class="radio-group display-mode-group" id="color-mode-group" style="--radio-options: 2">
                                     <div class="radio-group-option">
                                         <input id="cm-length" type="radio" name="train-color-mode" value="length" checked class="radio-group-input">
-                                        <label for="cm-length" class="radio-group-label">Efter längd</label>
+                                        <label for="cm-length" class="radio-group-label display-mode-option">
+                                            <span class="display-mode-glyph display-mode-glyph--split" aria-hidden="true">
+                                                <span></span><span></span><span></span><span></span>
+                                            </span>
+                                            <span class="display-mode-text">Efter längd</span>
+                                        </label>
                                     </div>
                                     <div class="radio-group-option">
                                         <input id="cm-single" type="radio" name="train-color-mode" value="single" class="radio-group-input">
-                                        <label for="cm-single" class="radio-group-label">Enfärgad</label>
+                                        <label for="cm-single" class="radio-group-label display-mode-option">
+                                            <span class="display-mode-glyph display-mode-glyph--unified" aria-hidden="true">
+                                                <span></span><span></span><span></span><span></span>
+                                            </span>
+                                            <span class="display-mode-text">Enfärgad</span>
+                                        </label>
                                     </div>
                                 </div>
-                                <p class="form-help">Färgkoda tåg efter deras längd, eller använd en enda färg för alla.</p>
+                                <p class="form-help">Välj om färgen ska hjälpa dig skilja längdklasser åt, eller om alla tåg ska bära samma ton för ett lugnare uttryck.</p>
                             </div>
 
-                            <!-- Length Theme (shown in length mode) -->
-                            <div class="form-control" id="length-theme-controls">
+                            <div class="form-control display-theme-control" id="display-theme-control">
                                 <div class="form-label-wrapper">
-                                    <label class="form-label" for="length-theme">Färgtema</label>
+                                    <label class="form-label" for="display-theme-strip">Grundtema</label>
                                     <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
-                                <div class="custom-select">
-                                    <button class="custom-select-button" id="length-theme" aria-expanded="false">
-                                        Modern (ljust grå)
-                                        <div class="custom-select-chevron">▼</div>
-                                    </button>
-                                    <div class="custom-select-menu">
-                                        <div class="custom-select-option" data-value="custom">Anpassad</div>
-                                        <div class="custom-select-option selected" data-value="modern">Modern (ljust grå)</div>
-                                        <div class="custom-select-option" data-value="highvis">Högsynlighet</div>
-                                        <div class="custom-select-option" data-value="dark">Mörka färger</div>
-                                        <div class="custom-select-option" data-value="simon">Simon-läge 🎨</div>
-                                    </div>
-                                </div>
-                                <p class="form-help">Välj ett färdigt tema. Välj "Anpassad" för att justera färgerna manuellt.</p>
+                                <input id="length-theme" type="hidden" value="modern">
+                                <input id="single-theme" type="hidden" value="neutral">
+                                <div class="display-theme-strip" id="display-theme-strip" role="radiogroup" aria-label="Grundtema"></div>
+                                <p class="form-help">Välj ett tema visuellt. Välj Anpassad för att öppna manuell finjustering.</p>
                             </div>
 
-                            <!-- Single Theme (shown in single mode) -->
-                            <div class="form-control" id="single-color-controls" style="display:none;">
-                                <div class="form-label-wrapper">
-                                    <label class="form-label" for="single-theme">Färgtema</label>
-                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
-                                </div>
-                                <div class="custom-select">
-                                    <button class="custom-select-button" id="single-theme" aria-expanded="false">
-                                        Neutral grå
-                                        <div class="custom-select-chevron">▼</div>
-                                    </button>
-                                    <div class="custom-select-menu">
-                                        <div class="custom-select-option" data-value="custom">Anpassad</div>
-                                        <div class="custom-select-option selected" data-value="neutral">Neutral grå</div>
-                                        <div class="custom-select-option" data-value="blue">Klassiskt blå</div>
-                                        <div class="custom-select-option" data-value="green">Trafikgrön</div>
-                                        <div class="custom-select-option" data-value="amber">Varningsgul</div>
-                                        <div class="custom-select-option" data-value="simon">Simon-läge 🎨</div>
-                                    </div>
-                                </div>
-                                <div class="settings-color-row-simple" style="margin-top: var(--spacing-3);">
-                                    <label class="color-simple-label">Bakgrund <input id="single-bg" type="color" class="settings-color-simple"></label>
-                                    <label class="color-simple-label">Kant <input id="single-border" type="color" class="settings-color-simple"></label>
-                                    <label class="color-simple-label">Text <input id="single-text" type="color" class="settings-color-simple"></label>
-                                </div>
-                                <p class="form-help">Välj ett tema eller anpassa färgerna manuellt.</p>
-                            </div>
-
-                            <!-- Preview -->
-                            <div class="form-control">
-                                <div class="form-label-wrapper">
-                                    <label class="form-label">Förhandsvisning</label>
-                                </div>
-                                <div id="train-preview" class="train-preview">
-                                    <div class="preview-train" data-bucket="b1">b1</div>
-                                    <div class="preview-train" data-bucket="b2">b2</div>
-                                    <div class="preview-train" data-bucket="b3">b3</div>
-                                    <div class="preview-train" data-bucket="b4">b4</div>
-                                    <div class="preview-train" data-bucket="b5">b5</div>
-                                </div>
-                                <div class="viz-preview-labels">
-                                    <span>Kort</span><span>Medel-k</span><span>Medel</span><span>Medel-l</span><span>Lång</span>
-                                </div>
-                            </div>
-
-                            <!-- Advanced toggle (length mode only) -->
-                            <div id="advanced-toggle-wrapper" style="margin-top: var(--space-2);">
-                                <button id="show-advanced-btn" class="btn btn-secondary btn-sm">
-                                    Anpassa färger manuellt
-                                </button>
-                            </div>
-
-                            <!-- Advanced Color Controls -->
-                            <div id="advanced-train-colors" style="display:none;">
-                                <div style="margin-top: var(--space-4); padding: var(--space-4); border-radius: var(--radius-lg); background: var(--surface-tertiary); border: 1px solid var(--border-secondary);">
+                            <div id="display-custom-panel" class="display-custom-panel" hidden>
+                                <div id="single-color-controls" class="display-custom-group" hidden>
                                     <div class="form-control">
                                         <div class="form-label-wrapper">
-                                            <label class="form-label" for="train-color-dimension">Längdmått</label>
+                                            <label class="form-label">Anpassad enfärg</label>
                                             <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                         </div>
-                                        <div class="custom-select">
-                                            <button class="custom-select-button" id="train-color-dimension" aria-expanded="false">
-                                                Fordonstyp
-                                                <div class="custom-select-chevron">▼</div>
-                                            </button>
-                                            <div class="custom-select-menu">
-                                                <div class="custom-select-option selected" data-value="base">Fordonstyp</div>
-                                                <div class="custom-select-option" data-value="total">Total tåglängd</div>
+                                        <div class="settings-color-row-simple">
+                                            <label class="color-simple-label">Bakgrund <input id="single-bg" type="color" class="settings-color-simple"></label>
+                                            <label class="color-simple-label">Kant <input id="single-border" type="color" class="settings-color-simple"></label>
+                                            <label class="color-simple-label">Text <input id="single-text" type="color" class="settings-color-simple"></label>
+                                        </div>
+                                        <p class="form-help">Justera bakgrund, kant och text för den gemensamma tågfärgen.</p>
+                                    </div>
+                                </div>
+
+                                <div id="length-custom-controls" class="display-custom-group" hidden>
+                                    <div class="form-control">
+                                        <div class="form-label-wrapper">
+                                            <label class="form-label">Längdmått</label>
+                                            <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                        </div>
+                                        <div class="radio-group display-dimension-group" id="train-color-dimension-group" style="--radio-options: 2">
+                                            <div class="radio-group-option">
+                                                <input id="tcd-base" type="radio" name="train-color-dimension" value="base" checked class="radio-group-input">
+                                                <label for="tcd-base" class="radio-group-label">Fordonstyp</label>
+                                            </div>
+                                            <div class="radio-group-option">
+                                                <input id="tcd-total" type="radio" name="train-color-dimension" value="total" class="radio-group-input">
+                                                <label for="tcd-total" class="radio-group-label">Total tåglängd</label>
                                             </div>
                                         </div>
                                         <p class="form-help">Basera färgning på fordonets längd eller hela sättets längd.</p>
@@ -463,14 +442,30 @@
                                             <label class="form-label">Kanoniska längder (m)</label>
                                             <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                         </div>
-                                        <div class="settings-grid-5-compact">
-                                            <input id="len-canon-1" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="50">
-                                            <input id="len-canon-2" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="75">
-                                            <input id="len-canon-3" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="80">
-                                            <input id="len-canon-4" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="107">
-                                            <input id="len-canon-5" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="135">
+                                        <div class="display-length-ruler" id="display-length-ruler">
+                                            <div class="display-length-ruler-rail"></div>
+                                            <label class="display-length-stop" data-length-stop="b1">
+                                                <span class="display-length-pill">b1</span>
+                                                <input id="len-canon-1" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="50">
+                                            </label>
+                                            <label class="display-length-stop" data-length-stop="b2">
+                                                <span class="display-length-pill">b2</span>
+                                                <input id="len-canon-2" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="75">
+                                            </label>
+                                            <label class="display-length-stop" data-length-stop="b3">
+                                                <span class="display-length-pill">b3</span>
+                                                <input id="len-canon-3" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="80">
+                                            </label>
+                                            <label class="display-length-stop" data-length-stop="b4">
+                                                <span class="display-length-pill">b4</span>
+                                                <input id="len-canon-4" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="107">
+                                            </label>
+                                            <label class="display-length-stop" data-length-stop="b5">
+                                                <span class="display-length-pill">b5</span>
+                                                <input id="len-canon-5" type="number" inputmode="numeric" min="1" class="settings-input-compact" value="135">
+                                            </label>
                                         </div>
-                                        <p class="form-help">Gränsvärden för längdklasserna b1–b5 (systemet väljer närmaste).</p>
+                                        <p class="form-help">Gränsvärden för längdklasserna b1–b5. Systemet väljer närmaste klass.</p>
                                     </div>
 
                                     <div class="form-control">
@@ -478,39 +473,45 @@
                                             <label class="form-label">Anpassa färger per klass</label>
                                             <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                         </div>
-                                        <div class="settings-color-grid-compact">
-                                            <div class="color-row-compact">
-                                                <span class="color-label-compact">b1</span>
+                                        <div class="display-class-head" aria-hidden="true">
+                                            <span></span>
+                                            <span>Bakgrund</span>
+                                            <span>Kant</span>
+                                            <span>Text</span>
+                                        </div>
+                                        <div class="display-class-editor">
+                                            <div class="display-class-row" data-class-row="b1">
+                                                <div class="display-class-swatch"><span class="display-class-bar"></span><span class="display-class-code">b1</span></div>
                                                 <input id="len-b1-bg" type="color" class="settings-color-compact">
                                                 <input id="len-b1-border" type="color" class="settings-color-compact">
                                                 <input id="len-b1-text" type="color" class="settings-color-compact">
                                             </div>
-                                            <div class="color-row-compact">
-                                                <span class="color-label-compact">b2</span>
+                                            <div class="display-class-row" data-class-row="b2">
+                                                <div class="display-class-swatch"><span class="display-class-bar"></span><span class="display-class-code">b2</span></div>
                                                 <input id="len-b2-bg" type="color" class="settings-color-compact">
                                                 <input id="len-b2-border" type="color" class="settings-color-compact">
                                                 <input id="len-b2-text" type="color" class="settings-color-compact">
                                             </div>
-                                            <div class="color-row-compact">
-                                                <span class="color-label-compact">b3</span>
+                                            <div class="display-class-row" data-class-row="b3">
+                                                <div class="display-class-swatch"><span class="display-class-bar"></span><span class="display-class-code">b3</span></div>
                                                 <input id="len-b3-bg" type="color" class="settings-color-compact">
                                                 <input id="len-b3-border" type="color" class="settings-color-compact">
                                                 <input id="len-b3-text" type="color" class="settings-color-compact">
                                             </div>
-                                            <div class="color-row-compact">
-                                                <span class="color-label-compact">b4</span>
+                                            <div class="display-class-row" data-class-row="b4">
+                                                <div class="display-class-swatch"><span class="display-class-bar"></span><span class="display-class-code">b4</span></div>
                                                 <input id="len-b4-bg" type="color" class="settings-color-compact">
                                                 <input id="len-b4-border" type="color" class="settings-color-compact">
                                                 <input id="len-b4-text" type="color" class="settings-color-compact">
                                             </div>
-                                            <div class="color-row-compact">
-                                                <span class="color-label-compact">b5</span>
+                                            <div class="display-class-row" data-class-row="b5">
+                                                <div class="display-class-swatch"><span class="display-class-bar"></span><span class="display-class-code">b5</span></div>
                                                 <input id="len-b5-bg" type="color" class="settings-color-compact">
                                                 <input id="len-b5-border" type="color" class="settings-color-compact">
                                                 <input id="len-b5-text" type="color" class="settings-color-compact">
                                             </div>
                                         </div>
-                                        <p class="form-help">Bakgrund / kant / text för varje längdklass (bg/kant/text).</p>
+                                        <p class="form-help">Bakgrund, kant och text för varje längdklass.</p>
                                     </div>
                                 </div>
                             </div>
@@ -710,6 +711,7 @@
     <!-- 4. Settings -->
     <script src="js/components/settings-controls.js"></script>
     <script src="js/components/forms.js"></script>
+    <script src="js/components/settings-display.js"></script>
     <script src="js/components/settings-modal.js"></script>
     <script src="js/components/settings-delay.js"></script>
     
@@ -731,6 +733,7 @@
     <script src="js/modules/train-positioning.js"></script>
     <script src="js/modules/timeline-renderer.js"></script>
     <script src="js/modules/train-renderer.js"></script>
+    <script src="js/modules/closure-renderer.js"></script>
     <script src="js/modules/schedule-renderer.js"></script>
     
     <!-- 8. Main app -->
@@ -754,4 +757,3 @@
     </script>
 </body>
 </html>
-

@@ -153,6 +153,7 @@
         loadSettings();
         setupEventListeners();
         setupRadioGroupHighlights();
+        initDisplaySettings();
         setupColorModeListener();
         initSettingsViz();
 
@@ -185,49 +186,37 @@
      * Set up event listeners for the color mode and theme selects
      */
     function setupColorModeListener() {
-        // Color mode: listen on native radio change (no dependency on forms.js timing)
         document.querySelectorAll('input[name="train-color-mode"]').forEach(input => {
             input.addEventListener('change', () => {
                 if (!input.checked) return;
                 currentSettings.trainColorMode = input.value;
-                const themeToUse = input.value === 'single' ? currentSettings.singleTheme : currentSettings.lengthTheme;
-                updateVisibility(input.value, themeToUse || 'modern');
-                updatePreview();
+                syncDisplaySettings();
             });
         });
 
-        // Length theme select
-        const lengthThemeContainer = document.querySelector('#length-theme')?.closest('.custom-select');
-        if (lengthThemeContainer) {
-            lengthThemeContainer.addEventListener('change', (e) => {
-                e.stopPropagation();
-                applyLengthTheme(e.detail.value);
-                updateVisibility('length', e.detail.value);
-                updatePreview();
+        document.querySelectorAll('input[name="train-color-dimension"]').forEach(input => {
+            input.addEventListener('change', () => {
+                if (!input.checked) return;
+                currentSettings.trainColorDimension = input.value;
+                syncDisplaySettings();
             });
-        }
+        });
 
-        // Single theme select
-        const singleThemeContainer = document.querySelector('#single-theme')?.closest('.custom-select');
-        if (singleThemeContainer) {
-            singleThemeContainer.addEventListener('change', (e) => {
-                e.stopPropagation();
-                applySingleTheme(e.detail.value);
-                updateVisibility('single', e.detail.value);
-                updatePreview();
-            });
-        }
-
-        // Color inputs: update preview and mark as custom
         document.querySelectorAll('#panel-display input[type="color"]').forEach(input => {
             input.addEventListener('input', () => {
-                updatePreview();
                 if (currentSettings.trainColorMode === 'single') {
                     currentSettings.singleTheme = 'custom';
+                    setHiddenThemeValue('single', 'custom');
                 } else {
                     currentSettings.lengthTheme = 'custom';
+                    setHiddenThemeValue('length', 'custom');
                 }
+                syncDisplaySettings();
             });
+        });
+
+        document.querySelectorAll('#display-length-ruler input').forEach(input => {
+            input.addEventListener('input', syncDisplaySettings);
         });
     }
 
@@ -300,17 +289,6 @@
             }, 500);
         }
 
-        // Advanced toggle
-        const showAdvancedBtn = document.getElementById('show-advanced-btn');
-        const advancedSection = document.getElementById('advanced-train-colors');
-        if (showAdvancedBtn && advancedSection) {
-            let advancedVisible = false;
-            showAdvancedBtn.addEventListener('click', () => {
-                advancedVisible = !advancedVisible;
-                advancedSection.style.display = advancedVisible ? 'block' : 'none';
-                showAdvancedBtn.textContent = advancedVisible ? 'Dölj anpassning' : 'Anpassa färger manuellt';
-            });
-        }
     }
 
     /**
@@ -326,17 +304,27 @@
         elements.backdrop.classList.remove('hidden', 'closing');
         void elements.backdrop.offsetHeight; // force reflow for animation
 
+        collapseInlineHelp();
         updateControlsFromSettings();
-        updatePreview();
-
-        const colorMode = currentSettings.trainColorMode || 'length';
-        const theme = colorMode === 'single' ? currentSettings.singleTheme : currentSettings.lengthTheme;
-        updateVisibility(colorMode, theme || 'modern');
+        syncDisplaySettings();
 
         // Re-sync radio group highlights after setting values
         document.querySelectorAll('.radio-group').forEach(updateRadioGroupHighlight);
 
         trapFocus();
+    }
+
+    function collapseInlineHelp() {
+        if (!elements.modal) return;
+
+        elements.modal.querySelectorAll('.form-help-toggle.expanded').forEach(toggle => {
+            toggle.classList.remove('expanded');
+            toggle.setAttribute('aria-expanded', 'false');
+        });
+
+        elements.modal.querySelectorAll('.form-help.visible, .setting-viz.visible').forEach(element => {
+            element.classList.remove('visible');
+        });
     }
 
     /**
@@ -451,7 +439,7 @@
         currentSettings.lengthTheme = themeId;
         currentSettings.lenColors = JSON.parse(JSON.stringify(theme.colors));
         updateControlsFromSettings();
-        updatePreview();
+        syncDisplaySettings();
     }
 
     /**
@@ -463,7 +451,7 @@
         currentSettings.singleTheme = themeId;
         currentSettings.singleColor = JSON.parse(JSON.stringify(theme.color));
         updateControlsFromSettings();
-        updatePreview();
+        syncDisplaySettings();
     }
 
     /**
@@ -477,8 +465,7 @@
             // Confirmed — reset
             currentSettings = JSON.parse(JSON.stringify(defaultSettings));
             updateControlsFromSettings();
-            updatePreview();
-            updateVisibility(defaultSettings.trainColorMode, defaultSettings.lengthTheme);
+            syncDisplaySettings();
             document.querySelectorAll('.radio-group').forEach(updateRadioGroupHighlight);
             saveSettings();
             btn.textContent = 'Återställ';
@@ -528,7 +515,7 @@
             followMode: doc.getElementById('follow-mode')?.classList.contains('checked') ?? defaultSettings.followMode,
             updateInterval: getRadio('update-interval', defaultSettings.updateInterval),
             trainColorMode: getRadio('train-color-mode', defaultSettings.trainColorMode),
-            trainColorDimension: getVal('train-color-dimension', defaultSettings.trainColorDimension),
+            trainColorDimension: getRadio('train-color-dimension', defaultSettings.trainColorDimension),
             canonicalLengths: canonical,
             lengthTheme: getVal('length-theme', defaultSettings.lengthTheme),
             singleTheme: getVal('single-theme', defaultSettings.singleTheme),
@@ -547,29 +534,6 @@
             conflictTolerance: parseInt(doc.getElementById('delay-conflict-tolerance')?.value ?? defaultSettings.conflictTolerance, 10),
             showWarnings: doc.getElementById('delay-show-warnings')?.classList.contains('checked') ?? defaultSettings.showWarnings
         };
-    }
-
-    /**
-     * Programmatically select an option in a custom-select
-     */
-    function setSelectOption(buttonId, value) {
-        const button = document.getElementById(buttonId);
-        if (!button) return;
-        const select = button.closest('.custom-select');
-        if (!select) return;
-        const options = select.querySelectorAll('.custom-select-option');
-        options.forEach(opt => {
-            const isMatch = opt.getAttribute('data-value') === value;
-            opt.classList.toggle('selected', isMatch);
-            opt.setAttribute('aria-selected', isMatch ? 'true' : 'false');
-            if (isMatch) {
-                button.textContent = opt.textContent.trim();
-                const chevron = document.createElement('div');
-                chevron.className = 'custom-select-chevron';
-                chevron.innerHTML = '▼';
-                button.appendChild(chevron);
-            }
-        });
     }
 
     /**
@@ -598,12 +562,11 @@
         const cmInput = document.querySelector(`input[name="train-color-mode"][value="${currentSettings.trainColorMode}"]`);
         if (cmInput) cmInput.checked = true;
 
-        // Length and single theme selects
-        setSelectOption('length-theme', currentSettings.lengthTheme || defaultSettings.lengthTheme);
-        setSelectOption('single-theme', currentSettings.singleTheme || defaultSettings.singleTheme);
+        setHiddenThemeValue('length', currentSettings.lengthTheme || defaultSettings.lengthTheme);
+        setHiddenThemeValue('single', currentSettings.singleTheme || defaultSettings.singleTheme);
 
-        // Train color dimension select
-        setSelectOption('train-color-dimension', currentSettings.trainColorDimension);
+        const dimensionInput = document.querySelector(`input[name="train-color-dimension"][value="${currentSettings.trainColorDimension}"]`);
+        if (dimensionInput) dimensionInput.checked = true;
 
         // Canonical lengths
         const canon = currentSettings.canonicalLengths || defaultSettings.canonicalLengths;
@@ -718,66 +681,49 @@
         }).join('');
     }
 
-    /**
-     * Show/hide controls based on color mode and theme
-     */
-    function updateVisibility(colorMode, themeId) {
-        const singleColorControls = document.getElementById('single-color-controls');
-        const lengthThemeControls = document.getElementById('length-theme-controls');
-        const advancedToggleWrapper = document.getElementById('advanced-toggle-wrapper');
-        const advancedSection = document.getElementById('advanced-train-colors');
-        const showAdvancedBtn = document.getElementById('show-advanced-btn');
+    function initDisplaySettings() {
+        if (!window.SettingsDisplay) return;
 
-        const isSingle = colorMode === 'single';
-        if (singleColorControls) singleColorControls.style.display = isSingle ? 'block' : 'none';
-        if (lengthThemeControls) lengthThemeControls.style.display = isSingle ? 'none' : 'block';
-
-        const isCustom = themeId === 'custom';
-
-        if (advancedToggleWrapper) {
-            advancedToggleWrapper.style.display = (!isSingle && !isCustom) ? 'block' : 'none';
-        }
-
-        if (advancedSection) {
-            if (isSingle) {
-                advancedSection.style.display = 'none';
-            } else if (isCustom) {
-                advancedSection.style.display = 'block';
-                if (showAdvancedBtn) showAdvancedBtn.textContent = 'Dölj anpassning';
-            } else {
-                advancedSection.style.display = 'none';
-            }
-        }
+        window.SettingsDisplay.init({
+            lengthThemes,
+            singleThemes,
+            onThemeChange: handleThemeSelection
+        });
     }
 
-    /**
-     * Update color preview trains
-     */
-    function updatePreview() {
-        const preview = document.getElementById('train-preview');
-        if (!preview) return;
+    function handleThemeSelection(themeId) {
+        const mode = currentSettings.trainColorMode || defaultSettings.trainColorMode;
 
-        const mode = document.querySelector('input[name="train-color-mode"]:checked')?.value || 'length';
-        const trains = preview.querySelectorAll('.preview-train');
-
-        trains.forEach((train, idx) => {
-            const bucket = `b${idx + 1}`;
-            let bg, border, text;
-
-            if (mode === 'single') {
-                bg = document.getElementById('single-bg')?.value || getComputedStyle(document.documentElement).getPropertyValue('--train-single-bg');
-                border = document.getElementById('single-border')?.value || getComputedStyle(document.documentElement).getPropertyValue('--train-single-border');
-                text = document.getElementById('single-text')?.value || getComputedStyle(document.documentElement).getPropertyValue('--train-single-text');
-            } else {
-                bg = document.getElementById(`len-${bucket}-bg`)?.value || getComputedStyle(document.documentElement).getPropertyValue(`--len-${bucket}-bg`);
-                border = document.getElementById(`len-${bucket}-border`)?.value || getComputedStyle(document.documentElement).getPropertyValue(`--len-${bucket}-border`);
-                text = document.getElementById(`len-${bucket}-text`)?.value || getComputedStyle(document.documentElement).getPropertyValue(`--len-${bucket}-text`);
+        if (mode === 'single') {
+            if (themeId === 'custom') {
+                currentSettings.singleTheme = 'custom';
+                setHiddenThemeValue('single', 'custom');
+                syncDisplaySettings();
+                return;
             }
 
-            train.style.backgroundColor = bg;
-            train.style.borderColor = border;
-            train.style.color = text;
-        });
+            applySingleTheme(themeId);
+            return;
+        }
+
+        if (themeId === 'custom') {
+            currentSettings.lengthTheme = 'custom';
+            setHiddenThemeValue('length', 'custom');
+            syncDisplaySettings();
+            return;
+        }
+
+        applyLengthTheme(themeId);
+    }
+
+    function setHiddenThemeValue(mode, value) {
+        const input = document.getElementById(mode === 'single' ? 'single-theme' : 'length-theme');
+        if (input) input.value = value;
+    }
+
+    function syncDisplaySettings() {
+        if (!window.SettingsDisplay) return;
+        window.SettingsDisplay.render(getSettingsFromControls());
     }
 
     /**
