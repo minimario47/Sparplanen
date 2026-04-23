@@ -2,7 +2,10 @@
 """
 extract_monday.py
 =================
-Robust extractor for the "Spårplaner Göteborg C, v.17 3tim" Monday PDF.
+Robust extractor for the "Spårplaner Göteborg C, v.17 3tim" Göteborg C PDFs.
+
+Default input is the Thursday (Torsdag) v.17 VERSION 2 file; pass another PDF
+path as argv[1] for e.g. Monday (Måndag).
 
 Pipeline stages (each stage is a pure function so it is easy to unit-test):
 
@@ -42,6 +45,7 @@ Pipeline stages (each stage is a pure function so it is easy to unit-test):
 
 Run:
     python extract_monday.py
+    python extract_monday.py path/to/other.pdf   # optional explicit PDF
 """
 
 from __future__ import annotations
@@ -49,6 +53,7 @@ from __future__ import annotations
 import csv
 import json
 import re
+import sys
 from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
@@ -61,7 +66,14 @@ import pdfplumber
 # ─── Paths ────────────────────────────────────────────────────────────────────
 
 HERE = Path(__file__).parent
-PDF = HERE / "Spårplaner Göteborg C, v.17 3tim.pdf Måndag.pdf"
+
+
+def default_pdf() -> Path:
+    """Thursday (v.17 VERSION 2) — primary schedule for the live app."""
+    return HERE / "Spårplaner Göteborg C, v.17 3tim VERSION 2.pdf Torsdag.pdf"
+
+
+PDF = default_pdf()
 OUT_SCHEDULE = HERE / "monday_schedule.json"
 OUT_CLOSURES = HERE / "monday_closures.json"
 OUT_AUDIT_CSV = HERE / "monday_audit.csv"
@@ -983,6 +995,13 @@ def emit_outputs(
 
 
 def main() -> None:
+    global PDF
+    if len(sys.argv) > 1:
+        PDF = Path(sys.argv[1]).expanduser().resolve()
+    else:
+        PDF = default_pdf().resolve()
+    if not PDF.is_file():
+        raise SystemExit(f"PDF not found: {PDF}")
     slots, closures = run(PDF)
     emit_outputs(slots, closures)
 

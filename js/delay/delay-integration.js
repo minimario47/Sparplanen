@@ -95,20 +95,29 @@ class DelayIntegration {
     setupEventListeners() {
         // Listen to API data updates
         this.apiClient.on('data-updated', (data) => {
-            console.groupCollapsed(`🔄 Delay Update: ${data.trains.length} trains`);
-            console.log('📊 Summary:', {
-                total: data.trains.length,
-                delayed: data.summary?.delayed || 0,
-                early: data.summary?.early || 0,
-                onTime: data.summary?.onTime || 0
-            });
+            if (window.__DEBUG_DELAY_FEED) {
+                console.groupCollapsed(`🔄 Delay Update: ${data.trains.length} trains`);
+                console.log('📊 Summary:', {
+                    total: data.trains.length,
+                    delayed: data.summary?.delayed || 0,
+                    early: data.summary?.early || 0,
+                    onTime: data.summary?.onTime || 0
+                });
+            }
 
             this.dataManager.updateData(data.trains);
+            try {
+                window.dispatchEvent(new CustomEvent('delay-feed-updated', { detail: data }));
+            } catch (e) {
+                logger.warn('Integration', 'delay-feed-updated dispatch failed', e);
+            }
             this.updateAllVisualizations();
             this.updateConnectionStatus();
 
-            console.log(`⏰ Next delay update expected in ${this.apiClient.updateIntervalMs / 1000} seconds`);
-            console.groupEnd();
+            if (window.__DEBUG_DELAY_FEED) {
+                console.log(`⏰ Next delay update expected in ${this.apiClient.updateIntervalMs / 1000} seconds`);
+                console.groupEnd();
+            }
         });
         
         // Listen to API connection changes
@@ -268,13 +277,14 @@ class DelayIntegration {
             visualizedCount++;
         });
         
-        // Log condensed summary instead of individual train details
-        console.log('✅ Delay Visualization Summary:', {
-            processed: visualizedCount,
-            conflicts: conflictCount,
-            delayBreakdown: delayStats,
-            totalTrains: trainBars.length
-        });
+        if (window.__DEBUG_DELAY_FEED) {
+            console.log('✅ Delay Visualization Summary:', {
+                processed: visualizedCount,
+                conflicts: conflictCount,
+                delayBreakdown: delayStats,
+                totalTrains: trainBars.length
+            });
+        }
     }
     
     /**

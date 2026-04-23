@@ -1,0 +1,193 @@
+/**
+ * Floating panel: late arrivals to Göteborg (Trafikverket signatur G).
+ * z-index between main chrome and settings modal.
+ */
+
+.late-arrivals-panel {
+    position: fixed;
+    z-index: 1250;
+    width: min(320px, calc(100vw - 32px));
+    max-height: min(420px, calc(100vh - var(--header-height) - 48px));
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+.late-arrivals-panel[hidden] {
+    display: none !important;
+}
+
+.late-arrivals-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3) var(--spacing-3);
+    background: linear-gradient(to bottom, var(--surface-secondary), var(--surface-primary));
+    border-bottom: 1px solid var(--border-primary);
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+}
+
+.late-arrivals-panel__header:active {
+    cursor: grabbing;
+}
+
+.late-arrivals-panel__title-wrap {
+    min-width: 0;
+}
+
+.late-arrivals-panel__title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.late-arrivals-panel__subtitle {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.late-arrivals-panel__close {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: var(--border-radius-md);
+    background: var(--interactive-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.late-arrivals-panel__close:hover {
+    background: var(--interactive-secondary-hover);
+}
+
+.late-arrivals-panel__toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-wrap: wrap;
+}
+
+.late-arrivals-panel__toolbar label {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.late-arrivals-panel__threshold {
+    width: 56px;
+    padding: 4px 6px;
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-sm);
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.late-arrivals-panel__list {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: var(--spacing-2) 0;
+    min-height: 80px;
+    max-height: 260px;
+    touch-action: pan-y;
+}
+
+.late-arrivals-panel__empty,
+.late-arrivals-panel__error {
+    padding: var(--spacing-4) var(--spacing-3);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    line-height: 1.45;
+}
+
+.late-arrivals-panel__error {
+    color: var(--danger-600, #c0392b);
+}
+
+.late-arrivals-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--spacing-1) var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.late-arrivals-row:last-child {
+    border-bottom: none;
+}
+
+.late-arrivals-row__num {
+    font-weight: var(--font-weight-semibold);
+    font-variant-numeric: tabular-nums;
+}
+
+.late-arrivals-row__delay {
+    font-weight: var(--font-weight-semibold);
+    color: var(--warning-600, #b45309);
+    font-variant-numeric: tabular-nums;
+}
+
+.late-arrivals-row__meta {
+    grid-column: 1 / -1;
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    line-height: 1.35;
+}
+
+.late-arrivals-panel__footer {
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: 10px;
+    color: var(--text-tertiary, var(--text-secondary));
+    border-top: 1px solid var(--border-subtle);
+    text-align: center;
+}
+
+.late-arrivals-toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    line-height: 1;
+}
+
+/* Toggle in header — active state */
+#late-arrivals-toggle.is-active {
+    background: var(--primary-100, #dbeafe);
+    border-color: var(--primary-400, #60a5fa);
+    color: var(--primary-800, #1e3a8a);
+}
+
+[data-theme="dark"] #late-arrivals-toggle.is-active {
+    background: rgba(37, 99, 235, 0.25);
+    border-color: var(--primary-500);
+    color: var(--text-primary);
+}

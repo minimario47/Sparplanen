@@ -63,6 +63,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         logger.error('App', 'Failed to initialize delay integration', error);
         console.warn('⚠️ Running without delay data integration');
     }
+
+    if (typeof window.LateArrivalsPanel !== 'undefined' && window.LateArrivalsPanel.init) {
+        try {
+            window.LateArrivalsPanel.init();
+        } catch (e) {
+            console.warn('LateArrivalsPanel init failed', e);
+        }
+    }
     
     console.log('🎨 SpårplanV2 loaded successfully!');
     console.log('📋 All systems initialized:');

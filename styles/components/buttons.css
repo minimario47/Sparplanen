@@ -43,6 +43,13 @@
     pointer-events: none;
 }
 
+/* Edge / Safari: clicks on inner <img> or <span> do not always activate the <button> */
+.app-header .btn-icon > img,
+.app-header .btn-icon .icon-svg,
+.app-header .btn-icon > span {
+    pointer-events: none;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    PRIMARY BUTTON - Main call-to-action
 ═══════════════════════════════════════════════════════════════════════════ */

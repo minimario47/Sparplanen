@@ -65,6 +65,7 @@
     <link rel="stylesheet" href="styles/components/delay-visualization.css">
     <link rel="stylesheet" href="styles/components/settings-viz.css">
     <link rel="stylesheet" href="styles/components/debug-logs.css">
+    <link rel="stylesheet" href="styles/components/late-arrivals-panel.css">
     
     <!-- Data Files -->
     <script src="vehicleTypes.js"></script>
@@ -153,8 +154,12 @@
                 <button class="btn btn-secondary btn-icon theme-toggle" id="theme-toggle-btn" aria-label="Byt tema" title="Byt tema">
                     <span style="font-size: 20px;">🌓</span>
                 </button>
-                <button class="btn btn-secondary btn-icon settings-button" aria-label="Inställningar" title="Inställningar">
-                    <img src="assets/Icons/settings.png" alt="Settings" class="icon-svg">
+                <button type="button" class="btn btn-secondary btn-icon" id="late-arrivals-toggle"
+                    aria-label="Sen ankomst till Göteborg" title="Sen ankomst G (försenade)" aria-pressed="false">
+                    <span class="late-arrivals-toggle-icon" aria-hidden="true">G</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-icon settings-button" aria-label="Inställningar" title="Inställningar">
+                    <img src="assets/Icons/settings.png" alt="" class="icon-svg" width="20" height="20" decoding="async">
                 </button>
             </div>
         </div>
@@ -725,6 +730,7 @@
     <script src="js/delay/visualizers/icon-visualizer.js"></script>
     <script src="js/delay/visualizers/combined-visualizer.js"></script>
     <script src="js/delay/delay-integration.js"></script>
+    <script src="js/components/late-arrivals-panel.js"></script>
     
     <!-- 7. Header & Schedule -->
     <script src="js/modules/header-controls.js"></script>

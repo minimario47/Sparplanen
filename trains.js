@@ -1,14 +1,36 @@
 // Auto-generated — DO NOT EDIT MANUALLY
-// Source : Spårplaner Göteborg C, v.17 3tim.pdf Måndag.pdf
-// Created: 2026-04-20 13:07
+// Source : Spårplaner Göteborg C, v.17 3tim VERSION 2.pdf Torsdag.pdf
+// Created: 2026-04-23 12:45
 
 const initialServiceData = [
   {
     "id": 1,
     "trackId": 1,
-    "arrivalTrainNumber": "3587",
+    "arrivalTrainNumber": "3593",
+    "departureTrainNumber": "",
+    "scheduledArrivalTime": "00:19",
+    "scheduledDepartureTime": "00:34",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 3,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.949,
+      0.584
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 2,
+    "trackId": 2,
+    "arrivalTrainNumber": "",
     "departureTrainNumber": "3500",
-    "scheduledArrivalTime": "00:00",
+    "scheduledArrivalTime": "",
     "scheduledDepartureTime": "00:23",
     "origin": "",
     "destination": "",
@@ -26,8 +48,8 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 2,
-    "trackId": 1,
+    "id": 3,
+    "trackId": 2,
     "arrivalTrainNumber": "23493",
     "departureTrainNumber": "3516",
     "scheduledArrivalTime": "00:37",
@@ -48,55 +70,11 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 3,
-    "trackId": 2,
-    "arrivalTrainNumber": "3593",
-    "departureTrainNumber": "",
-    "scheduledArrivalTime": "00:19",
-    "scheduledDepartureTime": "00:34",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.949,
-      0.584
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
     "id": 4,
-    "trackId": 2,
-    "arrivalTrainNumber": "17399",
-    "departureTrainNumber": "3220",
-    "scheduledArrivalTime": "00:05",
-    "scheduledDepartureTime": "05:00",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 3,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.6,
-      0.8
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 5,
     "trackId": 3,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "400",
-    "scheduledArrivalTime": "01:00",
+    "scheduledArrivalTime": "02:40",
     "scheduledDepartureTime": "05:12",
     "origin": "",
     "destination": "",
@@ -114,12 +92,34 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
+    "id": 5,
+    "trackId": 3,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "3602",
+    "scheduledArrivalTime": "",
+    "scheduledDepartureTime": "00:30",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.8,
+      0.6,
+      1.0
+    ],
+    "continuesFromPrevPage": true,
+    "continuesToNextPage": false
+  },
+  {
     "id": 6,
     "trackId": 3,
-    "arrivalTrainNumber": "449",
+    "arrivalTrainNumber": "451",
     "departureTrainNumber": "",
-    "scheduledArrivalTime": "00:00",
-    "scheduledDepartureTime": "00:30",
+    "scheduledArrivalTime": "00:42",
+    "scheduledDepartureTime": "01:20",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -132,16 +132,16 @@ const initialServiceData = [
       1.0,
       1.0
     ],
-    "continuesFromPrevPage": true,
+    "continuesFromPrevPage": false,
     "continuesToNextPage": false
   },
   {
     "id": 7,
     "trackId": 3,
     "arrivalTrainNumber": "",
-    "departureTrainNumber": "422",
-    "scheduledArrivalTime": "00:55",
-    "scheduledDepartureTime": "06:18",
+    "departureTrainNumber": "420",
+    "scheduledArrivalTime": "01:30",
+    "scheduledDepartureTime": "05:18",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -160,10 +160,10 @@ const initialServiceData = [
   {
     "id": 8,
     "trackId": 4,
-    "arrivalTrainNumber": "451",
+    "arrivalTrainNumber": "",
     "departureTrainNumber": "",
-    "scheduledArrivalTime": "00:42",
-    "scheduledDepartureTime": "01:25",
+    "scheduledArrivalTime": "",
+    "scheduledDepartureTime": "00:20",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -176,16 +176,16 @@ const initialServiceData = [
       1.0,
       1.0
     ],
-    "continuesFromPrevPage": false,
+    "continuesFromPrevPage": true,
     "continuesToNextPage": false
   },
   {
     "id": 9,
     "trackId": 4,
-    "arrivalTrainNumber": "453",
-    "departureTrainNumber": "",
-    "scheduledArrivalTime": "01:42",
-    "scheduledDepartureTime": "02:25",
+    "arrivalTrainNumber": "20379",
+    "departureTrainNumber": "20350",
+    "scheduledArrivalTime": "00:50",
+    "scheduledDepartureTime": "05:15",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -203,55 +203,11 @@ const initialServiceData = [
   },
   {
     "id": 10,
-    "trackId": 4,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "420",
-    "scheduledArrivalTime": "02:45",
-    "scheduledDepartureTime": "05:18",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.0,
-      1.0,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 11,
-    "trackId": 6,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "164",
-    "scheduledArrivalTime": "02:30",
-    "scheduledDepartureTime": "05:37",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.0,
-      1.0,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 12,
-    "trackId": 8,
-    "arrivalTrainNumber": "20379",
-    "departureTrainNumber": "20350",
-    "scheduledArrivalTime": "00:50",
-    "scheduledDepartureTime": "05:15",
+    "trackId": 5,
+    "arrivalTrainNumber": "17399",
+    "departureTrainNumber": "3003",
+    "scheduledArrivalTime": "00:05",
+    "scheduledDepartureTime": "00:30",
     "origin": "",
     "destination": "",
     "subTrackIndex": 1,
@@ -260,19 +216,63 @@ const initialServiceData = [
       "count": 1
     },
     "barColor": [
-      0.0,
-      1.0,
+      0.733,
+      0.71,
+      0.616
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 11,
+    "trackId": 5,
+    "arrivalTrainNumber": "3693",
+    "departureTrainNumber": "",
+    "scheduledArrivalTime": "00:35",
+    "scheduledDepartureTime": "00:50",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.8,
+      0.6,
       1.0
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
   },
   {
+    "id": 12,
+    "trackId": 5,
+    "arrivalTrainNumber": "59823",
+    "departureTrainNumber": "69299",
+    "scheduledArrivalTime": "02:35",
+    "scheduledDepartureTime": "03:06",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.902,
+      0.902,
+      0.902
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
     "id": 13,
-    "trackId": 8,
-    "arrivalTrainNumber": "2047",
+    "trackId": 5,
+    "arrivalTrainNumber": "",
     "departureTrainNumber": "2012",
-    "scheduledArrivalTime": "00:00",
+    "scheduledArrivalTime": "",
     "scheduledDepartureTime": "05:33",
     "origin": "",
     "destination": "",
@@ -291,98 +291,54 @@ const initialServiceData = [
   },
   {
     "id": 14,
-    "trackId": 9,
-    "arrivalTrainNumber": "76241",
-    "departureTrainNumber": "76242",
-    "scheduledArrivalTime": "01:05",
-    "scheduledDepartureTime": "01:13",
+    "trackId": 6,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "3420",
+    "scheduledArrivalTime": "",
+    "scheduledDepartureTime": "04:37",
     "origin": "",
     "destination": "",
-    "subTrackIndex": 2,
+    "subTrackIndex": 1,
     "trainSet": {
       "vehicleTypeID": "X40",
-      "count": 1
+      "count": 2
     },
     "barColor": [
-      0.878,
-      0.871,
-      0.796
+      1.0,
+      0.8,
+      0.6
     ],
-    "continuesFromPrevPage": false,
+    "continuesFromPrevPage": true,
     "continuesToNextPage": false
   },
   {
     "id": 15,
-    "trackId": 9,
-    "arrivalTrainNumber": "3603",
-    "departureTrainNumber": "3616",
-    "scheduledArrivalTime": "01:35",
-    "scheduledDepartureTime": "04:20",
+    "trackId": 7,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "382",
+    "scheduledArrivalTime": "",
+    "scheduledDepartureTime": "06:15",
     "origin": "",
     "destination": "",
-    "subTrackIndex": 2,
+    "subTrackIndex": 1,
     "trainSet": {
       "vehicleTypeID": "X40",
-      "count": 1
+      "count": 2
     },
     "barColor": [
-      0.8,
-      0.6,
-      1.0
+      0.396,
+      0.478,
+      0.529
     ],
-    "continuesFromPrevPage": false,
+    "continuesFromPrevPage": true,
     "continuesToNextPage": false
   },
   {
     "id": 16,
-    "trackId": 10,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "3602",
-    "scheduledArrivalTime": "00:15",
-    "scheduledDepartureTime": "00:30",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.8,
-      0.6,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 17,
-    "trackId": 10,
-    "arrivalTrainNumber": "3693",
-    "departureTrainNumber": "3618",
-    "scheduledArrivalTime": "00:35",
-    "scheduledDepartureTime": "04:50",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.8,
-      0.6,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 18,
     "trackId": 11,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "481",
-    "scheduledArrivalTime": "",
+    "scheduledArrivalTime": "00:01",
     "scheduledDepartureTime": "06:20",
     "origin": "",
     "destination": "",
@@ -396,11 +352,11 @@ const initialServiceData = [
       1.0,
       1.0
     ],
-    "continuesFromPrevPage": true,
+    "continuesFromPrevPage": false,
     "continuesToNextPage": false
   },
   {
-    "id": 19,
+    "id": 17,
     "trackId": 13,
     "arrivalTrainNumber": "319",
     "departureTrainNumber": "319",
@@ -422,9 +378,9 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 20,
+    "id": 18,
     "trackId": 14,
-    "arrivalTrainNumber": "19134",
+    "arrivalTrainNumber": "11130",
     "departureTrainNumber": "11031",
     "scheduledArrivalTime": "00:05",
     "scheduledDepartureTime": "04:55",
@@ -444,12 +400,56 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 21,
+    "id": 19,
     "trackId": 15,
-    "arrivalTrainNumber": "3094",
-    "departureTrainNumber": "3003",
-    "scheduledArrivalTime": "00:15",
-    "scheduledDepartureTime": "00:30",
+    "arrivalTrainNumber": "33095",
+    "departureTrainNumber": "",
+    "scheduledArrivalTime": "00:00",
+    "scheduledDepartureTime": "00:10",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 3,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.733,
+      0.71,
+      0.616
+    ],
+    "continuesFromPrevPage": true,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 20,
+    "trackId": 15,
+    "arrivalTrainNumber": "13094",
+    "departureTrainNumber": "3019",
+    "scheduledArrivalTime": "00:31",
+    "scheduledDepartureTime": "04:45",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 3,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.733,
+      0.71,
+      0.616
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 21,
+    "trackId": 16,
+    "arrivalTrainNumber": "3004",
+    "departureTrainNumber": "3021",
+    "scheduledArrivalTime": "01:30",
+    "scheduledDepartureTime": "05:15",
     "origin": "",
     "destination": "",
     "subTrackIndex": 3,
@@ -467,54 +467,10 @@ const initialServiceData = [
   },
   {
     "id": 22,
-    "trackId": 16,
-    "arrivalTrainNumber": "3004",
-    "departureTrainNumber": "3019",
-    "scheduledArrivalTime": "01:30",
-    "scheduledDepartureTime": "04:45",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.733,
-      0.71,
-      0.616
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 23,
-    "trackId": 16,
-    "arrivalTrainNumber": "3092",
-    "departureTrainNumber": "3021",
-    "scheduledArrivalTime": "00:00",
-    "scheduledDepartureTime": "05:15",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 3,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.733,
-      0.71,
-      0.616
-    ],
-    "continuesFromPrevPage": true,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 24,
     "trackId": 1,
-    "arrivalTrainNumber": "",
+    "arrivalTrainNumber": "83520",
     "departureTrainNumber": "3520",
-    "scheduledArrivalTime": "05:08",
+    "scheduledArrivalTime": "04:50",
     "scheduledDepartureTime": "05:23",
     "origin": "",
     "destination": "",
@@ -532,7 +488,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 25,
+    "id": 23,
     "trackId": 1,
     "arrivalTrainNumber": "3513",
     "departureTrainNumber": "3520",
@@ -554,7 +510,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 26,
+    "id": 24,
     "trackId": 1,
     "arrivalTrainNumber": "3515",
     "departureTrainNumber": "3524",
@@ -576,15 +532,15 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 27,
+    "id": 25,
     "trackId": 2,
-    "arrivalTrainNumber": "65245",
+    "arrivalTrainNumber": "",
     "departureTrainNumber": "3518",
-    "scheduledArrivalTime": "04:10",
+    "scheduledArrivalTime": "04:27",
     "scheduledDepartureTime": "04:42",
     "origin": "",
     "destination": "",
-    "subTrackIndex": 2,
+    "subTrackIndex": 3,
     "trainSet": {
       "vehicleTypeID": "X40",
       "count": 1
@@ -598,7 +554,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 28,
+    "id": 26,
     "trackId": 2,
     "arrivalTrainNumber": "3517",
     "departureTrainNumber": "3522",
@@ -620,11 +576,33 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 29,
+    "id": 27,
+    "trackId": 3,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "422",
+    "scheduledArrivalTime": "05:25",
+    "scheduledDepartureTime": "06:19",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 28,
     "trackId": 4,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "424",
-    "scheduledArrivalTime": "05:25",
+    "scheduledArrivalTime": "05:30",
     "scheduledDepartureTime": "07:18",
     "origin": "",
     "destination": "",
@@ -642,12 +620,78 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
+    "id": 29,
+    "trackId": 6,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "164",
+    "scheduledArrivalTime": "",
+    "scheduledDepartureTime": "05:37",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "continuesFromPrevPage": true,
+    "continuesToNextPage": false
+  },
+  {
     "id": 30,
-    "trackId": 5,
-    "arrivalTrainNumber": "93420",
-    "departureTrainNumber": "3420",
-    "scheduledArrivalTime": "04:22",
-    "scheduledDepartureTime": "04:37",
+    "trackId": 6,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "168",
+    "scheduledArrivalTime": "05:45",
+    "scheduledDepartureTime": "07:37",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 31,
+    "trackId": 8,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "3622",
+    "scheduledArrivalTime": "05:35",
+    "scheduledDepartureTime": "05:50",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.8,
+      0.6,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 32,
+    "trackId": 8,
+    "arrivalTrainNumber": "3217",
+    "departureTrainNumber": "3226",
+    "scheduledArrivalTime": "06:00",
+    "scheduledDepartureTime": "06:30",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -657,15 +701,15 @@ const initialServiceData = [
     },
     "barColor": [
       1.0,
-      0.8,
-      0.6
+      0.6,
+      0.8
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
   },
   {
-    "id": 31,
-    "trackId": 7,
+    "id": 33,
+    "trackId": 9,
     "arrivalTrainNumber": "3215",
     "departureTrainNumber": "3224",
     "scheduledArrivalTime": "05:30",
@@ -686,56 +730,12 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 32,
-    "trackId": 7,
-    "arrivalTrainNumber": "93224",
-    "departureTrainNumber": "3224",
-    "scheduledArrivalTime": "05:23",
-    "scheduledDepartureTime": "06:00",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.6,
-      0.8
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 33,
-    "trackId": 9,
-    "arrivalTrainNumber": "3617",
-    "departureTrainNumber": "13670",
-    "scheduledArrivalTime": "05:25",
-    "scheduledDepartureTime": "05:35",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.8,
-      0.6,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
     "id": 34,
     "trackId": 9,
-    "arrivalTrainNumber": "3217",
-    "departureTrainNumber": "3226",
-    "scheduledArrivalTime": "06:00",
-    "scheduledDepartureTime": "06:30",
+    "arrivalTrainNumber": "93224",
+    "departureTrainNumber": "3224",
+    "scheduledArrivalTime": "05:18",
+    "scheduledDepartureTime": "06:00",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -776,10 +776,10 @@ const initialServiceData = [
   {
     "id": 36,
     "trackId": 10,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "3622",
-    "scheduledArrivalTime": "05:35",
-    "scheduledDepartureTime": "05:50",
+    "arrivalTrainNumber": "3617",
+    "departureTrainNumber": "13670",
+    "scheduledArrivalTime": "05:25",
+    "scheduledDepartureTime": "05:35",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -820,16 +820,16 @@ const initialServiceData = [
   {
     "id": 38,
     "trackId": 12,
-    "arrivalTrainNumber": "13120",
-    "departureTrainNumber": "13125",
-    "scheduledArrivalTime": "05:35",
-    "scheduledDepartureTime": "06:10",
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "3023",
+    "scheduledArrivalTime": "05:30",
+    "scheduledDepartureTime": "05:45",
     "origin": "",
     "destination": "",
-    "subTrackIndex": 2,
+    "subTrackIndex": 1,
     "trainSet": {
       "vehicleTypeID": "X40",
-      "count": 1
+      "count": 2
     },
     "barColor": [
       0.733,
@@ -866,7 +866,7 @@ const initialServiceData = [
     "trackId": 14,
     "arrivalTrainNumber": "3018",
     "departureTrainNumber": "3175",
-    "scheduledArrivalTime": "05:15",
+    "scheduledArrivalTime": "05:21",
     "scheduledDepartureTime": "06:00",
     "origin": "",
     "destination": "",
@@ -887,28 +887,6 @@ const initialServiceData = [
     "id": 41,
     "trackId": 15,
     "arrivalTrainNumber": "",
-    "departureTrainNumber": "3023",
-    "scheduledArrivalTime": "05:30",
-    "scheduledDepartureTime": "05:45",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 2
-    },
-    "barColor": [
-      0.733,
-      0.71,
-      0.616
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 42,
-    "trackId": 15,
-    "arrivalTrainNumber": "",
     "departureTrainNumber": "20151",
     "scheduledArrivalTime": "05:10",
     "scheduledDepartureTime": "05:25",
@@ -923,6 +901,28 @@ const initialServiceData = [
       0.8,
       1.0,
       0.8
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 42,
+    "trackId": 15,
+    "arrivalTrainNumber": "13120",
+    "departureTrainNumber": "13125",
+    "scheduledArrivalTime": "05:35",
+    "scheduledDepartureTime": "06:10",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 3,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.733,
+      0.71,
+      0.616
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
@@ -1128,16 +1128,38 @@ const initialServiceData = [
   {
     "id": 52,
     "trackId": 3,
+    "arrivalTrainNumber": "3427",
+    "departureTrainNumber": "",
+    "scheduledArrivalTime": "07:42",
+    "scheduledDepartureTime": "07:57",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.8,
+      0.6
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 53,
+    "trackId": 3,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "426",
     "scheduledArrivalTime": "06:35",
     "scheduledDepartureTime": "08:18",
     "origin": "",
     "destination": "",
-    "subTrackIndex": 1,
+    "subTrackIndex": 2,
     "trainSet": {
       "vehicleTypeID": "X40",
-      "count": 2
+      "count": 1
     },
     "barColor": [
       0.0,
@@ -1148,7 +1170,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 53,
+    "id": 54,
     "trackId": 3,
     "arrivalTrainNumber": "20351",
     "departureTrainNumber": "20356",
@@ -1170,7 +1192,29 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 54,
+    "id": 55,
+    "trackId": 4,
+    "arrivalTrainNumber": "3421",
+    "departureTrainNumber": "3426",
+    "scheduledArrivalTime": "06:23",
+    "scheduledDepartureTime": "06:37",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.8,
+      0.6
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 56,
     "trackId": 4,
     "arrivalTrainNumber": "3425",
     "departureTrainNumber": "13790",
@@ -1192,7 +1236,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 55,
+    "id": 57,
     "trackId": 4,
     "arrivalTrainNumber": "3425",
     "departureTrainNumber": "",
@@ -1214,12 +1258,12 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 56,
+    "id": 58,
     "trackId": 4,
     "arrivalTrainNumber": "",
-    "departureTrainNumber": "428",
-    "scheduledArrivalTime": "07:55",
-    "scheduledDepartureTime": "09:18",
+    "departureTrainNumber": "13734",
+    "scheduledArrivalTime": "08:30",
+    "scheduledDepartureTime": "08:45",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -1228,15 +1272,15 @@ const initialServiceData = [
       "count": 1
     },
     "barColor": [
-      0.0,
       1.0,
-      1.0
+      0.6,
+      0.8
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
   },
   {
-    "id": 57,
+    "id": 59,
     "trackId": 5,
     "arrivalTrainNumber": "3423",
     "departureTrainNumber": "",
@@ -1258,7 +1302,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 58,
+    "id": 60,
     "trackId": 5,
     "arrivalTrainNumber": "97224",
     "departureTrainNumber": "2004",
@@ -1280,7 +1324,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 59,
+    "id": 61,
     "trackId": 5,
     "arrivalTrainNumber": "97226",
     "departureTrainNumber": "2006",
@@ -1302,8 +1346,30 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 60,
+    "id": 62,
     "trackId": 5,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "428",
+    "scheduledArrivalTime": "07:55",
+    "scheduledDepartureTime": "09:18",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 63,
+    "trackId": 6,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "170",
     "scheduledArrivalTime": "07:40",
@@ -1324,95 +1390,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 61,
-    "trackId": 6,
-    "arrivalTrainNumber": "3421",
-    "departureTrainNumber": "3426",
-    "scheduledArrivalTime": "06:23",
-    "scheduledDepartureTime": "06:37",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.8,
-      0.6
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 62,
-    "trackId": 6,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "168",
-    "scheduledArrivalTime": "07:00",
-    "scheduledDepartureTime": "07:37",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.0,
-      1.0,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 63,
-    "trackId": 6,
-    "arrivalTrainNumber": "3427",
-    "departureTrainNumber": "",
-    "scheduledArrivalTime": "07:42",
-    "scheduledDepartureTime": "07:57",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.8,
-      0.6
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
     "id": 64,
-    "trackId": 6,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "13734",
-    "scheduledArrivalTime": "08:30",
-    "scheduledDepartureTime": "08:45",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.6,
-      0.8
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 65,
     "trackId": 6,
     "arrivalTrainNumber": "3229",
     "departureTrainNumber": "",
@@ -1434,7 +1412,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 66,
+    "id": 65,
     "trackId": 7,
     "arrivalTrainNumber": "155",
     "departureTrainNumber": "",
@@ -1456,15 +1434,15 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 67,
+    "id": 66,
     "trackId": 7,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "20352",
-    "scheduledArrivalTime": "06:35",
+    "scheduledArrivalTime": "06:37",
     "scheduledDepartureTime": "07:15",
     "origin": "",
     "destination": "",
-    "subTrackIndex": 2,
+    "subTrackIndex": 1,
     "trainSet": {
       "vehicleTypeID": "X40",
       "count": 1
@@ -1475,6 +1453,28 @@ const initialServiceData = [
       1.0
     ],
     "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 67,
+    "trackId": 7,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "384",
+    "scheduledArrivalTime": "",
+    "scheduledDepartureTime": "08:10",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.396,
+      0.478,
+      0.529
+    ],
+    "continuesFromPrevPage": true,
     "continuesToNextPage": false
   },
   {
@@ -1524,28 +1524,6 @@ const initialServiceData = [
   {
     "id": 70,
     "trackId": 8,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "3624",
-    "scheduledArrivalTime": "06:05",
-    "scheduledDepartureTime": "06:20",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.8,
-      0.6,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 71,
-    "trackId": 8,
     "arrivalTrainNumber": "13721",
     "departureTrainNumber": "",
     "scheduledArrivalTime": "06:45",
@@ -1566,7 +1544,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 72,
+    "id": 71,
     "trackId": 8,
     "arrivalTrainNumber": "3223",
     "departureTrainNumber": "",
@@ -1588,7 +1566,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 73,
+    "id": 72,
     "trackId": 8,
     "arrivalTrainNumber": "13277",
     "departureTrainNumber": "3234",
@@ -1610,7 +1588,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 74,
+    "id": 73,
     "trackId": 8,
     "arrivalTrainNumber": "419",
     "departureTrainNumber": "489",
@@ -1632,7 +1610,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 75,
+    "id": 74,
     "trackId": 9,
     "arrivalTrainNumber": "3225",
     "departureTrainNumber": "",
@@ -1654,7 +1632,51 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
+    "id": 75,
+    "trackId": 9,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "3624",
+    "scheduledArrivalTime": "06:05",
+    "scheduledDepartureTime": "06:20",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.8,
+      0.6,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
     "id": 76,
+    "trackId": 9,
+    "arrivalTrainNumber": "3219",
+    "departureTrainNumber": "3228",
+    "scheduledArrivalTime": "06:30",
+    "scheduledDepartureTime": "07:00",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.6,
+      0.8
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 77,
     "trackId": 9,
     "arrivalTrainNumber": "13679",
     "departureTrainNumber": "3634",
@@ -1676,7 +1698,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 77,
+    "id": 78,
     "trackId": 10,
     "arrivalTrainNumber": "3621",
     "departureTrainNumber": "13674",
@@ -1698,7 +1720,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 78,
+    "id": 79,
     "trackId": 10,
     "arrivalTrainNumber": "13671",
     "departureTrainNumber": "3626",
@@ -1720,7 +1742,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 79,
+    "id": 80,
     "trackId": 10,
     "arrivalTrainNumber": "3623",
     "departureTrainNumber": "13676",
@@ -1742,7 +1764,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 80,
+    "id": 81,
     "trackId": 10,
     "arrivalTrainNumber": "13673",
     "departureTrainNumber": "3628",
@@ -1764,7 +1786,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 81,
+    "id": 82,
     "trackId": 10,
     "arrivalTrainNumber": "3625",
     "departureTrainNumber": "13678",
@@ -1786,7 +1808,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 82,
+    "id": 83,
     "trackId": 10,
     "arrivalTrainNumber": "13675",
     "departureTrainNumber": "3630",
@@ -1808,7 +1830,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 83,
+    "id": 84,
     "trackId": 10,
     "arrivalTrainNumber": "3627",
     "departureTrainNumber": "13680",
@@ -1830,7 +1852,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 84,
+    "id": 85,
     "trackId": 10,
     "arrivalTrainNumber": "13677",
     "departureTrainNumber": "3632",
@@ -1852,7 +1874,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 85,
+    "id": 86,
     "trackId": 10,
     "arrivalTrainNumber": "3629",
     "departureTrainNumber": "",
@@ -1874,7 +1896,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 86,
+    "id": 87,
     "trackId": 10,
     "arrivalTrainNumber": "3631",
     "departureTrainNumber": "3636",
@@ -1896,12 +1918,56 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 87,
+    "id": 88,
     "trackId": 11,
-    "arrivalTrainNumber": "3219",
-    "departureTrainNumber": "3228",
+    "arrivalTrainNumber": "13273",
+    "departureTrainNumber": "7331",
+    "scheduledArrivalTime": "07:15",
+    "scheduledDepartureTime": "07:35",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.6,
+      0.8,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 89,
+    "trackId": 11,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "13726",
     "scheduledArrivalTime": "06:30",
-    "scheduledDepartureTime": "07:00",
+    "scheduledDepartureTime": "06:45",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.4,
+      0.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 90,
+    "trackId": 11,
+    "arrivalTrainNumber": "13273",
+    "departureTrainNumber": "",
+    "scheduledArrivalTime": "07:15",
+    "scheduledDepartureTime": "07:40",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -1918,7 +1984,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 88,
+    "id": 91,
     "trackId": 11,
     "arrivalTrainNumber": "7330",
     "departureTrainNumber": "",
@@ -1940,7 +2006,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 89,
+    "id": 92,
     "trackId": 11,
     "arrivalTrainNumber": "480",
     "departureTrainNumber": "487",
@@ -1962,7 +2028,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 90,
+    "id": 93,
     "trackId": 12,
     "arrivalTrainNumber": "3227",
     "departureTrainNumber": "",
@@ -1984,29 +2050,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 91,
-    "trackId": 12,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "13726",
-    "scheduledArrivalTime": "06:30",
-    "scheduledDepartureTime": "06:45",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.4,
-      0.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 92,
+    "id": 94,
     "trackId": 12,
     "arrivalTrainNumber": "3221",
     "departureTrainNumber": "3230",
@@ -2028,7 +2072,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 93,
+    "id": 95,
     "trackId": 12,
     "arrivalTrainNumber": "13795",
     "departureTrainNumber": "3236",
@@ -2050,7 +2094,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 94,
+    "id": 96,
     "trackId": 13,
     "arrivalTrainNumber": "3022",
     "departureTrainNumber": "3177",
@@ -2072,29 +2116,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 95,
-    "trackId": 13,
-    "arrivalTrainNumber": "13273",
-    "departureTrainNumber": "7331",
-    "scheduledArrivalTime": "07:15",
-    "scheduledDepartureTime": "07:35",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 1,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.6,
-      0.8,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 96,
+    "id": 97,
     "trackId": 13,
     "arrivalTrainNumber": "3030",
     "departureTrainNumber": "3185",
@@ -2116,7 +2138,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 97,
+    "id": 98,
     "trackId": 13,
     "arrivalTrainNumber": "3032",
     "departureTrainNumber": "3187",
@@ -2138,7 +2160,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 98,
+    "id": 99,
     "trackId": 13,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3177",
@@ -2160,7 +2182,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 99,
+    "id": 100,
     "trackId": 13,
     "arrivalTrainNumber": "13124",
     "departureTrainNumber": "13129",
@@ -2177,28 +2199,6 @@ const initialServiceData = [
       0.733,
       0.71,
       0.616
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 100,
-    "trackId": 13,
-    "arrivalTrainNumber": "13273",
-    "departureTrainNumber": "",
-    "scheduledArrivalTime": "07:15",
-    "scheduledDepartureTime": "07:40",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.6,
-      0.8
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
@@ -2338,7 +2338,7 @@ const initialServiceData = [
   {
     "id": 107,
     "trackId": 14,
-    "arrivalTrainNumber": "29154",
+    "arrivalTrainNumber": "20154",
     "departureTrainNumber": "",
     "scheduledArrivalTime": "07:05",
     "scheduledDepartureTime": "07:20",
@@ -2426,7 +2426,7 @@ const initialServiceData = [
   {
     "id": 111,
     "trackId": 14,
-    "arrivalTrainNumber": "29154",
+    "arrivalTrainNumber": "20154",
     "departureTrainNumber": "20155",
     "scheduledArrivalTime": "07:05",
     "scheduledDepartureTime": "07:25",
@@ -2960,7 +2960,7 @@ const initialServiceData = [
     "scheduledDepartureTime": "11:18",
     "origin": "",
     "destination": "",
-    "subTrackIndex": 2,
+    "subTrackIndex": 1,
     "trainSet": {
       "vehicleTypeID": "X40",
       "count": 1
@@ -2975,6 +2975,28 @@ const initialServiceData = [
   },
   {
     "id": 136,
+    "trackId": 3,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "432",
+    "scheduledArrivalTime": "09:20",
+    "scheduledDepartureTime": "11:18",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 137,
     "trackId": 3,
     "arrivalTrainNumber": "425",
     "departureTrainNumber": "436",
@@ -2996,7 +3018,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 137,
+    "id": 138,
     "trackId": 4,
     "arrivalTrainNumber": "2019",
     "departureTrainNumber": "2032",
@@ -3004,7 +3026,7 @@ const initialServiceData = [
     "scheduledDepartureTime": "10:33",
     "origin": "",
     "destination": "",
-    "subTrackIndex": 2,
+    "subTrackIndex": 1,
     "trainSet": {
       "vehicleTypeID": "X40",
       "count": 1
@@ -3018,12 +3040,34 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 138,
+    "id": 139,
     "trackId": 4,
     "arrivalTrainNumber": "423",
     "departureTrainNumber": "434",
     "scheduledArrivalTime": "10:42",
     "scheduledDepartureTime": "12:18",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 2
+    },
+    "barColor": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 140,
+    "trackId": 4,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "434",
+    "scheduledArrivalTime": "09:15",
+    "scheduledDepartureTime": "",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -3037,15 +3081,15 @@ const initialServiceData = [
       1.0
     ],
     "continuesFromPrevPage": false,
-    "continuesToNextPage": false
+    "continuesToNextPage": true
   },
   {
-    "id": 139,
+    "id": 141,
     "trackId": 5,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "3238",
-    "scheduledArrivalTime": "09:15",
-    "scheduledDepartureTime": "09:30",
+    "arrivalTrainNumber": "3231",
+    "departureTrainNumber": "3240",
+    "scheduledArrivalTime": "09:30",
+    "scheduledDepartureTime": "10:00",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -3062,29 +3106,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 140,
-    "trackId": 5,
-    "arrivalTrainNumber": "482",
-    "departureTrainNumber": "430",
-    "scheduledArrivalTime": "09:35",
-    "scheduledDepartureTime": "10:18",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.0,
-      1.0,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 141,
+    "id": 142,
     "trackId": 5,
     "arrivalTrainNumber": "2021",
     "departureTrainNumber": "2036",
@@ -3106,7 +3128,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 142,
+    "id": 143,
     "trackId": 6,
     "arrivalTrainNumber": "157",
     "departureTrainNumber": "174",
@@ -3128,7 +3150,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 143,
+    "id": 144,
     "trackId": 6,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3446",
@@ -3150,7 +3172,29 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 144,
+    "id": 145,
+    "trackId": 7,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "3238",
+    "scheduledArrivalTime": "09:15",
+    "scheduledDepartureTime": "09:30",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.6,
+      0.8
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 146,
     "trackId": 7,
     "arrivalTrainNumber": "23441",
     "departureTrainNumber": "",
@@ -3172,7 +3216,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 145,
+    "id": 147,
     "trackId": 7,
     "arrivalTrainNumber": "383",
     "departureTrainNumber": "386",
@@ -3194,7 +3238,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 146,
+    "id": 148,
     "trackId": 7,
     "arrivalTrainNumber": "159",
     "departureTrainNumber": "178",
@@ -3216,7 +3260,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 147,
+    "id": 149,
     "trackId": 8,
     "arrivalTrainNumber": "13681",
     "departureTrainNumber": "",
@@ -3238,7 +3282,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 148,
+    "id": 150,
     "trackId": 8,
     "arrivalTrainNumber": "20355",
     "departureTrainNumber": "20360",
@@ -3260,7 +3304,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 149,
+    "id": 151,
     "trackId": 8,
     "arrivalTrainNumber": "385",
     "departureTrainNumber": "388",
@@ -3282,7 +3326,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 150,
+    "id": 152,
     "trackId": 9,
     "arrivalTrainNumber": "23631",
     "departureTrainNumber": "",
@@ -3304,7 +3348,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 151,
+    "id": 153,
     "trackId": 9,
     "arrivalTrainNumber": "3233",
     "departureTrainNumber": "3242",
@@ -3326,7 +3370,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 152,
+    "id": 154,
     "trackId": 9,
     "arrivalTrainNumber": "13303",
     "departureTrainNumber": "13304",
@@ -3348,7 +3392,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 153,
+    "id": 155,
     "trackId": 9,
     "arrivalTrainNumber": "3237",
     "departureTrainNumber": "3246",
@@ -3370,7 +3414,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 154,
+    "id": 156,
     "trackId": 9,
     "arrivalTrainNumber": "3241",
     "departureTrainNumber": "3250",
@@ -3392,7 +3436,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 155,
+    "id": 157,
     "trackId": 10,
     "arrivalTrainNumber": "3633",
     "departureTrainNumber": "3638",
@@ -3414,7 +3458,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 156,
+    "id": 158,
     "trackId": 10,
     "arrivalTrainNumber": "3635",
     "departureTrainNumber": "3640",
@@ -3436,7 +3480,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 157,
+    "id": 159,
     "trackId": 10,
     "arrivalTrainNumber": "3637",
     "departureTrainNumber": "3642",
@@ -3458,7 +3502,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 158,
+    "id": 160,
     "trackId": 10,
     "arrivalTrainNumber": "3639",
     "departureTrainNumber": "3644",
@@ -3480,7 +3524,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 159,
+    "id": 161,
     "trackId": 10,
     "arrivalTrainNumber": "3641",
     "departureTrainNumber": "3646",
@@ -3502,7 +3546,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 160,
+    "id": 162,
     "trackId": 10,
     "arrivalTrainNumber": "3643",
     "departureTrainNumber": "3648",
@@ -3524,12 +3568,12 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 161,
+    "id": 163,
     "trackId": 11,
-    "arrivalTrainNumber": "3231",
-    "departureTrainNumber": "3240",
-    "scheduledArrivalTime": "09:30",
-    "scheduledDepartureTime": "10:00",
+    "arrivalTrainNumber": "482",
+    "departureTrainNumber": "430",
+    "scheduledArrivalTime": "09:35",
+    "scheduledDepartureTime": "10:18",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -3538,15 +3582,15 @@ const initialServiceData = [
       "count": 1
     },
     "barColor": [
+      0.0,
       1.0,
-      0.6,
-      0.8
+      1.0
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
   },
   {
-    "id": 162,
+    "id": 164,
     "trackId": 11,
     "arrivalTrainNumber": "13739",
     "departureTrainNumber": "13742",
@@ -3568,7 +3612,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 163,
+    "id": 165,
     "trackId": 12,
     "arrivalTrainNumber": "320",
     "departureTrainNumber": "327",
@@ -3590,7 +3634,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 164,
+    "id": 166,
     "trackId": 12,
     "arrivalTrainNumber": "7336",
     "departureTrainNumber": "",
@@ -3612,7 +3656,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 165,
+    "id": 167,
     "trackId": 12,
     "arrivalTrainNumber": "3235",
     "departureTrainNumber": "3244",
@@ -3634,7 +3678,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 166,
+    "id": 168,
     "trackId": 12,
     "arrivalTrainNumber": "3239",
     "departureTrainNumber": "3248",
@@ -3656,7 +3700,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 167,
+    "id": 169,
     "trackId": 13,
     "arrivalTrainNumber": "3186",
     "departureTrainNumber": "3039",
@@ -3678,7 +3722,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 168,
+    "id": 170,
     "trackId": 13,
     "arrivalTrainNumber": "13136",
     "departureTrainNumber": "3041",
@@ -3700,7 +3744,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 169,
+    "id": 171,
     "trackId": 13,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3043",
@@ -3722,7 +3766,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 170,
+    "id": 172,
     "trackId": 13,
     "arrivalTrainNumber": "13140",
     "departureTrainNumber": "13145",
@@ -3744,7 +3788,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 171,
+    "id": 173,
     "trackId": 13,
     "arrivalTrainNumber": "3044",
     "departureTrainNumber": "3049",
@@ -3766,7 +3810,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 172,
+    "id": 174,
     "trackId": 14,
     "arrivalTrainNumber": "11010",
     "departureTrainNumber": "11071",
@@ -3788,7 +3832,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 173,
+    "id": 175,
     "trackId": 14,
     "arrivalTrainNumber": "11018",
     "departureTrainNumber": "11079",
@@ -3810,7 +3854,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 174,
+    "id": 176,
     "trackId": 14,
     "arrivalTrainNumber": "11026",
     "departureTrainNumber": "11087",
@@ -3832,7 +3876,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 175,
+    "id": 177,
     "trackId": 15,
     "arrivalTrainNumber": "3036",
     "departureTrainNumber": "",
@@ -3854,7 +3898,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 176,
+    "id": 178,
     "trackId": 15,
     "arrivalTrainNumber": "3034",
     "departureTrainNumber": "3189",
@@ -3876,7 +3920,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 177,
+    "id": 179,
     "trackId": 15,
     "arrivalTrainNumber": "3038",
     "departureTrainNumber": "3045",
@@ -3898,7 +3942,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 178,
+    "id": 180,
     "trackId": 16,
     "arrivalTrainNumber": "20160",
     "departureTrainNumber": "",
@@ -3920,7 +3964,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 179,
+    "id": 181,
     "trackId": 16,
     "arrivalTrainNumber": "3188",
     "departureTrainNumber": "",
@@ -3942,7 +3986,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 180,
+    "id": 182,
     "trackId": 16,
     "arrivalTrainNumber": "3040",
     "departureTrainNumber": "",
@@ -3964,7 +4008,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 181,
+    "id": 183,
     "trackId": 16,
     "arrivalTrainNumber": "3042",
     "departureTrainNumber": "3047",
@@ -3986,7 +4030,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 182,
+    "id": 184,
     "trackId": 1,
     "arrivalTrainNumber": "3543",
     "departureTrainNumber": "3552",
@@ -4008,7 +4052,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 183,
+    "id": 185,
     "trackId": 1,
     "arrivalTrainNumber": "64705",
     "departureTrainNumber": "3556",
@@ -4030,7 +4074,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 184,
+    "id": 186,
     "trackId": 1,
     "arrivalTrainNumber": "3551",
     "departureTrainNumber": "3560",
@@ -4052,7 +4096,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 185,
+    "id": 187,
     "trackId": 2,
     "arrivalTrainNumber": "3545",
     "departureTrainNumber": "3550",
@@ -4074,7 +4118,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 186,
+    "id": 188,
     "trackId": 2,
     "arrivalTrainNumber": "3549",
     "departureTrainNumber": "3554",
@@ -4096,7 +4140,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 187,
+    "id": 189,
     "trackId": 2,
     "arrivalTrainNumber": "3553",
     "departureTrainNumber": "3558",
@@ -4118,7 +4162,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 188,
+    "id": 190,
     "trackId": 3,
     "arrivalTrainNumber": "3251",
     "departureTrainNumber": "3260",
@@ -4140,7 +4184,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 189,
+    "id": 191,
     "trackId": 3,
     "arrivalTrainNumber": "429",
     "departureTrainNumber": "440",
@@ -4162,7 +4206,29 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 190,
+    "id": 192,
+    "trackId": 4,
+    "arrivalTrainNumber": "3247",
+    "departureTrainNumber": "3256",
+    "scheduledArrivalTime": "13:30",
+    "scheduledDepartureTime": "14:00",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.6,
+      0.8
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 193,
     "trackId": 4,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "184",
@@ -4184,7 +4250,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 191,
+    "id": 194,
     "trackId": 4,
     "arrivalTrainNumber": "427",
     "departureTrainNumber": "438",
@@ -4206,7 +4272,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 192,
+    "id": 195,
     "trackId": 4,
     "arrivalTrainNumber": "167",
     "departureTrainNumber": "184",
@@ -4228,7 +4294,7 @@ const initialServiceData = [
     "continuesToNextPage": true
   },
   {
-    "id": 193,
+    "id": 196,
     "trackId": 5,
     "arrivalTrainNumber": "165",
     "departureTrainNumber": "182",
@@ -4250,7 +4316,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 194,
+    "id": 197,
     "trackId": 5,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "182",
@@ -4272,7 +4338,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 195,
+    "id": 198,
     "trackId": 5,
     "arrivalTrainNumber": "431",
     "departureTrainNumber": "",
@@ -4294,7 +4360,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 196,
+    "id": 199,
     "trackId": 6,
     "arrivalTrainNumber": "3245",
     "departureTrainNumber": "3254",
@@ -4316,7 +4382,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 197,
+    "id": 200,
     "trackId": 6,
     "arrivalTrainNumber": "163",
     "departureTrainNumber": "180",
@@ -4338,7 +4404,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 198,
+    "id": 201,
     "trackId": 6,
     "arrivalTrainNumber": "3249",
     "departureTrainNumber": "64958",
@@ -4360,7 +4426,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 199,
+    "id": 202,
     "trackId": 6,
     "arrivalTrainNumber": "3253",
     "departureTrainNumber": "",
@@ -4382,7 +4448,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 200,
+    "id": 203,
     "trackId": 7,
     "arrivalTrainNumber": "20363",
     "departureTrainNumber": "20368",
@@ -4404,7 +4470,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 201,
+    "id": 204,
     "trackId": 7,
     "arrivalTrainNumber": "64681",
     "departureTrainNumber": "13750",
@@ -4426,7 +4492,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 202,
+    "id": 205,
     "trackId": 7,
     "arrivalTrainNumber": "2027",
     "departureTrainNumber": "",
@@ -4448,7 +4514,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 203,
+    "id": 206,
     "trackId": 7,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "2042",
@@ -4470,7 +4536,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 204,
+    "id": 207,
     "trackId": 8,
     "arrivalTrainNumber": "3547",
     "departureTrainNumber": "3258",
@@ -4492,7 +4558,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 205,
+    "id": 208,
     "trackId": 8,
     "arrivalTrainNumber": "3243",
     "departureTrainNumber": "3252",
@@ -4514,7 +4580,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 206,
+    "id": 209,
     "trackId": 8,
     "arrivalTrainNumber": "13755",
     "departureTrainNumber": "",
@@ -4536,7 +4602,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 207,
+    "id": 210,
     "trackId": 9,
     "arrivalTrainNumber": "20359",
     "departureTrainNumber": "20364",
@@ -4558,7 +4624,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 208,
+    "id": 211,
     "trackId": 9,
     "arrivalTrainNumber": "387",
     "departureTrainNumber": "390",
@@ -4580,7 +4646,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 209,
+    "id": 212,
     "trackId": 9,
     "arrivalTrainNumber": "93758",
     "departureTrainNumber": "13758",
@@ -4602,7 +4668,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 210,
+    "id": 213,
     "trackId": 10,
     "arrivalTrainNumber": "3645",
     "departureTrainNumber": "3650",
@@ -4624,7 +4690,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 211,
+    "id": 214,
     "trackId": 10,
     "arrivalTrainNumber": "3647",
     "departureTrainNumber": "3652",
@@ -4646,7 +4712,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 212,
+    "id": 215,
     "trackId": 10,
     "arrivalTrainNumber": "3649",
     "departureTrainNumber": "3654",
@@ -4668,7 +4734,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 213,
+    "id": 216,
     "trackId": 10,
     "arrivalTrainNumber": "3651",
     "departureTrainNumber": "3656",
@@ -4690,7 +4756,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 214,
+    "id": 217,
     "trackId": 10,
     "arrivalTrainNumber": "3653",
     "departureTrainNumber": "3658",
@@ -4712,7 +4778,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 215,
+    "id": 218,
     "trackId": 10,
     "arrivalTrainNumber": "3655",
     "departureTrainNumber": "13608",
@@ -4734,7 +4800,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 216,
+    "id": 219,
     "trackId": 11,
     "arrivalTrainNumber": "13897",
     "departureTrainNumber": "",
@@ -4756,7 +4822,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 217,
+    "id": 220,
     "trackId": 11,
     "arrivalTrainNumber": "3056",
     "departureTrainNumber": "3111",
@@ -4778,29 +4844,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 218,
-    "trackId": 11,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "13098",
-    "scheduledArrivalTime": "13:30",
-    "scheduledDepartureTime": "13:45",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.627,
-      0.729,
-      0.686
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 219,
+    "id": 221,
     "trackId": 11,
     "arrivalTrainNumber": "10332",
     "departureTrainNumber": "",
@@ -4822,7 +4866,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 220,
+    "id": 222,
     "trackId": 11,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3111",
@@ -4844,7 +4888,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 221,
+    "id": 223,
     "trackId": 12,
     "arrivalTrainNumber": "13305",
     "departureTrainNumber": "",
@@ -4866,7 +4910,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 222,
+    "id": 224,
     "trackId": 12,
     "arrivalTrainNumber": "484",
     "departureTrainNumber": "491",
@@ -4888,12 +4932,12 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 223,
+    "id": 225,
     "trackId": 12,
-    "arrivalTrainNumber": "3247",
-    "departureTrainNumber": "3256",
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "13098",
     "scheduledArrivalTime": "13:30",
-    "scheduledDepartureTime": "14:00",
+    "scheduledDepartureTime": "13:45",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -4902,15 +4946,15 @@ const initialServiceData = [
       "count": 1
     },
     "barColor": [
-      1.0,
-      0.6,
-      0.8
+      0.627,
+      0.729,
+      0.686
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
   },
   {
-    "id": 224,
+    "id": 226,
     "trackId": 12,
     "arrivalTrainNumber": "13156",
     "departureTrainNumber": "13161",
@@ -4932,7 +4976,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 225,
+    "id": 227,
     "trackId": 13,
     "arrivalTrainNumber": "3054",
     "departureTrainNumber": "3109",
@@ -4954,7 +4998,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 226,
+    "id": 228,
     "trackId": 13,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3061",
@@ -4976,7 +5020,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 227,
+    "id": 229,
     "trackId": 13,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3103",
@@ -4998,7 +5042,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 228,
+    "id": 230,
     "trackId": 13,
     "arrivalTrainNumber": "7350",
     "departureTrainNumber": "7355",
@@ -5020,7 +5064,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 229,
+    "id": 231,
     "trackId": 13,
     "arrivalTrainNumber": "83109",
     "departureTrainNumber": "3109",
@@ -5042,7 +5086,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 230,
+    "id": 232,
     "trackId": 14,
     "arrivalTrainNumber": "11034",
     "departureTrainNumber": "11095",
@@ -5064,7 +5108,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 231,
+    "id": 233,
     "trackId": 14,
     "arrivalTrainNumber": "11042",
     "departureTrainNumber": "11103",
@@ -5086,7 +5130,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 232,
+    "id": 234,
     "trackId": 14,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "11111",
@@ -5108,7 +5152,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 233,
+    "id": 235,
     "trackId": 15,
     "arrivalTrainNumber": "3050",
     "departureTrainNumber": "3105",
@@ -5130,7 +5174,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 234,
+    "id": 236,
     "trackId": 15,
     "arrivalTrainNumber": "11050",
     "departureTrainNumber": "20171",
@@ -5152,7 +5196,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 235,
+    "id": 237,
     "trackId": 15,
     "arrivalTrainNumber": "3046",
     "departureTrainNumber": "3051",
@@ -5174,7 +5218,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 236,
+    "id": 238,
     "trackId": 15,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3105",
@@ -5196,7 +5240,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 237,
+    "id": 239,
     "trackId": 15,
     "arrivalTrainNumber": "3052",
     "departureTrainNumber": "3107",
@@ -5218,7 +5262,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 238,
+    "id": 240,
     "trackId": 15,
     "arrivalTrainNumber": "3108",
     "departureTrainNumber": "3113",
@@ -5240,7 +5284,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 239,
+    "id": 241,
     "trackId": 16,
     "arrivalTrainNumber": "13148",
     "departureTrainNumber": "13153",
@@ -5262,7 +5306,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 240,
+    "id": 242,
     "trackId": 16,
     "arrivalTrainNumber": "3106",
     "departureTrainNumber": "3059",
@@ -5284,7 +5328,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 241,
+    "id": 243,
     "trackId": 16,
     "arrivalTrainNumber": "3048",
     "departureTrainNumber": "3053",
@@ -5306,7 +5350,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 242,
+    "id": 244,
     "trackId": 16,
     "arrivalTrainNumber": "3102",
     "departureTrainNumber": "3055",
@@ -5328,7 +5372,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 243,
+    "id": 245,
     "trackId": 16,
     "arrivalTrainNumber": "3104",
     "departureTrainNumber": "3057",
@@ -5350,7 +5394,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 244,
+    "id": 246,
     "trackId": 16,
     "arrivalTrainNumber": "7361",
     "departureTrainNumber": "7361",
@@ -5372,7 +5416,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 245,
+    "id": 247,
     "trackId": 1,
     "arrivalTrainNumber": "3555",
     "departureTrainNumber": "3564",
@@ -5394,7 +5438,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 246,
+    "id": 248,
     "trackId": 1,
     "arrivalTrainNumber": "3559",
     "departureTrainNumber": "3568",
@@ -5416,7 +5460,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 247,
+    "id": 249,
     "trackId": 1,
     "arrivalTrainNumber": "3563",
     "departureTrainNumber": "3572",
@@ -5438,7 +5482,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 248,
+    "id": 250,
     "trackId": 2,
     "arrivalTrainNumber": "3557",
     "departureTrainNumber": "3562",
@@ -5460,7 +5504,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 249,
+    "id": 251,
     "trackId": 2,
     "arrivalTrainNumber": "3561",
     "departureTrainNumber": "3566",
@@ -5482,7 +5526,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 250,
+    "id": 252,
     "trackId": 2,
     "arrivalTrainNumber": "3565",
     "departureTrainNumber": "3570",
@@ -5504,7 +5548,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 251,
+    "id": 253,
     "trackId": 3,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "442",
@@ -5526,7 +5570,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 252,
+    "id": 254,
     "trackId": 3,
     "arrivalTrainNumber": "169",
     "departureTrainNumber": "186",
@@ -5548,7 +5592,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 253,
+    "id": 255,
     "trackId": 3,
     "arrivalTrainNumber": "13763",
     "departureTrainNumber": "13420",
@@ -5570,7 +5614,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 254,
+    "id": 256,
     "trackId": 3,
     "arrivalTrainNumber": "437",
     "departureTrainNumber": "448",
@@ -5592,7 +5636,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 255,
+    "id": 257,
     "trackId": 4,
     "arrivalTrainNumber": "83465",
     "departureTrainNumber": "3466",
@@ -5614,29 +5658,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 256,
-    "trackId": 4,
-    "arrivalTrainNumber": "435",
-    "departureTrainNumber": "",
-    "scheduledArrivalTime": "16:42",
-    "scheduledDepartureTime": "17:20",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 1,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.0,
-      1.0,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 257,
+    "id": 258,
     "trackId": 4,
     "arrivalTrainNumber": "435",
     "departureTrainNumber": "446",
@@ -5658,7 +5680,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 258,
+    "id": 259,
     "trackId": 5,
     "arrivalTrainNumber": "2031",
     "departureTrainNumber": "2046",
@@ -5680,7 +5702,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 259,
+    "id": 260,
     "trackId": 5,
     "arrivalTrainNumber": "13793",
     "departureTrainNumber": "3272",
@@ -5702,12 +5724,12 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 260,
+    "id": 261,
     "trackId": 6,
-    "arrivalTrainNumber": "3255",
-    "departureTrainNumber": "13792",
-    "scheduledArrivalTime": "15:30",
-    "scheduledDepartureTime": "15:45",
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "3662",
+    "scheduledArrivalTime": "15:35",
+    "scheduledDepartureTime": "15:50",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -5716,15 +5738,15 @@ const initialServiceData = [
       "count": 1
     },
     "barColor": [
-      1.0,
-      0.4,
-      0.0
+      0.8,
+      0.6,
+      1.0
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
   },
   {
-    "id": 261,
+    "id": 262,
     "trackId": 6,
     "arrivalTrainNumber": "3461",
     "departureTrainNumber": "23694",
@@ -5746,7 +5768,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 262,
+    "id": 263,
     "trackId": 6,
     "arrivalTrainNumber": "2035",
     "departureTrainNumber": "2010",
@@ -5768,7 +5790,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 263,
+    "id": 264,
     "trackId": 7,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3266",
@@ -5790,7 +5812,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 264,
+    "id": 265,
     "trackId": 7,
     "arrivalTrainNumber": "3257",
     "departureTrainNumber": "3266",
@@ -5812,7 +5834,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 265,
+    "id": 266,
     "trackId": 7,
     "arrivalTrainNumber": "3265",
     "departureTrainNumber": "13224",
@@ -5834,7 +5856,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 266,
+    "id": 267,
     "trackId": 7,
     "arrivalTrainNumber": "433",
     "departureTrainNumber": "444",
@@ -5856,7 +5878,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 267,
+    "id": 268,
     "trackId": 7,
     "arrivalTrainNumber": "3465",
     "departureTrainNumber": "3470",
@@ -5873,28 +5895,6 @@ const initialServiceData = [
       1.0,
       0.8,
       0.6
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 268,
-    "trackId": 8,
-    "arrivalTrainNumber": "3657",
-    "departureTrainNumber": "13610",
-    "scheduledArrivalTime": "15:25",
-    "scheduledDepartureTime": "15:35",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 1,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.8,
-      0.6,
-      1.0
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
@@ -6122,10 +6122,10 @@ const initialServiceData = [
   {
     "id": 279,
     "trackId": 10,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "3662",
-    "scheduledArrivalTime": "15:35",
-    "scheduledDepartureTime": "15:50",
+    "arrivalTrainNumber": "3657",
+    "departureTrainNumber": "13610",
+    "scheduledArrivalTime": "15:25",
+    "scheduledDepartureTime": "15:35",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -6452,6 +6452,28 @@ const initialServiceData = [
   {
     "id": 294,
     "trackId": 12,
+    "arrivalTrainNumber": "3255",
+    "departureTrainNumber": "13792",
+    "scheduledArrivalTime": "15:30",
+    "scheduledDepartureTime": "15:45",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.4,
+      0.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 295,
+    "trackId": 12,
     "arrivalTrainNumber": "336",
     "departureTrainNumber": "",
     "scheduledArrivalTime": "15:55",
@@ -6472,7 +6494,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 295,
+    "id": 296,
     "trackId": 12,
     "arrivalTrainNumber": "490",
     "departureTrainNumber": "497",
@@ -6494,7 +6516,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 296,
+    "id": 297,
     "trackId": 13,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "13216",
@@ -6516,7 +6538,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 297,
+    "id": 298,
     "trackId": 13,
     "arrivalTrainNumber": "7358",
     "departureTrainNumber": "13216",
@@ -6538,7 +6560,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 298,
+    "id": 299,
     "trackId": 13,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "7367",
@@ -6560,7 +6582,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 299,
+    "id": 300,
     "trackId": 13,
     "arrivalTrainNumber": "13164",
     "departureTrainNumber": "13169",
@@ -6582,7 +6604,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 300,
+    "id": 301,
     "trackId": 13,
     "arrivalTrainNumber": "343",
     "departureTrainNumber": "343",
@@ -6604,7 +6626,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 301,
+    "id": 302,
     "trackId": 14,
     "arrivalTrainNumber": "11058",
     "departureTrainNumber": "20173",
@@ -6626,7 +6648,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 302,
+    "id": 303,
     "trackId": 14,
     "arrivalTrainNumber": "11119",
     "departureTrainNumber": "",
@@ -6648,7 +6670,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 303,
+    "id": 304,
     "trackId": 14,
     "arrivalTrainNumber": "11066",
     "departureTrainNumber": "20175",
@@ -6670,7 +6692,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 304,
+    "id": 305,
     "trackId": 14,
     "arrivalTrainNumber": "11127",
     "departureTrainNumber": "",
@@ -6692,7 +6714,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 305,
+    "id": 306,
     "trackId": 14,
     "arrivalTrainNumber": "11074",
     "departureTrainNumber": "20177",
@@ -6714,7 +6736,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 306,
+    "id": 307,
     "trackId": 14,
     "arrivalTrainNumber": "20176",
     "departureTrainNumber": "11135",
@@ -6736,7 +6758,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 307,
+    "id": 308,
     "trackId": 14,
     "arrivalTrainNumber": "20172",
     "departureTrainNumber": "11119",
@@ -6758,7 +6780,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 308,
+    "id": 309,
     "trackId": 14,
     "arrivalTrainNumber": "20174",
     "departureTrainNumber": "11127",
@@ -6780,7 +6802,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 309,
+    "id": 310,
     "trackId": 15,
     "arrivalTrainNumber": "3060",
     "departureTrainNumber": "3115",
@@ -6802,7 +6824,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 310,
+    "id": 311,
     "trackId": 15,
     "arrivalTrainNumber": "3066",
     "departureTrainNumber": "3121",
@@ -6824,7 +6846,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 311,
+    "id": 312,
     "trackId": 15,
     "arrivalTrainNumber": "3058",
     "departureTrainNumber": "3113",
@@ -6846,7 +6868,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 312,
+    "id": 313,
     "trackId": 15,
     "arrivalTrainNumber": "3062",
     "departureTrainNumber": "3117",
@@ -6868,7 +6890,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 313,
+    "id": 314,
     "trackId": 15,
     "arrivalTrainNumber": "3064",
     "departureTrainNumber": "3119",
@@ -6890,7 +6912,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 314,
+    "id": 315,
     "trackId": 15,
     "arrivalTrainNumber": "3068",
     "departureTrainNumber": "3123",
@@ -6912,7 +6934,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 315,
+    "id": 316,
     "trackId": 15,
     "arrivalTrainNumber": "93167",
     "departureTrainNumber": "13167",
@@ -6934,7 +6956,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 316,
+    "id": 317,
     "trackId": 15,
     "arrivalTrainNumber": "64717",
     "departureTrainNumber": "7371",
@@ -6956,7 +6978,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 317,
+    "id": 318,
     "trackId": 15,
     "arrivalTrainNumber": "3068",
     "departureTrainNumber": "3073",
@@ -6978,7 +7000,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 318,
+    "id": 319,
     "trackId": 16,
     "arrivalTrainNumber": "3110",
     "departureTrainNumber": "3063",
@@ -7000,7 +7022,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 319,
+    "id": 320,
     "trackId": 16,
     "arrivalTrainNumber": "3112",
     "departureTrainNumber": "3065",
@@ -7022,7 +7044,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 320,
+    "id": 321,
     "trackId": 16,
     "arrivalTrainNumber": "3114",
     "departureTrainNumber": "3067",
@@ -7044,7 +7066,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 321,
+    "id": 322,
     "trackId": 16,
     "arrivalTrainNumber": "3116",
     "departureTrainNumber": "3069",
@@ -7066,7 +7088,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 322,
+    "id": 323,
     "trackId": 16,
     "arrivalTrainNumber": "3118",
     "departureTrainNumber": "3071",
@@ -7088,7 +7110,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 323,
+    "id": 324,
     "trackId": 1,
     "arrivalTrainNumber": "3567",
     "departureTrainNumber": "3576",
@@ -7110,34 +7132,12 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 324,
+    "id": 325,
     "trackId": 1,
     "arrivalTrainNumber": "3571",
     "departureTrainNumber": "",
     "scheduledArrivalTime": "19:37",
     "scheduledDepartureTime": "19:52",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.949,
-      0.584
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 325,
-    "trackId": 1,
-    "arrivalTrainNumber": "3575",
-    "departureTrainNumber": "",
-    "scheduledArrivalTime": "20:37",
-    "scheduledDepartureTime": "20:52",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -7199,28 +7199,6 @@ const initialServiceData = [
   },
   {
     "id": 328,
-    "trackId": 1,
-    "arrivalTrainNumber": "3575",
-    "departureTrainNumber": "3584",
-    "scheduledArrivalTime": "20:37",
-    "scheduledDepartureTime": "21:23",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 3,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.949,
-      0.584
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 329,
     "trackId": 2,
     "arrivalTrainNumber": "3569",
     "departureTrainNumber": "3574",
@@ -7242,7 +7220,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 330,
+    "id": 329,
     "trackId": 2,
     "arrivalTrainNumber": "3573",
     "departureTrainNumber": "3578",
@@ -7264,7 +7242,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 331,
+    "id": 330,
     "trackId": 2,
     "arrivalTrainNumber": "3577",
     "departureTrainNumber": "3582",
@@ -7281,6 +7259,28 @@ const initialServiceData = [
       1.0,
       0.949,
       0.584
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 331,
+    "trackId": 3,
+    "arrivalTrainNumber": "443",
+    "departureTrainNumber": "4444",
+    "scheduledArrivalTime": "20:42",
+    "scheduledDepartureTime": "20:55",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.0,
+      1.0,
+      1.0
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
@@ -7309,6 +7309,28 @@ const initialServiceData = [
   },
   {
     "id": 333,
+    "trackId": 3,
+    "arrivalTrainNumber": "443",
+    "departureTrainNumber": "",
+    "scheduledArrivalTime": "20:42",
+    "scheduledDepartureTime": "21:25",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 334,
     "trackId": 4,
     "arrivalTrainNumber": "175",
     "departureTrainNumber": "192",
@@ -7330,28 +7352,6 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 334,
-    "trackId": 4,
-    "arrivalTrainNumber": "443",
-    "departureTrainNumber": "4444",
-    "scheduledArrivalTime": "20:42",
-    "scheduledDepartureTime": "20:55",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 1,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.0,
-      1.0,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
     "id": 335,
     "trackId": 4,
     "arrivalTrainNumber": "441",
@@ -7360,10 +7360,10 @@ const initialServiceData = [
     "scheduledDepartureTime": "20:25",
     "origin": "",
     "destination": "",
-    "subTrackIndex": 2,
+    "subTrackIndex": 1,
     "trainSet": {
       "vehicleTypeID": "X40",
-      "count": 1
+      "count": 2
     },
     "barColor": [
       0.0,
@@ -7376,10 +7376,32 @@ const initialServiceData = [
   {
     "id": 336,
     "trackId": 4,
-    "arrivalTrainNumber": "443",
+    "arrivalTrainNumber": "3575",
     "departureTrainNumber": "",
-    "scheduledArrivalTime": "20:42",
-    "scheduledDepartureTime": "21:25",
+    "scheduledArrivalTime": "20:37",
+    "scheduledDepartureTime": "20:52",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.949,
+      0.584
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 337,
+    "trackId": 4,
+    "arrivalTrainNumber": "3575",
+    "departureTrainNumber": "3584",
+    "scheduledArrivalTime": "20:37",
+    "scheduledDepartureTime": "21:23",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -7388,15 +7410,15 @@ const initialServiceData = [
       "count": 1
     },
     "barColor": [
-      0.0,
       1.0,
-      1.0
+      0.949,
+      0.584
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
   },
   {
-    "id": 337,
+    "id": 338,
     "trackId": 5,
     "arrivalTrainNumber": "3669",
     "departureTrainNumber": "",
@@ -7418,7 +7440,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 338,
+    "id": 339,
     "trackId": 5,
     "arrivalTrainNumber": "177",
     "departureTrainNumber": "",
@@ -7440,7 +7462,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 339,
+    "id": 340,
     "trackId": 5,
     "arrivalTrainNumber": "2011",
     "departureTrainNumber": "",
@@ -7462,7 +7484,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 340,
+    "id": 341,
     "trackId": 6,
     "arrivalTrainNumber": "3269",
     "departureTrainNumber": "",
@@ -7484,7 +7506,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 341,
+    "id": 342,
     "trackId": 6,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "",
@@ -7506,7 +7528,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 342,
+    "id": 343,
     "trackId": 6,
     "arrivalTrainNumber": "179",
     "departureTrainNumber": "",
@@ -7528,7 +7550,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 343,
+    "id": 344,
     "trackId": 7,
     "arrivalTrainNumber": "393",
     "departureTrainNumber": "398",
@@ -7550,7 +7572,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 344,
+    "id": 345,
     "trackId": 7,
     "arrivalTrainNumber": "20375",
     "departureTrainNumber": "",
@@ -7572,7 +7594,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 345,
+    "id": 346,
     "trackId": 7,
     "arrivalTrainNumber": "3265",
     "departureTrainNumber": "3474",
@@ -7594,7 +7616,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 346,
+    "id": 347,
     "trackId": 7,
     "arrivalTrainNumber": "13771",
     "departureTrainNumber": "3276",
@@ -7616,7 +7638,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 347,
+    "id": 348,
     "trackId": 7,
     "arrivalTrainNumber": "393",
     "departureTrainNumber": "384",
@@ -7638,7 +7660,7 @@ const initialServiceData = [
     "continuesToNextPage": true
   },
   {
-    "id": 348,
+    "id": 349,
     "trackId": 8,
     "arrivalTrainNumber": "3267",
     "departureTrainNumber": "13774",
@@ -7660,7 +7682,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 349,
+    "id": 350,
     "trackId": 8,
     "arrivalTrainNumber": "3267",
     "departureTrainNumber": "3278",
@@ -7682,7 +7704,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 350,
+    "id": 351,
     "trackId": 8,
     "arrivalTrainNumber": "3273",
     "departureTrainNumber": "",
@@ -7704,7 +7726,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 351,
+    "id": 352,
     "trackId": 8,
     "arrivalTrainNumber": "3277",
     "departureTrainNumber": "",
@@ -7726,7 +7748,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 352,
+    "id": 353,
     "trackId": 9,
     "arrivalTrainNumber": "3671",
     "departureTrainNumber": "",
@@ -7743,28 +7765,6 @@ const initialServiceData = [
       0.8,
       0.6,
       1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 353,
-    "trackId": 9,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "3280",
-    "scheduledArrivalTime": "19:45",
-    "scheduledDepartureTime": "20:00",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 1,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.6,
-      0.8
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
@@ -7816,10 +7816,10 @@ const initialServiceData = [
   {
     "id": 356,
     "trackId": 9,
-    "arrivalTrainNumber": "492",
-    "departureTrainNumber": "450",
-    "scheduledArrivalTime": "19:35",
-    "scheduledDepartureTime": "20:18",
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "3280",
+    "scheduledArrivalTime": "19:45",
+    "scheduledDepartureTime": "20:00",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -7828,9 +7828,9 @@ const initialServiceData = [
       "count": 1
     },
     "barColor": [
-      0.0,
       1.0,
-      1.0
+      0.6,
+      0.8
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
@@ -8057,11 +8057,11 @@ const initialServiceData = [
   },
   {
     "id": 367,
-    "trackId": 12,
-    "arrivalTrainNumber": "439",
-    "departureTrainNumber": "499",
-    "scheduledArrivalTime": "18:42",
-    "scheduledDepartureTime": "19:20",
+    "trackId": 11,
+    "arrivalTrainNumber": "3124",
+    "departureTrainNumber": "",
+    "scheduledArrivalTime": "19:00",
+    "scheduledDepartureTime": "19:15",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -8070,16 +8070,16 @@ const initialServiceData = [
       "count": 1
     },
     "barColor": [
-      0.0,
-      1.0,
-      1.0
+      0.733,
+      0.71,
+      0.616
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
   },
   {
     "id": 368,
-    "trackId": 12,
+    "trackId": 11,
     "arrivalTrainNumber": "344",
     "departureTrainNumber": "",
     "scheduledArrivalTime": "19:55",
@@ -8102,6 +8102,50 @@ const initialServiceData = [
   {
     "id": 369,
     "trackId": 12,
+    "arrivalTrainNumber": "439",
+    "departureTrainNumber": "499",
+    "scheduledArrivalTime": "18:42",
+    "scheduledDepartureTime": "19:20",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 370,
+    "trackId": 12,
+    "arrivalTrainNumber": "492",
+    "departureTrainNumber": "450",
+    "scheduledArrivalTime": "19:35",
+    "scheduledDepartureTime": "20:18",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.0,
+      1.0,
+      1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 371,
+    "trackId": 12,
     "arrivalTrainNumber": "3080",
     "departureTrainNumber": "3085",
     "scheduledArrivalTime": "20:45",
@@ -8122,12 +8166,12 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 370,
+    "id": 372,
     "trackId": 13,
-    "arrivalTrainNumber": "3124",
+    "arrivalTrainNumber": "13172",
     "departureTrainNumber": "",
-    "scheduledArrivalTime": "19:00",
-    "scheduledDepartureTime": "19:15",
+    "scheduledArrivalTime": "18:50",
+    "scheduledDepartureTime": "19:05",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -8144,7 +8188,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 371,
+    "id": 373,
     "trackId": 13,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "13181",
@@ -8166,7 +8210,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 372,
+    "id": 374,
     "trackId": 13,
     "arrivalTrainNumber": "3078",
     "departureTrainNumber": "3083",
@@ -8188,7 +8232,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 373,
+    "id": 375,
     "trackId": 14,
     "arrivalTrainNumber": "11082",
     "departureTrainNumber": "20179",
@@ -8210,7 +8254,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 374,
+    "id": 376,
     "trackId": 14,
     "arrivalTrainNumber": "20178",
     "departureTrainNumber": "11143",
@@ -8232,7 +8276,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 375,
+    "id": 377,
     "trackId": 14,
     "arrivalTrainNumber": "11090",
     "departureTrainNumber": "",
@@ -8254,7 +8298,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 376,
+    "id": 378,
     "trackId": 14,
     "arrivalTrainNumber": "20180",
     "departureTrainNumber": "11151",
@@ -8276,7 +8320,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 377,
+    "id": 379,
     "trackId": 14,
     "arrivalTrainNumber": "11098",
     "departureTrainNumber": "",
@@ -8298,7 +8342,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 378,
+    "id": 380,
     "trackId": 14,
     "arrivalTrainNumber": "11090",
     "departureTrainNumber": "20181",
@@ -8320,7 +8364,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 379,
+    "id": 381,
     "trackId": 14,
     "arrivalTrainNumber": "11098",
     "departureTrainNumber": "11159",
@@ -8342,12 +8386,12 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 380,
+    "id": 382,
     "trackId": 15,
-    "arrivalTrainNumber": "13172",
-    "departureTrainNumber": "",
-    "scheduledArrivalTime": "18:50",
-    "scheduledDepartureTime": "19:05",
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "3077",
+    "scheduledArrivalTime": "19:00",
+    "scheduledDepartureTime": "19:15",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -8364,7 +8408,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 381,
+    "id": 383,
     "trackId": 15,
     "arrivalTrainNumber": "69334",
     "departureTrainNumber": "30834",
@@ -8386,33 +8430,11 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 382,
-    "trackId": 15,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "3077",
-    "scheduledArrivalTime": "18:35",
-    "scheduledDepartureTime": "19:15",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 3,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.733,
-      0.71,
-      0.616
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 383,
+    "id": 384,
     "trackId": 15,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3079",
-    "scheduledArrivalTime": "19:30",
+    "scheduledArrivalTime": "19:00",
     "scheduledDepartureTime": "19:45",
     "origin": "",
     "destination": "",
@@ -8430,7 +8452,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 384,
+    "id": 385,
     "trackId": 15,
     "arrivalTrainNumber": "77103",
     "departureTrainNumber": "77900",
@@ -8452,7 +8474,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 385,
+    "id": 386,
     "trackId": 16,
     "arrivalTrainNumber": "3070",
     "departureTrainNumber": "3125",
@@ -8474,7 +8496,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 386,
+    "id": 387,
     "trackId": 16,
     "arrivalTrainNumber": "3072",
     "departureTrainNumber": "7375",
@@ -8496,7 +8518,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 387,
+    "id": 388,
     "trackId": 16,
     "arrivalTrainNumber": "3072",
     "departureTrainNumber": "",
@@ -8518,7 +8540,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 388,
+    "id": 389,
     "trackId": 16,
     "arrivalTrainNumber": "3074",
     "departureTrainNumber": "",
@@ -8540,7 +8562,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 389,
+    "id": 390,
     "trackId": 16,
     "arrivalTrainNumber": "3076",
     "departureTrainNumber": "3081",
@@ -8562,11 +8584,11 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 390,
+    "id": 391,
     "trackId": 16,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "11167",
-    "scheduledArrivalTime": "20:50",
+    "scheduledArrivalTime": "20:45",
     "scheduledDepartureTime": "21:55",
     "origin": "",
     "destination": "",
@@ -8584,7 +8606,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 391,
+    "id": 392,
     "trackId": 1,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3588",
@@ -8606,7 +8628,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 392,
+    "id": 393,
     "trackId": 1,
     "arrivalTrainNumber": "3583",
     "departureTrainNumber": "3592",
@@ -8628,7 +8650,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 393,
+    "id": 394,
     "trackId": 2,
     "arrivalTrainNumber": "3581",
     "departureTrainNumber": "3586",
@@ -8650,7 +8672,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 394,
+    "id": 395,
     "trackId": 2,
     "arrivalTrainNumber": "3585",
     "departureTrainNumber": "3590",
@@ -8672,7 +8694,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 395,
+    "id": 396,
     "trackId": 2,
     "arrivalTrainNumber": "3589",
     "departureTrainNumber": "3594",
@@ -8694,7 +8716,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 396,
+    "id": 397,
     "trackId": 3,
     "arrivalTrainNumber": "445",
     "departureTrainNumber": "",
@@ -8716,7 +8738,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 397,
+    "id": 398,
     "trackId": 3,
     "arrivalTrainNumber": "447",
     "departureTrainNumber": "",
@@ -8738,7 +8760,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 398,
+    "id": 399,
     "trackId": 3,
     "arrivalTrainNumber": "449",
     "departureTrainNumber": "",
@@ -8760,7 +8782,7 @@ const initialServiceData = [
     "continuesToNextPage": true
   },
   {
-    "id": 399,
+    "id": 400,
     "trackId": 4,
     "arrivalTrainNumber": "13233",
     "departureTrainNumber": "3400",
@@ -8782,7 +8804,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 400,
+    "id": 401,
     "trackId": 4,
     "arrivalTrainNumber": "3579",
     "departureTrainNumber": "",
@@ -8804,7 +8826,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 401,
+    "id": 402,
     "trackId": 4,
     "arrivalTrainNumber": "17383",
     "departureTrainNumber": "3500",
@@ -8826,7 +8848,7 @@ const initialServiceData = [
     "continuesToNextPage": true
   },
   {
-    "id": 402,
+    "id": 403,
     "trackId": 5,
     "arrivalTrainNumber": "3489",
     "departureTrainNumber": "3420",
@@ -8848,7 +8870,7 @@ const initialServiceData = [
     "continuesToNextPage": true
   },
   {
-    "id": 403,
+    "id": 404,
     "trackId": 5,
     "arrivalTrainNumber": "2003",
     "departureTrainNumber": "",
@@ -8870,7 +8892,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 404,
+    "id": 405,
     "trackId": 5,
     "arrivalTrainNumber": "183",
     "departureTrainNumber": "",
@@ -8892,7 +8914,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 405,
+    "id": 406,
     "trackId": 5,
     "arrivalTrainNumber": "2047",
     "departureTrainNumber": "2012",
@@ -8914,7 +8936,7 @@ const initialServiceData = [
     "continuesToNextPage": true
   },
   {
-    "id": 406,
+    "id": 407,
     "trackId": 6,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "164",
@@ -8936,7 +8958,7 @@ const initialServiceData = [
     "continuesToNextPage": true
   },
   {
-    "id": 407,
+    "id": 408,
     "trackId": 6,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3486",
@@ -8958,7 +8980,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 408,
+    "id": 409,
     "trackId": 6,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "168",
@@ -8980,7 +9002,7 @@ const initialServiceData = [
     "continuesToNextPage": true
   },
   {
-    "id": 409,
+    "id": 410,
     "trackId": 7,
     "arrivalTrainNumber": "2397",
     "departureTrainNumber": "382",
@@ -9000,28 +9022,6 @@ const initialServiceData = [
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": true
-  },
-  {
-    "id": 410,
-    "trackId": 8,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "17388",
-    "scheduledArrivalTime": "22:35",
-    "scheduledDepartureTime": "22:50",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 1,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.6,
-      0.8
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
   },
   {
     "id": 411,
@@ -9048,32 +9048,10 @@ const initialServiceData = [
   {
     "id": 412,
     "trackId": 8,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "17388",
-    "scheduledArrivalTime": "22:30",
-    "scheduledDepartureTime": "22:50",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      1.0,
-      0.6,
-      0.8
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": false
-  },
-  {
-    "id": 413,
-    "trackId": 8,
     "arrivalTrainNumber": "80443",
     "departureTrainNumber": "",
     "scheduledArrivalTime": "23:10",
-    "scheduledDepartureTime": "23:40",
+    "scheduledDepartureTime": "23:50",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -9085,6 +9063,28 @@ const initialServiceData = [
       0.0,
       1.0,
       1.0
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 413,
+    "trackId": 9,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "17388",
+    "scheduledArrivalTime": "22:35",
+    "scheduledDepartureTime": "22:50",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 1,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.6,
+      0.8
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
@@ -9114,10 +9114,10 @@ const initialServiceData = [
   {
     "id": 415,
     "trackId": 9,
-    "arrivalTrainNumber": "3689",
-    "departureTrainNumber": "3602",
-    "scheduledArrivalTime": "23:35",
-    "scheduledDepartureTime": "",
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "17388",
+    "scheduledArrivalTime": "22:30",
+    "scheduledDepartureTime": "22:50",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -9126,15 +9126,37 @@ const initialServiceData = [
       "count": 1
     },
     "barColor": [
-      0.8,
+      1.0,
       0.6,
-      1.0
+      0.8
     ],
     "continuesFromPrevPage": false,
-    "continuesToNextPage": true
+    "continuesToNextPage": false
   },
   {
     "id": 416,
+    "trackId": 9,
+    "arrivalTrainNumber": "",
+    "departureTrainNumber": "17302",
+    "scheduledArrivalTime": "23:35",
+    "scheduledDepartureTime": "23:50",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      1.0,
+      0.6,
+      0.8
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 417,
     "trackId": 10,
     "arrivalTrainNumber": "3681",
     "departureTrainNumber": "",
@@ -9156,7 +9178,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 417,
+    "id": 418,
     "trackId": 10,
     "arrivalTrainNumber": "3683",
     "departureTrainNumber": "3688",
@@ -9178,7 +9200,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 418,
+    "id": 419,
     "trackId": 10,
     "arrivalTrainNumber": "3685",
     "departureTrainNumber": "",
@@ -9200,7 +9222,7 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 419,
+    "id": 420,
     "trackId": 10,
     "arrivalTrainNumber": "",
     "departureTrainNumber": "3692",
@@ -9222,12 +9244,12 @@ const initialServiceData = [
     "continuesToNextPage": false
   },
   {
-    "id": 420,
+    "id": 421,
     "trackId": 10,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "17302",
+    "arrivalTrainNumber": "3689",
+    "departureTrainNumber": "3602",
     "scheduledArrivalTime": "23:35",
-    "scheduledDepartureTime": "23:50",
+    "scheduledDepartureTime": "",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -9236,15 +9258,15 @@ const initialServiceData = [
       "count": 1
     },
     "barColor": [
-      1.0,
+      0.8,
       0.6,
-      0.8
+      1.0
     ],
     "continuesFromPrevPage": false,
-    "continuesToNextPage": false
+    "continuesToNextPage": true
   },
   {
-    "id": 421,
+    "id": 422,
     "trackId": 11,
     "arrivalTrainNumber": "496",
     "departureTrainNumber": "",
@@ -9264,28 +9286,6 @@ const initialServiceData = [
     ],
     "continuesFromPrevPage": false,
     "continuesToNextPage": false
-  },
-  {
-    "id": 422,
-    "trackId": 11,
-    "arrivalTrainNumber": "",
-    "departureTrainNumber": "481",
-    "scheduledArrivalTime": "23:59",
-    "scheduledDepartureTime": "",
-    "origin": "",
-    "destination": "",
-    "subTrackIndex": 2,
-    "trainSet": {
-      "vehicleTypeID": "X40",
-      "count": 1
-    },
-    "barColor": [
-      0.0,
-      1.0,
-      1.0
-    ],
-    "continuesFromPrevPage": false,
-    "continuesToNextPage": true
   },
   {
     "id": 423,
@@ -9335,9 +9335,9 @@ const initialServiceData = [
     "id": 425,
     "trackId": 13,
     "arrivalTrainNumber": "3084",
-    "departureTrainNumber": "3091",
+    "departureTrainNumber": "3089",
     "scheduledArrivalTime": "21:45",
-    "scheduledDepartureTime": "22:45",
+    "scheduledDepartureTime": "22:15",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -9379,9 +9379,9 @@ const initialServiceData = [
     "id": 427,
     "trackId": 14,
     "arrivalTrainNumber": "11114",
-    "departureTrainNumber": "",
-    "scheduledArrivalTime": "22:18",
-    "scheduledDepartureTime": "22:33",
+    "departureTrainNumber": "21187",
+    "scheduledArrivalTime": "22:05",
+    "scheduledDepartureTime": "23:00",
     "origin": "",
     "destination": "",
     "subTrackIndex": 2,
@@ -9399,10 +9399,98 @@ const initialServiceData = [
   },
   {
     "id": 428,
+    "trackId": 14,
+    "arrivalTrainNumber": "11122",
+    "departureTrainNumber": "20189",
+    "scheduledArrivalTime": "23:05",
+    "scheduledDepartureTime": "23:55",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 2,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.8,
+      1.0,
+      0.8
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 429,
+    "trackId": 15,
+    "arrivalTrainNumber": "3090",
+    "departureTrainNumber": "3003",
+    "scheduledArrivalTime": "23:15",
+    "scheduledDepartureTime": "",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 3,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.733,
+      0.71,
+      0.616
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": true
+  },
+  {
+    "id": 430,
+    "trackId": 16,
+    "arrivalTrainNumber": "3086",
+    "departureTrainNumber": "3091",
+    "scheduledArrivalTime": "22:15",
+    "scheduledDepartureTime": "22:40",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 3,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.733,
+      0.71,
+      0.616
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 431,
     "trackId": 16,
     "arrivalTrainNumber": "3088",
-    "departureTrainNumber": "3021",
+    "departureTrainNumber": "3093",
     "scheduledArrivalTime": "22:45",
+    "scheduledDepartureTime": "23:15",
+    "origin": "",
+    "destination": "",
+    "subTrackIndex": 3,
+    "trainSet": {
+      "vehicleTypeID": "X40",
+      "count": 1
+    },
+    "barColor": [
+      0.733,
+      0.71,
+      0.616
+    ],
+    "continuesFromPrevPage": false,
+    "continuesToNextPage": false
+  },
+  {
+    "id": 432,
+    "trackId": 16,
+    "arrivalTrainNumber": "3092",
+    "departureTrainNumber": "33095",
+    "scheduledArrivalTime": "23:51",
     "scheduledDepartureTime": "",
     "origin": "",
     "destination": "",

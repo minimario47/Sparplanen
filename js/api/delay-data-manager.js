@@ -54,27 +54,6 @@ class DelayDataManager {
         
         this.totalTrains = trainsArray.length;
         this.lastUpdateTime = new Date();
-        
-        // ===== TESTING: Add forced 50min delay to train 2033 =====
-        const testDelayInfo = {
-            trainNumber: '3561',
-            delayMinutes: 30,
-            delayStatus: 'DELAYED',
-            isCanceled: false,
-            isReplaced: false,
-            deviationDescription: '[TEST] Train delayed 50 minutes for testing purposes',
-            estimatedTime: null,
-            advertisedTime: null,
-            actualTime: null,
-            trackAtLocation: null,
-            fromLocation: 'Test Location',
-            lastUpdated: new Date().toISOString()
-        };
-        this.delayData.set('3561', testDelayInfo);
-        this.delayData.set(3561, testDelayInfo);
-        logger.warn('DelayData', '⚠️ TEST DATA: Train 2033 has forced 50min delay');
-        // =========================================================
-        
         // Summary is logged in integration instead of here
     }
     

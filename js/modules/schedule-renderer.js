@@ -15,7 +15,9 @@ function initializeSchedule() {
         return;
     }
     
-    console.log('📅 Initializing schedule...');
+    if (window.__DEBUG_SCHEDULE_RENDER) {
+        console.log('📅 Initializing schedule...');
+    }
     
     window.TimeManager.addListener(handleTimeManagerChange);
     
@@ -33,7 +35,9 @@ function initializeSchedule() {
     setupScrollSynchronization();
     startCurrentTimeUpdater();
     
-    console.log('✅ Schedule initialized:', cachedTrains.length, 'trains');
+    if (window.__DEBUG_SCHEDULE_RENDER) {
+        console.log('✅ Schedule initialized:', cachedTrains.length, 'trains');
+    }
 }
 
 function prepareTrackData() {
@@ -275,9 +279,11 @@ function renderFullSchedule() {
     
     scrollToViewTime(viewTime, timelineStart, window.currentPixelsPerHour, state.isFollowingMode, state.offsetPercentage);
     
-    const viewWindowHours = timeRange + (bufferHours * 2);
-    console.log(`🔄 View: ${viewWindowHours}h (${timeRange}h + ${bufferHours}h buffer)`);
-    console.log(`🌙 Trains: ${visibleTrains.length}/${window.cachedTrains.length}`);
+    if (window.__DEBUG_SCHEDULE_RENDER) {
+        const viewWindowHours = timeRange + (bufferHours * 2);
+        console.log(`🔄 View: ${viewWindowHours}h (${timeRange}h + ${bufferHours}h buffer)`);
+        console.log(`🌙 Trains: ${visibleTrains.length}/${window.cachedTrains.length}`);
+    }
     
     if (window.delayIntegration && window.delayIntegration.isInitialized) {
         setTimeout(() => window.delayIntegration.updateAllVisualizations(), 100);
