@@ -1,7 +1,9 @@
 /**
  * Late arrivals to Göteborg C (Trafikverket location signature G).
  * Movable floating panel; lists announcements delayed by at least N minutes.
- * Rows hide 1 minute after actual arrival (TimeAtLocation).
+ * Rows hide shortly after the train should have cleared the arrival:
+ *   1 min after actual TimeAtLocation, else 1 min after EstimatedTimeAtLocation,
+ *   else 2 min after (advertised + delayMinutes) when the API never reports an arrival at G.
  */
 (function () {
     'use strict';
@@ -101,23 +103,47 @@
                 <span style="font-size:var(--font-size-xs);color:var(--text-secondary)">min</span>
             </div>
             <div class="late-arrivals-panel__list" id="late-arrivals-list"></div>
-            <div class="late-arrivals-panel__footer">Uppdateras med förseningsdata · rader försvinner 1 min efter faktisk ankomst</div>
+            <div class="late-arrivals-panel__footer">Uppdateras med förseningsdata · rader döljs 1 min efter faktisk ankomst, annars 1 min efter beräknad tid, annars 2 min efter plan + försening om G saknar avläsning</div>
         `;
         document.body.appendChild(el);
         return el;
     }
 
+    /**
+     * True when the train should no longer appear as "incoming late" — i.e. the
+     * passage at G is already over from the user's perspective. Trafikverket does
+     * not always send TimeAtLocation for every train; without a fallback, rows
+     * would stick forever (e.g. 72477 after many hours).
+     */
+    function isArrivalWindowClosed(t, nowMs) {
+        const actual = parseApiDate(t.actualTime);
+        if (actual) {
+            return nowMs - actual.getTime() > 60 * 1000;
+        }
+        const est = parseApiDate(t.estimatedTime);
+        if (est) {
+            return nowMs - est.getTime() > 60 * 1000;
+        }
+        const adv = parseApiDate(t.advertisedTime);
+        const dm = t.delayMinutes;
+        if (adv && Number.isFinite(dm) && dm >= 0) {
+            const impliedPass = adv.getTime() + dm * 60 * 1000;
+            return nowMs - impliedPass > 2 * 60 * 1000;
+        }
+        return false;
+    }
+
     function filterTrains(trains, minMinutes, now) {
         const out = [];
         if (!Array.isArray(trains)) return out;
+        const nowMs = now.getTime();
         for (const t of trains) {
             if (t.isCanceled) continue;
             const dm = t.delayMinutes;
             if (dm == null || !Number.isFinite(dm)) continue;
             if (dm < minMinutes) continue;
 
-            const actual = parseApiDate(t.actualTime);
-            if (actual && now.getTime() - actual.getTime() > 60 * 1000) continue;
+            if (isArrivalWindowClosed(t, nowMs)) continue;
 
             out.push(t);
         }
