@@ -85,29 +85,60 @@ class TrainTooltip {
             return;
         }
         
-        // Get delay info if available
-        let delayInfo = null;
-        if (window.delayIntegration?.dataManager) {
-            if (train.arrivalTrainNumber) {
-                delayInfo = window.delayIntegration.dataManager.getDelayInfo(train.arrivalTrainNumber);
-            }
-            if (!delayInfo && train.departureTrainNumber) {
-                delayInfo = window.delayIntegration.dataManager.getDelayInfo(train.departureTrainNumber);
-            }
-        }
+        const selectedTrainNumber = this.resolveTrainNumberByClickSide(train, trainBar, event);
+        const delayInfo = this.getDelayInfoForTrain(train, selectedTrainNumber);
         
-        this.show(train, delayInfo, event, trainBar);
+        this.show(train, delayInfo, event, trainBar, selectedTrainNumber);
+    }
+
+    resolveTrainNumberByClickSide(train, trainBar, event) {
+        const arrival = String(train.arrivalTrainNumber || '').trim();
+        const departure = String(train.departureTrainNumber || '').trim();
+        if (!arrival) return departure;
+        if (!departure) return arrival;
+
+        if (!event || typeof event.clientX !== 'number') {
+            return arrival;
+        }
+
+        const rect = trainBar.getBoundingClientRect();
+        const clickOffset = event.clientX - rect.left;
+        const clickedRightSide = clickOffset >= rect.width / 2;
+        return clickedRightSide ? departure : arrival;
+    }
+
+    getDelayInfoForTrain(train, preferredTrainNumber = '') {
+        const dataManager = window.delayIntegration?.dataManager;
+        if (!dataManager) return null;
+
+        const preferred = String(preferredTrainNumber || '').trim();
+        const arrival = String(train.arrivalTrainNumber || '').trim();
+        const departure = String(train.departureTrainNumber || '').trim();
+
+        if (preferred) {
+            const preferredInfo = dataManager.getDelayInfo(preferred);
+            if (preferredInfo) return preferredInfo;
+        }
+        if (arrival && arrival !== preferred) {
+            const arrivalInfo = dataManager.getDelayInfo(arrival);
+            if (arrivalInfo) return arrivalInfo;
+        }
+        if (departure && departure !== preferred) {
+            const departureInfo = dataManager.getDelayInfo(departure);
+            if (departureInfo) return departureInfo;
+        }
+        return null;
     }
     
     /**
      * Show tooltip with train data
      */
-    show(train, delayInfo, event, trainBar) {
+    show(train, delayInfo, event, trainBar, selectedTrainNumber = '') {
         this.currentTrain = train;
         this.isVisible = true;
         
         // Build tooltip content
-        const content = this.buildContent(train, delayInfo);
+        const content = this.buildContent(train, delayInfo, selectedTrainNumber);
         
         // Find or create content container (preserve close button)
         let contentContainer = this.tooltip.querySelector('.tooltip-content');
@@ -129,7 +160,7 @@ class TrainTooltip {
         
         logger.info('TrainTooltip', 'Tooltip shown', { 
             trainId: train.id, 
-            trainNumber: train.arrivalTrainNumber || train.departureTrainNumber 
+            trainNumber: selectedTrainNumber || train.arrivalTrainNumber || train.departureTrainNumber 
         });
     }
     
@@ -147,16 +178,7 @@ class TrainTooltip {
             return;
         }
         
-        // Get delay info if available
-        let delayInfo = null;
-        if (window.delayIntegration?.dataManager) {
-            if (train.arrivalTrainNumber) {
-                delayInfo = window.delayIntegration.dataManager.getDelayInfo(train.arrivalTrainNumber);
-            }
-            if (!delayInfo && train.departureTrainNumber) {
-                delayInfo = window.delayIntegration.dataManager.getDelayInfo(train.departureTrainNumber);
-            }
-        }
+        const delayInfo = this.getDelayInfoForTrain(train);
         
         this.currentTrain = train;
         this.isVisible = true;
@@ -192,8 +214,8 @@ class TrainTooltip {
     /**
      * Build tooltip content HTML - Clean, professional design
      */
-    buildContent(train, delayInfo) {
-        const trainNumber = train.arrivalTrainNumber || train.departureTrainNumber;
+    buildContent(train, delayInfo, selectedTrainNumber = '') {
+        const trainNumber = selectedTrainNumber || train.arrivalTrainNumber || train.departureTrainNumber;
         const trainType = this.getTrainType(train.type);
         const trackInfo = train.trackId ? `Spår ${train.trackId}` : 'Okänt spår';
         

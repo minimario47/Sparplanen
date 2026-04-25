@@ -136,8 +136,10 @@ class OffsetVisualizer {
         let toleranceMinutes = 0;
         
         if (delayMinutes > 0) {
-            turnaroundMinutes = this.settings?.turnaroundTime || 10;
-            toleranceMinutes = this.settings?.conflictTolerance || 5;
+            const turnaroundEnabled = this.settings?.turnaroundEnabled !== false;
+            const toleranceEnabled = this.settings?.conflictToleranceEnabled !== false;
+            turnaroundMinutes = turnaroundEnabled ? (this.settings?.turnaroundTime || 10) : 0;
+            toleranceMinutes = toleranceEnabled ? (this.settings?.conflictTolerance || 5) : 0;
         }
         
         const turnaroundPixels = turnaroundMinutes * pixelsPerMinute;
@@ -154,9 +156,9 @@ class OffsetVisualizer {
             delayOverlay.style.left = '0';
             delayOverlay.style.width = `${delayPixels}px`;
         } else {
-            // Early - extends LEFT from scheduled arrival
-            delayOverlay.style.left = `-${delayPixels}px`;
-            delayOverlay.style.width = `${delayPixels}px`;
+            // Early train: render as extension of the train bar with overlap-aware variants
+            this.applyEarlyExtension(trainBar, train, delayInfo, delayPixels);
+            return;
         }
         
         // Apply visualization style based on user setting
@@ -295,8 +297,10 @@ class OffsetVisualizer {
         if (!trainBar) return;
 
         try {
+            trainBar.classList.remove('early-extended');
             const overlays = trainBar.querySelectorAll('.delay-overlay-offset');
             const warnings = trainBar.querySelectorAll('.conflict-warning-icon');
+            const earlyPills = trainBar.querySelectorAll('.early-pill-floating');
 
             overlays.forEach(el => {
                 if (el && el.parentNode) {
@@ -308,9 +312,69 @@ class OffsetVisualizer {
                     el.parentNode.removeChild(el);
                 }
             });
+            earlyPills.forEach(el => {
+                if (el && el.parentNode) {
+                    el.parentNode.removeChild(el);
+                }
+            });
         } catch (error) {
             logger.error('Visualizer', 'Error removing delay overlays', error);
         }
+    }
+
+    applyEarlyExtension(trainBar, train, delayInfo, delayPixels) {
+        const visual = trainBar.querySelector('.train-bar-visual') || trainBar;
+        const visualStyle = window.getComputedStyle(visual);
+        const barColor = visualStyle.backgroundColor || this.settings.colors.early || '#22C55E';
+        const borderColor = visualStyle.borderColor || this.getUserBorderColor();
+        const delayMinutes = Math.abs(delayInfo.delayMinutes || 0);
+
+        const arrMs = train.arrTime ? train.arrTime.getTime() : null;
+        if (!arrMs) return;
+        const earlyStartMs = arrMs - delayMinutes * 60 * 1000;
+
+        const sameTrack = Array.isArray(window.cachedTrains)
+            ? window.cachedTrains.filter((other) => other.id !== train.id && other.trackId === train.trackId)
+            : [];
+        let clipPixels = delayPixels;
+        for (const other of sameTrack) {
+            const otherEndMs = other.depTime ? other.depTime.getTime() : (other.arrTime ? other.arrTime.getTime() : null);
+            if (!otherEndMs) continue;
+            if (otherEndMs <= earlyStartMs || otherEndMs >= arrMs) continue;
+            const overlapMinutes = Math.ceil((otherEndMs - earlyStartMs) / 60000);
+            const overlapPixels = Math.max(0, overlapMinutes * (window.currentPixelsPerHour / 60));
+            clipPixels = Math.min(clipPixels, Math.max(0, delayPixels - overlapPixels));
+        }
+
+        if (clipPixels <= 2) {
+            const pill = document.createElement('div');
+            pill.className = 'early-pill-floating';
+            pill.textContent = `↶ ${delayMinutes} min för tidig`;
+            trainBar.appendChild(pill);
+            return;
+        }
+
+        const earlyOverlay = document.createElement('div');
+        earlyOverlay.className = 'delay-overlay-offset early-extension';
+        if (clipPixels < delayPixels) {
+            earlyOverlay.classList.add('early-extension--partial');
+        }
+        earlyOverlay.style.left = `-${clipPixels}px`;
+        earlyOverlay.style.width = `${clipPixels}px`;
+        earlyOverlay.style.setProperty('--early-bar-color', barColor);
+        earlyOverlay.style.setProperty('--early-border-color', borderColor);
+        earlyOverlay.title = `Planerad ankomst ${train.arrTime.toTimeString().slice(0, 5)}`;
+
+        const marker = document.createElement('div');
+        marker.className = 'early-extension__planned-marker';
+        marker.title = `Planerad ankomst ${train.arrTime.toTimeString().slice(0, 5)}`;
+        earlyOverlay.appendChild(marker);
+
+        earlyOverlay.addEventListener('mouseenter', () => trainBar.classList.add('is-hovered'));
+        earlyOverlay.addEventListener('mouseleave', () => trainBar.classList.remove('is-hovered'));
+
+        trainBar.appendChild(earlyOverlay);
+        trainBar.classList.add('early-extended');
     }
     
     /**

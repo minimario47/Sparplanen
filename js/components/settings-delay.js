@@ -17,7 +17,9 @@
         showWarnings: true,
         visualizationStyle: 'color-coded',
         turnaroundTime: 10,
-        conflictTolerance: 5
+        conflictTolerance: 5,
+        turnaroundEnabled: true,
+        conflictToleranceEnabled: true
     };
 
     window.loadDelaySettings = function () {
@@ -34,6 +36,8 @@
                     saved.delayVisualizationStyle ?? DEFAULT_DELAY_SETTINGS.visualizationStyle,
                 turnaroundTime: saved.turnaroundTime ?? DEFAULT_DELAY_SETTINGS.turnaroundTime,
                 conflictTolerance: saved.conflictTolerance ?? DEFAULT_DELAY_SETTINGS.conflictTolerance,
+                turnaroundEnabled: saved.turnaroundEnabled ?? DEFAULT_DELAY_SETTINGS.turnaroundEnabled,
+                conflictToleranceEnabled: saved.conflictToleranceEnabled ?? DEFAULT_DELAY_SETTINGS.conflictToleranceEnabled,
                 showWarnings:
                     saved.showWarnings !== undefined ? saved.showWarnings : DEFAULT_DELAY_SETTINGS.showWarnings
             };

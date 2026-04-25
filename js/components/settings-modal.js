@@ -111,8 +111,11 @@
         // Delay settings (merged from settings-delay.js)
         delayMode: 'offset',
         delayVisualizationStyle: 'color-coded',
+        hoverTooltipEnabled: true,
         turnaroundTime: 10,
         conflictTolerance: 5,
+        turnaroundEnabled: true,
+        conflictToleranceEnabled: true,
         showWarnings: true
     };
 
@@ -411,8 +414,11 @@
                 detail: {
                     mode: currentSettings.delayMode,
                     visualizationStyle: currentSettings.delayVisualizationStyle,
+                    hoverTooltipEnabled: currentSettings.hoverTooltipEnabled,
                     turnaroundTime: currentSettings.turnaroundTime,
                     conflictTolerance: currentSettings.conflictTolerance,
+                    turnaroundEnabled: currentSettings.turnaroundEnabled,
+                    conflictToleranceEnabled: currentSettings.conflictToleranceEnabled,
                     showWarnings: currentSettings.showWarnings
                 }
             }));
@@ -530,8 +536,11 @@
             // Delay settings
             delayMode: getRadio('delay-mode', defaultSettings.delayMode),
             delayVisualizationStyle: getRadio('delay-style', defaultSettings.delayVisualizationStyle),
+            hoverTooltipEnabled: doc.getElementById('hover-tooltip-enabled')?.classList.contains('checked') ?? defaultSettings.hoverTooltipEnabled,
             turnaroundTime: parseInt(doc.getElementById('delay-turnaround-time')?.value ?? defaultSettings.turnaroundTime, 10),
             conflictTolerance: parseInt(doc.getElementById('delay-conflict-tolerance')?.value ?? defaultSettings.conflictTolerance, 10),
+            turnaroundEnabled: doc.getElementById('delay-turnaround-time-enabled')?.classList.contains('checked') ?? defaultSettings.turnaroundEnabled,
+            conflictToleranceEnabled: doc.getElementById('delay-conflict-tolerance-enabled')?.classList.contains('checked') ?? defaultSettings.conflictToleranceEnabled,
             showWarnings: doc.getElementById('delay-show-warnings')?.classList.contains('checked') ?? defaultSettings.showWarnings
         };
     }
@@ -606,10 +615,21 @@
         const dsInput = document.querySelector(`input[name="delay-style"][value="${currentSettings.delayVisualizationStyle}"]`);
         if (dsInput) dsInput.checked = true;
 
+        const hoverTooltipToggle = document.getElementById('hover-tooltip-enabled');
+        if (hoverTooltipToggle) {
+            hoverTooltipToggle.classList.toggle('checked', !!currentSettings.hoverTooltipEnabled);
+            hoverTooltipToggle.setAttribute('aria-checked', String(!!currentSettings.hoverTooltipEnabled));
+        }
+
         const turnaroundSlider = document.getElementById('delay-turnaround-time');
         if (turnaroundSlider) {
             turnaroundSlider.value = currentSettings.turnaroundTime;
             turnaroundSlider.dispatchEvent(new Event('input'));
+        }
+        const turnaroundEnabledToggle = document.getElementById('delay-turnaround-time-enabled');
+        if (turnaroundEnabledToggle) {
+            turnaroundEnabledToggle.classList.toggle('checked', !!currentSettings.turnaroundEnabled);
+            turnaroundEnabledToggle.setAttribute('aria-checked', String(!!currentSettings.turnaroundEnabled));
         }
 
         const toleranceSlider = document.getElementById('delay-conflict-tolerance');
@@ -617,12 +637,18 @@
             toleranceSlider.value = currentSettings.conflictTolerance;
             toleranceSlider.dispatchEvent(new Event('input'));
         }
+        const toleranceEnabledToggle = document.getElementById('delay-conflict-tolerance-enabled');
+        if (toleranceEnabledToggle) {
+            toleranceEnabledToggle.classList.toggle('checked', !!currentSettings.conflictToleranceEnabled);
+            toleranceEnabledToggle.setAttribute('aria-checked', String(!!currentSettings.conflictToleranceEnabled));
+        }
 
         const warningsToggle = document.getElementById('delay-show-warnings');
         if (warningsToggle) {
             warningsToggle.classList.toggle('checked', !!currentSettings.showWarnings);
             warningsToggle.setAttribute('aria-checked', String(!!currentSettings.showWarnings));
         }
+        updateDelaySliderEnabledState();
     }
 
     /**
@@ -802,6 +828,8 @@
             updateWarningsViz();
         }
 
+        setupToggleableDelayControls();
+
         // Viz 5 — Delay mode radio
         document.querySelectorAll('input[name="delay-mode"]').forEach(input => {
             input.addEventListener('change', () => {
@@ -821,6 +849,60 @@
         });
     }
 
+    function updateDelaySliderEnabledState() {
+        const controls = [
+            {
+                toggle: document.getElementById('delay-turnaround-time-enabled'),
+                slider: document.getElementById('delay-turnaround-time'),
+                container: document.getElementById('setting-turnaround-time')
+            },
+            {
+                toggle: document.getElementById('delay-conflict-tolerance-enabled'),
+                slider: document.getElementById('delay-conflict-tolerance'),
+                container: document.getElementById('setting-conflict-tolerance')
+            }
+        ];
+
+        controls.forEach(({ toggle, slider, container }) => {
+            if (!toggle || !slider || !container) return;
+            const enabled = toggle.classList.contains('checked');
+            slider.disabled = !enabled;
+            container.classList.toggle('is-disabled', !enabled);
+        });
+    }
+
+    function setupToggleableDelayControls() {
+        const toggles = [
+            document.getElementById('delay-turnaround-time-enabled'),
+            document.getElementById('delay-conflict-tolerance-enabled')
+        ].filter(Boolean);
+
+        toggles.forEach((toggle) => {
+            if (toggle.dataset.bound === 'true') return;
+            toggle.dataset.bound = 'true';
+            const flip = () => {
+                const checked = !toggle.classList.contains('checked');
+                toggle.classList.toggle('checked', checked);
+                toggle.setAttribute('aria-checked', String(checked));
+                updateDelaySliderEnabledState();
+            };
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                flip();
+            });
+            toggle.addEventListener('keydown', (e) => {
+                if (e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    flip();
+                }
+            });
+        });
+
+        updateDelaySliderEnabledState();
+    }
+
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
@@ -832,6 +914,10 @@
     window.SettingsModal = {
         open: openModal,
         close: closeModal,
+        openTab: function(tabName) {
+            openModal();
+            switchTab(tabName);
+        },
         getCurrentSettings: getCurrentSettings
     };
 

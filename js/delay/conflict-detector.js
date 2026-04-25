@@ -129,8 +129,10 @@ class ConflictDetector {
             return { hasConflict: false, conflictType: 'none', affectedTrains: [] };
         }
         
-        const turnaroundTime = settings.turnaroundTime || 10;
-        const tolerance = settings.conflictTolerance || 5;
+        const turnaroundEnabled = settings.turnaroundEnabled !== false;
+        const toleranceEnabled = settings.conflictToleranceEnabled !== false;
+        const turnaroundTime = turnaroundEnabled ? (settings.turnaroundTime || 10) : 0;
+        const tolerance = toleranceEnabled ? (settings.conflictTolerance || 5) : 0;
         const showWarnings = settings.showWarnings !== false;
         
         // Calculate actual times for delayed train

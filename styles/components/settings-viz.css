@@ -957,6 +957,62 @@
     border-width: 2px;
 }
 
+/* Hover tooltip preview */
+.viz-hover-tooltip-track {
+    position: relative;
+    height: 72px;
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(148, 163, 184, 0.16), rgba(148, 163, 184, 0.08));
+    border: 1px solid var(--border-secondary);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.viz-hover-tooltip-train {
+    min-width: 128px;
+    height: 20px;
+    border-radius: 6px;
+    border: 1px solid var(--border-primary);
+    background: var(--surface-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono, monospace);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.viz-hover-tooltip-popup {
+    position: absolute;
+    left: 50%;
+    top: 36px;
+    transform: translateX(-50%);
+    min-width: 120px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: #111827;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+    font-size: 12px;
+}
+
+.viz-hover-tooltip-title {
+    opacity: 0.9;
+}
+
+.viz-hover-tooltip-value {
+    font-family: var(--font-mono, monospace);
+    font-weight: 700;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    REDUCED MOTION — freeze all loops, show representative static state
 ═══════════════════════════════════════════════════════════════════════════ */

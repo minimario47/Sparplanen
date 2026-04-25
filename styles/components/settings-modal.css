@@ -409,6 +409,15 @@
     font-weight: 500;
 }
 
+.settings-tab-panel .toggleable-setting.is-disabled .slider-wrapper,
+.settings-tab-panel .toggleable-setting.is-disabled .setting-viz {
+    opacity: 0.45;
+}
+
+.settings-tab-panel .toggleable-setting.is-disabled .slider {
+    cursor: not-allowed;
+}
+
 /* Slider value: monospaced and right-aligned */
 .settings-tab-panel .slider-value {
     font-family: var(--font-mono, monospace);

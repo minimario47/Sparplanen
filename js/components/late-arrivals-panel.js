@@ -137,11 +137,14 @@
         const out = [];
         if (!Array.isArray(trains)) return out;
         const nowMs = now.getTime();
+        const suppressed = window.suppressedDelays instanceof Set ? window.suppressedDelays : null;
         for (const t of trains) {
             if (t.isCanceled) continue;
             const dm = t.delayMinutes;
             if (dm == null || !Number.isFinite(dm)) continue;
             if (dm < minMinutes) continue;
+            const trainNumber = String(t.trainNumber || '').trim();
+            if (suppressed && trainNumber && suppressed.has(trainNumber)) continue;
 
             if (isArrivalWindowClosed(t, nowMs)) continue;
 
@@ -324,6 +327,9 @@
         toggleBtn.addEventListener('click', () => setOpen(panel.hidden));
 
         window.addEventListener('delay-feed-updated', onFeedUpdated);
+        window.addEventListener('suppressed-delays-changed', () => {
+            if (panel && !panel.hidden) renderList();
+        });
         window.addEventListener('resize', () => {
             if (!panel.hidden) clampPanelPosition();
         });

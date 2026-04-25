@@ -56,6 +56,7 @@ window.TrainRenderer = {
     _createTrainElement(train, position, totalOverlapping, trackLayout, startTime, pixelsPerHour) {
         const trainHeight = this._getTrainHeight(totalOverlapping);
         const bottomOffset = position * trainHeight;
+        const showHoverTooltip = userSettings?.hoverTooltipEnabled !== false;
         
         const arrMinutes = train.arrTime ? (train.arrTime - startTime) / (1000 * 60) : null;
         const depMinutes = train.depTime ? (train.depTime - startTime) / (1000 * 60) : null;
@@ -88,6 +89,7 @@ window.TrainRenderer = {
         trainDiv.style.height = `${Math.max(trainHeight - verticalPadding * 2, 8)}px`;
         trainDiv.style.top = `${trackLayout.top + (trackLayout.height - bottomOffset - trainHeight) + verticalPadding}px`;
         trainDiv.style.zIndex = 10 + position;
+        trainDiv.dataset.baseZIndex = String(10 + position);
         
         trainDiv.dataset.trainId = train.id;
         trainDiv.dataset.arrival = train.arrivalTrainNumber || '';
@@ -140,14 +142,12 @@ window.TrainRenderer = {
             ? '<div class="connection-icon" title="Kopplad tåg 🔗"></div>' 
             : '';
 
-        const showTooltip = isVeryNarrow || !hasArrival || !hasDeparture;
-        const tooltipHTML = showTooltip ? `
+        const defaultHoverNumber = train.arrivalTrainNumber || train.departureTrainNumber || '';
+        const tooltipHTML = showHoverTooltip ? `
             <div class="train-tooltip">
-                ${hasArrival ? `Ank: ${train.arrivalTrainNumber}` : ''}
-                ${hasArrival && hasDeparture ? ' → ' : ''}
-                ${hasDeparture ? `Avg: ${train.departureTrainNumber}` : ''}
-                ${train.origin ? `<br>Från: ${train.origin}` : ''}
-                ${train.dest ? `<br>Till: ${train.dest}` : ''}
+                <div class="train-tooltip-number">Tåg <span class="train-tooltip-number-value">${defaultHoverNumber}</span></div>
+                ${train.origin ? `<div class="train-tooltip-meta">Från: ${train.origin}</div>` : ''}
+                ${train.dest ? `<div class="train-tooltip-meta">Till: ${train.dest}</div>` : ''}
             </div>
         ` : '';
 
@@ -166,8 +166,25 @@ window.TrainRenderer = {
 
         trainDiv.classList.add(`len-${train.lengthClass}`, densityClass);
 
-        trainDiv.addEventListener('mouseenter', () => trainDiv.classList.add('is-hovered'));
-        trainDiv.addEventListener('mouseleave', () => trainDiv.classList.remove('is-hovered'));
+        trainDiv.addEventListener('mouseenter', () => {
+            trainDiv.classList.add('is-hovered');
+            trainDiv.style.zIndex = '2200';
+        });
+        trainDiv.addEventListener('mouseleave', () => {
+            trainDiv.classList.remove('is-hovered');
+            trainDiv.style.zIndex = trainDiv.dataset.baseZIndex || String(10 + position);
+        });
+        trainDiv.addEventListener('mousemove', (e) => {
+            if (!showHoverTooltip) return;
+            if (!(hasArrival && hasDeparture) || train.arrivalTrainNumber === train.departureTrainNumber) {
+                return;
+            }
+            const tooltipNumber = trainDiv.querySelector('.train-tooltip-number-value');
+            if (!tooltipNumber) return;
+            const rect = trainDiv.getBoundingClientRect();
+            const onRightSide = (e.clientX - rect.left) >= rect.width / 2;
+            tooltipNumber.textContent = onRightSide ? train.departureTrainNumber : train.arrivalTrainNumber;
+        });
         trainDiv.addEventListener('click', () => {
             document.querySelectorAll('.train-bar.is-selected').forEach(el => el.classList.remove('is-selected'));
             trainDiv.classList.add('is-selected');

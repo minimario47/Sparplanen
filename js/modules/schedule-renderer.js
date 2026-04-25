@@ -160,7 +160,8 @@ function loadUserSettings() {
             b4: { bg: null, border: null, text: null },
             b5: { bg: null, border: null, text: null }
         },
-        singleColor: { bg: null, border: null, text: null }
+        singleColor: { bg: null, border: null, text: null },
+        hoverTooltipEnabled: true
     };
     try {
         const saved = localStorage.getItem('sparplannen-settings');

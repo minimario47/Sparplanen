@@ -93,7 +93,7 @@
                             <div class="connection-line"></div>
                             <div class="node node-3"></div>
                         </div>
-                </div>
+                    </div>
                 </div>
             </a>
             </div>
@@ -522,6 +522,31 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Utseende</h3>
+                        <div class="settings-section-content">
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label id="label-hover-tooltip-enabled" class="form-label">Visa hover-info</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext för hover-info">ⓘ</button>
+                                </div>
+                                <div class="toggle-switch checked" id="hover-tooltip-enabled" role="switch" aria-checked="true" aria-labelledby="label-hover-tooltip-enabled" tabindex="0">
+                                    <div class="toggle-thumb"></div>
+                                </div>
+                                <p class="form-help">Visar svart infobox med tågnummer vid hovring. På tåg med både ankomst och avgång visas ankomst till vänster och avgång till höger.</p>
+                                <div class="setting-viz viz-hover-tooltip" id="viz-hover-tooltip" aria-hidden="true">
+                                    <div class="viz-hover-tooltip-track">
+                                        <div class="viz-hover-tooltip-train">3429 | 3516</div>
+                                        <div class="viz-hover-tooltip-popup">
+                                            <span class="viz-hover-tooltip-title">Tåg</span>
+                                            <span class="viz-hover-tooltip-value">3429</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Förseningar Tab -->
@@ -542,9 +567,12 @@
                             </div>
 
                             <!-- Conflict Tolerance Slider -->
-                            <div class="form-control">
+                            <div class="form-control toggleable-setting" id="setting-conflict-tolerance">
                                 <div class="form-label-wrapper">
                                     <label class="form-label" for="delay-conflict-tolerance">Konflikttolerans</label>
+                                    <div class="toggle-switch checked" id="delay-conflict-tolerance-enabled" role="switch" aria-checked="true" aria-label="Aktivera konflikttolerans" tabindex="0">
+                                        <div class="toggle-thumb"></div>
+                                    </div>
                                     <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
                                 </div>
                                 <div class="slider-wrapper">
@@ -567,6 +595,44 @@
                                         </div>
                                     </div>
                                     <p class="viz-caption" id="viz-conflict-caption">T&#229;g 3545 anl&#228;nder f&#246;r n&#228;ra 3429</p>
+                                </div>
+                            </div>
+                            <!-- Turnaround Time Slider -->
+                            <div class="form-control toggleable-setting" id="setting-turnaround-time">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label" for="delay-turnaround-time">Minsta vändtid</label>
+                                    <div class="toggle-switch checked" id="delay-turnaround-time-enabled" role="switch" aria-checked="true" aria-label="Aktivera vändtid" tabindex="0">
+                                        <div class="toggle-thumb"></div>
+                                    </div>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                </div>
+                                <div class="slider-wrapper">
+                                    <input id="delay-turnaround-time" type="range" min="5" max="30" value="10" class="slider" data-unit=" min">
+                                    <span class="slider-value">10 min</span>
+                                </div>
+                                <p class="form-help">Minsta godkänd tid för tömning, personalbyte och påfyllning vid vändstation.</p>
+                                <div class="setting-viz viz-turnaround" id="viz-turnaround" aria-hidden="true">
+                                    <div class="viz-ta-header">
+                                        <div class="viz-ta-phases">
+                                            <span class="viz-ta-phase-1">Ankommer...</span>
+                                            <span class="viz-ta-phase-2">Vändtid p&#229;g&#229;r</span>
+                                            <span class="viz-ta-phase-3">Avg&#229;r...</span>
+                                        </div>
+                                        <div class="viz-ta-clock-wrap">
+                                            <div class="viz-ta-clock">
+                                                <div class="viz-ta-clock-hour"></div>
+                                                <div class="viz-ta-clock-min"></div>
+                                            </div>
+                                            <span id="viz-ta-timer" class="viz-ta-timer-label">10 min</span>
+                                        </div>
+                                    </div>
+                                    <div class="viz-ta-track">
+                                        <div class="viz-track-line"></div>
+                                        <div class="viz-turnaround-train"><span>X2000</span></div>
+                                        <div class="viz-turnaround-zone" id="viz-ta-zone">
+                                            <span class="viz-ta-zone-label">v&#228;ndtid</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -635,47 +701,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="settings-section">
-                        <h3 class="settings-section-title">Vändtid</h3>
-                        <div class="settings-section-content">
-                            <!-- Turnaround Time Slider -->
-                            <div class="form-control">
-                                <div class="form-label-wrapper">
-                                    <label class="form-label" for="delay-turnaround-time">Minsta vändtid</label>
-                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
-                                </div>
-                                <div class="slider-wrapper">
-                                    <input id="delay-turnaround-time" type="range" min="5" max="30" value="10" class="slider" data-unit=" min">
-                                    <span class="slider-value">10 min</span>
-                                </div>
-                                <p class="form-help">Minsta godkänd tid för tömning, personalbyte och påfyllning vid vändstation.</p>
-                                <div class="setting-viz viz-turnaround" id="viz-turnaround" aria-hidden="true">
-                                    <div class="viz-ta-header">
-                                        <div class="viz-ta-phases">
-                                            <span class="viz-ta-phase-1">Ankommer...</span>
-                                            <span class="viz-ta-phase-2">Vändtid p&#229;g&#229;r</span>
-                                            <span class="viz-ta-phase-3">Avg&#229;r...</span>
-                                        </div>
-                                        <div class="viz-ta-clock-wrap">
-                                            <div class="viz-ta-clock">
-                                                <div class="viz-ta-clock-hour"></div>
-                                                <div class="viz-ta-clock-min"></div>
-                                            </div>
-                                            <span id="viz-ta-timer" class="viz-ta-timer-label">10 min</span>
-                                        </div>
-                                    </div>
-                                    <div class="viz-ta-track">
-                                        <div class="viz-track-line"></div>
-                                        <div class="viz-turnaround-train"><span>X2000</span></div>
-                                        <div class="viz-turnaround-zone" id="viz-ta-zone">
-                                            <span class="viz-ta-zone-label">v&#228;ndtid</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -751,6 +777,7 @@
     <script src="js/components/search-trains.js"></script>
     <script src="js/components/track-tooltip.js"></script>
     <script src="js/components/train-tooltip.js"></script>
+    <script src="js/components/train-context-menu.js"></script>
     <script src="js/components/debug-logs.js"></script>
     
     <script>

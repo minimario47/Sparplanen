@@ -75,7 +75,9 @@ class DelayIntegration {
             showWarnings: this.settings.showWarnings,
             visualizationStyle: this.settings.visualizationStyle,
             turnaroundTime: this.settings.turnaroundTime, // Include turnaround time for delay calculations
-            conflictTolerance: this.settings.conflictTolerance
+            conflictTolerance: this.settings.conflictTolerance,
+            turnaroundEnabled: this.settings.turnaroundEnabled,
+            conflictToleranceEnabled: this.settings.conflictToleranceEnabled
         };
         
         switch (mode) {
@@ -174,7 +176,9 @@ class DelayIntegration {
                 showWarnings: newSettings.showWarnings,
                 visualizationStyle: newSettings.visualizationStyle,
                 turnaroundTime: newSettings.turnaroundTime,
-                conflictTolerance: newSettings.conflictTolerance
+                conflictTolerance: newSettings.conflictTolerance,
+                turnaroundEnabled: newSettings.turnaroundEnabled,
+                conflictToleranceEnabled: newSettings.conflictToleranceEnabled
             });
         }
         
@@ -221,6 +225,20 @@ class DelayIntegration {
             }
             
             if (!delayInfo) return;
+
+            const suppressedSet = window.suppressedDelays;
+            const arrNum = String(train.arrivalTrainNumber || '').trim();
+            const depNum = String(train.departureTrainNumber || '').trim();
+            const isSuppressed =
+                suppressedSet instanceof Set &&
+                ((arrNum && suppressedSet.has(arrNum)) || (depNum && suppressedSet.has(depNum)));
+            if (isSuppressed) {
+                this.visualizer.remove(trainBar);
+                trainBar.classList.remove('is-canceled', 'is-replaced', 'is-delayed');
+                trainBar.classList.add('is-suppressed');
+                return;
+            }
+            trainBar.classList.remove('is-suppressed');
             
             // Handle canceled/replaced trains - always show overlay
             if (delayInfo.isCanceled || delayInfo.isReplaced) {
