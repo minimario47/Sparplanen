@@ -320,6 +320,46 @@ class TrainTooltip {
             </div>
         `;
         
+        let noteHTML = '';
+        try {
+            const meta = window.TrainNotesStore && window.TrainNotesStore.getMeta(train.id);
+            if (meta && meta.text) {
+                const safe = String(meta.text)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/\n/g, '<br>');
+                noteHTML = `
+                    <div class="tooltip-note" role="note">
+                        <div class="tooltip-note__title">
+                            <span class="tooltip-note__icon" aria-hidden="true">✎</span>
+                            Anteckning
+                        </div>
+                        <div class="tooltip-note__body">${safe}</div>
+                    </div>
+                `;
+            }
+        } catch (e) {
+            console.warn('[TrainTooltip] note render failed', e);
+        }
+
+        let checkHTML = '';
+        try {
+            if (window.TrainChecksStore && window.TrainChecksStore.isChecked(train.id)) {
+                const meta = window.TrainChecksStore.getMeta(train.id);
+                const when = meta?.checkedAt ? new Date(meta.checkedAt).toLocaleString('sv-SE') : '';
+                checkHTML = `
+                    <div class="tooltip-check" role="status">
+                        <span class="tooltip-check__icon" aria-hidden="true">✓</span>
+                        <span class="tooltip-check__label">Kontrollerad${when ? ` · ${when}` : ''}</span>
+                    </div>
+                `;
+            }
+        } catch (e) {
+            console.warn('[TrainTooltip] check render failed', e);
+        }
+
         return `
             ${statusHTML}
             ${trainNumberHTML}
@@ -327,6 +367,8 @@ class TrainTooltip {
             ${delayHTML}
             ${routeHTML}
             ${detailsHTML}
+            ${noteHTML}
+            ${checkHTML}
         `;
     }
     

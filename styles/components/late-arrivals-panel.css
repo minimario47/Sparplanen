@@ -165,18 +165,22 @@
 }
 
 .late-arrivals-toggle-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
     width: 22px;
     height: 22px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    background: var(--surface-secondary);
-    border: 1px solid var(--border-primary);
+    object-fit: contain;
     line-height: 1;
+    /* The asset is black ink on transparent — keep it crisp on light themes
+       and recolour for dark / high-contrast via filters below. */
+}
+
+[data-theme="dark"] .late-arrivals-toggle-icon {
+    filter: invert(1) brightness(1.05);
+}
+
+[data-theme="hc"] .late-arrivals-toggle-icon,
+[data-theme="high-contrast"] .late-arrivals-toggle-icon {
+    filter: invert(1) brightness(1.4) contrast(1.2);
 }
 
 /* Toggle in header — active state */

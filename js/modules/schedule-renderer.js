@@ -34,6 +34,14 @@ function initializeSchedule() {
     renderFullSchedule();
     setupScrollSynchronization();
     startCurrentTimeUpdater();
+
+    window.addEventListener('user-trains-changed', () => {
+        prepareTrainData();
+        renderFullSchedule();
+    });
+    window.addEventListener('user-closures-changed', () => {
+        renderFullSchedule();
+    });
     
     if (window.__DEBUG_SCHEDULE_RENDER) {
         console.log('✅ Schedule initialized:', cachedTrains.length, 'trains');
@@ -44,10 +52,11 @@ function prepareTrackData() {
     cachedTracks = trackDefinitions.map(track => ({
         id: parseInt(track.publicTrackNumber),
         name: `Spår ${track.publicTrackNumber}`,
-        type: track.properties.includes('regional_platform') ? 'main' : 
+        type: track.properties.includes('regional_platform') ? 'main' :
               track.properties.includes('commuter_platform') ? 'side' : 'main',
         length: track.totalLengthMeters
     }));
+    window.cachedTracks = cachedTracks;
 }
 
 function prepareTrainData() {
@@ -145,7 +154,94 @@ function prepareTrainData() {
         }
     });
     
-    window.cachedTrains = trainData;
+    const userTrains = (window.UserTrainsStore && typeof window.UserTrainsStore.getAll === 'function')
+        ? window.UserTrainsStore.getAll()
+        : [];
+
+    const mergedTrains = trainData.concat(userTrains.map(serviceLikeToTrain).filter(Boolean));
+
+    window.cachedTrains = mergedTrains;
+}
+
+/**
+ * Map a user-added service-shaped record (from UserTrainsStore) into the
+ * same "train" object shape that prepareTrainData produces, so the renderer
+ * can treat user trains identically.
+ */
+function serviceLikeToTrain(service) {
+    if (!service || typeof service !== 'object') return null;
+    const now = new Date();
+
+    const parseTimeToDate = (timeStr) => {
+        if (!timeStr) return null;
+        const [hours, minutes] = String(timeStr).split(':').map(Number);
+        if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return null;
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
+    };
+
+    let arrTime = parseTimeToDate(service.scheduledArrivalTime);
+    let depTime = parseTimeToDate(service.scheduledDepartureTime);
+
+    if (arrTime && depTime && depTime < arrTime) {
+        depTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
+    } else if (!arrTime && depTime) {
+        const depHour = parseInt(String(service.scheduledDepartureTime).split(':')[0], 10);
+        if (depHour >= 0 && depHour < 6) {
+            depTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
+        }
+    }
+
+    if (!arrTime && !depTime) return null;
+
+    let lengthMeters = 0;
+    let baseUnitLengthMeters = 0;
+    let type = 'regional';
+
+    try {
+        if (service.trainSet && typeof calculateTrainSetLength === 'function') {
+            lengthMeters = calculateTrainSetLength(service.trainSet) || 0;
+        }
+        if (service.trainSet && service.trainSet.vehicleTypeID && typeof getVehicleDefinition === 'function') {
+            const vDef = getVehicleDefinition(service.trainSet.vehicleTypeID);
+            if (vDef) {
+                baseUnitLengthMeters = vDef.baseLengthMeters || 0;
+                if (vDef.category === 'high_speed') type = 'long-distance';
+                else if (vDef.category === 'commuter') type = 'regional';
+                else if (vDef.category === 'cargo') type = 'freight';
+            }
+        }
+    } catch (_) { /* ignore vehicle resolution failures */ }
+
+    const dimension = (userSettings && userSettings.trainColorDimension === 'total')
+        ? lengthMeters
+        : (baseUnitLengthMeters || lengthMeters);
+
+    const canonical = (userSettings && Array.isArray(userSettings.canonicalLengths) && userSettings.canonicalLengths.length === 5)
+        ? userSettings.canonicalLengths
+        : [50, 75, 80, 107, 135];
+
+    const lengthClass = (window.ColorUtils && typeof window.ColorUtils.computeNearestBucket === 'function')
+        ? window.ColorUtils.computeNearestBucket(dimension, canonical)
+        : 'b1';
+
+    return {
+        id: service.id,
+        arrivalTrainNumber: service.arrivalTrainNumber || '',
+        departureTrainNumber: service.departureTrainNumber || '',
+        type,
+        lengthMeters,
+        lengthClass,
+        trackId: service.trackId,
+        arrTime,
+        depTime,
+        origin: service.origin || '',
+        dest: service.destination || '',
+        status: 'on-time',
+        hasConflict: false,
+        connectedTo: null,
+        userAdded: true,
+        kind: service.kind || 'train'
+    };
 }
 
 function loadUserSettings() {
@@ -289,7 +385,21 @@ function renderFullSchedule() {
     if (window.delayIntegration && window.delayIntegration.isInitialized) {
         setTimeout(() => window.delayIntegration.updateAllVisualizations(), 100);
     }
+
+    window.scheduleState = {
+        timelineStart,
+        pixelsPerHour: window.currentPixelsPerHour,
+        trackLayouts,
+        viewWindowStart,
+        viewWindowEnd
+    };
+    window.dispatchEvent(new CustomEvent('schedule:rendered'));
 }
+
+window.scheduleRenderer = window.scheduleRenderer || {};
+window.scheduleRenderer.refresh = function refreshSchedule() {
+    renderFullSchedule();
+};
 
 function scrollToViewTime(viewTime, timelineStart, pixelsPerHour, isFollowingMode, offsetPercentage) {
     const scheduleWrapper = document.querySelector('.schedule-wrapper');

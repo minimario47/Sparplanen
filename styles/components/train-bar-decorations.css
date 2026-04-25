@@ -1,0 +1,113 @@
+/* =========================================================================
+ * Train bar decorations
+ *
+ * Tiny visual badges layered on top of regular train bars:
+ *   - .train-bar__note-badge   ✎  → operator note exists
+ *   - .train-bar__check-badge  ✓  → operator marked as controlled
+ *
+ * Decorators (`train-notes-decorator.js`, `train-checks-decorator.js`)
+ * inject these spans and toggle `data-has-note` / `data-checked`
+ * attributes. Theme-friendly via existing CSS variables.
+ * ========================================================================= */
+
+.train-bar__note-badge,
+.train-bar__check-badge {
+    position: absolute;
+    top: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    pointer-events: none;
+    color: var(--text-on-accent, #fff);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    z-index: 5;
+    user-select: none;
+}
+
+.train-bar__note-badge {
+    right: 2px;
+    background: var(--note-badge-bg, #2563eb);
+    border: 1px solid var(--note-badge-border, rgba(255, 255, 255, 0.6));
+}
+
+.train-bar__check-badge {
+    left: 2px;
+    background: var(--check-badge-bg, #16a34a);
+    border: 1px solid var(--check-badge-border, rgba(255, 255, 255, 0.6));
+}
+
+.train-bar[data-has-note="true"] {
+    box-shadow: inset 0 0 0 1px var(--note-badge-bg, #2563eb), 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+.train-bar[data-checked="true"] {
+    outline: 1px dashed var(--check-badge-bg, #16a34a);
+    outline-offset: -1px;
+}
+
+/* Compact bars — collapse the inner padding by hiding text overflow but keep
+   the badges visible. */
+.train-bar[data-has-note="true"][data-checked="true"] .train-bar__check-badge {
+    left: 2px;
+}
+
+/* Dark theme overrides ---------------------------------------------------- */
+[data-theme="dark"] .train-bar__note-badge {
+    --note-badge-bg: #60a5fa;
+    --note-badge-border: rgba(15, 23, 42, 0.85);
+    color: #0f172a;
+}
+
+[data-theme="dark"] .train-bar__check-badge {
+    --check-badge-bg: #4ade80;
+    --check-badge-border: rgba(15, 23, 42, 0.85);
+    color: #052e16;
+}
+
+[data-theme="dark"] .train-bar[data-has-note="true"] {
+    box-shadow: inset 0 0 0 1px #60a5fa, 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .train-bar[data-checked="true"] {
+    outline-color: #4ade80;
+}
+
+/* High contrast theme ---------------------------------------------------- */
+[data-theme="hc"] .train-bar__note-badge,
+[data-theme="high-contrast"] .train-bar__note-badge {
+    --note-badge-bg: #ffeb3b;
+    --note-badge-border: #000;
+    color: #000;
+}
+
+[data-theme="hc"] .train-bar__check-badge,
+[data-theme="high-contrast"] .train-bar__check-badge {
+    --check-badge-bg: #00e676;
+    --check-badge-border: #000;
+    color: #000;
+}
+
+[data-theme="hc"] .train-bar[data-has-note="true"],
+[data-theme="high-contrast"] .train-bar[data-has-note="true"] {
+    box-shadow: inset 0 0 0 2px #ffeb3b;
+}
+
+[data-theme="hc"] .train-bar[data-checked="true"],
+[data-theme="high-contrast"] .train-bar[data-checked="true"] {
+    outline: 2px solid #00e676;
+    outline-offset: -2px;
+}
+
+/* Reduced motion: no transitions on badges */
+@media (prefers-reduced-motion: reduce) {
+    .train-bar__note-badge,
+    .train-bar__check-badge {
+        transition: none;
+    }
+}

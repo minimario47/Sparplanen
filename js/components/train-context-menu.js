@@ -1,9 +1,28 @@
+/**
+ * Train Context Menu — registry-driven shell
+ *
+ * Owns the menu DOM, positioning, lifecycle and item helpers.
+ * Items are contributed by other modules via:
+ *
+ *   window.TrainContextMenu.register({
+ *     id: 'string',           // unique
+ *     order: number,          // smaller renders first; built-ins live in 100-block windows
+ *     build(train, ctx) → MenuItem | MenuItem[] | null
+ *   })
+ *
+ * MenuItem = HTMLElement (use createItem / createSeparator).
+ *
+ * The four legacy items (slopa/återställ försening, visa info, kopiera tågnummer)
+ * are registered inside this same file to preserve historic behaviour.
+ */
 (function () {
     'use strict';
 
     const MENU_ID = 'train-context-menu';
     let menu = null;
     let activeTrainBar = null;
+    let activeContext = null;
+    const registry = [];
 
     if (!window.suppressedDelays) {
         window.suppressedDelays = new Set();
@@ -43,11 +62,25 @@
         window.dispatchEvent(new CustomEvent('suppressed-delays-changed'));
     }
 
+    /**
+     * Public helper — exposed for action modules.
+     */
     function createItem(label, action, options = {}) {
         const button = document.createElement('button');
         button.type = 'button';
+        button.role = 'menuitem';
         button.className = 'train-context-menu__item';
-        button.textContent = label;
+        if (options.icon) {
+            const iconEl = document.createElement('span');
+            iconEl.className = 'train-context-menu__icon';
+            iconEl.setAttribute('aria-hidden', 'true');
+            iconEl.textContent = options.icon;
+            button.appendChild(iconEl);
+        }
+        const labelEl = document.createElement('span');
+        labelEl.className = 'train-context-menu__label';
+        labelEl.textContent = label;
+        button.appendChild(labelEl);
         if (options.disabled) {
             button.disabled = true;
         }
@@ -59,10 +92,33 @@
             e.preventDefault();
             hideMenu();
             if (!button.disabled) {
-                action();
+                try {
+                    action();
+                } catch (error) {
+                    console.error('[TrainContextMenu] action failed', error);
+                }
             }
         });
         return button;
+    }
+
+    function createSeparator() {
+        const separator = document.createElement('div');
+        separator.className = 'train-context-menu__separator';
+        separator.setAttribute('role', 'separator');
+        return separator;
+    }
+
+    function register(entry) {
+        if (!entry || typeof entry.build !== 'function') return;
+        const order = Number.isFinite(entry.order) ? entry.order : 1000;
+        const id = String(entry.id || `entry-${registry.length}`);
+        const existingIdx = registry.findIndex((e) => e.id === id);
+        if (existingIdx >= 0) {
+            registry[existingIdx] = { ...entry, order, id };
+        } else {
+            registry.push({ ...entry, order, id });
+        }
     }
 
     function renderMenu(trainBar) {
@@ -71,54 +127,37 @@
 
         const train = getTrainFromBar(trainBar);
         if (!train) return;
-        const trainNumber = getTrainNumber(train);
-        const suppressed = isSuppressed(train);
-        const canSuppress = trainNumber && hasDelayData(train) && !suppressed;
 
-        menu.appendChild(
-            createItem('Slopa försening', () => {
-                if (!trainNumber) return;
-                window.suppressedDelays.add(trainNumber);
-                refreshVisuals();
-            }, { disabled: !canSuppress })
-        );
+        activeContext = {
+            train,
+            trainBar,
+            trainNumber: getTrainNumber(train),
+            isSuppressed: isSuppressed(train),
+            hasDelayData: hasDelayData(train)
+        };
 
-        menu.appendChild(
-            createItem('Återställ försening', () => {
-                if (!trainNumber) return;
-                window.suppressedDelays.delete(trainNumber);
-                refreshVisuals();
-            }, { disabled: !suppressed })
-        );
-
-        const separator = document.createElement('div');
-        separator.className = 'train-context-menu__separator';
-        menu.appendChild(separator);
-
-        menu.appendChild(
-            createItem('Visa info', () => {
-                const event = new MouseEvent('click', { bubbles: true, clientX: 0, clientY: 0 });
-                if (window.trainTooltip?.showForTrainBar) {
-                    window.trainTooltip.showForTrainBar(trainBar, event);
-                }
-            })
-        );
-
-        menu.appendChild(
-            createItem('Kopiera tågnummer', async () => {
-                if (!trainNumber) return;
-                try {
-                    await navigator.clipboard.writeText(trainNumber);
-                    if (window.showNotification) {
-                        window.showNotification(`Kopierade tågnummer ${trainNumber}`, 'success');
-                    }
-                } catch (_) {
-                    if (window.showNotification) {
-                        window.showNotification('Kunde inte kopiera tågnummer', 'error');
-                    }
-                }
-            }, { disabled: !trainNumber })
-        );
+        const sorted = registry.slice().sort((a, b) => a.order - b.order);
+        let lastGroup = null;
+        sorted.forEach((entry) => {
+            let result;
+            try {
+                result = entry.build(train, activeContext);
+            } catch (error) {
+                console.error('[TrainContextMenu] entry build failed', entry.id, error);
+                return;
+            }
+            if (!result) return;
+            const items = Array.isArray(result) ? result : [result];
+            if (items.length === 0) return;
+            const group = Math.floor(entry.order / 100);
+            if (lastGroup !== null && group !== lastGroup) {
+                menu.appendChild(createSeparator());
+            }
+            items.forEach((node) => {
+                if (node instanceof HTMLElement) menu.appendChild(node);
+            });
+            lastGroup = group;
+        });
     }
 
     function positionMenu(x, y) {
@@ -142,12 +181,28 @@
         activeTrainBar = trainBar;
         renderMenu(trainBar);
         positionMenu(x, y);
+        const firstItem = menu.querySelector('.train-context-menu__item:not(:disabled)');
+        if (firstItem) {
+            setTimeout(() => firstItem.focus(), 0);
+        }
     }
 
     function hideMenu() {
         if (!menu) return;
         menu.style.display = 'none';
         activeTrainBar = null;
+        activeContext = null;
+    }
+
+    function focusSibling(direction) {
+        if (!menu || menu.style.display !== 'block') return;
+        const items = Array.from(menu.querySelectorAll('.train-context-menu__item:not(:disabled)'));
+        if (items.length === 0) return;
+        const idx = items.indexOf(document.activeElement);
+        let next = idx + direction;
+        if (next < 0) next = items.length - 1;
+        if (next >= items.length) next = 0;
+        items[next].focus();
     }
 
     function initDom() {
@@ -158,6 +213,7 @@
         menu = document.createElement('div');
         menu.id = MENU_ID;
         menu.className = 'train-context-menu';
+        menu.setAttribute('role', 'menu');
         menu.style.display = 'none';
         menu.addEventListener('contextmenu', (e) => {
             e.preventDefault();
@@ -186,8 +242,16 @@
         });
 
         document.addEventListener('keydown', (e) => {
+            if (!menu || menu.style.display !== 'block') return;
             if (e.key === 'Escape') {
                 hideMenu();
+                if (activeTrainBar) activeTrainBar.focus?.();
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                focusSibling(1);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                focusSibling(-1);
             }
         });
 
@@ -198,11 +262,85 @@
                 renderMenu(activeTrainBar);
             }
         });
+        window.addEventListener('train-notes-changed', () => {
+            if (activeTrainBar && menu && menu.style.display === 'block') {
+                renderMenu(activeTrainBar);
+            }
+        });
+        window.addEventListener('train-checks-changed', () => {
+            if (activeTrainBar && menu && menu.style.display === 'block') {
+                renderMenu(activeTrainBar);
+            }
+        });
+        window.addEventListener('user-trains-changed', () => {
+            hideMenu();
+        });
+    }
+
+    /**
+     * Built-in items (delay suppression, copy, show info).
+     * Order numbers leave room for new groups: 100s = delay ops,
+     * 200s reserved for note/record/check actions in train-context-menu-actions.js,
+     * 300s = info.
+     */
+    function registerBuiltins() {
+        register({
+            id: 'builtin.suppress',
+            order: 100,
+            build: (train, ctx) => {
+                const canSuppress = ctx.trainNumber && ctx.hasDelayData && !ctx.isSuppressed;
+                return createItem('Slopa försening', () => {
+                    if (!ctx.trainNumber) return;
+                    window.suppressedDelays.add(ctx.trainNumber);
+                    refreshVisuals();
+                }, { disabled: !canSuppress });
+            }
+        });
+
+        register({
+            id: 'builtin.restore',
+            order: 110,
+            build: (train, ctx) => createItem('Återställ försening', () => {
+                if (!ctx.trainNumber) return;
+                window.suppressedDelays.delete(ctx.trainNumber);
+                refreshVisuals();
+            }, { disabled: !ctx.isSuppressed })
+        });
+
+        register({
+            id: 'builtin.show-info',
+            order: 300,
+            build: (train, ctx) => createItem('Visa info', () => {
+                const event = new MouseEvent('click', { bubbles: true, clientX: 0, clientY: 0 });
+                if (window.trainTooltip?.showForTrainBar) {
+                    window.trainTooltip.showForTrainBar(ctx.trainBar, event);
+                }
+            })
+        });
+
+        register({
+            id: 'builtin.copy-number',
+            order: 310,
+            build: (train, ctx) => createItem('Kopiera tågnummer', async () => {
+                if (!ctx.trainNumber) return;
+                try {
+                    await navigator.clipboard.writeText(ctx.trainNumber);
+                    if (window.showNotification) {
+                        window.showNotification(`Kopierade tågnummer ${ctx.trainNumber}`, 'success');
+                    }
+                } catch (_) {
+                    if (window.showNotification) {
+                        window.showNotification('Kunde inte kopiera tågnummer', 'error');
+                    }
+                }
+            }, { disabled: !ctx.trainNumber })
+        });
     }
 
     function init() {
         initDom();
         attachListeners();
+        registerBuiltins();
     }
 
     if (document.readyState === 'loading') {
@@ -210,4 +348,11 @@
     } else {
         init();
     }
+
+    window.TrainContextMenu = {
+        register,
+        createItem,
+        createSeparator,
+        hide: hideMenu
+    };
 })();

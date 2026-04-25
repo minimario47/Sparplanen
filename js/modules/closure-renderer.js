@@ -47,9 +47,13 @@ window.ClosureRenderer = (() => {
         // `closures.js`, which does NOT attach to `window` in browsers; we
         // therefore reach for the bare identifier.  Wrapped in typeof so we
         // don't throw when the file failed to load.
-        const source = (typeof initialTrackClosures !== 'undefined' && Array.isArray(initialTrackClosures))
+        const baseClosures = (typeof initialTrackClosures !== 'undefined' && Array.isArray(initialTrackClosures))
             ? initialTrackClosures
             : [];
+        const userClosures = (window.UserClosuresStore && typeof window.UserClosuresStore.getAll === 'function')
+            ? window.UserClosuresStore.getAll()
+            : [];
+        const source = baseClosures.concat(userClosures);
         if (source.length === 0) return;
 
         source.forEach(c => {
@@ -80,6 +84,13 @@ window.ClosureRenderer = (() => {
             const reason = c.reason || 'Spår stängt';
             el.dataset.trackId = String(c.trackId);
             el.dataset.subTrackIndex = String(c.subTrackIndex ?? 0);
+            if (c.id !== undefined && c.id !== null) {
+                el.dataset.closureId = String(c.id);
+            }
+            if (c.userAdded) {
+                el.dataset.userAdded = 'true';
+                el.classList.add('closure-band--user-added');
+            }
             el.setAttribute('role', 'img');
             el.setAttribute('aria-label', `${reason}: ${timeRange}`);
 

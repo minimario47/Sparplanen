@@ -24,6 +24,14 @@
     box-shadow: inset 0 0 0 1px var(--closure-band-border, rgba(15, 18, 24, 0.55));
 }
 
+/* User-added closures are editable via right-click; signal that affordance. */
+.closure-band--user-added {
+    cursor: context-menu;
+    box-shadow:
+        inset 0 0 0 1px var(--closure-band-border, rgba(15, 18, 24, 0.55)),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.18);
+}
+
 .closure-band__stripes {
     position: absolute;
     inset: 0;

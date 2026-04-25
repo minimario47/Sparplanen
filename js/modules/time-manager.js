@@ -133,7 +133,33 @@ class TimeManager {
     console.log('🎯 Jumped to now (red line at ' + this.offsetPercentage + '%):', this.getStateInfo());
     return true;
   }
-  
+
+  /**
+   * Center the timeline view on an arbitrary time so that it lands at the
+   * red-line offset. Mirrors `jumpToNow` but takes any Date.
+   *
+   * Used by the empty-grid context menu's "Centrera tid här" action.
+   */
+  centerOnTime(targetTime) {
+    if (!(targetTime instanceof Date) || Number.isNaN(targetTime.getTime())) {
+      return false;
+    }
+
+    const offsetFromCenterPercent = this.offsetPercentage - 50;
+    const offsetFromCenterHours = (offsetFromCenterPercent / 100) * this.timeRange;
+
+    this.viewTime = new Date(targetTime.getTime() - offsetFromCenterHours * 60 * 60000);
+
+    if (this.isFollowingMode) {
+      this.deactivateFollowingMode();
+    }
+    this.saveState();
+    this.notifyChange('jump_to_now', { centeredAt: targetTime.toISOString() });
+
+    console.log('🎯 Centered on time:', targetTime.toLocaleString('sv-SE'));
+    return true;
+  }
+
   /**
    * Toggle following mode on/off
    */

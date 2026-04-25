@@ -1,0 +1,338 @@
+/* =========================================================================
+ * Train Note Modal
+ *
+ * Lightweight, accessible modal for editing the per-train operator note.
+ * Uses local CSS variables so the dark / high-contrast themes can override
+ * via [data-theme="…"] selectors at the bottom of the file.
+ * ========================================================================= */
+
+.train-note-modal__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000;
+    animation: trainNoteFadeIn 120ms ease-out;
+    padding: 24px;
+}
+
+.train-note-modal__backdrop.hidden {
+    display: none;
+}
+
+@keyframes trainNoteFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.train-note-modal {
+    background: var(--surface, #fff);
+    color: var(--text, #1a2332);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.35);
+    min-width: 380px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.98);
+    animation: trainNotePop 160ms ease-out forwards;
+    border: 1px solid var(--border, rgba(15, 23, 42, 0.08));
+}
+
+@keyframes trainNotePop {
+    to { transform: scale(1); }
+}
+
+.train-note-modal__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 20px 12px;
+    border-bottom: 1px solid var(--border, rgba(15, 23, 42, 0.08));
+}
+
+.train-note-modal__title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.train-note-modal__subtitle {
+    color: var(--text-muted, rgba(26, 35, 50, 0.65));
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.train-note-modal__close {
+    background: transparent;
+    border: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--text-muted, rgba(26, 35, 50, 0.7));
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 100ms ease;
+}
+
+.train-note-modal__close:hover { background: var(--surface-muted, rgba(15, 23, 42, 0.06)); }
+.train-note-modal__close:focus-visible {
+    outline: 2px solid var(--accent, #2563eb);
+    outline-offset: 2px;
+}
+
+.train-note-modal__body {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+}
+
+.train-note-modal__label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted, rgba(26, 35, 50, 0.6));
+}
+
+.train-note-modal__textarea {
+    font: inherit;
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--border, rgba(15, 23, 42, 0.18));
+    background: var(--surface-muted, #f8fafc);
+    color: var(--text, #1a2332);
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.45;
+    transition: border-color 100ms ease, box-shadow 100ms ease;
+}
+
+.train-note-modal__textarea:focus {
+    outline: none;
+    border-color: var(--accent, #2563eb);
+    box-shadow: 0 0 0 3px var(--accent-soft, rgba(37, 99, 235, 0.18));
+}
+
+.train-note-modal__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted, rgba(26, 35, 50, 0.55));
+}
+
+.train-note-modal__counter.is-warning {
+    color: #b45309;
+    font-weight: 600;
+}
+
+.train-note-modal__footer {
+    display: flex;
+    gap: 8px;
+    padding: 12px 20px 16px;
+    border-top: 1px solid var(--border, rgba(15, 23, 42, 0.08));
+    align-items: center;
+}
+
+.train-note-modal__footer-spacer { flex: 1; }
+
+.train-note-modal__btn {
+    appearance: none;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 100ms ease, color 100ms ease, border-color 100ms ease;
+}
+
+.train-note-modal__btn--ghost {
+    background: transparent;
+    color: #b91c1c;
+    border-color: transparent;
+}
+
+.train-note-modal__btn--ghost:hover {
+    background: rgba(220, 38, 38, 0.08);
+}
+
+.train-note-modal__btn--secondary {
+    background: var(--surface-muted, rgba(15, 23, 42, 0.06));
+    color: var(--text, #1a2332);
+}
+
+.train-note-modal__btn--secondary:hover {
+    background: var(--surface-muted-hover, rgba(15, 23, 42, 0.1));
+}
+
+.train-note-modal__btn--primary {
+    background: var(--accent, #2563eb);
+    color: #fff;
+}
+
+.train-note-modal__btn--primary:hover {
+    background: var(--accent-strong, #1d4ed8);
+}
+
+.train-note-modal__btn:focus-visible {
+    outline: 2px solid var(--accent, #2563eb);
+    outline-offset: 2px;
+}
+
+/* Tooltip note section --------------------------------------------------- */
+.tooltip-note {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(37, 99, 235, 0.08);
+    border-left: 3px solid #2563eb;
+    color: var(--text, #1a2332);
+}
+
+.tooltip-note__title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #1d4ed8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.tooltip-note__icon { font-size: 12px; }
+
+.tooltip-note__body {
+    font-size: 13px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 160px;
+    overflow-y: auto;
+}
+
+.tooltip-check {
+    margin-top: 8px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(22, 163, 74, 0.1);
+    color: #15803d;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Dark theme ------------------------------------------------------------- */
+[data-theme="dark"] .train-note-modal {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-color: rgba(148, 163, 184, 0.18);
+}
+
+[data-theme="dark"] .train-note-modal__textarea {
+    background: #0f172a;
+    border-color: rgba(148, 163, 184, 0.25);
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .train-note-modal__textarea:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25);
+}
+
+[data-theme="dark"] .train-note-modal__btn--secondary {
+    background: rgba(148, 163, 184, 0.16);
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .train-note-modal__btn--primary {
+    background: #2563eb;
+}
+
+[data-theme="dark"] .tooltip-note {
+    background: rgba(96, 165, 250, 0.16);
+    border-left-color: #60a5fa;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .tooltip-note__title { color: #93c5fd; }
+
+[data-theme="dark"] .tooltip-check {
+    background: rgba(74, 222, 128, 0.16);
+    color: #86efac;
+}
+
+/* High-contrast theme --------------------------------------------------- */
+[data-theme="hc"] .train-note-modal,
+[data-theme="high-contrast"] .train-note-modal {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+[data-theme="hc"] .train-note-modal__textarea,
+[data-theme="high-contrast"] .train-note-modal__textarea {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+[data-theme="hc"] .train-note-modal__btn--primary,
+[data-theme="high-contrast"] .train-note-modal__btn--primary {
+    background: #ffeb3b;
+    color: #000;
+    border: 2px solid #000;
+}
+
+[data-theme="hc"] .train-note-modal__btn--secondary,
+[data-theme="high-contrast"] .train-note-modal__btn--secondary {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+[data-theme="hc"] .train-note-modal__btn--ghost,
+[data-theme="high-contrast"] .train-note-modal__btn--ghost {
+    color: #ff6b6b;
+    border: 2px solid #ff6b6b;
+}
+
+[data-theme="hc"] .tooltip-note,
+[data-theme="high-contrast"] .tooltip-note {
+    background: #000;
+    color: #fff;
+    border-left: 4px solid #ffeb3b;
+}
+
+[data-theme="hc"] .tooltip-note__title,
+[data-theme="high-contrast"] .tooltip-note__title { color: #ffeb3b; }
+
+[data-theme="hc"] .tooltip-check,
+[data-theme="high-contrast"] .tooltip-check {
+    background: #000;
+    color: #00e676;
+    border: 2px solid #00e676;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .train-note-modal__backdrop,
+    .train-note-modal { animation: none !important; }
+}

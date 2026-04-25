@@ -36,36 +36,42 @@
     <link rel="stylesheet" href="styles/base.css">
     
     <!-- 4. Components -->
+    <link rel="stylesheet" href="styles/components/add-closure-modal.css">
+    <link rel="stylesheet" href="styles/components/add-train-modal.css">
     <link rel="stylesheet" href="styles/components/buttons.css">
+    <link rel="stylesheet" href="styles/components/closure-band.css">
+    <link rel="stylesheet" href="styles/components/context-menu.css">
+    <link rel="stylesheet" href="styles/components/debug-logs.css">
+    <link rel="stylesheet" href="styles/components/delay-visualization.css">
     <link rel="stylesheet" href="styles/components/header-base.css">
-    <link rel="stylesheet" href="styles/components/header-time-controls.css">
     <link rel="stylesheet" href="styles/components/header-status.css">
+    <link rel="stylesheet" href="styles/components/header-time-controls.css">
+    <link rel="stylesheet" href="styles/components/late-arrivals-panel.css">
     <link rel="stylesheet" href="styles/components/logo.css">
-    <link rel="stylesheet" href="styles/components/theme-switch.css">
     <link rel="stylesheet" href="styles/components/notifications.css">
     <link rel="stylesheet" href="styles/components/schedule.css">
-    <link rel="stylesheet" href="styles/components/closure-band.css">
-    <link rel="stylesheet" href="styles/components/settings-modal.css">
-    <link rel="stylesheet" href="styles/components/settings-display.css">
-    <link rel="stylesheet" href="styles/components/settings-display-detail.css">
+    <link rel="stylesheet" href="styles/components/search-highlights.css">
+    <link rel="stylesheet" href="styles/components/search-inline.css">
     <link rel="stylesheet" href="styles/components/settings-controls.css">
+    <link rel="stylesheet" href="styles/components/settings-display-detail.css">
+    <link rel="stylesheet" href="styles/components/settings-display.css">
+    <link rel="stylesheet" href="styles/components/settings-modal.css">
+    <link rel="stylesheet" href="styles/components/settings-viz.css">
+    <link rel="stylesheet" href="styles/components/theme-switch.css">
+    <link rel="stylesheet" href="styles/components/timeline.css">
+    <link rel="stylesheet" href="styles/components/track-tooltip.css">
+    <link rel="stylesheet" href="styles/components/tracks.css">
+    <link rel="stylesheet" href="styles/components/train-bar-decorations.css">
+    <link rel="stylesheet" href="styles/components/train-note-modal.css">
+    <link rel="stylesheet" href="styles/components/train-record-drawer.css">
+    <link rel="stylesheet" href="styles/components/train-tooltip.css">
+    <link rel="stylesheet" href="styles/components/trains.css">
     <!-- New Form Components -->
     <link rel="stylesheet" href="styles/components/forms-base.css">
     <link rel="stylesheet" href="styles/components/forms-toggle.css">
     <link rel="stylesheet" href="styles/components/forms-slider.css">
     <link rel="stylesheet" href="styles/components/forms-select.css">
     <link rel="stylesheet" href="styles/components/forms-radio-group.css">
-    <link rel="stylesheet" href="styles/components/search-highlights.css">
-    <link rel="stylesheet" href="styles/components/search-inline.css">
-    <link rel="stylesheet" href="styles/components/tracks.css">
-    <link rel="stylesheet" href="styles/components/timeline.css">
-    <link rel="stylesheet" href="styles/components/trains.css">
-    <link rel="stylesheet" href="styles/components/track-tooltip.css">
-    <link rel="stylesheet" href="styles/components/train-tooltip.css">
-    <link rel="stylesheet" href="styles/components/delay-visualization.css">
-    <link rel="stylesheet" href="styles/components/settings-viz.css">
-    <link rel="stylesheet" href="styles/components/debug-logs.css">
-    <link rel="stylesheet" href="styles/components/late-arrivals-panel.css">
     
     <!-- Data Files -->
     <script src="vehicleTypes.js"></script>
@@ -156,7 +162,7 @@
                 </button>
                 <button type="button" class="btn btn-secondary btn-icon" id="late-arrivals-toggle"
                     aria-label="Sen ankomst till Göteborg" title="Sen ankomst G (försenade)" aria-pressed="false">
-                    <span class="late-arrivals-toggle-icon" aria-hidden="true">G</span>
+                    <img src="assets/Icons/+3.png" alt="" class="late-arrivals-toggle-icon" width="22" height="22" decoding="async">
                 </button>
                 <button type="button" class="btn btn-secondary btn-icon settings-button" aria-label="Inställningar" title="Inställningar">
                     <img src="assets/Icons/settings.png" alt="" class="icon-svg" width="20" height="20" decoding="async">
@@ -778,6 +784,29 @@
     <script src="js/components/track-tooltip.js"></script>
     <script src="js/components/train-tooltip.js"></script>
     <script src="js/components/train-context-menu.js"></script>
+
+    <!-- 9a. Stores (must load before decorators / modals that read them) -->
+    <script src="js/components/train-notes/train-notes-store.js"></script>
+    <script src="js/components/train-checks/train-checks-store.js"></script>
+    <script src="js/components/grid-actions/user-trains-store.js"></script>
+    <script src="js/components/grid-actions/user-closures-store.js"></script>
+
+    <!-- 9b. Decorators (subscribe to schedule:rendered + store changes) -->
+    <script src="js/components/train-notes/train-notes-decorator.js"></script>
+    <script src="js/components/train-checks/train-checks-decorator.js"></script>
+
+    <!-- 9c. Modals & drawer -->
+    <script src="js/components/train-notes/train-note-modal.js"></script>
+    <script src="js/components/train-record-drawer/train-record-drawer.js"></script>
+    <script src="js/components/grid-actions/add-train-modal.js"></script>
+    <script src="js/components/grid-actions/add-closure-modal.js"></script>
+
+    <!-- 9d. Grid coords helper, then context-menu actions, then grid menu -->
+    <script src="js/components/grid-actions/grid-coords.js"></script>
+    <script src="js/components/train-context-menu-actions.js"></script>
+    <script src="js/components/grid-context-menu.js"></script>
+    <script src="js/components/grid-context-menu-actions.js"></script>
+
     <script src="js/components/debug-logs.js"></script>
     
     <script>
