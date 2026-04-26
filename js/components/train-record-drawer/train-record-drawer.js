@@ -184,8 +184,10 @@
             renderSection('Rutt', [
                 renderRow('Ursprung', train.origin),
                 renderRow('Destination', train.dest),
-                renderRow('Kopplad till', train.connectedTo)
-            ]),
+                renderRow('Kopplad till', train.connectedTo),
+                train.crossDayFrom && renderRow('Föregående dags tåg (enligt plan)', train.crossDayFrom),
+                train.crossDayTo && renderRow('Nästa dags tåg (enligt plan)', train.crossDayTo)
+            ].filter(Boolean)),
             renderSection('Fordon', [
                 renderRow('Längd (m)', train.lengthMeters, { showEmpty: true }),
                 renderRow('Längdklass', train.lengthClass)

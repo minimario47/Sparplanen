@@ -48,6 +48,80 @@ function initializeSchedule() {
     }
 }
 
+/**
+ * Spårplan PDFs: day D ends with continuesToNextPage, day D+1 starts with continuesFromPrevPage
+ * (same spår, delspår, and matching tågnummer). Link current-day tjänster to readable labels.
+ */
+function applyCrossDayServiceLinks(trainData, resolved) {
+    const R = window.SparplanenResolve;
+    if (!R || !resolved || !resolved.usedBundle || !resolved.week || !resolved.day) return;
+    const weeks = typeof window !== 'undefined' ? window.SPARPLANEN_WEEKS : null;
+    if (!weeks) return;
+    const week = resolved.week;
+    const dayKey = resolved.day;
+    const wk = weeks[week];
+    if (!wk) return;
+    const curList = wk[dayKey];
+    if (!Array.isArray(curList)) return;
+
+    const pDay = R.prevDayKey(dayKey);
+    const nDay = R.nextDayKey(dayKey);
+    const prevList = pDay ? (wk[pDay] || []) : [];
+    const nextList = nDay ? (wk[nDay] || []) : [];
+
+    function subEq(a, b) {
+        return (a.subTrackIndex ?? 0) === (b.subTrackIndex ?? 0);
+    }
+    function sameServiceTrack(a, b) {
+        return a && b && a.trackId === b.trackId && subEq(a, b);
+    }
+    function anySharedNumber(a, b) {
+        const na = [a.arrivalTrainNumber, a.departureTrainNumber]
+            .map((s) => String(s || '').trim()).filter(Boolean);
+        const nb = [b.arrivalTrainNumber, b.departureTrainNumber]
+            .map((s) => String(s || '').trim()).filter(Boolean);
+        for (const x of na) for (const y of nb) if (x === y) return true;
+        return false;
+    }
+
+    for (const t of trainData) {
+        if (t.userAdded) continue;
+        const svc = curList.find((s) => s.id === t.id);
+        if (!svc) continue;
+
+        if (svc.continuesFromPrevPage && pDay) {
+            const partner = prevList.find(
+                (p) => p.continuesToNextPage
+                    && sameServiceTrack(p, svc)
+                    && anySharedNumber(p, svc)
+            );
+            if (partner) {
+                const time = partner.scheduledArrivalTime || partner.scheduledDepartureTime || '–';
+                const num = partner.departureTrainNumber || partner.arrivalTrainNumber || '';
+                const label = R.formatDayLabelSv(pDay);
+                t.crossDayFrom = num
+                    ? `${label}: tåg ${num} (ca ${time})`
+                    : `${label} (ca ${time})`;
+            }
+        }
+        if (svc.continuesToNextPage && nDay) {
+            const partner = nextList.find(
+                (n) => n.continuesFromPrevPage
+                    && sameServiceTrack(svc, n)
+                    && anySharedNumber(svc, n)
+            );
+            if (partner) {
+                const time = partner.scheduledArrivalTime || partner.scheduledDepartureTime || '–';
+                const num = partner.arrivalTrainNumber || partner.departureTrainNumber || '';
+                const label = R.formatDayLabelSv(nDay);
+                t.crossDayTo = num
+                    ? `${label}: tåg ${num} (ca ${time})`
+                    : `${label} (ca ${time})`;
+            }
+        }
+    }
+}
+
 function prepareTrackData() {
     const fmt = typeof formatTrackSignalLengthDisplay === 'function'
         ? formatTrackSignalLengthDisplay
@@ -169,6 +243,8 @@ function prepareTrainData() {
             }
         }
     });
+
+    applyCrossDayServiceLinks(trainData, resolved);
     
     const userTrains = (window.UserTrainsStore && typeof window.UserTrainsStore.getAll === 'function')
         ? window.UserTrainsStore.getAll()

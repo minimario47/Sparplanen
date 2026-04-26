@@ -78,10 +78,43 @@
         return { week: null, day: null, anchor: null };
     }
 
+    /** Mon–Sun order as in plan PDF week bundle (söndag → måndag spans two weeks of operations). */
+    const DAY_KEY_ORDER = ['mandag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lordag', 'sondag'];
+
+    const DAY_LABEL_SV = {
+        mandag: 'Måndag',
+        tisdag: 'Tisdag',
+        onsdag: 'Onsdag',
+        torsdag: 'Torsdag',
+        fredag: 'Fredag',
+        lordag: 'Lördag',
+        sondag: 'Söndag',
+    };
+
+    function prevDayKey(day) {
+        const i = DAY_KEY_ORDER.indexOf(day);
+        if (i < 0) return null;
+        return DAY_KEY_ORDER[(i + 6) % 7];
+    }
+
+    function nextDayKey(day) {
+        const i = DAY_KEY_ORDER.indexOf(day);
+        if (i < 0) return null;
+        return DAY_KEY_ORDER[(i + 1) % 7];
+    }
+
+    function formatDayLabelSv(day) {
+        return (day && DAY_LABEL_SV[day]) || day || '';
+    }
+
     window.SparplanenResolve = {
+        DAY_KEY_ORDER: DAY_KEY_ORDER,
         formatStockholmYMD: formatStockholmYMD,
         getStockholmSwedishDayKey: getStockholmSwedishDayKey,
         pickWeekAndDay: pickWeekAndDay,
+        prevDayKey: prevDayKey,
+        nextDayKey: nextDayKey,
+        formatDayLabelSv: formatDayLabelSv,
         parseScheduleNow: function () {
             const weeks = typeof window !== 'undefined' ? window.SPARPLANEN_WEEKS : null;
             const anchors = typeof window !== 'undefined' ? window.SPARPLANEN_ANCHORS : null;
