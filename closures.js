@@ -1,6 +1,4 @@
-// Auto-generated — DO NOT EDIT MANUALLY
-// Source : Spårplaner Göteborg C, v.17 3tim VERSION 2.pdf Torsdag.pdf
-// Created: 2026-04-23 12:45
-
+// Auto-generated — DO NOT EDIT MANUALLY (week bundle from emit_week_bundle)
+// Created: 2026-04-26 14:34
 const initialTrackClosures = [];
 window.initialTrackClosures = initialTrackClosures;

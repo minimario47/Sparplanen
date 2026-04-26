@@ -1,7 +1,31075 @@
-// Auto-generated — DO NOT EDIT MANUALLY
-// Source : Spårplaner Göteborg C, v.17 3tim VERSION 2.pdf Torsdag.pdf
-// Created: 2026-04-23 12:45
-
+// Auto-generated — DO NOT EDIT MANUALLY (week bundle from ingest_incoming + emit_week_bundle)
+// Created: 2026-04-26 14:34
+window.SPARPLANEN_WEEKS = {
+  "2026-W17": {
+    "torsdag": [
+      {
+        "id": 1,
+        "trackId": 1,
+        "arrivalTrainNumber": "3593",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:19",
+        "scheduledDepartureTime": "00:34",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 2,
+        "trackId": 2,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3500",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 3,
+        "trackId": 2,
+        "arrivalTrainNumber": "23493",
+        "departureTrainNumber": "3516",
+        "scheduledArrivalTime": "00:37",
+        "scheduledDepartureTime": "04:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 4,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "400",
+        "scheduledArrivalTime": "02:40",
+        "scheduledDepartureTime": "05:12",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 5,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3602",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 6,
+        "trackId": 3,
+        "arrivalTrainNumber": "451",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:42",
+        "scheduledDepartureTime": "01:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 7,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "420",
+        "scheduledArrivalTime": "01:30",
+        "scheduledDepartureTime": "05:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 8,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 9,
+        "trackId": 4,
+        "arrivalTrainNumber": "20379",
+        "departureTrainNumber": "20350",
+        "scheduledArrivalTime": "00:50",
+        "scheduledDepartureTime": "05:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 10,
+        "trackId": 5,
+        "arrivalTrainNumber": "17399",
+        "departureTrainNumber": "3003",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "00:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 11,
+        "trackId": 5,
+        "arrivalTrainNumber": "3693",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:35",
+        "scheduledDepartureTime": "00:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 12,
+        "trackId": 5,
+        "arrivalTrainNumber": "59823",
+        "departureTrainNumber": "69299",
+        "scheduledArrivalTime": "02:35",
+        "scheduledDepartureTime": "03:06",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.902,
+          0.902,
+          0.902
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 13,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "2012",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "05:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 14,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3420",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "04:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 15,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "382",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "06:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 16,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "481",
+        "scheduledArrivalTime": "00:01",
+        "scheduledDepartureTime": "06:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 17,
+        "trackId": 13,
+        "arrivalTrainNumber": "319",
+        "departureTrainNumber": "319",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "06:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 18,
+        "trackId": 14,
+        "arrivalTrainNumber": "11130",
+        "departureTrainNumber": "11031",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "04:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 19,
+        "trackId": 15,
+        "arrivalTrainNumber": "33095",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:00",
+        "scheduledDepartureTime": "00:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 20,
+        "trackId": 15,
+        "arrivalTrainNumber": "13094",
+        "departureTrainNumber": "3019",
+        "scheduledArrivalTime": "00:31",
+        "scheduledDepartureTime": "04:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 21,
+        "trackId": 16,
+        "arrivalTrainNumber": "3004",
+        "departureTrainNumber": "3021",
+        "scheduledArrivalTime": "01:30",
+        "scheduledDepartureTime": "05:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 22,
+        "trackId": 1,
+        "arrivalTrainNumber": "83520",
+        "departureTrainNumber": "3520",
+        "scheduledArrivalTime": "04:50",
+        "scheduledDepartureTime": "05:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 23,
+        "trackId": 1,
+        "arrivalTrainNumber": "3513",
+        "departureTrainNumber": "3520",
+        "scheduledArrivalTime": "04:37",
+        "scheduledDepartureTime": "05:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 24,
+        "trackId": 1,
+        "arrivalTrainNumber": "3515",
+        "departureTrainNumber": "3524",
+        "scheduledArrivalTime": "05:37",
+        "scheduledDepartureTime": "06:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 25,
+        "trackId": 2,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3518",
+        "scheduledArrivalTime": "04:27",
+        "scheduledDepartureTime": "04:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 26,
+        "trackId": 2,
+        "arrivalTrainNumber": "3517",
+        "departureTrainNumber": "3522",
+        "scheduledArrivalTime": "05:19",
+        "scheduledDepartureTime": "05:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 27,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "422",
+        "scheduledArrivalTime": "05:25",
+        "scheduledDepartureTime": "06:19",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 28,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "424",
+        "scheduledArrivalTime": "05:30",
+        "scheduledDepartureTime": "07:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 29,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "164",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "05:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 30,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "168",
+        "scheduledArrivalTime": "05:45",
+        "scheduledDepartureTime": "07:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 31,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3622",
+        "scheduledArrivalTime": "05:35",
+        "scheduledDepartureTime": "05:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 32,
+        "trackId": 8,
+        "arrivalTrainNumber": "3217",
+        "departureTrainNumber": "3226",
+        "scheduledArrivalTime": "06:00",
+        "scheduledDepartureTime": "06:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 33,
+        "trackId": 9,
+        "arrivalTrainNumber": "3215",
+        "departureTrainNumber": "3224",
+        "scheduledArrivalTime": "05:30",
+        "scheduledDepartureTime": "06:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 34,
+        "trackId": 9,
+        "arrivalTrainNumber": "93224",
+        "departureTrainNumber": "3224",
+        "scheduledArrivalTime": "05:18",
+        "scheduledDepartureTime": "06:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 35,
+        "trackId": 10,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3620",
+        "scheduledArrivalTime": "05:05",
+        "scheduledDepartureTime": "05:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 36,
+        "trackId": 10,
+        "arrivalTrainNumber": "3617",
+        "departureTrainNumber": "13670",
+        "scheduledArrivalTime": "05:25",
+        "scheduledDepartureTime": "05:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 37,
+        "trackId": 10,
+        "arrivalTrainNumber": "3619",
+        "departureTrainNumber": "13672",
+        "scheduledArrivalTime": "05:55",
+        "scheduledDepartureTime": "06:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 38,
+        "trackId": 12,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3023",
+        "scheduledArrivalTime": "05:30",
+        "scheduledDepartureTime": "05:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 39,
+        "trackId": 14,
+        "arrivalTrainNumber": "3020",
+        "departureTrainNumber": "3175",
+        "scheduledArrivalTime": "05:45",
+        "scheduledDepartureTime": "06:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 40,
+        "trackId": 14,
+        "arrivalTrainNumber": "3018",
+        "departureTrainNumber": "3175",
+        "scheduledArrivalTime": "05:21",
+        "scheduledDepartureTime": "06:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 41,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "20151",
+        "scheduledArrivalTime": "05:10",
+        "scheduledDepartureTime": "05:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 42,
+        "trackId": 15,
+        "arrivalTrainNumber": "13120",
+        "departureTrainNumber": "13125",
+        "scheduledArrivalTime": "05:35",
+        "scheduledDepartureTime": "06:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 43,
+        "trackId": 16,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3025",
+        "scheduledArrivalTime": "06:02",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 44,
+        "trackId": 16,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "11039",
+        "scheduledArrivalTime": "05:35",
+        "scheduledDepartureTime": "05:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 45,
+        "trackId": 16,
+        "arrivalTrainNumber": "3172",
+        "departureTrainNumber": "3027",
+        "scheduledArrivalTime": "06:00",
+        "scheduledDepartureTime": "06:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 46,
+        "trackId": 1,
+        "arrivalTrainNumber": "3519",
+        "departureTrainNumber": "3528",
+        "scheduledArrivalTime": "06:37",
+        "scheduledDepartureTime": "07:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 47,
+        "trackId": 1,
+        "arrivalTrainNumber": "3523",
+        "departureTrainNumber": "3532",
+        "scheduledArrivalTime": "07:37",
+        "scheduledDepartureTime": "08:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 48,
+        "trackId": 1,
+        "arrivalTrainNumber": "3527",
+        "departureTrainNumber": "3536",
+        "scheduledArrivalTime": "08:37",
+        "scheduledDepartureTime": "09:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 49,
+        "trackId": 2,
+        "arrivalTrainNumber": "3521",
+        "departureTrainNumber": "3526",
+        "scheduledArrivalTime": "06:19",
+        "scheduledDepartureTime": "06:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 50,
+        "trackId": 2,
+        "arrivalTrainNumber": "3525",
+        "departureTrainNumber": "3530",
+        "scheduledArrivalTime": "07:19",
+        "scheduledDepartureTime": "07:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 51,
+        "trackId": 2,
+        "arrivalTrainNumber": "3529",
+        "departureTrainNumber": "3534",
+        "scheduledArrivalTime": "08:19",
+        "scheduledDepartureTime": "08:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 52,
+        "trackId": 3,
+        "arrivalTrainNumber": "3427",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:42",
+        "scheduledDepartureTime": "07:57",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 53,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "426",
+        "scheduledArrivalTime": "06:35",
+        "scheduledDepartureTime": "08:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 54,
+        "trackId": 3,
+        "arrivalTrainNumber": "20351",
+        "departureTrainNumber": "20356",
+        "scheduledArrivalTime": "08:45",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 55,
+        "trackId": 4,
+        "arrivalTrainNumber": "3421",
+        "departureTrainNumber": "3426",
+        "scheduledArrivalTime": "06:23",
+        "scheduledDepartureTime": "06:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 56,
+        "trackId": 4,
+        "arrivalTrainNumber": "3425",
+        "departureTrainNumber": "13790",
+        "scheduledArrivalTime": "07:23",
+        "scheduledDepartureTime": "07:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 57,
+        "trackId": 4,
+        "arrivalTrainNumber": "3425",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:23",
+        "scheduledDepartureTime": "07:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 58,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13734",
+        "scheduledArrivalTime": "08:30",
+        "scheduledDepartureTime": "08:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 59,
+        "trackId": 5,
+        "arrivalTrainNumber": "3423",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "06:42",
+        "scheduledDepartureTime": "06:57",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 60,
+        "trackId": 5,
+        "arrivalTrainNumber": "97224",
+        "departureTrainNumber": "2004",
+        "scheduledArrivalTime": "06:10",
+        "scheduledDepartureTime": "06:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 61,
+        "trackId": 5,
+        "arrivalTrainNumber": "97226",
+        "departureTrainNumber": "2006",
+        "scheduledArrivalTime": "07:10",
+        "scheduledDepartureTime": "07:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 62,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "428",
+        "scheduledArrivalTime": "07:55",
+        "scheduledDepartureTime": "09:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 63,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "170",
+        "scheduledArrivalTime": "07:40",
+        "scheduledDepartureTime": "08:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 64,
+        "trackId": 6,
+        "arrivalTrainNumber": "3229",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:00",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 65,
+        "trackId": 7,
+        "arrivalTrainNumber": "155",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:23",
+        "scheduledDepartureTime": "08:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 0,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 66,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "20352",
+        "scheduledArrivalTime": "06:37",
+        "scheduledDepartureTime": "07:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 67,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "384",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "08:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 68,
+        "trackId": 7,
+        "arrivalTrainNumber": "155",
+        "departureTrainNumber": "172",
+        "scheduledArrivalTime": "08:23",
+        "scheduledDepartureTime": "09:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 69,
+        "trackId": 8,
+        "arrivalTrainNumber": "3223",
+        "departureTrainNumber": "3232",
+        "scheduledArrivalTime": "07:30",
+        "scheduledDepartureTime": "08:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 70,
+        "trackId": 8,
+        "arrivalTrainNumber": "13721",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "06:45",
+        "scheduledDepartureTime": "07:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 71,
+        "trackId": 8,
+        "arrivalTrainNumber": "3223",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:30",
+        "scheduledDepartureTime": "08:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 72,
+        "trackId": 8,
+        "arrivalTrainNumber": "13277",
+        "departureTrainNumber": "3234",
+        "scheduledArrivalTime": "08:15",
+        "scheduledDepartureTime": "08:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 73,
+        "trackId": 8,
+        "arrivalTrainNumber": "419",
+        "departureTrainNumber": "489",
+        "scheduledArrivalTime": "08:42",
+        "scheduledDepartureTime": "10:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 74,
+        "trackId": 9,
+        "arrivalTrainNumber": "3225",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:00",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 75,
+        "trackId": 9,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3624",
+        "scheduledArrivalTime": "06:05",
+        "scheduledDepartureTime": "06:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 76,
+        "trackId": 9,
+        "arrivalTrainNumber": "3219",
+        "departureTrainNumber": "3228",
+        "scheduledArrivalTime": "06:30",
+        "scheduledDepartureTime": "07:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 77,
+        "trackId": 9,
+        "arrivalTrainNumber": "13679",
+        "departureTrainNumber": "3634",
+        "scheduledArrivalTime": "08:40",
+        "scheduledDepartureTime": "08:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 78,
+        "trackId": 10,
+        "arrivalTrainNumber": "3621",
+        "departureTrainNumber": "13674",
+        "scheduledArrivalTime": "06:25",
+        "scheduledDepartureTime": "06:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 79,
+        "trackId": 10,
+        "arrivalTrainNumber": "13671",
+        "departureTrainNumber": "3626",
+        "scheduledArrivalTime": "06:40",
+        "scheduledDepartureTime": "06:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 80,
+        "trackId": 10,
+        "arrivalTrainNumber": "3623",
+        "departureTrainNumber": "13676",
+        "scheduledArrivalTime": "06:55",
+        "scheduledDepartureTime": "07:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 81,
+        "trackId": 10,
+        "arrivalTrainNumber": "13673",
+        "departureTrainNumber": "3628",
+        "scheduledArrivalTime": "07:10",
+        "scheduledDepartureTime": "07:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 82,
+        "trackId": 10,
+        "arrivalTrainNumber": "3625",
+        "departureTrainNumber": "13678",
+        "scheduledArrivalTime": "07:25",
+        "scheduledDepartureTime": "07:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 83,
+        "trackId": 10,
+        "arrivalTrainNumber": "13675",
+        "departureTrainNumber": "3630",
+        "scheduledArrivalTime": "07:40",
+        "scheduledDepartureTime": "07:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 84,
+        "trackId": 10,
+        "arrivalTrainNumber": "3627",
+        "departureTrainNumber": "13680",
+        "scheduledArrivalTime": "07:55",
+        "scheduledDepartureTime": "08:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 85,
+        "trackId": 10,
+        "arrivalTrainNumber": "13677",
+        "departureTrainNumber": "3632",
+        "scheduledArrivalTime": "08:10",
+        "scheduledDepartureTime": "08:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 86,
+        "trackId": 10,
+        "arrivalTrainNumber": "3629",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:25",
+        "scheduledDepartureTime": "08:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 87,
+        "trackId": 10,
+        "arrivalTrainNumber": "3631",
+        "departureTrainNumber": "3636",
+        "scheduledArrivalTime": "08:55",
+        "scheduledDepartureTime": "09:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 88,
+        "trackId": 11,
+        "arrivalTrainNumber": "13273",
+        "departureTrainNumber": "7331",
+        "scheduledArrivalTime": "07:15",
+        "scheduledDepartureTime": "07:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 89,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13726",
+        "scheduledArrivalTime": "06:30",
+        "scheduledDepartureTime": "06:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 90,
+        "trackId": 11,
+        "arrivalTrainNumber": "13273",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:15",
+        "scheduledDepartureTime": "07:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 91,
+        "trackId": 11,
+        "arrivalTrainNumber": "7330",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:10",
+        "scheduledDepartureTime": "08:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 92,
+        "trackId": 11,
+        "arrivalTrainNumber": "480",
+        "departureTrainNumber": "487",
+        "scheduledArrivalTime": "08:35",
+        "scheduledDepartureTime": "09:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 93,
+        "trackId": 12,
+        "arrivalTrainNumber": "3227",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:30",
+        "scheduledDepartureTime": "08:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 94,
+        "trackId": 12,
+        "arrivalTrainNumber": "3221",
+        "departureTrainNumber": "3230",
+        "scheduledArrivalTime": "07:00",
+        "scheduledDepartureTime": "07:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 95,
+        "trackId": 12,
+        "arrivalTrainNumber": "13795",
+        "departureTrainNumber": "3236",
+        "scheduledArrivalTime": "07:45",
+        "scheduledDepartureTime": "09:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 96,
+        "trackId": 13,
+        "arrivalTrainNumber": "3022",
+        "departureTrainNumber": "3177",
+        "scheduledArrivalTime": "06:15",
+        "scheduledDepartureTime": "06:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 97,
+        "trackId": 13,
+        "arrivalTrainNumber": "3030",
+        "departureTrainNumber": "3185",
+        "scheduledArrivalTime": "08:15",
+        "scheduledDepartureTime": "08:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 98,
+        "trackId": 13,
+        "arrivalTrainNumber": "3032",
+        "departureTrainNumber": "3187",
+        "scheduledArrivalTime": "08:45",
+        "scheduledDepartureTime": "09:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 99,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3177",
+        "scheduledArrivalTime": "06:10",
+        "scheduledDepartureTime": "06:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 100,
+        "trackId": 13,
+        "arrivalTrainNumber": "13124",
+        "departureTrainNumber": "13129",
+        "scheduledArrivalTime": "06:50",
+        "scheduledDepartureTime": "07:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 101,
+        "trackId": 13,
+        "arrivalTrainNumber": "13128",
+        "departureTrainNumber": "13133",
+        "scheduledArrivalTime": "07:50",
+        "scheduledDepartureTime": "08:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 102,
+        "trackId": 13,
+        "arrivalTrainNumber": "3030",
+        "departureTrainNumber": "83030",
+        "scheduledArrivalTime": "08:15",
+        "scheduledDepartureTime": "08:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 103,
+        "trackId": 13,
+        "arrivalTrainNumber": "3032",
+        "departureTrainNumber": "3037",
+        "scheduledArrivalTime": "08:45",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 104,
+        "trackId": 14,
+        "arrivalTrainNumber": "3180",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:00",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 0,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 105,
+        "trackId": 14,
+        "arrivalTrainNumber": "20150",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "06:05",
+        "scheduledDepartureTime": "06:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 106,
+        "trackId": 14,
+        "arrivalTrainNumber": "20152",
+        "departureTrainNumber": "11047",
+        "scheduledArrivalTime": "06:35",
+        "scheduledDepartureTime": "06:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 107,
+        "trackId": 14,
+        "arrivalTrainNumber": "20154",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:05",
+        "scheduledDepartureTime": "07:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 108,
+        "trackId": 14,
+        "arrivalTrainNumber": "20156",
+        "departureTrainNumber": "11055",
+        "scheduledArrivalTime": "07:35",
+        "scheduledDepartureTime": "07:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 109,
+        "trackId": 14,
+        "arrivalTrainNumber": "20158",
+        "departureTrainNumber": "11063",
+        "scheduledArrivalTime": "08:40",
+        "scheduledDepartureTime": "08:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 110,
+        "trackId": 14,
+        "arrivalTrainNumber": "20150",
+        "departureTrainNumber": "20153",
+        "scheduledArrivalTime": "06:05",
+        "scheduledDepartureTime": "06:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 111,
+        "trackId": 14,
+        "arrivalTrainNumber": "20154",
+        "departureTrainNumber": "20155",
+        "scheduledArrivalTime": "07:05",
+        "scheduledDepartureTime": "07:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 112,
+        "trackId": 14,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:00",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 113,
+        "trackId": 15,
+        "arrivalTrainNumber": "3024",
+        "departureTrainNumber": "3179",
+        "scheduledArrivalTime": "06:45",
+        "scheduledDepartureTime": "07:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 114,
+        "trackId": 15,
+        "arrivalTrainNumber": "3026",
+        "departureTrainNumber": "3181",
+        "scheduledArrivalTime": "07:15",
+        "scheduledDepartureTime": "07:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 115,
+        "trackId": 15,
+        "arrivalTrainNumber": "3028",
+        "departureTrainNumber": "3183",
+        "scheduledArrivalTime": "07:45",
+        "scheduledDepartureTime": "08:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 116,
+        "trackId": 15,
+        "arrivalTrainNumber": "7332",
+        "departureTrainNumber": "7337",
+        "scheduledArrivalTime": "08:55",
+        "scheduledDepartureTime": "09:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 117,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "7327",
+        "scheduledArrivalTime": "06:20",
+        "scheduledDepartureTime": "06:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 118,
+        "trackId": 15,
+        "arrivalTrainNumber": "7324",
+        "departureTrainNumber": "3179",
+        "scheduledArrivalTime": "06:40",
+        "scheduledDepartureTime": "07:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 119,
+        "trackId": 15,
+        "arrivalTrainNumber": "3028",
+        "departureTrainNumber": "3033",
+        "scheduledArrivalTime": "07:45",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 120,
+        "trackId": 15,
+        "arrivalTrainNumber": "13132",
+        "departureTrainNumber": "13137",
+        "scheduledArrivalTime": "08:50",
+        "scheduledDepartureTime": "09:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 121,
+        "trackId": 16,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3025",
+        "scheduledArrivalTime": "06:02",
+        "scheduledDepartureTime": "06:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 122,
+        "trackId": 16,
+        "arrivalTrainNumber": "3174",
+        "departureTrainNumber": "3027",
+        "scheduledArrivalTime": "06:30",
+        "scheduledDepartureTime": "06:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 123,
+        "trackId": 16,
+        "arrivalTrainNumber": "3176",
+        "departureTrainNumber": "3029",
+        "scheduledArrivalTime": "07:00",
+        "scheduledDepartureTime": "07:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 124,
+        "trackId": 16,
+        "arrivalTrainNumber": "3178",
+        "departureTrainNumber": "3031",
+        "scheduledArrivalTime": "07:30",
+        "scheduledDepartureTime": "07:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 125,
+        "trackId": 16,
+        "arrivalTrainNumber": "11002",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:05",
+        "scheduledDepartureTime": "08:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 126,
+        "trackId": 16,
+        "arrivalTrainNumber": "3182",
+        "departureTrainNumber": "3035",
+        "scheduledArrivalTime": "08:30",
+        "scheduledDepartureTime": "08:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 127,
+        "trackId": 16,
+        "arrivalTrainNumber": "11002",
+        "departureTrainNumber": "20157",
+        "scheduledArrivalTime": "08:05",
+        "scheduledDepartureTime": "08:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 128,
+        "trackId": 16,
+        "arrivalTrainNumber": "3184",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:00",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 129,
+        "trackId": 1,
+        "arrivalTrainNumber": "3531",
+        "departureTrainNumber": "3540",
+        "scheduledArrivalTime": "09:37",
+        "scheduledDepartureTime": "10:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 130,
+        "trackId": 1,
+        "arrivalTrainNumber": "3535",
+        "departureTrainNumber": "3544",
+        "scheduledArrivalTime": "10:37",
+        "scheduledDepartureTime": "11:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 131,
+        "trackId": 1,
+        "arrivalTrainNumber": "3539",
+        "departureTrainNumber": "3548",
+        "scheduledArrivalTime": "11:37",
+        "scheduledDepartureTime": "12:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 132,
+        "trackId": 2,
+        "arrivalTrainNumber": "3533",
+        "departureTrainNumber": "3538",
+        "scheduledArrivalTime": "09:19",
+        "scheduledDepartureTime": "09:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 133,
+        "trackId": 2,
+        "arrivalTrainNumber": "3537",
+        "departureTrainNumber": "3542",
+        "scheduledArrivalTime": "10:19",
+        "scheduledDepartureTime": "10:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 134,
+        "trackId": 2,
+        "arrivalTrainNumber": "3541",
+        "departureTrainNumber": "3546",
+        "scheduledArrivalTime": "11:19",
+        "scheduledDepartureTime": "11:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 135,
+        "trackId": 3,
+        "arrivalTrainNumber": "421",
+        "departureTrainNumber": "432",
+        "scheduledArrivalTime": "09:42",
+        "scheduledDepartureTime": "11:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 136,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "432",
+        "scheduledArrivalTime": "09:20",
+        "scheduledDepartureTime": "11:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 137,
+        "trackId": 3,
+        "arrivalTrainNumber": "425",
+        "departureTrainNumber": "436",
+        "scheduledArrivalTime": "11:42",
+        "scheduledDepartureTime": "13:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 138,
+        "trackId": 4,
+        "arrivalTrainNumber": "2019",
+        "departureTrainNumber": "2032",
+        "scheduledArrivalTime": "09:28",
+        "scheduledDepartureTime": "10:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 139,
+        "trackId": 4,
+        "arrivalTrainNumber": "423",
+        "departureTrainNumber": "434",
+        "scheduledArrivalTime": "10:42",
+        "scheduledDepartureTime": "12:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 140,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "434",
+        "scheduledArrivalTime": "09:15",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 141,
+        "trackId": 5,
+        "arrivalTrainNumber": "3231",
+        "departureTrainNumber": "3240",
+        "scheduledArrivalTime": "09:30",
+        "scheduledDepartureTime": "10:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 142,
+        "trackId": 5,
+        "arrivalTrainNumber": "2021",
+        "departureTrainNumber": "2036",
+        "scheduledArrivalTime": "10:28",
+        "scheduledDepartureTime": "12:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 143,
+        "trackId": 6,
+        "arrivalTrainNumber": "157",
+        "departureTrainNumber": "174",
+        "scheduledArrivalTime": "09:23",
+        "scheduledDepartureTime": "10:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 144,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3446",
+        "scheduledArrivalTime": "11:22",
+        "scheduledDepartureTime": "11:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 145,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3238",
+        "scheduledArrivalTime": "09:15",
+        "scheduledDepartureTime": "09:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 146,
+        "trackId": 7,
+        "arrivalTrainNumber": "23441",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "11:23",
+        "scheduledDepartureTime": "11:38",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 147,
+        "trackId": 7,
+        "arrivalTrainNumber": "383",
+        "departureTrainNumber": "386",
+        "scheduledArrivalTime": "09:45",
+        "scheduledDepartureTime": "10:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 148,
+        "trackId": 7,
+        "arrivalTrainNumber": "159",
+        "departureTrainNumber": "178",
+        "scheduledArrivalTime": "10:23",
+        "scheduledDepartureTime": "12:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 149,
+        "trackId": 8,
+        "arrivalTrainNumber": "13681",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:15",
+        "scheduledDepartureTime": "09:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 150,
+        "trackId": 8,
+        "arrivalTrainNumber": "20355",
+        "departureTrainNumber": "20360",
+        "scheduledArrivalTime": "10:40",
+        "scheduledDepartureTime": "11:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 151,
+        "trackId": 8,
+        "arrivalTrainNumber": "385",
+        "departureTrainNumber": "388",
+        "scheduledArrivalTime": "11:45",
+        "scheduledDepartureTime": "12:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 152,
+        "trackId": 9,
+        "arrivalTrainNumber": "23631",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:10",
+        "scheduledDepartureTime": "09:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 153,
+        "trackId": 9,
+        "arrivalTrainNumber": "3233",
+        "departureTrainNumber": "3242",
+        "scheduledArrivalTime": "10:00",
+        "scheduledDepartureTime": "10:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 154,
+        "trackId": 9,
+        "arrivalTrainNumber": "13303",
+        "departureTrainNumber": "13304",
+        "scheduledArrivalTime": "09:35",
+        "scheduledDepartureTime": "10:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 155,
+        "trackId": 9,
+        "arrivalTrainNumber": "3237",
+        "departureTrainNumber": "3246",
+        "scheduledArrivalTime": "11:00",
+        "scheduledDepartureTime": "11:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 156,
+        "trackId": 9,
+        "arrivalTrainNumber": "3241",
+        "departureTrainNumber": "3250",
+        "scheduledArrivalTime": "12:00",
+        "scheduledDepartureTime": "12:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 157,
+        "trackId": 10,
+        "arrivalTrainNumber": "3633",
+        "departureTrainNumber": "3638",
+        "scheduledArrivalTime": "09:25",
+        "scheduledDepartureTime": "09:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 158,
+        "trackId": 10,
+        "arrivalTrainNumber": "3635",
+        "departureTrainNumber": "3640",
+        "scheduledArrivalTime": "09:55",
+        "scheduledDepartureTime": "10:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 159,
+        "trackId": 10,
+        "arrivalTrainNumber": "3637",
+        "departureTrainNumber": "3642",
+        "scheduledArrivalTime": "10:25",
+        "scheduledDepartureTime": "10:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 160,
+        "trackId": 10,
+        "arrivalTrainNumber": "3639",
+        "departureTrainNumber": "3644",
+        "scheduledArrivalTime": "10:55",
+        "scheduledDepartureTime": "11:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 161,
+        "trackId": 10,
+        "arrivalTrainNumber": "3641",
+        "departureTrainNumber": "3646",
+        "scheduledArrivalTime": "11:25",
+        "scheduledDepartureTime": "11:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 162,
+        "trackId": 10,
+        "arrivalTrainNumber": "3643",
+        "departureTrainNumber": "3648",
+        "scheduledArrivalTime": "11:55",
+        "scheduledDepartureTime": "12:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 163,
+        "trackId": 11,
+        "arrivalTrainNumber": "482",
+        "departureTrainNumber": "430",
+        "scheduledArrivalTime": "09:35",
+        "scheduledDepartureTime": "10:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 164,
+        "trackId": 11,
+        "arrivalTrainNumber": "13739",
+        "departureTrainNumber": "13742",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 165,
+        "trackId": 12,
+        "arrivalTrainNumber": "320",
+        "departureTrainNumber": "327",
+        "scheduledArrivalTime": "09:10",
+        "scheduledDepartureTime": "10:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 166,
+        "trackId": 12,
+        "arrivalTrainNumber": "7336",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "10:10",
+        "scheduledDepartureTime": "10:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 167,
+        "trackId": 12,
+        "arrivalTrainNumber": "3235",
+        "departureTrainNumber": "3244",
+        "scheduledArrivalTime": "10:30",
+        "scheduledDepartureTime": "11:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 168,
+        "trackId": 12,
+        "arrivalTrainNumber": "3239",
+        "departureTrainNumber": "3248",
+        "scheduledArrivalTime": "11:30",
+        "scheduledDepartureTime": "12:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 169,
+        "trackId": 13,
+        "arrivalTrainNumber": "3186",
+        "departureTrainNumber": "3039",
+        "scheduledArrivalTime": "09:30",
+        "scheduledDepartureTime": "09:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 170,
+        "trackId": 13,
+        "arrivalTrainNumber": "13136",
+        "departureTrainNumber": "3041",
+        "scheduledArrivalTime": "09:50",
+        "scheduledDepartureTime": "10:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 171,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3043",
+        "scheduledArrivalTime": "10:30",
+        "scheduledDepartureTime": "10:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 172,
+        "trackId": 13,
+        "arrivalTrainNumber": "13140",
+        "departureTrainNumber": "13145",
+        "scheduledArrivalTime": "10:50",
+        "scheduledDepartureTime": "11:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 173,
+        "trackId": 13,
+        "arrivalTrainNumber": "3044",
+        "departureTrainNumber": "3049",
+        "scheduledArrivalTime": "11:45",
+        "scheduledDepartureTime": "12:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 174,
+        "trackId": 14,
+        "arrivalTrainNumber": "11010",
+        "departureTrainNumber": "11071",
+        "scheduledArrivalTime": "09:05",
+        "scheduledDepartureTime": "09:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 175,
+        "trackId": 14,
+        "arrivalTrainNumber": "11018",
+        "departureTrainNumber": "11079",
+        "scheduledArrivalTime": "10:05",
+        "scheduledDepartureTime": "10:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 176,
+        "trackId": 14,
+        "arrivalTrainNumber": "11026",
+        "departureTrainNumber": "11087",
+        "scheduledArrivalTime": "11:05",
+        "scheduledDepartureTime": "11:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 177,
+        "trackId": 15,
+        "arrivalTrainNumber": "3036",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:45",
+        "scheduledDepartureTime": "10:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 178,
+        "trackId": 15,
+        "arrivalTrainNumber": "3034",
+        "departureTrainNumber": "3189",
+        "scheduledArrivalTime": "09:15",
+        "scheduledDepartureTime": "09:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 179,
+        "trackId": 15,
+        "arrivalTrainNumber": "3038",
+        "departureTrainNumber": "3045",
+        "scheduledArrivalTime": "10:15",
+        "scheduledDepartureTime": "11:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 180,
+        "trackId": 16,
+        "arrivalTrainNumber": "20160",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:40",
+        "scheduledDepartureTime": "09:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 181,
+        "trackId": 16,
+        "arrivalTrainNumber": "3188",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "10:00",
+        "scheduledDepartureTime": "10:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 182,
+        "trackId": 16,
+        "arrivalTrainNumber": "3040",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 183,
+        "trackId": 16,
+        "arrivalTrainNumber": "3042",
+        "departureTrainNumber": "3047",
+        "scheduledArrivalTime": "11:15",
+        "scheduledDepartureTime": "11:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 184,
+        "trackId": 1,
+        "arrivalTrainNumber": "3543",
+        "departureTrainNumber": "3552",
+        "scheduledArrivalTime": "12:37",
+        "scheduledDepartureTime": "13:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 185,
+        "trackId": 1,
+        "arrivalTrainNumber": "64705",
+        "departureTrainNumber": "3556",
+        "scheduledArrivalTime": "14:10",
+        "scheduledDepartureTime": "14:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 186,
+        "trackId": 1,
+        "arrivalTrainNumber": "3551",
+        "departureTrainNumber": "3560",
+        "scheduledArrivalTime": "14:37",
+        "scheduledDepartureTime": "15:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 187,
+        "trackId": 2,
+        "arrivalTrainNumber": "3545",
+        "departureTrainNumber": "3550",
+        "scheduledArrivalTime": "12:19",
+        "scheduledDepartureTime": "12:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 188,
+        "trackId": 2,
+        "arrivalTrainNumber": "3549",
+        "departureTrainNumber": "3554",
+        "scheduledArrivalTime": "13:19",
+        "scheduledDepartureTime": "13:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 189,
+        "trackId": 2,
+        "arrivalTrainNumber": "3553",
+        "departureTrainNumber": "3558",
+        "scheduledArrivalTime": "14:19",
+        "scheduledDepartureTime": "14:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 190,
+        "trackId": 3,
+        "arrivalTrainNumber": "3251",
+        "departureTrainNumber": "3260",
+        "scheduledArrivalTime": "14:30",
+        "scheduledDepartureTime": "15:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 191,
+        "trackId": 3,
+        "arrivalTrainNumber": "429",
+        "departureTrainNumber": "440",
+        "scheduledArrivalTime": "13:42",
+        "scheduledDepartureTime": "15:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 192,
+        "trackId": 4,
+        "arrivalTrainNumber": "3247",
+        "departureTrainNumber": "3256",
+        "scheduledArrivalTime": "13:30",
+        "scheduledDepartureTime": "14:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 193,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "184",
+        "scheduledArrivalTime": "14:35",
+        "scheduledDepartureTime": "15:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 194,
+        "trackId": 4,
+        "arrivalTrainNumber": "427",
+        "departureTrainNumber": "438",
+        "scheduledArrivalTime": "12:42",
+        "scheduledDepartureTime": "14:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 195,
+        "trackId": 4,
+        "arrivalTrainNumber": "167",
+        "departureTrainNumber": "184",
+        "scheduledArrivalTime": "14:23",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 196,
+        "trackId": 5,
+        "arrivalTrainNumber": "165",
+        "departureTrainNumber": "182",
+        "scheduledArrivalTime": "13:23",
+        "scheduledDepartureTime": "14:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 197,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "182",
+        "scheduledArrivalTime": "13:15",
+        "scheduledDepartureTime": "14:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 198,
+        "trackId": 5,
+        "arrivalTrainNumber": "431",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "14:42",
+        "scheduledDepartureTime": "15:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 199,
+        "trackId": 6,
+        "arrivalTrainNumber": "3245",
+        "departureTrainNumber": "3254",
+        "scheduledArrivalTime": "13:00",
+        "scheduledDepartureTime": "13:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 200,
+        "trackId": 6,
+        "arrivalTrainNumber": "163",
+        "departureTrainNumber": "180",
+        "scheduledArrivalTime": "12:23",
+        "scheduledDepartureTime": "13:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 201,
+        "trackId": 6,
+        "arrivalTrainNumber": "3249",
+        "departureTrainNumber": "64958",
+        "scheduledArrivalTime": "14:00",
+        "scheduledDepartureTime": "14:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 202,
+        "trackId": 6,
+        "arrivalTrainNumber": "3253",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "15:00",
+        "scheduledDepartureTime": "15:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 203,
+        "trackId": 7,
+        "arrivalTrainNumber": "20363",
+        "departureTrainNumber": "20368",
+        "scheduledArrivalTime": "14:40",
+        "scheduledDepartureTime": "15:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 204,
+        "trackId": 7,
+        "arrivalTrainNumber": "64681",
+        "departureTrainNumber": "13750",
+        "scheduledArrivalTime": "12:55",
+        "scheduledDepartureTime": "13:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 205,
+        "trackId": 7,
+        "arrivalTrainNumber": "2027",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "13:28",
+        "scheduledDepartureTime": "13:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 206,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "2042",
+        "scheduledArrivalTime": "14:00",
+        "scheduledDepartureTime": "15:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 207,
+        "trackId": 8,
+        "arrivalTrainNumber": "3547",
+        "departureTrainNumber": "3258",
+        "scheduledArrivalTime": "13:37",
+        "scheduledDepartureTime": "14:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 208,
+        "trackId": 8,
+        "arrivalTrainNumber": "3243",
+        "departureTrainNumber": "3252",
+        "scheduledArrivalTime": "12:30",
+        "scheduledDepartureTime": "13:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 209,
+        "trackId": 8,
+        "arrivalTrainNumber": "13755",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "14:45",
+        "scheduledDepartureTime": "15:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 210,
+        "trackId": 9,
+        "arrivalTrainNumber": "20359",
+        "departureTrainNumber": "20364",
+        "scheduledArrivalTime": "12:40",
+        "scheduledDepartureTime": "13:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 211,
+        "trackId": 9,
+        "arrivalTrainNumber": "387",
+        "departureTrainNumber": "390",
+        "scheduledArrivalTime": "13:45",
+        "scheduledDepartureTime": "14:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 212,
+        "trackId": 9,
+        "arrivalTrainNumber": "93758",
+        "departureTrainNumber": "13758",
+        "scheduledArrivalTime": "14:20",
+        "scheduledDepartureTime": "14:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 213,
+        "trackId": 10,
+        "arrivalTrainNumber": "3645",
+        "departureTrainNumber": "3650",
+        "scheduledArrivalTime": "12:25",
+        "scheduledDepartureTime": "12:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 214,
+        "trackId": 10,
+        "arrivalTrainNumber": "3647",
+        "departureTrainNumber": "3652",
+        "scheduledArrivalTime": "12:55",
+        "scheduledDepartureTime": "13:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 215,
+        "trackId": 10,
+        "arrivalTrainNumber": "3649",
+        "departureTrainNumber": "3654",
+        "scheduledArrivalTime": "13:25",
+        "scheduledDepartureTime": "13:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 216,
+        "trackId": 10,
+        "arrivalTrainNumber": "3651",
+        "departureTrainNumber": "3656",
+        "scheduledArrivalTime": "13:55",
+        "scheduledDepartureTime": "14:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 217,
+        "trackId": 10,
+        "arrivalTrainNumber": "3653",
+        "departureTrainNumber": "3658",
+        "scheduledArrivalTime": "14:25",
+        "scheduledDepartureTime": "14:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 218,
+        "trackId": 10,
+        "arrivalTrainNumber": "3655",
+        "departureTrainNumber": "13608",
+        "scheduledArrivalTime": "14:55",
+        "scheduledDepartureTime": "15:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 219,
+        "trackId": 11,
+        "arrivalTrainNumber": "13897",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "12:45",
+        "scheduledDepartureTime": "13:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 220,
+        "trackId": 11,
+        "arrivalTrainNumber": "3056",
+        "departureTrainNumber": "3111",
+        "scheduledArrivalTime": "14:45",
+        "scheduledDepartureTime": "15:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 221,
+        "trackId": 11,
+        "arrivalTrainNumber": "10332",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "13:55",
+        "scheduledDepartureTime": "14:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 222,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3111",
+        "scheduledArrivalTime": "14:40",
+        "scheduledDepartureTime": "15:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 223,
+        "trackId": 12,
+        "arrivalTrainNumber": "13305",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "12:10",
+        "scheduledDepartureTime": "12:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 224,
+        "trackId": 12,
+        "arrivalTrainNumber": "484",
+        "departureTrainNumber": "491",
+        "scheduledArrivalTime": "12:35",
+        "scheduledDepartureTime": "13:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 225,
+        "trackId": 12,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13098",
+        "scheduledArrivalTime": "13:30",
+        "scheduledDepartureTime": "13:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 226,
+        "trackId": 12,
+        "arrivalTrainNumber": "13156",
+        "departureTrainNumber": "13161",
+        "scheduledArrivalTime": "14:50",
+        "scheduledDepartureTime": "15:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 227,
+        "trackId": 13,
+        "arrivalTrainNumber": "3054",
+        "departureTrainNumber": "3109",
+        "scheduledArrivalTime": "14:15",
+        "scheduledDepartureTime": "14:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 228,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3061",
+        "scheduledArrivalTime": "15:00",
+        "scheduledDepartureTime": "15:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 229,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3103",
+        "scheduledArrivalTime": "12:45",
+        "scheduledDepartureTime": "13:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 230,
+        "trackId": 13,
+        "arrivalTrainNumber": "7350",
+        "departureTrainNumber": "7355",
+        "scheduledArrivalTime": "13:25",
+        "scheduledDepartureTime": "13:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 231,
+        "trackId": 13,
+        "arrivalTrainNumber": "83109",
+        "departureTrainNumber": "3109",
+        "scheduledArrivalTime": "14:05",
+        "scheduledDepartureTime": "14:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 232,
+        "trackId": 14,
+        "arrivalTrainNumber": "11034",
+        "departureTrainNumber": "11095",
+        "scheduledArrivalTime": "12:05",
+        "scheduledDepartureTime": "12:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 233,
+        "trackId": 14,
+        "arrivalTrainNumber": "11042",
+        "departureTrainNumber": "11103",
+        "scheduledArrivalTime": "13:05",
+        "scheduledDepartureTime": "13:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 234,
+        "trackId": 14,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "11111",
+        "scheduledArrivalTime": "14:00",
+        "scheduledDepartureTime": "14:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 235,
+        "trackId": 15,
+        "arrivalTrainNumber": "3050",
+        "departureTrainNumber": "3105",
+        "scheduledArrivalTime": "13:15",
+        "scheduledDepartureTime": "13:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 236,
+        "trackId": 15,
+        "arrivalTrainNumber": "11050",
+        "departureTrainNumber": "20171",
+        "scheduledArrivalTime": "14:05",
+        "scheduledDepartureTime": "14:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 237,
+        "trackId": 15,
+        "arrivalTrainNumber": "3046",
+        "departureTrainNumber": "3051",
+        "scheduledArrivalTime": "12:15",
+        "scheduledDepartureTime": "12:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 238,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3105",
+        "scheduledArrivalTime": "13:10",
+        "scheduledDepartureTime": "13:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 239,
+        "trackId": 15,
+        "arrivalTrainNumber": "3052",
+        "departureTrainNumber": "3107",
+        "scheduledArrivalTime": "13:45",
+        "scheduledDepartureTime": "14:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 240,
+        "trackId": 15,
+        "arrivalTrainNumber": "3108",
+        "departureTrainNumber": "3113",
+        "scheduledArrivalTime": "15:00",
+        "scheduledDepartureTime": "15:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 241,
+        "trackId": 16,
+        "arrivalTrainNumber": "13148",
+        "departureTrainNumber": "13153",
+        "scheduledArrivalTime": "12:50",
+        "scheduledDepartureTime": "13:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 242,
+        "trackId": 16,
+        "arrivalTrainNumber": "3106",
+        "departureTrainNumber": "3059",
+        "scheduledArrivalTime": "14:30",
+        "scheduledDepartureTime": "14:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 243,
+        "trackId": 16,
+        "arrivalTrainNumber": "3048",
+        "departureTrainNumber": "3053",
+        "scheduledArrivalTime": "12:45",
+        "scheduledDepartureTime": "13:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 244,
+        "trackId": 16,
+        "arrivalTrainNumber": "3102",
+        "departureTrainNumber": "3055",
+        "scheduledArrivalTime": "13:30",
+        "scheduledDepartureTime": "13:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 245,
+        "trackId": 16,
+        "arrivalTrainNumber": "3104",
+        "departureTrainNumber": "3057",
+        "scheduledArrivalTime": "14:00",
+        "scheduledDepartureTime": "14:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 246,
+        "trackId": 16,
+        "arrivalTrainNumber": "7361",
+        "departureTrainNumber": "7361",
+        "scheduledArrivalTime": "14:50",
+        "scheduledDepartureTime": "15:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 247,
+        "trackId": 1,
+        "arrivalTrainNumber": "3555",
+        "departureTrainNumber": "3564",
+        "scheduledArrivalTime": "15:37",
+        "scheduledDepartureTime": "16:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 248,
+        "trackId": 1,
+        "arrivalTrainNumber": "3559",
+        "departureTrainNumber": "3568",
+        "scheduledArrivalTime": "16:37",
+        "scheduledDepartureTime": "17:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 249,
+        "trackId": 1,
+        "arrivalTrainNumber": "3563",
+        "departureTrainNumber": "3572",
+        "scheduledArrivalTime": "17:37",
+        "scheduledDepartureTime": "18:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 250,
+        "trackId": 2,
+        "arrivalTrainNumber": "3557",
+        "departureTrainNumber": "3562",
+        "scheduledArrivalTime": "15:19",
+        "scheduledDepartureTime": "15:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 251,
+        "trackId": 2,
+        "arrivalTrainNumber": "3561",
+        "departureTrainNumber": "3566",
+        "scheduledArrivalTime": "16:19",
+        "scheduledDepartureTime": "16:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 252,
+        "trackId": 2,
+        "arrivalTrainNumber": "3565",
+        "departureTrainNumber": "3570",
+        "scheduledArrivalTime": "17:19",
+        "scheduledDepartureTime": "17:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 253,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "442",
+        "scheduledArrivalTime": "15:30",
+        "scheduledDepartureTime": "16:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 0,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 254,
+        "trackId": 3,
+        "arrivalTrainNumber": "169",
+        "departureTrainNumber": "186",
+        "scheduledArrivalTime": "15:23",
+        "scheduledDepartureTime": "16:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 255,
+        "trackId": 3,
+        "arrivalTrainNumber": "13763",
+        "departureTrainNumber": "13420",
+        "scheduledArrivalTime": "17:05",
+        "scheduledDepartureTime": "17:28",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 256,
+        "trackId": 3,
+        "arrivalTrainNumber": "437",
+        "departureTrainNumber": "448",
+        "scheduledArrivalTime": "17:42",
+        "scheduledDepartureTime": "19:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 257,
+        "trackId": 4,
+        "arrivalTrainNumber": "83465",
+        "departureTrainNumber": "3466",
+        "scheduledArrivalTime": "16:04",
+        "scheduledDepartureTime": "16:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 258,
+        "trackId": 4,
+        "arrivalTrainNumber": "435",
+        "departureTrainNumber": "446",
+        "scheduledArrivalTime": "16:42",
+        "scheduledDepartureTime": "18:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 259,
+        "trackId": 5,
+        "arrivalTrainNumber": "2031",
+        "departureTrainNumber": "2046",
+        "scheduledArrivalTime": "15:28",
+        "scheduledDepartureTime": "17:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 260,
+        "trackId": 5,
+        "arrivalTrainNumber": "13793",
+        "departureTrainNumber": "3272",
+        "scheduledArrivalTime": "17:45",
+        "scheduledDepartureTime": "18:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 261,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3662",
+        "scheduledArrivalTime": "15:35",
+        "scheduledDepartureTime": "15:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 262,
+        "trackId": 6,
+        "arrivalTrainNumber": "3461",
+        "departureTrainNumber": "23694",
+        "scheduledArrivalTime": "16:23",
+        "scheduledDepartureTime": "16:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 263,
+        "trackId": 6,
+        "arrivalTrainNumber": "2035",
+        "departureTrainNumber": "2010",
+        "scheduledArrivalTime": "17:28",
+        "scheduledDepartureTime": "19:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 264,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3266",
+        "scheduledArrivalTime": "16:15",
+        "scheduledDepartureTime": "16:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 0,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 265,
+        "trackId": 7,
+        "arrivalTrainNumber": "3257",
+        "departureTrainNumber": "3266",
+        "scheduledArrivalTime": "16:00",
+        "scheduledDepartureTime": "16:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 266,
+        "trackId": 7,
+        "arrivalTrainNumber": "3265",
+        "departureTrainNumber": "13224",
+        "scheduledArrivalTime": "18:00",
+        "scheduledDepartureTime": "18:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 267,
+        "trackId": 7,
+        "arrivalTrainNumber": "433",
+        "departureTrainNumber": "444",
+        "scheduledArrivalTime": "15:42",
+        "scheduledDepartureTime": "17:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 268,
+        "trackId": 7,
+        "arrivalTrainNumber": "3465",
+        "departureTrainNumber": "3470",
+        "scheduledArrivalTime": "17:23",
+        "scheduledDepartureTime": "17:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 269,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3264",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "16:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 270,
+        "trackId": 8,
+        "arrivalTrainNumber": "93564",
+        "departureTrainNumber": "3264",
+        "scheduledArrivalTime": "15:05",
+        "scheduledDepartureTime": "16:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 271,
+        "trackId": 8,
+        "arrivalTrainNumber": "20367",
+        "departureTrainNumber": "20372",
+        "scheduledArrivalTime": "16:45",
+        "scheduledDepartureTime": "17:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 272,
+        "trackId": 8,
+        "arrivalTrainNumber": "391",
+        "departureTrainNumber": "394",
+        "scheduledArrivalTime": "17:40",
+        "scheduledDepartureTime": "18:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 273,
+        "trackId": 9,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3262",
+        "scheduledArrivalTime": "15:15",
+        "scheduledDepartureTime": "15:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 274,
+        "trackId": 9,
+        "arrivalTrainNumber": "389",
+        "departureTrainNumber": "392",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "16:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 275,
+        "trackId": 9,
+        "arrivalTrainNumber": "3259",
+        "departureTrainNumber": "3268",
+        "scheduledArrivalTime": "16:30",
+        "scheduledDepartureTime": "17:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 276,
+        "trackId": 9,
+        "arrivalTrainNumber": "488",
+        "departureTrainNumber": "495",
+        "scheduledArrivalTime": "15:35",
+        "scheduledDepartureTime": "16:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 277,
+        "trackId": 9,
+        "arrivalTrainNumber": "3665",
+        "departureTrainNumber": "13618",
+        "scheduledArrivalTime": "17:25",
+        "scheduledDepartureTime": "17:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 278,
+        "trackId": 10,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3660",
+        "scheduledArrivalTime": "15:07",
+        "scheduledDepartureTime": "15:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 279,
+        "trackId": 10,
+        "arrivalTrainNumber": "3657",
+        "departureTrainNumber": "13610",
+        "scheduledArrivalTime": "15:25",
+        "scheduledDepartureTime": "15:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 280,
+        "trackId": 10,
+        "arrivalTrainNumber": "3659",
+        "departureTrainNumber": "13612",
+        "scheduledArrivalTime": "15:55",
+        "scheduledDepartureTime": "16:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 281,
+        "trackId": 10,
+        "arrivalTrainNumber": "13609",
+        "departureTrainNumber": "3664",
+        "scheduledArrivalTime": "16:10",
+        "scheduledDepartureTime": "16:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 282,
+        "trackId": 10,
+        "arrivalTrainNumber": "3661",
+        "departureTrainNumber": "13614",
+        "scheduledArrivalTime": "16:25",
+        "scheduledDepartureTime": "16:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 283,
+        "trackId": 10,
+        "arrivalTrainNumber": "13611",
+        "departureTrainNumber": "3666",
+        "scheduledArrivalTime": "16:40",
+        "scheduledDepartureTime": "16:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 284,
+        "trackId": 10,
+        "arrivalTrainNumber": "3663",
+        "departureTrainNumber": "13616",
+        "scheduledArrivalTime": "16:55",
+        "scheduledDepartureTime": "17:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 285,
+        "trackId": 10,
+        "arrivalTrainNumber": "13613",
+        "departureTrainNumber": "3668",
+        "scheduledArrivalTime": "17:10",
+        "scheduledDepartureTime": "17:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 286,
+        "trackId": 10,
+        "arrivalTrainNumber": "13615",
+        "departureTrainNumber": "3670",
+        "scheduledArrivalTime": "17:35",
+        "scheduledDepartureTime": "17:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 287,
+        "trackId": 10,
+        "arrivalTrainNumber": "3667",
+        "departureTrainNumber": "13620",
+        "scheduledArrivalTime": "17:55",
+        "scheduledDepartureTime": "18:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 288,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "339",
+        "scheduledArrivalTime": "15:35",
+        "scheduledDepartureTime": "16:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 289,
+        "trackId": 11,
+        "arrivalTrainNumber": "7362",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "16:10",
+        "scheduledDepartureTime": "16:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 290,
+        "trackId": 11,
+        "arrivalTrainNumber": "3261",
+        "departureTrainNumber": "3270",
+        "scheduledArrivalTime": "17:00",
+        "scheduledDepartureTime": "17:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 291,
+        "trackId": 11,
+        "arrivalTrainNumber": "7368",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "17:40",
+        "scheduledDepartureTime": "17:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 292,
+        "trackId": 12,
+        "arrivalTrainNumber": "3263",
+        "departureTrainNumber": "13796",
+        "scheduledArrivalTime": "17:30",
+        "scheduledDepartureTime": "17:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 293,
+        "trackId": 12,
+        "arrivalTrainNumber": "3120",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:00",
+        "scheduledDepartureTime": "18:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 294,
+        "trackId": 12,
+        "arrivalTrainNumber": "3255",
+        "departureTrainNumber": "13792",
+        "scheduledArrivalTime": "15:30",
+        "scheduledDepartureTime": "15:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 295,
+        "trackId": 12,
+        "arrivalTrainNumber": "336",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "15:55",
+        "scheduledDepartureTime": "16:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 296,
+        "trackId": 12,
+        "arrivalTrainNumber": "490",
+        "departureTrainNumber": "497",
+        "scheduledArrivalTime": "16:35",
+        "scheduledDepartureTime": "17:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 297,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13216",
+        "scheduledArrivalTime": "16:00",
+        "scheduledDepartureTime": "16:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 298,
+        "trackId": 13,
+        "arrivalTrainNumber": "7358",
+        "departureTrainNumber": "13216",
+        "scheduledArrivalTime": "15:25",
+        "scheduledDepartureTime": "16:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 299,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "7367",
+        "scheduledArrivalTime": "16:20",
+        "scheduledDepartureTime": "16:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 300,
+        "trackId": 13,
+        "arrivalTrainNumber": "13164",
+        "departureTrainNumber": "13169",
+        "scheduledArrivalTime": "16:50",
+        "scheduledDepartureTime": "17:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 301,
+        "trackId": 13,
+        "arrivalTrainNumber": "343",
+        "departureTrainNumber": "343",
+        "scheduledArrivalTime": "17:30",
+        "scheduledDepartureTime": "18:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 302,
+        "trackId": 14,
+        "arrivalTrainNumber": "11058",
+        "departureTrainNumber": "20173",
+        "scheduledArrivalTime": "15:05",
+        "scheduledDepartureTime": "15:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 303,
+        "trackId": 14,
+        "arrivalTrainNumber": "11119",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "15:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 304,
+        "trackId": 14,
+        "arrivalTrainNumber": "11066",
+        "departureTrainNumber": "20175",
+        "scheduledArrivalTime": "16:05",
+        "scheduledDepartureTime": "16:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 305,
+        "trackId": 14,
+        "arrivalTrainNumber": "11127",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "16:45",
+        "scheduledDepartureTime": "16:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 306,
+        "trackId": 14,
+        "arrivalTrainNumber": "11074",
+        "departureTrainNumber": "20177",
+        "scheduledArrivalTime": "17:05",
+        "scheduledDepartureTime": "17:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 307,
+        "trackId": 14,
+        "arrivalTrainNumber": "20176",
+        "departureTrainNumber": "11135",
+        "scheduledArrivalTime": "17:35",
+        "scheduledDepartureTime": "17:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 308,
+        "trackId": 14,
+        "arrivalTrainNumber": "20172",
+        "departureTrainNumber": "11119",
+        "scheduledArrivalTime": "15:40",
+        "scheduledDepartureTime": "15:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 309,
+        "trackId": 14,
+        "arrivalTrainNumber": "20174",
+        "departureTrainNumber": "11127",
+        "scheduledArrivalTime": "16:40",
+        "scheduledDepartureTime": "16:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 310,
+        "trackId": 15,
+        "arrivalTrainNumber": "3060",
+        "departureTrainNumber": "3115",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "16:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 311,
+        "trackId": 15,
+        "arrivalTrainNumber": "3066",
+        "departureTrainNumber": "3121",
+        "scheduledArrivalTime": "17:15",
+        "scheduledDepartureTime": "17:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 312,
+        "trackId": 15,
+        "arrivalTrainNumber": "3058",
+        "departureTrainNumber": "3113",
+        "scheduledArrivalTime": "15:15",
+        "scheduledDepartureTime": "15:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 313,
+        "trackId": 15,
+        "arrivalTrainNumber": "3062",
+        "departureTrainNumber": "3117",
+        "scheduledArrivalTime": "16:15",
+        "scheduledDepartureTime": "16:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 314,
+        "trackId": 15,
+        "arrivalTrainNumber": "3064",
+        "departureTrainNumber": "3119",
+        "scheduledArrivalTime": "16:45",
+        "scheduledDepartureTime": "17:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 315,
+        "trackId": 15,
+        "arrivalTrainNumber": "3068",
+        "departureTrainNumber": "3123",
+        "scheduledArrivalTime": "17:45",
+        "scheduledDepartureTime": "18:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 316,
+        "trackId": 15,
+        "arrivalTrainNumber": "93167",
+        "departureTrainNumber": "13167",
+        "scheduledArrivalTime": "15:40",
+        "scheduledDepartureTime": "16:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 317,
+        "trackId": 15,
+        "arrivalTrainNumber": "64717",
+        "departureTrainNumber": "7371",
+        "scheduledArrivalTime": "17:10",
+        "scheduledDepartureTime": "17:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 318,
+        "trackId": 15,
+        "arrivalTrainNumber": "3068",
+        "departureTrainNumber": "3073",
+        "scheduledArrivalTime": "17:45",
+        "scheduledDepartureTime": "18:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 319,
+        "trackId": 16,
+        "arrivalTrainNumber": "3110",
+        "departureTrainNumber": "3063",
+        "scheduledArrivalTime": "15:30",
+        "scheduledDepartureTime": "15:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 320,
+        "trackId": 16,
+        "arrivalTrainNumber": "3112",
+        "departureTrainNumber": "3065",
+        "scheduledArrivalTime": "16:00",
+        "scheduledDepartureTime": "16:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 321,
+        "trackId": 16,
+        "arrivalTrainNumber": "3114",
+        "departureTrainNumber": "3067",
+        "scheduledArrivalTime": "16:30",
+        "scheduledDepartureTime": "16:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 322,
+        "trackId": 16,
+        "arrivalTrainNumber": "3116",
+        "departureTrainNumber": "3069",
+        "scheduledArrivalTime": "17:00",
+        "scheduledDepartureTime": "17:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 323,
+        "trackId": 16,
+        "arrivalTrainNumber": "3118",
+        "departureTrainNumber": "3071",
+        "scheduledArrivalTime": "17:30",
+        "scheduledDepartureTime": "17:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 324,
+        "trackId": 1,
+        "arrivalTrainNumber": "3567",
+        "departureTrainNumber": "3576",
+        "scheduledArrivalTime": "18:37",
+        "scheduledDepartureTime": "19:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 325,
+        "trackId": 1,
+        "arrivalTrainNumber": "3571",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:37",
+        "scheduledDepartureTime": "19:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 326,
+        "trackId": 1,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:37",
+        "scheduledDepartureTime": "19:57",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 327,
+        "trackId": 1,
+        "arrivalTrainNumber": "83483",
+        "departureTrainNumber": "13482",
+        "scheduledArrivalTime": "20:08",
+        "scheduledDepartureTime": "20:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 328,
+        "trackId": 2,
+        "arrivalTrainNumber": "3569",
+        "departureTrainNumber": "3574",
+        "scheduledArrivalTime": "18:19",
+        "scheduledDepartureTime": "18:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 329,
+        "trackId": 2,
+        "arrivalTrainNumber": "3573",
+        "departureTrainNumber": "3578",
+        "scheduledArrivalTime": "19:19",
+        "scheduledDepartureTime": "19:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 330,
+        "trackId": 2,
+        "arrivalTrainNumber": "3577",
+        "departureTrainNumber": "3582",
+        "scheduledArrivalTime": "20:19",
+        "scheduledDepartureTime": "20:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 331,
+        "trackId": 3,
+        "arrivalTrainNumber": "443",
+        "departureTrainNumber": "4444",
+        "scheduledArrivalTime": "20:42",
+        "scheduledDepartureTime": "20:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 332,
+        "trackId": 3,
+        "arrivalTrainNumber": "2009",
+        "departureTrainNumber": "2052",
+        "scheduledArrivalTime": "19:28",
+        "scheduledDepartureTime": "20:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 333,
+        "trackId": 3,
+        "arrivalTrainNumber": "443",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:42",
+        "scheduledDepartureTime": "21:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 334,
+        "trackId": 4,
+        "arrivalTrainNumber": "175",
+        "departureTrainNumber": "192",
+        "scheduledArrivalTime": "18:23",
+        "scheduledDepartureTime": "19:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 335,
+        "trackId": 4,
+        "arrivalTrainNumber": "441",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:42",
+        "scheduledDepartureTime": "20:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 336,
+        "trackId": 4,
+        "arrivalTrainNumber": "3575",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:37",
+        "scheduledDepartureTime": "20:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 337,
+        "trackId": 4,
+        "arrivalTrainNumber": "3575",
+        "departureTrainNumber": "3584",
+        "scheduledArrivalTime": "20:37",
+        "scheduledDepartureTime": "21:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 338,
+        "trackId": 5,
+        "arrivalTrainNumber": "3669",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:25",
+        "scheduledDepartureTime": "18:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 339,
+        "trackId": 5,
+        "arrivalTrainNumber": "177",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:23",
+        "scheduledDepartureTime": "20:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 340,
+        "trackId": 5,
+        "arrivalTrainNumber": "2011",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:28",
+        "scheduledDepartureTime": "20:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 341,
+        "trackId": 6,
+        "arrivalTrainNumber": "3269",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 0,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 342,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 343,
+        "trackId": 6,
+        "arrivalTrainNumber": "179",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:23",
+        "scheduledDepartureTime": "20:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 344,
+        "trackId": 7,
+        "arrivalTrainNumber": "393",
+        "departureTrainNumber": "398",
+        "scheduledArrivalTime": "19:15",
+        "scheduledDepartureTime": "20:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 345,
+        "trackId": 7,
+        "arrivalTrainNumber": "20375",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:40",
+        "scheduledDepartureTime": "21:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 346,
+        "trackId": 7,
+        "arrivalTrainNumber": "3265",
+        "departureTrainNumber": "3474",
+        "scheduledArrivalTime": "18:00",
+        "scheduledDepartureTime": "18:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 347,
+        "trackId": 7,
+        "arrivalTrainNumber": "13771",
+        "departureTrainNumber": "3276",
+        "scheduledArrivalTime": "18:45",
+        "scheduledDepartureTime": "19:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 348,
+        "trackId": 7,
+        "arrivalTrainNumber": "393",
+        "departureTrainNumber": "384",
+        "scheduledArrivalTime": "19:15",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 349,
+        "trackId": 8,
+        "arrivalTrainNumber": "3267",
+        "departureTrainNumber": "13774",
+        "scheduledArrivalTime": "18:30",
+        "scheduledDepartureTime": "19:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 350,
+        "trackId": 8,
+        "arrivalTrainNumber": "3267",
+        "departureTrainNumber": "3278",
+        "scheduledArrivalTime": "18:30",
+        "scheduledDepartureTime": "19:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 351,
+        "trackId": 8,
+        "arrivalTrainNumber": "3273",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:00",
+        "scheduledDepartureTime": "20:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 352,
+        "trackId": 8,
+        "arrivalTrainNumber": "3277",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:00",
+        "scheduledDepartureTime": "21:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 353,
+        "trackId": 9,
+        "arrivalTrainNumber": "3671",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:55",
+        "scheduledDepartureTime": "19:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 354,
+        "trackId": 9,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13236",
+        "scheduledArrivalTime": "20:45",
+        "scheduledDepartureTime": "21:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 355,
+        "trackId": 9,
+        "arrivalTrainNumber": "20371",
+        "departureTrainNumber": "20376",
+        "scheduledArrivalTime": "18:40",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 356,
+        "trackId": 9,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3280",
+        "scheduledArrivalTime": "19:45",
+        "scheduledDepartureTime": "20:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 357,
+        "trackId": 10,
+        "arrivalTrainNumber": "13617",
+        "departureTrainNumber": "3672",
+        "scheduledArrivalTime": "18:10",
+        "scheduledDepartureTime": "18:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 358,
+        "trackId": 10,
+        "arrivalTrainNumber": "13619",
+        "departureTrainNumber": "3674",
+        "scheduledArrivalTime": "18:35",
+        "scheduledDepartureTime": "18:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 359,
+        "trackId": 10,
+        "arrivalTrainNumber": "13621",
+        "departureTrainNumber": "3676",
+        "scheduledArrivalTime": "19:10",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 360,
+        "trackId": 10,
+        "arrivalTrainNumber": "3673",
+        "departureTrainNumber": "3678",
+        "scheduledArrivalTime": "19:25",
+        "scheduledDepartureTime": "19:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 361,
+        "trackId": 10,
+        "arrivalTrainNumber": "3675",
+        "departureTrainNumber": "3680",
+        "scheduledArrivalTime": "19:55",
+        "scheduledDepartureTime": "20:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 362,
+        "trackId": 10,
+        "arrivalTrainNumber": "3677",
+        "departureTrainNumber": "3682",
+        "scheduledArrivalTime": "20:25",
+        "scheduledDepartureTime": "20:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 363,
+        "trackId": 10,
+        "arrivalTrainNumber": "3679",
+        "departureTrainNumber": "3684",
+        "scheduledArrivalTime": "20:55",
+        "scheduledDepartureTime": "21:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 364,
+        "trackId": 11,
+        "arrivalTrainNumber": "3122",
+        "departureTrainNumber": "3075",
+        "scheduledArrivalTime": "18:30",
+        "scheduledDepartureTime": "18:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 365,
+        "trackId": 11,
+        "arrivalTrainNumber": "13782",
+        "departureTrainNumber": "13782",
+        "scheduledArrivalTime": "20:55",
+        "scheduledDepartureTime": "21:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 366,
+        "trackId": 11,
+        "arrivalTrainNumber": "3122",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:30",
+        "scheduledDepartureTime": "18:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 367,
+        "trackId": 11,
+        "arrivalTrainNumber": "3124",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 368,
+        "trackId": 11,
+        "arrivalTrainNumber": "344",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:55",
+        "scheduledDepartureTime": "20:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 369,
+        "trackId": 12,
+        "arrivalTrainNumber": "439",
+        "departureTrainNumber": "499",
+        "scheduledArrivalTime": "18:42",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 370,
+        "trackId": 12,
+        "arrivalTrainNumber": "492",
+        "departureTrainNumber": "450",
+        "scheduledArrivalTime": "19:35",
+        "scheduledDepartureTime": "20:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 371,
+        "trackId": 12,
+        "arrivalTrainNumber": "3080",
+        "departureTrainNumber": "3085",
+        "scheduledArrivalTime": "20:45",
+        "scheduledDepartureTime": "21:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 372,
+        "trackId": 13,
+        "arrivalTrainNumber": "13172",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:50",
+        "scheduledDepartureTime": "19:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 373,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13181",
+        "scheduledArrivalTime": "19:55",
+        "scheduledDepartureTime": "20:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 374,
+        "trackId": 13,
+        "arrivalTrainNumber": "3078",
+        "departureTrainNumber": "3083",
+        "scheduledArrivalTime": "20:15",
+        "scheduledDepartureTime": "20:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 375,
+        "trackId": 14,
+        "arrivalTrainNumber": "11082",
+        "departureTrainNumber": "20179",
+        "scheduledArrivalTime": "18:05",
+        "scheduledDepartureTime": "18:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 376,
+        "trackId": 14,
+        "arrivalTrainNumber": "20178",
+        "departureTrainNumber": "11143",
+        "scheduledArrivalTime": "18:35",
+        "scheduledDepartureTime": "18:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 377,
+        "trackId": 14,
+        "arrivalTrainNumber": "11090",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:05",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 378,
+        "trackId": 14,
+        "arrivalTrainNumber": "20180",
+        "departureTrainNumber": "11151",
+        "scheduledArrivalTime": "19:40",
+        "scheduledDepartureTime": "19:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 379,
+        "trackId": 14,
+        "arrivalTrainNumber": "11098",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:05",
+        "scheduledDepartureTime": "20:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 380,
+        "trackId": 14,
+        "arrivalTrainNumber": "11090",
+        "departureTrainNumber": "20181",
+        "scheduledArrivalTime": "19:05",
+        "scheduledDepartureTime": "19:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 381,
+        "trackId": 14,
+        "arrivalTrainNumber": "11098",
+        "departureTrainNumber": "11159",
+        "scheduledArrivalTime": "20:05",
+        "scheduledDepartureTime": "20:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 382,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3077",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 383,
+        "trackId": 15,
+        "arrivalTrainNumber": "69334",
+        "departureTrainNumber": "30834",
+        "scheduledArrivalTime": "20:55",
+        "scheduledDepartureTime": "21:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.902,
+          0.902,
+          0.902
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 384,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3079",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 385,
+        "trackId": 15,
+        "arrivalTrainNumber": "77103",
+        "departureTrainNumber": "77900",
+        "scheduledArrivalTime": "20:10",
+        "scheduledDepartureTime": "22:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.902,
+          0.902,
+          0.902
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 386,
+        "trackId": 16,
+        "arrivalTrainNumber": "3070",
+        "departureTrainNumber": "3125",
+        "scheduledArrivalTime": "18:15",
+        "scheduledDepartureTime": "18:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 387,
+        "trackId": 16,
+        "arrivalTrainNumber": "3072",
+        "departureTrainNumber": "7375",
+        "scheduledArrivalTime": "18:45",
+        "scheduledDepartureTime": "19:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 388,
+        "trackId": 16,
+        "arrivalTrainNumber": "3072",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:45",
+        "scheduledDepartureTime": "19:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 389,
+        "trackId": 16,
+        "arrivalTrainNumber": "3074",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:15",
+        "scheduledDepartureTime": "19:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 390,
+        "trackId": 16,
+        "arrivalTrainNumber": "3076",
+        "departureTrainNumber": "3081",
+        "scheduledArrivalTime": "19:45",
+        "scheduledDepartureTime": "20:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 391,
+        "trackId": 16,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "11167",
+        "scheduledArrivalTime": "20:45",
+        "scheduledDepartureTime": "21:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 392,
+        "trackId": 1,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3588",
+        "scheduledArrivalTime": "21:30",
+        "scheduledDepartureTime": "22:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 393,
+        "trackId": 1,
+        "arrivalTrainNumber": "3583",
+        "departureTrainNumber": "3592",
+        "scheduledArrivalTime": "22:37",
+        "scheduledDepartureTime": "23:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 394,
+        "trackId": 2,
+        "arrivalTrainNumber": "3581",
+        "departureTrainNumber": "3586",
+        "scheduledArrivalTime": "21:19",
+        "scheduledDepartureTime": "21:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 395,
+        "trackId": 2,
+        "arrivalTrainNumber": "3585",
+        "departureTrainNumber": "3590",
+        "scheduledArrivalTime": "22:19",
+        "scheduledDepartureTime": "22:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 396,
+        "trackId": 2,
+        "arrivalTrainNumber": "3589",
+        "departureTrainNumber": "3594",
+        "scheduledArrivalTime": "23:19",
+        "scheduledDepartureTime": "23:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 397,
+        "trackId": 3,
+        "arrivalTrainNumber": "445",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:42",
+        "scheduledDepartureTime": "22:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 398,
+        "trackId": 3,
+        "arrivalTrainNumber": "447",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:42",
+        "scheduledDepartureTime": "23:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 399,
+        "trackId": 3,
+        "arrivalTrainNumber": "449",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "23:42",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 400,
+        "trackId": 4,
+        "arrivalTrainNumber": "13233",
+        "departureTrainNumber": "3400",
+        "scheduledArrivalTime": "22:05",
+        "scheduledDepartureTime": "22:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 401,
+        "trackId": 4,
+        "arrivalTrainNumber": "3579",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:37",
+        "scheduledDepartureTime": "21:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 402,
+        "trackId": 4,
+        "arrivalTrainNumber": "17383",
+        "departureTrainNumber": "3500",
+        "scheduledArrivalTime": "23:05",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 403,
+        "trackId": 5,
+        "arrivalTrainNumber": "3489",
+        "departureTrainNumber": "3420",
+        "scheduledArrivalTime": "23:37",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 404,
+        "trackId": 5,
+        "arrivalTrainNumber": "2003",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:28",
+        "scheduledDepartureTime": "21:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 405,
+        "trackId": 5,
+        "arrivalTrainNumber": "183",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:23",
+        "scheduledDepartureTime": "23:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 406,
+        "trackId": 5,
+        "arrivalTrainNumber": "2047",
+        "departureTrainNumber": "2012",
+        "scheduledArrivalTime": "23:28",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 407,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "164",
+        "scheduledArrivalTime": "22:00",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 408,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3486",
+        "scheduledArrivalTime": "21:22",
+        "scheduledDepartureTime": "21:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 409,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "168",
+        "scheduledArrivalTime": "21:45",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 410,
+        "trackId": 7,
+        "arrivalTrainNumber": "2397",
+        "departureTrainNumber": "382",
+        "scheduledArrivalTime": "21:45",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 411,
+        "trackId": 8,
+        "arrivalTrainNumber": "3481",
+        "departureTrainNumber": "17384",
+        "scheduledArrivalTime": "21:23",
+        "scheduledDepartureTime": "21:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 412,
+        "trackId": 8,
+        "arrivalTrainNumber": "80443",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "23:10",
+        "scheduledDepartureTime": "23:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 413,
+        "trackId": 9,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "17388",
+        "scheduledArrivalTime": "22:35",
+        "scheduledDepartureTime": "22:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 414,
+        "trackId": 9,
+        "arrivalTrainNumber": "13779",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:05",
+        "scheduledDepartureTime": "21:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 415,
+        "trackId": 9,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "17388",
+        "scheduledArrivalTime": "22:30",
+        "scheduledDepartureTime": "22:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 416,
+        "trackId": 9,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "17302",
+        "scheduledArrivalTime": "23:35",
+        "scheduledDepartureTime": "23:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 417,
+        "trackId": 10,
+        "arrivalTrainNumber": "3681",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:25",
+        "scheduledDepartureTime": "21:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 418,
+        "trackId": 10,
+        "arrivalTrainNumber": "3683",
+        "departureTrainNumber": "3688",
+        "scheduledArrivalTime": "21:55",
+        "scheduledDepartureTime": "22:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 419,
+        "trackId": 10,
+        "arrivalTrainNumber": "3685",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:35",
+        "scheduledDepartureTime": "22:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 420,
+        "trackId": 10,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3692",
+        "scheduledArrivalTime": "23:05",
+        "scheduledDepartureTime": "23:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 421,
+        "trackId": 10,
+        "arrivalTrainNumber": "3689",
+        "departureTrainNumber": "3602",
+        "scheduledArrivalTime": "23:35",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 422,
+        "trackId": 11,
+        "arrivalTrainNumber": "496",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:35",
+        "scheduledDepartureTime": "23:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 423,
+        "trackId": 12,
+        "arrivalTrainNumber": "13783",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:15",
+        "scheduledDepartureTime": "22:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 424,
+        "trackId": 13,
+        "arrivalTrainNumber": "11106",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:05",
+        "scheduledDepartureTime": "21:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 425,
+        "trackId": 13,
+        "arrivalTrainNumber": "3084",
+        "departureTrainNumber": "3089",
+        "scheduledArrivalTime": "21:45",
+        "scheduledDepartureTime": "22:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 426,
+        "trackId": 14,
+        "arrivalTrainNumber": "3082",
+        "departureTrainNumber": "3087",
+        "scheduledArrivalTime": "21:15",
+        "scheduledDepartureTime": "21:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 427,
+        "trackId": 14,
+        "arrivalTrainNumber": "11114",
+        "departureTrainNumber": "21187",
+        "scheduledArrivalTime": "22:05",
+        "scheduledDepartureTime": "23:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 428,
+        "trackId": 14,
+        "arrivalTrainNumber": "11122",
+        "departureTrainNumber": "20189",
+        "scheduledArrivalTime": "23:05",
+        "scheduledDepartureTime": "23:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 429,
+        "trackId": 15,
+        "arrivalTrainNumber": "3090",
+        "departureTrainNumber": "3003",
+        "scheduledArrivalTime": "23:15",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 430,
+        "trackId": 16,
+        "arrivalTrainNumber": "3086",
+        "departureTrainNumber": "3091",
+        "scheduledArrivalTime": "22:15",
+        "scheduledDepartureTime": "22:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 431,
+        "trackId": 16,
+        "arrivalTrainNumber": "3088",
+        "departureTrainNumber": "3093",
+        "scheduledArrivalTime": "22:45",
+        "scheduledDepartureTime": "23:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 432,
+        "trackId": 16,
+        "arrivalTrainNumber": "3092",
+        "departureTrainNumber": "33095",
+        "scheduledArrivalTime": "23:51",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      }
+    ],
+    "fredag": [
+      {
+        "id": 1,
+        "trackId": 1,
+        "arrivalTrainNumber": "3593",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:19",
+        "scheduledDepartureTime": "00:34",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 2,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "400",
+        "scheduledArrivalTime": "02:40",
+        "scheduledDepartureTime": "05:12",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 3,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 4,
+        "trackId": 3,
+        "arrivalTrainNumber": "451",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:42",
+        "scheduledDepartureTime": "01:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 5,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "420",
+        "scheduledArrivalTime": "01:30",
+        "scheduledDepartureTime": "05:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 6,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3500",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 7,
+        "trackId": 4,
+        "arrivalTrainNumber": "23493",
+        "departureTrainNumber": "3516",
+        "scheduledArrivalTime": "00:37",
+        "scheduledDepartureTime": "04:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 8,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3420",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "04:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 9,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "164",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "05:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 10,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "382",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "06:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 11,
+        "trackId": 8,
+        "arrivalTrainNumber": "20379",
+        "departureTrainNumber": "20350",
+        "scheduledArrivalTime": "00:50",
+        "scheduledDepartureTime": "05:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 12,
+        "trackId": 9,
+        "arrivalTrainNumber": "3693",
+        "departureTrainNumber": "3618",
+        "scheduledArrivalTime": "00:35",
+        "scheduledDepartureTime": "04:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 13,
+        "trackId": 10,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3602",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 14,
+        "trackId": 10,
+        "arrivalTrainNumber": "3603",
+        "departureTrainNumber": "3616",
+        "scheduledArrivalTime": "01:35",
+        "scheduledDepartureTime": "04:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 15,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "481",
+        "scheduledArrivalTime": "01:00",
+        "scheduledDepartureTime": "06:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 16,
+        "trackId": 12,
+        "arrivalTrainNumber": "17399",
+        "departureTrainNumber": "3220",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "05:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 17,
+        "trackId": 13,
+        "arrivalTrainNumber": "319",
+        "departureTrainNumber": "319",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "06:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 18,
+        "trackId": 14,
+        "arrivalTrainNumber": "13094",
+        "departureTrainNumber": "3019",
+        "scheduledArrivalTime": "00:31",
+        "scheduledDepartureTime": "04:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 19,
+        "trackId": 14,
+        "arrivalTrainNumber": "11130",
+        "departureTrainNumber": "11031",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "04:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 20,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3003",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 21,
+        "trackId": 15,
+        "arrivalTrainNumber": "59823",
+        "departureTrainNumber": "69299",
+        "scheduledArrivalTime": "02:36",
+        "scheduledDepartureTime": "03:06",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.902,
+          0.902,
+          0.902
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 22,
+        "trackId": 16,
+        "arrivalTrainNumber": "33095",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:00",
+        "scheduledDepartureTime": "00:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 23,
+        "trackId": 16,
+        "arrivalTrainNumber": "3004",
+        "departureTrainNumber": "3021",
+        "scheduledArrivalTime": "01:30",
+        "scheduledDepartureTime": "05:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 24,
+        "trackId": 1,
+        "arrivalTrainNumber": "3515",
+        "departureTrainNumber": "3524",
+        "scheduledArrivalTime": "05:37",
+        "scheduledDepartureTime": "06:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 25,
+        "trackId": 2,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3518",
+        "scheduledArrivalTime": "04:27",
+        "scheduledDepartureTime": "04:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 26,
+        "trackId": 2,
+        "arrivalTrainNumber": "3517",
+        "departureTrainNumber": "3522",
+        "scheduledArrivalTime": "05:19",
+        "scheduledDepartureTime": "05:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 27,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "422",
+        "scheduledArrivalTime": "05:25",
+        "scheduledDepartureTime": "06:19",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 28,
+        "trackId": 4,
+        "arrivalTrainNumber": "83520",
+        "departureTrainNumber": "3520",
+        "scheduledArrivalTime": "05:05",
+        "scheduledDepartureTime": "05:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 29,
+        "trackId": 4,
+        "arrivalTrainNumber": "3513",
+        "departureTrainNumber": "3520",
+        "scheduledArrivalTime": "04:37",
+        "scheduledDepartureTime": "05:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 30,
+        "trackId": 4,
+        "arrivalTrainNumber": "3215",
+        "departureTrainNumber": "3426",
+        "scheduledArrivalTime": "05:30",
+        "scheduledDepartureTime": "06:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 31,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "2012",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "05:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 32,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "424",
+        "scheduledArrivalTime": "05:50",
+        "scheduledDepartureTime": "07:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 33,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "168",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "07:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 34,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3622",
+        "scheduledArrivalTime": "05:35",
+        "scheduledDepartureTime": "05:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 35,
+        "trackId": 8,
+        "arrivalTrainNumber": "3217",
+        "departureTrainNumber": "3226",
+        "scheduledArrivalTime": "06:00",
+        "scheduledDepartureTime": "06:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 36,
+        "trackId": 9,
+        "arrivalTrainNumber": "93224",
+        "departureTrainNumber": "3224",
+        "scheduledArrivalTime": "05:18",
+        "scheduledDepartureTime": "06:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 37,
+        "trackId": 10,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3620",
+        "scheduledArrivalTime": "05:05",
+        "scheduledDepartureTime": "05:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 38,
+        "trackId": 10,
+        "arrivalTrainNumber": "3617",
+        "departureTrainNumber": "13670",
+        "scheduledArrivalTime": "05:25",
+        "scheduledDepartureTime": "05:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 39,
+        "trackId": 10,
+        "arrivalTrainNumber": "3619",
+        "departureTrainNumber": "13672",
+        "scheduledArrivalTime": "05:55",
+        "scheduledDepartureTime": "06:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 40,
+        "trackId": 12,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3023",
+        "scheduledArrivalTime": "05:30",
+        "scheduledDepartureTime": "05:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 41,
+        "trackId": 12,
+        "arrivalTrainNumber": "65726",
+        "departureTrainNumber": "65726",
+        "scheduledArrivalTime": "05:55",
+        "scheduledDepartureTime": "06:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.878,
+          0.871,
+          0.796
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 42,
+        "trackId": 14,
+        "arrivalTrainNumber": "3020",
+        "departureTrainNumber": "3175",
+        "scheduledArrivalTime": "05:45",
+        "scheduledDepartureTime": "06:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 43,
+        "trackId": 14,
+        "arrivalTrainNumber": "3018",
+        "departureTrainNumber": "3175",
+        "scheduledArrivalTime": "05:21",
+        "scheduledDepartureTime": "06:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 44,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "20151",
+        "scheduledArrivalTime": "05:10",
+        "scheduledDepartureTime": "05:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 45,
+        "trackId": 15,
+        "arrivalTrainNumber": "13120",
+        "departureTrainNumber": "13125",
+        "scheduledArrivalTime": "05:35",
+        "scheduledDepartureTime": "06:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 46,
+        "trackId": 16,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3025",
+        "scheduledArrivalTime": "06:02",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 47,
+        "trackId": 16,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "11039",
+        "scheduledArrivalTime": "05:35",
+        "scheduledDepartureTime": "05:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 48,
+        "trackId": 16,
+        "arrivalTrainNumber": "3172",
+        "departureTrainNumber": "3027",
+        "scheduledArrivalTime": "06:00",
+        "scheduledDepartureTime": "06:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 49,
+        "trackId": 1,
+        "arrivalTrainNumber": "3519",
+        "departureTrainNumber": "3528",
+        "scheduledArrivalTime": "06:37",
+        "scheduledDepartureTime": "07:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 50,
+        "trackId": 1,
+        "arrivalTrainNumber": "3523",
+        "departureTrainNumber": "3532",
+        "scheduledArrivalTime": "07:37",
+        "scheduledDepartureTime": "08:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 51,
+        "trackId": 1,
+        "arrivalTrainNumber": "3527",
+        "departureTrainNumber": "3536",
+        "scheduledArrivalTime": "08:37",
+        "scheduledDepartureTime": "09:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 52,
+        "trackId": 2,
+        "arrivalTrainNumber": "3521",
+        "departureTrainNumber": "3526",
+        "scheduledArrivalTime": "06:19",
+        "scheduledDepartureTime": "06:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 53,
+        "trackId": 2,
+        "arrivalTrainNumber": "3525",
+        "departureTrainNumber": "3530",
+        "scheduledArrivalTime": "07:19",
+        "scheduledDepartureTime": "07:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 54,
+        "trackId": 2,
+        "arrivalTrainNumber": "3529",
+        "departureTrainNumber": "3534",
+        "scheduledArrivalTime": "08:19",
+        "scheduledDepartureTime": "08:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 55,
+        "trackId": 3,
+        "arrivalTrainNumber": "3427",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:42",
+        "scheduledDepartureTime": "07:57",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 56,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "426",
+        "scheduledArrivalTime": "06:35",
+        "scheduledDepartureTime": "08:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 57,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13734",
+        "scheduledArrivalTime": "08:30",
+        "scheduledDepartureTime": "08:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 58,
+        "trackId": 3,
+        "arrivalTrainNumber": "3229",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:00",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 59,
+        "trackId": 4,
+        "arrivalTrainNumber": "3421",
+        "departureTrainNumber": "3426",
+        "scheduledArrivalTime": "06:23",
+        "scheduledDepartureTime": "06:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 60,
+        "trackId": 4,
+        "arrivalTrainNumber": "3423",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "06:42",
+        "scheduledDepartureTime": "06:57",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 61,
+        "trackId": 4,
+        "arrivalTrainNumber": "3425",
+        "departureTrainNumber": "13790",
+        "scheduledArrivalTime": "07:23",
+        "scheduledDepartureTime": "07:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 62,
+        "trackId": 4,
+        "arrivalTrainNumber": "3425",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:23",
+        "scheduledDepartureTime": "07:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 63,
+        "trackId": 4,
+        "arrivalTrainNumber": "97228",
+        "departureTrainNumber": "2008",
+        "scheduledArrivalTime": "08:10",
+        "scheduledDepartureTime": "08:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 64,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "428",
+        "scheduledArrivalTime": "07:55",
+        "scheduledDepartureTime": "09:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 65,
+        "trackId": 6,
+        "arrivalTrainNumber": "97224",
+        "departureTrainNumber": "2004",
+        "scheduledArrivalTime": "06:10",
+        "scheduledDepartureTime": "06:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 66,
+        "trackId": 6,
+        "arrivalTrainNumber": "13277",
+        "departureTrainNumber": "3234",
+        "scheduledArrivalTime": "08:15",
+        "scheduledDepartureTime": "08:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 67,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "170",
+        "scheduledArrivalTime": "07:50",
+        "scheduledDepartureTime": "08:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 68,
+        "trackId": 6,
+        "arrivalTrainNumber": "20351",
+        "departureTrainNumber": "20356",
+        "scheduledArrivalTime": "08:45",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 69,
+        "trackId": 7,
+        "arrivalTrainNumber": "155",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:23",
+        "scheduledDepartureTime": "08:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 0,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 70,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "20352",
+        "scheduledArrivalTime": "06:37",
+        "scheduledDepartureTime": "07:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 71,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "384",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "08:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 72,
+        "trackId": 7,
+        "arrivalTrainNumber": "155",
+        "departureTrainNumber": "172",
+        "scheduledArrivalTime": "08:23",
+        "scheduledDepartureTime": "09:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 73,
+        "trackId": 8,
+        "arrivalTrainNumber": "3223",
+        "departureTrainNumber": "3232",
+        "scheduledArrivalTime": "07:30",
+        "scheduledDepartureTime": "08:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 74,
+        "trackId": 8,
+        "arrivalTrainNumber": "13721",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "06:45",
+        "scheduledDepartureTime": "07:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 75,
+        "trackId": 8,
+        "arrivalTrainNumber": "3223",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:30",
+        "scheduledDepartureTime": "08:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 76,
+        "trackId": 8,
+        "arrivalTrainNumber": "419",
+        "departureTrainNumber": "489",
+        "scheduledArrivalTime": "08:42",
+        "scheduledDepartureTime": "10:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 77,
+        "trackId": 9,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3624",
+        "scheduledArrivalTime": "06:05",
+        "scheduledDepartureTime": "06:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 78,
+        "trackId": 9,
+        "arrivalTrainNumber": "3219",
+        "departureTrainNumber": "3228",
+        "scheduledArrivalTime": "06:30",
+        "scheduledDepartureTime": "07:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 79,
+        "trackId": 9,
+        "arrivalTrainNumber": "3225",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:00",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 80,
+        "trackId": 9,
+        "arrivalTrainNumber": "13679",
+        "departureTrainNumber": "3634",
+        "scheduledArrivalTime": "08:40",
+        "scheduledDepartureTime": "08:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 81,
+        "trackId": 10,
+        "arrivalTrainNumber": "3621",
+        "departureTrainNumber": "13674",
+        "scheduledArrivalTime": "06:25",
+        "scheduledDepartureTime": "06:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 82,
+        "trackId": 10,
+        "arrivalTrainNumber": "13671",
+        "departureTrainNumber": "3626",
+        "scheduledArrivalTime": "06:40",
+        "scheduledDepartureTime": "06:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 83,
+        "trackId": 10,
+        "arrivalTrainNumber": "3623",
+        "departureTrainNumber": "13676",
+        "scheduledArrivalTime": "06:55",
+        "scheduledDepartureTime": "07:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 84,
+        "trackId": 10,
+        "arrivalTrainNumber": "13673",
+        "departureTrainNumber": "3628",
+        "scheduledArrivalTime": "07:10",
+        "scheduledDepartureTime": "07:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 85,
+        "trackId": 10,
+        "arrivalTrainNumber": "3625",
+        "departureTrainNumber": "13678",
+        "scheduledArrivalTime": "07:25",
+        "scheduledDepartureTime": "07:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 86,
+        "trackId": 10,
+        "arrivalTrainNumber": "13675",
+        "departureTrainNumber": "3630",
+        "scheduledArrivalTime": "07:40",
+        "scheduledDepartureTime": "07:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 87,
+        "trackId": 10,
+        "arrivalTrainNumber": "3627",
+        "departureTrainNumber": "13680",
+        "scheduledArrivalTime": "07:55",
+        "scheduledDepartureTime": "08:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 88,
+        "trackId": 10,
+        "arrivalTrainNumber": "13677",
+        "departureTrainNumber": "3632",
+        "scheduledArrivalTime": "08:10",
+        "scheduledDepartureTime": "08:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 89,
+        "trackId": 10,
+        "arrivalTrainNumber": "3629",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:25",
+        "scheduledDepartureTime": "08:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 90,
+        "trackId": 10,
+        "arrivalTrainNumber": "3631",
+        "departureTrainNumber": "3636",
+        "scheduledArrivalTime": "08:55",
+        "scheduledDepartureTime": "09:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 91,
+        "trackId": 11,
+        "arrivalTrainNumber": "13273",
+        "departureTrainNumber": "7331",
+        "scheduledArrivalTime": "07:15",
+        "scheduledDepartureTime": "07:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 92,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13726",
+        "scheduledArrivalTime": "06:30",
+        "scheduledDepartureTime": "06:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 93,
+        "trackId": 11,
+        "arrivalTrainNumber": "13273",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:15",
+        "scheduledDepartureTime": "07:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 94,
+        "trackId": 11,
+        "arrivalTrainNumber": "7330",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:10",
+        "scheduledDepartureTime": "08:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 95,
+        "trackId": 11,
+        "arrivalTrainNumber": "480",
+        "departureTrainNumber": "487",
+        "scheduledArrivalTime": "08:35",
+        "scheduledDepartureTime": "09:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 96,
+        "trackId": 12,
+        "arrivalTrainNumber": "3227",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:30",
+        "scheduledDepartureTime": "08:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 97,
+        "trackId": 12,
+        "arrivalTrainNumber": "3221",
+        "departureTrainNumber": "3230",
+        "scheduledArrivalTime": "07:00",
+        "scheduledDepartureTime": "07:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 98,
+        "trackId": 12,
+        "arrivalTrainNumber": "13795",
+        "departureTrainNumber": "3236",
+        "scheduledArrivalTime": "07:45",
+        "scheduledDepartureTime": "09:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 99,
+        "trackId": 13,
+        "arrivalTrainNumber": "3022",
+        "departureTrainNumber": "3177",
+        "scheduledArrivalTime": "06:15",
+        "scheduledDepartureTime": "06:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 100,
+        "trackId": 13,
+        "arrivalTrainNumber": "3030",
+        "departureTrainNumber": "3185",
+        "scheduledArrivalTime": "08:15",
+        "scheduledDepartureTime": "08:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 101,
+        "trackId": 13,
+        "arrivalTrainNumber": "3032",
+        "departureTrainNumber": "3187",
+        "scheduledArrivalTime": "08:45",
+        "scheduledDepartureTime": "09:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 102,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3177",
+        "scheduledArrivalTime": "06:10",
+        "scheduledDepartureTime": "06:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 103,
+        "trackId": 13,
+        "arrivalTrainNumber": "13124",
+        "departureTrainNumber": "13129",
+        "scheduledArrivalTime": "06:50",
+        "scheduledDepartureTime": "07:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 104,
+        "trackId": 13,
+        "arrivalTrainNumber": "13128",
+        "departureTrainNumber": "13133",
+        "scheduledArrivalTime": "07:50",
+        "scheduledDepartureTime": "08:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 105,
+        "trackId": 13,
+        "arrivalTrainNumber": "3030",
+        "departureTrainNumber": "83030",
+        "scheduledArrivalTime": "08:15",
+        "scheduledDepartureTime": "08:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 106,
+        "trackId": 13,
+        "arrivalTrainNumber": "3032",
+        "departureTrainNumber": "3037",
+        "scheduledArrivalTime": "08:45",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 107,
+        "trackId": 14,
+        "arrivalTrainNumber": "3180",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:00",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 0,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 108,
+        "trackId": 14,
+        "arrivalTrainNumber": "20150",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "06:05",
+        "scheduledDepartureTime": "06:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 109,
+        "trackId": 14,
+        "arrivalTrainNumber": "20152",
+        "departureTrainNumber": "11047",
+        "scheduledArrivalTime": "06:35",
+        "scheduledDepartureTime": "06:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 110,
+        "trackId": 14,
+        "arrivalTrainNumber": "20154",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:05",
+        "scheduledDepartureTime": "07:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 111,
+        "trackId": 14,
+        "arrivalTrainNumber": "20156",
+        "departureTrainNumber": "11055",
+        "scheduledArrivalTime": "07:35",
+        "scheduledDepartureTime": "07:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 112,
+        "trackId": 14,
+        "arrivalTrainNumber": "20158",
+        "departureTrainNumber": "11063",
+        "scheduledArrivalTime": "08:40",
+        "scheduledDepartureTime": "08:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 113,
+        "trackId": 14,
+        "arrivalTrainNumber": "20150",
+        "departureTrainNumber": "20153",
+        "scheduledArrivalTime": "06:05",
+        "scheduledDepartureTime": "06:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 114,
+        "trackId": 14,
+        "arrivalTrainNumber": "20154",
+        "departureTrainNumber": "20155",
+        "scheduledArrivalTime": "07:05",
+        "scheduledDepartureTime": "07:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 115,
+        "trackId": 14,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:00",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 116,
+        "trackId": 15,
+        "arrivalTrainNumber": "3024",
+        "departureTrainNumber": "3179",
+        "scheduledArrivalTime": "06:45",
+        "scheduledDepartureTime": "07:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 117,
+        "trackId": 15,
+        "arrivalTrainNumber": "3026",
+        "departureTrainNumber": "3181",
+        "scheduledArrivalTime": "07:15",
+        "scheduledDepartureTime": "07:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 118,
+        "trackId": 15,
+        "arrivalTrainNumber": "3028",
+        "departureTrainNumber": "3183",
+        "scheduledArrivalTime": "07:45",
+        "scheduledDepartureTime": "08:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 119,
+        "trackId": 15,
+        "arrivalTrainNumber": "7332",
+        "departureTrainNumber": "7337",
+        "scheduledArrivalTime": "08:55",
+        "scheduledDepartureTime": "09:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 120,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "7327",
+        "scheduledArrivalTime": "06:20",
+        "scheduledDepartureTime": "06:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 121,
+        "trackId": 15,
+        "arrivalTrainNumber": "7324",
+        "departureTrainNumber": "3179",
+        "scheduledArrivalTime": "06:40",
+        "scheduledDepartureTime": "07:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 122,
+        "trackId": 15,
+        "arrivalTrainNumber": "3028",
+        "departureTrainNumber": "3033",
+        "scheduledArrivalTime": "07:45",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 123,
+        "trackId": 15,
+        "arrivalTrainNumber": "13132",
+        "departureTrainNumber": "13137",
+        "scheduledArrivalTime": "08:50",
+        "scheduledDepartureTime": "09:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 124,
+        "trackId": 16,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3025",
+        "scheduledArrivalTime": "06:02",
+        "scheduledDepartureTime": "06:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 125,
+        "trackId": 16,
+        "arrivalTrainNumber": "3174",
+        "departureTrainNumber": "3027",
+        "scheduledArrivalTime": "06:30",
+        "scheduledDepartureTime": "06:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 126,
+        "trackId": 16,
+        "arrivalTrainNumber": "3176",
+        "departureTrainNumber": "3029",
+        "scheduledArrivalTime": "07:00",
+        "scheduledDepartureTime": "07:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 127,
+        "trackId": 16,
+        "arrivalTrainNumber": "3178",
+        "departureTrainNumber": "3031",
+        "scheduledArrivalTime": "07:30",
+        "scheduledDepartureTime": "07:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 128,
+        "trackId": 16,
+        "arrivalTrainNumber": "11002",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:05",
+        "scheduledDepartureTime": "08:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 129,
+        "trackId": 16,
+        "arrivalTrainNumber": "3182",
+        "departureTrainNumber": "3035",
+        "scheduledArrivalTime": "08:30",
+        "scheduledDepartureTime": "08:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 130,
+        "trackId": 16,
+        "arrivalTrainNumber": "11002",
+        "departureTrainNumber": "20157",
+        "scheduledArrivalTime": "08:05",
+        "scheduledDepartureTime": "08:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 131,
+        "trackId": 16,
+        "arrivalTrainNumber": "3184",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:00",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 132,
+        "trackId": 1,
+        "arrivalTrainNumber": "3531",
+        "departureTrainNumber": "3540",
+        "scheduledArrivalTime": "09:37",
+        "scheduledDepartureTime": "10:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 133,
+        "trackId": 1,
+        "arrivalTrainNumber": "3535",
+        "departureTrainNumber": "3544",
+        "scheduledArrivalTime": "10:37",
+        "scheduledDepartureTime": "11:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 134,
+        "trackId": 1,
+        "arrivalTrainNumber": "3539",
+        "departureTrainNumber": "3548",
+        "scheduledArrivalTime": "11:37",
+        "scheduledDepartureTime": "12:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 135,
+        "trackId": 2,
+        "arrivalTrainNumber": "3533",
+        "departureTrainNumber": "3538",
+        "scheduledArrivalTime": "09:19",
+        "scheduledDepartureTime": "09:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 136,
+        "trackId": 2,
+        "arrivalTrainNumber": "3537",
+        "departureTrainNumber": "3542",
+        "scheduledArrivalTime": "10:19",
+        "scheduledDepartureTime": "10:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 137,
+        "trackId": 2,
+        "arrivalTrainNumber": "3541",
+        "departureTrainNumber": "3546",
+        "scheduledArrivalTime": "11:19",
+        "scheduledDepartureTime": "11:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 138,
+        "trackId": 3,
+        "arrivalTrainNumber": "421",
+        "departureTrainNumber": "432",
+        "scheduledArrivalTime": "09:42",
+        "scheduledDepartureTime": "11:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 139,
+        "trackId": 3,
+        "arrivalTrainNumber": "425",
+        "departureTrainNumber": "436",
+        "scheduledArrivalTime": "11:42",
+        "scheduledDepartureTime": "13:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 140,
+        "trackId": 4,
+        "arrivalTrainNumber": "2019",
+        "departureTrainNumber": "2032",
+        "scheduledArrivalTime": "09:28",
+        "scheduledDepartureTime": "10:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 141,
+        "trackId": 4,
+        "arrivalTrainNumber": "423",
+        "departureTrainNumber": "434",
+        "scheduledArrivalTime": "10:42",
+        "scheduledDepartureTime": "12:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 142,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "434",
+        "scheduledArrivalTime": "09:15",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 143,
+        "trackId": 5,
+        "arrivalTrainNumber": "3445",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "11:28",
+        "scheduledDepartureTime": "11:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 144,
+        "trackId": 5,
+        "arrivalTrainNumber": "3231",
+        "departureTrainNumber": "3240",
+        "scheduledArrivalTime": "09:30",
+        "scheduledDepartureTime": "10:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 145,
+        "trackId": 5,
+        "arrivalTrainNumber": "2021",
+        "departureTrainNumber": "2036",
+        "scheduledArrivalTime": "10:28",
+        "scheduledDepartureTime": "12:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 146,
+        "trackId": 6,
+        "arrivalTrainNumber": "157",
+        "departureTrainNumber": "174",
+        "scheduledArrivalTime": "09:23",
+        "scheduledDepartureTime": "10:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 147,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3446",
+        "scheduledArrivalTime": "11:22",
+        "scheduledDepartureTime": "11:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 148,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3238",
+        "scheduledArrivalTime": "09:15",
+        "scheduledDepartureTime": "09:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 149,
+        "trackId": 7,
+        "arrivalTrainNumber": "23441",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "11:23",
+        "scheduledDepartureTime": "11:38",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 150,
+        "trackId": 7,
+        "arrivalTrainNumber": "383",
+        "departureTrainNumber": "386",
+        "scheduledArrivalTime": "09:45",
+        "scheduledDepartureTime": "10:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 151,
+        "trackId": 7,
+        "arrivalTrainNumber": "159",
+        "departureTrainNumber": "178",
+        "scheduledArrivalTime": "10:23",
+        "scheduledDepartureTime": "12:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 152,
+        "trackId": 8,
+        "arrivalTrainNumber": "13681",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:15",
+        "scheduledDepartureTime": "09:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 153,
+        "trackId": 8,
+        "arrivalTrainNumber": "20355",
+        "departureTrainNumber": "20360",
+        "scheduledArrivalTime": "10:40",
+        "scheduledDepartureTime": "11:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 154,
+        "trackId": 8,
+        "arrivalTrainNumber": "385",
+        "departureTrainNumber": "388",
+        "scheduledArrivalTime": "11:45",
+        "scheduledDepartureTime": "12:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 155,
+        "trackId": 9,
+        "arrivalTrainNumber": "23631",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:10",
+        "scheduledDepartureTime": "09:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 156,
+        "trackId": 9,
+        "arrivalTrainNumber": "3233",
+        "departureTrainNumber": "3242",
+        "scheduledArrivalTime": "10:00",
+        "scheduledDepartureTime": "10:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 157,
+        "trackId": 9,
+        "arrivalTrainNumber": "13303",
+        "departureTrainNumber": "13304",
+        "scheduledArrivalTime": "09:35",
+        "scheduledDepartureTime": "10:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 158,
+        "trackId": 9,
+        "arrivalTrainNumber": "3237",
+        "departureTrainNumber": "3246",
+        "scheduledArrivalTime": "11:00",
+        "scheduledDepartureTime": "11:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 159,
+        "trackId": 9,
+        "arrivalTrainNumber": "3241",
+        "departureTrainNumber": "3250",
+        "scheduledArrivalTime": "12:00",
+        "scheduledDepartureTime": "12:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 160,
+        "trackId": 10,
+        "arrivalTrainNumber": "3633",
+        "departureTrainNumber": "3638",
+        "scheduledArrivalTime": "09:25",
+        "scheduledDepartureTime": "09:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 161,
+        "trackId": 10,
+        "arrivalTrainNumber": "3635",
+        "departureTrainNumber": "3640",
+        "scheduledArrivalTime": "09:55",
+        "scheduledDepartureTime": "10:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 162,
+        "trackId": 10,
+        "arrivalTrainNumber": "3637",
+        "departureTrainNumber": "3642",
+        "scheduledArrivalTime": "10:25",
+        "scheduledDepartureTime": "10:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 163,
+        "trackId": 10,
+        "arrivalTrainNumber": "3639",
+        "departureTrainNumber": "3644",
+        "scheduledArrivalTime": "10:55",
+        "scheduledDepartureTime": "11:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 164,
+        "trackId": 10,
+        "arrivalTrainNumber": "3641",
+        "departureTrainNumber": "3646",
+        "scheduledArrivalTime": "11:25",
+        "scheduledDepartureTime": "11:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 165,
+        "trackId": 10,
+        "arrivalTrainNumber": "3643",
+        "departureTrainNumber": "3648",
+        "scheduledArrivalTime": "11:55",
+        "scheduledDepartureTime": "12:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 166,
+        "trackId": 11,
+        "arrivalTrainNumber": "482",
+        "departureTrainNumber": "430",
+        "scheduledArrivalTime": "09:35",
+        "scheduledDepartureTime": "10:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 167,
+        "trackId": 11,
+        "arrivalTrainNumber": "13739",
+        "departureTrainNumber": "13742",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 168,
+        "trackId": 12,
+        "arrivalTrainNumber": "320",
+        "departureTrainNumber": "327",
+        "scheduledArrivalTime": "09:10",
+        "scheduledDepartureTime": "10:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 169,
+        "trackId": 12,
+        "arrivalTrainNumber": "7336",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "10:10",
+        "scheduledDepartureTime": "10:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 170,
+        "trackId": 12,
+        "arrivalTrainNumber": "3235",
+        "departureTrainNumber": "3244",
+        "scheduledArrivalTime": "10:30",
+        "scheduledDepartureTime": "11:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 171,
+        "trackId": 12,
+        "arrivalTrainNumber": "3239",
+        "departureTrainNumber": "3248",
+        "scheduledArrivalTime": "11:30",
+        "scheduledDepartureTime": "12:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 172,
+        "trackId": 13,
+        "arrivalTrainNumber": "3186",
+        "departureTrainNumber": "3039",
+        "scheduledArrivalTime": "09:30",
+        "scheduledDepartureTime": "09:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 173,
+        "trackId": 13,
+        "arrivalTrainNumber": "13136",
+        "departureTrainNumber": "3041",
+        "scheduledArrivalTime": "09:50",
+        "scheduledDepartureTime": "10:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 174,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3043",
+        "scheduledArrivalTime": "10:30",
+        "scheduledDepartureTime": "10:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 175,
+        "trackId": 13,
+        "arrivalTrainNumber": "13140",
+        "departureTrainNumber": "13145",
+        "scheduledArrivalTime": "10:50",
+        "scheduledDepartureTime": "11:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 176,
+        "trackId": 13,
+        "arrivalTrainNumber": "3044",
+        "departureTrainNumber": "3049",
+        "scheduledArrivalTime": "11:45",
+        "scheduledDepartureTime": "12:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 177,
+        "trackId": 14,
+        "arrivalTrainNumber": "11010",
+        "departureTrainNumber": "11071",
+        "scheduledArrivalTime": "09:05",
+        "scheduledDepartureTime": "09:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 178,
+        "trackId": 14,
+        "arrivalTrainNumber": "11018",
+        "departureTrainNumber": "11079",
+        "scheduledArrivalTime": "10:05",
+        "scheduledDepartureTime": "10:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 179,
+        "trackId": 14,
+        "arrivalTrainNumber": "11026",
+        "departureTrainNumber": "11087",
+        "scheduledArrivalTime": "11:05",
+        "scheduledDepartureTime": "11:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 180,
+        "trackId": 15,
+        "arrivalTrainNumber": "3036",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:45",
+        "scheduledDepartureTime": "10:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 181,
+        "trackId": 15,
+        "arrivalTrainNumber": "3034",
+        "departureTrainNumber": "3189",
+        "scheduledArrivalTime": "09:15",
+        "scheduledDepartureTime": "09:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 182,
+        "trackId": 15,
+        "arrivalTrainNumber": "3038",
+        "departureTrainNumber": "3045",
+        "scheduledArrivalTime": "10:15",
+        "scheduledDepartureTime": "11:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 183,
+        "trackId": 16,
+        "arrivalTrainNumber": "20160",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:40",
+        "scheduledDepartureTime": "09:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 184,
+        "trackId": 16,
+        "arrivalTrainNumber": "3188",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "10:00",
+        "scheduledDepartureTime": "10:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 185,
+        "trackId": 16,
+        "arrivalTrainNumber": "3040",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 186,
+        "trackId": 16,
+        "arrivalTrainNumber": "3042",
+        "departureTrainNumber": "3047",
+        "scheduledArrivalTime": "11:15",
+        "scheduledDepartureTime": "11:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 187,
+        "trackId": 1,
+        "arrivalTrainNumber": "3543",
+        "departureTrainNumber": "3552",
+        "scheduledArrivalTime": "12:37",
+        "scheduledDepartureTime": "13:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 188,
+        "trackId": 1,
+        "arrivalTrainNumber": "64705",
+        "departureTrainNumber": "3556",
+        "scheduledArrivalTime": "14:10",
+        "scheduledDepartureTime": "14:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 189,
+        "trackId": 1,
+        "arrivalTrainNumber": "3551",
+        "departureTrainNumber": "3560",
+        "scheduledArrivalTime": "14:37",
+        "scheduledDepartureTime": "15:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 190,
+        "trackId": 2,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13750",
+        "scheduledArrivalTime": "12:55",
+        "scheduledDepartureTime": "13:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 191,
+        "trackId": 2,
+        "arrivalTrainNumber": "3545",
+        "departureTrainNumber": "3550",
+        "scheduledArrivalTime": "12:19",
+        "scheduledDepartureTime": "12:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 192,
+        "trackId": 2,
+        "arrivalTrainNumber": "3549",
+        "departureTrainNumber": "3554",
+        "scheduledArrivalTime": "13:19",
+        "scheduledDepartureTime": "13:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 193,
+        "trackId": 2,
+        "arrivalTrainNumber": "3553",
+        "departureTrainNumber": "3558",
+        "scheduledArrivalTime": "14:19",
+        "scheduledDepartureTime": "14:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 194,
+        "trackId": 3,
+        "arrivalTrainNumber": "429",
+        "departureTrainNumber": "440",
+        "scheduledArrivalTime": "13:42",
+        "scheduledDepartureTime": "15:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 195,
+        "trackId": 4,
+        "arrivalTrainNumber": "3247",
+        "departureTrainNumber": "3256",
+        "scheduledArrivalTime": "13:30",
+        "scheduledDepartureTime": "14:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 196,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "184",
+        "scheduledArrivalTime": "14:35",
+        "scheduledDepartureTime": "15:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 197,
+        "trackId": 4,
+        "arrivalTrainNumber": "427",
+        "departureTrainNumber": "438",
+        "scheduledArrivalTime": "12:42",
+        "scheduledDepartureTime": "14:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 198,
+        "trackId": 4,
+        "arrivalTrainNumber": "167",
+        "departureTrainNumber": "184",
+        "scheduledArrivalTime": "14:23",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 199,
+        "trackId": 5,
+        "arrivalTrainNumber": "165",
+        "departureTrainNumber": "182",
+        "scheduledArrivalTime": "13:23",
+        "scheduledDepartureTime": "14:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 200,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "182",
+        "scheduledArrivalTime": "13:15",
+        "scheduledDepartureTime": "14:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 201,
+        "trackId": 5,
+        "arrivalTrainNumber": "431",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "14:42",
+        "scheduledDepartureTime": "15:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 202,
+        "trackId": 6,
+        "arrivalTrainNumber": "163",
+        "departureTrainNumber": "180",
+        "scheduledArrivalTime": "12:23",
+        "scheduledDepartureTime": "13:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 203,
+        "trackId": 6,
+        "arrivalTrainNumber": "3249",
+        "departureTrainNumber": "64958",
+        "scheduledArrivalTime": "14:00",
+        "scheduledDepartureTime": "14:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 204,
+        "trackId": 6,
+        "arrivalTrainNumber": "3251",
+        "departureTrainNumber": "3260",
+        "scheduledArrivalTime": "14:30",
+        "scheduledDepartureTime": "15:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 205,
+        "trackId": 7,
+        "arrivalTrainNumber": "20363",
+        "departureTrainNumber": "20368",
+        "scheduledArrivalTime": "14:40",
+        "scheduledDepartureTime": "15:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 206,
+        "trackId": 7,
+        "arrivalTrainNumber": "20359",
+        "departureTrainNumber": "20364",
+        "scheduledArrivalTime": "12:40",
+        "scheduledDepartureTime": "13:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 207,
+        "trackId": 7,
+        "arrivalTrainNumber": "2027",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "13:28",
+        "scheduledDepartureTime": "13:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 208,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "2042",
+        "scheduledArrivalTime": "14:00",
+        "scheduledDepartureTime": "15:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 209,
+        "trackId": 8,
+        "arrivalTrainNumber": "3547",
+        "departureTrainNumber": "3258",
+        "scheduledArrivalTime": "13:37",
+        "scheduledDepartureTime": "14:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 210,
+        "trackId": 8,
+        "arrivalTrainNumber": "3243",
+        "departureTrainNumber": "3252",
+        "scheduledArrivalTime": "12:30",
+        "scheduledDepartureTime": "13:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 211,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3448",
+        "scheduledArrivalTime": "13:18",
+        "scheduledDepartureTime": "13:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 212,
+        "trackId": 8,
+        "arrivalTrainNumber": "13755",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "14:45",
+        "scheduledDepartureTime": "15:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 213,
+        "trackId": 9,
+        "arrivalTrainNumber": "3245",
+        "departureTrainNumber": "3254",
+        "scheduledArrivalTime": "13:00",
+        "scheduledDepartureTime": "13:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 214,
+        "trackId": 9,
+        "arrivalTrainNumber": "387",
+        "departureTrainNumber": "390",
+        "scheduledArrivalTime": "13:45",
+        "scheduledDepartureTime": "14:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 215,
+        "trackId": 9,
+        "arrivalTrainNumber": "93758",
+        "departureTrainNumber": "13758",
+        "scheduledArrivalTime": "14:20",
+        "scheduledDepartureTime": "14:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 216,
+        "trackId": 9,
+        "arrivalTrainNumber": "3253",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "15:00",
+        "scheduledDepartureTime": "15:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 217,
+        "trackId": 10,
+        "arrivalTrainNumber": "3645",
+        "departureTrainNumber": "3650",
+        "scheduledArrivalTime": "12:25",
+        "scheduledDepartureTime": "12:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 218,
+        "trackId": 10,
+        "arrivalTrainNumber": "3647",
+        "departureTrainNumber": "3652",
+        "scheduledArrivalTime": "12:55",
+        "scheduledDepartureTime": "13:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 219,
+        "trackId": 10,
+        "arrivalTrainNumber": "3649",
+        "departureTrainNumber": "3654",
+        "scheduledArrivalTime": "13:25",
+        "scheduledDepartureTime": "13:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 220,
+        "trackId": 10,
+        "arrivalTrainNumber": "3651",
+        "departureTrainNumber": "3656",
+        "scheduledArrivalTime": "13:55",
+        "scheduledDepartureTime": "14:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 221,
+        "trackId": 10,
+        "arrivalTrainNumber": "3653",
+        "departureTrainNumber": "3658",
+        "scheduledArrivalTime": "14:25",
+        "scheduledDepartureTime": "14:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 222,
+        "trackId": 10,
+        "arrivalTrainNumber": "3655",
+        "departureTrainNumber": "13608",
+        "scheduledArrivalTime": "14:55",
+        "scheduledDepartureTime": "15:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 223,
+        "trackId": 11,
+        "arrivalTrainNumber": "13897",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "12:45",
+        "scheduledDepartureTime": "13:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 224,
+        "trackId": 11,
+        "arrivalTrainNumber": "3056",
+        "departureTrainNumber": "3111",
+        "scheduledArrivalTime": "14:45",
+        "scheduledDepartureTime": "15:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 225,
+        "trackId": 11,
+        "arrivalTrainNumber": "3102",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "13:30",
+        "scheduledDepartureTime": "13:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 226,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3111",
+        "scheduledArrivalTime": "14:40",
+        "scheduledDepartureTime": "15:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 227,
+        "trackId": 12,
+        "arrivalTrainNumber": "13305",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "12:10",
+        "scheduledDepartureTime": "12:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 228,
+        "trackId": 12,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3103",
+        "scheduledArrivalTime": "12:45",
+        "scheduledDepartureTime": "13:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 229,
+        "trackId": 12,
+        "arrivalTrainNumber": "7350",
+        "departureTrainNumber": "7355",
+        "scheduledArrivalTime": "13:25",
+        "scheduledDepartureTime": "13:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 230,
+        "trackId": 12,
+        "arrivalTrainNumber": "10332",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "13:55",
+        "scheduledDepartureTime": "14:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 231,
+        "trackId": 12,
+        "arrivalTrainNumber": "13156",
+        "departureTrainNumber": "13161",
+        "scheduledArrivalTime": "14:50",
+        "scheduledDepartureTime": "15:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 232,
+        "trackId": 13,
+        "arrivalTrainNumber": "3054",
+        "departureTrainNumber": "3109",
+        "scheduledArrivalTime": "14:15",
+        "scheduledDepartureTime": "14:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 233,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3061",
+        "scheduledArrivalTime": "15:00",
+        "scheduledDepartureTime": "15:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 234,
+        "trackId": 13,
+        "arrivalTrainNumber": "484",
+        "departureTrainNumber": "491",
+        "scheduledArrivalTime": "12:35",
+        "scheduledDepartureTime": "13:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 235,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13098",
+        "scheduledArrivalTime": "13:30",
+        "scheduledDepartureTime": "13:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 236,
+        "trackId": 13,
+        "arrivalTrainNumber": "83109",
+        "departureTrainNumber": "3109",
+        "scheduledArrivalTime": "14:05",
+        "scheduledDepartureTime": "14:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 237,
+        "trackId": 14,
+        "arrivalTrainNumber": "11034",
+        "departureTrainNumber": "11095",
+        "scheduledArrivalTime": "12:05",
+        "scheduledDepartureTime": "12:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 238,
+        "trackId": 14,
+        "arrivalTrainNumber": "11042",
+        "departureTrainNumber": "11103",
+        "scheduledArrivalTime": "13:05",
+        "scheduledDepartureTime": "13:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 239,
+        "trackId": 14,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "11111",
+        "scheduledArrivalTime": "14:00",
+        "scheduledDepartureTime": "14:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 240,
+        "trackId": 15,
+        "arrivalTrainNumber": "3050",
+        "departureTrainNumber": "3105",
+        "scheduledArrivalTime": "13:15",
+        "scheduledDepartureTime": "13:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 241,
+        "trackId": 15,
+        "arrivalTrainNumber": "11050",
+        "departureTrainNumber": "20171",
+        "scheduledArrivalTime": "14:05",
+        "scheduledDepartureTime": "14:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 242,
+        "trackId": 15,
+        "arrivalTrainNumber": "3046",
+        "departureTrainNumber": "3051",
+        "scheduledArrivalTime": "12:15",
+        "scheduledDepartureTime": "12:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 243,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3105",
+        "scheduledArrivalTime": "13:10",
+        "scheduledDepartureTime": "13:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 244,
+        "trackId": 15,
+        "arrivalTrainNumber": "3052",
+        "departureTrainNumber": "3107",
+        "scheduledArrivalTime": "13:45",
+        "scheduledDepartureTime": "14:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 245,
+        "trackId": 15,
+        "arrivalTrainNumber": "3108",
+        "departureTrainNumber": "3113",
+        "scheduledArrivalTime": "15:00",
+        "scheduledDepartureTime": "15:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 246,
+        "trackId": 16,
+        "arrivalTrainNumber": "13148",
+        "departureTrainNumber": "13153",
+        "scheduledArrivalTime": "12:50",
+        "scheduledDepartureTime": "13:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 247,
+        "trackId": 16,
+        "arrivalTrainNumber": "3106",
+        "departureTrainNumber": "3059",
+        "scheduledArrivalTime": "14:30",
+        "scheduledDepartureTime": "14:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 248,
+        "trackId": 16,
+        "arrivalTrainNumber": "3048",
+        "departureTrainNumber": "3053",
+        "scheduledArrivalTime": "12:45",
+        "scheduledDepartureTime": "13:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 249,
+        "trackId": 16,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3055",
+        "scheduledArrivalTime": "13:30",
+        "scheduledDepartureTime": "13:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 250,
+        "trackId": 16,
+        "arrivalTrainNumber": "3104",
+        "departureTrainNumber": "3057",
+        "scheduledArrivalTime": "14:00",
+        "scheduledDepartureTime": "14:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 251,
+        "trackId": 16,
+        "arrivalTrainNumber": "7361",
+        "departureTrainNumber": "7361",
+        "scheduledArrivalTime": "14:50",
+        "scheduledDepartureTime": "15:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 252,
+        "trackId": 1,
+        "arrivalTrainNumber": "3555",
+        "departureTrainNumber": "3564",
+        "scheduledArrivalTime": "15:37",
+        "scheduledDepartureTime": "16:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 253,
+        "trackId": 1,
+        "arrivalTrainNumber": "3559",
+        "departureTrainNumber": "3568",
+        "scheduledArrivalTime": "16:37",
+        "scheduledDepartureTime": "17:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 254,
+        "trackId": 1,
+        "arrivalTrainNumber": "3563",
+        "departureTrainNumber": "3572",
+        "scheduledArrivalTime": "17:37",
+        "scheduledDepartureTime": "18:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 255,
+        "trackId": 2,
+        "arrivalTrainNumber": "3557",
+        "departureTrainNumber": "3562",
+        "scheduledArrivalTime": "15:19",
+        "scheduledDepartureTime": "15:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 256,
+        "trackId": 2,
+        "arrivalTrainNumber": "3561",
+        "departureTrainNumber": "3566",
+        "scheduledArrivalTime": "16:19",
+        "scheduledDepartureTime": "16:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 257,
+        "trackId": 2,
+        "arrivalTrainNumber": "3565",
+        "departureTrainNumber": "3570",
+        "scheduledArrivalTime": "17:19",
+        "scheduledDepartureTime": "17:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 258,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "442",
+        "scheduledArrivalTime": "15:30",
+        "scheduledDepartureTime": "16:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 0,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 259,
+        "trackId": 3,
+        "arrivalTrainNumber": "169",
+        "departureTrainNumber": "186",
+        "scheduledArrivalTime": "15:23",
+        "scheduledDepartureTime": "16:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 260,
+        "trackId": 3,
+        "arrivalTrainNumber": "435",
+        "departureTrainNumber": "446",
+        "scheduledArrivalTime": "16:42",
+        "scheduledDepartureTime": "18:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 261,
+        "trackId": 4,
+        "arrivalTrainNumber": "83465",
+        "departureTrainNumber": "3466",
+        "scheduledArrivalTime": "16:04",
+        "scheduledDepartureTime": "16:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 262,
+        "trackId": 4,
+        "arrivalTrainNumber": "437",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "17:42",
+        "scheduledDepartureTime": "18:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 263,
+        "trackId": 5,
+        "arrivalTrainNumber": "3265",
+        "departureTrainNumber": "13224",
+        "scheduledArrivalTime": "18:00",
+        "scheduledDepartureTime": "18:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 264,
+        "trackId": 5,
+        "arrivalTrainNumber": "2031",
+        "departureTrainNumber": "2046",
+        "scheduledArrivalTime": "15:28",
+        "scheduledDepartureTime": "17:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 265,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3264",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "16:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 266,
+        "trackId": 6,
+        "arrivalTrainNumber": "93564",
+        "departureTrainNumber": "3264",
+        "scheduledArrivalTime": "15:05",
+        "scheduledDepartureTime": "16:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 267,
+        "trackId": 6,
+        "arrivalTrainNumber": "13609",
+        "departureTrainNumber": "3664",
+        "scheduledArrivalTime": "16:10",
+        "scheduledDepartureTime": "16:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 268,
+        "trackId": 6,
+        "arrivalTrainNumber": "2035",
+        "departureTrainNumber": "2010",
+        "scheduledArrivalTime": "17:28",
+        "scheduledDepartureTime": "19:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 269,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3266",
+        "scheduledArrivalTime": "16:15",
+        "scheduledDepartureTime": "16:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 0,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 270,
+        "trackId": 7,
+        "arrivalTrainNumber": "3257",
+        "departureTrainNumber": "3266",
+        "scheduledArrivalTime": "16:00",
+        "scheduledDepartureTime": "16:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 271,
+        "trackId": 7,
+        "arrivalTrainNumber": "20367",
+        "departureTrainNumber": "20372",
+        "scheduledArrivalTime": "16:45",
+        "scheduledDepartureTime": "17:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 272,
+        "trackId": 7,
+        "arrivalTrainNumber": "433",
+        "departureTrainNumber": "444",
+        "scheduledArrivalTime": "15:42",
+        "scheduledDepartureTime": "17:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 273,
+        "trackId": 7,
+        "arrivalTrainNumber": "3465",
+        "departureTrainNumber": "3470",
+        "scheduledArrivalTime": "17:23",
+        "scheduledDepartureTime": "17:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 274,
+        "trackId": 7,
+        "arrivalTrainNumber": "13793",
+        "departureTrainNumber": "3272",
+        "scheduledArrivalTime": "17:45",
+        "scheduledDepartureTime": "18:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 275,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3262",
+        "scheduledArrivalTime": "15:15",
+        "scheduledDepartureTime": "15:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 276,
+        "trackId": 8,
+        "arrivalTrainNumber": "3461",
+        "departureTrainNumber": "23694",
+        "scheduledArrivalTime": "16:23",
+        "scheduledDepartureTime": "16:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 277,
+        "trackId": 8,
+        "arrivalTrainNumber": "391",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "17:40",
+        "scheduledDepartureTime": "17:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 278,
+        "trackId": 8,
+        "arrivalTrainNumber": "389",
+        "departureTrainNumber": "392",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "16:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 279,
+        "trackId": 8,
+        "arrivalTrainNumber": "3461",
+        "departureTrainNumber": "13420",
+        "scheduledArrivalTime": "16:23",
+        "scheduledDepartureTime": "17:28",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 280,
+        "trackId": 8,
+        "arrivalTrainNumber": "391",
+        "departureTrainNumber": "394",
+        "scheduledArrivalTime": "17:40",
+        "scheduledDepartureTime": "18:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 281,
+        "trackId": 9,
+        "arrivalTrainNumber": "3259",
+        "departureTrainNumber": "3268",
+        "scheduledArrivalTime": "16:30",
+        "scheduledDepartureTime": "17:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 282,
+        "trackId": 9,
+        "arrivalTrainNumber": "13763",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "17:05",
+        "scheduledDepartureTime": "17:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 283,
+        "trackId": 9,
+        "arrivalTrainNumber": "488",
+        "departureTrainNumber": "495",
+        "scheduledArrivalTime": "15:35",
+        "scheduledDepartureTime": "16:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 284,
+        "trackId": 9,
+        "arrivalTrainNumber": "3665",
+        "departureTrainNumber": "13618",
+        "scheduledArrivalTime": "17:25",
+        "scheduledDepartureTime": "17:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 285,
+        "trackId": 10,
+        "arrivalTrainNumber": "3659",
+        "departureTrainNumber": "13612",
+        "scheduledArrivalTime": "15:55",
+        "scheduledDepartureTime": "16:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 286,
+        "trackId": 10,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3660",
+        "scheduledArrivalTime": "15:07",
+        "scheduledDepartureTime": "15:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 287,
+        "trackId": 10,
+        "arrivalTrainNumber": "3657",
+        "departureTrainNumber": "13610",
+        "scheduledArrivalTime": "15:25",
+        "scheduledDepartureTime": "15:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 288,
+        "trackId": 10,
+        "arrivalTrainNumber": "93167",
+        "departureTrainNumber": "13167",
+        "scheduledArrivalTime": "15:40",
+        "scheduledDepartureTime": "16:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 289,
+        "trackId": 10,
+        "arrivalTrainNumber": "3661",
+        "departureTrainNumber": "13614",
+        "scheduledArrivalTime": "16:25",
+        "scheduledDepartureTime": "16:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 290,
+        "trackId": 10,
+        "arrivalTrainNumber": "13611",
+        "departureTrainNumber": "3666",
+        "scheduledArrivalTime": "16:40",
+        "scheduledDepartureTime": "16:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 291,
+        "trackId": 10,
+        "arrivalTrainNumber": "3663",
+        "departureTrainNumber": "13616",
+        "scheduledArrivalTime": "16:55",
+        "scheduledDepartureTime": "17:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 292,
+        "trackId": 10,
+        "arrivalTrainNumber": "13613",
+        "departureTrainNumber": "3668",
+        "scheduledArrivalTime": "17:10",
+        "scheduledDepartureTime": "17:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 293,
+        "trackId": 10,
+        "arrivalTrainNumber": "13615",
+        "departureTrainNumber": "3670",
+        "scheduledArrivalTime": "17:35",
+        "scheduledDepartureTime": "17:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 294,
+        "trackId": 10,
+        "arrivalTrainNumber": "3667",
+        "departureTrainNumber": "13620",
+        "scheduledArrivalTime": "17:55",
+        "scheduledDepartureTime": "18:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 295,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "339",
+        "scheduledArrivalTime": "15:35",
+        "scheduledDepartureTime": "16:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 296,
+        "trackId": 11,
+        "arrivalTrainNumber": "7362",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "16:10",
+        "scheduledDepartureTime": "16:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 297,
+        "trackId": 11,
+        "arrivalTrainNumber": "3261",
+        "departureTrainNumber": "3270",
+        "scheduledArrivalTime": "17:00",
+        "scheduledDepartureTime": "17:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 298,
+        "trackId": 11,
+        "arrivalTrainNumber": "7368",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "17:40",
+        "scheduledDepartureTime": "17:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 299,
+        "trackId": 12,
+        "arrivalTrainNumber": "3263",
+        "departureTrainNumber": "13796",
+        "scheduledArrivalTime": "17:30",
+        "scheduledDepartureTime": "17:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 300,
+        "trackId": 12,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3662",
+        "scheduledArrivalTime": "15:35",
+        "scheduledDepartureTime": "15:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 301,
+        "trackId": 12,
+        "arrivalTrainNumber": "336",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "15:55",
+        "scheduledDepartureTime": "16:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 302,
+        "trackId": 12,
+        "arrivalTrainNumber": "490",
+        "departureTrainNumber": "497",
+        "scheduledArrivalTime": "16:35",
+        "scheduledDepartureTime": "17:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 303,
+        "trackId": 13,
+        "arrivalTrainNumber": "3255",
+        "departureTrainNumber": "13792",
+        "scheduledArrivalTime": "15:30",
+        "scheduledDepartureTime": "15:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 304,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13216",
+        "scheduledArrivalTime": "16:00",
+        "scheduledDepartureTime": "16:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 305,
+        "trackId": 13,
+        "arrivalTrainNumber": "7358",
+        "departureTrainNumber": "13216",
+        "scheduledArrivalTime": "15:25",
+        "scheduledDepartureTime": "16:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 306,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "7367",
+        "scheduledArrivalTime": "16:20",
+        "scheduledDepartureTime": "16:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 307,
+        "trackId": 13,
+        "arrivalTrainNumber": "13164",
+        "departureTrainNumber": "13169",
+        "scheduledArrivalTime": "16:50",
+        "scheduledDepartureTime": "17:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 308,
+        "trackId": 13,
+        "arrivalTrainNumber": "343",
+        "departureTrainNumber": "343",
+        "scheduledArrivalTime": "17:30",
+        "scheduledDepartureTime": "18:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 309,
+        "trackId": 14,
+        "arrivalTrainNumber": "11058",
+        "departureTrainNumber": "20173",
+        "scheduledArrivalTime": "15:05",
+        "scheduledDepartureTime": "15:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 310,
+        "trackId": 14,
+        "arrivalTrainNumber": "11119",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "15:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 311,
+        "trackId": 14,
+        "arrivalTrainNumber": "11066",
+        "departureTrainNumber": "20175",
+        "scheduledArrivalTime": "16:05",
+        "scheduledDepartureTime": "16:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 312,
+        "trackId": 14,
+        "arrivalTrainNumber": "11127",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "16:45",
+        "scheduledDepartureTime": "16:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 313,
+        "trackId": 14,
+        "arrivalTrainNumber": "11074",
+        "departureTrainNumber": "20177",
+        "scheduledArrivalTime": "17:05",
+        "scheduledDepartureTime": "17:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 314,
+        "trackId": 14,
+        "arrivalTrainNumber": "20176",
+        "departureTrainNumber": "11135",
+        "scheduledArrivalTime": "17:35",
+        "scheduledDepartureTime": "17:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 315,
+        "trackId": 14,
+        "arrivalTrainNumber": "20172",
+        "departureTrainNumber": "11119",
+        "scheduledArrivalTime": "15:40",
+        "scheduledDepartureTime": "15:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 316,
+        "trackId": 14,
+        "arrivalTrainNumber": "20174",
+        "departureTrainNumber": "11127",
+        "scheduledArrivalTime": "16:40",
+        "scheduledDepartureTime": "16:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 317,
+        "trackId": 15,
+        "arrivalTrainNumber": "3066",
+        "departureTrainNumber": "3121",
+        "scheduledArrivalTime": "17:15",
+        "scheduledDepartureTime": "17:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 318,
+        "trackId": 15,
+        "arrivalTrainNumber": "3058",
+        "departureTrainNumber": "3113",
+        "scheduledArrivalTime": "15:15",
+        "scheduledDepartureTime": "15:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 319,
+        "trackId": 15,
+        "arrivalTrainNumber": "3060",
+        "departureTrainNumber": "3115",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "16:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 320,
+        "trackId": 15,
+        "arrivalTrainNumber": "3062",
+        "departureTrainNumber": "3117",
+        "scheduledArrivalTime": "16:15",
+        "scheduledDepartureTime": "16:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 321,
+        "trackId": 15,
+        "arrivalTrainNumber": "3064",
+        "departureTrainNumber": "3119",
+        "scheduledArrivalTime": "16:45",
+        "scheduledDepartureTime": "17:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 322,
+        "trackId": 15,
+        "arrivalTrainNumber": "3068",
+        "departureTrainNumber": "3123",
+        "scheduledArrivalTime": "17:45",
+        "scheduledDepartureTime": "18:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 323,
+        "trackId": 15,
+        "arrivalTrainNumber": "64717",
+        "departureTrainNumber": "7371",
+        "scheduledArrivalTime": "17:10",
+        "scheduledDepartureTime": "17:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 324,
+        "trackId": 15,
+        "arrivalTrainNumber": "3068",
+        "departureTrainNumber": "3073",
+        "scheduledArrivalTime": "17:45",
+        "scheduledDepartureTime": "18:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 325,
+        "trackId": 16,
+        "arrivalTrainNumber": "3110",
+        "departureTrainNumber": "3063",
+        "scheduledArrivalTime": "15:30",
+        "scheduledDepartureTime": "15:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 326,
+        "trackId": 16,
+        "arrivalTrainNumber": "3112",
+        "departureTrainNumber": "3065",
+        "scheduledArrivalTime": "16:00",
+        "scheduledDepartureTime": "16:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 327,
+        "trackId": 16,
+        "arrivalTrainNumber": "3114",
+        "departureTrainNumber": "3067",
+        "scheduledArrivalTime": "16:30",
+        "scheduledDepartureTime": "16:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 328,
+        "trackId": 16,
+        "arrivalTrainNumber": "3116",
+        "departureTrainNumber": "3069",
+        "scheduledArrivalTime": "17:00",
+        "scheduledDepartureTime": "17:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 329,
+        "trackId": 16,
+        "arrivalTrainNumber": "3118",
+        "departureTrainNumber": "3071",
+        "scheduledArrivalTime": "17:30",
+        "scheduledDepartureTime": "17:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 330,
+        "trackId": 16,
+        "arrivalTrainNumber": "3120",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:00",
+        "scheduledDepartureTime": "18:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 331,
+        "trackId": 1,
+        "arrivalTrainNumber": "3567",
+        "departureTrainNumber": "3576",
+        "scheduledArrivalTime": "18:37",
+        "scheduledDepartureTime": "19:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 332,
+        "trackId": 1,
+        "arrivalTrainNumber": "3571",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:37",
+        "scheduledDepartureTime": "19:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 333,
+        "trackId": 1,
+        "arrivalTrainNumber": "3575",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:37",
+        "scheduledDepartureTime": "20:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 334,
+        "trackId": 1,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:37",
+        "scheduledDepartureTime": "19:57",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 335,
+        "trackId": 1,
+        "arrivalTrainNumber": "83483",
+        "departureTrainNumber": "13482",
+        "scheduledArrivalTime": "20:08",
+        "scheduledDepartureTime": "20:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 336,
+        "trackId": 1,
+        "arrivalTrainNumber": "3575",
+        "departureTrainNumber": "3584",
+        "scheduledArrivalTime": "20:37",
+        "scheduledDepartureTime": "21:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 337,
+        "trackId": 2,
+        "arrivalTrainNumber": "3569",
+        "departureTrainNumber": "3574",
+        "scheduledArrivalTime": "18:19",
+        "scheduledDepartureTime": "18:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 338,
+        "trackId": 2,
+        "arrivalTrainNumber": "3573",
+        "departureTrainNumber": "3578",
+        "scheduledArrivalTime": "19:19",
+        "scheduledDepartureTime": "19:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 339,
+        "trackId": 2,
+        "arrivalTrainNumber": "3577",
+        "departureTrainNumber": "3582",
+        "scheduledArrivalTime": "20:19",
+        "scheduledDepartureTime": "20:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 340,
+        "trackId": 3,
+        "arrivalTrainNumber": "175",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:23",
+        "scheduledDepartureTime": "18:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 341,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3478",
+        "scheduledArrivalTime": "19:22",
+        "scheduledDepartureTime": "19:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 342,
+        "trackId": 3,
+        "arrivalTrainNumber": "441",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:42",
+        "scheduledDepartureTime": "20:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 343,
+        "trackId": 3,
+        "arrivalTrainNumber": "443",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:42",
+        "scheduledDepartureTime": "21:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 344,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "448",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "19:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 345,
+        "trackId": 4,
+        "arrivalTrainNumber": "177",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:23",
+        "scheduledDepartureTime": "19:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 346,
+        "trackId": 4,
+        "arrivalTrainNumber": "2011",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:28",
+        "scheduledDepartureTime": "20:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 347,
+        "trackId": 4,
+        "arrivalTrainNumber": "3277",
+        "departureTrainNumber": "3490",
+        "scheduledArrivalTime": "21:00",
+        "scheduledDepartureTime": "22:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 348,
+        "trackId": 5,
+        "arrivalTrainNumber": "3269",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 349,
+        "trackId": 5,
+        "arrivalTrainNumber": "3265",
+        "departureTrainNumber": "3474",
+        "scheduledArrivalTime": "18:00",
+        "scheduledDepartureTime": "18:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 350,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 351,
+        "trackId": 5,
+        "arrivalTrainNumber": "2009",
+        "departureTrainNumber": "2052",
+        "scheduledArrivalTime": "19:28",
+        "scheduledDepartureTime": "20:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 352,
+        "trackId": 6,
+        "arrivalTrainNumber": "179",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:23",
+        "scheduledDepartureTime": "20:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 353,
+        "trackId": 7,
+        "arrivalTrainNumber": "393",
+        "departureTrainNumber": "398",
+        "scheduledArrivalTime": "19:15",
+        "scheduledDepartureTime": "20:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 354,
+        "trackId": 7,
+        "arrivalTrainNumber": "20375",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:40",
+        "scheduledDepartureTime": "21:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 355,
+        "trackId": 7,
+        "arrivalTrainNumber": "3669",
+        "departureTrainNumber": "65256",
+        "scheduledArrivalTime": "18:25",
+        "scheduledDepartureTime": "18:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 356,
+        "trackId": 7,
+        "arrivalTrainNumber": "13771",
+        "departureTrainNumber": "3276",
+        "scheduledArrivalTime": "18:45",
+        "scheduledDepartureTime": "19:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 357,
+        "trackId": 7,
+        "arrivalTrainNumber": "393",
+        "departureTrainNumber": "386",
+        "scheduledArrivalTime": "19:15",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 358,
+        "trackId": 8,
+        "arrivalTrainNumber": "3267",
+        "departureTrainNumber": "13774",
+        "scheduledArrivalTime": "18:30",
+        "scheduledDepartureTime": "19:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 359,
+        "trackId": 8,
+        "arrivalTrainNumber": "3267",
+        "departureTrainNumber": "3278",
+        "scheduledArrivalTime": "18:30",
+        "scheduledDepartureTime": "19:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 360,
+        "trackId": 9,
+        "arrivalTrainNumber": "3671",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:55",
+        "scheduledDepartureTime": "19:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 361,
+        "trackId": 9,
+        "arrivalTrainNumber": "20371",
+        "departureTrainNumber": "20376",
+        "scheduledArrivalTime": "18:40",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 362,
+        "trackId": 9,
+        "arrivalTrainNumber": "3273",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:00",
+        "scheduledDepartureTime": "20:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 363,
+        "trackId": 10,
+        "arrivalTrainNumber": "13617",
+        "departureTrainNumber": "3672",
+        "scheduledArrivalTime": "18:10",
+        "scheduledDepartureTime": "18:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 364,
+        "trackId": 10,
+        "arrivalTrainNumber": "13619",
+        "departureTrainNumber": "3674",
+        "scheduledArrivalTime": "18:35",
+        "scheduledDepartureTime": "18:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 365,
+        "trackId": 10,
+        "arrivalTrainNumber": "13621",
+        "departureTrainNumber": "3676",
+        "scheduledArrivalTime": "19:10",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 366,
+        "trackId": 10,
+        "arrivalTrainNumber": "3675",
+        "departureTrainNumber": "3680",
+        "scheduledArrivalTime": "19:55",
+        "scheduledDepartureTime": "20:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 367,
+        "trackId": 10,
+        "arrivalTrainNumber": "3677",
+        "departureTrainNumber": "3682",
+        "scheduledArrivalTime": "20:25",
+        "scheduledDepartureTime": "20:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 368,
+        "trackId": 10,
+        "arrivalTrainNumber": "3679",
+        "departureTrainNumber": "3684",
+        "scheduledArrivalTime": "20:55",
+        "scheduledDepartureTime": "21:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 369,
+        "trackId": 11,
+        "arrivalTrainNumber": "439",
+        "departureTrainNumber": "499",
+        "scheduledArrivalTime": "18:42",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 370,
+        "trackId": 11,
+        "arrivalTrainNumber": "492",
+        "departureTrainNumber": "450",
+        "scheduledArrivalTime": "19:35",
+        "scheduledDepartureTime": "20:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 371,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3284",
+        "scheduledArrivalTime": "20:45",
+        "scheduledDepartureTime": "21:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 372,
+        "trackId": 12,
+        "arrivalTrainNumber": "13782",
+        "departureTrainNumber": "13782",
+        "scheduledArrivalTime": "20:55",
+        "scheduledDepartureTime": "21:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 373,
+        "trackId": 12,
+        "arrivalTrainNumber": "3124",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 374,
+        "trackId": 12,
+        "arrivalTrainNumber": "3673",
+        "departureTrainNumber": "3678",
+        "scheduledArrivalTime": "19:25",
+        "scheduledDepartureTime": "19:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 375,
+        "trackId": 12,
+        "arrivalTrainNumber": "344",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:55",
+        "scheduledDepartureTime": "20:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 376,
+        "trackId": 13,
+        "arrivalTrainNumber": "3070",
+        "departureTrainNumber": "3125",
+        "scheduledArrivalTime": "18:15",
+        "scheduledDepartureTime": "18:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 377,
+        "trackId": 13,
+        "arrivalTrainNumber": "3070",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:15",
+        "scheduledDepartureTime": "18:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 378,
+        "trackId": 13,
+        "arrivalTrainNumber": "13172",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:50",
+        "scheduledDepartureTime": "19:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 379,
+        "trackId": 13,
+        "arrivalTrainNumber": "3074",
+        "departureTrainNumber": "3280",
+        "scheduledArrivalTime": "19:15",
+        "scheduledDepartureTime": "20:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 380,
+        "trackId": 13,
+        "arrivalTrainNumber": "3078",
+        "departureTrainNumber": "3083",
+        "scheduledArrivalTime": "20:15",
+        "scheduledDepartureTime": "20:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 381,
+        "trackId": 14,
+        "arrivalTrainNumber": "11082",
+        "departureTrainNumber": "20179",
+        "scheduledArrivalTime": "18:05",
+        "scheduledDepartureTime": "18:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 382,
+        "trackId": 14,
+        "arrivalTrainNumber": "20178",
+        "departureTrainNumber": "11143",
+        "scheduledArrivalTime": "18:35",
+        "scheduledDepartureTime": "18:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 383,
+        "trackId": 14,
+        "arrivalTrainNumber": "11090",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:05",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 384,
+        "trackId": 14,
+        "arrivalTrainNumber": "20180",
+        "departureTrainNumber": "11151",
+        "scheduledArrivalTime": "19:40",
+        "scheduledDepartureTime": "19:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 385,
+        "trackId": 14,
+        "arrivalTrainNumber": "11098",
+        "departureTrainNumber": "11161",
+        "scheduledArrivalTime": "20:05",
+        "scheduledDepartureTime": "20:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 386,
+        "trackId": 14,
+        "arrivalTrainNumber": "11090",
+        "departureTrainNumber": "20181",
+        "scheduledArrivalTime": "19:05",
+        "scheduledDepartureTime": "19:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 387,
+        "trackId": 15,
+        "arrivalTrainNumber": "3122",
+        "departureTrainNumber": "3075",
+        "scheduledArrivalTime": "18:30",
+        "scheduledDepartureTime": "18:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 388,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3077",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 389,
+        "trackId": 15,
+        "arrivalTrainNumber": "3122",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:30",
+        "scheduledDepartureTime": "18:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 390,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3079",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 391,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13181",
+        "scheduledArrivalTime": "19:55",
+        "scheduledDepartureTime": "20:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 392,
+        "trackId": 15,
+        "arrivalTrainNumber": "77103",
+        "departureTrainNumber": "77902",
+        "scheduledArrivalTime": "20:50",
+        "scheduledDepartureTime": "22:28",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.902,
+          0.902,
+          0.902
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 393,
+        "trackId": 16,
+        "arrivalTrainNumber": "3072",
+        "departureTrainNumber": "7375",
+        "scheduledArrivalTime": "18:45",
+        "scheduledDepartureTime": "19:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 394,
+        "trackId": 16,
+        "arrivalTrainNumber": "3072",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:45",
+        "scheduledDepartureTime": "19:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 395,
+        "trackId": 16,
+        "arrivalTrainNumber": "3076",
+        "departureTrainNumber": "3081",
+        "scheduledArrivalTime": "19:45",
+        "scheduledDepartureTime": "20:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 396,
+        "trackId": 16,
+        "arrivalTrainNumber": "3080",
+        "departureTrainNumber": "3085",
+        "scheduledArrivalTime": "20:45",
+        "scheduledDepartureTime": "21:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 397,
+        "trackId": 1,
+        "arrivalTrainNumber": "3579",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:37",
+        "scheduledDepartureTime": "21:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 398,
+        "trackId": 1,
+        "arrivalTrainNumber": "3585",
+        "departureTrainNumber": "3590",
+        "scheduledArrivalTime": "22:19",
+        "scheduledDepartureTime": "22:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 399,
+        "trackId": 1,
+        "arrivalTrainNumber": "3589",
+        "departureTrainNumber": "3594",
+        "scheduledArrivalTime": "23:19",
+        "scheduledDepartureTime": "23:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 400,
+        "trackId": 2,
+        "arrivalTrainNumber": "3581",
+        "departureTrainNumber": "3586",
+        "scheduledArrivalTime": "21:19",
+        "scheduledDepartureTime": "21:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 401,
+        "trackId": 2,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3588",
+        "scheduledArrivalTime": "22:08",
+        "scheduledDepartureTime": "22:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 402,
+        "trackId": 2,
+        "arrivalTrainNumber": "3583",
+        "departureTrainNumber": "3592",
+        "scheduledArrivalTime": "22:37",
+        "scheduledDepartureTime": "23:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 403,
+        "trackId": 3,
+        "arrivalTrainNumber": "445",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:41",
+        "scheduledDepartureTime": "22:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 404,
+        "trackId": 3,
+        "arrivalTrainNumber": "447",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:42",
+        "scheduledDepartureTime": "23:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 405,
+        "trackId": 3,
+        "arrivalTrainNumber": "449",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "23:42",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 406,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3486",
+        "scheduledArrivalTime": "21:22",
+        "scheduledDepartureTime": "21:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 407,
+        "trackId": 5,
+        "arrivalTrainNumber": "13779",
+        "departureTrainNumber": "93549",
+        "scheduledArrivalTime": "21:05",
+        "scheduledDepartureTime": "21:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 408,
+        "trackId": 5,
+        "arrivalTrainNumber": "2003",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:28",
+        "scheduledDepartureTime": "21:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 409,
+        "trackId": 5,
+        "arrivalTrainNumber": "2047",
+        "departureTrainNumber": "2024",
+        "scheduledArrivalTime": "23:28",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 410,
+        "trackId": 6,
+        "arrivalTrainNumber": "183",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:23",
+        "scheduledDepartureTime": "22:58",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 411,
+        "trackId": 7,
+        "arrivalTrainNumber": "2397",
+        "departureTrainNumber": "384",
+        "scheduledArrivalTime": "21:45",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 412,
+        "trackId": 8,
+        "arrivalTrainNumber": "3481",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:23",
+        "scheduledDepartureTime": "21:38",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 413,
+        "trackId": 8,
+        "arrivalTrainNumber": "3481",
+        "departureTrainNumber": "17384",
+        "scheduledArrivalTime": "21:23",
+        "scheduledDepartureTime": "21:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 414,
+        "trackId": 8,
+        "arrivalTrainNumber": "3489",
+        "departureTrainNumber": "13728",
+        "scheduledArrivalTime": "23:37",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 415,
+        "trackId": 10,
+        "arrivalTrainNumber": "3681",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:25",
+        "scheduledDepartureTime": "21:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 416,
+        "trackId": 10,
+        "arrivalTrainNumber": "3683",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:55",
+        "scheduledDepartureTime": "22:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 417,
+        "trackId": 11,
+        "arrivalTrainNumber": "13783",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:00",
+        "scheduledDepartureTime": "22:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 418,
+        "trackId": 12,
+        "arrivalTrainNumber": "3084",
+        "departureTrainNumber": "3089",
+        "scheduledArrivalTime": "21:45",
+        "scheduledDepartureTime": "22:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 419,
+        "trackId": 12,
+        "arrivalTrainNumber": "496",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:35",
+        "scheduledDepartureTime": "23:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 420,
+        "trackId": 13,
+        "arrivalTrainNumber": "11106",
+        "departureTrainNumber": "11167",
+        "scheduledArrivalTime": "21:05",
+        "scheduledDepartureTime": "21:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 421,
+        "trackId": 13,
+        "arrivalTrainNumber": "3086",
+        "departureTrainNumber": "3091",
+        "scheduledArrivalTime": "22:15",
+        "scheduledDepartureTime": "22:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 422,
+        "trackId": 14,
+        "arrivalTrainNumber": "11114",
+        "departureTrainNumber": "20187",
+        "scheduledArrivalTime": "22:05",
+        "scheduledDepartureTime": "22:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 423,
+        "trackId": 14,
+        "arrivalTrainNumber": "11122",
+        "departureTrainNumber": "20189",
+        "scheduledArrivalTime": "23:05",
+        "scheduledDepartureTime": "23:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 424,
+        "trackId": 14,
+        "arrivalTrainNumber": "3082",
+        "departureTrainNumber": "3087",
+        "scheduledArrivalTime": "21:15",
+        "scheduledDepartureTime": "21:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 425,
+        "trackId": 15,
+        "arrivalTrainNumber": "69346",
+        "departureTrainNumber": "59852",
+        "scheduledArrivalTime": "21:40",
+        "scheduledDepartureTime": "22:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.902,
+          0.902,
+          0.902
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 426,
+        "trackId": 15,
+        "arrivalTrainNumber": "3088",
+        "departureTrainNumber": "3093",
+        "scheduledArrivalTime": "22:45",
+        "scheduledDepartureTime": "23:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 427,
+        "trackId": 15,
+        "arrivalTrainNumber": "3092",
+        "departureTrainNumber": "3001",
+        "scheduledArrivalTime": "23:45",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 428,
+        "trackId": 16,
+        "arrivalTrainNumber": "3090",
+        "departureTrainNumber": "3095",
+        "scheduledArrivalTime": "23:15",
+        "scheduledDepartureTime": "23:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      }
+    ],
+    "lordag": [
+      {
+        "id": 1,
+        "trackId": 1,
+        "arrivalTrainNumber": "3593",
+        "departureTrainNumber": "3530",
+        "scheduledArrivalTime": "00:19",
+        "scheduledDepartureTime": "07:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 2,
+        "trackId": 2,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3500",
+        "scheduledArrivalTime": "00:08",
+        "scheduledDepartureTime": "00:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 3,
+        "trackId": 2,
+        "arrivalTrainNumber": "23493",
+        "departureTrainNumber": "3504",
+        "scheduledArrivalTime": "00:37",
+        "scheduledDepartureTime": "01:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 4,
+        "trackId": 2,
+        "arrivalTrainNumber": "3501",
+        "departureTrainNumber": "3508",
+        "scheduledArrivalTime": "01:37",
+        "scheduledDepartureTime": "02:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 5,
+        "trackId": 2,
+        "arrivalTrainNumber": "3503",
+        "departureTrainNumber": "3512",
+        "scheduledArrivalTime": "02:37",
+        "scheduledDepartureTime": "03:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 6,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 7,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "422",
+        "scheduledArrivalTime": "02:05",
+        "scheduledDepartureTime": "06:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 8,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3402",
+        "scheduledArrivalTime": "00:22",
+        "scheduledDepartureTime": "00:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 9,
+        "trackId": 4,
+        "arrivalTrainNumber": "451",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:42",
+        "scheduledDepartureTime": "01:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 10,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "424",
+        "scheduledArrivalTime": "02:00",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 11,
+        "trackId": 5,
+        "arrivalTrainNumber": "64286",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "01:25",
+        "scheduledDepartureTime": "02:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.502,
+          0.502,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 12,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "2024",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "06:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 13,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "164",
+        "scheduledArrivalTime": "01:00",
+        "scheduledDepartureTime": "05:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 14,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "384",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "08:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 15,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13728",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "07:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 16,
+        "trackId": 14,
+        "arrivalTrainNumber": "11150",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "00:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 17,
+        "trackId": 14,
+        "arrivalTrainNumber": "11138",
+        "departureTrainNumber": "11047",
+        "scheduledArrivalTime": "01:05",
+        "scheduledDepartureTime": "06:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 18,
+        "trackId": 14,
+        "arrivalTrainNumber": "11150",
+        "departureTrainNumber": "20191",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "00:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 19,
+        "trackId": 14,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "11047",
+        "scheduledArrivalTime": "01:00",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 20,
+        "trackId": 15,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3001",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 21,
+        "trackId": 15,
+        "arrivalTrainNumber": "3000",
+        "departureTrainNumber": "3005",
+        "scheduledArrivalTime": "00:45",
+        "scheduledDepartureTime": "01:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 22,
+        "trackId": 15,
+        "arrivalTrainNumber": "3006",
+        "departureTrainNumber": "3013",
+        "scheduledArrivalTime": "02:15",
+        "scheduledDepartureTime": "03:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 23,
+        "trackId": 16,
+        "arrivalTrainNumber": "3002",
+        "departureTrainNumber": "3009",
+        "scheduledArrivalTime": "01:15",
+        "scheduledDepartureTime": "02:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 24,
+        "trackId": 16,
+        "arrivalTrainNumber": "3094",
+        "departureTrainNumber": "3033",
+        "scheduledArrivalTime": "00:15",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 25,
+        "trackId": 1,
+        "arrivalTrainNumber": "3515",
+        "departureTrainNumber": "3524",
+        "scheduledArrivalTime": "05:57",
+        "scheduledDepartureTime": "06:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 26,
+        "trackId": 2,
+        "arrivalTrainNumber": "3505",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "03:37",
+        "scheduledDepartureTime": "03:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 27,
+        "trackId": 2,
+        "arrivalTrainNumber": "3217",
+        "departureTrainNumber": "3426",
+        "scheduledArrivalTime": "06:00",
+        "scheduledDepartureTime": "06:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 28,
+        "trackId": 3,
+        "arrivalTrainNumber": "93520",
+        "departureTrainNumber": "3224",
+        "scheduledArrivalTime": "05:10",
+        "scheduledDepartureTime": "06:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 29,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "168",
+        "scheduledArrivalTime": "05:50",
+        "scheduledDepartureTime": "07:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 30,
+        "trackId": 10,
+        "arrivalTrainNumber": "83280",
+        "departureTrainNumber": "3620",
+        "scheduledArrivalTime": "05:10",
+        "scheduledDepartureTime": "05:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 31,
+        "trackId": 13,
+        "arrivalTrainNumber": "3010",
+        "departureTrainNumber": "3025",
+        "scheduledArrivalTime": "03:15",
+        "scheduledDepartureTime": "06:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 32,
+        "trackId": 15,
+        "arrivalTrainNumber": "3014",
+        "departureTrainNumber": "3021",
+        "scheduledArrivalTime": "04:20",
+        "scheduledDepartureTime": "05:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 33,
+        "trackId": 1,
+        "arrivalTrainNumber": "3519",
+        "departureTrainNumber": "3528",
+        "scheduledArrivalTime": "06:37",
+        "scheduledDepartureTime": "07:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 34,
+        "trackId": 1,
+        "arrivalTrainNumber": "3529",
+        "departureTrainNumber": "3534",
+        "scheduledArrivalTime": "08:19",
+        "scheduledDepartureTime": "08:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 35,
+        "trackId": 2,
+        "arrivalTrainNumber": "3523",
+        "departureTrainNumber": "3532",
+        "scheduledArrivalTime": "07:37",
+        "scheduledDepartureTime": "08:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 36,
+        "trackId": 2,
+        "arrivalTrainNumber": "3527",
+        "departureTrainNumber": "3536",
+        "scheduledArrivalTime": "08:37",
+        "scheduledDepartureTime": "09:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 37,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "426",
+        "scheduledArrivalTime": "07:00",
+        "scheduledDepartureTime": "08:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 38,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "428",
+        "scheduledArrivalTime": "08:40",
+        "scheduledDepartureTime": "09:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 39,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "424",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "07:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 40,
+        "trackId": 4,
+        "arrivalTrainNumber": "3429",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:23",
+        "scheduledDepartureTime": "08:38",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 41,
+        "trackId": 5,
+        "arrivalTrainNumber": "3425",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:23",
+        "scheduledDepartureTime": "07:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 42,
+        "trackId": 5,
+        "arrivalTrainNumber": "3425",
+        "departureTrainNumber": "3232",
+        "scheduledArrivalTime": "07:23",
+        "scheduledDepartureTime": "08:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 43,
+        "trackId": 5,
+        "arrivalTrainNumber": "97228",
+        "departureTrainNumber": "2028",
+        "scheduledArrivalTime": "08:10",
+        "scheduledDepartureTime": "08:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 44,
+        "trackId": 5,
+        "arrivalTrainNumber": "3229",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:00",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 45,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "170",
+        "scheduledArrivalTime": "08:00",
+        "scheduledDepartureTime": "08:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 46,
+        "trackId": 6,
+        "arrivalTrainNumber": "93564",
+        "departureTrainNumber": "3236",
+        "scheduledArrivalTime": "08:50",
+        "scheduledDepartureTime": "09:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 47,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "386",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "10:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 48,
+        "trackId": 8,
+        "arrivalTrainNumber": "25346",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:20",
+        "scheduledDepartureTime": "07:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 49,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "20356",
+        "scheduledArrivalTime": "08:35",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 50,
+        "trackId": 9,
+        "arrivalTrainNumber": "13279",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:40",
+        "scheduledDepartureTime": "08:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 51,
+        "trackId": 9,
+        "arrivalTrainNumber": "93528",
+        "departureTrainNumber": "3228",
+        "scheduledArrivalTime": "06:30",
+        "scheduledDepartureTime": "07:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 52,
+        "trackId": 9,
+        "arrivalTrainNumber": "3225",
+        "departureTrainNumber": "93525",
+        "scheduledArrivalTime": "08:00",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 53,
+        "trackId": 10,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3624",
+        "scheduledArrivalTime": "06:05",
+        "scheduledDepartureTime": "06:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 54,
+        "trackId": 10,
+        "arrivalTrainNumber": "3621",
+        "departureTrainNumber": "3628",
+        "scheduledArrivalTime": "06:25",
+        "scheduledDepartureTime": "07:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 55,
+        "trackId": 10,
+        "arrivalTrainNumber": "3625",
+        "departureTrainNumber": "3632",
+        "scheduledArrivalTime": "07:25",
+        "scheduledDepartureTime": "08:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 56,
+        "trackId": 10,
+        "arrivalTrainNumber": "3629",
+        "departureTrainNumber": "3634",
+        "scheduledArrivalTime": "08:25",
+        "scheduledDepartureTime": "08:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 57,
+        "trackId": 11,
+        "arrivalTrainNumber": "3221",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:00",
+        "scheduledDepartureTime": "07:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 58,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "485",
+        "scheduledArrivalTime": "07:40",
+        "scheduledDepartureTime": "08:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 59,
+        "trackId": 13,
+        "arrivalTrainNumber": "3032",
+        "departureTrainNumber": "3037",
+        "scheduledArrivalTime": "08:45",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 60,
+        "trackId": 14,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "11055",
+        "scheduledArrivalTime": "07:40",
+        "scheduledDepartureTime": "07:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 61,
+        "trackId": 14,
+        "arrivalTrainNumber": "20154",
+        "departureTrainNumber": "11055",
+        "scheduledArrivalTime": "07:05",
+        "scheduledDepartureTime": "07:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 62,
+        "trackId": 14,
+        "arrivalTrainNumber": "11002",
+        "departureTrainNumber": "11063",
+        "scheduledArrivalTime": "08:05",
+        "scheduledDepartureTime": "08:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 63,
+        "trackId": 15,
+        "arrivalTrainNumber": "3022",
+        "departureTrainNumber": "3029",
+        "scheduledArrivalTime": "06:15",
+        "scheduledDepartureTime": "07:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 64,
+        "trackId": 15,
+        "arrivalTrainNumber": "3030",
+        "departureTrainNumber": "3035",
+        "scheduledArrivalTime": "08:15",
+        "scheduledDepartureTime": "08:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 65,
+        "trackId": 16,
+        "arrivalTrainNumber": "3026",
+        "departureTrainNumber": "3031",
+        "scheduledArrivalTime": "07:15",
+        "scheduledDepartureTime": "07:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 66,
+        "trackId": 16,
+        "arrivalTrainNumber": "13132",
+        "departureTrainNumber": "13137",
+        "scheduledArrivalTime": "08:50",
+        "scheduledDepartureTime": "09:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 67,
+        "trackId": 1,
+        "arrivalTrainNumber": "3533",
+        "departureTrainNumber": "3538",
+        "scheduledArrivalTime": "09:19",
+        "scheduledDepartureTime": "09:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 68,
+        "trackId": 1,
+        "arrivalTrainNumber": "3537",
+        "departureTrainNumber": "3542",
+        "scheduledArrivalTime": "10:20",
+        "scheduledDepartureTime": "10:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 69,
+        "trackId": 1,
+        "arrivalTrainNumber": "3541",
+        "departureTrainNumber": "3546",
+        "scheduledArrivalTime": "11:19",
+        "scheduledDepartureTime": "11:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 70,
+        "trackId": 2,
+        "arrivalTrainNumber": "3531",
+        "departureTrainNumber": "3540",
+        "scheduledArrivalTime": "09:37",
+        "scheduledDepartureTime": "10:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 71,
+        "trackId": 2,
+        "arrivalTrainNumber": "3535",
+        "departureTrainNumber": "3544",
+        "scheduledArrivalTime": "10:37",
+        "scheduledDepartureTime": "11:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 72,
+        "trackId": 2,
+        "arrivalTrainNumber": "3539",
+        "departureTrainNumber": "3548",
+        "scheduledArrivalTime": "11:37",
+        "scheduledDepartureTime": "12:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 73,
+        "trackId": 3,
+        "arrivalTrainNumber": "482",
+        "departureTrainNumber": "430",
+        "scheduledArrivalTime": "09:35",
+        "scheduledDepartureTime": "10:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 74,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "432",
+        "scheduledArrivalTime": "10:25",
+        "scheduledDepartureTime": "11:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 75,
+        "trackId": 3,
+        "arrivalTrainNumber": "425",
+        "departureTrainNumber": "436",
+        "scheduledArrivalTime": "11:42",
+        "scheduledDepartureTime": "13:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 76,
+        "trackId": 4,
+        "arrivalTrainNumber": "157",
+        "departureTrainNumber": "174",
+        "scheduledArrivalTime": "09:23",
+        "scheduledDepartureTime": "10:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 77,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "434",
+        "scheduledArrivalTime": "11:35",
+        "scheduledDepartureTime": "12:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 78,
+        "trackId": 4,
+        "arrivalTrainNumber": "3237",
+        "departureTrainNumber": "13742",
+        "scheduledArrivalTime": "11:00",
+        "scheduledDepartureTime": "11:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 79,
+        "trackId": 4,
+        "arrivalTrainNumber": "2023",
+        "departureTrainNumber": "2038",
+        "scheduledArrivalTime": "11:28",
+        "scheduledDepartureTime": "13:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 80,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3446",
+        "scheduledArrivalTime": "11:22",
+        "scheduledDepartureTime": "11:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 81,
+        "trackId": 5,
+        "arrivalTrainNumber": "2021",
+        "departureTrainNumber": "2036",
+        "scheduledArrivalTime": "10:28",
+        "scheduledDepartureTime": "12:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 82,
+        "trackId": 6,
+        "arrivalTrainNumber": "3441",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "11:23",
+        "scheduledDepartureTime": "11:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 83,
+        "trackId": 6,
+        "arrivalTrainNumber": "97232",
+        "departureTrainNumber": "2032",
+        "scheduledArrivalTime": "10:15",
+        "scheduledDepartureTime": "10:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 84,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "172",
+        "scheduledArrivalTime": "09:05",
+        "scheduledDepartureTime": "09:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 85,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3240",
+        "scheduledArrivalTime": "09:45",
+        "scheduledDepartureTime": "10:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 86,
+        "trackId": 7,
+        "arrivalTrainNumber": "159",
+        "departureTrainNumber": "178",
+        "scheduledArrivalTime": "10:23",
+        "scheduledDepartureTime": "12:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 87,
+        "trackId": 8,
+        "arrivalTrainNumber": "20355",
+        "departureTrainNumber": "20360",
+        "scheduledArrivalTime": "10:40",
+        "scheduledDepartureTime": "11:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 88,
+        "trackId": 8,
+        "arrivalTrainNumber": "385",
+        "departureTrainNumber": "388",
+        "scheduledArrivalTime": "11:45",
+        "scheduledDepartureTime": "12:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 89,
+        "trackId": 9,
+        "arrivalTrainNumber": "13731",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:10",
+        "scheduledDepartureTime": "09:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 90,
+        "trackId": 9,
+        "arrivalTrainNumber": "3241",
+        "departureTrainNumber": "3252",
+        "scheduledArrivalTime": "12:00",
+        "scheduledDepartureTime": "13:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 91,
+        "trackId": 9,
+        "arrivalTrainNumber": "3233",
+        "departureTrainNumber": "3244",
+        "scheduledArrivalTime": "10:00",
+        "scheduledDepartureTime": "11:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 92,
+        "trackId": 9,
+        "arrivalTrainNumber": "13739",
+        "departureTrainNumber": "23750",
+        "scheduledArrivalTime": "11:05",
+        "scheduledDepartureTime": "13:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 93,
+        "trackId": 10,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3636",
+        "scheduledArrivalTime": "09:05",
+        "scheduledDepartureTime": "09:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 94,
+        "trackId": 10,
+        "arrivalTrainNumber": "3633",
+        "departureTrainNumber": "3638",
+        "scheduledArrivalTime": "09:25",
+        "scheduledDepartureTime": "09:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 95,
+        "trackId": 10,
+        "arrivalTrainNumber": "3635",
+        "departureTrainNumber": "3640",
+        "scheduledArrivalTime": "09:55",
+        "scheduledDepartureTime": "10:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 96,
+        "trackId": 10,
+        "arrivalTrainNumber": "3637",
+        "departureTrainNumber": "3642",
+        "scheduledArrivalTime": "10:25",
+        "scheduledDepartureTime": "10:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 97,
+        "trackId": 10,
+        "arrivalTrainNumber": "3639",
+        "departureTrainNumber": "3644",
+        "scheduledArrivalTime": "10:55",
+        "scheduledDepartureTime": "11:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 98,
+        "trackId": 10,
+        "arrivalTrainNumber": "3641",
+        "departureTrainNumber": "3646",
+        "scheduledArrivalTime": "11:25",
+        "scheduledDepartureTime": "11:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 99,
+        "trackId": 10,
+        "arrivalTrainNumber": "3643",
+        "departureTrainNumber": "3648",
+        "scheduledArrivalTime": "11:55",
+        "scheduledDepartureTime": "12:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 100,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3041",
+        "scheduledArrivalTime": "10:00",
+        "scheduledDepartureTime": "10:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 101,
+        "trackId": 11,
+        "arrivalTrainNumber": "13289",
+        "departureTrainNumber": "3248",
+        "scheduledArrivalTime": "11:30",
+        "scheduledDepartureTime": "12:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 102,
+        "trackId": 12,
+        "arrivalTrainNumber": "13311",
+        "departureTrainNumber": "13322",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 103,
+        "trackId": 12,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "327",
+        "scheduledArrivalTime": "09:30",
+        "scheduledDepartureTime": "10:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 104,
+        "trackId": 13,
+        "arrivalTrainNumber": "507",
+        "departureTrainNumber": "489",
+        "scheduledArrivalTime": "09:42",
+        "scheduledDepartureTime": "10:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 105,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "7345",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 106,
+        "trackId": 14,
+        "arrivalTrainNumber": "11010",
+        "departureTrainNumber": "11071",
+        "scheduledArrivalTime": "09:05",
+        "scheduledDepartureTime": "09:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 107,
+        "trackId": 14,
+        "arrivalTrainNumber": "11018",
+        "departureTrainNumber": "11079",
+        "scheduledArrivalTime": "10:05",
+        "scheduledDepartureTime": "10:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 108,
+        "trackId": 14,
+        "arrivalTrainNumber": "11026",
+        "departureTrainNumber": "11087",
+        "scheduledArrivalTime": "11:05",
+        "scheduledDepartureTime": "11:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 109,
+        "trackId": 15,
+        "arrivalTrainNumber": "13140",
+        "departureTrainNumber": "13145",
+        "scheduledArrivalTime": "10:50",
+        "scheduledDepartureTime": "11:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 110,
+        "trackId": 15,
+        "arrivalTrainNumber": "3034",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:15",
+        "scheduledDepartureTime": "09:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 111,
+        "trackId": 15,
+        "arrivalTrainNumber": "3036",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:45",
+        "scheduledDepartureTime": "10:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 112,
+        "trackId": 15,
+        "arrivalTrainNumber": "3040",
+        "departureTrainNumber": "3045",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 113,
+        "trackId": 15,
+        "arrivalTrainNumber": "3044",
+        "departureTrainNumber": "3049",
+        "scheduledArrivalTime": "11:45",
+        "scheduledDepartureTime": "12:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 114,
+        "trackId": 16,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3039",
+        "scheduledArrivalTime": "09:20",
+        "scheduledDepartureTime": "09:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 115,
+        "trackId": 16,
+        "arrivalTrainNumber": "7338",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:55",
+        "scheduledDepartureTime": "10:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 116,
+        "trackId": 16,
+        "arrivalTrainNumber": "3038",
+        "departureTrainNumber": "3043",
+        "scheduledArrivalTime": "10:15",
+        "scheduledDepartureTime": "10:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 117,
+        "trackId": 16,
+        "arrivalTrainNumber": "3042",
+        "departureTrainNumber": "3047",
+        "scheduledArrivalTime": "11:15",
+        "scheduledDepartureTime": "11:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 118,
+        "trackId": 1,
+        "arrivalTrainNumber": "3545",
+        "departureTrainNumber": "3550",
+        "scheduledArrivalTime": "12:19",
+        "scheduledDepartureTime": "12:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 119,
+        "trackId": 1,
+        "arrivalTrainNumber": "3549",
+        "departureTrainNumber": "3554",
+        "scheduledArrivalTime": "13:19",
+        "scheduledDepartureTime": "13:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 120,
+        "trackId": 1,
+        "arrivalTrainNumber": "3553",
+        "departureTrainNumber": "3558",
+        "scheduledArrivalTime": "14:19",
+        "scheduledDepartureTime": "14:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 121,
+        "trackId": 2,
+        "arrivalTrainNumber": "3543",
+        "departureTrainNumber": "3552",
+        "scheduledArrivalTime": "12:37",
+        "scheduledDepartureTime": "13:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 122,
+        "trackId": 2,
+        "arrivalTrainNumber": "3547",
+        "departureTrainNumber": "3556",
+        "scheduledArrivalTime": "13:37",
+        "scheduledDepartureTime": "14:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 123,
+        "trackId": 2,
+        "arrivalTrainNumber": "3551",
+        "departureTrainNumber": "3560",
+        "scheduledArrivalTime": "14:37",
+        "scheduledDepartureTime": "15:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 124,
+        "trackId": 3,
+        "arrivalTrainNumber": "165",
+        "departureTrainNumber": "182",
+        "scheduledArrivalTime": "13:23",
+        "scheduledDepartureTime": "14:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 125,
+        "trackId": 3,
+        "arrivalTrainNumber": "431",
+        "departureTrainNumber": "442",
+        "scheduledArrivalTime": "14:42",
+        "scheduledDepartureTime": "16:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 126,
+        "trackId": 4,
+        "arrivalTrainNumber": "429",
+        "departureTrainNumber": "440",
+        "scheduledArrivalTime": "13:42",
+        "scheduledDepartureTime": "15:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 127,
+        "trackId": 5,
+        "arrivalTrainNumber": "20359",
+        "departureTrainNumber": "20364",
+        "scheduledArrivalTime": "12:40",
+        "scheduledDepartureTime": "13:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 128,
+        "trackId": 5,
+        "arrivalTrainNumber": "2027",
+        "departureTrainNumber": "2042",
+        "scheduledArrivalTime": "13:28",
+        "scheduledDepartureTime": "15:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 129,
+        "trackId": 6,
+        "arrivalTrainNumber": "163",
+        "departureTrainNumber": "180",
+        "scheduledArrivalTime": "12:23",
+        "scheduledDepartureTime": "13:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 130,
+        "trackId": 6,
+        "arrivalTrainNumber": "167",
+        "departureTrainNumber": "184",
+        "scheduledArrivalTime": "14:23",
+        "scheduledDepartureTime": "15:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 131,
+        "trackId": 6,
+        "arrivalTrainNumber": "390",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "13:50",
+        "scheduledDepartureTime": "14:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 132,
+        "trackId": 7,
+        "arrivalTrainNumber": "387",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "13:45",
+        "scheduledDepartureTime": "14:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 133,
+        "trackId": 7,
+        "arrivalTrainNumber": "427",
+        "departureTrainNumber": "438",
+        "scheduledArrivalTime": "12:42",
+        "scheduledDepartureTime": "14:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 134,
+        "trackId": 7,
+        "arrivalTrainNumber": "20363",
+        "departureTrainNumber": "20368",
+        "scheduledArrivalTime": "14:40",
+        "scheduledDepartureTime": "15:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 135,
+        "trackId": 8,
+        "arrivalTrainNumber": "3245",
+        "departureTrainNumber": "3256",
+        "scheduledArrivalTime": "13:00",
+        "scheduledDepartureTime": "14:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 136,
+        "trackId": 8,
+        "arrivalTrainNumber": "23758",
+        "departureTrainNumber": "23758",
+        "scheduledArrivalTime": "14:55",
+        "scheduledDepartureTime": "15:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 137,
+        "trackId": 9,
+        "arrivalTrainNumber": "3249",
+        "departureTrainNumber": "3260",
+        "scheduledArrivalTime": "14:00",
+        "scheduledDepartureTime": "15:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 138,
+        "trackId": 10,
+        "arrivalTrainNumber": "3645",
+        "departureTrainNumber": "3650",
+        "scheduledArrivalTime": "12:25",
+        "scheduledDepartureTime": "12:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 139,
+        "trackId": 10,
+        "arrivalTrainNumber": "3647",
+        "departureTrainNumber": "3652",
+        "scheduledArrivalTime": "12:55",
+        "scheduledDepartureTime": "13:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 140,
+        "trackId": 10,
+        "arrivalTrainNumber": "3649",
+        "departureTrainNumber": "3654",
+        "scheduledArrivalTime": "13:25",
+        "scheduledDepartureTime": "13:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 141,
+        "trackId": 10,
+        "arrivalTrainNumber": "3651",
+        "departureTrainNumber": "3656",
+        "scheduledArrivalTime": "13:55",
+        "scheduledDepartureTime": "14:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 142,
+        "trackId": 10,
+        "arrivalTrainNumber": "3653",
+        "departureTrainNumber": "3658",
+        "scheduledArrivalTime": "14:25",
+        "scheduledDepartureTime": "14:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 143,
+        "trackId": 10,
+        "arrivalTrainNumber": "3655",
+        "departureTrainNumber": "3660",
+        "scheduledArrivalTime": "14:55",
+        "scheduledDepartureTime": "15:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 144,
+        "trackId": 11,
+        "arrivalTrainNumber": "13747",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "12:45",
+        "scheduledDepartureTime": "13:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 145,
+        "trackId": 11,
+        "arrivalTrainNumber": "3253",
+        "departureTrainNumber": "3264",
+        "scheduledArrivalTime": "15:00",
+        "scheduledDepartureTime": "16:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 146,
+        "trackId": 12,
+        "arrivalTrainNumber": "3046",
+        "departureTrainNumber": "3051",
+        "scheduledArrivalTime": "12:15",
+        "scheduledDepartureTime": "12:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 147,
+        "trackId": 12,
+        "arrivalTrainNumber": "10332",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "14:55",
+        "scheduledDepartureTime": "15:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 148,
+        "trackId": 13,
+        "arrivalTrainNumber": "484",
+        "departureTrainNumber": "491",
+        "scheduledArrivalTime": "12:35",
+        "scheduledDepartureTime": "13:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 149,
+        "trackId": 13,
+        "arrivalTrainNumber": "486",
+        "departureTrainNumber": "495",
+        "scheduledArrivalTime": "14:35",
+        "scheduledDepartureTime": "16:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 150,
+        "trackId": 14,
+        "arrivalTrainNumber": "11034",
+        "departureTrainNumber": "11095",
+        "scheduledArrivalTime": "12:05",
+        "scheduledDepartureTime": "12:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 151,
+        "trackId": 14,
+        "arrivalTrainNumber": "11042",
+        "departureTrainNumber": "11103",
+        "scheduledArrivalTime": "13:05",
+        "scheduledDepartureTime": "13:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 152,
+        "trackId": 14,
+        "arrivalTrainNumber": "11050",
+        "departureTrainNumber": "11111",
+        "scheduledArrivalTime": "14:05",
+        "scheduledDepartureTime": "14:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 153,
+        "trackId": 15,
+        "arrivalTrainNumber": "13156",
+        "departureTrainNumber": "13161",
+        "scheduledArrivalTime": "14:50",
+        "scheduledDepartureTime": "15:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 154,
+        "trackId": 15,
+        "arrivalTrainNumber": "3048",
+        "departureTrainNumber": "3053",
+        "scheduledArrivalTime": "12:45",
+        "scheduledDepartureTime": "13:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 155,
+        "trackId": 15,
+        "arrivalTrainNumber": "3052",
+        "departureTrainNumber": "3057",
+        "scheduledArrivalTime": "13:45",
+        "scheduledDepartureTime": "14:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 156,
+        "trackId": 15,
+        "arrivalTrainNumber": "3056",
+        "departureTrainNumber": "3061",
+        "scheduledArrivalTime": "14:45",
+        "scheduledDepartureTime": "15:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 157,
+        "trackId": 16,
+        "arrivalTrainNumber": "13148",
+        "departureTrainNumber": "13153",
+        "scheduledArrivalTime": "12:50",
+        "scheduledDepartureTime": "13:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 158,
+        "trackId": 16,
+        "arrivalTrainNumber": "3050",
+        "departureTrainNumber": "3055",
+        "scheduledArrivalTime": "13:15",
+        "scheduledDepartureTime": "13:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 159,
+        "trackId": 16,
+        "arrivalTrainNumber": "3054",
+        "departureTrainNumber": "3059",
+        "scheduledArrivalTime": "14:15",
+        "scheduledDepartureTime": "14:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 160,
+        "trackId": 16,
+        "arrivalTrainNumber": "7348",
+        "departureTrainNumber": "7359",
+        "scheduledArrivalTime": "12:30",
+        "scheduledDepartureTime": "15:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 161,
+        "trackId": 1,
+        "arrivalTrainNumber": "3557",
+        "departureTrainNumber": "3562",
+        "scheduledArrivalTime": "15:19",
+        "scheduledDepartureTime": "15:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 162,
+        "trackId": 1,
+        "arrivalTrainNumber": "3561",
+        "departureTrainNumber": "3566",
+        "scheduledArrivalTime": "16:19",
+        "scheduledDepartureTime": "16:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 163,
+        "trackId": 1,
+        "arrivalTrainNumber": "3565",
+        "departureTrainNumber": "3570",
+        "scheduledArrivalTime": "17:19",
+        "scheduledDepartureTime": "17:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 164,
+        "trackId": 2,
+        "arrivalTrainNumber": "3555",
+        "departureTrainNumber": "3564",
+        "scheduledArrivalTime": "15:37",
+        "scheduledDepartureTime": "16:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 165,
+        "trackId": 2,
+        "arrivalTrainNumber": "3559",
+        "departureTrainNumber": "3568",
+        "scheduledArrivalTime": "16:37",
+        "scheduledDepartureTime": "17:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 166,
+        "trackId": 2,
+        "arrivalTrainNumber": "3563",
+        "departureTrainNumber": "3572",
+        "scheduledArrivalTime": "17:37",
+        "scheduledDepartureTime": "18:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 167,
+        "trackId": 3,
+        "arrivalTrainNumber": "435",
+        "departureTrainNumber": "446",
+        "scheduledArrivalTime": "16:42",
+        "scheduledDepartureTime": "18:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 168,
+        "trackId": 4,
+        "arrivalTrainNumber": "3461",
+        "departureTrainNumber": "23466",
+        "scheduledArrivalTime": "16:23",
+        "scheduledDepartureTime": "16:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 169,
+        "trackId": 4,
+        "arrivalTrainNumber": "2031",
+        "departureTrainNumber": "2046",
+        "scheduledArrivalTime": "15:28",
+        "scheduledDepartureTime": "17:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 170,
+        "trackId": 4,
+        "arrivalTrainNumber": "437",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "17:42",
+        "scheduledDepartureTime": "18:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 171,
+        "trackId": 5,
+        "arrivalTrainNumber": "433",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "15:42",
+        "scheduledDepartureTime": "16:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 172,
+        "trackId": 5,
+        "arrivalTrainNumber": "3261",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "17:00",
+        "scheduledDepartureTime": "17:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 173,
+        "trackId": 5,
+        "arrivalTrainNumber": "2035",
+        "departureTrainNumber": "2070",
+        "scheduledArrivalTime": "17:28",
+        "scheduledDepartureTime": "19:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 174,
+        "trackId": 6,
+        "arrivalTrainNumber": "173",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "17:23",
+        "scheduledDepartureTime": "18:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 175,
+        "trackId": 6,
+        "arrivalTrainNumber": "3257",
+        "departureTrainNumber": "3268",
+        "scheduledArrivalTime": "16:00",
+        "scheduledDepartureTime": "17:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 176,
+        "trackId": 7,
+        "arrivalTrainNumber": "169",
+        "departureTrainNumber": "188",
+        "scheduledArrivalTime": "15:23",
+        "scheduledDepartureTime": "17:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 177,
+        "trackId": 7,
+        "arrivalTrainNumber": "3265",
+        "departureTrainNumber": "3474",
+        "scheduledArrivalTime": "18:00",
+        "scheduledDepartureTime": "18:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 178,
+        "trackId": 8,
+        "arrivalTrainNumber": "389",
+        "departureTrainNumber": "392",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "16:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 179,
+        "trackId": 8,
+        "arrivalTrainNumber": "391",
+        "departureTrainNumber": "394",
+        "scheduledArrivalTime": "17:40",
+        "scheduledDepartureTime": "18:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 180,
+        "trackId": 9,
+        "arrivalTrainNumber": "13313",
+        "departureTrainNumber": "13318",
+        "scheduledArrivalTime": "15:30",
+        "scheduledDepartureTime": "17:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 181,
+        "trackId": 10,
+        "arrivalTrainNumber": "3657",
+        "departureTrainNumber": "3662",
+        "scheduledArrivalTime": "15:25",
+        "scheduledDepartureTime": "15:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 182,
+        "trackId": 10,
+        "arrivalTrainNumber": "3659",
+        "departureTrainNumber": "3664",
+        "scheduledArrivalTime": "15:55",
+        "scheduledDepartureTime": "16:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 183,
+        "trackId": 10,
+        "arrivalTrainNumber": "3661",
+        "departureTrainNumber": "3666",
+        "scheduledArrivalTime": "16:25",
+        "scheduledDepartureTime": "16:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 184,
+        "trackId": 10,
+        "arrivalTrainNumber": "3663",
+        "departureTrainNumber": "3668",
+        "scheduledArrivalTime": "16:55",
+        "scheduledDepartureTime": "17:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 185,
+        "trackId": 10,
+        "arrivalTrainNumber": "3665",
+        "departureTrainNumber": "3670",
+        "scheduledArrivalTime": "17:25",
+        "scheduledDepartureTime": "17:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 186,
+        "trackId": 10,
+        "arrivalTrainNumber": "3667",
+        "departureTrainNumber": "3672",
+        "scheduledArrivalTime": "17:55",
+        "scheduledDepartureTime": "18:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 187,
+        "trackId": 11,
+        "arrivalTrainNumber": "13755",
+        "departureTrainNumber": "93055",
+        "scheduledArrivalTime": "15:10",
+        "scheduledDepartureTime": "15:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 188,
+        "trackId": 11,
+        "arrivalTrainNumber": "13763",
+        "departureTrainNumber": "3272",
+        "scheduledArrivalTime": "17:05",
+        "scheduledDepartureTime": "18:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 189,
+        "trackId": 11,
+        "arrivalTrainNumber": "20367",
+        "departureTrainNumber": "20376",
+        "scheduledArrivalTime": "16:40",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 190,
+        "trackId": 12,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "339",
+        "scheduledArrivalTime": "15:30",
+        "scheduledDepartureTime": "16:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 191,
+        "trackId": 12,
+        "arrivalTrainNumber": "490",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "16:35",
+        "scheduledDepartureTime": "17:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 192,
+        "trackId": 13,
+        "arrivalTrainNumber": "3064",
+        "departureTrainNumber": "3069",
+        "scheduledArrivalTime": "16:45",
+        "scheduledDepartureTime": "17:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 193,
+        "trackId": 14,
+        "arrivalTrainNumber": "11058",
+        "departureTrainNumber": "11119",
+        "scheduledArrivalTime": "15:05",
+        "scheduledDepartureTime": "15:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 194,
+        "trackId": 14,
+        "arrivalTrainNumber": "11066",
+        "departureTrainNumber": "11127",
+        "scheduledArrivalTime": "16:05",
+        "scheduledDepartureTime": "16:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 195,
+        "trackId": 14,
+        "arrivalTrainNumber": "11074",
+        "departureTrainNumber": "11135",
+        "scheduledArrivalTime": "17:05",
+        "scheduledDepartureTime": "17:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 196,
+        "trackId": 15,
+        "arrivalTrainNumber": "3060",
+        "departureTrainNumber": "3065",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "16:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 197,
+        "trackId": 15,
+        "arrivalTrainNumber": "7364",
+        "departureTrainNumber": "7369",
+        "scheduledArrivalTime": "16:20",
+        "scheduledDepartureTime": "17:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 198,
+        "trackId": 15,
+        "arrivalTrainNumber": "3066",
+        "departureTrainNumber": "3071",
+        "scheduledArrivalTime": "17:15",
+        "scheduledDepartureTime": "17:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 199,
+        "trackId": 16,
+        "arrivalTrainNumber": "3058",
+        "departureTrainNumber": "3063",
+        "scheduledArrivalTime": "15:15",
+        "scheduledDepartureTime": "15:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 200,
+        "trackId": 16,
+        "arrivalTrainNumber": "3062",
+        "departureTrainNumber": "3067",
+        "scheduledArrivalTime": "16:15",
+        "scheduledDepartureTime": "16:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 201,
+        "trackId": 16,
+        "arrivalTrainNumber": "13164",
+        "departureTrainNumber": "13169",
+        "scheduledArrivalTime": "16:50",
+        "scheduledDepartureTime": "17:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 202,
+        "trackId": 16,
+        "arrivalTrainNumber": "3068",
+        "departureTrainNumber": "3073",
+        "scheduledArrivalTime": "17:45",
+        "scheduledDepartureTime": "18:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 203,
+        "trackId": 1,
+        "arrivalTrainNumber": "3569",
+        "departureTrainNumber": "3574",
+        "scheduledArrivalTime": "18:19",
+        "scheduledDepartureTime": "18:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 204,
+        "trackId": 1,
+        "arrivalTrainNumber": "3573",
+        "departureTrainNumber": "3578",
+        "scheduledArrivalTime": "19:19",
+        "scheduledDepartureTime": "19:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 205,
+        "trackId": 1,
+        "arrivalTrainNumber": "3577",
+        "departureTrainNumber": "3582",
+        "scheduledArrivalTime": "20:19",
+        "scheduledDepartureTime": "20:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 206,
+        "trackId": 2,
+        "arrivalTrainNumber": "3567",
+        "departureTrainNumber": "3576",
+        "scheduledArrivalTime": "18:37",
+        "scheduledDepartureTime": "19:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 207,
+        "trackId": 2,
+        "arrivalTrainNumber": "3571",
+        "departureTrainNumber": "3580",
+        "scheduledArrivalTime": "19:37",
+        "scheduledDepartureTime": "20:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 208,
+        "trackId": 2,
+        "arrivalTrainNumber": "3575",
+        "departureTrainNumber": "3584",
+        "scheduledArrivalTime": "20:37",
+        "scheduledDepartureTime": "21:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 209,
+        "trackId": 3,
+        "arrivalTrainNumber": "441",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:42",
+        "scheduledDepartureTime": "20:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 210,
+        "trackId": 4,
+        "arrivalTrainNumber": "439",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:42",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 211,
+        "trackId": 4,
+        "arrivalTrainNumber": "2039",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:28",
+        "scheduledDepartureTime": "19:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 212,
+        "trackId": 4,
+        "arrivalTrainNumber": "83481",
+        "departureTrainNumber": "3482",
+        "scheduledArrivalTime": "20:17",
+        "scheduledDepartureTime": "20:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 213,
+        "trackId": 4,
+        "arrivalTrainNumber": "83284",
+        "departureTrainNumber": "3284",
+        "scheduledArrivalTime": "20:45",
+        "scheduledDepartureTime": "21:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 214,
+        "trackId": 6,
+        "arrivalTrainNumber": "177",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:23",
+        "scheduledDepartureTime": "19:58",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 215,
+        "trackId": 6,
+        "arrivalTrainNumber": "179",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:23",
+        "scheduledDepartureTime": "20:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 216,
+        "trackId": 6,
+        "arrivalTrainNumber": "175",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:23",
+        "scheduledDepartureTime": "19:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 217,
+        "trackId": 7,
+        "arrivalTrainNumber": "64969",
+        "departureTrainNumber": "3478",
+        "scheduledArrivalTime": "19:20",
+        "scheduledDepartureTime": "19:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 218,
+        "trackId": 7,
+        "arrivalTrainNumber": "395",
+        "departureTrainNumber": "398",
+        "scheduledArrivalTime": "19:45",
+        "scheduledDepartureTime": "20:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 219,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "1343",
+        "scheduledArrivalTime": "21:00",
+        "scheduledDepartureTime": "21:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 220,
+        "trackId": 8,
+        "arrivalTrainNumber": "3269",
+        "departureTrainNumber": "3280",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "20:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 221,
+        "trackId": 8,
+        "arrivalTrainNumber": "20375",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:40",
+        "scheduledDepartureTime": "21:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 222,
+        "trackId": 9,
+        "arrivalTrainNumber": "13771",
+        "departureTrainNumber": "13774",
+        "scheduledArrivalTime": "18:45",
+        "scheduledDepartureTime": "19:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 223,
+        "trackId": 9,
+        "arrivalTrainNumber": "13327",
+        "departureTrainNumber": "13328",
+        "scheduledArrivalTime": "19:35",
+        "scheduledDepartureTime": "19:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 224,
+        "trackId": 9,
+        "arrivalTrainNumber": "3277",
+        "departureTrainNumber": "17384",
+        "scheduledArrivalTime": "21:00",
+        "scheduledDepartureTime": "21:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 225,
+        "trackId": 10,
+        "arrivalTrainNumber": "3669",
+        "departureTrainNumber": "3674",
+        "scheduledArrivalTime": "18:25",
+        "scheduledDepartureTime": "18:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 226,
+        "trackId": 10,
+        "arrivalTrainNumber": "3671",
+        "departureTrainNumber": "3676",
+        "scheduledArrivalTime": "18:55",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 227,
+        "trackId": 10,
+        "arrivalTrainNumber": "3673",
+        "departureTrainNumber": "3678",
+        "scheduledArrivalTime": "19:25",
+        "scheduledDepartureTime": "19:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 228,
+        "trackId": 10,
+        "arrivalTrainNumber": "3675",
+        "departureTrainNumber": "3680",
+        "scheduledArrivalTime": "19:55",
+        "scheduledDepartureTime": "20:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 229,
+        "trackId": 10,
+        "arrivalTrainNumber": "3677",
+        "departureTrainNumber": "3682",
+        "scheduledArrivalTime": "20:25",
+        "scheduledDepartureTime": "20:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 230,
+        "trackId": 10,
+        "arrivalTrainNumber": "3679",
+        "departureTrainNumber": "3684",
+        "scheduledArrivalTime": "20:55",
+        "scheduledDepartureTime": "21:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 231,
+        "trackId": 11,
+        "arrivalTrainNumber": "3273",
+        "departureTrainNumber": "13782",
+        "scheduledArrivalTime": "20:00",
+        "scheduledDepartureTime": "21:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 232,
+        "trackId": 12,
+        "arrivalTrainNumber": "3070",
+        "departureTrainNumber": "3276",
+        "scheduledArrivalTime": "18:15",
+        "scheduledDepartureTime": "19:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 233,
+        "trackId": 12,
+        "arrivalTrainNumber": "7067",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:05",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 234,
+        "trackId": 12,
+        "arrivalTrainNumber": "344",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:55",
+        "scheduledDepartureTime": "21:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 235,
+        "trackId": 13,
+        "arrivalTrainNumber": "13172",
+        "departureTrainNumber": "13177",
+        "scheduledArrivalTime": "18:50",
+        "scheduledDepartureTime": "19:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 236,
+        "trackId": 13,
+        "arrivalTrainNumber": "492",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:35",
+        "scheduledDepartureTime": "20:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 237,
+        "trackId": 14,
+        "arrivalTrainNumber": "11082",
+        "departureTrainNumber": "11143",
+        "scheduledArrivalTime": "18:05",
+        "scheduledDepartureTime": "18:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 238,
+        "trackId": 14,
+        "arrivalTrainNumber": "11090",
+        "departureTrainNumber": "11151",
+        "scheduledArrivalTime": "19:05",
+        "scheduledDepartureTime": "19:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 239,
+        "trackId": 14,
+        "arrivalTrainNumber": "11098",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:05",
+        "scheduledDepartureTime": "20:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 240,
+        "trackId": 14,
+        "arrivalTrainNumber": "11098",
+        "departureTrainNumber": "11161",
+        "scheduledArrivalTime": "20:05",
+        "scheduledDepartureTime": "20:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 241,
+        "trackId": 15,
+        "arrivalTrainNumber": "83075",
+        "departureTrainNumber": "3075",
+        "scheduledArrivalTime": "18:30",
+        "scheduledDepartureTime": "18:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 242,
+        "trackId": 15,
+        "arrivalTrainNumber": "3074",
+        "departureTrainNumber": "3079",
+        "scheduledArrivalTime": "19:15",
+        "scheduledDepartureTime": "19:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 243,
+        "trackId": 15,
+        "arrivalTrainNumber": "3078",
+        "departureTrainNumber": "3083",
+        "scheduledArrivalTime": "20:15",
+        "scheduledDepartureTime": "20:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 244,
+        "trackId": 15,
+        "arrivalTrainNumber": "13180",
+        "departureTrainNumber": "13185",
+        "scheduledArrivalTime": "20:50",
+        "scheduledDepartureTime": "21:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 245,
+        "trackId": 16,
+        "arrivalTrainNumber": "3072",
+        "departureTrainNumber": "3077",
+        "scheduledArrivalTime": "18:45",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 246,
+        "trackId": 16,
+        "arrivalTrainNumber": "3076",
+        "departureTrainNumber": "3081",
+        "scheduledArrivalTime": "19:45",
+        "scheduledDepartureTime": "20:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 247,
+        "trackId": 16,
+        "arrivalTrainNumber": "3080",
+        "departureTrainNumber": "3085",
+        "scheduledArrivalTime": "20:45",
+        "scheduledDepartureTime": "21:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 248,
+        "trackId": 1,
+        "arrivalTrainNumber": "3581",
+        "departureTrainNumber": "3586",
+        "scheduledArrivalTime": "21:19",
+        "scheduledDepartureTime": "21:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 249,
+        "trackId": 1,
+        "arrivalTrainNumber": "3585",
+        "departureTrainNumber": "3590",
+        "scheduledArrivalTime": "22:19",
+        "scheduledDepartureTime": "22:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 250,
+        "trackId": 1,
+        "arrivalTrainNumber": "3589",
+        "departureTrainNumber": "3594",
+        "scheduledArrivalTime": "23:19",
+        "scheduledDepartureTime": "23:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 251,
+        "trackId": 2,
+        "arrivalTrainNumber": "3579",
+        "departureTrainNumber": "3588",
+        "scheduledArrivalTime": "21:37",
+        "scheduledDepartureTime": "22:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 252,
+        "trackId": 2,
+        "arrivalTrainNumber": "3583",
+        "departureTrainNumber": "3592",
+        "scheduledArrivalTime": "22:37",
+        "scheduledDepartureTime": "23:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 253,
+        "trackId": 3,
+        "arrivalTrainNumber": "3587",
+        "departureTrainNumber": "3500",
+        "scheduledArrivalTime": "23:37",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 254,
+        "trackId": 3,
+        "arrivalTrainNumber": "3481",
+        "departureTrainNumber": "3486",
+        "scheduledArrivalTime": "21:23",
+        "scheduledDepartureTime": "21:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 255,
+        "trackId": 3,
+        "arrivalTrainNumber": "64651",
+        "departureTrainNumber": "3490",
+        "scheduledArrivalTime": "22:25",
+        "scheduledDepartureTime": "22:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 256,
+        "trackId": 3,
+        "arrivalTrainNumber": "3485",
+        "departureTrainNumber": "3402",
+        "scheduledArrivalTime": "23:23",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 257,
+        "trackId": 4,
+        "arrivalTrainNumber": "445",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:42",
+        "scheduledDepartureTime": "22:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 258,
+        "trackId": 5,
+        "arrivalTrainNumber": "2043",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:28",
+        "scheduledDepartureTime": "21:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 259,
+        "trackId": 5,
+        "arrivalTrainNumber": "2047",
+        "departureTrainNumber": "2028",
+        "scheduledArrivalTime": "23:28",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 260,
+        "trackId": 6,
+        "arrivalTrainNumber": "183",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:23",
+        "scheduledDepartureTime": "23:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 261,
+        "trackId": 6,
+        "arrivalTrainNumber": "3281",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:00",
+        "scheduledDepartureTime": "22:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 262,
+        "trackId": 7,
+        "arrivalTrainNumber": "64653",
+        "departureTrainNumber": "17388",
+        "scheduledArrivalTime": "22:35",
+        "scheduledDepartureTime": "22:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 263,
+        "trackId": 8,
+        "arrivalTrainNumber": "2397",
+        "departureTrainNumber": "386",
+        "scheduledArrivalTime": "21:45",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 264,
+        "trackId": 9,
+        "arrivalTrainNumber": "17383",
+        "departureTrainNumber": "17302",
+        "scheduledArrivalTime": "23:05",
+        "scheduledDepartureTime": "23:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 265,
+        "trackId": 10,
+        "arrivalTrainNumber": "3681",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:25",
+        "scheduledDepartureTime": "21:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 266,
+        "trackId": 10,
+        "arrivalTrainNumber": "3683",
+        "departureTrainNumber": "3688",
+        "scheduledArrivalTime": "21:55",
+        "scheduledDepartureTime": "22:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 267,
+        "trackId": 10,
+        "arrivalTrainNumber": "3685",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:35",
+        "scheduledDepartureTime": "22:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 268,
+        "trackId": 10,
+        "arrivalTrainNumber": "83692",
+        "departureTrainNumber": "3692",
+        "scheduledArrivalTime": "23:10",
+        "scheduledDepartureTime": "23:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 269,
+        "trackId": 10,
+        "arrivalTrainNumber": "3689",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "23:35",
+        "scheduledDepartureTime": "23:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 270,
+        "trackId": 11,
+        "arrivalTrainNumber": "13781",
+        "departureTrainNumber": "13244",
+        "scheduledArrivalTime": "22:15",
+        "scheduledDepartureTime": "23:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 271,
+        "trackId": 12,
+        "arrivalTrainNumber": "64425",
+        "departureTrainNumber": "64426",
+        "scheduledArrivalTime": "21:35",
+        "scheduledDepartureTime": "22:14",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.502,
+          0.502,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 272,
+        "trackId": 14,
+        "arrivalTrainNumber": "11106",
+        "departureTrainNumber": "11167",
+        "scheduledArrivalTime": "21:05",
+        "scheduledDepartureTime": "21:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 273,
+        "trackId": 14,
+        "arrivalTrainNumber": "11114",
+        "departureTrainNumber": "20187",
+        "scheduledArrivalTime": "22:05",
+        "scheduledDepartureTime": "22:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 274,
+        "trackId": 14,
+        "arrivalTrainNumber": "11122",
+        "departureTrainNumber": "20189",
+        "scheduledArrivalTime": "23:05",
+        "scheduledDepartureTime": "23:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 275,
+        "trackId": 15,
+        "arrivalTrainNumber": "3082",
+        "departureTrainNumber": "3087",
+        "scheduledArrivalTime": "21:15",
+        "scheduledDepartureTime": "21:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 276,
+        "trackId": 15,
+        "arrivalTrainNumber": "3086",
+        "departureTrainNumber": "3091",
+        "scheduledArrivalTime": "22:15",
+        "scheduledDepartureTime": "22:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 277,
+        "trackId": 15,
+        "arrivalTrainNumber": "3090",
+        "departureTrainNumber": "3095",
+        "scheduledArrivalTime": "23:15",
+        "scheduledDepartureTime": "23:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 278,
+        "trackId": 16,
+        "arrivalTrainNumber": "3084",
+        "departureTrainNumber": "3089",
+        "scheduledArrivalTime": "21:45",
+        "scheduledDepartureTime": "22:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 279,
+        "trackId": 16,
+        "arrivalTrainNumber": "3088",
+        "departureTrainNumber": "3093",
+        "scheduledArrivalTime": "22:45",
+        "scheduledDepartureTime": "23:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 280,
+        "trackId": 16,
+        "arrivalTrainNumber": "3092",
+        "departureTrainNumber": "3001",
+        "scheduledArrivalTime": "23:45",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      }
+    ],
+    "sondag": [
+      {
+        "id": 1,
+        "trackId": 1,
+        "arrivalTrainNumber": "3591",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:37",
+        "scheduledDepartureTime": "00:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 2,
+        "trackId": 1,
+        "arrivalTrainNumber": "3593",
+        "departureTrainNumber": "3534",
+        "scheduledArrivalTime": "00:19",
+        "scheduledDepartureTime": "08:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 3,
+        "trackId": 2,
+        "arrivalTrainNumber": "13493",
+        "departureTrainNumber": "3504",
+        "scheduledArrivalTime": "00:23",
+        "scheduledDepartureTime": "01:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 4,
+        "trackId": 2,
+        "arrivalTrainNumber": "3501",
+        "departureTrainNumber": "3508",
+        "scheduledArrivalTime": "01:37",
+        "scheduledDepartureTime": "02:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 5,
+        "trackId": 2,
+        "arrivalTrainNumber": "3503",
+        "departureTrainNumber": "3512",
+        "scheduledArrivalTime": "02:37",
+        "scheduledDepartureTime": "03:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 6,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3500",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 7,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3402",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 8,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "2028",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "08:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 9,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "168",
+        "scheduledArrivalTime": "01:05",
+        "scheduledDepartureTime": "07:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 10,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "170",
+        "scheduledArrivalTime": "01:00",
+        "scheduledDepartureTime": "08:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 11,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "386",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 12,
+        "trackId": 9,
+        "arrivalTrainNumber": "17391",
+        "departureTrainNumber": "17332",
+        "scheduledArrivalTime": "01:10",
+        "scheduledDepartureTime": "08:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 13,
+        "trackId": 10,
+        "arrivalTrainNumber": "17399",
+        "departureTrainNumber": "3600",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "00:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 14,
+        "trackId": 10,
+        "arrivalTrainNumber": "3693",
+        "departureTrainNumber": "17304",
+        "scheduledArrivalTime": "00:35",
+        "scheduledDepartureTime": "01:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 15,
+        "trackId": 10,
+        "arrivalTrainNumber": "3603",
+        "departureTrainNumber": "17308",
+        "scheduledArrivalTime": "01:35",
+        "scheduledDepartureTime": "02:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 16,
+        "trackId": 10,
+        "arrivalTrainNumber": "17303",
+        "departureTrainNumber": "3612",
+        "scheduledArrivalTime": "02:35",
+        "scheduledDepartureTime": "03:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 17,
+        "trackId": 14,
+        "arrivalTrainNumber": "11150",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "00:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 18,
+        "trackId": 14,
+        "arrivalTrainNumber": "11150",
+        "departureTrainNumber": "20191",
+        "scheduledArrivalTime": "00:05",
+        "scheduledDepartureTime": "00:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 19,
+        "trackId": 14,
+        "arrivalTrainNumber": "11138",
+        "departureTrainNumber": "11047",
+        "scheduledArrivalTime": "01:05",
+        "scheduledDepartureTime": "06:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 20,
+        "trackId": 15,
+        "arrivalTrainNumber": "3000",
+        "departureTrainNumber": "3005",
+        "scheduledArrivalTime": "00:45",
+        "scheduledDepartureTime": "01:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 21,
+        "trackId": 15,
+        "arrivalTrainNumber": "3006",
+        "departureTrainNumber": "3013",
+        "scheduledArrivalTime": "02:15",
+        "scheduledDepartureTime": "03:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 22,
+        "trackId": 15,
+        "arrivalTrainNumber": "3094",
+        "departureTrainNumber": "3037",
+        "scheduledArrivalTime": "00:15",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 23,
+        "trackId": 16,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3001",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "00:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 24,
+        "trackId": 16,
+        "arrivalTrainNumber": "3002",
+        "departureTrainNumber": "3009",
+        "scheduledArrivalTime": "01:15",
+        "scheduledDepartureTime": "02:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 25,
+        "trackId": 2,
+        "arrivalTrainNumber": "3505",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "03:37",
+        "scheduledDepartureTime": "03:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 26,
+        "trackId": 2,
+        "arrivalTrainNumber": "3515",
+        "departureTrainNumber": "3524",
+        "scheduledArrivalTime": "05:57",
+        "scheduledDepartureTime": "06:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 27,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "424",
+        "scheduledArrivalTime": "05:05",
+        "scheduledDepartureTime": "07:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 28,
+        "trackId": 10,
+        "arrivalTrainNumber": "3613",
+        "departureTrainNumber": "17318",
+        "scheduledArrivalTime": "04:25",
+        "scheduledDepartureTime": "05:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 29,
+        "trackId": 15,
+        "arrivalTrainNumber": "3014",
+        "departureTrainNumber": "3021",
+        "scheduledArrivalTime": "04:20",
+        "scheduledDepartureTime": "05:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 30,
+        "trackId": 16,
+        "arrivalTrainNumber": "3010",
+        "departureTrainNumber": "3025",
+        "scheduledArrivalTime": "03:15",
+        "scheduledDepartureTime": "06:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 31,
+        "trackId": 2,
+        "arrivalTrainNumber": "3519",
+        "departureTrainNumber": "3528",
+        "scheduledArrivalTime": "06:37",
+        "scheduledDepartureTime": "07:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 32,
+        "trackId": 2,
+        "arrivalTrainNumber": "3523",
+        "departureTrainNumber": "3532",
+        "scheduledArrivalTime": "07:37",
+        "scheduledDepartureTime": "08:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 33,
+        "trackId": 2,
+        "arrivalTrainNumber": "3527",
+        "departureTrainNumber": "3536",
+        "scheduledArrivalTime": "08:37",
+        "scheduledDepartureTime": "09:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 34,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "428",
+        "scheduledArrivalTime": "08:00",
+        "scheduledDepartureTime": "09:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 35,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "426",
+        "scheduledArrivalTime": "06:05",
+        "scheduledDepartureTime": "08:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 36,
+        "trackId": 4,
+        "arrivalTrainNumber": "3429",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "08:23",
+        "scheduledDepartureTime": "08:38",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 37,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "430",
+        "scheduledArrivalTime": "09:00",
+        "scheduledDepartureTime": "10:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 38,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "172",
+        "scheduledArrivalTime": "08:45",
+        "scheduledDepartureTime": "09:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 39,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "386",
+        "scheduledArrivalTime": "",
+        "scheduledDepartureTime": "10:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": true,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 40,
+        "trackId": 10,
+        "arrivalTrainNumber": "17317",
+        "departureTrainNumber": "17324",
+        "scheduledArrivalTime": "06:25",
+        "scheduledDepartureTime": "06:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 41,
+        "trackId": 10,
+        "arrivalTrainNumber": "17321",
+        "departureTrainNumber": "17328",
+        "scheduledArrivalTime": "07:25",
+        "scheduledDepartureTime": "07:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 42,
+        "trackId": 10,
+        "arrivalTrainNumber": "17323",
+        "departureTrainNumber": "3632",
+        "scheduledArrivalTime": "08:05",
+        "scheduledDepartureTime": "08:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 43,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "20356",
+        "scheduledArrivalTime": "08:35",
+        "scheduledDepartureTime": "09:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 44,
+        "trackId": 12,
+        "arrivalTrainNumber": "25346",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "07:40",
+        "scheduledDepartureTime": "08:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 45,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "485",
+        "scheduledArrivalTime": "08:00",
+        "scheduledDepartureTime": "08:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 46,
+        "trackId": 14,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "11063",
+        "scheduledArrivalTime": "08:40",
+        "scheduledDepartureTime": "08:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 47,
+        "trackId": 14,
+        "arrivalTrainNumber": "20154",
+        "departureTrainNumber": "11055",
+        "scheduledArrivalTime": "07:05",
+        "scheduledDepartureTime": "07:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 48,
+        "trackId": 14,
+        "arrivalTrainNumber": "11002",
+        "departureTrainNumber": "11063",
+        "scheduledArrivalTime": "08:05",
+        "scheduledDepartureTime": "08:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 49,
+        "trackId": 15,
+        "arrivalTrainNumber": "3022",
+        "departureTrainNumber": "3029",
+        "scheduledArrivalTime": "06:15",
+        "scheduledDepartureTime": "07:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 50,
+        "trackId": 15,
+        "arrivalTrainNumber": "3030",
+        "departureTrainNumber": "3035",
+        "scheduledArrivalTime": "08:15",
+        "scheduledDepartureTime": "08:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 51,
+        "trackId": 16,
+        "arrivalTrainNumber": "3026",
+        "departureTrainNumber": "3033",
+        "scheduledArrivalTime": "07:15",
+        "scheduledDepartureTime": "08:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 52,
+        "trackId": 16,
+        "arrivalTrainNumber": "13132",
+        "departureTrainNumber": "13137",
+        "scheduledArrivalTime": "08:50",
+        "scheduledDepartureTime": "09:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 53,
+        "trackId": 1,
+        "arrivalTrainNumber": "3533",
+        "departureTrainNumber": "3538",
+        "scheduledArrivalTime": "09:19",
+        "scheduledDepartureTime": "09:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 54,
+        "trackId": 1,
+        "arrivalTrainNumber": "3537",
+        "departureTrainNumber": "3542",
+        "scheduledArrivalTime": "10:20",
+        "scheduledDepartureTime": "10:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 55,
+        "trackId": 1,
+        "arrivalTrainNumber": "3541",
+        "departureTrainNumber": "3546",
+        "scheduledArrivalTime": "11:19",
+        "scheduledDepartureTime": "11:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 56,
+        "trackId": 2,
+        "arrivalTrainNumber": "3531",
+        "departureTrainNumber": "3540",
+        "scheduledArrivalTime": "09:37",
+        "scheduledDepartureTime": "10:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 57,
+        "trackId": 2,
+        "arrivalTrainNumber": "3535",
+        "departureTrainNumber": "3544",
+        "scheduledArrivalTime": "10:37",
+        "scheduledDepartureTime": "11:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 58,
+        "trackId": 2,
+        "arrivalTrainNumber": "3539",
+        "departureTrainNumber": "3548",
+        "scheduledArrivalTime": "11:37",
+        "scheduledDepartureTime": "12:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 59,
+        "trackId": 3,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "432",
+        "scheduledArrivalTime": "10:40",
+        "scheduledDepartureTime": "11:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 60,
+        "trackId": 3,
+        "arrivalTrainNumber": "425",
+        "departureTrainNumber": "436",
+        "scheduledArrivalTime": "11:42",
+        "scheduledDepartureTime": "13:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 61,
+        "trackId": 4,
+        "arrivalTrainNumber": "23441",
+        "departureTrainNumber": "83441",
+        "scheduledArrivalTime": "11:23",
+        "scheduledDepartureTime": "11:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 62,
+        "trackId": 4,
+        "arrivalTrainNumber": "423",
+        "departureTrainNumber": "434",
+        "scheduledArrivalTime": "10:42",
+        "scheduledDepartureTime": "12:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 63,
+        "trackId": 5,
+        "arrivalTrainNumber": "3433",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:23",
+        "scheduledDepartureTime": "09:38",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 64,
+        "trackId": 5,
+        "arrivalTrainNumber": "97232",
+        "departureTrainNumber": "2032",
+        "scheduledArrivalTime": "10:15",
+        "scheduledDepartureTime": "10:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 65,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "23742",
+        "scheduledArrivalTime": "10:55",
+        "scheduledDepartureTime": "11:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 66,
+        "trackId": 5,
+        "arrivalTrainNumber": "2023",
+        "departureTrainNumber": "2038",
+        "scheduledArrivalTime": "11:28",
+        "scheduledDepartureTime": "13:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 67,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "174",
+        "scheduledArrivalTime": "09:45",
+        "scheduledDepartureTime": "10:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 68,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "178",
+        "scheduledArrivalTime": "11:45",
+        "scheduledDepartureTime": "12:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 69,
+        "trackId": 6,
+        "arrivalTrainNumber": "97234",
+        "departureTrainNumber": "2034",
+        "scheduledArrivalTime": "11:15",
+        "scheduledDepartureTime": "11:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 70,
+        "trackId": 7,
+        "arrivalTrainNumber": "3437",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "10:23",
+        "scheduledDepartureTime": "10:38",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 71,
+        "trackId": 7,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3446",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 72,
+        "trackId": 7,
+        "arrivalTrainNumber": "385",
+        "departureTrainNumber": "388",
+        "scheduledArrivalTime": "11:45",
+        "scheduledDepartureTime": "12:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 73,
+        "trackId": 8,
+        "arrivalTrainNumber": "20355",
+        "departureTrainNumber": "20364",
+        "scheduledArrivalTime": "10:40",
+        "scheduledDepartureTime": "13:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 74,
+        "trackId": 9,
+        "arrivalTrainNumber": "13311",
+        "departureTrainNumber": "13312",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 75,
+        "trackId": 9,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13740",
+        "scheduledArrivalTime": "09:20",
+        "scheduledDepartureTime": "09:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 76,
+        "trackId": 10,
+        "arrivalTrainNumber": "17327",
+        "departureTrainNumber": "3636",
+        "scheduledArrivalTime": "09:05",
+        "scheduledDepartureTime": "09:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 77,
+        "trackId": 10,
+        "arrivalTrainNumber": "3633",
+        "departureTrainNumber": "17336",
+        "scheduledArrivalTime": "09:35",
+        "scheduledDepartureTime": "09:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 78,
+        "trackId": 10,
+        "arrivalTrainNumber": "17331",
+        "departureTrainNumber": "3640",
+        "scheduledArrivalTime": "10:05",
+        "scheduledDepartureTime": "10:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 79,
+        "trackId": 10,
+        "arrivalTrainNumber": "3637",
+        "departureTrainNumber": "17340",
+        "scheduledArrivalTime": "10:35",
+        "scheduledDepartureTime": "10:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 80,
+        "trackId": 10,
+        "arrivalTrainNumber": "17335",
+        "departureTrainNumber": "3644",
+        "scheduledArrivalTime": "11:05",
+        "scheduledDepartureTime": "11:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 81,
+        "trackId": 10,
+        "arrivalTrainNumber": "3641",
+        "departureTrainNumber": "17344",
+        "scheduledArrivalTime": "11:35",
+        "scheduledDepartureTime": "11:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 82,
+        "trackId": 11,
+        "arrivalTrainNumber": "7338",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "09:55",
+        "scheduledDepartureTime": "10:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 83,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "7034",
+        "scheduledArrivalTime": "11:00",
+        "scheduledDepartureTime": "11:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 84,
+        "trackId": 12,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "327",
+        "scheduledArrivalTime": "09:30",
+        "scheduledDepartureTime": "10:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 85,
+        "trackId": 12,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "7345",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 86,
+        "trackId": 12,
+        "arrivalTrainNumber": "13739",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "11:10",
+        "scheduledDepartureTime": "11:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 87,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "489",
+        "scheduledArrivalTime": "09:40",
+        "scheduledDepartureTime": "10:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 88,
+        "trackId": 13,
+        "arrivalTrainNumber": "13140",
+        "departureTrainNumber": "13145",
+        "scheduledArrivalTime": "10:50",
+        "scheduledDepartureTime": "11:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 89,
+        "trackId": 14,
+        "arrivalTrainNumber": "11010",
+        "departureTrainNumber": "11071",
+        "scheduledArrivalTime": "09:05",
+        "scheduledDepartureTime": "09:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 90,
+        "trackId": 14,
+        "arrivalTrainNumber": "11018",
+        "departureTrainNumber": "11079",
+        "scheduledArrivalTime": "10:05",
+        "scheduledDepartureTime": "10:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 91,
+        "trackId": 14,
+        "arrivalTrainNumber": "11026",
+        "departureTrainNumber": "11087",
+        "scheduledArrivalTime": "11:05",
+        "scheduledDepartureTime": "11:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 92,
+        "trackId": 15,
+        "arrivalTrainNumber": "3036",
+        "departureTrainNumber": "3041",
+        "scheduledArrivalTime": "09:45",
+        "scheduledDepartureTime": "10:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 93,
+        "trackId": 15,
+        "arrivalTrainNumber": "3040",
+        "departureTrainNumber": "3045",
+        "scheduledArrivalTime": "10:45",
+        "scheduledDepartureTime": "11:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 94,
+        "trackId": 15,
+        "arrivalTrainNumber": "3044",
+        "departureTrainNumber": "3049",
+        "scheduledArrivalTime": "11:45",
+        "scheduledDepartureTime": "12:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 95,
+        "trackId": 16,
+        "arrivalTrainNumber": "3034",
+        "departureTrainNumber": "3039",
+        "scheduledArrivalTime": "09:15",
+        "scheduledDepartureTime": "09:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 96,
+        "trackId": 16,
+        "arrivalTrainNumber": "3038",
+        "departureTrainNumber": "3043",
+        "scheduledArrivalTime": "10:15",
+        "scheduledDepartureTime": "10:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 97,
+        "trackId": 16,
+        "arrivalTrainNumber": "3042",
+        "departureTrainNumber": "3047",
+        "scheduledArrivalTime": "11:15",
+        "scheduledDepartureTime": "11:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 98,
+        "trackId": 1,
+        "arrivalTrainNumber": "3545",
+        "departureTrainNumber": "3550",
+        "scheduledArrivalTime": "12:19",
+        "scheduledDepartureTime": "12:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 99,
+        "trackId": 1,
+        "arrivalTrainNumber": "3549",
+        "departureTrainNumber": "3554",
+        "scheduledArrivalTime": "13:19",
+        "scheduledDepartureTime": "13:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 100,
+        "trackId": 1,
+        "arrivalTrainNumber": "3553",
+        "departureTrainNumber": "3558",
+        "scheduledArrivalTime": "14:19",
+        "scheduledDepartureTime": "14:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 101,
+        "trackId": 2,
+        "arrivalTrainNumber": "3543",
+        "departureTrainNumber": "3552",
+        "scheduledArrivalTime": "12:37",
+        "scheduledDepartureTime": "13:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 102,
+        "trackId": 2,
+        "arrivalTrainNumber": "3547",
+        "departureTrainNumber": "3556",
+        "scheduledArrivalTime": "13:37",
+        "scheduledDepartureTime": "14:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 103,
+        "trackId": 2,
+        "arrivalTrainNumber": "3551",
+        "departureTrainNumber": "3560",
+        "scheduledArrivalTime": "14:37",
+        "scheduledDepartureTime": "15:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 104,
+        "trackId": 3,
+        "arrivalTrainNumber": "429",
+        "departureTrainNumber": "440",
+        "scheduledArrivalTime": "13:42",
+        "scheduledDepartureTime": "15:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 105,
+        "trackId": 4,
+        "arrivalTrainNumber": "2027",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "13:28",
+        "scheduledDepartureTime": "13:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 106,
+        "trackId": 4,
+        "arrivalTrainNumber": "427",
+        "departureTrainNumber": "438",
+        "scheduledArrivalTime": "12:42",
+        "scheduledDepartureTime": "14:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 107,
+        "trackId": 4,
+        "arrivalTrainNumber": "431",
+        "departureTrainNumber": "442",
+        "scheduledArrivalTime": "14:42",
+        "scheduledDepartureTime": "16:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 108,
+        "trackId": 5,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "2042",
+        "scheduledArrivalTime": "14:00",
+        "scheduledDepartureTime": "15:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 109,
+        "trackId": 6,
+        "arrivalTrainNumber": "165",
+        "departureTrainNumber": "182",
+        "scheduledArrivalTime": "13:23",
+        "scheduledDepartureTime": "14:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 110,
+        "trackId": 7,
+        "arrivalTrainNumber": "163",
+        "departureTrainNumber": "180",
+        "scheduledArrivalTime": "12:23",
+        "scheduledDepartureTime": "13:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 111,
+        "trackId": 7,
+        "arrivalTrainNumber": "167",
+        "departureTrainNumber": "184",
+        "scheduledArrivalTime": "14:23",
+        "scheduledDepartureTime": "15:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 112,
+        "trackId": 8,
+        "arrivalTrainNumber": "13287",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "12:40",
+        "scheduledDepartureTime": "12:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 113,
+        "trackId": 8,
+        "arrivalTrainNumber": "387",
+        "departureTrainNumber": "390",
+        "scheduledArrivalTime": "13:45",
+        "scheduledDepartureTime": "14:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 114,
+        "trackId": 8,
+        "arrivalTrainNumber": "93758",
+        "departureTrainNumber": "23758",
+        "scheduledArrivalTime": "14:20",
+        "scheduledDepartureTime": "15:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 115,
+        "trackId": 9,
+        "arrivalTrainNumber": "13323",
+        "departureTrainNumber": "13324",
+        "scheduledArrivalTime": "13:55",
+        "scheduledDepartureTime": "14:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 116,
+        "trackId": 9,
+        "arrivalTrainNumber": "13747",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "12:45",
+        "scheduledDepartureTime": "13:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 117,
+        "trackId": 9,
+        "arrivalTrainNumber": "20363",
+        "departureTrainNumber": "20368",
+        "scheduledArrivalTime": "14:40",
+        "scheduledDepartureTime": "15:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 118,
+        "trackId": 10,
+        "arrivalTrainNumber": "17339",
+        "departureTrainNumber": "3648",
+        "scheduledArrivalTime": "12:05",
+        "scheduledDepartureTime": "12:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 119,
+        "trackId": 10,
+        "arrivalTrainNumber": "3645",
+        "departureTrainNumber": "17348",
+        "scheduledArrivalTime": "12:35",
+        "scheduledDepartureTime": "12:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 120,
+        "trackId": 10,
+        "arrivalTrainNumber": "17343",
+        "departureTrainNumber": "3652",
+        "scheduledArrivalTime": "13:05",
+        "scheduledDepartureTime": "13:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 121,
+        "trackId": 10,
+        "arrivalTrainNumber": "3649",
+        "departureTrainNumber": "17352",
+        "scheduledArrivalTime": "13:35",
+        "scheduledDepartureTime": "13:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 122,
+        "trackId": 10,
+        "arrivalTrainNumber": "17347",
+        "departureTrainNumber": "3656",
+        "scheduledArrivalTime": "14:05",
+        "scheduledDepartureTime": "14:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 123,
+        "trackId": 10,
+        "arrivalTrainNumber": "3653",
+        "departureTrainNumber": "17356",
+        "scheduledArrivalTime": "14:35",
+        "scheduledDepartureTime": "14:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 124,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "13750",
+        "scheduledArrivalTime": "12:55",
+        "scheduledDepartureTime": "13:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 125,
+        "trackId": 12,
+        "arrivalTrainNumber": "484",
+        "departureTrainNumber": "491",
+        "scheduledArrivalTime": "12:35",
+        "scheduledDepartureTime": "13:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 126,
+        "trackId": 12,
+        "arrivalTrainNumber": "486",
+        "departureTrainNumber": "493",
+        "scheduledArrivalTime": "14:35",
+        "scheduledDepartureTime": "15:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 127,
+        "trackId": 13,
+        "arrivalTrainNumber": "7348",
+        "departureTrainNumber": "7359",
+        "scheduledArrivalTime": "12:30",
+        "scheduledDepartureTime": "14:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 128,
+        "trackId": 13,
+        "arrivalTrainNumber": "10332",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "14:55",
+        "scheduledDepartureTime": "15:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 129,
+        "trackId": 14,
+        "arrivalTrainNumber": "11034",
+        "departureTrainNumber": "11095",
+        "scheduledArrivalTime": "12:05",
+        "scheduledDepartureTime": "12:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 130,
+        "trackId": 14,
+        "arrivalTrainNumber": "11042",
+        "departureTrainNumber": "11103",
+        "scheduledArrivalTime": "13:05",
+        "scheduledDepartureTime": "13:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 131,
+        "trackId": 14,
+        "arrivalTrainNumber": "11050",
+        "departureTrainNumber": "11111",
+        "scheduledArrivalTime": "14:05",
+        "scheduledDepartureTime": "14:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 132,
+        "trackId": 15,
+        "arrivalTrainNumber": "3048",
+        "departureTrainNumber": "3053",
+        "scheduledArrivalTime": "12:45",
+        "scheduledDepartureTime": "13:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 133,
+        "trackId": 15,
+        "arrivalTrainNumber": "3052",
+        "departureTrainNumber": "3057",
+        "scheduledArrivalTime": "13:45",
+        "scheduledDepartureTime": "14:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 134,
+        "trackId": 15,
+        "arrivalTrainNumber": "3056",
+        "departureTrainNumber": "3061",
+        "scheduledArrivalTime": "14:45",
+        "scheduledDepartureTime": "15:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 135,
+        "trackId": 16,
+        "arrivalTrainNumber": "3046",
+        "departureTrainNumber": "3051",
+        "scheduledArrivalTime": "12:15",
+        "scheduledDepartureTime": "12:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 136,
+        "trackId": 16,
+        "arrivalTrainNumber": "13148",
+        "departureTrainNumber": "13153",
+        "scheduledArrivalTime": "12:50",
+        "scheduledDepartureTime": "13:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 137,
+        "trackId": 16,
+        "arrivalTrainNumber": "3050",
+        "departureTrainNumber": "3055",
+        "scheduledArrivalTime": "13:15",
+        "scheduledDepartureTime": "13:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 138,
+        "trackId": 16,
+        "arrivalTrainNumber": "3054",
+        "departureTrainNumber": "3059",
+        "scheduledArrivalTime": "14:15",
+        "scheduledDepartureTime": "14:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 139,
+        "trackId": 16,
+        "arrivalTrainNumber": "13156",
+        "departureTrainNumber": "13161",
+        "scheduledArrivalTime": "14:50",
+        "scheduledDepartureTime": "15:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 140,
+        "trackId": 1,
+        "arrivalTrainNumber": "3557",
+        "departureTrainNumber": "3562",
+        "scheduledArrivalTime": "15:19",
+        "scheduledDepartureTime": "15:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 141,
+        "trackId": 1,
+        "arrivalTrainNumber": "3561",
+        "departureTrainNumber": "3566",
+        "scheduledArrivalTime": "16:19",
+        "scheduledDepartureTime": "16:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 142,
+        "trackId": 1,
+        "arrivalTrainNumber": "3565",
+        "departureTrainNumber": "3570",
+        "scheduledArrivalTime": "17:19",
+        "scheduledDepartureTime": "17:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 143,
+        "trackId": 2,
+        "arrivalTrainNumber": "3555",
+        "departureTrainNumber": "3564",
+        "scheduledArrivalTime": "15:37",
+        "scheduledDepartureTime": "16:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 144,
+        "trackId": 2,
+        "arrivalTrainNumber": "3559",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "16:37",
+        "scheduledDepartureTime": "16:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 145,
+        "trackId": 2,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3568",
+        "scheduledArrivalTime": "17:08",
+        "scheduledDepartureTime": "17:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 146,
+        "trackId": 2,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3572",
+        "scheduledArrivalTime": "17:50",
+        "scheduledDepartureTime": "18:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 147,
+        "trackId": 3,
+        "arrivalTrainNumber": "3461",
+        "departureTrainNumber": "23466",
+        "scheduledArrivalTime": "16:23",
+        "scheduledDepartureTime": "16:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 148,
+        "trackId": 3,
+        "arrivalTrainNumber": "23763",
+        "departureTrainNumber": "64944",
+        "scheduledArrivalTime": "17:10",
+        "scheduledDepartureTime": "17:26",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 149,
+        "trackId": 3,
+        "arrivalTrainNumber": "2031",
+        "departureTrainNumber": "2046",
+        "scheduledArrivalTime": "15:28",
+        "scheduledDepartureTime": "17:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 150,
+        "trackId": 3,
+        "arrivalTrainNumber": "3563",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "17:37",
+        "scheduledDepartureTime": "17:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 151,
+        "trackId": 4,
+        "arrivalTrainNumber": "437",
+        "departureTrainNumber": "448",
+        "scheduledArrivalTime": "17:42",
+        "scheduledDepartureTime": "19:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 152,
+        "trackId": 4,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "444",
+        "scheduledArrivalTime": "16:40",
+        "scheduledDepartureTime": "17:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 153,
+        "trackId": 4,
+        "arrivalTrainNumber": "2035",
+        "departureTrainNumber": "2070",
+        "scheduledArrivalTime": "17:28",
+        "scheduledDepartureTime": "19:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 154,
+        "trackId": 5,
+        "arrivalTrainNumber": "433",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "15:42",
+        "scheduledDepartureTime": "15:57",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 155,
+        "trackId": 5,
+        "arrivalTrainNumber": "435",
+        "departureTrainNumber": "446",
+        "scheduledArrivalTime": "16:42",
+        "scheduledDepartureTime": "18:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 156,
+        "trackId": 6,
+        "arrivalTrainNumber": "169",
+        "departureTrainNumber": "188",
+        "scheduledArrivalTime": "15:23",
+        "scheduledDepartureTime": "17:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 157,
+        "trackId": 7,
+        "arrivalTrainNumber": "20367",
+        "departureTrainNumber": "20372",
+        "scheduledArrivalTime": "16:40",
+        "scheduledDepartureTime": "17:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 158,
+        "trackId": 7,
+        "arrivalTrainNumber": "173",
+        "departureTrainNumber": "190",
+        "scheduledArrivalTime": "17:23",
+        "scheduledDepartureTime": "18:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 159,
+        "trackId": 8,
+        "arrivalTrainNumber": "394",
+        "departureTrainNumber": "394",
+        "scheduledArrivalTime": "17:55",
+        "scheduledDepartureTime": "18:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 160,
+        "trackId": 8,
+        "arrivalTrainNumber": "389",
+        "departureTrainNumber": "392",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "16:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 161,
+        "trackId": 8,
+        "arrivalTrainNumber": "391",
+        "departureTrainNumber": "394",
+        "scheduledArrivalTime": "17:40",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 162,
+        "trackId": 9,
+        "arrivalTrainNumber": "13325",
+        "departureTrainNumber": "13326",
+        "scheduledArrivalTime": "16:45",
+        "scheduledDepartureTime": "17:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 163,
+        "trackId": 9,
+        "arrivalTrainNumber": "93216",
+        "departureTrainNumber": "13216",
+        "scheduledArrivalTime": "16:15",
+        "scheduledDepartureTime": "16:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 164,
+        "trackId": 10,
+        "arrivalTrainNumber": "17351",
+        "departureTrainNumber": "3660",
+        "scheduledArrivalTime": "15:05",
+        "scheduledDepartureTime": "15:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 165,
+        "trackId": 10,
+        "arrivalTrainNumber": "3657",
+        "departureTrainNumber": "17360",
+        "scheduledArrivalTime": "15:35",
+        "scheduledDepartureTime": "15:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 166,
+        "trackId": 10,
+        "arrivalTrainNumber": "17355",
+        "departureTrainNumber": "3664",
+        "scheduledArrivalTime": "16:05",
+        "scheduledDepartureTime": "16:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 167,
+        "trackId": 10,
+        "arrivalTrainNumber": "3661",
+        "departureTrainNumber": "17364",
+        "scheduledArrivalTime": "16:35",
+        "scheduledDepartureTime": "16:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 168,
+        "trackId": 10,
+        "arrivalTrainNumber": "17359",
+        "departureTrainNumber": "3668",
+        "scheduledArrivalTime": "17:05",
+        "scheduledDepartureTime": "17:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 169,
+        "trackId": 10,
+        "arrivalTrainNumber": "3665",
+        "departureTrainNumber": "17368",
+        "scheduledArrivalTime": "17:35",
+        "scheduledDepartureTime": "17:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 170,
+        "trackId": 11,
+        "arrivalTrainNumber": "13755",
+        "departureTrainNumber": "23766",
+        "scheduledArrivalTime": "15:10",
+        "scheduledDepartureTime": "17:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 171,
+        "trackId": 12,
+        "arrivalTrainNumber": "490",
+        "departureTrainNumber": "497",
+        "scheduledArrivalTime": "16:35",
+        "scheduledDepartureTime": "17:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 172,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "339",
+        "scheduledArrivalTime": "15:30",
+        "scheduledDepartureTime": "16:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 173,
+        "trackId": 13,
+        "arrivalTrainNumber": "7364",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "16:20",
+        "scheduledDepartureTime": "16:35",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 174,
+        "trackId": 13,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "7369",
+        "scheduledArrivalTime": "16:45",
+        "scheduledDepartureTime": "17:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.6,
+          0.8,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 175,
+        "trackId": 14,
+        "arrivalTrainNumber": "11058",
+        "departureTrainNumber": "11119",
+        "scheduledArrivalTime": "15:05",
+        "scheduledDepartureTime": "15:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 176,
+        "trackId": 14,
+        "arrivalTrainNumber": "11066",
+        "departureTrainNumber": "11127",
+        "scheduledArrivalTime": "16:05",
+        "scheduledDepartureTime": "16:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 177,
+        "trackId": 14,
+        "arrivalTrainNumber": "11074",
+        "departureTrainNumber": "11135",
+        "scheduledArrivalTime": "17:05",
+        "scheduledDepartureTime": "17:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 178,
+        "trackId": 15,
+        "arrivalTrainNumber": "3060",
+        "departureTrainNumber": "3065",
+        "scheduledArrivalTime": "15:45",
+        "scheduledDepartureTime": "16:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 179,
+        "trackId": 15,
+        "arrivalTrainNumber": "3064",
+        "departureTrainNumber": "3069",
+        "scheduledArrivalTime": "16:45",
+        "scheduledDepartureTime": "17:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 180,
+        "trackId": 15,
+        "arrivalTrainNumber": "3068",
+        "departureTrainNumber": "3073",
+        "scheduledArrivalTime": "17:45",
+        "scheduledDepartureTime": "18:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 181,
+        "trackId": 16,
+        "arrivalTrainNumber": "3058",
+        "departureTrainNumber": "3063",
+        "scheduledArrivalTime": "15:15",
+        "scheduledDepartureTime": "15:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 182,
+        "trackId": 16,
+        "arrivalTrainNumber": "3062",
+        "departureTrainNumber": "3067",
+        "scheduledArrivalTime": "16:15",
+        "scheduledDepartureTime": "16:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 183,
+        "trackId": 16,
+        "arrivalTrainNumber": "13164",
+        "departureTrainNumber": "13169",
+        "scheduledArrivalTime": "16:50",
+        "scheduledDepartureTime": "17:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 184,
+        "trackId": 16,
+        "arrivalTrainNumber": "3066",
+        "departureTrainNumber": "3071",
+        "scheduledArrivalTime": "17:15",
+        "scheduledDepartureTime": "17:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 185,
+        "trackId": 1,
+        "arrivalTrainNumber": "3569",
+        "departureTrainNumber": "3574",
+        "scheduledArrivalTime": "18:19",
+        "scheduledDepartureTime": "18:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 186,
+        "trackId": 1,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3576",
+        "scheduledArrivalTime": "19:00",
+        "scheduledDepartureTime": "19:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 187,
+        "trackId": 1,
+        "arrivalTrainNumber": "3571",
+        "departureTrainNumber": "3580",
+        "scheduledArrivalTime": "19:37",
+        "scheduledDepartureTime": "20:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 188,
+        "trackId": 1,
+        "arrivalTrainNumber": "3575",
+        "departureTrainNumber": "3584",
+        "scheduledArrivalTime": "20:37",
+        "scheduledDepartureTime": "21:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 189,
+        "trackId": 2,
+        "arrivalTrainNumber": "3567",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "18:37",
+        "scheduledDepartureTime": "18:52",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 190,
+        "trackId": 2,
+        "arrivalTrainNumber": "3573",
+        "departureTrainNumber": "3578",
+        "scheduledArrivalTime": "19:19",
+        "scheduledDepartureTime": "19:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 191,
+        "trackId": 2,
+        "arrivalTrainNumber": "3577",
+        "departureTrainNumber": "3582",
+        "scheduledArrivalTime": "20:19",
+        "scheduledDepartureTime": "20:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 192,
+        "trackId": 3,
+        "arrivalTrainNumber": "175",
+        "departureTrainNumber": "192",
+        "scheduledArrivalTime": "18:23",
+        "scheduledDepartureTime": "19:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 193,
+        "trackId": 3,
+        "arrivalTrainNumber": "441",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:42",
+        "scheduledDepartureTime": "20:25",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 194,
+        "trackId": 3,
+        "arrivalTrainNumber": "2011",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:28",
+        "scheduledDepartureTime": "20:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 195,
+        "trackId": 3,
+        "arrivalTrainNumber": "441",
+        "departureTrainNumber": "452",
+        "scheduledArrivalTime": "19:42",
+        "scheduledDepartureTime": "21:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 196,
+        "trackId": 4,
+        "arrivalTrainNumber": "83481",
+        "departureTrainNumber": "3482",
+        "scheduledArrivalTime": "20:22",
+        "scheduledDepartureTime": "20:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 197,
+        "trackId": 4,
+        "arrivalTrainNumber": "443",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:42",
+        "scheduledDepartureTime": "21:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 198,
+        "trackId": 5,
+        "arrivalTrainNumber": "2039",
+        "departureTrainNumber": "2072",
+        "scheduledArrivalTime": "19:28",
+        "scheduledDepartureTime": "20:33",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 199,
+        "trackId": 6,
+        "arrivalTrainNumber": "177",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:23",
+        "scheduledDepartureTime": "20:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 200,
+        "trackId": 6,
+        "arrivalTrainNumber": "179",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:23",
+        "scheduledDepartureTime": "21:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 201,
+        "trackId": 7,
+        "arrivalTrainNumber": "395",
+        "departureTrainNumber": "398",
+        "scheduledArrivalTime": "19:45",
+        "scheduledDepartureTime": "20:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 202,
+        "trackId": 7,
+        "arrivalTrainNumber": "395",
+        "departureTrainNumber": "384",
+        "scheduledArrivalTime": "19:45",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 203,
+        "trackId": 8,
+        "arrivalTrainNumber": "20371",
+        "departureTrainNumber": "20376",
+        "scheduledArrivalTime": "18:40",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 204,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "21551",
+        "scheduledArrivalTime": "20:20",
+        "scheduledDepartureTime": "21:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 205,
+        "trackId": 9,
+        "arrivalTrainNumber": "23771",
+        "departureTrainNumber": "13774",
+        "scheduledArrivalTime": "18:45",
+        "scheduledDepartureTime": "19:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.4,
+          0.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 206,
+        "trackId": 9,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3680",
+        "scheduledArrivalTime": "20:05",
+        "scheduledDepartureTime": "20:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 207,
+        "trackId": 9,
+        "arrivalTrainNumber": "20375",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:40",
+        "scheduledDepartureTime": "23:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 208,
+        "trackId": 10,
+        "arrivalTrainNumber": "17363",
+        "departureTrainNumber": "3672",
+        "scheduledArrivalTime": "18:05",
+        "scheduledDepartureTime": "18:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 209,
+        "trackId": 10,
+        "arrivalTrainNumber": "3669",
+        "departureTrainNumber": "17372",
+        "scheduledArrivalTime": "18:35",
+        "scheduledDepartureTime": "18:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 210,
+        "trackId": 10,
+        "arrivalTrainNumber": "17367",
+        "departureTrainNumber": "3676",
+        "scheduledArrivalTime": "19:05",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 211,
+        "trackId": 10,
+        "arrivalTrainNumber": "3673",
+        "departureTrainNumber": "17376",
+        "scheduledArrivalTime": "19:35",
+        "scheduledDepartureTime": "19:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 212,
+        "trackId": 10,
+        "arrivalTrainNumber": "17371",
+        "departureTrainNumber": "17380",
+        "scheduledArrivalTime": "20:05",
+        "scheduledDepartureTime": "20:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 213,
+        "trackId": 11,
+        "arrivalTrainNumber": "13327",
+        "departureTrainNumber": "23338",
+        "scheduledArrivalTime": "19:55",
+        "scheduledDepartureTime": "20:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.627,
+          0.729,
+          0.686
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 214,
+        "trackId": 11,
+        "arrivalTrainNumber": "13782",
+        "departureTrainNumber": "13782",
+        "scheduledArrivalTime": "20:55",
+        "scheduledDepartureTime": "21:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 215,
+        "trackId": 11,
+        "arrivalTrainNumber": "3677",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:35",
+        "scheduledDepartureTime": "20:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 216,
+        "trackId": 12,
+        "arrivalTrainNumber": "439",
+        "departureTrainNumber": "499",
+        "scheduledArrivalTime": "18:42",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 217,
+        "trackId": 12,
+        "arrivalTrainNumber": "492",
+        "departureTrainNumber": "450",
+        "scheduledArrivalTime": "19:35",
+        "scheduledDepartureTime": "20:18",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 218,
+        "trackId": 13,
+        "arrivalTrainNumber": "13172",
+        "departureTrainNumber": "13177",
+        "scheduledArrivalTime": "18:50",
+        "scheduledDepartureTime": "19:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 219,
+        "trackId": 13,
+        "arrivalTrainNumber": "344",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:55",
+        "scheduledDepartureTime": "21:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 220,
+        "trackId": 14,
+        "arrivalTrainNumber": "11082",
+        "departureTrainNumber": "11143",
+        "scheduledArrivalTime": "18:05",
+        "scheduledDepartureTime": "18:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 221,
+        "trackId": 14,
+        "arrivalTrainNumber": "11090",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "19:05",
+        "scheduledDepartureTime": "19:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 222,
+        "trackId": 14,
+        "arrivalTrainNumber": "11098",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "20:05",
+        "scheduledDepartureTime": "20:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 223,
+        "trackId": 14,
+        "arrivalTrainNumber": "11090",
+        "departureTrainNumber": "11151",
+        "scheduledArrivalTime": "19:05",
+        "scheduledDepartureTime": "19:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 224,
+        "trackId": 14,
+        "arrivalTrainNumber": "11098",
+        "departureTrainNumber": "11159",
+        "scheduledArrivalTime": "20:05",
+        "scheduledDepartureTime": "20:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 225,
+        "trackId": 15,
+        "arrivalTrainNumber": "3072",
+        "departureTrainNumber": "3077",
+        "scheduledArrivalTime": "18:45",
+        "scheduledDepartureTime": "19:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 226,
+        "trackId": 15,
+        "arrivalTrainNumber": "3076",
+        "departureTrainNumber": "3081",
+        "scheduledArrivalTime": "19:45",
+        "scheduledDepartureTime": "20:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 227,
+        "trackId": 15,
+        "arrivalTrainNumber": "3080",
+        "departureTrainNumber": "3085",
+        "scheduledArrivalTime": "20:45",
+        "scheduledDepartureTime": "21:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 228,
+        "trackId": 16,
+        "arrivalTrainNumber": "3070",
+        "departureTrainNumber": "3075",
+        "scheduledArrivalTime": "18:15",
+        "scheduledDepartureTime": "18:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 229,
+        "trackId": 16,
+        "arrivalTrainNumber": "3074",
+        "departureTrainNumber": "3079",
+        "scheduledArrivalTime": "19:15",
+        "scheduledDepartureTime": "19:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 230,
+        "trackId": 16,
+        "arrivalTrainNumber": "3078",
+        "departureTrainNumber": "3083",
+        "scheduledArrivalTime": "20:15",
+        "scheduledDepartureTime": "20:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 231,
+        "trackId": 16,
+        "arrivalTrainNumber": "13180",
+        "departureTrainNumber": "13185",
+        "scheduledArrivalTime": "20:50",
+        "scheduledDepartureTime": "21:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 232,
+        "trackId": 1,
+        "arrivalTrainNumber": "64955",
+        "departureTrainNumber": "3584",
+        "scheduledArrivalTime": "21:05",
+        "scheduledDepartureTime": "21:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 233,
+        "trackId": 1,
+        "arrivalTrainNumber": "3681",
+        "departureTrainNumber": "3588",
+        "scheduledArrivalTime": "21:35",
+        "scheduledDepartureTime": "22:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 234,
+        "trackId": 1,
+        "arrivalTrainNumber": "3583",
+        "departureTrainNumber": "3592",
+        "scheduledArrivalTime": "22:37",
+        "scheduledDepartureTime": "23:23",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 235,
+        "trackId": 1,
+        "arrivalTrainNumber": "3587",
+        "departureTrainNumber": "3500",
+        "scheduledArrivalTime": "23:37",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 236,
+        "trackId": 2,
+        "arrivalTrainNumber": "3581",
+        "departureTrainNumber": "3586",
+        "scheduledArrivalTime": "21:19",
+        "scheduledDepartureTime": "21:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 237,
+        "trackId": 2,
+        "arrivalTrainNumber": "3585",
+        "departureTrainNumber": "3590",
+        "scheduledArrivalTime": "22:19",
+        "scheduledDepartureTime": "22:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 238,
+        "trackId": 2,
+        "arrivalTrainNumber": "3589",
+        "departureTrainNumber": "3594",
+        "scheduledArrivalTime": "23:19",
+        "scheduledDepartureTime": "23:42",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.949,
+          0.584
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 239,
+        "trackId": 3,
+        "arrivalTrainNumber": "83490",
+        "departureTrainNumber": "3400",
+        "scheduledArrivalTime": "22:25",
+        "scheduledDepartureTime": "22:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 240,
+        "trackId": 3,
+        "arrivalTrainNumber": "3481",
+        "departureTrainNumber": "83480",
+        "scheduledArrivalTime": "21:23",
+        "scheduledDepartureTime": "21:40",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 241,
+        "trackId": 3,
+        "arrivalTrainNumber": "447",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:42",
+        "scheduledDepartureTime": "23:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 242,
+        "trackId": 3,
+        "arrivalTrainNumber": "449",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "23:42",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 243,
+        "trackId": 4,
+        "arrivalTrainNumber": "445",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:42",
+        "scheduledDepartureTime": "22:30",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 244,
+        "trackId": 5,
+        "arrivalTrainNumber": "2043",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:28",
+        "scheduledDepartureTime": "21:43",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 245,
+        "trackId": 5,
+        "arrivalTrainNumber": "97392",
+        "departureTrainNumber": "3688",
+        "scheduledArrivalTime": "22:10",
+        "scheduledDepartureTime": "22:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 246,
+        "trackId": 5,
+        "arrivalTrainNumber": "2047",
+        "departureTrainNumber": "2012",
+        "scheduledArrivalTime": "23:28",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.984,
+          0.769,
+          0.192
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 247,
+        "trackId": 6,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3486",
+        "scheduledArrivalTime": "21:22",
+        "scheduledDepartureTime": "21:37",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 248,
+        "trackId": 6,
+        "arrivalTrainNumber": "183",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:23",
+        "scheduledDepartureTime": "23:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 249,
+        "trackId": 7,
+        "arrivalTrainNumber": "2397",
+        "departureTrainNumber": "382",
+        "scheduledArrivalTime": "21:45",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.396,
+          0.478,
+          0.529
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 250,
+        "trackId": 8,
+        "arrivalTrainNumber": "3685",
+        "departureTrainNumber": "17388",
+        "scheduledArrivalTime": "22:35",
+        "scheduledDepartureTime": "22:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 251,
+        "trackId": 8,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:10",
+        "scheduledDepartureTime": "21:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 252,
+        "trackId": 8,
+        "arrivalTrainNumber": "3579",
+        "departureTrainNumber": "17388",
+        "scheduledArrivalTime": "21:37",
+        "scheduledDepartureTime": "22:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 253,
+        "trackId": 8,
+        "arrivalTrainNumber": "17383",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "23:05",
+        "scheduledDepartureTime": "23:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 254,
+        "trackId": 9,
+        "arrivalTrainNumber": "13779",
+        "departureTrainNumber": "17384",
+        "scheduledArrivalTime": "21:15",
+        "scheduledDepartureTime": "21:50",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 255,
+        "trackId": 9,
+        "arrivalTrainNumber": "67891",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:20",
+        "scheduledDepartureTime": "23:00",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 256,
+        "trackId": 10,
+        "arrivalTrainNumber": "17375",
+        "departureTrainNumber": "3684",
+        "scheduledArrivalTime": "21:05",
+        "scheduledDepartureTime": "21:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 257,
+        "trackId": 10,
+        "arrivalTrainNumber": "17379",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "22:05",
+        "scheduledDepartureTime": "22:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 258,
+        "trackId": 10,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "3692",
+        "scheduledArrivalTime": "23:05",
+        "scheduledDepartureTime": "23:20",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 259,
+        "trackId": 11,
+        "arrivalTrainNumber": "494",
+        "departureTrainNumber": "",
+        "scheduledArrivalTime": "21:35",
+        "scheduledDepartureTime": "22:10",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 260,
+        "trackId": 11,
+        "arrivalTrainNumber": "",
+        "departureTrainNumber": "481",
+        "scheduledArrivalTime": "23:00",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      },
+      {
+        "id": 261,
+        "trackId": 12,
+        "arrivalTrainNumber": "11114",
+        "departureTrainNumber": "29187",
+        "scheduledArrivalTime": "22:05",
+        "scheduledDepartureTime": "23:05",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 262,
+        "trackId": 13,
+        "arrivalTrainNumber": "93595",
+        "departureTrainNumber": "3095",
+        "scheduledArrivalTime": "23:20",
+        "scheduledDepartureTime": "23:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 263,
+        "trackId": 13,
+        "arrivalTrainNumber": "3084",
+        "departureTrainNumber": "3089",
+        "scheduledArrivalTime": "21:45",
+        "scheduledDepartureTime": "22:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 264,
+        "trackId": 13,
+        "arrivalTrainNumber": "3090",
+        "departureTrainNumber": "3095",
+        "scheduledArrivalTime": "23:15",
+        "scheduledDepartureTime": "23:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 265,
+        "trackId": 14,
+        "arrivalTrainNumber": "11106",
+        "departureTrainNumber": "11167",
+        "scheduledArrivalTime": "21:05",
+        "scheduledDepartureTime": "21:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 1,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 2
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 266,
+        "trackId": 14,
+        "arrivalTrainNumber": "3086",
+        "departureTrainNumber": "3091",
+        "scheduledArrivalTime": "22:15",
+        "scheduledDepartureTime": "22:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 267,
+        "trackId": 14,
+        "arrivalTrainNumber": "11122",
+        "departureTrainNumber": "20189",
+        "scheduledArrivalTime": "23:05",
+        "scheduledDepartureTime": "23:55",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 2,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.8,
+          1.0,
+          0.8
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 268,
+        "trackId": 15,
+        "arrivalTrainNumber": "59845",
+        "departureTrainNumber": "69303",
+        "scheduledArrivalTime": "21:45",
+        "scheduledDepartureTime": "22:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.902,
+          0.902,
+          0.902
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 269,
+        "trackId": 16,
+        "arrivalTrainNumber": "3082",
+        "departureTrainNumber": "3087",
+        "scheduledArrivalTime": "21:15",
+        "scheduledDepartureTime": "21:45",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 270,
+        "trackId": 16,
+        "arrivalTrainNumber": "3088",
+        "departureTrainNumber": "3093",
+        "scheduledArrivalTime": "22:45",
+        "scheduledDepartureTime": "23:15",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": false
+      },
+      {
+        "id": 271,
+        "trackId": 16,
+        "arrivalTrainNumber": "3092",
+        "departureTrainNumber": "3021",
+        "scheduledArrivalTime": "23:45",
+        "scheduledDepartureTime": "",
+        "origin": "",
+        "destination": "",
+        "subTrackIndex": 3,
+        "trainSet": {
+          "vehicleTypeID": "X40",
+          "count": 1
+        },
+        "barColor": [
+          0.733,
+          0.71,
+          0.616
+        ],
+        "continuesFromPrevPage": false,
+        "continuesToNextPage": true
+      }
+    ]
+  }
+};
+window.SPARPLANEN_CLOSURES_WEEKS = {
+  "2026-W17": {
+    "torsdag": [],
+    "fredag": [],
+    "lordag": [],
+    "sondag": []
+  }
+};
+window.SPARPLANEN_ANCHORS = {
+  "2026-W17": {
+    "fredag": "2026-04-24",
+    "lordag": "2026-04-25",
+    "sondag": "2026-04-26",
+    "torsdag": "2026-04-23"
+  }
+};
 const initialServiceData = [
   {
     "id": 1,
