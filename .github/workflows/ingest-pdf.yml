@@ -15,11 +15,18 @@ on:
 permissions:
   contents: write
 
+# Queue concurrent ingest runs; still allow races with other pushers (mail PDF commits, users).
+concurrency:
+  group: ingest-plan-pdf-main
+  cancel-in-progress: false
+
 jobs:
   ingest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -47,4 +54,14 @@ jobs:
             exit 0
           fi
           git commit -m "chore(data): update schedule from plan PDFs [automated]"
-          git push
+          # Another push (e.g. PDF commits from mail automation) can land on main
+          # between checkout and here — rebase, then push; retry on races.
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push; then
+              exit 0
+            fi
+            echo "push failed, retrying ($i/5) after race..."
+            sleep 4
+          done
+          exit 1
