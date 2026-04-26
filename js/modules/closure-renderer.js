@@ -36,7 +36,7 @@ window.ClosureRenderer = (() => {
      * Converts closure data into timeline-relative minute offsets, then
      * draws one DIV per closure into `#timeline-canvas`.
      */
-    function render(trackLayouts, timelineStart, pixelsPerHour, viewWindowStart, viewWindowEnd, stitchedClosures) {
+    function render(trackLayouts, timelineStart, pixelsPerHour, viewWindowStart, viewWindowEnd) {
         const canvas = document.getElementById('timeline-canvas');
         if (!canvas) return;
 
@@ -50,9 +50,7 @@ window.ClosureRenderer = (() => {
         let baseClosures = (typeof initialTrackClosures !== 'undefined' && Array.isArray(initialTrackClosures))
             ? initialTrackClosures
             : [];
-        if (Array.isArray(stitchedClosures) && stitchedClosures.length > 0) {
-            baseClosures = stitchedClosures;
-        } else if (window.SparplanenResolve && typeof window.SparplanenResolve.parseScheduleNow === 'function'
+        if (window.SparplanenResolve && typeof window.SparplanenResolve.parseScheduleNow === 'function'
             && typeof window.SparplanenResolve.parseClosuresNow === 'function') {
             const r = window.SparplanenResolve.parseScheduleNow();
             if (r && r.usedBundle && r.week && r.day) {
@@ -72,8 +70,8 @@ window.ClosureRenderer = (() => {
             const track = trackLayouts.find(t => t.id === c.trackId);
             if (!track) return;
 
-            const start = (c.__startDate instanceof Date) ? c.__startDate : parseTime(c.startTime, timelineStart);
-            const end = (c.__endDate instanceof Date) ? c.__endDate : parseTime(c.endTime, timelineStart);
+            const start = parseTime(c.startTime, timelineStart);
+            const end = parseTime(c.endTime, timelineStart);
             if (!start || !end) return;
 
             // Viewport cull for performance.
