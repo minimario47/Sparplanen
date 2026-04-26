@@ -1,0 +1,5 @@
+# Extractor staging (CI and local ingest)
+TrainData/.extract-staging/
+
+# Per-day plan PDFs live on GitHub via automation; do not commit them by default
+TrainData/incoming/**/*.pdf

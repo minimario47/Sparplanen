@@ -47,9 +47,19 @@ window.ClosureRenderer = (() => {
         // `closures.js`, which does NOT attach to `window` in browsers; we
         // therefore reach for the bare identifier.  Wrapped in typeof so we
         // don't throw when the file failed to load.
-        const baseClosures = (typeof initialTrackClosures !== 'undefined' && Array.isArray(initialTrackClosures))
+        let baseClosures = (typeof initialTrackClosures !== 'undefined' && Array.isArray(initialTrackClosures))
             ? initialTrackClosures
             : [];
+        if (window.SparplanenResolve && typeof window.SparplanenResolve.parseScheduleNow === 'function'
+            && typeof window.SparplanenResolve.parseClosuresNow === 'function') {
+            const r = window.SparplanenResolve.parseScheduleNow();
+            if (r && r.usedBundle && r.week && r.day) {
+                const fromBundle = window.SparplanenResolve.parseClosuresNow(r.week, r.day);
+                if (Array.isArray(fromBundle)) {
+                    baseClosures = fromBundle;
+                }
+            }
+        }
         const userClosures = (window.UserClosuresStore && typeof window.UserClosuresStore.getAll === 'function')
             ? window.UserClosuresStore.getAll()
             : [];

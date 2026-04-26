@@ -78,6 +78,7 @@
     <script src="tracks.js"></script>
     <script src="trains.js"></script>
     <script src="closures.js"></script>
+    <script src="js/schedule-timezone-helpers.js"></script>
     
 </head>
 <body>
@@ -698,7 +699,7 @@
                                         <label for="ds-dashed" class="radio-group-label">Streckad</label>
                                     </div>
                                 </div>
-                                <p class="form-help">Färgkodad visar en färgad remsa. Transparent bibehåller tågets originalfärg. Streckad markerar med prickad kant.</p>
+                                <p class="form-help">Färgkodad visar en färgad remsa. Transparent bibehåller tågets originalfärg. Streckad markerar med prickad kant. Vid tidig ankomst: Färgkodad och Transparent = samma färg som tåglisten och gröna accenter, utan siffror. Streckad = kan dessutom visa minuter i tidssegmentet.</p>
                                 <div class="setting-viz viz-delay-style" id="viz-delay-style" data-style="color-coded" aria-hidden="true">
                                     <div class="viz-ds-scene">
                                         <div class="viz-ds-track-line"></div>

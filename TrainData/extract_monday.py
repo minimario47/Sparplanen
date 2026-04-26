@@ -50,6 +50,7 @@ Run:
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import re
@@ -913,10 +914,16 @@ def run(pdf_path: Path) -> Tuple[List[Slot], List[Closure]]:
 def emit_outputs(
     slots: List[Slot],
     closures: List[Closure],
-    audit_csv: Path = OUT_AUDIT_CSV,
-    schedule_json: Path = OUT_SCHEDULE,
-    closures_json: Path = OUT_CLOSURES,
+    audit_csv: Optional[Path] = None,
+    schedule_json: Optional[Path] = None,
+    closures_json: Optional[Path] = None,
 ) -> None:
+    if audit_csv is None:
+        audit_csv = OUT_AUDIT_CSV
+    if schedule_json is None:
+        schedule_json = OUT_SCHEDULE
+    if closures_json is None:
+        closures_json = OUT_CLOSURES
     schedule_entries = []
     for i, s in enumerate(slots, 1):
         schedule_entries.append({
@@ -994,14 +1001,48 @@ def emit_outputs(
             ])
 
 
+def _apply_out_stem(stem: str, out_dir: Path) -> None:
+    """Point extractor outputs to ``out_dir / f\"{stem}_*\"`` (JSON + audit CSV)."""
+    global OUT_SCHEDULE, OUT_CLOSURES, OUT_AUDIT_CSV
+    OUT_SCHEDULE = out_dir / f"{stem}_schedule.json"
+    OUT_CLOSURES = out_dir / f"{stem}_closures.json"
+    OUT_AUDIT_CSV = out_dir / f"{stem}_audit.csv"
+
+
 def main() -> None:
     global PDF
-    if len(sys.argv) > 1:
-        PDF = Path(sys.argv[1]).expanduser().resolve()
+    parser = argparse.ArgumentParser(
+        description="Extract train schedule + closures from a Göteborg C Spårplan PDF.",
+    )
+    parser.add_argument(
+        "pdf",
+        nargs="?",
+        default=None,
+        help="Path to PDF (default: built-in v.17 Thursday sample)",
+    )
+    parser.add_argument(
+        "--out-stem",
+        default="monday",
+        metavar="STEM",
+        help='Output file stem, e.g. "2026-W18_mandag" → 2026-W18_mandag_schedule.json (default: monday)',
+    )
+    parser.add_argument(
+        "--out-dir",
+        type=Path,
+        default=None,
+        help=f"Directory for JSON/CSV (default: {HERE})",
+    )
+    args = parser.parse_args()
+    if args.pdf:
+        PDF = Path(args.pdf).expanduser().resolve()
     else:
         PDF = default_pdf().resolve()
     if not PDF.is_file():
         raise SystemExit(f"PDF not found: {PDF}")
+    out_dir = (args.out_dir or HERE).resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    if args.out_stem != "monday" or args.out_dir is not None:
+        _apply_out_stem(args.out_stem, out_dir)
     slots, closures = run(PDF)
     emit_outputs(slots, closures)
 

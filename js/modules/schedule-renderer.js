@@ -49,18 +49,34 @@ function initializeSchedule() {
 }
 
 function prepareTrackData() {
+    const fmt = typeof formatTrackSignalLengthDisplay === 'function'
+        ? formatTrackSignalLengthDisplay
+        : (typeof formatTrackLengthDisplay === 'function'
+            ? formatTrackLengthDisplay
+            : (t) => `${t.totalLengthMeters}m`);
     cachedTracks = trackDefinitions.map(track => ({
         id: parseInt(track.publicTrackNumber),
         name: `Spår ${track.publicTrackNumber}`,
         type: track.properties.includes('regional_platform') ? 'main' :
               track.properties.includes('commuter_platform') ? 'side' : 'main',
-        length: track.totalLengthMeters
+        length: track.totalLengthMeters,
+        lengthDisplay: fmt(track)
     }));
     window.cachedTracks = cachedTracks;
 }
 
 function prepareTrainData() {
-    const now = new Date();
+    const resolved = (window.SparplanenResolve && typeof window.SparplanenResolve.parseScheduleNow === 'function')
+        ? window.SparplanenResolve.parseScheduleNow()
+        : { usedBundle: false, services: null, anchorStr: null };
+    let timeBase;
+    if (resolved.usedBundle && resolved.anchorStr) {
+        const p = String(resolved.anchorStr).split('-').map(Number);
+        timeBase = new Date(p[0], p[1] - 1, p[2], 0, 0, 0, 0);
+    } else {
+        timeBase = new Date();
+    }
+    const serviceInput = (resolved.usedBundle && Array.isArray(resolved.services)) ? resolved.services : initialServiceData;
     
     function parseTimeToDate(timeStr, baseDate) {
         if (!timeStr) return null;
@@ -68,11 +84,11 @@ function prepareTrainData() {
         return new Date(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate(), hours, minutes);
     }
     
-    const trainData = initialServiceData
+    const trainData = serviceInput
         .filter(service => service.trackId >= 1 && service.trackId <= 16)
         .map(service => {
-            let arrTime = parseTimeToDate(service.scheduledArrivalTime, now);
-            let depTime = parseTimeToDate(service.scheduledDepartureTime, now);
+            let arrTime = parseTimeToDate(service.scheduledArrivalTime, timeBase);
+            let depTime = parseTimeToDate(service.scheduledDepartureTime, timeBase);
             
             if (arrTime && depTime && depTime < arrTime) {
                 depTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
