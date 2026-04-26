@@ -6,6 +6,8 @@
 window.currentPixelsPerHour = 200;
 let cachedTracks = [];
 window.cachedTrains = [];
+window.cachedClosuresForTimeline = [];
+window.currentScheduleContext = null;
 let timelineStart = null;
 let userSettings = null;
 
@@ -48,80 +50,6 @@ function initializeSchedule() {
     }
 }
 
-/**
- * Spårplan PDFs: day D ends with continuesToNextPage, day D+1 starts with continuesFromPrevPage
- * (same spår, delspår, and matching tågnummer). Link current-day tjänster to readable labels.
- */
-function applyCrossDayServiceLinks(trainData, resolved) {
-    const R = window.SparplanenResolve;
-    if (!R || !resolved || !resolved.usedBundle || !resolved.week || !resolved.day) return;
-    const weeks = typeof window !== 'undefined' ? window.SPARPLANEN_WEEKS : null;
-    if (!weeks) return;
-    const week = resolved.week;
-    const dayKey = resolved.day;
-    const wk = weeks[week];
-    if (!wk) return;
-    const curList = wk[dayKey];
-    if (!Array.isArray(curList)) return;
-
-    const pDay = R.prevDayKey(dayKey);
-    const nDay = R.nextDayKey(dayKey);
-    const prevList = pDay ? (wk[pDay] || []) : [];
-    const nextList = nDay ? (wk[nDay] || []) : [];
-
-    function subEq(a, b) {
-        return (a.subTrackIndex ?? 0) === (b.subTrackIndex ?? 0);
-    }
-    function sameServiceTrack(a, b) {
-        return a && b && a.trackId === b.trackId && subEq(a, b);
-    }
-    function anySharedNumber(a, b) {
-        const na = [a.arrivalTrainNumber, a.departureTrainNumber]
-            .map((s) => String(s || '').trim()).filter(Boolean);
-        const nb = [b.arrivalTrainNumber, b.departureTrainNumber]
-            .map((s) => String(s || '').trim()).filter(Boolean);
-        for (const x of na) for (const y of nb) if (x === y) return true;
-        return false;
-    }
-
-    for (const t of trainData) {
-        if (t.userAdded) continue;
-        const svc = curList.find((s) => s.id === t.id);
-        if (!svc) continue;
-
-        if (svc.continuesFromPrevPage && pDay) {
-            const partner = prevList.find(
-                (p) => p.continuesToNextPage
-                    && sameServiceTrack(p, svc)
-                    && anySharedNumber(p, svc)
-            );
-            if (partner) {
-                const time = partner.scheduledArrivalTime || partner.scheduledDepartureTime || '–';
-                const num = partner.departureTrainNumber || partner.arrivalTrainNumber || '';
-                const label = R.formatDayLabelSv(pDay);
-                t.crossDayFrom = num
-                    ? `${label}: tåg ${num} (ca ${time})`
-                    : `${label} (ca ${time})`;
-            }
-        }
-        if (svc.continuesToNextPage && nDay) {
-            const partner = nextList.find(
-                (n) => n.continuesFromPrevPage
-                    && sameServiceTrack(svc, n)
-                    && anySharedNumber(svc, n)
-            );
-            if (partner) {
-                const time = partner.scheduledArrivalTime || partner.scheduledDepartureTime || '–';
-                const num = partner.arrivalTrainNumber || partner.departureTrainNumber || '';
-                const label = R.formatDayLabelSv(nDay);
-                t.crossDayTo = num
-                    ? `${label}: tåg ${num} (ca ${time})`
-                    : `${label} (ca ${time})`;
-            }
-        }
-    }
-}
-
 function prepareTrackData() {
     const fmt = typeof formatTrackSignalLengthDisplay === 'function'
         ? formatTrackSignalLengthDisplay
@@ -140,9 +68,19 @@ function prepareTrackData() {
 }
 
 function prepareTrainData() {
-    const resolved = (window.SparplanenResolve && typeof window.SparplanenResolve.parseScheduleNow === 'function')
-        ? window.SparplanenResolve.parseScheduleNow()
-        : { usedBundle: false, services: null, anchorStr: null };
+    const resolved = (window.SparplanenResolve && typeof window.SparplanenResolve.parseScheduleContext === 'function')
+        ? window.SparplanenResolve.parseScheduleContext()
+        : ((window.SparplanenResolve && typeof window.SparplanenResolve.parseScheduleNow === 'function')
+            ? window.SparplanenResolve.parseScheduleNow()
+            : { usedBundle: false, services: null, anchorStr: null });
+    window.currentScheduleContext = resolved || null;
+    const stitchedServices = (resolved && resolved.usedBundle && window.CrossDayStitch && typeof window.CrossDayStitch.stitchTrainsAcrossDays === 'function')
+        ? window.CrossDayStitch.stitchTrainsAcrossDays(resolved)
+        : null;
+    const stitchedClosures = (resolved && resolved.usedBundle && window.CrossDayStitch && typeof window.CrossDayStitch.stitchClosuresAcrossDays === 'function')
+        ? window.CrossDayStitch.stitchClosuresAcrossDays(resolved)
+        : null;
+    window.cachedClosuresForTimeline = Array.isArray(stitchedClosures) ? stitchedClosures : [];
     let timeBase;
     if (resolved.usedBundle && resolved.anchorStr) {
         const p = String(resolved.anchorStr).split('-').map(Number);
@@ -150,7 +88,9 @@ function prepareTrainData() {
     } else {
         timeBase = new Date();
     }
-    const serviceInput = (resolved.usedBundle && Array.isArray(resolved.services)) ? resolved.services : initialServiceData;
+    const serviceInput = (resolved.usedBundle && Array.isArray(stitchedServices))
+        ? stitchedServices
+        : ((resolved.usedBundle && Array.isArray(resolved.services)) ? resolved.services : initialServiceData);
     
     function parseTimeToDate(timeStr, baseDate) {
         if (!timeStr) return null;
@@ -161,13 +101,13 @@ function prepareTrainData() {
     const trainData = serviceInput
         .filter(service => service.trackId >= 1 && service.trackId <= 16)
         .map(service => {
-            let arrTime = parseTimeToDate(service.scheduledArrivalTime, timeBase);
-            let depTime = parseTimeToDate(service.scheduledDepartureTime, timeBase);
+            let arrTime = (service.__arrDate instanceof Date) ? service.__arrDate : parseTimeToDate(service.scheduledArrivalTime, timeBase);
+            let depTime = (service.__depDate instanceof Date) ? service.__depDate : parseTimeToDate(service.scheduledDepartureTime, timeBase);
             
             if (arrTime && depTime && depTime < arrTime) {
                 depTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
             } else if (!arrTime && depTime) {
-                const depHour = parseInt(service.scheduledDepartureTime.split(':')[0]);
+                const depHour = parseInt(String(service.scheduledDepartureTime || '').split(':')[0], 10);
                 if (depHour >= 0 && depHour < 6) {
                     depTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
                 }
@@ -243,8 +183,6 @@ function prepareTrainData() {
             }
         }
     });
-
-    applyCrossDayServiceLinks(trainData, resolved);
     
     const userTrains = (window.UserTrainsStore && typeof window.UserTrainsStore.getAll === 'function')
         ? window.UserTrainsStore.getAll()
@@ -418,15 +356,21 @@ function handleTimeManagerChange(event) {
 function renderFullSchedule() {
     const state = window.TimeManager.getState();
     const { viewTime, timeRange } = state;
-    
-    const timelineStartHours = 30;
-    const now = new Date();
-    
-    timelineStart = new Date(now);
-    timelineStart.setHours(0, 0, 0, 0);
-    
-    const timelineEnd = new Date(timelineStart);
-    timelineEnd.setHours(timelineEnd.getHours() + timelineStartHours);
+    const resolved = window.currentScheduleContext || {};
+    let timelineStartHours = 30;
+    if (resolved.usedBundle && window.CrossDayStitch && typeof window.CrossDayStitch.computeTimelineRange === 'function') {
+        const range = window.CrossDayStitch.computeTimelineRange(
+            resolved.anchorStr || null,
+            window.cachedTrains || [],
+            window.cachedClosuresForTimeline || []
+        );
+        timelineStart = range.timelineStart;
+        timelineStartHours = range.timelineHours;
+    } else {
+        const now = new Date();
+        timelineStart = new Date(now);
+        timelineStart.setHours(0, 0, 0, 0);
+    }
     
     const targetViewportWidth = 1400; 
     window.currentPixelsPerHour = targetViewportWidth / timeRange;
@@ -461,7 +405,8 @@ function renderFullSchedule() {
             timelineStart,
             window.currentPixelsPerHour,
             viewWindowStart,
-            viewWindowEnd
+            viewWindowEnd,
+            window.cachedClosuresForTimeline || []
         );
     }
     updateCurrentTimeLine();

@@ -4,6 +4,7 @@
  * Depends on: window.SPARPLANEN_WEEKS, SPARPLANEN_CLOSURES_WEEKS, SPARPLANEN_ANCHORS (from emit_week_bundle)
  */
 (function () {
+    const DAY_ORDER = ['mandag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lordag', 'sondag'];
     const SWE_DAY_TO_KEY = {
         'måndag': 'mandag',
         'mandag': 'mandag',
@@ -35,9 +36,9 @@
     }
 
     function parseWeekKey(wk) {
-        const p = wk.split('-W', 1);
-        if (p.length !== 2) return { y: 0, w: 0 };
-        return { y: parseInt(p[0], 10) || 0, w: parseInt(p[1], 10) || 0 };
+        const m = /^(\d{4})-W(\d{1,2})$/i.exec(String(wk || ''));
+        if (!m) return { y: 0, w: 0 };
+        return { y: parseInt(m[1], 10) || 0, w: parseInt(m[2], 10) || 0 };
     }
 
     function compareWeekKeysDesc(a, b) {
@@ -67,8 +68,7 @@
         for (const wk of list) {
             const wmap = weeks[wk];
             if (!wmap) continue;
-            const days = Object.keys(wmap);
-            for (const dk of ['mandag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lordag', 'sondag']) {
+            for (const dk of DAY_ORDER) {
                 if (wmap[dk] && wmap[dk].length) {
                     const anc = (anchors && anchors[wk] && anchors[wk][dk]) || null;
                     return { week: wk, day: dk, anchor: anc };
@@ -78,67 +78,83 @@
         return { week: null, day: null, anchor: null };
     }
 
-    /** Mon–Sun order as in plan PDF week bundle (söndag → måndag spans two weeks of operations). */
-    const DAY_KEY_ORDER = ['mandag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lordag', 'sondag'];
+    function getAdjacentDayRef(weeks, anchors, weekKey, dayKey, direction) {
+        if (!weekKey || !dayKey || !weeks) return null;
+        const idx = DAY_ORDER.indexOf(dayKey);
+        if (idx < 0) return null;
+        const weekList = Object.keys(weeks).sort(compareWeekKeysDesc).reverse();
+        const wIdx = weekList.indexOf(weekKey);
+        if (wIdx < 0) return null;
 
-    const DAY_LABEL_SV = {
-        mandag: 'Måndag',
-        tisdag: 'Tisdag',
-        onsdag: 'Onsdag',
-        torsdag: 'Torsdag',
-        fredag: 'Fredag',
-        lordag: 'Lördag',
-        sondag: 'Söndag',
-    };
-
-    function prevDayKey(day) {
-        const i = DAY_KEY_ORDER.indexOf(day);
-        if (i < 0) return null;
-        return DAY_KEY_ORDER[(i + 6) % 7];
+        let targetWeek = weekKey;
+        let targetDayIndex = idx + (direction > 0 ? 1 : -1);
+        let targetWeekIndex = wIdx;
+        if (targetDayIndex < 0) {
+            targetWeekIndex -= 1;
+            targetDayIndex = DAY_ORDER.length - 1;
+        } else if (targetDayIndex >= DAY_ORDER.length) {
+            targetWeekIndex += 1;
+            targetDayIndex = 0;
+        }
+        if (targetWeekIndex < 0 || targetWeekIndex >= weekList.length) return null;
+        targetWeek = weekList[targetWeekIndex];
+        const targetDay = DAY_ORDER[targetDayIndex];
+        return {
+            weekKey: targetWeek,
+            dayKey: targetDay,
+            anchorStr: (anchors && anchors[targetWeek] && anchors[targetWeek][targetDay]) || null,
+            services: (weeks[targetWeek] && weeks[targetWeek][targetDay]) || []
+        };
     }
 
-    function nextDayKey(day) {
-        const i = DAY_KEY_ORDER.indexOf(day);
-        if (i < 0) return null;
-        return DAY_KEY_ORDER[(i + 1) % 7];
-    }
-
-    function formatDayLabelSv(day) {
-        return (day && DAY_LABEL_SV[day]) || day || '';
+    function parseScheduleContext() {
+        const weeks = typeof window !== 'undefined' ? window.SPARPLANEN_WEEKS : null;
+        const anchors = typeof window !== 'undefined' ? window.SPARPLANEN_ANCHORS : null;
+        const closureWeeks = typeof window !== 'undefined' ? window.SPARPLANEN_CLOSURES_WEEKS : null;
+        if (!weeks) {
+            return { usedBundle: false, week: null, day: null, services: null, anchorStr: null, anchor: null };
+        }
+        const p = pickWeekAndDay(weeks, anchors);
+        if (!p.week || !p.day) {
+            return { usedBundle: true, week: null, day: null, services: null, anchorStr: null, anchor: null };
+        }
+        const currentDay = {
+            weekKey: p.week,
+            dayKey: p.day,
+            anchorStr: p.anchor || null,
+            services: (weeks[p.week] && weeks[p.week][p.day]) || []
+        };
+        const prevDay = getAdjacentDayRef(weeks, anchors, p.week, p.day, -1);
+        const nextDay = getAdjacentDayRef(weeks, anchors, p.week, p.day, 1);
+        const withClosures = (dayRef) => {
+            if (!dayRef) return null;
+            return {
+                ...dayRef,
+                closures: (closureWeeks && closureWeeks[dayRef.weekKey] && closureWeeks[dayRef.weekKey][dayRef.dayKey]) || []
+            };
+        };
+        return {
+            usedBundle: true,
+            week: p.week,
+            day: p.day,
+            weekKey: p.week,
+            dayKey: p.day,
+            services: currentDay.services,
+            anchorStr: p.anchor,
+            anchor: p.anchor ? new Date(p.anchor + 'T12:00:00') : null,
+            currentDay: withClosures(currentDay),
+            prevDay: withClosures(prevDay),
+            nextDay: withClosures(nextDay)
+        };
     }
 
     window.SparplanenResolve = {
-        DAY_KEY_ORDER: DAY_KEY_ORDER,
         formatStockholmYMD: formatStockholmYMD,
         getStockholmSwedishDayKey: getStockholmSwedishDayKey,
         pickWeekAndDay: pickWeekAndDay,
-        prevDayKey: prevDayKey,
-        nextDayKey: nextDayKey,
-        formatDayLabelSv: formatDayLabelSv,
+        parseScheduleContext: parseScheduleContext,
         parseScheduleNow: function () {
-            const weeks = typeof window !== 'undefined' ? window.SPARPLANEN_WEEKS : null;
-            const anchors = typeof window !== 'undefined' ? window.SPARPLANEN_ANCHORS : null;
-            if (!weeks) {
-                return { usedBundle: false, week: null, day: null, services: null, anchorStr: null, anchor: null };
-            }
-            const p = pickWeekAndDay(weeks, anchors);
-            if (!p.week || !p.day) {
-                return { usedBundle: true, week: null, day: null, services: null, anchorStr: null, anchor: null };
-            }
-            const arr = weeks[p.week] && weeks[p.week][p.day];
-            const a = p.anchor
-                ? new Date(p.anchor + 'T12:00:00')
-                : null;
-            return {
-                usedBundle: true,
-                week: p.week,
-                day: p.day,
-                weekKey: p.week,
-                dayKey: p.day,
-                services: arr || [],
-                anchorStr: p.anchor,
-                anchor: a,
-            };
+            return parseScheduleContext();
         },
         parseClosuresNow: function (week, day) {
             const cws = typeof window !== 'undefined' ? window.SPARPLANEN_CLOSURES_WEEKS : null;

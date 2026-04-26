@@ -23,6 +23,7 @@ window.TimelineRenderer = {
             const hourTime = new Date(timelineStart);
             hourTime.setHours(hourTime.getHours() + i);
             const hour = hourTime.getHours();
+            const dayOffset = Math.floor((hourTime.getTime() - timelineStart.getTime()) / (24 * 60 * 60 * 1000));
             
             const leftPosition = i * pixelsPerHour;
             
@@ -31,7 +32,8 @@ window.TimelineRenderer = {
             hourDiv.style.position = 'absolute';
             hourDiv.style.left = leftPosition + 'px';
             hourDiv.style.width = pixelsPerHour + 'px';
-            hourDiv.innerHTML = `<span class="timeline-hour-label">${hour.toString().padStart(2, '0')}:00</span>`;
+            const daySuffix = dayOffset > 0 ? ` (+${dayOffset}d)` : '';
+            hourDiv.innerHTML = `<span class="timeline-hour-label">${hour.toString().padStart(2, '0')}:00${daySuffix}</span>`;
             
             timelineHours.appendChild(hourDiv);
         }
