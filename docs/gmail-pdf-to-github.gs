@@ -28,30 +28,54 @@ var DAY_KEY_MAP = {
   "söndag": "sondag",
 };
 
-var DAY_TOKEN_RE = /(Måndag|tisdag|Tisdag|Onsdag|onsdag|Torsdag|torsdag|Fredag|fredag|Lördag|lördag|Söndag|söndag)\.pdf/i;
-
 /**
- * "Spårplaner ... v.18 ... Måndag.pdf" or "3tim.pdf Måndag.pdf" → 18
+ * Spårplannen week, e.g. "v.17" in subject or "…, v.17 3tim …" in filename.
+ * Must NOT treat "VERSION 2" as v + 2 (week). Require literal "v." or "v" + dot before digits.
  */
-function weekNumberFromName_(name) {
-  var m = (name || "").match(/v\.?\s*(\d+)/i);
-  if (!m) {
-    return null;
-  }
-  return parseInt(m[1], 10);
+function weekNumberFromName_(name, subject) {
+  // Require "v.17" style — avoids treating "VERSION 2" as week 2
+  var pool = (name || "") + " " + (subject || "");
+  var m = pool.match(/\bv\.\s*(\d{1,2})\b/i);
+  return m ? parseInt(m[1], 10) : null;
 }
 
 /**
- * Tries to find a Swedish day name; returns a key in DAY_KEY_MAP or null.
- * Skips the "master" file that has no "Day.pdf" at the end.
+ * Filenames can look like: "... VERSION 2.pdf Fredag.pdf" — the *tail* is always "Dayname.pdf".
+ * The all-days file ends with "VERSION 2.pdf" (no day word before the last .pdf).
  */
 function dayKeyFromFileName_(name) {
-  var m = (name || "").match(DAY_TOKEN_RE);
+  var n = (name || "").replace(/\s+$/, "");
+  if (!/\.pdf$/i.test(n)) {
+    return null;
+  }
+  var m = n.match(/([a-zA-Z\u00C0-\u024F]+)\.pdf$/i);
   if (!m) {
     return null;
   }
-  var token = m[1].toLowerCase();
-  return DAY_KEY_MAP[token] || null;
+  var raw = m[1].toLowerCase();
+  var u = raw.replace(/\u00f6/g, "o").replace(/\u00e4/g, "a").replace(/\u00e5/g, "a");
+  if (u === "mandag" || raw === "måndag") {
+    return "mandag";
+  }
+  if (u === "lordag" || raw === "l\u00f6rdag") {
+    return "lordag";
+  }
+  if (u === "sondag" || raw === "s\u00f6ndag") {
+    return "sondag";
+  }
+  if (u === "tisdag") {
+    return "tisdag";
+  }
+  if (u === "onsdag") {
+    return "onsdag";
+  }
+  if (u === "torsdag") {
+    return "torsdag";
+  }
+  if (u === "fredag") {
+    return "fredag";
+  }
+  return null;
 }
 
 function isPdf_(att) {
@@ -106,7 +130,13 @@ function putGitHubFile_(owner, repo, token, filePath, contentBase64, message, br
     payload: JSON.stringify(body),
     muteHttpExceptions: true,
   });
-  return r.getResponseCode() === 200 || r.getResponseCode() === 201;
+  var code = r.getResponseCode();
+  if (code === 200 || code === 201) {
+    return true;
+  }
+  Logger.log("GitHub PUT failed: " + code + " for " + filePath);
+  Logger.log(r.getContentText().slice(0, 800));
+  return false;
 }
 
 function dispatchWorkflow_(owner, repo, token, workflow, branch) {
@@ -142,21 +172,51 @@ function yearForMessage_(message) {
   return parseInt(Utilities.formatDate(message.getDate(), "Europe/Stockholm", "yyyy"), 10);
 }
 
-function processInbox() {
+/**
+ * Set dryRun: true to only log what would be uploaded (no GitHub, no mark read).
+ * Open Executions (or View → Logs) to read SPAR: lines.
+ */
+function processInbox(dryRun) {
   var c = getProps_();
   if (!c.label || !c.token || !c.owner || !c.repo) {
     throw new Error("Set GMAIL_LABEL, GITHUB_TOKEN, GITHUB_OWNER, GITHUB_REPO");
   }
+  if (dryRun) {
+    Logger.log("SPAR: DRY RUN — no GitHub calls");
+  } else {
+    Logger.log("SPAR: starting owner=" + c.owner + " repo=" + c.repo + " branch=" + c.branch);
+  }
   var userLabel = GmailApp.getUserLabelByName(c.label);
   if (!userLabel) {
-    throw new Error("Gmail label not found: " + c.label);
+    throw new Error("Gmail label not found. Exact spelling? Got: " + c.label);
   }
-  var threads = userLabel.getThreads(0, 20);
+  // Only threads that are *unread* in Gmail (same as a search for is:unread on that label)
+  var q = 'label:"' + c.label.replace(/"/g, "") + '" is:unread';
+  var threads;
+  try {
+    threads = GmailApp.search(q, 0, 20);
+  } catch (e) {
+    Logger.log("SPAR: search failed: " + e);
+    threads = [];
+  }
+  if (threads.length === 0) {
+    var totalLabeled = 0;
+    try {
+      totalLabeled = userLabel.getThreads(0, 100).length;
+    } catch (e2) {
+      Logger.log("SPAR: could not list labeled threads: " + e2);
+    }
+    Logger.log(
+      "SPAR: 0 *unread* threads with this label. Labeled (any state) in sample: " +
+        totalLabeled +
+        " — if >0, your mail is READ. In Gmail: open the thread → ⋮ → 'Mark as unread' (or select thread + m). " +
+        "The script will not re-upload from read mail."
+    );
+    return;
+  }
+  Logger.log("SPAR: unread threads to process=" + threads.length);
   for (var ti = 0; ti < threads.length; ti++) {
     var thread = threads[ti];
-    if (!thread.isUnread()) {
-      continue;
-    }
     var year = 0;
     var uploaded = 0;
     var messages = thread.getMessages();
@@ -168,6 +228,8 @@ function processInbox() {
       if (year === 0) {
         year = yearForMessage_(message);
       }
+      var subj = message.getSubject() || "";
+      Logger.log("SPAR: unread msg y=" + year + " subj=" + subj);
       var atts = message.getAttachments();
       for (var ai = 0; ai < atts.length; ai++) {
         var att = atts[ai];
@@ -176,34 +238,53 @@ function processInbox() {
         }
         var name = att.getName() || "plan.pdf";
         var dayKey = dayKeyFromFileName_(name);
+        var wn = weekNumberFromName_(name, subj);
         if (!dayKey) {
-          // All-days bundle or unknown — skip
+          Logger.log('SPAR: skip (no day in tail .pdf) name="' + name + '"');
           continue;
         }
-        var wn = weekNumberFromName_(name);
         if (wn == null) {
+          Logger.log('SPAR: skip (no v.## week) name="' + name + '" subj=' + subj);
           continue;
         }
         var wpad = wn < 10 ? "0" + wn : String(wn);
         var folder = year + "-W" + wpad;
         var path = "TrainData/incoming/" + folder + "/" + dayKey + ".pdf";
+        if (dryRun) {
+          Logger.log("SPAR: [dry] would put " + path + " from " + name);
+          uploaded++;
+          continue;
+        }
+        Logger.log("SPAR: uploading " + path);
         var bytes = att.copyBlob().getBytes();
         var b64 = Utilities.base64Encode(bytes);
         var msg = "chore: plan PDF " + folder + " " + dayKey + " (" + name + ")";
         if (!putGitHubFile_(c.owner, c.repo, c.token, path, b64, msg, c.branch)) {
-          throw new Error("PUT failed for " + path);
+          throw new Error("PUT failed for " + path + " — see logs for GitHub body");
         }
+        Logger.log("SPAR: ok " + path);
         uploaded++;
       }
     }
     if (uploaded > 0) {
-      dispatchWorkflow_(c.owner, c.repo, c.token, c.workflow, c.branch);
-      thread.markRead();
+      if (!dryRun) {
+        dispatchWorkflow_(c.owner, c.repo, c.token, c.workflow, c.branch);
+        Logger.log("SPAR: workflow dispatch OK");
+        thread.markRead();
+      } else {
+        Logger.log("SPAR: dry run — not dispatching, not markRead");
+      }
       return;
     }
   }
+  Logger.log("SPAR: nothing uploaded. Is the mail UNREAD? Does a per-day PDF end in Fredag.pdf / Måndag.pdf? Is v.17 in subject or filename?");
+}
+
+/** Logs parsing only; run this if GitHub is silent. */
+function dryRunInbox() {
+  processInbox(true);
 }
 
 function main() {
-  processInbox();
+  processInbox(false);
 }

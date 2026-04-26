@@ -126,6 +126,7 @@ Check `trains.js` for `SPARPLANEN_WEEKS` and `SPARPLANEN_ANCHORS`, then open the
 
 | Symptom | What to check |
 |--------|----------------|
+| Log says **0 unread** (or you only have read labeled mail) | Gmail marks threads **read** when you open them. **Mark as unread** the conversation (thread menu ⋮) before the script runs, or the script intentionally does nothing. |
 | 403/401 on GitHub | Token scopes, owner/repo, branch |
 | 404 on dispatch | Workflow file name = `ingest-pdf.yml` in **default** branch; token has **workflow** |
 | Nothing uploads | Per-day name must end with a weekday before `.pdf`; `v.18` must appear in the filename for week number |
