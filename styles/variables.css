@@ -23,7 +23,7 @@ These variables map old names to new design system values.
     --track-height: 40px;
     --header-height: 70px;              /* Increased for better touch targets */
     --timeline-height: 45px;
-    --track-label-width: 140px;
+    --track-label-width: 200px;
     
     /* Grid calculations - dynamic, set by JavaScript */
     --hour-grid-size: 240px;

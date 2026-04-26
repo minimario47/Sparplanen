@@ -3,21 +3,23 @@
 .track-tooltip {
     position: fixed;
     z-index: 10000;
-    background: var(--bg-elevated);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    background: var(--bg-primary, #ffffff);
+    color: var(--text-primary, #0f172a);
+    border: 1px solid var(--border-primary, #334155);
+    border-radius: 10px;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
     padding: 0;
     min-width: 320px;
     max-width: 420px;
     opacity: 0;
     transform: translateY(-8px) scale(0.95);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.18s ease, transform 0.18s ease;
     pointer-events: auto;
     font-size: 14px;
     overflow: hidden;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    isolation: isolate;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 .track-tooltip.visible {
@@ -59,7 +61,7 @@
 /* Header with Status */
 .track-tooltip-header {
     padding: 16px 20px 12px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-primary, #e2e8f0);
 }
 
 .track-tooltip-title {
@@ -79,8 +81,8 @@
 /* Content sections */
 .track-tooltip-section {
     padding: 20px;
-    background: var(--bg-subtle);
-    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-secondary, #f1f5f9);
+    border-bottom: 1px solid var(--border-primary, #e2e8f0);
 }
 
 .track-tooltip-section:last-child {
@@ -111,7 +113,7 @@
 }
 
 .track-info-item:not(:last-child) {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-primary, #e2e8f0);
 }
 
 .track-info-label {
@@ -128,62 +130,90 @@
     letter-spacing: 0.5px;
 }
 
-/* Properties */
-.track-properties {
-    display: flex;
+/* Längre signalsiktsrad: wrap */
+.track-info-item:has(.track-signal-length) {
+    align-items: flex-start;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: 8px 12px;
 }
 
-.track-property {
-    display: inline-block;
-    padding: 4px 12px;
-    background: var(--primary-100);
-    color: var(--primary-700);
-    border-radius: 20px;
+.track-info-item:has(.track-signal-length) .track-info-label {
+    flex: 0 0 auto;
+    max-width: 40%;
+    padding-top: 2px;
+}
+
+.track-info-value.track-signal-length {
+    flex: 1 1 12rem;
+    min-width: 0;
+    max-width: 100%;
+    text-align: right;
+    white-space: normal;
+    line-height: 1.35;
+    word-break: break-word;
+    letter-spacing: 0.2px;
+}
+
+/* Första/andra spårledning: kompaktare än huvudrader */
+.track-info-item.track-ledning-row {
+    padding: 3px 0;
+    align-items: baseline;
+}
+
+.track-info-item.track-ledning-row .track-info-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary, #64748b);
+}
+
+.track-info-item.track-ledning-row .track-info-value {
     font-size: 12px;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.1px;
 }
 
-/* Description */
-.track-description {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--text-secondary);
-    font-style: italic;
-}
-
-/* Dark theme support */
+/* Dark theme — opaque navy surface, matching the right-click context menu */
 [data-theme="dark"] .track-tooltip {
-    background: var(--bg-elevated);
-    border-color: var(--border-color);
+    background: var(--bg-primary, #0f172a);
+    color: var(--text-primary, #e2e8f0);
+    border-color: var(--border-primary, #475569);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+}
+
+[data-theme="dark"] .track-tooltip-section {
+    background: var(--bg-secondary, #1e293b);
+    border-color: rgba(148, 163, 184, 0.25);
+}
+
+[data-theme="dark"] .track-tooltip-header,
+[data-theme="dark"] .track-info-item:not(:last-child) {
+    border-color: rgba(148, 163, 184, 0.25);
 }
 
 [data-theme="dark"] .track-tooltip-close {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary, rgba(226, 232, 240, 0.7));
 }
 
 [data-theme="dark"] .track-tooltip-close:hover {
-    background: rgba(220, 38, 38, 0.1);
-    color: #DC2626;
-}
-
-[data-theme="dark"] .track-property {
-    background: var(--primary-800);
-    color: var(--primary-200);
+    background: rgba(248, 113, 113, 0.18);
+    color: #f87171;
 }
 
 /* High contrast theme support */
+[data-theme="hc"] .track-tooltip,
 [data-theme="high-contrast"] .track-tooltip {
-    background: var(--surface-primary);
-    border: 2px solid var(--border-primary);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.65);
+}
+
+[data-theme="hc"] .track-tooltip-section,
+[data-theme="high-contrast"] .track-tooltip-section {
+    background: #1a1a1a;
+    border-color: #fff;
 }
 
 [data-theme="high-contrast"] .track-tooltip-close {
@@ -195,12 +225,6 @@
 [data-theme="high-contrast"] .track-tooltip-close:hover {
     background: var(--interactive-primary);
     color: var(--text-inverse);
-}
-
-[data-theme="high-contrast"] .track-property {
-    background: var(--surface-secondary);
-    color: var(--text-primary);
-    border: 2px solid var(--border-primary);
 }
 
 /* Mobile adjustments */
@@ -221,14 +245,5 @@
     
     .track-tooltip-section {
         padding: 16px;
-    }
-    
-    .track-properties {
-        gap: 6px;
-    }
-    
-    .track-property {
-        padding: 3px 8px;
-        font-size: 11px;
     }
 }

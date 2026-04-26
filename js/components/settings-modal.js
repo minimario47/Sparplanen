@@ -872,31 +872,20 @@
     }
 
     function setupToggleableDelayControls() {
+        // These toggles are already wired by FormComponents.initToggles() (click + keyboard
+        // call toggleSwitch). A second custom click handler here was flipping state again,
+        // cancelling the first toggle so the switch never moved. Only react to the resulting
+        // `change` event to dim sliders / is-disabled, not to toggle twice.
         const toggles = [
             document.getElementById('delay-turnaround-time-enabled'),
             document.getElementById('delay-conflict-tolerance-enabled')
         ].filter(Boolean);
 
         toggles.forEach((toggle) => {
-            if (toggle.dataset.bound === 'true') return;
-            toggle.dataset.bound = 'true';
-            const flip = () => {
-                const checked = !toggle.classList.contains('checked');
-                toggle.classList.toggle('checked', checked);
-                toggle.setAttribute('aria-checked', String(checked));
+            if (toggle.dataset.delaySliderBound === 'true') return;
+            toggle.dataset.delaySliderBound = 'true';
+            toggle.addEventListener('change', () => {
                 updateDelaySliderEnabledState();
-            };
-            toggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                flip();
-            });
-            toggle.addEventListener('keydown', (e) => {
-                if (e.key === ' ' || e.key === 'Enter') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    flip();
-                }
             });
         });
 

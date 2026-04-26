@@ -32,23 +32,22 @@ class TrackTooltip {
                     <h4>Information</h4>
                     <div class="track-info-grid">
                         <div class="track-info-item">
-                            <span class="track-info-label">Längd:</span>
-                            <span class="track-info-value track-length"></span>
-                        </div>
-                        <div class="track-info-item">
-                            <span class="track-info-label">Signalområde:</span>
+                            <span class="track-info-label">Signal:</span>
                             <span class="track-info-value track-signal-length"></span>
                         </div>
+                        <div class="track-info-item track-ledning-row track-segment-first">
+                            <span class="track-info-label">Första spårledning:</span>
+                            <span class="track-info-value track-first-led"></span>
+                        </div>
+                        <div class="track-info-item track-ledning-row track-segment-second">
+                            <span class="track-info-label">Andra spårledning:</span>
+                            <span class="track-info-value track-second-led"></span>
+                        </div>
                         <div class="track-info-item">
-                            <span class="track-info-label">Delspår:</span>
-                            <span class="track-info-value track-subtracks"></span>
+                            <span class="track-info-label">Plattform:</span>
+                            <span class="track-info-value track-platform-length"></span>
                         </div>
                     </div>
-                </div>
-                <div class="track-tooltip-section">
-                    <h4>Användning</h4>
-                    <div class="track-properties"></div>
-                    <p class="track-description"></p>
                 </div>
             </div>
         `;
@@ -181,45 +180,43 @@ class TrackTooltip {
         const titleElement = this.tooltip.querySelector('.track-number');
         titleElement.textContent = trackData.publicTrackNumber;
 
-        // Update lengths
-        const lengthElement = this.tooltip.querySelector('.track-length');
-        lengthElement.textContent = `${trackData.totalLengthMeters}m`;
-
-        const signalLengthElement = this.tooltip.querySelector('.track-signal-length');
-        signalLengthElement.textContent = `${trackData.signalVisibleLengthMeters}m`;
-
-        // Update subtracks
-        const subtracksElement = this.tooltip.querySelector('.track-subtracks');
-        subtracksElement.textContent = trackData.subTrackCount;
-
-        // Update properties
-        const propertiesElement = this.tooltip.querySelector('.track-properties');
-        propertiesElement.innerHTML = this.formatProperties(trackData.properties);
-
-        // Update description
-        const descriptionElement = this.tooltip.querySelector('.track-description');
-        descriptionElement.textContent = trackData.description;
-    }
-
-    formatProperties(properties) {
-        if (!properties || !Array.isArray(properties)) return '';
-
-        const propertyLabels = {
-            'regional_platform': 'Regionalplattform',
-            'high_speed_platform': 'Höghastighetsplattform',
-            'long_distance': 'Långdistanstrafik',
-            'intercity_platform': 'InterCity-plattform',
-            'commuter_platform': 'Pendeltågsplattform',
-            'cargo': 'Godstrafik',
-            'maintenance': 'Underhåll',
-            'maintenance_only': 'Endast underhåll',
-            'limited': 'Begränsad användning'
+        const signalEl = this.tooltip.querySelector('.track-signal-length');
+        const firstLedEl = this.tooltip.querySelector('.track-first-led');
+        const secondLedEl = this.tooltip.querySelector('.track-second-led');
+        const platformEl = this.tooltip.querySelector('.track-platform-length');
+        if (signalEl) {
+            const line = typeof formatTrackSignalLengthDisplay === 'function'
+                ? formatTrackSignalLengthDisplay(trackData)
+                : `${trackData.totalLengthMeters}m`;
+            signalEl.textContent = line;
+        }
+        const segs = Array.isArray(trackData.trackSegmentMeters) ? trackData.trackSegmentMeters : null;
+        const hasSegments = segs && segs.length >= 2;
+        const setRow = (el, value, show) => {
+            if (!el) return;
+            const row = el.closest('.track-info-item');
+            if (!row) return;
+            if (show) {
+                el.textContent = value;
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
         };
-
-        return properties.map(prop => {
-            const label = propertyLabels[prop] || prop;
-            return `<span class="track-property">${label}</span>`;
-        }).join('');
+        // [0] = andra spårledning, [1] = första (samma som vänster/höger i "A+B"-texten)
+        if (firstLedEl && secondLedEl) {
+            setRow(firstLedEl, hasSegments ? `${segs[1]}m` : '', hasSegments);
+            setRow(secondLedEl, hasSegments ? `${segs[0]}m` : '', hasSegments);
+        }
+        if (platformEl) {
+            if (trackData.platformLengthMeters != null) {
+                platformEl.textContent = `${trackData.platformLengthMeters}m`;
+                platformEl.closest('.track-info-item').style.display = '';
+            } else {
+                const row = platformEl.closest('.track-info-item');
+                if (row) row.style.display = 'none';
+            }
+        }
     }
 
     positionTooltip(targetElement) {

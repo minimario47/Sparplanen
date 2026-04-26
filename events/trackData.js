@@ -49,12 +49,24 @@
                     <span class="track-info-value">${trackDef.publicTrackNumber}</span>
                 </div>
                 <div class="track-info-item">
-                    <span class="track-info-label">Total längd:</span>
-                    <span class="track-info-value">${trackDef.totalLengthMeters}m</span>
+                    <span class="track-info-label">Signal:</span>
+                    <span class="track-info-value">${typeof formatTrackSignalLengthDisplay === 'function' ? formatTrackSignalLengthDisplay(trackDef) : `${trackDef.totalLengthMeters}m`}</span>
+                </div>
+                <div class="track-info-item track-ledning-row">
+                    <span class="track-info-label">Första spårledning:</span>
+                    <span class="track-info-value">${Array.isArray(trackDef.trackSegmentMeters) && trackDef.trackSegmentMeters.length >= 2 ? `${trackDef.trackSegmentMeters[1]}m` : '—'}</span>
+                </div>
+                <div class="track-info-item track-ledning-row">
+                    <span class="track-info-label">Andra spårledning:</span>
+                    <span class="track-info-value">${Array.isArray(trackDef.trackSegmentMeters) && trackDef.trackSegmentMeters.length >= 2 ? `${trackDef.trackSegmentMeters[0]}m` : '—'}</span>
                 </div>
                 <div class="track-info-item">
-                    <span class="track-info-label">Signalsikt:</span>
-                    <span class="track-info-value">${trackDef.signalVisibleLengthMeters}m</span>
+                    <span class="track-info-label">Plattform:</span>
+                    <span class="track-info-value">${trackDef.platformLengthMeters != null ? `${trackDef.platformLengthMeters}m` : '—'}</span>
+                </div>
+                <div class="track-info-item">
+                    <span class="track-info-label">Tåglängdsgräns (plattform/spår):</span>
+                    <span class="track-info-value">${typeof getTrackStoppingLimitMeters === 'function' ? getTrackStoppingLimitMeters(trackDef) : trackDef.signalVisibleLengthMeters}m</span>
                 </div>
                 <div class="track-info-item">
                     <span class="track-info-label">Antal delspår:</span>
@@ -127,7 +139,8 @@
             return sum + calculateTrainSetLength(train.trainSet);
         }, 0);
 
-        const utilization = Math.round((totalTrainLength / trackDef.signalVisibleLengthMeters) * 100);
+        const cap = typeof getTrackStoppingLimitMeters === 'function' ? getTrackStoppingLimitMeters(trackDef) : trackDef.signalVisibleLengthMeters;
+        const utilization = Math.round((totalTrainLength / cap) * 100);
         const utilizationClass = utilization > 100 ? 'error' : utilization > 80 ? 'warning' : 'success';
 
         return `
@@ -307,8 +320,22 @@
                     <span class="track-info-value">${trackDef ? trackDef.description : 'Okänt'}</span>
                 </div>
                 <div class="track-info-item">
-                    <span class="track-info-label">Spårlängd:</span>
-                    <span class="track-info-value">${trackDef ? trackDef.signalVisibleLengthMeters + 'm' : 'Okänt'}</span>
+                    <span class="track-info-label">Signal:</span>
+                    <span class="track-info-value">${trackDef
+                        ? (typeof formatTrackSignalLengthDisplay === 'function' ? formatTrackSignalLengthDisplay(trackDef) : trackDef.totalLengthMeters + 'm')
+                        : 'Okänt'}</span>
+                </div>
+                <div class="track-info-item track-ledning-row">
+                    <span class="track-info-label">Första spårledning:</span>
+                    <span class="track-info-value">${trackDef && Array.isArray(trackDef.trackSegmentMeters) && trackDef.trackSegmentMeters.length >= 2 ? `${trackDef.trackSegmentMeters[1]}m` : (trackDef ? '—' : 'Okänt')}</span>
+                </div>
+                <div class="track-info-item track-ledning-row">
+                    <span class="track-info-label">Andra spårledning:</span>
+                    <span class="track-info-value">${trackDef && Array.isArray(trackDef.trackSegmentMeters) && trackDef.trackSegmentMeters.length >= 2 ? `${trackDef.trackSegmentMeters[0]}m` : (trackDef ? '—' : 'Okänt')}</span>
+                </div>
+                <div class="track-info-item">
+                    <span class="track-info-label">Plattform:</span>
+                    <span class="track-info-value">${trackDef && trackDef.platformLengthMeters != null ? `${trackDef.platformLengthMeters}m` : (trackDef ? '—' : 'Okänt')}</span>
                 </div>
             </div>
 

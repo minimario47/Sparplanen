@@ -127,36 +127,6 @@
   border-bottom-right-radius: var(--radius-md);
 }
 
-/* Connected Train Icon */
-.train-bar .connection-icon {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  font-size: 12px;
-}
-.train-bar .connection-icon::before {
-  content: '🔗';
-}
-.train-bar.type-regional .connection-icon { color: var(--train-regional); }
-.train-bar.type-long-distance .connection-icon { color: var(--train-long-distance); }
-.train-bar.type-freight .connection-icon { color: var(--train-freight); }
-
-/* Dark mode connection icon colors */
-[data-theme="dark"] .train-bar.type-regional .connection-icon { color: var(--train-regional-dark); }
-[data-theme="dark"] .train-bar.type-long-distance .connection-icon { color: var(--train-long-distance-dark); }
-[data-theme="dark"] .train-bar.type-freight .connection-icon { color: var(--train-freight-dark); }
-
-/* High-contrast mode connection icon colors */
-[data-theme="high-contrast"] .train-bar.type-regional .connection-icon { color: var(--train-regional-hc); }
-[data-theme="high-contrast"] .train-bar.type-long-distance .connection-icon { color: var(--train-long-distance-hc); }
-[data-theme="high-contrast"] .train-bar.type-freight .connection-icon { color: var(--train-freight-hc); }
-
 /* Train Numbers Layout */
 .train-numbers {
   height: 100%;

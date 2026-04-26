@@ -52,13 +52,13 @@ window.TimelineRenderer = {
             const trackInfo = cachedTracks.find(t => t.id === layout.id);
             if (!trackInfo) return;
 
+            const lenText = trackInfo.lengthDisplay != null ? trackInfo.lengthDisplay : `${trackInfo.length}m`;
             trackDiv.innerHTML = `
                 <div class="track-content">
                     <div class="track-name">${trackInfo.name}</div>
                     <div class="track-info">
                         <span class="track-length">
-                            <span class="track-length-icon"></span>
-                            ${trackInfo.length}m
+                            <span class="track-length-text">${lenText}</span>
                         </span>
                     </div>
                 </div>

@@ -66,14 +66,21 @@
             return;
         }
 
+        const lenLine = (t) => (typeof formatTrackSignalLengthDisplay === 'function'
+            ? formatTrackSignalLengthDisplay(t)
+            : (typeof formatTrackLengthDisplay === 'function'
+                ? formatTrackLengthDisplay(t)
+                : `${t.totalLengthMeters}m`));
+        const lenShort = (t) => (t.totalLengthMeters + 'm');
+
         trackDefinitions.forEach(trackDef => {
             const label = document.createElement('div');
             label.className = 'track-label';
             label.innerHTML = `
                 <div class="track-name">${lang.track} ${trackDef.publicTrackNumber}</div>
-                <div class="track-length">${trackDef.signalVisibleLengthMeters}m</div>
+                <div class="track-length">${lenLine(trackDef)}</div>
             `;
-            label.title = `${trackDef.description}\nLängd: ${trackDef.totalLengthMeters}m\nSignalsikt: ${trackDef.signalVisibleLengthMeters}m`;
+            label.title = `${trackDef.description}\n${lenLine(trackDef)}`;
             label.dataset.trackId = trackDef.publicTrackNumber;
             label.style.cursor = 'pointer';
             trackLabelsContainer.appendChild(label);
@@ -86,7 +93,7 @@
             for (let j = 0; j < trackDef.subTrackCount; j++) {
                 const option = document.createElement('option');
                 option.value = `${trackDef.publicTrackNumber}-${j}`;
-                option.textContent = `${lang.track} ${trackDef.publicTrackNumber} (Del ${j + 1}) - ${trackDef.signalVisibleLengthMeters}m`;
+                option.textContent = `${lang.track} ${trackDef.publicTrackNumber} (Del ${j + 1}) - ${lenShort(trackDef)}`;
                 trackSelect.appendChild(option);
             }
         });

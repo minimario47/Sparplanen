@@ -5,6 +5,9 @@
 
 class OffsetVisualizer {
     constructor(settings = {}) {
+        // Keep delay zone toggles and minute values. Previously only a subset was copied, so
+        // turnaroundEnabled / conflictToleranceEnabled were undefined; `undefined !== false`
+        // stayed true and vändtid + konfliktzoner always rendered at full width.
         this.settings = {
             colorThresholds: settings.colorThresholds || { minor: 3, moderate: 6, significant: 11, severe: 21 },
             colors: settings.colors || {
@@ -15,7 +18,17 @@ class OffsetVisualizer {
                 early: '#22C55E'
             },
             showWarnings: settings.showWarnings !== false,
-            visualizationStyle: settings.visualizationStyle || 'color-coded'
+            // color-coded / transparent: tidig-segment = barfärg + gröna accenter, utan siffror
+            // dashed: tydligare; kan visa minuter i overlay (samma tredje stil i inställningar)
+            visualizationStyle: settings.visualizationStyle || 'color-coded',
+            turnaroundTime: Number(settings.turnaroundTime) || 10,
+            conflictTolerance: Number(settings.conflictTolerance) || 5,
+            turnaroundEnabled: 'turnaroundEnabled' in settings
+                ? Boolean(settings.turnaroundEnabled)
+                : true,
+            conflictToleranceEnabled: 'conflictToleranceEnabled' in settings
+                ? Boolean(settings.conflictToleranceEnabled)
+                : true
         };
         
         logger.info('Visualizer', 'OffsetVisualizer initialized', this.settings);
@@ -136,10 +149,12 @@ class OffsetVisualizer {
         let toleranceMinutes = 0;
         
         if (delayMinutes > 0) {
-            const turnaroundEnabled = this.settings?.turnaroundEnabled !== false;
-            const toleranceEnabled = this.settings?.conflictToleranceEnabled !== false;
-            turnaroundMinutes = turnaroundEnabled ? (this.settings?.turnaroundTime || 10) : 0;
-            toleranceMinutes = toleranceEnabled ? (this.settings?.conflictTolerance || 5) : 0;
+            turnaroundMinutes = this.settings.turnaroundEnabled
+                ? (Number(this.settings.turnaroundTime) || 10)
+                : 0;
+            toleranceMinutes = this.settings.conflictToleranceEnabled
+                ? (Number(this.settings.conflictTolerance) || 5)
+                : 0;
         }
         
         const turnaroundPixels = turnaroundMinutes * pixelsPerMinute;
@@ -346,28 +361,61 @@ class OffsetVisualizer {
             clipPixels = Math.min(clipPixels, Math.max(0, delayPixels - overlapPixels));
         }
 
-        if (clipPixels <= 2) {
+        /* Too narrow to read as a bar segment (e.g. overlap on same track) — use pill instead of a green sliver */
+        const minEarlyWidthPx = 12;
+        if (clipPixels <= minEarlyWidthPx) {
             const pill = document.createElement('div');
             pill.className = 'early-pill-floating';
-            pill.textContent = `↶ ${delayMinutes} min för tidig`;
+            const style = this.settings.visualizationStyle || 'color-coded';
+            if (style === 'dashed') {
+                pill.classList.add('early-pill-floating--with-text');
+                pill.textContent = `↶ ${delayMinutes} min`;
+            }
+            const partialNote = clipPixels < delayPixels
+                ? ' (kortare p.g.a. annat tåg på samma spår)'
+                : '';
+            pill.setAttribute('role', 'img');
+            pill.setAttribute('aria-label', `För tidig med ${delayMinutes} min, planerad ankomst ${train.arrTime.toTimeString().slice(0, 5)}${partialNote}`);
+            pill.title = `För tidig med ${delayMinutes} min. Planerad ankomst ${train.arrTime.toTimeString().slice(0, 5)}${partialNote}`;
             trainBar.appendChild(pill);
             return;
         }
 
+        const timeStr = train.arrTime.toTimeString().slice(0, 5);
+        const isPartial = clipPixels < delayPixels;
+        const titleParts = [
+            `För tidig med ${delayMinutes} min (ej försening)`,
+            `Planerad ankomst ${timeStr}`
+        ];
+        if (isPartial) {
+            titleParts.push('Kortare segment — annat tåg på samma spår');
+        }
+
         const earlyOverlay = document.createElement('div');
         earlyOverlay.className = 'delay-overlay-offset early-extension';
-        if (clipPixels < delayPixels) {
+        if (isPartial) {
             earlyOverlay.classList.add('early-extension--partial');
         }
         earlyOverlay.style.left = `-${clipPixels}px`;
         earlyOverlay.style.width = `${clipPixels}px`;
         earlyOverlay.style.setProperty('--early-bar-color', barColor);
         earlyOverlay.style.setProperty('--early-border-color', borderColor);
-        earlyOverlay.title = `Planerad ankomst ${train.arrTime.toTimeString().slice(0, 5)}`;
+        earlyOverlay.setAttribute('role', 'img');
+        earlyOverlay.setAttribute('aria-label', titleParts.join('. '));
+        earlyOverlay.title = titleParts.join(' · ');
+
+        const visStyle = this.settings.visualizationStyle || 'color-coded';
+        if (visStyle === 'dashed') {
+            const labelEl = document.createElement('span');
+            labelEl.className = 'early-extension__label early-extension__label--visible';
+            labelEl.textContent = `↶${delayMinutes} min`;
+            labelEl.setAttribute('aria-hidden', 'true');
+            earlyOverlay.appendChild(labelEl);
+        }
 
         const marker = document.createElement('div');
         marker.className = 'early-extension__planned-marker';
-        marker.title = `Planerad ankomst ${train.arrTime.toTimeString().slice(0, 5)}`;
+        marker.title = `Planerad ankomst ${timeStr}`;
         earlyOverlay.appendChild(marker);
 
         earlyOverlay.addEventListener('mouseenter', () => trainBar.classList.add('is-hovered'));

@@ -43,7 +43,8 @@
 
 .track-info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   gap: var(--spacing-2);
   font-size: var(--text-xs);
   color: var(--text-secondary);
@@ -89,14 +90,16 @@
 
 .track-length {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
   color: var(--text-tertiary);
+  min-width: 0;
 }
 
-.track-length-icon::before {
-  content: "↔";
-  font-size: var(--text-sm);
+.track-length .track-length-text {
+  white-space: normal;
+  line-height: 1.25;
+  word-break: break-word;
 }
 
 .track-notes-indicator {

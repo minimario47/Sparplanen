@@ -98,7 +98,6 @@ window.TrainRenderer = {
 
         if (train.status === 'conflict') trainDiv.classList.add('has-conflict');
         if (train.status === 'delayed') trainDiv.classList.add('is-delayed');
-        if (train.connectedTo) trainDiv.classList.add('has-connection');
 
         const isVeryNarrow = width < 60;
         const isNarrow = width < 100;
@@ -138,10 +137,6 @@ window.TrainRenderer = {
             ? '<div class="status-icon" title="Konflikt! ⚠️"></div>' 
             : '';
         
-        const connectionIconHTML = train.connectedTo 
-            ? '<div class="connection-icon" title="Kopplad tåg 🔗"></div>' 
-            : '';
-
         const defaultHoverNumber = train.arrivalTrainNumber || train.departureTrainNumber || '';
         const tooltipHTML = showHoverTooltip ? `
             <div class="train-tooltip">
@@ -156,7 +151,6 @@ window.TrainRenderer = {
         trainDiv.innerHTML = `
             <div class="train-bar-visual">
                 ${statusIconHTML}
-                ${connectionIconHTML}
                 <div class="train-numbers ${displaySingleNumber ? singleAlignClass : ''}" style="font-size: ${fontSize};">
                     ${numbersHTML}
                 </div>

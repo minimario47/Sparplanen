@@ -96,16 +96,44 @@ class IconVisualizer {
             return;
         }
         
-        // Determine if delay affects arrival, departure, or both
-        const hasArrival = train.scheduledArrivalTime && train.arrivalTrainNumber;
-        const hasDeparture = train.scheduledDepartureTime && train.departureTrainNumber;
-        
-        // Check if we have delay info for arrival or departure
-        const arrivalDelayed = hasArrival && train.arrivalTrainNumber === delayInfo.trainNumber;
-        const departureDelayed = hasDeparture && train.departureTrainNumber === delayInfo.trainNumber;
-        
-        // Add arrival badge if applicable
-        if (arrivalDelayed || (hasArrival && !hasDeparture)) {
+        // Leg presence must match schedule-renderer: cached trains use arrTime/depTime, not
+        // scheduledArrivalTime / scheduledDepartureTime (those are only on raw service records).
+        const hasArrival = !!String(train.arrivalTrainNumber || '').trim();
+        const hasDeparture = !!String(train.departureTrainNumber || '').trim();
+
+        // Normalize so API string/number train ids match schedule train numbers
+        const matchesDelay = (n) => {
+            if (delayInfo.trainNumber == null || n == null) return false;
+            const a = String(n).trim();
+            const b = String(delayInfo.trainNumber).trim();
+            return a.length > 0 && b.length > 0 && a === b;
+        };
+
+        const arrivalDelayed = hasArrival && matchesDelay(train.arrivalTrainNumber);
+        const departureDelayed = hasDeparture && matchesDelay(train.departureTrainNumber);
+
+        // När samma tågnummer/anslag gäller både ankomst och avgång: fortfarande bara en bolliknande etikett per tjänst (ingen dubbel vänster+höger).
+        const showDepartureFallback =
+            hasDeparture &&
+            delayMinutes > 0 &&
+            Math.abs(delayMinutes) > 10 &&
+            !departureDelayed &&
+            !arrivalDelayed;
+
+        // Högst en sida: ingen identisk etikett både vänster och höger på samma tjänst.
+        let useArrival = false;
+        let useDeparture = false;
+        if (arrivalDelayed && departureDelayed) {
+            useArrival = true;
+        } else if (arrivalDelayed) {
+            useArrival = true;
+        } else if (departureDelayed) {
+            useDeparture = true;
+        } else if (showDepartureFallback) {
+            useDeparture = true;
+        }
+
+        if (useArrival) {
             const badge = this.createBadge(delayMinutes, severity, 'arrival');
             const position = this.calculateBadgePosition(trainBar, 'left');
             Object.assign(badge.style, {
@@ -113,15 +141,8 @@ class IconVisualizer {
                 left: `${position.left}px`
             });
             trainBar.appendChild(badge);
-            
-            logger.info('Visualizer', `Added arrival badge to train ${train.id}`, {
-                delay: delayMinutes,
-                severity
-            });
-        }
-        
-        // Add departure badge if delay extends to departure
-        if (departureDelayed || (delayMinutes > 0 && Math.abs(delayMinutes) > 10)) {
+            logger.info('Visualizer', `Added arrival badge to train ${train.id}`, { delay: delayMinutes, severity });
+        } else if (useDeparture) {
             const badge = this.createBadge(delayMinutes, severity, 'departure');
             const position = this.calculateBadgePosition(trainBar, 'right');
             Object.assign(badge.style, {
@@ -129,11 +150,7 @@ class IconVisualizer {
                 right: `${position.right}px`
             });
             trainBar.appendChild(badge);
-            
-            logger.info('Visualizer', `Added departure badge to train ${train.id}`, {
-                delay: delayMinutes,
-                severity
-            });
+            logger.info('Visualizer', `Added departure badge to train ${train.id}`, { delay: delayMinutes, severity });
         }
         
         // Add conflict warning icon if needed
