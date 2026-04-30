@@ -189,6 +189,53 @@ class DelayIntegration {
     }
     
     /**
+     * Detect track changes from the API and (optionally) auto-switch trains
+     * to their actual track. Returns true if anything was mutated and a
+     * re-render is required.
+     */
+    detectTrackChanges() {
+        if (!Array.isArray(window.cachedTrains) || !window.TrackChangesStore) return false;
+
+        const userSettings = window.SettingsModal?.getCurrentSettings?.() || {};
+        const autoSwitch = userSettings.trackChangesAutoSwitch !== false;
+
+        const validTracks = new Set();
+        if (Array.isArray(window.trackDefinitions)) {
+            window.trackDefinitions.forEach((t) => {
+                const n = parseInt(t.publicTrackNumber, 10);
+                if (Number.isFinite(n)) validTracks.add(n);
+            });
+        }
+
+        let mutated = false;
+
+        window.cachedTrains.forEach((train) => {
+            if (!train) return;
+            let delayInfo = null;
+            if (train.arrivalTrainNumber) {
+                delayInfo = this.dataManager.getDelayInfo(train.arrivalTrainNumber);
+            }
+            if (!delayInfo && train.departureTrainNumber) {
+                delayInfo = this.dataManager.getDelayInfo(train.departureTrainNumber);
+            }
+            if (!delayInfo || delayInfo.trackAtLocation == null) return;
+
+            const apiTrack = parseInt(delayInfo.trackAtLocation, 10);
+            const planned = parseInt(train.trackId, 10);
+            if (!Number.isFinite(apiTrack) || apiTrack === planned) return;
+            if (validTracks.size > 0 && !validTracks.has(apiTrack)) return;
+
+            window.TrackChangesStore.recordChange(train.id, planned, apiTrack);
+            if (autoSwitch) {
+                train.trackId = apiTrack;
+                mutated = true;
+            }
+        });
+
+        return mutated;
+    }
+
+    /**
      * Update all train visualizations
      */
     updateAllVisualizations() {
@@ -196,7 +243,23 @@ class DelayIntegration {
             logger.warn('Integration', 'Cannot update visualizations - not initialized');
             return;
         }
-        
+
+        if (!this._isApplyingTrackChange) {
+            const needsRerender = this.detectTrackChanges();
+            if (needsRerender && window.scheduleRenderer?.refresh) {
+                this._isApplyingTrackChange = true;
+                try {
+                    window.scheduleRenderer.refresh();
+                } finally {
+                    this._isApplyingTrackChange = false;
+                }
+                // The refresh schedules its own delayed updateAllVisualizations call
+                // (see schedule-renderer.js renderFullSchedule), so bail here to
+                // avoid running the visualization pass twice on stale DOM nodes.
+                return;
+            }
+        }
+
         const trainBars = document.querySelectorAll('.train-bar');
         let visualizedCount = 0;
         let conflictCount = 0;

@@ -1,0 +1,282 @@
+/* Track Changes — overlay visuals + settings mini-viz
+   Two layers: arrow (.track-change-arrow) and ghost (.track-change-ghost)
+   live inside #timeline-canvas under #track-changes-layer.
+*/
+
+/* ───────────── Overlay layer ───────────── */
+
+#track-changes-layer.track-changes-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 26;
+}
+
+.track-change-arrow,
+.track-change-ghost {
+    position: absolute;
+    pointer-events: none;
+    animation-name: track-change-fade;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    will-change: opacity;
+}
+
+/* Arrow */
+.track-change-arrow {
+    color: var(--accent-warning, #f59e0b);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.18));
+}
+
+.track-change-arrow svg {
+    overflow: visible;
+}
+
+.track-change-arrow__shaft {
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-dasharray: 4 3;
+    animation: track-change-march 600ms linear infinite;
+}
+
+.track-change-arrow__head {
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+.track-change-arrow__dot {
+    fill: currentColor;
+    opacity: 0.7;
+}
+
+.track-change-arrow__pill {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-warning, #f59e0b);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 5px;
+    border-radius: 4px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Ghost trail */
+.track-change-ghost {
+    border: 1.5px dashed var(--accent-warning, #f59e0b);
+    border-radius: 4px;
+    background: repeating-linear-gradient(
+        135deg,
+        rgba(245, 158, 11, 0.08) 0 6px,
+        transparent 6px 12px
+    );
+    opacity: 0.7;
+    overflow: hidden;
+}
+
+.track-change-ghost__stripe {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(245, 158, 11, 0.25) 50%,
+        transparent 100%
+    );
+    animation: track-change-shimmer 1.6s ease-in-out infinite;
+}
+
+.track-change-ghost__label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--accent-warning, #f59e0b);
+    background: rgba(255, 255, 255, 0.85);
+    padding: 1px 5px;
+    border-radius: 3px;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+[data-theme="dark"] .track-change-ghost__label {
+    background: rgba(20, 24, 32, 0.85);
+    color: #fbbf24;
+}
+
+/* Bar marker — subtle ring on the moved train bar */
+.train-bar[data-has-track-change]::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 6px;
+    border: 1.5px solid var(--accent-warning, #f59e0b);
+    pointer-events: none;
+    opacity: 0.45;
+    animation: track-change-pulse 1.4s ease-in-out infinite;
+}
+
+/* ───────────── Animations ───────────── */
+
+@keyframes track-change-fade {
+    0% { opacity: 1; }
+    80% { opacity: 0.85; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes track-change-march {
+    to { stroke-dashoffset: -14; }
+}
+
+@keyframes track-change-shimmer {
+    0%, 100% { transform: translateX(-30%); opacity: 0.4; }
+    50% { transform: translateX(30%); opacity: 0.9; }
+}
+
+@keyframes track-change-pulse {
+    0%, 100% { opacity: 0.25; }
+    50% { opacity: 0.7; }
+}
+
+/* ───────────── Settings mini-viz ───────────── */
+
+.setting-viz.viz-track-change {
+    height: 92px;
+    padding: 12px 14px;
+}
+
+.viz-tc-rails {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.viz-tc-rail {
+    height: 22px;
+    border-radius: 4px;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-secondary);
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    position: relative;
+}
+
+.viz-tc-rail-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+}
+
+.viz-tc-train {
+    position: absolute;
+    width: 56px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1.5px solid var(--primary-400, #6b7d91);
+    background: var(--primary-100, #e8eef5);
+}
+
+.viz-tc-train--old {
+    left: 56px;
+    top: 15px;
+    opacity: 0.55;
+    border-style: dashed;
+    background: repeating-linear-gradient(
+        135deg,
+        rgba(245, 158, 11, 0.12) 0 6px,
+        transparent 6px 12px
+    );
+}
+
+.viz-tc-train--new {
+    left: 56px;
+    bottom: 15px;
+    background: var(--primary-200, #d6e1eb);
+    border-color: var(--primary-500, #495e6d);
+}
+
+.viz-tc-arrow {
+    position: absolute;
+    left: 70px;
+    top: 18px;
+    width: 28px;
+    height: 56px;
+    color: var(--accent-warning, #f59e0b);
+    opacity: 1;
+}
+
+.setting-viz.viz-track-change[data-active="false"] .viz-tc-arrow,
+.setting-viz.viz-track-change[data-active="false"] .viz-tc-train--new {
+    opacity: 0.25;
+    filter: grayscale(0.6);
+}
+
+.setting-viz.viz-track-change.is-replaying .viz-tc-arrow {
+    animation: viz-tc-flash 1.2s ease-out;
+}
+
+.setting-viz.viz-track-change.is-replaying .viz-tc-train--new {
+    animation: viz-tc-arrive 1.2s ease-out;
+}
+
+@keyframes viz-tc-flash {
+    0% { transform: translateY(8px); opacity: 0; }
+    20% { transform: translateY(0); opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes viz-tc-arrive {
+    0% { transform: translateY(-18px); opacity: 0; }
+    40% { opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Duration mini-viz */
+.setting-viz.viz-track-change-duration {
+    padding: 14px;
+}
+
+.viz-tc-bar {
+    position: relative;
+    height: 12px;
+    border-radius: 6px;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-secondary);
+    overflow: hidden;
+}
+
+.viz-tc-bar-fill {
+    position: absolute;
+    inset: 0;
+    width: 20%;
+    background: linear-gradient(
+        90deg,
+        var(--accent-warning, #f59e0b),
+        rgba(245, 158, 11, 0.25)
+    );
+    transition: width 0.25s ease;
+}
+
+.viz-tc-bar-label {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+}

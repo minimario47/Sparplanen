@@ -116,7 +116,12 @@
         conflictTolerance: 5,
         turnaroundEnabled: true,
         conflictToleranceEnabled: true,
-        showWarnings: true
+        showWarnings: true,
+        // Track changes (Spårändringar)
+        trackChangesAutoSwitch: true,
+        trackChangesShowArrow: true,
+        trackChangesShowGhost: true,
+        trackChangesDurationMin: 2
     };
 
     let currentSettings = { ...defaultSettings };
@@ -269,6 +274,20 @@
 
         if (elements.saveBtn) {
             elements.saveBtn.addEventListener('click', saveSettings);
+        }
+
+        const clearHiddenBtn = document.getElementById('track-changes-clear-hidden');
+        if (clearHiddenBtn) {
+            clearHiddenBtn.addEventListener('click', () => {
+                const cleared = window.TrackChangesStore?.clearHidden?.() ?? 0;
+                if (window.showNotification) {
+                    if (cleared > 0) {
+                        window.showNotification(`${cleared} dolda spårändring${cleared === 1 ? '' : 'ar'} återställda`, 'success');
+                    } else {
+                        window.showNotification('Inga dolda spårändringar', 'info');
+                    }
+                }
+            });
         }
 
         // Settings button in header
@@ -541,7 +560,12 @@
             conflictTolerance: parseInt(doc.getElementById('delay-conflict-tolerance')?.value ?? defaultSettings.conflictTolerance, 10),
             turnaroundEnabled: doc.getElementById('delay-turnaround-time-enabled')?.classList.contains('checked') ?? defaultSettings.turnaroundEnabled,
             conflictToleranceEnabled: doc.getElementById('delay-conflict-tolerance-enabled')?.classList.contains('checked') ?? defaultSettings.conflictToleranceEnabled,
-            showWarnings: doc.getElementById('delay-show-warnings')?.classList.contains('checked') ?? defaultSettings.showWarnings
+            showWarnings: doc.getElementById('delay-show-warnings')?.classList.contains('checked') ?? defaultSettings.showWarnings,
+            // Track changes
+            trackChangesAutoSwitch: doc.getElementById('track-changes-auto-switch')?.classList.contains('checked') ?? defaultSettings.trackChangesAutoSwitch,
+            trackChangesShowArrow: doc.getElementById('track-changes-show-arrow')?.classList.contains('checked') ?? defaultSettings.trackChangesShowArrow,
+            trackChangesShowGhost: doc.getElementById('track-changes-show-ghost')?.classList.contains('checked') ?? defaultSettings.trackChangesShowGhost,
+            trackChangesDurationMin: parseInt(doc.getElementById('track-changes-duration')?.value ?? defaultSettings.trackChangesDurationMin, 10)
         };
     }
 
@@ -649,6 +673,28 @@
             warningsToggle.setAttribute('aria-checked', String(!!currentSettings.showWarnings));
         }
         updateDelaySliderEnabledState();
+
+        // Track-change toggles
+        const tcAuto = document.getElementById('track-changes-auto-switch');
+        if (tcAuto) {
+            tcAuto.classList.toggle('checked', !!currentSettings.trackChangesAutoSwitch);
+            tcAuto.setAttribute('aria-checked', String(!!currentSettings.trackChangesAutoSwitch));
+        }
+        const tcArrow = document.getElementById('track-changes-show-arrow');
+        if (tcArrow) {
+            tcArrow.classList.toggle('checked', !!currentSettings.trackChangesShowArrow);
+            tcArrow.setAttribute('aria-checked', String(!!currentSettings.trackChangesShowArrow));
+        }
+        const tcGhost = document.getElementById('track-changes-show-ghost');
+        if (tcGhost) {
+            tcGhost.classList.toggle('checked', !!currentSettings.trackChangesShowGhost);
+            tcGhost.setAttribute('aria-checked', String(!!currentSettings.trackChangesShowGhost));
+        }
+        const tcDuration = document.getElementById('track-changes-duration');
+        if (tcDuration) {
+            tcDuration.value = currentSettings.trackChangesDurationMin;
+            tcDuration.dispatchEvent(new Event('input'));
+        }
     }
 
     /**
@@ -847,6 +893,35 @@
                 if (viz) viz.dataset.style = input.value;
             });
         });
+
+        // Viz 7 — Track change duration
+        const tcDuration = document.getElementById('track-changes-duration');
+        if (tcDuration) {
+            const update = () => {
+                const val = parseInt(tcDuration.value, 10);
+                const fill = document.getElementById('viz-tc-bar-fill');
+                const label = document.getElementById('viz-tc-bar-label');
+                if (fill) fill.style.width = ((val - 1) / 9 * 100) + '%';
+                if (label) label.textContent = val + ' min';
+            };
+            tcDuration.addEventListener('input', update);
+            update();
+        }
+
+        // Viz 8 — Track change auto switch animation re-trigger on toggle
+        const tcAuto = document.getElementById('track-changes-auto-switch');
+        if (tcAuto) {
+            const updateAutoViz = () => {
+                const viz = document.getElementById('viz-tc-switch');
+                if (!viz) return;
+                viz.dataset.active = tcAuto.classList.contains('checked');
+                viz.classList.remove('is-replaying');
+                void viz.offsetWidth;
+                viz.classList.add('is-replaying');
+            };
+            new MutationObserver(updateAutoViz).observe(tcAuto, { attributes: true, attributeFilter: ['class'] });
+            updateAutoViz();
+        }
     }
 
     function updateDelaySliderEnabledState() {

@@ -62,6 +62,7 @@
     <link rel="stylesheet" href="styles/components/track-tooltip.css">
     <link rel="stylesheet" href="styles/components/tracks.css">
     <link rel="stylesheet" href="styles/components/train-bar-decorations.css">
+    <link rel="stylesheet" href="styles/components/track-changes.css">
     <link rel="stylesheet" href="styles/components/train-note-modal.css">
     <link rel="stylesheet" href="styles/components/train-record-drawer.css">
     <link rel="stylesheet" href="styles/components/train-tooltip.css">
@@ -249,6 +250,13 @@
                         <circle cx="8" cy="11.25" r="0.65" fill="currentColor"/>
                     </svg>
                     <span>Förseningar</span>
+                </button>
+                <button id="tab-track-changes" class="settings-tab" data-tab="track-changes" role="tab" aria-selected="false" aria-controls="panel-track-changes">
+                    <svg class="settings-tab-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2.5 4.5h9.5l-2.2-2.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13.5 11.5H4l2.2 2.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Spårändringar</span>
                 </button>
                 <div class="settings-nav-footer">
                     <span class="settings-nav-version">v2.0.0</span>
@@ -713,6 +721,92 @@
                     </div>
                 </div>
 
+                <!-- Spårändringar Tab -->
+                <div id="panel-track-changes" class="settings-tab-panel" data-tab-panel="track-changes" role="tabpanel" aria-labelledby="tab-track-changes" hidden>
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Automatik</h3>
+                        <div class="settings-section-content">
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label id="label-tc-auto" class="form-label">Byt spår automatiskt</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                </div>
+                                <div class="toggle-switch checked" id="track-changes-auto-switch" role="switch" aria-checked="true" aria-labelledby="label-tc-auto" tabindex="0">
+                                    <div class="toggle-thumb"></div>
+                                </div>
+                                <p class="form-help">Flyttar tåget till det spår API:et rapporterar när det skiljer sig från det planerade.</p>
+                                <div class="setting-viz viz-track-change" id="viz-tc-switch" aria-hidden="true">
+                                    <div class="viz-tc-rails">
+                                        <div class="viz-tc-rail" data-rail="old"><span class="viz-tc-rail-label">Spår 4</span></div>
+                                        <div class="viz-tc-rail" data-rail="new"><span class="viz-tc-rail-label">Spår 6</span></div>
+                                    </div>
+                                    <div class="viz-tc-train viz-tc-train--old"></div>
+                                    <div class="viz-tc-train viz-tc-train--new"></div>
+                                    <svg class="viz-tc-arrow" viewBox="0 0 60 50" aria-hidden="true">
+                                        <path d="M18 8 V42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                        <polyline points="13,12 18,8 23,12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Visualisering</h3>
+                        <div class="settings-section-content">
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label id="label-tc-arrow" class="form-label">Pil till tidigare spår</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                </div>
+                                <div class="toggle-switch checked" id="track-changes-show-arrow" role="switch" aria-checked="true" aria-labelledby="label-tc-arrow" tabindex="0">
+                                    <div class="toggle-thumb"></div>
+                                </div>
+                                <p class="form-help">Visar en kort pil från det nya spåret tillbaka till det planerade.</p>
+                            </div>
+
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label id="label-tc-ghost" class="form-label">Spökspår på gamla spåret</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                </div>
+                                <div class="toggle-switch checked" id="track-changes-show-ghost" role="switch" aria-checked="true" aria-labelledby="label-tc-ghost" tabindex="0">
+                                    <div class="toggle-thumb"></div>
+                                </div>
+                                <p class="form-help">Lämnar en transparent kontur av tåget på det tidigare spåret.</p>
+                            </div>
+
+                            <div class="form-control">
+                                <div class="form-label-wrapper">
+                                    <label class="form-label" for="track-changes-duration">Visningstid</label>
+                                    <button class="form-help-toggle" aria-expanded="false" aria-label="Visa hjälptext">ⓘ</button>
+                                </div>
+                                <div class="slider-wrapper">
+                                    <input id="track-changes-duration" type="range" min="1" max="10" value="2" class="slider" data-unit=" min">
+                                    <span class="slider-value">2 min</span>
+                                </div>
+                                <p class="form-help">Hur länge pilen och spökspåret visas innan de tonas bort.</p>
+                                <div class="setting-viz viz-track-change-duration" id="viz-tc-duration" aria-hidden="true">
+                                    <div class="viz-tc-bar">
+                                        <div class="viz-tc-bar-fill" id="viz-tc-bar-fill"></div>
+                                        <span class="viz-tc-bar-label" id="viz-tc-bar-label">2 min</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Dolda spårändringar</h3>
+                        <div class="settings-section-content">
+                            <div class="form-control">
+                                <p class="form-help">Högerklicka på ett tåg för att dölja en enskild spårändring. Klicka nedan för att visa alla igen.</p>
+                                <button id="track-changes-clear-hidden" type="button" class="btn btn-tertiary btn-sm">Visa alla dolda igen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div><!-- end .settings-content -->
 
             </div><!-- end .settings-body -->
@@ -789,12 +883,14 @@
     <!-- 9a. Stores (must load before decorators / modals that read them) -->
     <script src="js/components/train-notes/train-notes-store.js"></script>
     <script src="js/components/train-checks/train-checks-store.js"></script>
+    <script src="js/components/track-changes/track-changes-store.js"></script>
     <script src="js/components/grid-actions/user-trains-store.js"></script>
     <script src="js/components/grid-actions/user-closures-store.js"></script>
 
     <!-- 9b. Decorators (subscribe to schedule:rendered + store changes) -->
     <script src="js/components/train-notes/train-notes-decorator.js"></script>
     <script src="js/components/train-checks/train-checks-decorator.js"></script>
+    <script src="js/components/track-changes/track-changes-decorator.js"></script>
 
     <!-- 9c. Modals & drawer -->
     <script src="js/components/train-notes/train-note-modal.js"></script>

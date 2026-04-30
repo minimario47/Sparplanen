@@ -61,6 +61,23 @@
         });
 
         register({
+            id: 'track-change.hide',
+            order: 230,
+            build: (train) => {
+                const store = window.TrackChangesStore;
+                if (!store) return null;
+                const active = store.getActive(train.id);
+                if (!active) return null;
+                return createItem('Dölj spårändring', () => {
+                    store.hide(train.id);
+                    if (window.showNotification) {
+                        window.showNotification(`Spårändring dold för tåg ${train.arrivalTrainNumber || train.departureTrainNumber || train.id}`, 'info');
+                    }
+                }, { icon: '⤫' });
+            }
+        });
+
+        register({
             id: 'user-train.edit',
             order: 400,
             build: (train) => {
