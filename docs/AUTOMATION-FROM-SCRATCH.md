@@ -67,16 +67,17 @@ This is the full path from nothing to a working **weekly multi-PDF** flow. It as
 
 4. **Code:** paste the contents of [gmail-pdf-to-github.gs](gmail-pdf-to-github.gs) into a script file and **Save**.
 
-5. **First authorization:** choose **Run** on `processInbox` (or `main`) and allow Gmail + external URL to `api.github.com`.
+5. **First authorization:** choose **Run** on `main` and allow Gmail + external URL to `api.github.com`.
 
-6. **Trigger (clock):** time-driven, e.g. every **15 minutes**, function **`processInbox`**.
+6. **Trigger (clock):** time-driven, e.g. every **15 minutes**, function **`main`**.
 
 7. **How one run works:**  
    For the first **unread** labeled thread, it checks each PDF. For each per-day file it:
    - derives **year** from the **message date** in Stockholm
    - derives **week** from `v.<number>` in the **filename**
    - derives **day** from the Swedish name before `.pdf`
-   - `PUT` to `TrainData/incoming/<YEAR>-W<WW>/<day>.pdf`
+   - stages the PDF for `TrainData/incoming/<YEAR>-W<WW>/<day>.pdf`
+   - commits all PDFs from that email in **one** `[skip ci]` batch commit so push workflows do not start early
    - after **at least one** successful upload, calls **`workflow_dispatch`** once for `ingest-pdf.yml`, then **marks the thread read**
    - If there is nothing to upload (only the “all week” master PDFs), the thread is **not** marked read (fix filter or add a per-day file).
 
@@ -89,7 +90,7 @@ This is the full path from nothing to a working **weekly multi-PDF** flow. It as
 - Workflow file: [ingest-pdf.yml](../.github/workflows/ingest-pdf.yml)
 
 - **Manual:** Actions → “Ingest plan PDF” → Run workflow.  
-- **From Apps Script:** the script calls `workflow_dispatch` after your uploads (recommended so **one** run processes **all** files you just added).
+- **From Apps Script:** the script makes one `[skip ci]` PDF batch commit, then calls `workflow_dispatch` after your uploads so **one** run processes **all** files you just added.
 
 - The job runs `python3 TrainData/ingest_incoming.py`, which:
   - runs `extract_monday.py` for each per-day PDF under `TrainData/incoming/...`
@@ -131,6 +132,7 @@ Check `trains.js` for `SPARPLANEN_WEEKS` and `SPARPLANEN_ANCHORS`, then open the
 | 404 on dispatch | Workflow file name = `ingest-pdf.yml` in **default** branch; token has **workflow** |
 | Nothing uploads | Per-day name must end with a weekday before `.pdf`; `v.18` must appear in the filename for week number |
 | Workflow runs but no JS change | Path must be `TrainData/incoming/YYYY-Www/mandag.pdf` etc., not a flat `latest.pdf` |
+| Several ingest runs start from one mail | Update the Apps Script from `docs/gmail-pdf-to-github.gs`; PDF commits should contain `[skip ci]`, and the clock trigger should run `main` |
 | Wrong day in the app | Browser uses Stockholm date + [schedule-timezone-helpers.js](../js/schedule-timezone-helpers.js) |
 
 ---

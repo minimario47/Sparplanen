@@ -1,21 +1,16 @@
 # Build trains.js + closures.js from all per-day PDFs under TrainData/incoming/<YEAR>-W<WW>/
-# Trigger: workflow_dispatch (recommended) — e.g. from Google Apps Script after all PDF uploads
-# in one batch, so the bundle is complete in a single run.
+# Trigger: workflow_dispatch only — e.g. from Google Apps Script after all PDF
+# uploads are committed in one batch, so the bundle is complete in a single run.
 # Manual: Actions → Ingest plan PDF → Run workflow.
 name: Ingest plan PDF
 
 on:
   workflow_dispatch:
-  # Optional: re-run on git push of incoming PDFs (e.g. local); may run once per file if using API 1:1
-  push:
-    branches: [main]
-    paths:
-      - "TrainData/incoming/**"
 
 permissions:
   contents: write
 
-# Queue concurrent ingest runs; still allow races with other pushers (mail PDF commits, users).
+# Queue concurrent ingest runs so the generated files are written serially.
 concurrency:
   group: ingest-plan-pdf-main
   cancel-in-progress: false
