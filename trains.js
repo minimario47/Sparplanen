@@ -1,5 +1,5 @@
 // Auto-generated — DO NOT EDIT MANUALLY (week bundle from ingest_incoming + emit_week_bundle)
-// Created: 2026-05-04 10:16
+// Created: 2026-05-04 08:20
 window.SPARPLANEN_WEEKS = {
   "2026-W17": {
     "torsdag": [
