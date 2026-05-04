@@ -174,12 +174,9 @@ def main() -> int:
                 legacy_clo = c[d]  # type: ignore[assignment]
                 break
 
-    from datetime import datetime  # local import for stamp
-
-    stamp = datetime.now().strftime("%Y-%m-%d %H:%M")
     lines = [
         "// Auto-generated — DO NOT EDIT MANUALLY (week bundle from ingest_incoming + emit_week_bundle)\n"
-        f"// Created: {stamp}\n"
+        "// Generated from TrainData/incoming PDFs.\n"
         "window.SPARPLANEN_WEEKS = "
         + json.dumps(by_week, ensure_ascii=False, indent=2)
         + ";\n"
@@ -197,7 +194,7 @@ def main() -> int:
     TRAINS_JS.write_text("".join(lines), encoding="utf-8")
     c_lines = [
         "// Auto-generated — DO NOT EDIT MANUALLY (week bundle from emit_week_bundle)\n"
-        f"// Created: {stamp}\n"
+        "// Generated from TrainData/incoming PDFs.\n"
         "const initialTrackClosures = "
         + json.dumps(legacy_clo, ensure_ascii=False, indent=2)
         + ";\n"

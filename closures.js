@@ -1,5 +1,5 @@
 // Auto-generated — DO NOT EDIT MANUALLY (week bundle from emit_week_bundle)
-// Created: 2026-05-04 08:24
+// Generated from TrainData/incoming PDFs.
 const initialTrackClosures = [
   {
     "id": 1,
