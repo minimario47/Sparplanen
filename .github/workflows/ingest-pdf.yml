@@ -79,7 +79,7 @@ jobs:
 
       - name: Wait before retry
         if: steps.deployment.outcome == 'failure'
-        run: sleep 20
+        run: sleep 120
 
       - name: Retry deploy to GitHub Pages
         if: steps.deployment.outcome == 'failure'
