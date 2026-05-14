@@ -8,6 +8,7 @@ let cachedTracks = [];
 window.cachedTrains = [];
 let timelineStart = null;
 let userSettings = null;
+let scheduleSelection = null;
 
 function initializeSchedule() {
     if (!window.TimeManager) {
@@ -65,6 +66,91 @@ function prepareTrackData() {
     window.cachedTracks = cachedTracks;
 }
 
+function normalizeTrainSet(trainSet) {
+    if (!trainSet || typeof trainSet !== 'object') {
+        return { vehicleTypeID: 'X40', count: 1 };
+    }
+    const copy = { ...trainSet };
+    const count = parseInt(copy.count, 10);
+    copy.count = Number.isFinite(count) && count > 0 ? count : 1;
+    if (!copy.vehicleTypeID && !copy.customComposition) {
+        copy.vehicleTypeID = 'X40';
+    }
+    return copy;
+}
+
+function getVehicleCount(trainSet) {
+    const count = parseInt(trainSet?.count, 10);
+    return Number.isFinite(count) && count > 0 ? count : 1;
+}
+
+function formatTimeKey(date) {
+    if (!(date instanceof Date)) return '';
+    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+}
+
+function assignConnectionGroups(trains) {
+    const groups = new Map();
+
+    const add = (key, train) => {
+        if (!key || !train) return;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(train);
+    };
+
+    trains.forEach(train => {
+        const track = String(train.trackId);
+        const arrNum = String(train.arrivalTrainNumber || '').trim();
+        const depNum = String(train.departureTrainNumber || '').trim();
+        const arrTime = formatTimeKey(train.arrTime);
+        const depTime = formatTimeKey(train.depTime);
+
+        if (arrNum && arrTime) add(`track:${track}:arr:${arrNum}:${arrTime}`, train);
+        if (depNum && depTime) add(`track:${track}:dep:${depNum}:${depTime}`, train);
+
+        const startTime = arrTime || depTime;
+        if (startTime && (!arrNum || !depNum)) {
+            add(`track:${track}:start:${startTime}:partial`, train);
+        }
+    });
+
+    let groupSeq = 1;
+    const seenGroups = [];
+
+    groups.forEach((members) => {
+        if (members.length < 2) return;
+        const sorted = members.slice().sort((a, b) => {
+            const subDiff = (a.subTrackIndex || 0) - (b.subTrackIndex || 0);
+            return subDiff || String(a.id).localeCompare(String(b.id), undefined, { numeric: true });
+        });
+
+        const hasAdjacentSubRows = sorted.some((train, i) => {
+            if (i === 0) return false;
+            return Math.abs((train.subTrackIndex || 0) - (sorted[i - 1].subTrackIndex || 0)) <= 1;
+        });
+        const hasSameNumber = sorted.some((a, i) => sorted.some((b, j) => {
+            if (i === j) return false;
+            return (a.arrivalTrainNumber && a.arrivalTrainNumber === b.arrivalTrainNumber) ||
+                (a.departureTrainNumber && a.departureTrainNumber === b.departureTrainNumber);
+        }));
+
+        if (!hasAdjacentSubRows && !hasSameNumber) return;
+
+        const ids = sorted.map(t => String(t.id));
+        const groupId = `cg-${groupSeq++}`;
+        seenGroups.push({ groupId, ids });
+        sorted.forEach(train => {
+            const existing = train.connectedTo ? String(train.connectedTo).split(',').filter(Boolean) : [];
+            const merged = Array.from(new Set(existing.concat(ids.filter(id => id !== String(train.id)))));
+            train.connectedTo = merged.length ? merged.join(',') : null;
+            train.connectionGroupId = train.connectionGroupId || groupId;
+            train.connectionGroupSize = Math.max(train.connectionGroupSize || 1, sorted.length);
+        });
+    });
+
+    return seenGroups;
+}
+
 function prepareTrainData() {
     const resolved = (window.SparplanenResolve && typeof window.SparplanenResolve.parseScheduleNow === 'function')
         ? window.SparplanenResolve.parseScheduleNow()
@@ -76,6 +162,14 @@ function prepareTrainData() {
     } else {
         timeBase = new Date();
     }
+    scheduleSelection = {
+        week: resolved.week || null,
+        day: resolved.day || null,
+        anchorStr: resolved.anchorStr || null,
+        qaOverride: !!resolved.qaOverride,
+        qaTime: resolved.qaTime || null
+    };
+    window.currentScheduleSelection = scheduleSelection;
     const serviceInput = (resolved.usedBundle && Array.isArray(resolved.services)) ? resolved.services : initialServiceData;
     
     function parseTimeToDate(timeStr, baseDate) {
@@ -102,15 +196,18 @@ function prepareTrainData() {
             let type = 'regional';
             let lengthMeters = 0;
             let baseUnitLengthMeters = 0;
+            const trainSet = normalizeTrainSet(service.trainSet);
+            const vehicleCount = getVehicleCount(trainSet);
+            const subTrackIndex = parseInt(service.subTrackIndex, 10);
             
             try {
-                if (service.trainSet) {
-                    lengthMeters = calculateTrainSetLength(service.trainSet) || 0;
-                    if (service.trainSet.vehicleTypeID) {
-                        const vDef = getVehicleDefinition(service.trainSet.vehicleTypeID);
+                if (trainSet) {
+                    lengthMeters = calculateTrainSetLength(trainSet) || 0;
+                    if (trainSet.vehicleTypeID) {
+                        const vDef = getVehicleDefinition(trainSet.vehicleTypeID);
                         baseUnitLengthMeters = vDef ? (vDef.baseLengthMeters || 0) : 0;
-                    } else if (service.trainSet.customComposition && service.trainSet.customComposition.length > 0) {
-                        const first = service.trainSet.customComposition[0];
+                    } else if (trainSet.customComposition && trainSet.customComposition.length > 0) {
+                        const first = trainSet.customComposition[0];
                         const vDefFirst = getVehicleDefinition(first.vehicleTypeID);
                         baseUnitLengthMeters = vDefFirst ? (vDefFirst.baseLengthMeters || 0) : 0;
                     }
@@ -128,8 +225,8 @@ function prepareTrainData() {
                 : [50, 75, 80, 107, 135];
             const lengthClass = window.ColorUtils.computeNearestBucket(effectiveLengthForColor, canonical);
             
-            if (service.trainSet && service.trainSet.vehicleTypeID) {
-                const vehicleDef = getVehicleDefinition(service.trainSet.vehicleTypeID);
+            if (trainSet && trainSet.vehicleTypeID) {
+                const vehicleDef = getVehicleDefinition(trainSet.vehicleTypeID);
                 if (vehicleDef) {
                     if (vehicleDef.category === 'high_speed') type = 'long-distance';
                     else if (vehicleDef.category === 'commuter') type = 'regional';
@@ -141,40 +238,36 @@ function prepareTrainData() {
                 id: service.id,
                 arrivalTrainNumber: service.arrivalTrainNumber || '',
                 departureTrainNumber: service.departureTrainNumber || '',
+                arrivalLabel: service.arrivalLabel || '',
+                departureLabel: service.departureLabel || '',
                 type: type,
                 lengthMeters: lengthMeters,
                 lengthClass: lengthClass,
-                trackId: service.trackId,
+                trackId: parseInt(service.trackId, 10),
+                subTrackIndex: Number.isFinite(subTrackIndex) ? subTrackIndex : 0,
+                trainSet,
+                vehicleCount,
                 arrTime: arrTime,
                 depTime: depTime,
-                origin: service.origin,
-                dest: service.destination,
+                origin: service.origin || '',
+                dest: service.destination || '',
                 status: 'on-time',
                 hasConflict: false,
-                connectedTo: null
+                connectedTo: null,
+                connectionGroupId: null,
+                connectionGroupSize: 1,
+                movementKind: service.arrivalTrainNumber && service.departureTrainNumber
+                    ? 'through'
+                    : (service.arrivalTrainNumber ? 'arrival' : (service.departureTrainNumber ? 'departure' : 'operation'))
             };
         });
-    
-    trainData.forEach(train => {
-        if (train.departureTrainNumber) {
-            const connected = trainData.filter(other => 
-                other.id !== train.id &&
-                other.trackId === train.trackId &&
-                other.departureTrainNumber === train.departureTrainNumber &&
-                other.departureTrainNumber !== ''
-            );
-            
-            if (connected.length > 0) {
-                train.connectedTo = connected.map(t => t.id).join(',');
-            }
-        }
-    });
     
     const userTrains = (window.UserTrainsStore && typeof window.UserTrainsStore.getAll === 'function')
         ? window.UserTrainsStore.getAll()
         : [];
 
     const mergedTrains = trainData.concat(userTrains.map(serviceLikeToTrain).filter(Boolean));
+    assignConnectionGroups(mergedTrains);
 
     window.cachedTrains = mergedTrains;
 }
@@ -212,13 +305,16 @@ function serviceLikeToTrain(service) {
     let lengthMeters = 0;
     let baseUnitLengthMeters = 0;
     let type = 'regional';
+    const trainSet = normalizeTrainSet(service.trainSet);
+    const vehicleCount = getVehicleCount(trainSet);
+    const subTrackIndex = parseInt(service.subTrackIndex, 10);
 
     try {
-        if (service.trainSet && typeof calculateTrainSetLength === 'function') {
-            lengthMeters = calculateTrainSetLength(service.trainSet) || 0;
+        if (trainSet && typeof calculateTrainSetLength === 'function') {
+            lengthMeters = calculateTrainSetLength(trainSet) || 0;
         }
-        if (service.trainSet && service.trainSet.vehicleTypeID && typeof getVehicleDefinition === 'function') {
-            const vDef = getVehicleDefinition(service.trainSet.vehicleTypeID);
+        if (trainSet && trainSet.vehicleTypeID && typeof getVehicleDefinition === 'function') {
+            const vDef = getVehicleDefinition(trainSet.vehicleTypeID);
             if (vDef) {
                 baseUnitLengthMeters = vDef.baseLengthMeters || 0;
                 if (vDef.category === 'high_speed') type = 'long-distance';
@@ -244,10 +340,15 @@ function serviceLikeToTrain(service) {
         id: service.id,
         arrivalTrainNumber: service.arrivalTrainNumber || '',
         departureTrainNumber: service.departureTrainNumber || '',
+        arrivalLabel: service.arrivalLabel || '',
+        departureLabel: service.departureLabel || '',
         type,
         lengthMeters,
         lengthClass,
-        trackId: service.trackId,
+        trackId: parseInt(service.trackId, 10),
+        subTrackIndex: Number.isFinite(subTrackIndex) ? subTrackIndex : 0,
+        trainSet,
+        vehicleCount,
         arrTime,
         depTime,
         origin: service.origin || '',
@@ -255,8 +356,13 @@ function serviceLikeToTrain(service) {
         status: 'on-time',
         hasConflict: false,
         connectedTo: null,
+        connectionGroupId: null,
+        connectionGroupSize: 1,
         userAdded: true,
-        kind: service.kind || 'train'
+        kind: service.kind || 'train',
+        movementKind: service.arrivalTrainNumber && service.departureTrainNumber
+            ? 'through'
+            : (service.arrivalTrainNumber ? 'arrival' : (service.departureTrainNumber ? 'departure' : 'operation'))
     };
 }
 
@@ -341,10 +447,22 @@ function handleTimeManagerChange(event) {
 
 function renderFullSchedule() {
     const state = window.TimeManager.getState();
-    const { viewTime, timeRange } = state;
+    let { viewTime, timeRange } = state;
     
     const timelineStartHours = 30;
-    const now = new Date();
+    const now = scheduleSelection?.anchorStr
+        ? (() => {
+            const p = String(scheduleSelection.anchorStr).split('-').map(Number);
+            return new Date(p[0], p[1] - 1, p[2], 0, 0, 0, 0);
+        })()
+        : new Date();
+
+    if (scheduleSelection?.qaOverride && scheduleSelection.anchorStr) {
+        const [h, m] = String(scheduleSelection.qaTime || '19:00').split(':').map(Number);
+        if (Number.isFinite(h) && Number.isFinite(m)) {
+            viewTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0, 0);
+        }
+    }
     
     timelineStart = new Date(now);
     timelineStart.setHours(0, 0, 0, 0);

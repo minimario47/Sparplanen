@@ -5,8 +5,8 @@
  * `settingsChanged` and overlays two visuals onto `#timeline-canvas`
  * for every active track change:
  *
- *   1. An arrow connecting the train's new track row to its old one,
- *      pointing back to the previous track.
+ *   1. An arrow connecting the train's planned track row to its actual row,
+ *      pointing toward the actual API track.
  *   2. A "ghost" silhouette of the train at its previous track,
  *      slowly fading away.
  *
@@ -62,10 +62,11 @@
         return canvas.querySelector(`.train-bar[data-train-id="${CSS.escape(String(trainId))}"]`);
     }
 
-    function buildGhost(bar, oldLayout, durationMs, remainingMs) {
+    function buildGhost(bar, oldLayout, durationMs, remainingMs, entry) {
         const ghost = document.createElement('div');
         ghost.className = GHOST_CLASS;
         ghost.dataset.trainId = bar.dataset.trainId;
+        if (entry?.trainNumber) ghost.dataset.trainNumber = entry.trainNumber;
 
         const left = parseFloat(bar.style.left) || 0;
         const width = parseFloat(bar.style.width) || bar.getBoundingClientRect().width;
@@ -82,20 +83,20 @@
         // Inner trail decorations: pulsing stripe + label.
         ghost.innerHTML = `
             <div class="${GHOST_CLASS}__stripe"></div>
-            <div class="${GHOST_CLASS}__label">Spår ${oldLayout.id}</div>
+            <div class="${GHOST_CLASS}__label">${entry?.trainNumber ? `${entry.trainNumber} · ` : ''}Plan ${oldLayout.id}</div>
         `;
 
         return ghost;
     }
 
-    function buildArrow(bar, oldLayout, newLayout, fromTrack, durationMs, remainingMs) {
+    function buildArrow(bar, oldLayout, newLayout, entry, durationMs, remainingMs) {
         const left = parseFloat(bar.style.left) || 0;
         const width = parseFloat(bar.style.width) || bar.getBoundingClientRect().width;
 
         const oldCenterY = oldLayout.top + oldLayout.height / 2;
         const newCenterY = newLayout.top + newLayout.height / 2;
 
-        const goingUp = oldCenterY < newCenterY;
+        const goingDown = newCenterY > oldCenterY;
 
         const top = Math.min(oldCenterY, newCenterY) - 6;
         const height = Math.abs(newCenterY - oldCenterY) + 12;
@@ -106,7 +107,9 @@
 
         const wrap = document.createElement('div');
         wrap.className = ARROW_CLASS;
+        if (entry.discrepancy) wrap.classList.add(`${ARROW_CLASS}--discrepancy`);
         wrap.dataset.trainId = bar.dataset.trainId;
+        if (entry.trainNumber) wrap.dataset.trainNumber = entry.trainNumber;
         wrap.style.left = `${arrowLeft}px`;
         wrap.style.top = `${top}px`;
         wrap.style.width = `${svgWidth}px`;
@@ -114,9 +117,10 @@
         wrap.style.animationDuration = `${remainingMs}ms`;
 
         const x = svgWidth / 2;
-        const y1 = goingUp ? height - 2 : 2;          // tail (at new track)
-        const y2 = goingUp ? 8 : height - 8;          // head (at old track)
-        const headDir = goingUp ? -1 : 1;
+        const y1 = goingDown ? 2 : height - 2;        // tail (planned track)
+        const y2 = goingDown ? height - 8 : 8;        // head (actual track)
+        const headDir = goingDown ? 1 : -1;
+        const pillText = `${entry.trainNumber ? `${entry.trainNumber} · ` : ''}${entry.fromTrack ?? '?'} → ${entry.toTrack ?? '?'}`;
 
         wrap.innerHTML = `
             <svg viewBox="0 0 ${svgWidth} ${height}" width="${svgWidth}" height="${height}" aria-hidden="true">
@@ -126,7 +130,7 @@
                           class="${ARROW_CLASS}__head" fill="none" stroke-linejoin="round" stroke-linecap="round"></polyline>
                 <circle cx="${x}" cy="${y1}" r="2.5" class="${ARROW_CLASS}__dot"></circle>
             </svg>
-            <span class="${ARROW_CLASS}__pill" style="${goingUp ? 'top:-4px' : 'bottom:-4px'}">Från ${fromTrack ?? '?'}</span>
+            <span class="${ARROW_CLASS}__pill" style="${goingDown ? 'bottom:-4px' : 'top:-4px'}">${pillText}</span>
         `;
 
         return wrap;
@@ -171,12 +175,12 @@
             const remainingMs = Math.max(150, durationMs - elapsed);
 
             if (showGhost) {
-                const ghost = buildGhost(bar, oldLayout, durationMs, remainingMs);
+                const ghost = buildGhost(bar, oldLayout, durationMs, remainingMs, entry);
                 layer.appendChild(ghost);
             }
 
             if (showArrow && newLayout) {
-                const arrow = buildArrow(bar, oldLayout, newLayout, entry.fromTrack, durationMs, remainingMs);
+                const arrow = buildArrow(bar, oldLayout, newLayout, entry, durationMs, remainingMs);
                 layer.appendChild(arrow);
             }
 

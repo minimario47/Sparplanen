@@ -73,6 +73,11 @@ function applySettingsToTimeManager(settings) {
     };
     
     window.TimeManager.updateSettings(timeManagerSettings);
+
+    if (window.TimeManager.qaOverrideActive) {
+        updateNuButtonState(false);
+        return;
+    }
     
     // If follow mode was enabled in settings, activate it immediately
     if (settings.followMode && !window.TimeManager.isFollowingMode) {
@@ -360,4 +365,3 @@ function formatTime(date) {
     const minutes = String(date.getMinutes()).padStart(2, '0');
     return `${hours}:${minutes}`;
 }
-

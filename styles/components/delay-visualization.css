@@ -31,6 +31,38 @@
     border-radius: var(--radius-md) 0 0 var(--radius-md); /* Rounded on left only */
 }
 
+.delay-overlay-main.delay-leg-departure {
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.delay-overlay__label {
+    position: absolute;
+    inset: 50% 3px auto 3px;
+    transform: translateY(-50%);
+    z-index: 3;
+    display: block;
+    overflow: hidden;
+    color: #111827;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+    pointer-events: none;
+}
+
+.delay-overlay__label--compact {
+    font-size: 8px;
+}
+
+[data-theme="dark"] .delay-overlay__label {
+    color: #f8fafc;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+
 /* When main delay has conflict, add thick border on right edge */
 .delay-overlay-main.has-conflict {
     border-right: 3px solid currentColor;
@@ -133,6 +165,9 @@
     z-index: 10;
     pointer-events: none;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    max-width: 96px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     transition: opacity var(--transition-DEFAULT) var(--ease-in-out),
                 transform var(--transition-DEFAULT) var(--ease-in-out);
 }
@@ -626,6 +661,14 @@
     box-sizing: border-box;
 }
 
+.train-bar .delay-overlay-offset.early-extension--departure {
+    left: auto;
+    right: 0;
+    border-right: 1px solid var(--early-border-color, #334155);
+    border-left: none;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
 .early-extension::before {
     content: '';
     position: absolute;
@@ -638,6 +681,13 @@
     opacity: 0.88;
     pointer-events: none;
     border-top-left-radius: var(--radius-md);
+}
+
+.early-extension--departure::before {
+    left: auto;
+    right: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: var(--radius-md);
 }
 
 /* Minuter endast när förseningsstil = streckat (samma “tredje” alternativ i inställningar) */
@@ -680,6 +730,11 @@
     border-left: 2px dashed var(--early-border-color, #334155);
 }
 
+.early-extension--departure .early-extension__planned-marker {
+    left: -1px;
+    right: auto;
+}
+
 .train-bar.early-extended .train-bar-visual {
     border-left-color: transparent !important;
 }
@@ -698,6 +753,11 @@
     background: rgba(34, 197, 94, 0.45);
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35) inset, 0 1px 2px rgba(15, 23, 42, 0.15);
     pointer-events: none;
+}
+
+.early-pill-floating--departure {
+    left: auto;
+    right: 4px;
 }
 
 .early-pill-floating.early-pill-floating--with-text {
@@ -720,4 +780,3 @@
     color: #f1f5f9;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
 }
-

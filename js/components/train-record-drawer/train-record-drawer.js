@@ -171,6 +171,8 @@
                 renderRow('Intern ID', train.id, { mono: true }),
                 renderRow('Ankomsttågnr', train.arrivalTrainNumber, { showEmpty: true }),
                 renderRow('Avgångstågnr', train.departureTrainNumber, { showEmpty: true }),
+                renderRow('Ankomstetikett', train.arrivalLabel, { showEmpty: true }),
+                renderRow('Avgångetikett', train.departureLabel, { showEmpty: true }),
                 renderRow('Typ', train.type, { showEmpty: true }),
                 renderRow('Användartillagd', train.userAdded ? 'Ja' : 'Nej', { showEmpty: true })
             ]),
@@ -178,6 +180,7 @@
                 renderRow('Ankomst', fmtTime(train.arrTime), { showEmpty: true }),
                 renderRow('Avgång', fmtTime(train.depTime), { showEmpty: true }),
                 renderRow('Spår', train.trackId, { showEmpty: true }),
+                renderRow('Delspår', train.subTrackIndex, { showEmpty: true }),
                 renderRow('Status', train.status, { showEmpty: true }),
                 renderRow('Konflikt', train.hasConflict ? 'Ja' : 'Nej')
             ]),
@@ -188,6 +191,7 @@
             ]),
             renderSection('Fordon', [
                 renderRow('Längd (m)', train.lengthMeters, { showEmpty: true }),
+                renderRow('Antal fordon', train.vehicleCount, { showEmpty: true }),
                 renderRow('Längdklass', train.lengthClass)
             ])
         ];

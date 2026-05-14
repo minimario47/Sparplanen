@@ -63,6 +63,12 @@ def _clean_trains(data: dict, renum_start: int) -> list[dict[str, object]]:
                 "departureTrainNumber": (ee.get("departureTrainNumber") or "")
                 if ee.get("departureTrainNumber") is not None
                 else "",
+                "arrivalLabel": (ee.get("arrivalLabel") or "")
+                if ee.get("arrivalLabel") is not None
+                else "",
+                "departureLabel": (ee.get("departureLabel") or "")
+                if ee.get("departureLabel") is not None
+                else "",
                 "scheduledArrivalTime": (ee.get("scheduledArrivalTime") or "")
                 if ee.get("scheduledArrivalTime") is not None
                 else "",

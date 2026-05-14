@@ -47,8 +47,25 @@
         return B.w - A.w;
     }
 
+    function getQaOverride(weeks, anchors) {
+        if (typeof window === 'undefined' || !window.location || !window.URLSearchParams) return null;
+        const params = new URLSearchParams(window.location.search || '');
+        const week = params.get('week');
+        const day = params.get('day');
+        if (!week || !day) return null;
+
+        const dayKey = SWE_DAY_TO_KEY[String(day).toLowerCase().trim()] || String(day).toLowerCase().trim();
+        const services = weeks && weeks[week] && weeks[week][dayKey];
+        if (!Array.isArray(services) || services.length === 0) return null;
+        const anchor = (anchors && anchors[week] && anchors[week][dayKey]) || null;
+        return { week, day: dayKey, anchor, qaOverride: true, qaTime: params.get('time') || null };
+    }
+
     function pickWeekAndDay(weeks, anchors) {
         if (!weeks || typeof weeks !== 'object') return { week: null, day: null, anchor: null };
+        const qa = getQaOverride(weeks, anchors);
+        if (qa) return qa;
+
         const ymd = formatStockholmYMD();
         const dayKey = getStockholmSwedishDayKey();
         const list = Object.keys(weeks).sort(compareWeekKeysDesc);
@@ -105,6 +122,8 @@
                 services: arr || [],
                 anchorStr: p.anchor,
                 anchor: a,
+                qaOverride: !!p.qaOverride,
+                qaTime: p.qaTime || null,
             };
         },
         parseClosuresNow: function (week, day) {

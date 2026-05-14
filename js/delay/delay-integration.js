@@ -189,6 +189,34 @@ class DelayIntegration {
     }
     
     /**
+     * Build delay contexts for each scheduled leg on a train bar.
+     */
+    getDelayContextsForTrain(train) {
+        if (!train || !this.dataManager) return [];
+        const contexts = [];
+        const seen = new Set();
+        const add = (trainNumber, leg, side, scheduledTime) => {
+            const number = String(trainNumber || '').trim();
+            if (!number || seen.has(number)) return;
+            const delayInfo = this.dataManager.getDelayInfo(number);
+            if (!delayInfo) return;
+            seen.add(number);
+            contexts.push({
+                trainNumber: number,
+                leg,
+                side,
+                delayInfo,
+                scheduledTime,
+                labelPrefix: leg === 'arrival' ? 'Ank' : 'Avg'
+            });
+        };
+
+        add(train.arrivalTrainNumber, 'arrival', 'arrival', train.arrTime);
+        add(train.departureTrainNumber, 'departure', 'departure', train.depTime);
+        return contexts;
+    }
+
+    /**
      * Detect track changes from the API and (optionally) auto-switch trains
      * to their actual track. Returns true if anything was mutated and a
      * re-render is required.
@@ -211,24 +239,43 @@ class DelayIntegration {
 
         window.cachedTrains.forEach((train) => {
             if (!train) return;
-            let delayInfo = null;
-            if (train.arrivalTrainNumber) {
-                delayInfo = this.dataManager.getDelayInfo(train.arrivalTrainNumber);
-            }
-            if (!delayInfo && train.departureTrainNumber) {
-                delayInfo = this.dataManager.getDelayInfo(train.departureTrainNumber);
-            }
-            if (!delayInfo || delayInfo.trackAtLocation == null) return;
+            const contexts = this.getDelayContextsForTrain(train)
+                .filter((ctx) => ctx.delayInfo && ctx.delayInfo.trackAtLocation != null);
+            if (contexts.length === 0) return;
 
-            const apiTrack = parseInt(delayInfo.trackAtLocation, 10);
             const planned = parseInt(train.trackId, 10);
-            if (!Number.isFinite(apiTrack) || apiTrack === planned) return;
-            if (validTracks.size > 0 && !validTracks.has(apiTrack)) return;
+            if (!Number.isFinite(planned)) return;
 
-            window.TrackChangesStore.recordChange(train.id, planned, apiTrack);
-            if (autoSwitch) {
-                train.trackId = apiTrack;
+            const validContexts = contexts.map((ctx) => ({
+                ...ctx,
+                apiTrack: parseInt(ctx.delayInfo.trackAtLocation, 10)
+            })).filter((ctx) => Number.isFinite(ctx.apiTrack) && (validTracks.size === 0 || validTracks.has(ctx.apiTrack)));
+
+            if (validContexts.length === 0) return;
+
+            validContexts.forEach((ctx) => {
+                if (ctx.apiTrack === planned) return;
+                const changeId = `${train.id}:${ctx.leg}:${ctx.trainNumber}`;
+                window.TrackChangesStore.recordChange(changeId, planned, ctx.apiTrack, {
+                    trainId: train.id,
+                    trainNumber: ctx.trainNumber,
+                    leg: ctx.leg
+                });
+            });
+
+            const changedTargets = Array.from(new Set(validContexts
+                .map((ctx) => ctx.apiTrack)
+                .filter((track) => track !== planned)));
+
+            if (autoSwitch && changedTargets.length === 1) {
+                train.trackId = changedTargets[0];
                 mutated = true;
+            } else if (changedTargets.length > 1) {
+                validContexts.forEach((ctx) => {
+                    const changeId = `${train.id}:${ctx.leg}:${ctx.trainNumber}`;
+                    const raw = window.TrackChangesStore.getRaw(changeId);
+                    if (raw) raw.discrepancy = true;
+                });
             }
         });
 
@@ -278,16 +325,8 @@ class DelayIntegration {
             const train = window.cachedTrains?.find(t => String(t.id) === String(trainId));
             if (!train) return;
             
-            // Check for delay info on arrival or departure
-            let delayInfo = null;
-            if (train.arrivalTrainNumber) {
-                delayInfo = this.dataManager.getDelayInfo(train.arrivalTrainNumber);
-            }
-            if (!delayInfo && train.departureTrainNumber) {
-                delayInfo = this.dataManager.getDelayInfo(train.departureTrainNumber);
-            }
-            
-            if (!delayInfo) return;
+            const delayContexts = this.getDelayContextsForTrain(train);
+            if (delayContexts.length === 0) return;
 
             const suppressedSet = window.suppressedDelays;
             const arrNum = String(train.arrivalTrainNumber || '').trim();
@@ -302,9 +341,15 @@ class DelayIntegration {
                 return;
             }
             trainBar.classList.remove('is-suppressed');
+
+            if (this.visualizer && typeof this.visualizer.remove === 'function') {
+                this.visualizer.remove(trainBar);
+            }
             
             // Handle canceled/replaced trains - always show overlay
-            if (delayInfo.isCanceled || delayInfo.isReplaced) {
+            const canceledContext = delayContexts.find((ctx) => ctx.delayInfo.isCanceled || ctx.delayInfo.isReplaced);
+            if (canceledContext) {
+                const delayInfo = canceledContext.delayInfo;
                 this.visualizer.addCancellationOverlay(trainBar, delayInfo);
                 visualizedCount++;
                 
@@ -320,29 +365,32 @@ class DelayIntegration {
                 });
                 return;
             }
-            
-            // Skip if no significant delay
-            if (!delayInfo.delayMinutes || Math.abs(delayInfo.delayMinutes) <= 2) {
+
+            const significantContexts = delayContexts.filter((ctx) => {
+                const delayMinutes = ctx.delayInfo.delayMinutes;
+                return delayMinutes && Math.abs(delayMinutes) > 2;
+            });
+
+            if (significantContexts.length === 0) {
                 return;
             }
             
-            // Detect conflicts
-            let conflicts = null;
-            if (this.settings.showWarnings) {
-                conflicts = this.conflictDetector.detectConflicts(
-                    train,
-                    delayInfo,
-                    window.cachedTrains || [],
-                    this.settings
-                );
-                
-                if (conflicts.hasConflict) {
-                    conflictCount++;
+            significantContexts.forEach((ctx) => {
+                const delayInfo = ctx.delayInfo;
+                let conflicts = null;
+                if (this.settings.showWarnings) {
+                    conflicts = this.conflictDetector.detectConflicts(
+                        train,
+                        delayInfo,
+                        window.cachedTrains || [],
+                        this.settings
+                    );
+                    
+                    if (conflicts.hasConflict) {
+                        conflictCount++;
+                    }
                 }
-            }
-            
-            // Apply visualization and collect statistics
-            if (delayInfo.delayMinutes !== 0 && Math.abs(delayInfo.delayMinutes) > 2) {
+
                 if (this.visualizer && this.visualizer.getSeverity) {
                     const severity = this.visualizer.getSeverity(delayInfo.delayMinutes);
                     if (severity) {
@@ -353,9 +401,9 @@ class DelayIntegration {
                         }
                     }
                 }
-            }
-            this.visualizer.apply(trainBar, train, delayInfo, conflicts);
-            visualizedCount++;
+                this.visualizer.apply(trainBar, train, delayInfo, conflicts, ctx, { preserve: true });
+                visualizedCount++;
+            });
         });
         
         if (window.__DEBUG_DELAY_FEED) {
@@ -447,4 +495,3 @@ window.DelayIntegration = DelayIntegration;
 
 // Global instance (will be initialized in app.js)
 window.delayIntegration = null;
-

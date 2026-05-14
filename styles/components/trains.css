@@ -127,6 +127,37 @@
   border-bottom-right-radius: var(--radius-md);
 }
 
+.train-bar.is-connected-train .train-bar-visual {
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.12);
+}
+
+.train-bar.is-multi-vehicle .train-bar-visual {
+  overflow: hidden;
+}
+
+.train-vehicle-divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-0.5px);
+  background: rgba(15, 23, 42, 0.28);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="dark"] .train-vehicle-divider {
+  background: rgba(255, 255, 255, 0.34);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.65);
+}
+
+[data-theme="high-contrast"] .train-vehicle-divider {
+  height: 2px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
 /* Train Numbers Layout */
 .train-numbers {
   height: 100%;
@@ -140,6 +171,8 @@
   text-overflow: ellipsis;
   font-family: var(--font-mono);
   min-width: 0; /* Allow flex shrink below content size */
+  position: relative;
+  z-index: 2;
 }
 
 .train-number-value {
@@ -229,6 +262,15 @@
 [data-train-color-mode="single"] .train-bar .train-bar-visual { background-color: var(--train-single-bg) !important; border-color: var(--train-single-border) !important; }
 [data-train-color-mode="single"] .train-bar .train-numbers { color: var(--train-single-text) !important; }
 
+/* Keep train IDs legible on dark operational views, including custom color modes. */
+[data-theme="dark"] .train-bar .train-numbers {
+  color: var(--text-primary-dark, #f8fafc);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.55);
+}
+[data-theme="dark"][data-train-color-mode="single"] .train-bar .train-numbers {
+  color: var(--text-primary-dark, #f8fafc) !important;
+}
+
 /* High contrast */
 [data-theme="high-contrast"] .train-bar.len-s .train-bar-visual { background-color: var(--surface-primary); border-color: var(--primary-500); }
 [data-theme="high-contrast"] .train-bar.len-m .train-bar-visual { background-color: var(--surface-primary); border-color: var(--info-500); }
@@ -308,4 +350,3 @@
   opacity: 0.95;
   white-space: normal;
 }
-

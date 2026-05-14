@@ -11,7 +11,7 @@
  * `suppressedDelays` pattern.
  *
  * Public API (window.TrackChangesStore):
- *   recordChange(trainId, from, to)  → boolean (true if newly stored / replaced)
+ *   recordChange(changeId, from, to, meta)  → boolean (true if newly stored / replaced)
  *   getActive(trainId)               → entry | null  (null if hidden / expired)
  *   getRaw(trainId)                  → entry | null  (ignores hide / expiry)
  *   getAllActive()                   → Array<entry>
@@ -29,8 +29,8 @@
     'use strict';
 
     const subscribers = new Set();
-    const changes = new Map(); // trainId(string) → { fromTrack, toTrack, changedAt }
-    const hidden = new Set();  // trainId(string)
+    const changes = new Map(); // changeId(string) → { trainId, trainNumber, leg, fromTrack, toTrack, changedAt }
+    const hidden = new Set();  // changeId(string)
     let pruneTimer = null;
 
     function key(id) {
@@ -60,8 +60,8 @@
         } catch (_) { /* ignore */ }
     }
 
-    function recordChange(trainId, fromTrack, toTrack) {
-        const k = key(trainId);
+    function recordChange(changeId, fromTrack, toTrack, meta = {}) {
+        const k = key(changeId);
         if (!k) return false;
         const from = parseInt(fromTrack, 10);
         const to = parseInt(toTrack, 10);
@@ -73,7 +73,10 @@
         }
 
         changes.set(k, {
-            trainId: k,
+            changeId: k,
+            trainId: key(meta.trainId || changeId),
+            trainNumber: meta.trainNumber ? String(meta.trainNumber) : '',
+            leg: meta.leg || '',
             fromTrack: Number.isFinite(from) ? from : (existing?.fromTrack ?? null),
             toTrack: to,
             changedAt: Date.now()
@@ -82,7 +85,7 @@
         // can see the latest movement and choose to hide it again if needed.
         if (hidden.has(k)) hidden.delete(k);
 
-        notify({ type: 'recorded', trainId: k, toTrack: to });
+        notify({ type: 'recorded', changeId: k, trainId: key(meta.trainId || changeId), toTrack: to });
         scheduleAutoPrune();
         return true;
     }
@@ -96,9 +99,12 @@
     function getActive(trainId) {
         const k = key(trainId);
         if (!k) return null;
-        if (hidden.has(k)) return null;
-        const entry = changes.get(k);
+        let entry = changes.get(k) || null;
+        if (!entry) {
+            entry = Array.from(changes.values()).find((candidate) => candidate.trainId === k) || null;
+        }
         if (!entry) return null;
+        if (hidden.has(entry.changeId || k)) return null;
         if (isExpired(entry)) return null;
         return entry;
     }
@@ -106,7 +112,7 @@
     function getAllActive() {
         const out = [];
         changes.forEach((entry, k) => {
-            if (hidden.has(k)) return;
+            if (hidden.has(k) || hidden.has(entry.changeId)) return;
             if (isExpired(entry)) return;
             out.push(entry);
         });
@@ -116,8 +122,13 @@
     function hide(trainId) {
         const k = key(trainId);
         if (!k) return false;
-        if (hidden.has(k)) return false;
-        hidden.add(k);
+        const matching = Array.from(changes.values()).filter((entry) => entry.changeId === k || entry.trainId === k);
+        if (matching.length === 0) {
+            if (hidden.has(k)) return false;
+            hidden.add(k);
+        } else {
+            matching.forEach((entry) => hidden.add(entry.changeId || k));
+        }
         notify({ type: 'hidden', trainId: k });
         return true;
     }
@@ -133,7 +144,9 @@
 
     function isHidden(trainId) {
         const k = key(trainId);
-        return !!k && hidden.has(k);
+        if (!k) return false;
+        if (hidden.has(k)) return true;
+        return Array.from(changes.values()).some((entry) => entry.trainId === k && hidden.has(entry.changeId));
     }
 
     function clearHidden() {

@@ -38,9 +38,10 @@ window.TrainRenderer = {
                 }
             }
             
-            trainPositions.forEach(({ train, position, totalOverlapping }) => {
+            trainPositions.forEach((placement) => {
+                const { train } = placement;
                 const trainDiv = this._createTrainElement(
-                    train, position, totalOverlapping, trackLayout, startTime, pixelsPerHour
+                    train, placement, trackLayout, startTime, pixelsPerHour
                 );
                 if (trainDiv) {
                     timelineCanvas.appendChild(trainDiv);
@@ -53,9 +54,12 @@ window.TrainRenderer = {
     /**
      * Internal: Create a single train element
      */
-    _createTrainElement(train, position, totalOverlapping, trackLayout, startTime, pixelsPerHour) {
-        const trainHeight = this._getTrainHeight(totalOverlapping);
-        const bottomOffset = position * trainHeight;
+    _createTrainElement(train, placement, trackLayout, startTime, pixelsPerHour) {
+        const laneStart = placement?.laneStart ?? placement?.position ?? 0;
+        const laneSpan = Math.max(1, placement?.laneSpan || train.vehicleCount || train.trainSet?.count || 1);
+        const totalOverlapping = placement?.totalOverlapping || trackLayout.laneCount || 1;
+        const laneHeight = trackLayout.laneHeight || this._getTrainHeight(totalOverlapping);
+        const trainHeight = laneHeight * laneSpan;
         const showHoverTooltip = userSettings?.hoverTooltipEnabled !== false;
         
         const arrMinutes = train.arrTime ? (train.arrTime - startTime) / (1000 * 60) : null;
@@ -85,30 +89,43 @@ window.TrainRenderer = {
         trainDiv.style.left = `${left}px`;
         trainDiv.style.width = `${width}px`;
         
-        const verticalPadding = totalOverlapping >= 3 ? 1 : (totalOverlapping === 2 ? 2 : 3);
+        const verticalPadding = trackLayout.laneCount >= 3 ? 1 : (trackLayout.laneCount === 2 ? 2 : 3);
         trainDiv.style.height = `${Math.max(trainHeight - verticalPadding * 2, 8)}px`;
-        trainDiv.style.top = `${trackLayout.top + (trackLayout.height - bottomOffset - trainHeight) + verticalPadding}px`;
-        trainDiv.style.zIndex = 10 + position;
-        trainDiv.dataset.baseZIndex = String(10 + position);
+        trainDiv.style.top = `${trackLayout.top + (laneStart * laneHeight) + verticalPadding}px`;
+        trainDiv.style.zIndex = 10 + laneStart;
+        trainDiv.dataset.baseZIndex = String(10 + laneStart);
         
         trainDiv.dataset.trainId = train.id;
         trainDiv.dataset.arrival = train.arrivalTrainNumber || '';
         trainDiv.dataset.departure = train.departureTrainNumber || '';
+        trainDiv.dataset.arrivalLabel = train.arrivalLabel || '';
+        trainDiv.dataset.departureLabel = train.departureLabel || '';
         trainDiv.dataset.bucket = train.lengthClass;
+        trainDiv.dataset.subTrackIndex = String(train.subTrackIndex ?? laneStart);
+        trainDiv.dataset.vehicleCount = String(laneSpan);
+        if (train.connectionGroupId) {
+            trainDiv.dataset.connectionGroupId = train.connectionGroupId;
+        }
 
         if (train.status === 'conflict') trainDiv.classList.add('has-conflict');
         if (train.status === 'delayed') trainDiv.classList.add('is-delayed');
+        if (laneSpan > 1) trainDiv.classList.add('is-multi-vehicle');
+        if (train.connectedTo) trainDiv.classList.add('is-connected-train');
 
         const isVeryNarrow = width < 60;
         const isNarrow = width < 100;
-        const isCompressed = totalOverlapping >= 3;
+        const isCompressed = (trackLayout.laneCount || totalOverlapping) >= 3;
         
         const hasArrival = !!train.arrivalTrainNumber;
         const hasDeparture = !!train.departureTrainNumber;
+        const arrivalDisplay = train.arrivalTrainNumber || train.arrivalLabel || '';
+        const departureDisplay = train.departureTrainNumber || train.departureLabel || '';
+        const hasArrivalDisplay = !!arrivalDisplay;
+        const hasDepartureDisplay = !!departureDisplay;
         const sameNumber = train.arrivalTrainNumber === train.departureTrainNumber;
         
-        const displaySingleNumber = sameNumber || isVeryNarrow || !(hasArrival && hasDeparture);
-        const singleNumber = train.arrivalTrainNumber || train.departureTrainNumber;
+        const displaySingleNumber = sameNumber || isVeryNarrow || !(hasArrivalDisplay && hasDepartureDisplay);
+        const singleNumber = arrivalDisplay || departureDisplay;
 
         let fontSize = '14px';
         if (isCompressed || isNarrow) fontSize = '12px';
@@ -118,18 +135,18 @@ window.TrainRenderer = {
         let numbersHTML = '';
         let singleAlignClass = '';
         if (displaySingleNumber) {
-            if (hasArrival && !hasDeparture) {
+            if (hasArrivalDisplay && !hasDepartureDisplay) {
                 singleAlignClass = 'single-left';
-            } else if (!hasArrival && hasDeparture) {
+            } else if (!hasArrivalDisplay && hasDepartureDisplay) {
                 singleAlignClass = 'single-right';
             } else {
                 singleAlignClass = 'single-centered';
             }
-            numbersHTML = `<div class="train-number-value">${singleNumber || ''}</div>`;
+            numbersHTML = `<div class="train-number-value">${this._escape(singleNumber || '')}</div>`;
         } else {
             numbersHTML = `
-                <div class="train-number-value">${train.arrivalTrainNumber || ''}</div>
-                <div class="train-number-value">${train.departureTrainNumber || ''}</div>
+                <div class="train-number-value">${this._escape(arrivalDisplay || '')}</div>
+                <div class="train-number-value">${this._escape(departureDisplay || '')}</div>
             `;
         }
 
@@ -137,19 +154,27 @@ window.TrainRenderer = {
             ? '<div class="status-icon" title="Konflikt! ⚠️"></div>' 
             : '';
         
-        const defaultHoverNumber = train.arrivalTrainNumber || train.departureTrainNumber || '';
+        const defaultHoverNumber = arrivalDisplay || departureDisplay || '';
         const tooltipHTML = showHoverTooltip ? `
             <div class="train-tooltip">
-                <div class="train-tooltip-number">Tåg <span class="train-tooltip-number-value">${defaultHoverNumber}</span></div>
-                ${train.origin ? `<div class="train-tooltip-meta">Från: ${train.origin}</div>` : ''}
-                ${train.dest ? `<div class="train-tooltip-meta">Till: ${train.dest}</div>` : ''}
+                <div class="train-tooltip-number">Tåg <span class="train-tooltip-number-value">${this._escape(defaultHoverNumber)}</span></div>
+                ${train.origin ? `<div class="train-tooltip-meta">Från: ${this._escape(train.origin)}</div>` : ''}
+                ${train.dest ? `<div class="train-tooltip-meta">Till: ${this._escape(train.dest)}</div>` : ''}
+                ${laneSpan > 1 ? `<div class="train-tooltip-meta">${laneSpan} fordon</div>` : ''}
             </div>
         ` : '';
 
-        const densityClass = totalOverlapping >= 3 ? 'density-3' : (totalOverlapping === 2 ? 'density-2' : 'density-1');
+        const densityClass = (trackLayout.laneCount || totalOverlapping) >= 3 ? 'density-3' : ((trackLayout.laneCount || totalOverlapping) === 2 ? 'density-2' : 'density-1');
+        const dividerHTML = laneSpan > 1
+            ? Array.from({ length: laneSpan - 1 }, (_, idx) => {
+                const top = ((idx + 1) / laneSpan) * 100;
+                return `<div class="train-vehicle-divider" style="top:${top}%"></div>`;
+            }).join('')
+            : '';
 
         trainDiv.innerHTML = `
             <div class="train-bar-visual">
+                ${dividerHTML}
                 ${statusIconHTML}
                 <div class="train-numbers ${displaySingleNumber ? singleAlignClass : ''}" style="font-size: ${fontSize};">
                     ${numbersHTML}
@@ -170,14 +195,14 @@ window.TrainRenderer = {
         });
         trainDiv.addEventListener('mousemove', (e) => {
             if (!showHoverTooltip) return;
-            if (!(hasArrival && hasDeparture) || train.arrivalTrainNumber === train.departureTrainNumber) {
+            if (!(hasArrivalDisplay && hasDepartureDisplay) || arrivalDisplay === departureDisplay) {
                 return;
             }
             const tooltipNumber = trainDiv.querySelector('.train-tooltip-number-value');
             if (!tooltipNumber) return;
             const rect = trainDiv.getBoundingClientRect();
             const onRightSide = (e.clientX - rect.left) >= rect.width / 2;
-            tooltipNumber.textContent = onRightSide ? train.departureTrainNumber : train.arrivalTrainNumber;
+            tooltipNumber.textContent = onRightSide ? departureDisplay : arrivalDisplay;
         });
         trainDiv.addEventListener('click', () => {
             document.querySelectorAll('.train-bar.is-selected').forEach(el => el.classList.remove('is-selected'));
@@ -186,7 +211,10 @@ window.TrainRenderer = {
                 id: train.id,
                 ankomst: train.arrivalTrainNumber,
                 avgång: train.departureTrainNumber,
+                etikett: train.arrivalLabel || train.departureLabel,
                 spår: train.trackId,
+                delspår: train.subTrackIndex,
+                fordon: laneSpan,
                 status: train.status
             });
         });
@@ -203,5 +231,15 @@ window.TrainRenderer = {
         if (totalTrains === 3) return 16;
         if (totalTrains === 4) return 12;
         return 10;
+    },
+
+    _escape(value) {
+        return String(value ?? '').replace(/[&<>"']/g, (ch) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[ch]));
     }
 };

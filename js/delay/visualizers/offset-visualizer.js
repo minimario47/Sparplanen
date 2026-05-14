@@ -115,11 +115,13 @@ class OffsetVisualizer {
     /**
      * Apply delay visualization to train bar
      */
-    apply(trainBar, train, delayInfo, conflicts = null) {
+    apply(trainBar, train, delayInfo, conflicts = null, context = null, options = {}) {
         if (!trainBar || !train || !delayInfo) return;
         
         // Remove existing delay overlays
-        this.remove(trainBar);
+        if (!options.preserve) {
+            this.remove(trainBar);
+        }
         
         const delayMinutes = delayInfo.delayMinutes;
         const severity = this.getSeverity(delayMinutes);
@@ -140,6 +142,9 @@ class OffsetVisualizer {
         const delayPixels = absDelayMinutes * pixelsPerMinute;
         const color = this.getColor(severity);
         const opacity = this.getOpacity(severity);
+        const barWidth = parseFloat(trainBar.style.width) || trainBar.getBoundingClientRect().width || 0;
+        const leg = context?.leg || 'arrival';
+        const sideClass = leg === 'departure' ? 'delay-leg-departure' : 'delay-leg-arrival';
         
         // Get user's border color for dashed outline
         const userBorderColor = this.getUserBorderColor();
@@ -162,17 +167,23 @@ class OffsetVisualizer {
         
         // 1. CREATE MAIN DELAY OVERLAY (solid fill)
         const delayOverlay = document.createElement('div');
-        delayOverlay.className = 'delay-overlay-offset delay-overlay-main delay-severity-' + severity;
+        delayOverlay.className = `delay-overlay-offset delay-overlay-main ${sideClass} delay-severity-${severity}`;
         delayOverlay.dataset.severity = severity;
         delayOverlay.dataset.delayMinutes = delayMinutes;
+        if (context?.trainNumber) {
+            delayOverlay.dataset.trainNumber = context.trainNumber;
+        }
+        if (context?.leg) {
+            delayOverlay.dataset.leg = context.leg;
+        }
         
         if (delayMinutes > 0) {
             // Delayed - solid overlay for actual delay
-            delayOverlay.style.left = '0';
+            delayOverlay.style.left = leg === 'departure' ? `${barWidth}px` : '0';
             delayOverlay.style.width = `${delayPixels}px`;
         } else {
             // Early train: render as extension of the train bar with overlap-aware variants
-            this.applyEarlyExtension(trainBar, train, delayInfo, delayPixels);
+            this.applyEarlyExtension(trainBar, train, delayInfo, delayPixels, context);
             return;
         }
         
@@ -209,17 +220,19 @@ class OffsetVisualizer {
                 delayOverlay.style.opacity = '0.8';
             }
         }
+
+        this.addInlineLabel(delayOverlay, context, delayMinutes, delayPixels);
         
         trainBar.appendChild(delayOverlay);
         
         // 2. CREATE TURNAROUND TIME OVERLAY (diagonal lines - vändtid)
         if (turnaroundMinutes > 0) {
             const turnaroundOverlay = document.createElement('div');
-            turnaroundOverlay.className = 'delay-overlay-offset delay-overlay-turnaround delay-severity-' + severity;
+            turnaroundOverlay.className = `delay-overlay-offset delay-overlay-turnaround ${sideClass} delay-severity-${severity}`;
             turnaroundOverlay.dataset.type = 'turnaround';
             turnaroundOverlay.title = `Vändtid: ${turnaroundMinutes} min`;
             
-            turnaroundOverlay.style.left = `${delayPixels}px`;
+            turnaroundOverlay.style.left = `${(leg === 'departure' ? barWidth : 0) + delayPixels}px`;
             turnaroundOverlay.style.width = `${turnaroundPixels}px`;
             turnaroundOverlay.style.setProperty('--overlay-color', userBorderColor);
 
@@ -234,11 +247,11 @@ class OffsetVisualizer {
         // 3. CREATE TOLERANCE OVERLAY (dotted border - konfliktolerans)
         if (toleranceMinutes > 0) {
             const toleranceOverlay = document.createElement('div');
-            toleranceOverlay.className = 'delay-overlay-offset delay-overlay-tolerance delay-severity-' + severity;
+            toleranceOverlay.className = `delay-overlay-offset delay-overlay-tolerance ${sideClass} delay-severity-${severity}`;
             toleranceOverlay.dataset.type = 'tolerance';
             toleranceOverlay.title = `Konfliktolerans: ${toleranceMinutes} min`;
             
-            const toleranceStart = delayPixels + turnaroundPixels;
+            const toleranceStart = (leg === 'departure' ? barWidth : 0) + delayPixels + turnaroundPixels;
             toleranceOverlay.style.left = `${toleranceStart}px`;
             toleranceOverlay.style.width = `${tolerancePixels}px`;
             toleranceOverlay.style.borderColor = userBorderColor;
@@ -267,6 +280,20 @@ class OffsetVisualizer {
                 pixels: delayPixels + turnaroundPixels + tolerancePixels
             });
         }
+    }
+
+    addInlineLabel(overlay, context, delayMinutes, widthPx) {
+        if (!overlay || !context) return;
+        const label = document.createElement('span');
+        label.className = 'delay-overlay__label';
+        const prefix = delayMinutes > 0 ? '+' : '';
+        label.textContent = `${context.labelPrefix || ''} ${context.trainNumber || ''} ${prefix}${delayMinutes}`.trim();
+        label.title = label.textContent;
+        if (widthPx < 42) {
+            label.classList.add('delay-overlay__label--compact');
+            label.textContent = `${prefix}${delayMinutes}`;
+        }
+        overlay.appendChild(label);
     }
     
     /**
@@ -337,39 +364,46 @@ class OffsetVisualizer {
         }
     }
 
-    applyEarlyExtension(trainBar, train, delayInfo, delayPixels) {
+    applyEarlyExtension(trainBar, train, delayInfo, delayPixels, context = null) {
         const visual = trainBar.querySelector('.train-bar-visual') || trainBar;
         const visualStyle = window.getComputedStyle(visual);
         const barColor = visualStyle.backgroundColor || this.settings.colors.early || '#22C55E';
         const borderColor = visualStyle.borderColor || this.getUserBorderColor();
         const delayMinutes = Math.abs(delayInfo.delayMinutes || 0);
+        const leg = context?.leg || 'arrival';
 
         const arrMs = train.arrTime ? train.arrTime.getTime() : null;
-        if (!arrMs) return;
-        const earlyStartMs = arrMs - delayMinutes * 60 * 1000;
+        const depMs = train.depTime ? train.depTime.getTime() : null;
+        const anchorMs = leg === 'departure' ? depMs : arrMs;
+        if (!anchorMs) return;
+        const earlyStartMs = anchorMs - delayMinutes * 60 * 1000;
 
         const sameTrack = Array.isArray(window.cachedTrains)
             ? window.cachedTrains.filter((other) => other.id !== train.id && other.trackId === train.trackId)
             : [];
         let clipPixels = delayPixels;
-        for (const other of sameTrack) {
-            const otherEndMs = other.depTime ? other.depTime.getTime() : (other.arrTime ? other.arrTime.getTime() : null);
-            if (!otherEndMs) continue;
-            if (otherEndMs <= earlyStartMs || otherEndMs >= arrMs) continue;
-            const overlapMinutes = Math.ceil((otherEndMs - earlyStartMs) / 60000);
-            const overlapPixels = Math.max(0, overlapMinutes * (window.currentPixelsPerHour / 60));
-            clipPixels = Math.min(clipPixels, Math.max(0, delayPixels - overlapPixels));
+        if (leg !== 'departure') {
+            for (const other of sameTrack) {
+                const otherEndMs = other.depTime ? other.depTime.getTime() : (other.arrTime ? other.arrTime.getTime() : null);
+                if (!otherEndMs) continue;
+                if (otherEndMs <= earlyStartMs || otherEndMs >= anchorMs) continue;
+                const overlapMinutes = Math.ceil((otherEndMs - earlyStartMs) / 60000);
+                const overlapPixels = Math.max(0, overlapMinutes * (window.currentPixelsPerHour / 60));
+                clipPixels = Math.min(clipPixels, Math.max(0, delayPixels - overlapPixels));
+            }
         }
 
         /* Too narrow to read as a bar segment (e.g. overlap on same track) — use pill instead of a green sliver */
         const minEarlyWidthPx = 12;
         if (clipPixels <= minEarlyWidthPx) {
             const pill = document.createElement('div');
-            pill.className = 'early-pill-floating';
+            pill.className = `early-pill-floating early-pill-floating--${leg}`;
             const style = this.settings.visualizationStyle || 'color-coded';
-            if (style === 'dashed') {
+            if (style === 'dashed' || context?.trainNumber) {
                 pill.classList.add('early-pill-floating--with-text');
-                pill.textContent = `↶ ${delayMinutes} min`;
+                pill.textContent = context?.trainNumber
+                    ? `${context.labelPrefix || ''} ${context.trainNumber} -${delayMinutes}`.trim()
+                    : `-${delayMinutes} min`;
             }
             const partialNote = clipPixels < delayPixels
                 ? ' (kortare p.g.a. annat tåg på samma spår)'
@@ -381,22 +415,26 @@ class OffsetVisualizer {
             return;
         }
 
-        const timeStr = train.arrTime.toTimeString().slice(0, 5);
+        const timeStr = (leg === 'departure' ? train.depTime : train.arrTime).toTimeString().slice(0, 5);
         const isPartial = clipPixels < delayPixels;
         const titleParts = [
-            `För tidig med ${delayMinutes} min (ej försening)`,
-            `Planerad ankomst ${timeStr}`
+            `${context?.trainNumber ? `Tåg ${context.trainNumber}: ` : ''}För tidig med ${delayMinutes} min`,
+            `${leg === 'departure' ? 'Planerad avgång' : 'Planerad ankomst'} ${timeStr}`
         ];
         if (isPartial) {
             titleParts.push('Kortare segment — annat tåg på samma spår');
         }
 
         const earlyOverlay = document.createElement('div');
-        earlyOverlay.className = 'delay-overlay-offset early-extension';
+        earlyOverlay.className = `delay-overlay-offset early-extension early-extension--${leg}`;
         if (isPartial) {
             earlyOverlay.classList.add('early-extension--partial');
         }
-        earlyOverlay.style.left = `-${clipPixels}px`;
+        if (leg === 'departure') {
+            earlyOverlay.style.right = '0';
+        } else {
+            earlyOverlay.style.left = `-${clipPixels}px`;
+        }
         earlyOverlay.style.width = `${clipPixels}px`;
         earlyOverlay.style.setProperty('--early-bar-color', barColor);
         earlyOverlay.style.setProperty('--early-border-color', borderColor);
@@ -405,10 +443,12 @@ class OffsetVisualizer {
         earlyOverlay.title = titleParts.join(' · ');
 
         const visStyle = this.settings.visualizationStyle || 'color-coded';
-        if (visStyle === 'dashed') {
+        if (visStyle === 'dashed' || clipPixels >= 42) {
             const labelEl = document.createElement('span');
             labelEl.className = 'early-extension__label early-extension__label--visible';
-            labelEl.textContent = `↶${delayMinutes} min`;
+            labelEl.textContent = context?.trainNumber
+                ? `${context.labelPrefix || ''} ${context.trainNumber} -${delayMinutes}`.trim()
+                : `-${delayMinutes} min`;
             labelEl.setAttribute('aria-hidden', 'true');
             earlyOverlay.appendChild(labelEl);
         }
@@ -460,4 +500,3 @@ class OffsetVisualizer {
 
 // Export for use in other modules
 window.OffsetVisualizer = OffsetVisualizer;
-

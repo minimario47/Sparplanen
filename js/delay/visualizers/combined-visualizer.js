@@ -25,17 +25,17 @@ class CombinedVisualizer {
     /**
      * Apply both visualizations to train bar
      */
-    apply(trainBar, train, delayInfo, conflicts = null) {
+    apply(trainBar, train, delayInfo, conflicts = null, context = null, options = {}) {
         if (!trainBar || !train || !delayInfo) return;
         
         // Add mode class for CSS adjustments
         trainBar.classList.add('delay-mode-both');
         
         // Apply offset visualization
-        this.offsetVisualizer.apply(trainBar, train, delayInfo, conflicts);
+        this.offsetVisualizer.apply(trainBar, train, delayInfo, conflicts, context, options);
         
         // Apply icon visualization
-        this.iconVisualizer.apply(trainBar, train, delayInfo, conflicts);
+        this.iconVisualizer.apply(trainBar, train, delayInfo, conflicts, context, { preserve: true });
         
         logger.info('Visualizer', `Applied combined visualization to train ${train.id}`, {
             delay: delayInfo.delayMinutes,
@@ -65,4 +65,3 @@ class CombinedVisualizer {
 
 // Export for use in other modules
 window.CombinedVisualizer = CombinedVisualizer;
-

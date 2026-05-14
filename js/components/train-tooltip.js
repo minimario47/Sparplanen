@@ -92,8 +92,8 @@ class TrainTooltip {
     }
 
     resolveTrainNumberByClickSide(train, trainBar, event) {
-        const arrival = String(train.arrivalTrainNumber || '').trim();
-        const departure = String(train.departureTrainNumber || '').trim();
+        const arrival = String(train.arrivalTrainNumber || train.arrivalLabel || '').trim();
+        const departure = String(train.departureTrainNumber || train.departureLabel || '').trim();
         if (!arrival) return departure;
         if (!departure) return arrival;
 
@@ -215,7 +215,7 @@ class TrainTooltip {
      * Build tooltip content HTML - Clean, professional design
      */
     buildContent(train, delayInfo, selectedTrainNumber = '') {
-        const trainNumber = selectedTrainNumber || train.arrivalTrainNumber || train.departureTrainNumber;
+        const trainNumber = selectedTrainNumber || train.arrivalTrainNumber || train.departureTrainNumber || train.arrivalLabel || train.departureLabel;
         const trainType = this.getTrainType(train.type);
         const trackInfo = train.trackId ? `Spår ${train.trackId}` : 'Okänt spår';
         
@@ -612,4 +612,3 @@ class TrainTooltip {
 
 // Initialize globally
 window.trainTooltip = new TrainTooltip();
-

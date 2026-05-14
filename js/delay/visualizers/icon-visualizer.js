@@ -67,14 +67,18 @@ class IconVisualizer {
     /**
      * Create delay badge element
      */
-    createBadge(delayMinutes, severity, side) {
+    createBadge(delayMinutes, severity, side, context = null) {
         const badge = document.createElement('div');
         badge.className = `delay-badge-icon delay-badge-${side} severity-${severity}`;
         
         const prefix = delayMinutes > 0 ? '+' : '';
-        badge.textContent = `${prefix}${delayMinutes}min`;
+        badge.textContent = context?.trainNumber
+            ? `${context.labelPrefix || ''} ${context.trainNumber} ${prefix}${delayMinutes}`.trim()
+            : `${prefix}${delayMinutes}min`;
         badge.dataset.delayMinutes = delayMinutes;
         badge.dataset.severity = severity;
+        if (context?.trainNumber) badge.dataset.trainNumber = context.trainNumber;
+        if (context?.leg) badge.dataset.leg = context.leg;
         
         return badge;
     }
@@ -82,11 +86,13 @@ class IconVisualizer {
     /**
      * Apply delay visualization to train bar
      */
-    apply(trainBar, train, delayInfo, conflicts = null) {
+    apply(trainBar, train, delayInfo, conflicts = null, context = null, options = {}) {
         if (!trainBar || !train || !delayInfo) return;
         
         // Remove existing badges
-        this.remove(trainBar);
+        if (!options.preserve) {
+            this.remove(trainBar);
+        }
         
         const delayMinutes = delayInfo.delayMinutes;
         const severity = this.getSeverity(delayMinutes);
@@ -109,8 +115,12 @@ class IconVisualizer {
             return a.length > 0 && b.length > 0 && a === b;
         };
 
-        const arrivalDelayed = hasArrival && matchesDelay(train.arrivalTrainNumber);
-        const departureDelayed = hasDeparture && matchesDelay(train.departureTrainNumber);
+        const arrivalDelayed = context?.leg
+            ? context.leg === 'arrival'
+            : hasArrival && matchesDelay(train.arrivalTrainNumber);
+        const departureDelayed = context?.leg
+            ? context.leg === 'departure'
+            : hasDeparture && matchesDelay(train.departureTrainNumber);
 
         // När samma tågnummer/anslag gäller både ankomst och avgång: fortfarande bara en bolliknande etikett per tjänst (ingen dubbel vänster+höger).
         const showDepartureFallback =
@@ -134,7 +144,7 @@ class IconVisualizer {
         }
 
         if (useArrival) {
-            const badge = this.createBadge(delayMinutes, severity, 'arrival');
+            const badge = this.createBadge(delayMinutes, severity, 'arrival', context);
             const position = this.calculateBadgePosition(trainBar, 'left');
             Object.assign(badge.style, {
                 top: `${position.top}px`,
@@ -143,7 +153,7 @@ class IconVisualizer {
             trainBar.appendChild(badge);
             logger.info('Visualizer', `Added arrival badge to train ${train.id}`, { delay: delayMinutes, severity });
         } else if (useDeparture) {
-            const badge = this.createBadge(delayMinutes, severity, 'departure');
+            const badge = this.createBadge(delayMinutes, severity, 'departure', context);
             const position = this.calculateBadgePosition(trainBar, 'right');
             Object.assign(badge.style, {
                 top: `${position.top}px`,
@@ -243,4 +253,3 @@ class IconVisualizer {
 
 // Export for use in other modules
 window.IconVisualizer = IconVisualizer;
-

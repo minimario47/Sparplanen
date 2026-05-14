@@ -10,6 +10,7 @@ class TimeManager {
     this.timeRange = 4; // Hours to display (1, 3, 4, 6, 8, 12)
     this.isFollowingMode = false;
     this.followingInterval = null;
+    this.qaOverrideActive = false;
     
     // Settings (will be updated from settings modal)
     this.offsetPercentage = 20; // Percentage from left edge where red line is fixed (0-50%)
@@ -24,7 +25,32 @@ class TimeManager {
     
     // Initialize
     this.restoreState();
+    this.applyQaOverrideFromUrl();
     console.log('✅ TimeManager initialized:', this.getStateInfo());
+  }
+
+  applyQaOverrideFromUrl() {
+    if (typeof window === 'undefined' || !window.location || !window.URLSearchParams) return;
+    const params = new URLSearchParams(window.location.search || '');
+    const week = params.get('week');
+    const day = params.get('day');
+    if (!week || !day) return;
+
+    const dayKey = (window.SparplanenResolve && window.SparplanenResolve.getStockholmSwedishDayKey)
+      ? (window.SparplanenResolve.pickWeekAndDay(window.SPARPLANEN_WEEKS, window.SPARPLANEN_ANCHORS).day || day)
+      : day;
+    const anchors = window.SPARPLANEN_ANCHORS || {};
+    const normalizedDay = String(dayKey || day).toLowerCase();
+    const anchor = anchors[week]?.[normalizedDay] || anchors[week]?.[String(day).toLowerCase()];
+    if (!anchor) return;
+
+    const [year, month, date] = anchor.split('-').map(Number);
+    const [hours, minutes] = String(params.get('time') || '19:00').split(':').map(Number);
+    if (![year, month, date, hours, minutes].every(Number.isFinite)) return;
+
+    this.viewTime = new Date(year, month - 1, date, hours, minutes, 0, 0);
+    this.isFollowingMode = false;
+    this.qaOverrideActive = true;
   }
   
   /**
@@ -115,6 +141,13 @@ class TimeManager {
    * Jump to current time (positions current time at red line)
    */
   jumpToNow() {
+    if (this.qaOverrideActive) {
+      this.isFollowingMode = false;
+      this.notifyChange('jump_to_now');
+      console.log('QA schedule override is active; staying on the selected schedule time.');
+      return false;
+    }
+
     const now = new Date();
     
     // Calculate where red line is relative to center
@@ -177,6 +210,12 @@ class TimeManager {
    */
   activateFollowingMode() {
     if (this.isFollowingMode) return;
+    if (this.qaOverrideActive) {
+      this.isFollowingMode = false;
+      this.notifyChange('following_deactivated');
+      console.log('QA schedule override is active; following mode remains disabled.');
+      return;
+    }
     
     // First jump to now
     this.jumpToNow();

@@ -53,6 +53,8 @@ def emit_trains() -> None:
             "trackId": e["trackId"],
             "arrivalTrainNumber": e["arrivalTrainNumber"] or "",
             "departureTrainNumber": e["departureTrainNumber"] or "",
+            "arrivalLabel": e.get("arrivalLabel") or "",
+            "departureLabel": e.get("departureLabel") or "",
             "scheduledArrivalTime": e["scheduledArrivalTime"] or "",
             "scheduledDepartureTime": e["scheduledDepartureTime"] or "",
             "origin": "",

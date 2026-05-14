@@ -153,6 +153,16 @@ class ConflictDetector {
             
             // Skip if not on same track
             if (otherTrain.trackId !== train.trackId) return;
+
+            const trainLaneStart = parseInt(train.subTrackIndex, 10);
+            const otherLaneStart = parseInt(otherTrain.subTrackIndex, 10);
+            if (Number.isFinite(trainLaneStart) && Number.isFinite(otherLaneStart)) {
+                const trainSpan = Math.max(1, parseInt(train.vehicleCount || train.trainSet?.count, 10) || 1);
+                const otherSpan = Math.max(1, parseInt(otherTrain.vehicleCount || otherTrain.trainSet?.count, 10) || 1);
+                const trainLaneEnd = trainLaneStart + trainSpan;
+                const otherLaneEnd = otherLaneStart + otherSpan;
+                if (!(trainLaneStart < otherLaneEnd && otherLaneStart < trainLaneEnd)) return;
+            }
             
             // Get other train's times (without delay, as we're checking if delayed train affects it)
             const otherArrival = otherTrain.arrTime ? Math.floor(otherTrain.arrTime.getTime() / (1000 * 60)) % (24 * 60) : null;
@@ -269,4 +279,3 @@ class ConflictDetector {
 
 // Export for use in other modules
 window.ConflictDetector = ConflictDetector;
-

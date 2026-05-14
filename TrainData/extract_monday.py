@@ -117,6 +117,7 @@ def _is_red(color: Tuple[float, float, float]) -> bool:
 TIME_RE = re.compile(r"^(\d{1,2}):(\d{2})$")
 TRACK_LABEL_RE = re.compile(r"^(\d{1,2})(\.{0,3})$")
 DIGITS_ONLY_RE = re.compile(r"^\d{3,5}$")   # valid train numbers are 3-5 digits
+ENDPOINT_LABEL_RE = re.compile(r"^[A-ZÅÄÖ]{1,4}$")
 
 
 # ─── Data classes ─────────────────────────────────────────────────────────────
@@ -139,6 +140,16 @@ class NumberToken:
 
 
 @dataclass
+class LabelToken:
+    text: str
+    x0: float
+    x1: float
+    y_center: float
+    page: int
+    kind: str = "in_diagram"
+
+
+@dataclass
 class Slot:
     id: int = 0
     page: int = 0
@@ -151,6 +162,8 @@ class Slot:
     bar_color: Tuple[float, float, float] = (0.0, 0.0, 0.0)
     arrival_train: str = ""
     departure_train: str = ""
+    arrival_label: str = ""
+    departure_label: str = ""
     arrival_time: str = ""
     departure_time: str = ""
     continues_from_prev_page: bool = False
@@ -501,6 +514,34 @@ def build_train_number_tokens(page, page_num: int) -> List[NumberToken]:
     return in_diagram + right_margin
 
 
+def build_endpoint_label_tokens(page, page_num: int) -> List[LabelToken]:
+    """
+    Operational endpoint labels such as D, OGR, and GSV are rendered at the
+    same baseline as train-number labels, but they are not train numbers.  Keep
+    them as separate labels so the app can show the movement without matching
+    them against delay or track-change APIs.
+    """
+    out: List[LabelToken] = []
+    for w in page.extract_words(extra_attrs=["size"]):
+        text = str(w.get("text", "")).strip()
+        if not ENDPOINT_LABEL_RE.match(text):
+            continue
+        size = float(w.get("size", 0) or 0)
+        in_diagram = abs(size - MAIN_NUMBER_SIZE) <= NUMBER_SIZE_TOL and DIAGRAM_X0 <= w["x0"] < RIGHT_MARGIN_X
+        right_margin = abs(size - RIGHT_MARGIN_NUMBER_SIZE) <= NUMBER_SIZE_TOL and w["x0"] >= RIGHT_MARGIN_X
+        if not in_diagram and not right_margin:
+            continue
+        out.append(LabelToken(
+            text=text,
+            x0=w["x0"],
+            x1=w["x1"],
+            y_center=(w["top"] + w["bottom"]) / 2,
+            page=page_num,
+            kind="right_margin_continuation" if right_margin else "in_diagram",
+        ))
+    return out
+
+
 # ─── Stage 5: bars → slots ────────────────────────────────────────────────────
 
 def _snap_bars_to_rows(
@@ -649,6 +690,7 @@ def _assign_token_to_row(
 def attach_train_numbers(
     slots: List[Slot],
     tokens: List[NumberToken],
+    label_tokens: List[LabelToken],
     rows: List[TrackRow],
     cal: dict,
 ) -> None:
@@ -667,6 +709,15 @@ def attach_train_numbers(
 
     for _, toks in by_row.items():
         toks.sort(key=lambda t: t.x0)
+
+    labels_by_row: dict[Tuple[int, int], List[LabelToken]] = defaultdict(list)
+    for t in label_tokens:
+        row = _assign_token_to_row(t, rows)  # type: ignore[arg-type]
+        if row is None:
+            continue
+        labels_by_row[(row.track_num, row.sub_idx)].append(t)
+    for _, labels in labels_by_row.items():
+        labels.sort(key=lambda t: t.x0)
 
     # Train numbers are drawn inside the bar, flush-left for arrival and
     # flush-right for departure.  We accept tokens within a generous window
@@ -728,6 +779,48 @@ def attach_train_numbers(
             if rm:
                 slot.departure_train = rm[0].number
                 slot.departure_time = ""   # real departure time is on the next page
+
+        labels = labels_by_row.get((slot.track_num, slot.sub_idx), [])
+        if not slot.arrival_train:
+            arr_label_candidates = [
+                t for t in labels
+                if t.kind == "in_diagram"
+                and -EDGE_OUTSIDE_TOL <= (t.x0 - slot.x0) <= inside_tol
+                and t.x0 < bar_mid
+            ]
+            if arr_label_candidates:
+                slot.arrival_label = min(arr_label_candidates, key=lambda t: abs(t.x0 - slot.x0)).text
+
+        if not slot.departure_train:
+            dep_label_candidates = [
+                t for t in labels
+                if t.kind == "in_diagram"
+                and -inside_tol <= (t.x1 - slot.x1) <= EDGE_OUTSIDE_TOL
+                and t.x1 > bar_mid
+            ]
+            if dep_label_candidates:
+                slot.departure_label = min(dep_label_candidates, key=lambda t: abs(t.x1 - slot.x1)).text
+
+        if slot.continues_to_next_page and not slot.departure_train and not slot.departure_label:
+            rm_labels = [t for t in labels if t.kind == "right_margin_continuation"]
+            if rm_labels:
+                slot.departure_label = rm_labels[0].text
+
+        # Some PDF rows encode a pure operational move with only a centered
+        # label (SÄR, MVH, OGR, D, ...), not a train number at either edge.
+        # Keep the label rather than emitting an anonymous blank slot.
+        if not slot.arrival_train and not slot.departure_train and not slot.arrival_label and not slot.departure_label:
+            broad_label_candidates = [
+                t for t in labels
+                if t.kind == "in_diagram"
+                and (slot.x0 - EDGE_OUTSIDE_TOL) <= t.x0 <= (slot.x1 + max(80.0, bar_width * 0.8))
+            ]
+            if broad_label_candidates:
+                nearest = min(broad_label_candidates, key=lambda t: min(abs(t.x0 - slot.x0), abs(t.x1 - slot.x1)))
+                if nearest.x0 < bar_mid:
+                    slot.arrival_label = nearest.text
+                else:
+                    slot.departure_label = nearest.text
 
         # Fall back to bar edges for times when a number is known but no label time.
         if slot.arrival_train and not slot.arrival_time:
@@ -803,6 +896,46 @@ def stitch_across_pages(slots: List[Slot]) -> List[Slot]:
             break
 
     return [s for s in slots if s.id not in removed]
+
+
+def resolve_anonymous_slots(slots: List[Slot]) -> None:
+    """
+    A few PDF vehicle lanes are rendered as unlabeled companion bars next to a
+    labeled move.  Keep them visible, but copy the nearest companion's endpoint
+    text as labels so the app never renders an anonymous train bar or matches
+    those copied labels as train numbers.
+    """
+    def has_identity(s: Slot) -> bool:
+        return bool(s.arrival_train or s.departure_train or s.arrival_label or s.departure_label)
+
+    def overlap_pct(a: Slot, b: Slot) -> float:
+        lo = max(a.x0, b.x0)
+        hi = min(a.x1, b.x1)
+        if hi <= lo:
+            return 0.0
+        return (hi - lo) / max(1.0, min(a.x1 - a.x0, b.x1 - b.x0))
+
+    for slot in slots:
+        if has_identity(slot):
+            continue
+        candidates = [
+            other for other in slots
+            if other.id != slot.id
+            and has_identity(other)
+            and other.page == slot.page
+            and other.track_num == slot.track_num
+            and abs(other.sub_idx - slot.sub_idx) <= 2
+            and (overlap_pct(slot, other) >= 0.45 or abs(other.x0 - slot.x0) <= 5.0)
+        ]
+        if not candidates:
+            continue
+        nearest = min(candidates, key=lambda other: (
+            abs(other.sub_idx - slot.sub_idx),
+            -overlap_pct(slot, other),
+            abs(other.x0 - slot.x0) + abs(other.x1 - slot.x1),
+        ))
+        slot.arrival_label = nearest.arrival_train or nearest.arrival_label
+        slot.departure_label = nearest.departure_train or nearest.departure_label
 
 
 # ─── Stage 8: closures ────────────────────────────────────────────────────────
@@ -887,7 +1020,8 @@ def extract_page(page, page_num: int) -> Tuple[List[Slot], List[Closure], dict]:
 
     slots = group_bars_into_slots(train_rects, rows, page_num)
     tokens = build_train_number_tokens(page, page_num)
-    attach_train_numbers(slots, tokens, rows, cal)
+    label_tokens = build_endpoint_label_tokens(page, page_num)
+    attach_train_numbers(slots, tokens, label_tokens, rows, cal)
     closures = classify_closures(closure_rects, rows, page_num, cal)
     return slots, closures, cal
 
@@ -907,6 +1041,7 @@ def run(pdf_path: Path) -> Tuple[List[Slot], List[Closure]]:
         c.id = i
 
     all_slots = stitch_across_pages(all_slots)
+    resolve_anonymous_slots(all_slots)
     all_closures = stitch_closures_across_pages(all_closures)
     return all_slots, all_closures
 
@@ -932,6 +1067,8 @@ def emit_outputs(
             "subTrackIndex": s.sub_idx,
             "arrivalTrainNumber": s.arrival_train,
             "departureTrainNumber": s.departure_train,
+            "arrivalLabel": s.arrival_label,
+            "departureLabel": s.departure_label,
             "scheduledArrivalTime": s.arrival_time,
             "scheduledDepartureTime": s.departure_time,
             "origin": "",
@@ -981,6 +1118,7 @@ def emit_outputs(
     fields = [
         "id", "page", "track", "sub", "x0", "x1", "y",
         "arrival_train", "departure_train", "arrival_time", "departure_time",
+        "arrival_label", "departure_label",
         "vehicle_count", "bar_color",
         "continues_from_prev", "continues_to_next",
         "stitched_from",
@@ -994,6 +1132,7 @@ def emit_outputs(
                 round(s.x0, 1), round(s.x1, 1), round(s.y_center, 1),
                 s.arrival_train, s.departure_train,
                 s.arrival_time, s.departure_time,
+                s.arrival_label, s.departure_label,
                 s.vehicle_count,
                 ",".join(f"{c:.3f}" for c in s.bar_color),
                 s.continues_from_prev_page, s.continues_to_next_page,
