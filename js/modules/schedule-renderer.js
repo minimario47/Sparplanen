@@ -170,6 +170,10 @@ function prepareTrainData() {
         qaTime: resolved.qaTime || null
     };
     window.currentScheduleSelection = scheduleSelection;
+
+    if (window.TimeManager && typeof window.TimeManager.setScheduleAnchor === 'function') {
+        window.TimeManager.setScheduleAnchor(resolved.anchorStr || null);
+    }
     const serviceInput = (resolved.usedBundle && Array.isArray(resolved.services)) ? resolved.services : initialServiceData;
     
     function parseTimeToDate(timeStr, baseDate) {
@@ -575,7 +579,9 @@ function updateCurrentTimeLine() {
     if (!window.TimeManager || !timelineStart) return;
     
     const state = window.TimeManager.getState();
-    const now = new Date();
+    const now = (typeof window.TimeManager.getEffectiveNow === 'function')
+        ? window.TimeManager.getEffectiveNow()
+        : new Date();
     const { offsetPercentage, isFollowingMode } = state;
     
     const timelineCanvas = document.getElementById('timeline-canvas');

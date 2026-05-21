@@ -11,6 +11,7 @@ class TimeManager {
     this.isFollowingMode = false;
     this.followingInterval = null;
     this.qaOverrideActive = false;
+    this.scheduleAnchorStr = null;
     
     // Settings (will be updated from settings modal)
     this.offsetPercentage = 20; // Percentage from left edge where red line is fixed (0-50%)
@@ -51,6 +52,82 @@ class TimeManager {
     this.viewTime = new Date(year, month - 1, date, hours, minutes, 0, 0);
     this.isFollowingMode = false;
     this.qaOverrideActive = true;
+  }
+
+  /**
+   * Bind view/navigation time to the loaded schedule's calendar day.
+   * Train timestamps use the PDF anchor date; viewTime must use the same day
+   * or the visibility filter excludes every train when the bundle is a week behind.
+   */
+  setScheduleAnchor(anchorStr) {
+    const next = anchorStr || null;
+    const changed = next !== this.scheduleAnchorStr;
+    this.scheduleAnchorStr = next;
+    if (this.qaOverrideActive) return;
+
+    const realigned = this.syncViewTimeToScheduleDate();
+    if (changed || realigned) {
+      const todayYmd = this.getStockholmYmd(new Date());
+      const anchorYmd = this.getScheduleAnchorYmd();
+      if (anchorYmd && anchorYmd !== todayYmd) {
+        console.log(
+          `📅 Schedule uses ${anchorYmd} (today is ${todayYmd}); aligned view to schedule day`
+        );
+      }
+    }
+  }
+
+  getScheduleAnchorYmd() {
+    if (this.scheduleAnchorStr) return this.scheduleAnchorStr;
+    return this.getStockholmYmd(new Date());
+  }
+
+  getStockholmYmd(date) {
+    return new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Europe/Stockholm',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(date);
+  }
+
+  parseAnchorYmd(ymd) {
+    const [year, month, day] = String(ymd).split('-').map(Number);
+    if (![year, month, day].every(Number.isFinite)) return null;
+    return { year, month, day };
+  }
+
+  mapTimeToScheduleDate(sourceDate) {
+    const anchor = this.parseAnchorYmd(this.getScheduleAnchorYmd());
+    if (!anchor || !(sourceDate instanceof Date) || Number.isNaN(sourceDate.getTime())) {
+      return sourceDate instanceof Date ? new Date(sourceDate.getTime()) : new Date();
+    }
+    return new Date(
+      anchor.year,
+      anchor.month - 1,
+      anchor.day,
+      sourceDate.getHours(),
+      sourceDate.getMinutes(),
+      sourceDate.getSeconds(),
+      sourceDate.getMilliseconds()
+    );
+  }
+
+  /**
+   * Clock "now" on the schedule calendar day (real time-of-day, PDF anchor date).
+   */
+  getEffectiveNow() {
+    return this.mapTimeToScheduleDate(new Date());
+  }
+
+  syncViewTimeToScheduleDate() {
+    const mapped = this.mapTimeToScheduleDate(this.viewTime);
+    const changed = mapped.getTime() !== this.viewTime.getTime();
+    if (changed) {
+      this.viewTime = mapped;
+      this.saveState();
+    }
+    return changed;
   }
   
   /**
@@ -95,7 +172,7 @@ class TimeManager {
     const newTime = new Date(this.viewTime.getTime() - jumpHours * 60 * 60000);
     
     // Check boundary
-    const now = new Date();
+    const now = this.getEffectiveNow();
     const maxPast = new Date(now.getTime() - this.maxPastHours * 60 * 60000);
     
     if (newTime < maxPast) {
@@ -103,7 +180,7 @@ class TimeManager {
       return false;
     }
     
-    this.viewTime = newTime;
+    this.viewTime = this.mapTimeToScheduleDate(newTime);
     this.deactivateFollowingMode(); // User took manual control
     this.saveState();
     this.notifyChange('navigate_previous');
@@ -120,7 +197,7 @@ class TimeManager {
     const newTime = new Date(this.viewTime.getTime() + jumpHours * 60 * 60000);
     
     // Check boundary
-    const now = new Date();
+    const now = this.getEffectiveNow();
     const maxFuture = new Date(now.getTime() + this.maxFutureHours * 60 * 60000);
     
     if (newTime > maxFuture) {
@@ -128,7 +205,7 @@ class TimeManager {
       return false;
     }
     
-    this.viewTime = newTime;
+    this.viewTime = this.mapTimeToScheduleDate(newTime);
     this.deactivateFollowingMode(); // User took manual control
     this.saveState();
     this.notifyChange('navigate_next');
@@ -148,7 +225,7 @@ class TimeManager {
       return false;
     }
 
-    const now = new Date();
+    const now = this.getEffectiveNow();
     
     // Calculate where red line is relative to center
     // Red line is at offsetPercentage% from left, center is at 50%
@@ -159,7 +236,7 @@ class TimeManager {
     // View time should be offset so current time appears at red line
     const targetTime = new Date(now.getTime() - offsetFromCenterHours * 60 * 60000);
     
-    this.viewTime = targetTime;
+    this.viewTime = this.mapTimeToScheduleDate(targetTime);
     this.saveState();
     this.notifyChange('jump_to_now');
     
@@ -181,13 +258,15 @@ class TimeManager {
     const offsetFromCenterPercent = this.offsetPercentage - 50;
     const offsetFromCenterHours = (offsetFromCenterPercent / 100) * this.timeRange;
 
-    this.viewTime = new Date(targetTime.getTime() - offsetFromCenterHours * 60 * 60000);
+    this.viewTime = this.mapTimeToScheduleDate(
+      new Date(targetTime.getTime() - offsetFromCenterHours * 60 * 60000)
+    );
 
     if (this.isFollowingMode) {
       this.deactivateFollowingMode();
     }
     this.saveState();
-    this.notifyChange('jump_to_now', { centeredAt: targetTime.toISOString() });
+    this.notifyChange('jump_to_now', { centeredAt: this.mapTimeToScheduleDate(targetTime).toISOString() });
 
     console.log('🎯 Centered on time:', targetTime.toLocaleString('sv-SE'));
     return true;
@@ -259,7 +338,7 @@ class TimeManager {
   updateFollowingMode() {
     if (!this.isFollowingMode) return;
     
-    const now = new Date();
+    const now = this.getEffectiveNow();
     
     // Calculate where red line is relative to center
     const offsetFromCenterPercent = this.offsetPercentage - 50;
@@ -279,7 +358,7 @@ class TimeManager {
       strategy = 'animate'; // Visible but smooth
     }
     
-    this.viewTime = targetTime;
+    this.viewTime = this.mapTimeToScheduleDate(targetTime);
     this.saveState();
     this.notifyChange('following_update', { strategy, diffMinutes });
     
