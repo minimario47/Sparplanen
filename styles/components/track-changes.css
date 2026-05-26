@@ -9,7 +9,8 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    z-index: 26;
+    /* Below train bars (z-index >= 10), so connector lines disappear behind the actual bar. */
+    z-index: 9;
 }
 
 .track-change-arrow,
@@ -25,7 +26,7 @@
 /* Arrow */
 .track-change-arrow {
     color: var(--accent-warning, #f59e0b);
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.18));
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.16));
 }
 
 .track-change-arrow svg {
@@ -34,14 +35,9 @@
 
 .track-change-arrow__shaft {
     stroke: currentColor;
-    stroke-width: 2;
+    stroke-width: 2.5;
     stroke-dasharray: 4 3;
     animation: track-change-march 600ms linear infinite;
-}
-
-.track-change-arrow__head {
-    stroke: currentColor;
-    stroke-width: 2;
 }
 
 .track-change-arrow__dot {
@@ -49,32 +45,8 @@
     opacity: 0.7;
 }
 
-.track-change-arrow__pill {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--accent-warning, #f59e0b);
-    color: #fff;
-    font-size: 9px;
-    font-weight: 700;
-    line-height: 1;
-    padding: 2px 5px;
-    border-radius: 4px;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    max-width: 120px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 .track-change-arrow--discrepancy {
     color: var(--danger, #dc2626);
-}
-
-.track-change-arrow--discrepancy .track-change-arrow__pill {
-    background: var(--danger, #dc2626);
 }
 
 /* Ghost trail */
@@ -86,7 +58,7 @@
         rgba(245, 158, 11, 0.08) 0 6px,
         transparent 6px 12px
     );
-    opacity: 0.7;
+    opacity: 0.62;
     overflow: hidden;
 }
 
@@ -100,30 +72,6 @@
         transparent 100%
     );
     animation: track-change-shimmer 1.6s ease-in-out infinite;
-}
-
-.track-change-ghost__label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--accent-warning, #f59e0b);
-    background: rgba(255, 255, 255, 0.85);
-    padding: 1px 5px;
-    border-radius: 3px;
-    pointer-events: none;
-    white-space: nowrap;
-    max-width: calc(100% - 8px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-[data-theme="dark"] .track-change-ghost__label {
-    background: rgba(20, 24, 32, 0.85);
-    color: #fbbf24;
 }
 
 /* Bar marker — subtle ring on the moved train bar */

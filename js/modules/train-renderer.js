@@ -58,8 +58,10 @@ window.TrainRenderer = {
         const laneStart = placement?.laneStart ?? placement?.position ?? 0;
         const laneSpan = Math.max(1, placement?.laneSpan || train.vehicleCount || train.trainSet?.count || 1);
         const totalOverlapping = placement?.totalOverlapping || trackLayout.laneCount || 1;
+        const trackLaneCount = Math.max(1, trackLayout.laneCount || 1);
+        const lanePressure = Math.max(1, totalOverlapping || 1);
+        const isCompressed = lanePressure > 3;
         const laneHeight = trackLayout.laneHeight || this._getTrainHeight(totalOverlapping);
-        const trainHeight = laneHeight * laneSpan;
         const showHoverTooltip = userSettings?.hoverTooltipEnabled !== false;
         
         const arrMinutes = train.arrTime ? (train.arrTime - startTime) / (1000 * 60) : null;
@@ -89,9 +91,23 @@ window.TrainRenderer = {
         trainDiv.style.left = `${left}px`;
         trainDiv.style.width = `${width}px`;
         
-        const verticalPadding = trackLayout.laneCount >= 3 ? 1 : (trackLayout.laneCount === 2 ? 2 : 3);
-        trainDiv.style.height = `${Math.max(trainHeight - verticalPadding * 2, 8)}px`;
-        trainDiv.style.top = `${trackLayout.top + (laneStart * laneHeight) + verticalPadding}px`;
+        const verticalPadding = isCompressed ? (trackLaneCount >= 3 ? 1 : (trackLaneCount === 2 ? 2 : 3)) : 1;
+        const visualLaneCount = isCompressed
+            ? trackLaneCount
+            : Math.max(3, placement?.visualLaneCount || 3);
+        const visualLaneSpan = isCompressed
+            ? laneSpan
+            : Math.min(Math.max(1, placement?.visualLaneSpan || laneSpan), visualLaneCount);
+        const visualLaneStartRaw = isCompressed
+            ? laneStart
+            : (placement?.visualLaneStart ?? laneStart);
+        const visualLaneStart = isCompressed
+            ? visualLaneStartRaw
+            : Math.min(Math.max(0, visualLaneStartRaw), Math.max(0, visualLaneCount - visualLaneSpan));
+        const visualLaneHeight = isCompressed ? laneHeight : (trackLayout.height / visualLaneCount);
+        const visibleTrainHeight = Math.max(visualLaneHeight * visualLaneSpan - verticalPadding * 2, 8);
+        trainDiv.style.height = `${visibleTrainHeight}px`;
+        trainDiv.style.top = `${trackLayout.top + (visualLaneStart * visualLaneHeight) + verticalPadding}px`;
         trainDiv.style.zIndex = 10 + laneStart;
         trainDiv.dataset.baseZIndex = String(10 + laneStart);
         
@@ -103,6 +119,11 @@ window.TrainRenderer = {
         trainDiv.dataset.bucket = train.lengthClass;
         trainDiv.dataset.subTrackIndex = String(train.subTrackIndex ?? laneStart);
         trainDiv.dataset.vehicleCount = String(laneSpan);
+        trainDiv.dataset.lanePressure = String(lanePressure);
+        trainDiv.dataset.trackLaneCount = String(trackLaneCount);
+        trainDiv.dataset.visualLaneStart = String(visualLaneStart);
+        trainDiv.dataset.visualLaneSpan = String(visualLaneSpan);
+        trainDiv.dataset.totalOverlapping = String(totalOverlapping);
         if (train.connectionGroupId) {
             trainDiv.dataset.connectionGroupId = train.connectionGroupId;
         }
@@ -114,7 +135,6 @@ window.TrainRenderer = {
 
         const isVeryNarrow = width < 60;
         const isNarrow = width < 100;
-        const isCompressed = (trackLayout.laneCount || totalOverlapping) >= 3;
         
         const hasArrival = !!train.arrivalTrainNumber;
         const hasDeparture = !!train.departureTrainNumber;
@@ -127,10 +147,21 @@ window.TrainRenderer = {
         const displaySingleNumber = sameNumber || isVeryNarrow || !(hasArrivalDisplay && hasDepartureDisplay);
         const singleNumber = arrivalDisplay || departureDisplay;
 
-        let fontSize = '14px';
-        if (isCompressed || isNarrow) fontSize = '12px';
-        if (trainHeight < 20) fontSize = '10px';
-        if (trainHeight < 16) fontSize = '9px';
+        let fontSizePx;
+        if (isCompressed) {
+            fontSizePx = visibleTrainHeight >= 24 ? 12 : (visibleTrainHeight >= 14 ? 10 : 9);
+        } else if (laneSpan >= 2) {
+            fontSizePx = Math.min(16, Math.max(13, Math.round(visibleTrainHeight * 0.48)));
+        } else {
+            const cap = lanePressure <= 1 ? 16 : 13;
+            fontSizePx = Math.min(cap, Math.max(11, Math.ceil(visibleTrainHeight * 0.82)));
+        }
+        if (isVeryNarrow) {
+            fontSizePx = Math.min(fontSizePx, 11);
+        } else if (isNarrow) {
+            fontSizePx = Math.min(fontSizePx, 12);
+        }
+        const fontSize = `${fontSizePx}px`;
 
         let numbersHTML = '';
         let singleAlignClass = '';
@@ -164,7 +195,7 @@ window.TrainRenderer = {
             </div>
         ` : '';
 
-        const densityClass = (trackLayout.laneCount || totalOverlapping) >= 3 ? 'density-3' : ((trackLayout.laneCount || totalOverlapping) === 2 ? 'density-2' : 'density-1');
+        const densityClass = lanePressure >= 3 ? 'density-3' : (lanePressure === 2 ? 'density-2' : 'density-1');
         const dividerHTML = laneSpan > 1
             ? Array.from({ length: laneSpan - 1 }, (_, idx) => {
                 const top = ((idx + 1) / laneSpan) * 100;

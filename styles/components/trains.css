@@ -165,7 +165,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--spacing-2);
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -211,7 +211,7 @@
 .train-bar.density-2 .train-bar-visual { border-width: 2px; }
 .train-bar.density-3 .train-bar-visual { border-width: 2px; }
 .train-bar.density-2 .train-numbers { padding: 0 var(--spacing-1); }
-.train-bar.density-3 .train-numbers { padding: 0 var(--spacing-1); font-size: 10px; }
+.train-bar.density-3 .train-numbers { padding: 0 var(--spacing-1); }
 
 /* Length-based coloring (uses length classes set by JS) */
 /* Light */

@@ -652,19 +652,26 @@
     left: 0; /* real offset comes from inline style (negative) */
     height: 100%;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--early-bar-color, #dbeafe);
-    border: 1px solid var(--early-border-color, #334155);
+    border: 2px solid var(--early-border-color, #334155);
     border-right: none;
     border-radius: var(--radius-md) 0 0 var(--radius-md);
     overflow: hidden;
     pointer-events: auto;
     box-sizing: border-box;
+    box-shadow:
+        inset 0 0 0 1px color-mix(in srgb, var(--early-accent-color, #22C55E) 12%, transparent),
+        0 1px 2px rgba(15, 23, 42, 0.12);
+    isolation: isolate;
 }
 
 .train-bar .delay-overlay-offset.early-extension--departure {
     left: auto;
     right: 0;
-    border-right: 1px solid var(--early-border-color, #334155);
+    border-right: 2px solid var(--early-border-color, #334155);
     border-left: none;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
@@ -672,31 +679,39 @@
 .early-extension::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    height: 3px;
-    background: #22C55E;
-    opacity: 0.88;
+    inset: 0;
+    z-index: 0;
+    background: repeating-linear-gradient(
+        -45deg,
+        color-mix(in srgb, var(--early-accent-color, #22C55E) 13%, transparent) 0 4px,
+        transparent 4px 10px
+    );
+    opacity: 0.64;
     pointer-events: none;
-    border-top-left-radius: var(--radius-md);
 }
 
 .early-extension--departure::before {
-    left: auto;
-    right: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: var(--radius-md);
+    background: repeating-linear-gradient(
+        45deg,
+        color-mix(in srgb, var(--early-accent-color, #22C55E) 13%, transparent) 0 4px,
+        transparent 4px 10px
+    );
+}
+
+.early-extension::after {
+    content: none;
 }
 
 /* Minuter endast när förseningsstil = streckat (samma “tredje” alternativ i inställningar) */
 .early-extension__label.early-extension__label--visible {
     position: relative;
     z-index: 2;
-    display: block;
-    width: 100%;
-    padding: 0 1px 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    max-width: calc(100% - 6px);
+    padding: 0 3px 1px;
     font-size: clamp(6px, 0.4em + 3px, 9px);
     font-weight: 800;
     line-height: 1.1;
@@ -714,10 +729,10 @@
     background-color: var(--early-bar-color, #dbeafe);
     background-image: repeating-linear-gradient(
         -60deg,
-        rgba(34, 197, 94, 0.2),
-        rgba(34, 197, 94, 0.2) 6px,
-        rgba(34, 197, 94, 0.38) 6px,
-        rgba(34, 197, 94, 0.38) 10px
+        color-mix(in srgb, var(--early-accent-color, #22C55E) 16%, transparent),
+        color-mix(in srgb, var(--early-accent-color, #22C55E) 16%, transparent) 6px,
+        color-mix(in srgb, var(--early-accent-color, #22C55E) 34%, transparent) 6px,
+        color-mix(in srgb, var(--early-accent-color, #22C55E) 34%, transparent) 10px
     );
 }
 
@@ -727,7 +742,9 @@
     right: -1px;
     width: 0;
     height: calc(100% + 2px);
-    border-left: 2px dashed var(--early-border-color, #334155);
+    border-left: 2px dashed color-mix(in srgb, var(--early-border-color, #334155) 68%, transparent);
+    opacity: 0.82;
+    z-index: 2;
 }
 
 .early-extension--departure .early-extension__planned-marker {
@@ -735,8 +752,16 @@
     right: auto;
 }
 
-.train-bar.early-extended .train-bar-visual {
+.train-bar.early-extended--arrival .train-bar-visual {
     border-left-color: transparent !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.train-bar.early-extended--departure .train-bar-visual {
+    border-right-color: transparent !important;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 /* Smalt segment: endast grön indikator (ingen siffervisning); full etikett om streckat läge (JS) */
@@ -749,9 +774,12 @@
     height: 8px;
     box-sizing: border-box;
     border-radius: 50%;
-    border: 1px solid rgba(34, 197, 94, 0.7);
-    background: rgba(34, 197, 94, 0.45);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35) inset, 0 1px 2px rgba(15, 23, 42, 0.15);
+    border: 1px solid var(--early-border-color, rgba(34, 197, 94, 0.7));
+    background: var(--early-bar-color, rgba(34, 197, 94, 0.45));
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.35) inset,
+        inset 0 0 0 999px color-mix(in srgb, var(--early-accent-color, #22C55E) 10%, transparent),
+        0 1px 2px rgba(15, 23, 42, 0.15);
     pointer-events: none;
 }
 
@@ -766,7 +794,7 @@
     min-width: 0;
     max-width: calc(100% - 4px);
     border-radius: 999px;
-    padding: 1px 5px;
+    padding: 1px 6px 1px 7px;
     font-size: 9px;
     font-weight: 800;
     line-height: 1.2;

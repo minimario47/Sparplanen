@@ -339,7 +339,7 @@ class OffsetVisualizer {
         if (!trainBar) return;
 
         try {
-            trainBar.classList.remove('early-extended');
+            trainBar.classList.remove('early-extended', 'early-extended--arrival', 'early-extended--departure');
             const overlays = trainBar.querySelectorAll('.delay-overlay-offset');
             const warnings = trainBar.querySelectorAll('.conflict-warning-icon');
             const earlyPills = trainBar.querySelectorAll('.early-pill-floating');
@@ -367,8 +367,12 @@ class OffsetVisualizer {
     applyEarlyExtension(trainBar, train, delayInfo, delayPixels, context = null) {
         const visual = trainBar.querySelector('.train-bar-visual') || trainBar;
         const visualStyle = window.getComputedStyle(visual);
-        const barColor = visualStyle.backgroundColor || this.settings.colors.early || '#22C55E';
+        const rawBarColor = visualStyle.backgroundColor || '';
+        const barColor = (!rawBarColor || rawBarColor === 'rgba(0, 0, 0, 0)')
+            ? '#dbeafe'
+            : rawBarColor;
         const borderColor = visualStyle.borderColor || this.getUserBorderColor();
+        const accentColor = this.settings.colors.early || '#22C55E';
         const delayMinutes = Math.abs(delayInfo.delayMinutes || 0);
         const leg = context?.leg || 'arrival';
 
@@ -399,11 +403,12 @@ class OffsetVisualizer {
             const pill = document.createElement('div');
             pill.className = `early-pill-floating early-pill-floating--${leg}`;
             const style = this.settings.visualizationStyle || 'color-coded';
-            if (style === 'dashed' || context?.trainNumber) {
+            pill.style.setProperty('--early-bar-color', barColor);
+            pill.style.setProperty('--early-border-color', borderColor);
+            pill.style.setProperty('--early-accent-color', accentColor);
+            if (style === 'dashed') {
                 pill.classList.add('early-pill-floating--with-text');
-                pill.textContent = context?.trainNumber
-                    ? `${context.labelPrefix || ''} ${context.trainNumber} -${delayMinutes}`.trim()
-                    : `-${delayMinutes} min`;
+                pill.textContent = `-${delayMinutes}`;
             }
             const partialNote = clipPixels < delayPixels
                 ? ' (kortare p.g.a. annat tåg på samma spår)'
@@ -427,6 +432,8 @@ class OffsetVisualizer {
 
         const earlyOverlay = document.createElement('div');
         earlyOverlay.className = `delay-overlay-offset early-extension early-extension--${leg}`;
+        earlyOverlay.dataset.leg = leg;
+        earlyOverlay.dataset.delayMinutes = `-${delayMinutes}`;
         if (isPartial) {
             earlyOverlay.classList.add('early-extension--partial');
         }
@@ -438,6 +445,7 @@ class OffsetVisualizer {
         earlyOverlay.style.width = `${clipPixels}px`;
         earlyOverlay.style.setProperty('--early-bar-color', barColor);
         earlyOverlay.style.setProperty('--early-border-color', borderColor);
+        earlyOverlay.style.setProperty('--early-accent-color', accentColor);
         earlyOverlay.setAttribute('role', 'img');
         earlyOverlay.setAttribute('aria-label', titleParts.join('. '));
         earlyOverlay.title = titleParts.join(' · ');
@@ -446,9 +454,7 @@ class OffsetVisualizer {
         if (visStyle === 'dashed' || clipPixels >= 42) {
             const labelEl = document.createElement('span');
             labelEl.className = 'early-extension__label early-extension__label--visible';
-            labelEl.textContent = context?.trainNumber
-                ? `${context.labelPrefix || ''} ${context.trainNumber} -${delayMinutes}`.trim()
-                : `-${delayMinutes} min`;
+            labelEl.textContent = `-${delayMinutes}`;
             labelEl.setAttribute('aria-hidden', 'true');
             earlyOverlay.appendChild(labelEl);
         }
@@ -462,7 +468,7 @@ class OffsetVisualizer {
         earlyOverlay.addEventListener('mouseleave', () => trainBar.classList.remove('is-hovered'));
 
         trainBar.appendChild(earlyOverlay);
-        trainBar.classList.add('early-extended');
+        trainBar.classList.add('early-extended', `early-extended--${leg}`);
     }
     
     /**

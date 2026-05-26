@@ -150,12 +150,43 @@ window.TrainPositioning = {
                 laneStart = 0;
                 while (!laneIsFree(laneStart)) laneStart++;
             }
+
+            const visualLaneCount = maxSimultaneous > 3 ? Math.max(maxSimultaneous, laneStart + laneSpan) : 3;
+            const visualLaneSpan = maxSimultaneous > 3 ? laneSpan : Math.min(laneSpan, visualLaneCount);
+            let visualLaneStart = laneStart;
+
+            if (maxSimultaneous <= 3) {
+                const activeVisual = active.filter(r => (r.totalOverlapping || 1) <= 3);
+                const visualLaneIsFree = (startLane) => {
+                    for (const r of activeVisual) {
+                        const a0 = r.visualLaneStart ?? r.laneStart;
+                        const a1 = a0 + (r.visualLaneSpan ?? r.laneSpan);
+                        const b0 = startLane;
+                        const b1 = startLane + visualLaneSpan;
+                        if (b0 < a1 && a0 < b1) return false;
+                    }
+                    return true;
+                };
+
+                const maxStart = Math.max(0, visualLaneCount - visualLaneSpan);
+                visualLaneStart = Math.min(maxStart, this.getPreferredLane(train));
+                if (!visualLaneIsFree(visualLaneStart)) {
+                    visualLaneStart = 0;
+                    while (visualLaneStart <= maxStart && !visualLaneIsFree(visualLaneStart)) {
+                        visualLaneStart++;
+                    }
+                    if (visualLaneStart > maxStart) visualLaneStart = maxStart;
+                }
+            }
             
             result.push({
                 train,
                 position: laneStart,
                 laneStart,
                 laneSpan,
+                visualLaneStart,
+                visualLaneSpan,
+                visualLaneCount,
                 totalOverlapping: maxSimultaneous,
                 totalLanes: Math.max(maxSimultaneous, laneStart + laneSpan)
             });
