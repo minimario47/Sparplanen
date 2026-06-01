@@ -3,9 +3,9 @@
 const initialTrackClosures = [
   {
     "id": 1,
-    "trackId": 4,
+    "trackId": 11,
     "subTrackIndex": 1,
-    "startTime": "23:30",
+    "startTime": "21:00",
     "endTime": "23:59",
     "reason": "Spår stängt",
     "barColor": [
