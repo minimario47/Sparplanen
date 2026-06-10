@@ -989,6 +989,20 @@
         animation: none !important;
     }
 
+    /* The open state's visibility comes ONLY from the entrance animation's
+       `forwards` fill (base rules set opacity:0). With animations disabled
+       that fill never applies, so the modal would stay interactive but
+       invisible. Restore the visible end-state explicitly here. */
+    .settings-backdrop:not(.hidden) {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .settings-backdrop:not(.hidden) .settings-modal {
+        opacity: 1;
+        transform: none;
+    }
+
     .settings-tab,
     .settings-close-btn,
     .settings-tab-panel .form-control.fc-toggle,

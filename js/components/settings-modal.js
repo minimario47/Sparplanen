@@ -120,7 +120,7 @@
         // Track changes (Spårändringar)
         trackChangesAutoSwitch: true,
         trackChangesShowArrow: true,
-        trackChangesShowGhost: true,
+        trackChangesShowGhost: false,
         trackChangesDurationMin: 2
     };
 

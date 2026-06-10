@@ -414,11 +414,20 @@ function loadUserSettings() {
         singleColor: { bg: null, border: null, text: null },
         hoverTooltipEnabled: true
     };
+    // The settings modal owns the canonical defaults (including the actual
+    // hex palette behind the default length theme). Without this merge, a
+    // first-time user with empty localStorage would get the null lenColors
+    // above and the trains would fall back to the generic CSS-variable
+    // palette instead of the configured default theme.
+    const modalSettings = (window.SettingsModal && typeof window.SettingsModal.getCurrentSettings === 'function')
+        ? window.SettingsModal.getCurrentSettings()
+        : null;
+    const base = modalSettings ? { ...defaults, ...modalSettings } : defaults;
     try {
         const saved = localStorage.getItem('sparplannen-settings');
-        userSettings = saved ? { ...defaults, ...JSON.parse(saved) } : defaults;
+        userSettings = saved ? { ...base, ...JSON.parse(saved) } : base;
     } catch (e) {
-        userSettings = defaults;
+        userSettings = base;
     }
     applyTrainColorSettings();
 }
