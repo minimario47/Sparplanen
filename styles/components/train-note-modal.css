@@ -335,4 +335,10 @@
 @media (prefers-reduced-motion: reduce) {
     .train-note-modal__backdrop,
     .train-note-modal { animation: none !important; }
+
+    /* The modal box gets its resting size only from trainNotePop's forwards
+       fill (base is scale(0.98)). With the animation disabled that fill never
+       applies, so restore the resting transform explicitly — otherwise the
+       box stays slightly shrunk. */
+    .train-note-modal { transform: none; }
 }

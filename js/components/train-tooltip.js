@@ -152,11 +152,16 @@ class TrainTooltip {
         // Position tooltip near the clicked train bar
         this.position(event, trainBar);
         
-        // Show tooltip with animation
+        // Show tooltip. Force a reflow so the CSS opacity transition can play,
+        // then reveal SYNCHRONOUSLY. The previous setTimeout(…,10) proved
+        // unreliable on locked-down / power-managed work machines, where short
+        // timers get throttled — the timer could be delayed (or coalesced with
+        // the dismiss click) and leave the tooltip stuck at opacity:0. The
+        // track tooltip, which adds `.visible` synchronously, never had this
+        // problem; mirror that here.
         this.tooltip.style.display = 'block';
-        setTimeout(() => {
-            this.tooltip.classList.add('visible');
-        }, 10);
+        void this.tooltip.offsetHeight; // flush layout so the transition animates
+        this.tooltip.classList.add('visible');
         
         logger.info('TrainTooltip', 'Tooltip shown', { 
             trainId: train.id, 
@@ -198,11 +203,16 @@ class TrainTooltip {
         // Position tooltip near the warning icon
         this.position(event, trainBar);
         
-        // Show tooltip with animation
+        // Show tooltip. Force a reflow so the CSS opacity transition can play,
+        // then reveal SYNCHRONOUSLY. The previous setTimeout(…,10) proved
+        // unreliable on locked-down / power-managed work machines, where short
+        // timers get throttled — the timer could be delayed (or coalesced with
+        // the dismiss click) and leave the tooltip stuck at opacity:0. The
+        // track tooltip, which adds `.visible` synchronously, never had this
+        // problem; mirror that here.
         this.tooltip.style.display = 'block';
-        setTimeout(() => {
-            this.tooltip.classList.add('visible');
-        }, 10);
+        void this.tooltip.offsetHeight; // flush layout so the transition animates
+        this.tooltip.classList.add('visible');
         
         logger.info('TrainTooltip', 'Conflict tooltip shown', { 
             trainId: train.id, 
@@ -216,84 +226,27 @@ class TrainTooltip {
      */
     buildContent(train, delayInfo, selectedTrainNumber = '') {
         const trainNumber = selectedTrainNumber || train.arrivalTrainNumber || train.departureTrainNumber || train.arrivalLabel || train.departureLabel;
-        const trainType = this.getTrainType(train.type);
         const trackInfo = train.trackId ? `Spår ${train.trackId}` : 'Okänt spår';
-        
-        // Status header with clean design
-        let statusHTML = '';
-        if (delayInfo) {
-            const statusClass = this.getStatusClass(delayInfo);
-            const statusText = this.getStatusText(delayInfo);
-            const statusIcon = this.getStatusIcon(delayInfo);
-            statusHTML = `
-                <div class="tooltip-header ${statusClass}">
-                    <div class="status-indicator">
-                        <span class="status-icon">${statusIcon}</span>
-                        <span class="status-text">${statusText}</span>
-                    </div>
-                </div>
-            `;
-        }
-        
+
         // Train number - prominent display
         const trainNumberHTML = `
             <div class="tooltip-train-number">Tåg ${trainNumber}</div>
         `;
         
-        // Schedule times - clean layout
-        let scheduleHTML = '';
-        if (train.arrTime && train.depTime) {
-            const arrTime = this.formatTime(train.arrTime);
-            const depTime = this.formatTime(train.depTime);
-            scheduleHTML = `
-                <div class="tooltip-schedule">
-                    <div class="schedule-item">
-                        <span class="schedule-label">Ankomst</span>
-                        <span class="schedule-time">${arrTime}</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-label">Avgång</span>
-                        <span class="schedule-time">${depTime}</span>
-                    </div>
-                </div>
-            `;
-        } else if (train.arrTime) {
-            const arrTime = this.formatTime(train.arrTime);
-            scheduleHTML = `
-                <div class="tooltip-schedule">
-                    <div class="schedule-item">
-                        <span class="schedule-label">Ankomst</span>
-                        <span class="schedule-time">${arrTime}</span>
-                    </div>
-                </div>
-            `;
-        } else if (train.depTime) {
-            const depTime = this.formatTime(train.depTime);
-            scheduleHTML = `
-                <div class="tooltip-schedule">
-                    <div class="schedule-item">
-                        <span class="schedule-label">Avgång</span>
-                        <span class="schedule-time">${depTime}</span>
-                    </div>
-                </div>
-            `;
-        }
-        
-        // Delay information - only show if significant
-        let delayHTML = '';
-        if (delayInfo && delayInfo.delayMinutes && Math.abs(delayInfo.delayMinutes) > 2) {
-            const delayText = delayInfo.delayMinutes > 0 
-                ? `Försenat ${delayInfo.delayMinutes} min` 
-                : `Tidigt ${Math.abs(delayInfo.delayMinutes)} min`;
-            const delayClass = delayInfo.delayMinutes > 0 ? 'delayed' : 'early';
-            
-            delayHTML = `
-                <div class="tooltip-delay ${delayClass}">
-                    <span class="delay-text">${delayText}</span>
-                </div>
-            `;
-        }
-        
+        // Schedule times. The actual (delay-adjusted) time and the signed
+        // offset sit directly under each scheduled time — red when late, green
+        // when early. This replaces the old status header and the separate
+        // delay row.
+        const arrRow = train.arrTime
+            ? this.buildScheduleRow('Ankomst', this.formatTime(train.arrTime), train.arrTime, delayInfo)
+            : '';
+        const depRow = train.depTime
+            ? this.buildScheduleRow('Avgång', this.formatTime(train.depTime), train.depTime, delayInfo)
+            : '';
+        const scheduleHTML = (arrRow || depRow)
+            ? `<div class="tooltip-schedule">${arrRow}${depRow}</div>`
+            : '';
+
         // Route information
         let routeHTML = '';
         if (train.origin || train.dest) {
@@ -306,13 +259,9 @@ class TrainTooltip {
             `;
         }
         
-        // Technical details - compact
+        // Technical details - just the track (train type row removed as redundant)
         const detailsHTML = `
             <div class="tooltip-details">
-                <div class="detail-item">
-                    <span class="detail-label">Typ</span>
-                    <span class="detail-value">${trainType}</span>
-                </div>
                 <div class="detail-item">
                     <span class="detail-label">Spår</span>
                     <span class="detail-value">${trackInfo}</span>
@@ -361,10 +310,8 @@ class TrainTooltip {
         }
 
         return `
-            ${statusHTML}
             ${trainNumberHTML}
             ${scheduleHTML}
-            ${delayHTML}
             ${routeHTML}
             ${detailsHTML}
             ${noteHTML}
@@ -528,6 +475,56 @@ class TrainTooltip {
         } catch (e) {
             return timeString.substring(0, 5);
         }
+    }
+
+    /**
+     * Scheduled time shifted by the delay (minutes), formatted HH:MM.
+     */
+    formatActualTime(baseTimeString, delayMinutes) {
+        if (!baseTimeString) return '';
+        try {
+            const d = new Date(baseTimeString);
+            d.setMinutes(d.getMinutes() + (delayMinutes || 0));
+            return d.toTimeString().substring(0, 5);
+        } catch (e) {
+            return '';
+        }
+    }
+
+    /**
+     * One schedule row: label + scheduled time, with the actual (delay-adjusted)
+     * time and signed offset (+65 min / -10 min) stacked underneath when the
+     * train is off-schedule. Red for late, green for early; cancelled/replaced
+     * shown as text. Nothing extra is added when the train runs on time.
+     */
+    buildScheduleRow(label, scheduledStr, baseTimeString, delayInfo) {
+        let actualHTML = '';
+        if (delayInfo) {
+            if (delayInfo.isCanceled) {
+                actualHTML = `<span class="schedule-actual delayed">Inställt</span>`;
+            } else if (delayInfo.isReplaced) {
+                actualHTML = `<span class="schedule-actual delayed">Ersatt</span>`;
+            } else if (typeof delayInfo.delayMinutes === 'number' && Math.abs(delayInfo.delayMinutes) > 2) {
+                const dm = delayInfo.delayMinutes;
+                const cls = dm > 0 ? 'delayed' : 'early';
+                const actual = this.formatActualTime(baseTimeString, dm);
+                const delta = `${dm > 0 ? '+' : '-'}${Math.abs(dm)} min`;
+                actualHTML = `
+                    <span class="schedule-actual ${cls}">
+                        ${actual ? `<span class="schedule-actual-time">${actual}</span>` : ''}
+                        <span class="schedule-delta">${delta}</span>
+                    </span>`;
+            }
+        }
+        return `
+            <div class="schedule-item">
+                <span class="schedule-label">${label}</span>
+                <span class="schedule-time-group">
+                    <span class="schedule-time">${scheduledStr}</span>
+                    ${actualHTML}
+                </span>
+            </div>
+        `;
     }
     
     /**
