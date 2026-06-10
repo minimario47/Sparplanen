@@ -233,15 +233,20 @@ class TrainTooltip {
             <div class="tooltip-train-number">Tåg ${trainNumber}</div>
         `;
         
-        // Schedule times. The actual (delay-adjusted) time and the signed
-        // offset sit directly under each scheduled time — red when late, green
-        // when early. This replaces the old status header and the separate
-        // delay row.
+        // Schedule times. Only the ARRIVAL row carries a live-status line
+        // ("I tid" / "Sen" / "Tidig", or "Ingen API-data på detta tåg"); the
+        // departure row shows just its scheduled time. We resolve the delay for
+        // the arrival train number specifically so the status always reflects
+        // arrival regardless of which side of the bar was clicked.
+        const dataManager = window.delayIntegration?.dataManager;
+        const arrivalNum = String(train.arrivalTrainNumber || train.arrivalLabel || '').trim();
+        const arrivalDelay = (dataManager && arrivalNum) ? dataManager.getDelayInfo(arrivalNum) : null;
+
         const arrRow = train.arrTime
-            ? this.buildScheduleRow('Ankomst', this.formatTime(train.arrTime), train.arrTime, delayInfo)
+            ? this.buildScheduleRow('Ankomst', this.formatTime(train.arrTime), train.arrTime, arrivalDelay, true)
             : '';
         const depRow = train.depTime
-            ? this.buildScheduleRow('Avgång', this.formatTime(train.depTime), train.depTime, delayInfo)
+            ? this.buildScheduleRow('Avgång', this.formatTime(train.depTime), train.depTime, null, false)
             : '';
         const scheduleHTML = (arrRow || depRow)
             ? `<div class="tooltip-schedule">${arrRow}${depRow}</div>`
@@ -497,23 +502,36 @@ class TrainTooltip {
      * train is off-schedule. Red for late, green for early; cancelled/replaced
      * shown as text. Nothing extra is added when the train runs on time.
      */
-    buildScheduleRow(label, scheduledStr, baseTimeString, delayInfo) {
-        let actualHTML = '';
-        if (delayInfo) {
-            if (delayInfo.isCanceled) {
-                actualHTML = `<span class="schedule-actual delayed">Inställt</span>`;
+    buildScheduleRow(label, scheduledStr, baseTimeString, delayInfo, showStatus) {
+        let statusHTML = '';
+        if (showStatus) {
+            if (!delayInfo) {
+                statusHTML = `<span class="schedule-actual no-data">Ingen API-data på detta tåg</span>`;
+            } else if (delayInfo.isCanceled) {
+                statusHTML = `<span class="schedule-actual delayed"><span class="schedule-status-word">Inställt</span></span>`;
             } else if (delayInfo.isReplaced) {
-                actualHTML = `<span class="schedule-actual delayed">Ersatt</span>`;
-            } else if (typeof delayInfo.delayMinutes === 'number' && Math.abs(delayInfo.delayMinutes) > 2) {
+                statusHTML = `<span class="schedule-actual delayed"><span class="schedule-status-word">Ersatt</span></span>`;
+            } else if (typeof delayInfo.delayMinutes === 'number' && delayInfo.delayMinutes > 2) {
                 const dm = delayInfo.delayMinutes;
-                const cls = dm > 0 ? 'delayed' : 'early';
                 const actual = this.formatActualTime(baseTimeString, dm);
-                const delta = `${dm > 0 ? '+' : '-'}${Math.abs(dm)} min`;
-                actualHTML = `
-                    <span class="schedule-actual ${cls}">
+                statusHTML = `
+                    <span class="schedule-actual delayed">
+                        <span class="schedule-status-word">Sen</span>
                         ${actual ? `<span class="schedule-actual-time">${actual}</span>` : ''}
-                        <span class="schedule-delta">${delta}</span>
+                        <span class="schedule-delta">+${dm} min</span>
                     </span>`;
+            } else if (typeof delayInfo.delayMinutes === 'number' && delayInfo.delayMinutes < -2) {
+                const dm = delayInfo.delayMinutes;
+                const actual = this.formatActualTime(baseTimeString, dm);
+                statusHTML = `
+                    <span class="schedule-actual early">
+                        <span class="schedule-status-word">Tidig</span>
+                        ${actual ? `<span class="schedule-actual-time">${actual}</span>` : ''}
+                        <span class="schedule-delta">-${Math.abs(dm)} min</span>
+                    </span>`;
+            } else {
+                // Within ±2 min of plan → on time.
+                statusHTML = `<span class="schedule-actual ontime"><span class="schedule-status-word">I tid</span></span>`;
             }
         }
         return `
@@ -521,7 +539,7 @@ class TrainTooltip {
                 <span class="schedule-label">${label}</span>
                 <span class="schedule-time-group">
                     <span class="schedule-time">${scheduledStr}</span>
-                    ${actualHTML}
+                    ${statusHTML}
                 </span>
             </div>
         `;

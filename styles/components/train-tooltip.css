@@ -203,6 +203,22 @@
     color: var(--status-early);
 }
 
+.schedule-actual.ontime {
+    color: var(--status-early);
+}
+
+.schedule-actual.no-data {
+    color: var(--text-tertiary);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 12px;
+    text-align: right;
+}
+
+.schedule-status-word {
+    font-weight: 700;
+}
+
 .schedule-delta {
     font-weight: 700;
 }
