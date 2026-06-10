@@ -104,6 +104,7 @@
     <link rel="stylesheet" href="styles/components/train-note-modal.css">
     <link rel="stylesheet" href="styles/components/train-record-drawer.css">
     <link rel="stylesheet" href="styles/components/train-tooltip.css">
+    <link rel="stylesheet" href="styles/components/onskemal-modal.css">
     <link rel="stylesheet" href="styles/components/trains.css">
     <!-- New Form Components -->
     <link rel="stylesheet" href="styles/components/forms-base.css">
@@ -206,6 +207,9 @@
                 <button type="button" class="btn btn-secondary btn-icon" id="late-arrivals-toggle"
                     aria-label="Sen ankomst till Göteborg" title="Sen ankomst G (försenade)" aria-pressed="false">
                     <img src="assets/Icons/+3.png" alt="" class="late-arrivals-toggle-icon" width="22" height="22" decoding="async">
+                </button>
+                <button type="button" class="btn btn-secondary btn-icon" id="onskemal-btn" aria-label="Önskemål" title="Önskemål / feedback">
+                    <span class="onskemal-btn-icon" aria-hidden="true">💬</span>
                 </button>
                 <button type="button" class="btn btn-secondary btn-icon settings-button" aria-label="Inställningar" title="Inställningar">
                     <img src="assets/Icons/settings.png" alt="" class="icon-svg" width="20" height="20" decoding="async">
@@ -948,7 +952,12 @@
     <script src="js/components/grid-context-menu-actions.js"></script>
 
     <script src="js/components/debug-logs.js"></script>
-    
+
+    <!-- Önskemål (feedback) — Firebase compat SDK + widget -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+    <script src="js/components/onskemal.js"></script>
+
     <script>
         // Legacy theme switcher function for compatibility
         function setTheme(theme) {

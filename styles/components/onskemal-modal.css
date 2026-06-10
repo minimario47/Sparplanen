@@ -1,0 +1,177 @@
+/* Önskemål — feedback / feature-request modal.
+   Visibility is controlled by the .hidden class (no animation dependency), so
+   it stays reliable under prefers-reduced-motion. */
+
+.onskemal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(15, 23, 42, 0.55);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.onskemal-backdrop.hidden {
+    display: none;
+}
+
+.onskemal-modal {
+    width: 460px;
+    max-width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.35);
+}
+
+.onskemal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 20px 14px;
+    border-bottom: 1px solid var(--border-secondary);
+}
+
+.onskemal-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.onskemal-subtitle {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.onskemal-close {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease;
+}
+
+.onskemal-close:hover {
+    background: var(--surface-tertiary);
+    color: var(--text-primary);
+}
+
+.onskemal-body {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.onskemal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.onskemal-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.onskemal-optional {
+    font-weight: 400;
+    color: var(--text-tertiary);
+}
+
+.onskemal-select,
+.onskemal-input,
+.onskemal-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.onskemal-textarea {
+    resize: vertical;
+    min-height: 96px;
+    line-height: 1.5;
+}
+
+.onskemal-select:focus,
+.onskemal-input:focus,
+.onskemal-textarea:focus {
+    border-color: var(--interactive-primary, #2563eb);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+.onskemal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 20px 20px;
+    border-top: 1px solid var(--border-secondary);
+}
+
+.onskemal-btn {
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 150ms ease, border-color 150ms ease, color 150ms ease, opacity 150ms ease;
+}
+
+.onskemal-btn--ghost {
+    background: transparent;
+    border-color: var(--border-primary);
+    color: var(--text-secondary);
+}
+
+.onskemal-btn--ghost:hover {
+    background: var(--surface-tertiary);
+    color: var(--text-primary);
+}
+
+.onskemal-btn--primary {
+    background: var(--interactive-primary, #2563eb);
+    color: #fff;
+}
+
+.onskemal-btn--primary:hover {
+    background: var(--interactive-primary-hover, #1d4ed8);
+}
+
+.onskemal-btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+/* Header trigger button keeps the same icon-button footprint as its siblings */
+#onskemal-btn .onskemal-btn-icon {
+    font-size: 18px;
+    line-height: 1;
+}
