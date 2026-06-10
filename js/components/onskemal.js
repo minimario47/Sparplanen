@@ -26,12 +26,6 @@
         measurementId: 'G-CSDCJHEJNB'
     };
 
-    const TYPES = [
-        { value: 'önskemål', label: '💡 Önskemål' },
-        { value: 'bugg', label: '🐞 Bugg' },
-        { value: 'förbättring', label: '✨ Förbättring' }
-    ];
-
     let db = null;
     let backdrop = null;
     let submitting = false;
@@ -66,34 +60,17 @@
         backdrop.setAttribute('aria-modal', 'true');
         backdrop.setAttribute('aria-labelledby', 'onskemal-title');
 
-        const typeOptions = TYPES
-            .map((t, i) => `<option value="${t.value}"${i === 0 ? ' selected' : ''}>${t.label}</option>`)
-            .join('');
-
         backdrop.innerHTML = `
             <div class="onskemal-modal">
                 <div class="onskemal-header">
-                    <div>
-                        <h2 class="onskemal-title" id="onskemal-title">Önskemål</h2>
-                        <p class="onskemal-subtitle">Förslag, buggar eller förbättringar — tack!</p>
-                    </div>
+                    <h2 class="onskemal-title" id="onskemal-title">Önskemål</h2>
                     <button type="button" class="onskemal-close" aria-label="Stäng">&times;</button>
                 </div>
                 <div class="onskemal-body">
-                    <label class="onskemal-field">
-                        <span class="onskemal-label">Typ</span>
-                        <select class="onskemal-select" id="onskemal-type">${typeOptions}</select>
-                    </label>
-                    <label class="onskemal-field">
-                        <span class="onskemal-label">Beskrivning</span>
-                        <textarea class="onskemal-textarea" id="onskemal-message" rows="5"
-                            maxlength="2000" placeholder="Beskriv ditt önskemål eller problemet…"></textarea>
-                    </label>
-                    <label class="onskemal-field">
-                        <span class="onskemal-label">Namn / kontakt <span class="onskemal-optional">(valfritt)</span></span>
-                        <input type="text" class="onskemal-input" id="onskemal-contact"
-                            maxlength="200" placeholder="t.ex. namn eller e-post" autocomplete="off" />
-                    </label>
+                    <textarea class="onskemal-textarea" id="onskemal-message" rows="5"
+                        maxlength="2000" placeholder="Skriv ditt önskemål"></textarea>
+                    <input type="text" class="onskemal-input" id="onskemal-contact"
+                        maxlength="200" placeholder="Namn (valfritt)" autocomplete="off" />
                 </div>
                 <div class="onskemal-footer">
                     <button type="button" class="onskemal-btn onskemal-btn--ghost" data-action="cancel">Avbryt</button>
@@ -141,13 +118,12 @@
 
     async function submit() {
         if (submitting) return;
-        const typeEl = backdrop.querySelector('#onskemal-type');
         const msgEl = backdrop.querySelector('#onskemal-message');
         const contactEl = backdrop.querySelector('#onskemal-contact');
 
         const message = (msgEl.value || '').trim();
         if (!message) {
-            notify('Skriv en beskrivning först.', 'error');
+            notify('Skriv ett önskemål först.', 'error');
             msgEl.focus();
             return;
         }
@@ -159,7 +135,6 @@
         }
 
         const doc = {
-            type: typeEl.value || 'önskemål',
             message: message,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             page: String(location.href).slice(0, 300),
@@ -175,13 +150,12 @@
             // Reset and close.
             msgEl.value = '';
             contactEl.value = '';
-            typeEl.selectedIndex = 0;
             backdrop.classList.add('hidden');
-            notify('Tack! Ditt önskemål är skickat. 🙌', 'success');
+            notify('Tack! Ditt önskemål är skickat.', 'success');
         } catch (e) {
             console.error('[önskemål] submit failed', e);
             setSubmitting(false);
-            notify('Något gick fel — ditt önskemål kunde inte skickas.', 'error');
+            notify('Något gick fel. Ditt önskemål kunde inte skickas.', 'error');
         }
     }
 
