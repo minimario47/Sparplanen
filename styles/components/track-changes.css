@@ -108,6 +108,33 @@
     50% { opacity: 0.7; }
 }
 
+/* ───────────── Reduced motion ─────────────
+   The global reduced-motion reset (themes.css) forces animation-duration to
+   ~0 on every element. For these overlays that is destructive: the
+   track-change-fade keyframe ends at `opacity:0; visibility:hidden`, so with
+   the duration collapsed the arrow and ghost fade out instantly and are never
+   seen (the symptom reported on managed work machines with reduced motion on).
+   Disable the fade — and the decorative looping animations — so the overlays
+   stay fully visible for their lifetime. The decorator's periodic refresh
+   still removes them once the underlying entry expires. */
+@media (prefers-reduced-motion: reduce) {
+    .track-change-arrow,
+    .track-change-ghost {
+        animation: none !important;
+        visibility: visible !important;
+    }
+
+    .track-change-arrow {
+        opacity: 1 !important;
+    }
+
+    .track-change-arrow__shaft,
+    .track-change-ghost__stripe,
+    .train-bar[data-has-track-change]::after {
+        animation: none !important;
+    }
+}
+
 /* ───────────── Settings mini-viz ───────────── */
 
 .setting-viz.viz-track-change {
