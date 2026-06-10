@@ -26,8 +26,14 @@ function initializeSchedule() {
     window.addEventListener('settingsChanged', (e) => {
         userSettings = e.detail || userSettings;
         applyTrainColorSettings();
-        prepareTrainData();
-        renderFullSchedule();
+        // Color-only changes are pure CSS-variable writes — skip the expensive
+        // full DOM rebuild unless something layout-affecting changed.
+        // layoutChanged defaults to true when the flag is absent (safe default).
+        const layoutChanged = !e.detail || e.detail.layoutChanged !== false;
+        if (layoutChanged) {
+            prepareTrainData();
+            renderFullSchedule();
+        }
     });
     
     prepareTrackData();
@@ -35,6 +41,29 @@ function initializeSchedule() {
     renderFullSchedule();
     setupScrollSynchronization();
     startCurrentTimeUpdater();
+
+    // Re-evaluate inline train-number colors on theme switch. Without this,
+    // a color computed for the previous theme sticks as an inline style and
+    // can be invisible in the new one (e.g. dark mode's white text on
+    // Simonläge's white bars).
+    window.addEventListener('themeChanged', () => {
+        const bars = document.querySelectorAll('.train-bar');
+        if (!bars.length) return;
+        requestAnimationFrame(() => {
+            bars.forEach(bar => {
+                const numbers = bar.querySelector('.train-numbers');
+                if (numbers) numbers.style.color = '';
+            });
+            const colors = Array.prototype.map.call(bars, bar =>
+                window.ColorUtils.computeDynamicTextColor(bar, userSettings)
+            );
+            Array.prototype.forEach.call(bars, (bar, i) => {
+                if (!colors[i]) return;
+                const numbers = bar.querySelector('.train-numbers');
+                if (numbers) numbers.style.color = colors[i];
+            });
+        });
+    });
 
     window.addEventListener('user-trains-changed', () => {
         prepareTrainData();
@@ -572,7 +601,14 @@ function startCurrentTimeUpdater() {
         cachedCanvasHeight = canvas.offsetHeight;
     }
     updateCurrentTimeLine();
-    setInterval(updateCurrentTimeLine, 1000);
+    setInterval(() => {
+        if (document.hidden) return; // skip work in background tabs
+        updateCurrentTimeLine();
+    }, 1000);
+    // Catch up immediately when the tab becomes visible again
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) updateCurrentTimeLine();
+    });
 }
 
 function updateCurrentTimeLine() {

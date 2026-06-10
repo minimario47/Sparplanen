@@ -4,6 +4,7 @@
  */
 
 (function () {
+    // Defaults must mirror defaultSettings in settings-modal.js (single source of truth).
     const DEFAULT_DELAY_SETTINGS = {
         mode: 'offset',
         colorThresholds: { minor: 3, moderate: 6, significant: 11, severe: 21 },
@@ -14,12 +15,12 @@
             severe: '#DC143C',
             early: '#22C55E'
         },
-        showWarnings: true,
+        showWarnings: false,
         visualizationStyle: 'color-coded',
         turnaroundTime: 10,
         conflictTolerance: 5,
-        turnaroundEnabled: true,
-        conflictToleranceEnabled: true
+        turnaroundEnabled: false,
+        conflictToleranceEnabled: false
     };
 
     window.loadDelaySettings = function () {
@@ -29,15 +30,16 @@
                 return { ...DEFAULT_DELAY_SETTINGS };
             }
             const saved = JSON.parse(raw);
+            const keep = (val, fallback) => (val === undefined || val === null) ? fallback : val;
             return {
                 ...DEFAULT_DELAY_SETTINGS,
-                mode: saved.delayMode ?? DEFAULT_DELAY_SETTINGS.mode,
+                mode: keep(saved.delayMode, DEFAULT_DELAY_SETTINGS.mode),
                 visualizationStyle:
-                    saved.delayVisualizationStyle ?? DEFAULT_DELAY_SETTINGS.visualizationStyle,
-                turnaroundTime: saved.turnaroundTime ?? DEFAULT_DELAY_SETTINGS.turnaroundTime,
-                conflictTolerance: saved.conflictTolerance ?? DEFAULT_DELAY_SETTINGS.conflictTolerance,
-                turnaroundEnabled: saved.turnaroundEnabled ?? DEFAULT_DELAY_SETTINGS.turnaroundEnabled,
-                conflictToleranceEnabled: saved.conflictToleranceEnabled ?? DEFAULT_DELAY_SETTINGS.conflictToleranceEnabled,
+                    keep(saved.delayVisualizationStyle, DEFAULT_DELAY_SETTINGS.visualizationStyle),
+                turnaroundTime: keep(saved.turnaroundTime, DEFAULT_DELAY_SETTINGS.turnaroundTime),
+                conflictTolerance: keep(saved.conflictTolerance, DEFAULT_DELAY_SETTINGS.conflictTolerance),
+                turnaroundEnabled: keep(saved.turnaroundEnabled, DEFAULT_DELAY_SETTINGS.turnaroundEnabled),
+                conflictToleranceEnabled: keep(saved.conflictToleranceEnabled, DEFAULT_DELAY_SETTINGS.conflictToleranceEnabled),
                 showWarnings:
                     saved.showWarnings !== undefined ? saved.showWarnings : DEFAULT_DELAY_SETTINGS.showWarnings
             };

@@ -19,6 +19,43 @@
         })();
     </script>
 
+    <!-- Browser capability check (ES5 only — must parse on old Citrix browsers).
+         Turns silent "nothing works" failures into a visible diagnosis. -->
+    <script>
+        (function() {
+            var problems = [];
+            try { eval('null?.x'); } catch (e) { problems.push('JavaScript (kräver Chrome 80+)'); }
+            try {
+                if (!(window.CSS && CSS.supports && CSS.supports('selector(:has(*))'))) {
+                    problems.push('CSS :has()');
+                }
+            } catch (e) { problems.push('CSS :has()'); }
+            if (!problems.length) return;
+            var show = function() {
+                var banner = document.createElement('div');
+                banner.setAttribute('style',
+                    'position:fixed;top:0;left:0;right:0;z-index:99999;' +
+                    'background:#b91c1c;color:#ffffff;padding:8px 40px 8px 12px;' +
+                    'font:13px/1.4 sans-serif;text-align:center;');
+                banner.textContent = 'Din webbläsare är för gammal — alla funktioner fungerar inte (' +
+                    problems.join(', ') + '). Kontakta IT eller använd en nyare webbläsare.';
+                var close = document.createElement('button');
+                close.textContent = '×';
+                close.setAttribute('style',
+                    'position:absolute;right:8px;top:4px;background:none;border:none;' +
+                    'color:#ffffff;font-size:18px;cursor:pointer;');
+                close.onclick = function() { banner.parentNode.removeChild(banner); };
+                banner.appendChild(close);
+                document.body.appendChild(banner);
+            };
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', show);
+            } else {
+                show();
+            }
+        })();
+    </script>
+
     <!-- Typefaces -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,6 +87,7 @@
     <link rel="stylesheet" href="styles/components/logo.css">
     <link rel="stylesheet" href="styles/components/notifications.css">
     <link rel="stylesheet" href="styles/components/schedule.css">
+    <link rel="stylesheet" href="styles/components/schedule-staleness-banner.css">
     <link rel="stylesheet" href="styles/components/search-highlights.css">
     <link rel="stylesheet" href="styles/components/search-inline.css">
     <link rel="stylesheet" href="styles/components/settings-controls.css">
@@ -94,13 +132,16 @@
                 <img src="assets/logo.png" alt="SpårplanV2 Logo" class="app-logo" width="32" height="32" loading="eager">
                 <div class="header-title-block">
                     <h1 class="header-title">SpårplanV2</h1>
-                    <div class="network-status" id="api-status" title="Connection Status">
-                        <div class="network-nodes">
-                            <div class="node node-1"></div>
-                            <div class="node node-2"></div>
-                            <div class="connection-line"></div>
-                            <div class="node node-3"></div>
+                    <div class="header-title-meta">
+                        <div class="network-status" id="api-status" title="Connection Status">
+                            <div class="network-nodes">
+                                <div class="node node-1"></div>
+                                <div class="node node-2"></div>
+                                <div class="connection-line"></div>
+                                <div class="node node-3"></div>
+                            </div>
                         </div>
+                        <span class="header-week-indicator" id="header-week-indicator"></span>
                     </div>
                 </div>
             </a>
@@ -408,6 +449,7 @@
                                         </label>
                                     </div>
                                 </div>
+                                <p class="setting-warning-note" id="length-color-warning">⚠ Färgsättning efter tåglängd är inte färdigutvecklad, tågen antas ha samma längd.</p>
                                 <p class="form-help">Välj om färgen ska hjälpa dig skilja längdklasser åt, eller om alla tåg ska bära samma ton för ett lugnare uttryck.</p>
                             </div>
 
@@ -682,7 +724,7 @@
                                         <div class="viz-dm-track-line"></div>
                                         <div class="viz-dm-base-train">X74</div>
                                         <div class="viz-dm-delay-block"></div>
-                                        <div class="viz-dm-icon-badge">&#9888; +8 min</div>
+                                        <div class="viz-dm-icon-badge">+8 min</div>
                                     </div>
                                 </div>
                             </div>
@@ -707,12 +749,12 @@
                                         <label for="ds-dashed" class="radio-group-label">Streckad</label>
                                     </div>
                                 </div>
-                                <p class="form-help">Färgkodad visar en färgad remsa. Transparent bibehåller tågets originalfärg. Streckad markerar med prickad kant. Vid tidig ankomst: Färgkodad och Transparent = samma färg som tåglisten och gröna accenter, utan siffror. Streckad = kan dessutom visa minuter i tidssegmentet.</p>
+                                <p class="form-help">Färgkodad visar en färgad remsa. Transparent bibehåller tågets originalfärg. Streckad markerar med streckad kant. Vid tidig ankomst visas segmentet med gröna accenter, och minuter (t.ex. −5) visas när segmentet är brett nog.</p>
                                 <div class="setting-viz viz-delay-style" id="viz-delay-style" data-style="color-coded" aria-hidden="true">
                                     <div class="viz-ds-scene">
                                         <div class="viz-ds-track-line"></div>
                                         <div class="viz-ds-base-train">X74</div>
-                                        <div class="viz-ds-delay-block" id="viz-ds-overlay"><span>+8 min</span></div>
+                                        <div class="viz-ds-delay-block" id="viz-ds-overlay"><span>+8</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -868,7 +910,8 @@
     <script src="js/modules/train-renderer.js"></script>
     <script src="js/modules/closure-renderer.js"></script>
     <script src="js/modules/schedule-renderer.js"></script>
-    
+    <script src="js/modules/schedule-staleness-banner.js"></script>
+
     <!-- 8. Main app -->
     <script src="js/app.js"></script>
     

@@ -72,13 +72,15 @@ class IconVisualizer {
         badge.className = `delay-badge-icon delay-badge-${side} severity-${severity}`;
         
         const prefix = delayMinutes > 0 ? '+' : '';
-        badge.textContent = context?.trainNumber
-            ? `${context.labelPrefix || ''} ${context.trainNumber} ${prefix}${delayMinutes}`.trim()
-            : `${prefix}${delayMinutes}min`;
+        // The train bar already shows the train number — keep the badge to the
+        // delay itself; full context goes in the tooltip.
+        badge.textContent = `${prefix}${delayMinutes} min`;
+        const who = context ? [context.labelPrefix, context.trainNumber].filter(Boolean).join(' ') : '';
+        badge.title = `${who ? who + ': ' : ''}${prefix}${delayMinutes} min`;
         badge.dataset.delayMinutes = delayMinutes;
         badge.dataset.severity = severity;
-        if (context?.trainNumber) badge.dataset.trainNumber = context.trainNumber;
-        if (context?.leg) badge.dataset.leg = context.leg;
+        if (context && context.trainNumber) badge.dataset.trainNumber = context.trainNumber;
+        if (context && context.leg) badge.dataset.leg = context.leg;
         
         return badge;
     }

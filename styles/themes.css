@@ -35,6 +35,7 @@ LAST UPDATED: 2025-01-09
 
 :root,
 [data-theme="light"] {
+    color-scheme: light;  /* Native scrollbars/inputs follow the theme */
     /* Semantic surface colors - from design-system.css */
     --surface-primary: var(--surface-base);              /* #fafafa - near-white base */
     --surface-secondary: var(--surface-elevated);        /* #ffffff - cards, elevated */
@@ -93,6 +94,14 @@ LAST UPDATED: 2025-01-09
     --conflict-warning: #FFC107;
     --conflict-error: #DC143C;
 
+    /* Semantic status text colors (tooltips, badges) — darkened for light
+       backgrounds; dark theme overrides with brightened variants below */
+    --status-early: #059669;
+    --status-delayed-minor: #d97706;
+    --status-delayed-moderate: #ea580c;
+    --status-delayed: #dc2626;
+    --status-replaced: #2563eb;
+
     /* Default length bucket variables (light) */
     --len-b1-bg: var(--primary-100);
     --len-b1-border: var(--primary-300);
@@ -124,6 +133,7 @@ LAST UPDATED: 2025-01-09
 ═══════════════════════════════════════════════════════════════════════════ */
 
 [data-theme="dark"] {
+    color-scheme: dark;  /* Native scrollbars/inputs follow the theme */
     /* Surface colors - 12% brightness difference */
     --surface-primary: var(--surface-base-dark);       /* #1a1a1a - near-black base */
     --surface-secondary: var(--surface-elevated-dark); /* #252a31 - elevated (12% lighter) */
@@ -208,6 +218,13 @@ LAST UPDATED: 2025-01-09
     --train-single-bg: var(--neutral-700);
     --train-single-border: var(--primary-400);
     --train-single-text: var(--text-primary);
+
+    /* Semantic status text colors — brightened for dark surfaces */
+    --status-early: #34d399;
+    --status-delayed-minor: #fbbf24;
+    --status-delayed-moderate: #fb923c;
+    --status-delayed: #f87171;
+    --status-replaced: #60a5fa;
 }
 
 /* Dark mode: Replace shadows with borders */
@@ -239,6 +256,7 @@ LAST UPDATED: 2025-01-09
 ═══════════════════════════════════════════════════════════════════════════ */
 
 [data-theme="high-contrast"] {
+    color-scheme: dark;  /* Native scrollbars/inputs follow the theme */
     /* Extreme contrast - pure black and white okay here */
     --surface-primary: #000000;      /* Pure black for max contrast */
     --surface-secondary: #1a1a1a;    /* Slightly lighter */
@@ -325,10 +343,29 @@ LAST UPDATED: 2025-01-09
     --train-single-bg: #000000;
     --train-single-border: #00ccff;
     --train-single-text: #ffffff;
+
+    /* Semantic status text colors — bright on black */
+    --status-early: #00ff7f;
+    --status-delayed-minor: #ffff00;
+    --status-delayed-moderate: #ffa500;
+    --status-delayed: #ff6b6b;
+    --status-replaced: #66b3ff;
 }
 
-/* High contrast: Force thick borders everywhere */
-[data-theme="high-contrast"] * {
+/* High contrast: thick borders on the elements that actually carry borders.
+   (Was `[data-theme="high-contrast"] *` with !important — that forced a style
+   recalc of EVERY node on theme switch and caused layout shifts, a major part
+   of why switching to Simonläge was slow on weak machines.) */
+[data-theme="high-contrast"] .button,
+[data-theme="high-contrast"] button,
+[data-theme="high-contrast"] .card,
+[data-theme="high-contrast"] input,
+[data-theme="high-contrast"] select,
+[data-theme="high-contrast"] textarea,
+[data-theme="high-contrast"] .modal-content,
+[data-theme="high-contrast"] .settings-modal,
+[data-theme="high-contrast"] .form-control,
+[data-theme="high-contrast"] .train-bar-visual {
     border-width: 2px !important;
 }
 
@@ -350,9 +387,18 @@ LAST UPDATED: 2025-01-09
    then removed — so transitions never run on every element at idle time.
 ═══════════════════════════════════════════════════════════════════════════ */
 
-.theme-transitioning *,
-.theme-transitioning *::before,
-.theme-transitioning *::after {
+/* Scope the transition to app chrome — NOT the schedule grid. Animating
+   thousands of train bars is the expensive part of a theme switch; the grid
+   snaps instantly while header/modals/panels fade. */
+.theme-transitioning body,
+.theme-transitioning .app-header,
+.theme-transitioning .app-header *,
+.theme-transitioning .settings-modal,
+.theme-transitioning .settings-modal *,
+.theme-transitioning .modal-content,
+.theme-transitioning .modal-content *,
+.theme-transitioning .schedule-track-labels,
+.theme-transitioning .schedule-track-labels * {
     transition:
         background-color var(--transition-DEFAULT) var(--ease-in-out),
         border-color var(--transition-DEFAULT) var(--ease-in-out),

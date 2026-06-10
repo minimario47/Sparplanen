@@ -107,14 +107,15 @@ These variables map old names to new design system values.
     --train-freight-bg-dark: #7c2d12;
     --train-freight-border-dark: #9a3412;
 
-    /* High Contrast Train Colors */
-    --train-regional-hc: #008000;
+    /* High Contrast Train Colors — text colors must stay readable on the white
+       train bar backgrounds (WCAG contrast vs #ffffff noted per color) */
+    --train-regional-hc: #006400;           /* dark green, 7.6:1 on white */
     --train-regional-bg-hc: #ffffff;
     --train-regional-border-hc: #000000;
-    --train-long-distance-hc: #0000ff;
+    --train-long-distance-hc: #0000ff;      /* blue, 8.6:1 on white */
     --train-long-distance-bg-hc: #ffffff;
     --train-long-distance-border-hc: #000000;
-    --train-freight-hc: #ff6600;
+    --train-freight-hc: #a14b00;            /* dark orange, 6.0:1 on white (was #ff6600, only 2.6:1) */
     --train-freight-bg-hc: #ffffff;
     --train-freight-border-hc: #000000;
     

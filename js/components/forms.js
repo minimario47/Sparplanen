@@ -23,8 +23,8 @@
                 }
 
                 const formControl = toggle.closest('.form-control');
-                const settingViz = formControl?.querySelector('.setting-viz');
-                const helpText = formControl?.querySelector('.form-help');
+                const settingViz = formControl ? formControl.querySelector('.setting-viz') : null;
+                const helpText = formControl ? formControl.querySelector('.form-help') : null;
 
                 // Wire aria-describedby: assign an ID to the help text element and
                 // point the associated interactive control(s) at it so screen readers
@@ -60,13 +60,13 @@
         toggleHelp(toggle, helpText, settingViz, show) {
             if (show) {
                 toggle.classList.add('expanded');
-                helpText?.classList.add('visible');
-                settingViz?.classList.add('visible');
+                if (helpText) helpText.classList.add('visible');
+                if (settingViz) settingViz.classList.add('visible');
                 toggle.setAttribute('aria-expanded', 'true');
             } else {
                 toggle.classList.remove('expanded');
-                helpText?.classList.remove('visible');
-                settingViz?.classList.remove('visible');
+                if (helpText) helpText.classList.remove('visible');
+                if (settingViz) settingViz.classList.remove('visible');
                 toggle.setAttribute('aria-expanded', 'false');
             }
         },
@@ -255,10 +255,11 @@
                         closeMenu();
                     } else if (e.key === 'Home') {
                         e.preventDefault();
-                        options[0]?.focus();
+                        if (options[0]) options[0].focus();
                     } else if (e.key === 'End') {
                         e.preventDefault();
-                        options[options.length - 1]?.focus();
+                        const last = options[options.length - 1];
+                        if (last) last.focus();
                     }
                 });
             });

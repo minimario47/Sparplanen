@@ -114,9 +114,9 @@
         hoverTooltipEnabled: true,
         turnaroundTime: 10,
         conflictTolerance: 5,
-        turnaroundEnabled: true,
-        conflictToleranceEnabled: true,
-        showWarnings: true,
+        turnaroundEnabled: false,
+        conflictToleranceEnabled: false,
+        showWarnings: false,
         // Track changes (Spårändringar)
         trackChangesAutoSwitch: true,
         trackChangesShowArrow: true,
@@ -161,6 +161,7 @@
         loadSettings();
         setupEventListeners();
         setupRadioGroupHighlights();
+        tagFormControlVariants();
         initDisplaySettings();
         setupColorModeListener();
         initSettingsViz();
@@ -191,13 +192,43 @@
     }
 
     /**
+     * Tag each settings .form-control with a structural class describing the
+     * control it contains. CSS keys off these classes instead of :has(), which
+     * older browsers (Citrix/locked-down Chromium) don't support.
+     */
+    function tagFormControlVariants() {
+        document.querySelectorAll('.settings-tab-panel .form-control').forEach(control => {
+            const toggle = control.querySelector('.toggle-switch');
+            if (toggle) {
+                control.classList.add('fc-toggle');
+                const syncChecked = () => {
+                    control.classList.toggle('fc-checked', toggle.classList.contains('checked'));
+                };
+                new MutationObserver(syncChecked)
+                    .observe(toggle, { attributes: true, attributeFilter: ['class'] });
+                syncChecked();
+            }
+            if (control.querySelector('.slider')) control.classList.add('fc-slider');
+            if (control.querySelector('.radio-group')) control.classList.add('fc-radio');
+            if (control.querySelector('.custom-select')) control.classList.add('fc-select');
+        });
+    }
+
+    /**
      * Set up event listeners for the color mode and theme selects
      */
+    // Längdfärgning är inte färdigutvecklad — visa noteringen bara i det läget
+    function updateLengthColorWarning() {
+        const note = document.getElementById('length-color-warning');
+        if (note) note.hidden = currentSettings.trainColorMode !== 'length';
+    }
+
     function setupColorModeListener() {
         document.querySelectorAll('input[name="train-color-mode"]').forEach(input => {
             input.addEventListener('change', () => {
                 if (!input.checked) return;
                 currentSettings.trainColorMode = input.value;
+                updateLengthColorWarning();
                 syncDisplaySettings();
             });
         });
@@ -279,7 +310,8 @@
         const clearHiddenBtn = document.getElementById('track-changes-clear-hidden');
         if (clearHiddenBtn) {
             clearHiddenBtn.addEventListener('click', () => {
-                const cleared = window.TrackChangesStore?.clearHidden?.() ?? 0;
+                const store = window.TrackChangesStore;
+                const cleared = (store && typeof store.clearHidden === 'function') ? store.clearHidden() : 0;
                 if (window.showNotification) {
                     if (cleared > 0) {
                         window.showNotification(`${cleared} dolda spårändring${cleared === 1 ? '' : 'ar'} återställda`, 'success');
@@ -290,35 +322,51 @@
             });
         }
 
-        // Settings button in header
-        const settingsBtn = document.querySelector('.settings-button');
-        if (settingsBtn) {
-            settingsBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                openModal();
-            });
-        } else {
-            setTimeout(() => {
-                const retryBtn = document.querySelector('.settings-button');
-                if (retryBtn) {
-                    retryBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        openModal();
-                    });
-                }
-            }, 500);
-        }
-
     }
+
+    // Settings button in header — document-level delegation so the handler works
+    // no matter when (or how slowly) the header button is created. Registered at
+    // script evaluation, not in init(), so a delayed init can't lose the click.
+    function findSettingsButton(target) {
+        var el = target;
+        while (el && el !== document) {
+            if (el.classList && el.classList.contains('settings-button')) return el;
+            el = el.parentNode;
+        }
+        return null;
+    }
+
+    document.addEventListener('click', function (e) {
+        if (!findSettingsButton(e.target)) return;
+        e.preventDefault();
+        openModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var btn = findSettingsButton(e.target);
+        if (!btn || btn.tagName === 'BUTTON') return; // buttons fire click natively
+        e.preventDefault();
+        openModal();
+    });
 
     /**
      * Open the settings modal
      */
     function openModal() {
         if (!elements.backdrop || !elements.modal) {
+            // Late init (slow session): re-query once before giving up
+            elements.backdrop = elements.backdrop || document.getElementById('settings-backdrop');
+            elements.modal = elements.modal || document.getElementById('settings-modal');
+        }
+        if (!elements.backdrop || !elements.modal) {
             console.error('Modal elements not found');
+            var msg = 'Inställningar kunde inte öppnas — ladda om sidan';
+            if (window.showNotification) {
+                window.showNotification(msg, 'error');
+            } else {
+                alert(msg);
+            }
             return;
         }
 
@@ -401,11 +449,12 @@
             if (oldDelay) {
                 try {
                     const parsed = JSON.parse(oldDelay);
-                    currentSettings.delayMode = parsed.mode ?? currentSettings.delayMode;
-                    currentSettings.delayVisualizationStyle = parsed.visualizationStyle ?? currentSettings.delayVisualizationStyle;
-                    currentSettings.turnaroundTime = parsed.turnaroundTime ?? currentSettings.turnaroundTime;
-                    currentSettings.conflictTolerance = parsed.conflictTolerance ?? currentSettings.conflictTolerance;
-                    currentSettings.showWarnings = parsed.showWarnings ?? currentSettings.showWarnings;
+                    const keep = (val, fallback) => (val === undefined || val === null) ? fallback : val;
+                    currentSettings.delayMode = keep(parsed.mode, currentSettings.delayMode);
+                    currentSettings.delayVisualizationStyle = keep(parsed.visualizationStyle, currentSettings.delayVisualizationStyle);
+                    currentSettings.turnaroundTime = keep(parsed.turnaroundTime, currentSettings.turnaroundTime);
+                    currentSettings.conflictTolerance = keep(parsed.conflictTolerance, currentSettings.conflictTolerance);
+                    currentSettings.showWarnings = keep(parsed.showWarnings, currentSettings.showWarnings);
                     localStorage.removeItem('sparplanen-delay-settings');
                 } catch (_) { /* ignore malformed old data */ }
             }
@@ -418,14 +467,25 @@
     /**
      * Save current control values to localStorage
      */
+    // Settings that only change colors (consumed as CSS variables) — saving
+    // them must not trigger a full schedule DOM rebuild. Everything else is
+    // conservatively treated as layout-affecting.
+    const COLOR_ONLY_KEYS = ['trainColorMode', 'lengthTheme', 'singleTheme', 'lenColors', 'singleColor'];
+
     function saveSettings() {
+        const previousSettings = currentSettings;
         currentSettings = getSettingsFromControls();
+
+        const changedKeys = Object.keys(currentSettings).filter(key =>
+            JSON.stringify(currentSettings[key]) !== JSON.stringify(previousSettings[key])
+        );
+        const layoutChanged = changedKeys.some(key => COLOR_ONLY_KEYS.indexOf(key) === -1);
 
         try {
             localStorage.setItem('sparplannen-settings', JSON.stringify(currentSettings));
 
             window.dispatchEvent(new CustomEvent('settingsChanged', {
-                detail: currentSettings
+                detail: { ...currentSettings, layoutChanged }
             }));
 
             // Keep delay-settings-changed event for any existing listeners
@@ -518,8 +578,18 @@
             const el = doc.getElementById(id);
             return el ? (el.type === 'checkbox' ? el.checked : el.value) : fallback;
         };
-        const getRadio = (name, fallback) =>
-            doc.querySelector(`input[name="${name}"]:checked`)?.value ?? fallback;
+        const getRadio = (name, fallback) => {
+            const el = doc.querySelector(`input[name="${name}"]:checked`);
+            return el ? el.value : fallback;
+        };
+        const getNumber = (id, fallback) => {
+            const el = doc.getElementById(id);
+            return parseInt(el ? el.value : fallback, 10);
+        };
+        const getChecked = (id, fallback) => {
+            const el = doc.getElementById(id);
+            return el ? el.classList.contains('checked') : fallback;
+        };
 
         const readColorTriple = (prefix) => ({
             bg: getVal(`${prefix}-bg`, ''),
@@ -536,8 +606,8 @@
         ];
 
         return {
-            offsetPercentage: parseInt(doc.getElementById('offset-slider')?.value ?? defaultSettings.offsetPercentage, 10),
-            followMode: doc.getElementById('follow-mode')?.classList.contains('checked') ?? defaultSettings.followMode,
+            offsetPercentage: getNumber('offset-slider', defaultSettings.offsetPercentage),
+            followMode: getChecked('follow-mode', defaultSettings.followMode),
             updateInterval: getRadio('update-interval', defaultSettings.updateInterval),
             trainColorMode: getRadio('train-color-mode', defaultSettings.trainColorMode),
             trainColorDimension: getRadio('train-color-dimension', defaultSettings.trainColorDimension),
@@ -555,17 +625,17 @@
             // Delay settings
             delayMode: getRadio('delay-mode', defaultSettings.delayMode),
             delayVisualizationStyle: getRadio('delay-style', defaultSettings.delayVisualizationStyle),
-            hoverTooltipEnabled: doc.getElementById('hover-tooltip-enabled')?.classList.contains('checked') ?? defaultSettings.hoverTooltipEnabled,
-            turnaroundTime: parseInt(doc.getElementById('delay-turnaround-time')?.value ?? defaultSettings.turnaroundTime, 10),
-            conflictTolerance: parseInt(doc.getElementById('delay-conflict-tolerance')?.value ?? defaultSettings.conflictTolerance, 10),
-            turnaroundEnabled: doc.getElementById('delay-turnaround-time-enabled')?.classList.contains('checked') ?? defaultSettings.turnaroundEnabled,
-            conflictToleranceEnabled: doc.getElementById('delay-conflict-tolerance-enabled')?.classList.contains('checked') ?? defaultSettings.conflictToleranceEnabled,
-            showWarnings: doc.getElementById('delay-show-warnings')?.classList.contains('checked') ?? defaultSettings.showWarnings,
+            hoverTooltipEnabled: getChecked('hover-tooltip-enabled', defaultSettings.hoverTooltipEnabled),
+            turnaroundTime: getNumber('delay-turnaround-time', defaultSettings.turnaroundTime),
+            conflictTolerance: getNumber('delay-conflict-tolerance', defaultSettings.conflictTolerance),
+            turnaroundEnabled: getChecked('delay-turnaround-time-enabled', defaultSettings.turnaroundEnabled),
+            conflictToleranceEnabled: getChecked('delay-conflict-tolerance-enabled', defaultSettings.conflictToleranceEnabled),
+            showWarnings: getChecked('delay-show-warnings', defaultSettings.showWarnings),
             // Track changes
-            trackChangesAutoSwitch: doc.getElementById('track-changes-auto-switch')?.classList.contains('checked') ?? defaultSettings.trackChangesAutoSwitch,
-            trackChangesShowArrow: doc.getElementById('track-changes-show-arrow')?.classList.contains('checked') ?? defaultSettings.trackChangesShowArrow,
-            trackChangesShowGhost: doc.getElementById('track-changes-show-ghost')?.classList.contains('checked') ?? defaultSettings.trackChangesShowGhost,
-            trackChangesDurationMin: parseInt(doc.getElementById('track-changes-duration')?.value ?? defaultSettings.trackChangesDurationMin, 10)
+            trackChangesAutoSwitch: getChecked('track-changes-auto-switch', defaultSettings.trackChangesAutoSwitch),
+            trackChangesShowArrow: getChecked('track-changes-show-arrow', defaultSettings.trackChangesShowArrow),
+            trackChangesShowGhost: getChecked('track-changes-show-ghost', defaultSettings.trackChangesShowGhost),
+            trackChangesDurationMin: getNumber('track-changes-duration', defaultSettings.trackChangesDurationMin)
         };
     }
 
@@ -594,6 +664,7 @@
         // Train color mode radio group
         const cmInput = document.querySelector(`input[name="train-color-mode"][value="${currentSettings.trainColorMode}"]`);
         if (cmInput) cmInput.checked = true;
+        updateLengthColorWarning();
 
         setHiddenThemeValue('length', currentSettings.lengthTheme || defaultSettings.lengthTheme);
         setHiddenThemeValue('single', currentSettings.singleTheme || defaultSettings.singleTheme);
@@ -625,11 +696,12 @@
             setV(`${prefix}-text`, text);
         };
 
-        writeColorTriple('len-b1', currentSettings.lenColors?.b1, 'len-b1');
-        writeColorTriple('len-b2', currentSettings.lenColors?.b2, 'len-b2');
-        writeColorTriple('len-b3', currentSettings.lenColors?.b3, 'len-b3');
-        writeColorTriple('len-b4', currentSettings.lenColors?.b4, 'len-b4');
-        writeColorTriple('len-b5', currentSettings.lenColors?.b5, 'len-b5');
+        const lenColors = currentSettings.lenColors || {};
+        writeColorTriple('len-b1', lenColors.b1, 'len-b1');
+        writeColorTriple('len-b2', lenColors.b2, 'len-b2');
+        writeColorTriple('len-b3', lenColors.b3, 'len-b3');
+        writeColorTriple('len-b4', lenColors.b4, 'len-b4');
+        writeColorTriple('len-b5', lenColors.b5, 'len-b5');
         writeColorTriple('single', currentSettings.singleColor, 'train-single');
 
         // Delay settings

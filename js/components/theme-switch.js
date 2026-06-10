@@ -114,8 +114,22 @@ class ThemeSwitcher {
     }
 
     applyTheme(theme) {
-        // Apply to document
-        document.documentElement.setAttribute('data-theme', theme);
+        // Animate the switch only when the board is small enough that a 300ms
+        // transition is cheaper than it looks — on dense schedules (or weak
+        // Citrix machines) an instant switch beats animating thousands of nodes.
+        const root = document.documentElement;
+        const trainCount = document.querySelectorAll('.train-bar').length;
+        const animate = trainCount > 0 && trainCount <= 300;
+
+        if (animate) {
+            root.classList.add('theme-transitioning');
+            clearTimeout(this._transitionTimer);
+            this._transitionTimer = setTimeout(
+                () => root.classList.remove('theme-transitioning'), 300
+            );
+        }
+
+        root.setAttribute('data-theme', theme);
 
         // Dispatch event for other components
         window.dispatchEvent(new CustomEvent('themeChanged', {

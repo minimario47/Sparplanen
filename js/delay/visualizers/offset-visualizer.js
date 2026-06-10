@@ -221,8 +221,10 @@ class OffsetVisualizer {
             }
         }
 
-        this.addInlineLabel(delayOverlay, context, delayMinutes, delayPixels);
-        
+        // No inline "+N" text on the overlay — the visual extent carries the
+        // information and the full delay lives in the overlay tooltip. In
+        // "Båda" mode the icon badge shows the number instead.
+
         trainBar.appendChild(delayOverlay);
         
         // 2. CREATE TURNAROUND TIME OVERLAY (diagonal lines - vändtid)
@@ -283,15 +285,20 @@ class OffsetVisualizer {
     }
 
     addInlineLabel(overlay, context, delayMinutes, widthPx) {
-        if (!overlay || !context) return;
+        if (!overlay) return;
+        // Too narrow for any readable text — the overlay title/tooltip carries the info
+        if (widthPx < 24) return;
         const label = document.createElement('span');
         label.className = 'delay-overlay__label';
         const prefix = delayMinutes > 0 ? '+' : '';
-        label.textContent = `${context.labelPrefix || ''} ${context.trainNumber || ''} ${prefix}${delayMinutes}`.trim();
-        label.title = label.textContent;
+        // The train bar already shows the train number — the label only states
+        // the delay itself. Full context lives in the tooltip.
+        label.textContent = `${prefix}${delayMinutes}`;
+        const ctx = context || {};
+        const who = [ctx.labelPrefix, ctx.trainNumber].filter(Boolean).join(' ');
+        label.title = `${who ? who + ': ' : ''}${prefix}${delayMinutes} min`;
         if (widthPx < 42) {
             label.classList.add('delay-overlay__label--compact');
-            label.textContent = `${prefix}${delayMinutes}`;
         }
         overlay.appendChild(label);
     }
@@ -450,10 +457,14 @@ class OffsetVisualizer {
         earlyOverlay.setAttribute('aria-label', titleParts.join('. '));
         earlyOverlay.title = titleParts.join(' · ');
 
+        // Same width gate as the delayed-overlay label so early/delayed read alike
         const visStyle = this.settings.visualizationStyle || 'color-coded';
-        if (visStyle === 'dashed' || clipPixels >= 42) {
+        if (visStyle === 'dashed' || clipPixels >= 24) {
             const labelEl = document.createElement('span');
             labelEl.className = 'early-extension__label early-extension__label--visible';
+            if (clipPixels < 42) {
+                labelEl.classList.add('early-extension__label--compact');
+            }
             labelEl.textContent = `-${delayMinutes}`;
             labelEl.setAttribute('aria-hidden', 'true');
             earlyOverlay.appendChild(labelEl);

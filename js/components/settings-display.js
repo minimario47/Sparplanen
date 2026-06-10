@@ -73,7 +73,8 @@
         const mode = settings.trainColorMode;
         const themes = getOrderedThemes(mode);
         const activeThemeId = getActiveThemeId(settings);
-        const helpId = elements.themeControl?.querySelector('.form-help')?.id || '';
+        const helpEl = elements.themeControl ? elements.themeControl.querySelector('.form-help') : null;
+        const helpId = (helpEl && helpEl.id) || '';
 
         elements.themeStrip.innerHTML = themes.map(([themeId, theme]) => {
             const name = shortenThemeName(theme.name);

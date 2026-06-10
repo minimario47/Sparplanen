@@ -131,13 +131,13 @@
 }
 
 /* Längre signalsiktsrad: wrap */
-.track-info-item:has(.track-signal-length) {
+.track-info-item.track-signal-row {
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 8px 12px;
 }
 
-.track-info-item:has(.track-signal-length) .track-info-label {
+.track-info-item.track-signal-row .track-info-label {
     flex: 0 0 auto;
     max-width: 40%;
     padding-top: 2px;

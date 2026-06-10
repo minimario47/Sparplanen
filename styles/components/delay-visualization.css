@@ -42,7 +42,7 @@
     z-index: 3;
     display: block;
     overflow: hidden;
-    color: #111827;
+    color: var(--text-primary);
     font-family: var(--font-mono);
     font-size: 9px;
     font-weight: 800;
@@ -50,7 +50,7 @@
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+    text-shadow: var(--delay-label-shadow, 0 1px 0 rgba(255, 255, 255, 0.55));
     pointer-events: none;
 }
 
@@ -59,8 +59,11 @@
 }
 
 [data-theme="dark"] .delay-overlay__label {
-    color: #f8fafc;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="high-contrast"] .delay-overlay__label {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
 }
 
 /* When main delay has conflict, add thick border on right edge */
@@ -526,14 +529,9 @@
    ADDITIONAL THEME INTEGRATION
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* Ensure delay overlays work with train bar themes */
-[data-theme="dark"] .train-bar .delay-overlay-offset {
-    z-index: 3; /* Above train bar content */
-}
-
-[data-theme="high-contrast"] .train-bar .delay-overlay-offset {
-    z-index: 4; /* Highest priority in high contrast */
-}
+/* Delay overlays stay BELOW the train numbers in every theme (.train-numbers is
+   z-index 5). Earlier dark/HC overrides lifted overlays above the bar content,
+   which is what made train numbers unreadable under a delay overlay. */
 
 /* Theme-aware hover states */
 [data-theme="light"] .delay-overlay-offset:hover {
@@ -702,7 +700,7 @@
     content: none;
 }
 
-/* Minuter endast när förseningsstil = streckat (samma “tredje” alternativ i inställningar) */
+/* Early label — same typography as .delay-overlay__label so early/delayed read alike */
 .early-extension__label.early-extension__label--visible {
     position: relative;
     z-index: 2;
@@ -712,7 +710,8 @@
     min-width: 0;
     max-width: calc(100% - 6px);
     padding: 0 3px 1px;
-    font-size: clamp(6px, 0.4em + 3px, 9px);
+    font-family: var(--font-mono);
+    font-size: 9px;
     font-weight: 800;
     line-height: 1.1;
     text-align: center;
@@ -720,9 +719,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text-primary, #0f172a);
-    text-shadow: 0 0 1px rgba(255, 255, 255, 0.9);
+    text-shadow: var(--delay-label-shadow, 0 1px 0 rgba(255, 255, 255, 0.55));
     pointer-events: none;
     user-select: none;
+}
+
+.early-extension__label--compact {
+    font-size: 8px;
 }
 
 .early-extension--partial {
@@ -805,6 +808,5 @@
 }
 
 [data-theme="dark"] .early-extension__label.early-extension__label--visible {
-    color: #f1f5f9;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
 }

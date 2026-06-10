@@ -335,7 +335,7 @@
 ═══════════════════════════════════════════════════════════════════════════ */
 
 /* Toggle controls: label left, switch right — help text wraps below */
-.settings-tab-panel .form-control:has(.toggle-switch) {
+.settings-tab-panel .form-control.fc-toggle {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -347,51 +347,51 @@
     transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
 }
 
-.settings-tab-panel .form-control:has(.toggle-switch):hover {
+.settings-tab-panel .form-control.fc-toggle:hover {
     border-color: var(--primary-300);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.06);
 }
 
 /* Checked state — left accent stripe */
-.settings-tab-panel .form-control:has(.toggle-switch.checked) {
+.settings-tab-panel .form-control.fc-checked {
     border-left: 3px solid var(--modal-accent);
     background: var(--primary-50);
 }
 
-[data-theme="dark"] .settings-tab-panel .form-control:has(.toggle-switch.checked) {
+[data-theme="dark"] .settings-tab-panel .form-control.fc-checked {
     background: rgba(59, 130, 246, 0.08);
     border-left-color: var(--primary-400);
 }
 
-.settings-tab-panel .form-control:has(.toggle-switch) .form-label-wrapper {
+.settings-tab-panel .form-control.fc-toggle .form-label-wrapper {
     flex: 1;
     min-width: 0;
     margin-right: 16px;
 }
 
-.settings-tab-panel .form-control:has(.toggle-switch) .toggle-switch {
+.settings-tab-panel .form-control.fc-toggle .toggle-switch {
     flex-shrink: 0;
 }
 
-.settings-tab-panel .form-control:has(.toggle-switch) .form-label {
+.settings-tab-panel .form-control.fc-toggle .form-label {
     font-size: 13px;
     font-weight: 500;
 }
 
 /* Help text goes full-width on its own line below the label+toggle row */
-.settings-tab-panel .form-control:has(.toggle-switch) .form-help {
+.settings-tab-panel .form-control.fc-toggle .form-help {
     flex: 0 0 100%;
     width: 100%;
     margin-top: 2px;
 }
 
-.settings-tab-panel .form-control:has(.toggle-switch) .setting-viz {
+.settings-tab-panel .form-control.fc-toggle .setting-viz {
     flex: 0 0 100%;
     width: 100%;
 }
 
 /* Slider controls */
-.settings-tab-panel .form-control:has(.slider) {
+.settings-tab-panel .form-control.fc-slider {
     padding: 14px 16px;
     background: var(--surface-secondary);
     border: 1.5px solid var(--border-secondary);
@@ -399,12 +399,12 @@
     transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
-.settings-tab-panel .form-control:has(.slider):hover {
+.settings-tab-panel .form-control.fc-slider:hover {
     border-color: var(--primary-300);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.06);
 }
 
-.settings-tab-panel .form-control:has(.slider) .form-label {
+.settings-tab-panel .form-control.fc-slider .form-label {
     font-size: 13px;
     font-weight: 500;
 }
@@ -433,21 +433,21 @@
 }
 
 /* Radio group controls */
-.settings-tab-panel .form-control:has(.radio-group) {
+.settings-tab-panel .form-control.fc-radio {
     padding: 14px 16px;
     background: var(--surface-secondary);
     border: 1.5px solid var(--border-secondary);
     border-radius: 12px;
 }
 
-.settings-tab-panel .form-control:has(.radio-group) .form-label {
+.settings-tab-panel .form-control.fc-radio .form-label {
     font-size: 13px;
     font-weight: 500;
     margin-bottom: 10px;
 }
 
 /* Dropdown controls */
-.settings-tab-panel .form-control:has(.custom-select) .form-label {
+.settings-tab-panel .form-control.fc-select .form-label {
     font-size: 13px;
     font-weight: 500;
 }
@@ -821,15 +821,15 @@
         0 1px 3px rgba(59, 130, 246, 0.3);
 }
 
-[data-theme="dark"] .settings-tab-panel .form-control:has(.toggle-switch):not(:has(.toggle-switch.checked)) {
+[data-theme="dark"] .settings-tab-panel .form-control.fc-toggle:not(.fc-checked) {
     background: var(--surface-tertiary);
 }
 
-[data-theme="dark"] .settings-tab-panel .form-control:has(.slider) {
+[data-theme="dark"] .settings-tab-panel .form-control.fc-slider {
     background: var(--surface-tertiary);
 }
 
-[data-theme="dark"] .settings-tab-panel .form-control:has(.radio-group) {
+[data-theme="dark"] .settings-tab-panel .form-control.fc-radio {
     background: var(--surface-tertiary);
 }
 
@@ -886,12 +886,12 @@
     font-size: 11px;
 }
 
-[data-theme="high-contrast"] .settings-tab-panel .form-control:has(.toggle-switch) {
+[data-theme="high-contrast"] .settings-tab-panel .form-control.fc-toggle {
     border-width: 2px;
     border-radius: 0;
 }
 
-[data-theme="high-contrast"] .settings-tab-panel .form-control:has(.slider) {
+[data-theme="high-contrast"] .settings-tab-panel .form-control.fc-slider {
     border-width: 2px;
     border-radius: 0;
 }
@@ -991,8 +991,8 @@
 
     .settings-tab,
     .settings-close-btn,
-    .settings-tab-panel .form-control:has(.toggle-switch),
-    .settings-tab-panel .form-control:has(.slider) {
+    .settings-tab-panel .form-control.fc-toggle,
+    .settings-tab-panel .form-control.fc-slider {
         transition: none;
     }
 }
@@ -1055,4 +1055,27 @@
     display: flex;
     gap: var(--space-2);
     align-items: center;
+}
+
+/* Warning note for not-yet-implemented features (e.g. length-based coloring) */
+.setting-warning-note {
+    font-size: var(--font-size-xs);
+    font-style: italic;
+    line-height: 1.5;
+    margin: var(--spacing-2) 0 0 0;
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--border-radius-md, 8px);
+    background: var(--warning-100);
+    color: var(--warning-800);
+    border: 1px solid var(--warning-300);
+}
+
+.setting-warning-note[hidden] {
+    display: none;
+}
+
+[data-theme="dark"] .setting-warning-note {
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--warning-300);
+    border-color: var(--warning-700);
 }

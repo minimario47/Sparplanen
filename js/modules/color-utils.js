@@ -5,53 +5,62 @@
 window.ColorUtils = {
     
     /**
-     * Apply dynamic text contrast ensuring WCAG AA (4.5:1)
+     * Read phase: decide the text color for a train (or null to leave CSS alone).
+     * Only performs style READS so callers can batch all reads before any writes.
      */
-    applyDynamicTextContrast(trainElement, userSettings) {
-        if (!trainElement) return;
-        
+    computeDynamicTextColor(trainElement, userSettings) {
+        if (!trainElement) return null;
+
+        // High-contrast theme guarantees readable colors via CSS — an inline
+        // color here would override those rules and can make numbers invisible.
+        if (document.documentElement.getAttribute('data-theme') === 'high-contrast') return null;
+
         const visual = trainElement.querySelector('.train-bar-visual');
         const numbers = trainElement.querySelector('.train-numbers');
-        if (!visual || !numbers) return;
-        
+        if (!visual || !numbers) return null;
+
         try {
             const bucket = trainElement.dataset.bucket;
             const colorMode = userSettings.trainColorMode || 'length';
-            
+
             let hasCustomTextColor = false;
-            
+
             if (colorMode === 'single') {
                 hasCustomTextColor = userSettings.singleColor && userSettings.singleColor.text && userSettings.singleColor.text.startsWith('#');
             } else if (bucket) {
-                hasCustomTextColor = userSettings.lenColors && 
-                                     userSettings.lenColors[bucket] && 
-                                     userSettings.lenColors[bucket].text && 
+                hasCustomTextColor = userSettings.lenColors &&
+                                     userSettings.lenColors[bucket] &&
+                                     userSettings.lenColors[bucket].text &&
                                      userSettings.lenColors[bucket].text.startsWith('#');
             }
-            
-            if (hasCustomTextColor) return;
-            
+
+            if (hasCustomTextColor) return null;
+
+            // Contrast against the BACKGROUND the text actually sits on.
+            // (Previously this used min(bg, border) luminance, so a light bar
+            // with a black border picked white text — invisible on the bar.)
             const styles = getComputedStyle(visual);
-            const bgColor = styles.backgroundColor;
-            const borderColor = styles.borderColor;
-            
-            const bgLum = this._getRelativeLuminance(bgColor);
-            const borderLum = this._getRelativeLuminance(borderColor);
-            const effectiveLum = Math.min(bgLum, borderLum);
-            
-            const whiteLum = 1.0;
-            const blackLum = 0.0;
-            const whiteContrast = this._getContrastRatio(effectiveLum, whiteLum);
-            const blackContrast = this._getContrastRatio(effectiveLum, blackLum);
-            
+            const bgLum = this._getRelativeLuminance(styles.backgroundColor);
+
+            const whiteContrast = this._getContrastRatio(bgLum, 1.0);
+            const blackContrast = this._getContrastRatio(bgLum, 0.0);
+
             const useWhite = whiteContrast >= 4.5 || (whiteContrast > blackContrast && blackContrast < 4.5);
-            const textColor = useWhite ? '#ffffff' : '#000000';
-            
-            numbers.style.color = textColor;
-            
+            return useWhite ? '#ffffff' : '#000000';
         } catch (e) {
-            console.warn('Error applying dynamic contrast:', e);
+            console.warn('Error computing dynamic contrast:', e);
+            return null;
         }
+    },
+
+    /**
+     * Apply dynamic text contrast ensuring WCAG AA (4.5:1)
+     */
+    applyDynamicTextContrast(trainElement, userSettings) {
+        const textColor = this.computeDynamicTextColor(trainElement, userSettings);
+        if (!textColor) return;
+        const numbers = trainElement.querySelector('.train-numbers');
+        if (numbers) numbers.style.color = textColor;
     },
 
     /**

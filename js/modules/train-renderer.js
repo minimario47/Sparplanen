@@ -17,17 +17,23 @@ window.TrainRenderer = {
             return acc;
         }, {});
 
+        // Batch all DOM insertions into one fragment (one layout pass instead
+        // of one per train) and run the text-contrast pass once afterwards
+        // instead of scheduling one setTimeout per train.
+        const fragment = document.createDocumentFragment();
+        const createdDivs = [];
+
         for (const trackId in trainsByTrack) {
             const trackTrains = trainsByTrack[trackId];
             const trackLayout = trackLayouts.find(t => t.id === parseInt(trackId));
             if (!trackLayout) continue;
 
             const trainPositions = window.TrainPositioning.calculateTrainPositions(trackTrains);
-            
-            if (trainPositions.length > 0) {
+
+            if (window.__DEBUG_SCHEDULE_RENDER && trainPositions.length > 0) {
                 const maxOverlap = Math.max(...trainPositions.map(tp => tp.totalOverlapping));
                 console.log(`🚂 Spår ${trackId}: Max ${maxOverlap} tåg samtidigt`);
-                
+
                 if (maxOverlap > 1) {
                     trainPositions.forEach(({ train, position, totalOverlapping }) => {
                         const trainNum = train.arrivalTrainNumber || train.departureTrainNumber;
@@ -37,16 +43,33 @@ window.TrainRenderer = {
                     });
                 }
             }
-            
+
             trainPositions.forEach((placement) => {
                 const { train } = placement;
                 const trainDiv = this._createTrainElement(
                     train, placement, trackLayout, startTime, pixelsPerHour
                 );
                 if (trainDiv) {
-                    timelineCanvas.appendChild(trainDiv);
-                    setTimeout(() => window.ColorUtils.applyDynamicTextContrast(trainDiv, userSettings), 0);
+                    fragment.appendChild(trainDiv);
+                    createdDivs.push(trainDiv);
                 }
+            });
+        }
+
+        timelineCanvas.appendChild(fragment);
+
+        if (createdDivs.length > 0) {
+            requestAnimationFrame(() => {
+                // Read phase (getComputedStyle) for every train first, then one
+                // write phase — interleaving the two forces a reflow per train.
+                const colors = createdDivs.map((trainDiv) =>
+                    window.ColorUtils.computeDynamicTextColor(trainDiv, userSettings)
+                );
+                createdDivs.forEach((trainDiv, i) => {
+                    if (!colors[i]) return;
+                    const numbers = trainDiv.querySelector('.train-numbers');
+                    if (numbers) numbers.style.color = colors[i];
+                });
             });
         }
     },

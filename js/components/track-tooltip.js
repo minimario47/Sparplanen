@@ -31,7 +31,7 @@ class TrackTooltip {
                 <div class="track-tooltip-section">
                     <h4>Information</h4>
                     <div class="track-info-grid">
-                        <div class="track-info-item">
+                        <div class="track-info-item track-signal-row">
                             <span class="track-info-label">Signal:</span>
                             <span class="track-info-value track-signal-length"></span>
                         </div>

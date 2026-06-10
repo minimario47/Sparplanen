@@ -172,7 +172,7 @@
   font-family: var(--font-mono);
   min-width: 0; /* Allow flex shrink below content size */
   position: relative;
-  z-index: 2;
+  z-index: 5; /* Above delay overlays (2) and their labels (3) — the train number must never be covered */
 }
 
 .train-number-value {
@@ -281,17 +281,40 @@
 [data-theme="high-contrast"] .train-bar.len-l .train-numbers,
 [data-theme="high-contrast"] .train-bar.len-xl .train-numbers { color: var(--text-primary); }
 
-/* High-contrast: bucket classes inherit the same readable scheme */
-[data-theme="high-contrast"] .train-bar.len-b1 .train-bar-visual { background-color: var(--len-b1-bg); border-color: var(--len-b1-border); }
-[data-theme="high-contrast"] .train-bar.len-b2 .train-bar-visual { background-color: var(--len-b2-bg); border-color: var(--len-b2-border); }
-[data-theme="high-contrast"] .train-bar.len-b3 .train-bar-visual { background-color: var(--len-b3-bg); border-color: var(--len-b3-border); }
-[data-theme="high-contrast"] .train-bar.len-b4 .train-bar-visual { background-color: var(--len-b4-bg); border-color: var(--len-b4-border); }
-[data-theme="high-contrast"] .train-bar.len-b5 .train-bar-visual { background-color: var(--len-b5-bg); border-color: var(--len-b5-border); }
-[data-theme="high-contrast"] .train-bar.len-b1 .train-numbers { color: var(--len-b1-text); }
-[data-theme="high-contrast"] .train-bar.len-b2 .train-numbers { color: var(--len-b2-text); }
-[data-theme="high-contrast"] .train-bar.len-b3 .train-numbers { color: var(--len-b3-text); }
-[data-theme="high-contrast"] .train-bar.len-b4 .train-numbers { color: var(--len-b4-text); }
-[data-theme="high-contrast"] .train-bar.len-b5 .train-numbers { color: var(--len-b5-text); }
+/* High-contrast: bucket bars are ALWAYS black-on-white. The user-configured
+   --len-bX-* colors are tuned for light/dark themes and can render train
+   numbers invisible here (e.g. light text on the white HC bar), so they are
+   deliberately ignored — only the border keeps the bucket's identity color. */
+[data-theme="high-contrast"] .train-bar.len-b1 .train-bar-visual,
+[data-theme="high-contrast"] .train-bar.len-b2 .train-bar-visual,
+[data-theme="high-contrast"] .train-bar.len-b3 .train-bar-visual,
+[data-theme="high-contrast"] .train-bar.len-b4 .train-bar-visual,
+[data-theme="high-contrast"] .train-bar.len-b5 .train-bar-visual {
+  background-color: #ffffff;
+}
+[data-theme="high-contrast"] .train-bar.len-b1 .train-bar-visual { border-color: var(--len-b1-border, #000000); }
+[data-theme="high-contrast"] .train-bar.len-b2 .train-bar-visual { border-color: var(--len-b2-border, #000000); }
+[data-theme="high-contrast"] .train-bar.len-b3 .train-bar-visual { border-color: var(--len-b3-border, #000000); }
+[data-theme="high-contrast"] .train-bar.len-b4 .train-bar-visual { border-color: var(--len-b4-border, #000000); }
+[data-theme="high-contrast"] .train-bar.len-b5 .train-bar-visual { border-color: var(--len-b5-border, #000000); }
+[data-theme="high-contrast"] .train-bar.len-b1 .train-numbers,
+[data-theme="high-contrast"] .train-bar.len-b2 .train-numbers,
+[data-theme="high-contrast"] .train-bar.len-b3 .train-numbers,
+[data-theme="high-contrast"] .train-bar.len-b4 .train-numbers,
+[data-theme="high-contrast"] .train-bar.len-b5 .train-numbers {
+  color: #000000;
+  text-shadow: none;
+}
+
+/* High-contrast + single-color mode: same guarantee — user colors are ignored */
+[data-theme="high-contrast"][data-train-color-mode="single"] .train-bar .train-bar-visual {
+  background-color: #ffffff !important;
+  border-color: #000000 !important;
+}
+[data-theme="high-contrast"][data-train-color-mode="single"] .train-bar .train-numbers {
+  color: #000000 !important;
+  text-shadow: none;
+}
 
 /* Tooltip for very narrow bars */
 .train-tooltip {

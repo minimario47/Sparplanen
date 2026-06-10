@@ -34,8 +34,21 @@
         return SWE_DAY_TO_KEY[k] || 'mandag';
     }
 
+    // ISO-8601 week key (e.g. "2026-W23") for "now" in Europe/Stockholm.
+    function getStockholmIsoWeekKey() {
+        const ymd = formatStockholmYMD();
+        const parts = ymd.split('-').map(Number);
+        // Work in UTC so DST shifts can't move us across a day boundary.
+        const d = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+        const dayNum = d.getUTCDay() || 7; // Mon=1 … Sun=7
+        d.setUTCDate(d.getUTCDate() + 4 - dayNum); // shift to the week's Thursday
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        return d.getUTCFullYear() + '-W' + String(weekNo).padStart(2, '0');
+    }
+
     function parseWeekKey(wk) {
-        const p = wk.split('-W', 1);
+        const p = String(wk).split('-W');
         if (p.length !== 2) return { y: 0, w: 0 };
         return { y: parseInt(p[0], 10) || 0, w: parseInt(p[1], 10) || 0 };
     }
@@ -98,6 +111,7 @@
     window.SparplanenResolve = {
         formatStockholmYMD: formatStockholmYMD,
         getStockholmSwedishDayKey: getStockholmSwedishDayKey,
+        getStockholmIsoWeekKey: getStockholmIsoWeekKey,
         pickWeekAndDay: pickWeekAndDay,
         parseScheduleNow: function () {
             const weeks = typeof window !== 'undefined' ? window.SPARPLANEN_WEEKS : null;
@@ -113,12 +127,22 @@
             const a = p.anchor
                 ? new Date(p.anchor + 'T12:00:00')
                 : null;
+            // Staleness: the bundle we picked is from a different ISO week than
+            // the real current week (e.g. this week's PDF hasn't arrived yet).
+            // Suppressed when a QA week/day override is active.
+            const currentWeek = getStockholmIsoWeekKey();
+            const cur = parseWeekKey(currentWeek);
+            const used = parseWeekKey(p.week);
+            const isStale = !p.qaOverride && (used.y !== cur.y || used.w !== cur.w);
             return {
                 usedBundle: true,
                 week: p.week,
                 day: p.day,
                 weekKey: p.week,
                 dayKey: p.day,
+                weekNumber: used.w || null,
+                currentWeek: currentWeek,
+                isStale: isStale,
                 services: arr || [],
                 anchorStr: p.anchor,
                 anchor: a,

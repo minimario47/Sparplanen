@@ -701,18 +701,18 @@
     overflow: hidden;
 }
 
-/* Overlay fill layer */
+/* Overlay fill layer — mirrors the real .delay-overlay__label ("+N", mono, 800) */
 .viz-dm-delay-block::before {
-    content: '+8 min';
+    content: '+8';
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 8px;
-    font-weight: 700;
+    font-size: 9px;
+    font-weight: 800;
     font-family: var(--font-mono, monospace);
-    color: #9a3412;
+    color: var(--text-primary);
     z-index: 1;
     line-height: 20px;
     text-align: center;
@@ -748,10 +748,11 @@
     50%       { transform: scale(1.06); }
 }
 
-/* ─── mode: offset — orange fill overlay, no icon ─── */
+/* ─── mode: offset — orange fill overlay, no icon ───
+   Dashed border matches the real color-coded overlay rendering */
 [data-mode="offset"] .viz-dm-delay-block {
     background: rgba(251, 146, 60, 0.55);
-    border: 1.5px solid rgba(251, 146, 60, 0.9);
+    border: 1.5px dashed rgba(251, 146, 60, 0.9);
     border-left: none;
     opacity: 1;
 }
@@ -771,7 +772,7 @@
 /* ─── mode: both — overlay + icon ─── */
 [data-mode="both"] .viz-dm-delay-block {
     background: rgba(251, 146, 60, 0.55);
-    border: 1.5px solid rgba(251, 146, 60, 0.9);
+    border: 1.5px dashed rgba(251, 146, 60, 0.9);
     border-left: none;
     opacity: 1;
 }
@@ -827,37 +828,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 8px;
-    font-weight: 700;
+    font-size: 9px;
+    font-weight: 800;
     font-family: var(--font-mono, monospace);
-    color: #9a3412;
+    color: var(--text-primary);
     transition: background 280ms ease, border-color 280ms ease;
 }
 
+/* These three states mirror the real overlay styles in offset-visualizer.js:
+   color-coded = severity fill + dashed border, transparent = no fill + faint
+   dashed border, dashed = no fill + stronger dashed border (no hatching). */
 [data-style="color-coded"] .viz-ds-delay-block {
     background: rgba(251, 146, 60, 0.55);
-    border: 1.5px solid rgba(251, 146, 60, 0.9);
+    border: 1.5px dashed rgba(251, 146, 60, 0.9);
     border-left: none;
 }
 
 [data-style="transparent"] .viz-ds-delay-block {
     background: transparent;
-    border: 1.5px solid rgba(251, 146, 60, 0.9);
+    border: 1.5px dashed rgba(251, 146, 60, 0.6);
     border-left: none;
-    color: #9a3412;
+    color: var(--text-primary);
 }
 
 [data-style="dashed"] .viz-ds-delay-block {
-    background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 4px,
-        rgba(251, 146, 60, 0.38) 4px,
-        rgba(251, 146, 60, 0.38) 7px
-    );
-    border: 1.5px dashed rgba(251, 146, 60, 0.9);
+    background: transparent;
+    border: 1.5px dashed rgba(251, 146, 60, 0.95);
     border-left: none;
-    color: #9a3412;
+    color: var(--text-primary);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

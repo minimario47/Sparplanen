@@ -242,3 +242,15 @@
     color: var(--text-secondary);
     letter-spacing: 0.04em;
 }
+
+/* Dark theme: viz chips otherwise keep light-palette fills (--primary-100/200
+   are fixed light values, not theme-switched) */
+[data-theme="dark"] .viz-tc-train {
+    background: var(--neutral-800);
+    border-color: var(--primary-400);
+}
+
+[data-theme="dark"] .viz-tc-train--new {
+    background: var(--neutral-700);
+    border-color: var(--primary-300);
+}
