@@ -145,8 +145,8 @@
         try {
             const dm = window.delayIntegration?.dataManager;
             if (!dm || !train) return null;
-            const arr = train.arrivalTrainNumber ? dm.getDelayInfo(train.arrivalTrainNumber) : null;
-            const dep = train.departureTrainNumber ? dm.getDelayInfo(train.departureTrainNumber) : null;
+            const arr = train.arrivalTrainNumber ? dm.getDelayInfo(train.arrivalTrainNumber, 'arrival') : null;
+            const dep = train.departureTrainNumber ? dm.getDelayInfo(train.departureTrainNumber, 'departure') : null;
             return arr || dep || null;
         } catch (_) { return null; }
     }

@@ -134,6 +134,12 @@ window.TrainRenderer = {
         trainDiv.style.zIndex = 10 + laneStart;
         trainDiv.dataset.baseZIndex = String(10 + laneStart);
         
+        const segment = train._segment || null;
+        if (segment) {
+            trainDiv.dataset.segment = segment;
+            trainDiv.classList.add('train-bar--torn', `train-bar--torn-${segment}`);
+        }
+
         trainDiv.dataset.trainId = train.id;
         trainDiv.dataset.arrival = train.arrivalTrainNumber || '';
         trainDiv.dataset.departure = train.departureTrainNumber || '';
@@ -167,8 +173,13 @@ window.TrainRenderer = {
         const hasDepartureDisplay = !!departureDisplay;
         const sameNumber = train.arrivalTrainNumber === train.departureTrainNumber;
         
-        const displaySingleNumber = sameNumber || isVeryNarrow || !(hasArrivalDisplay && hasDepartureDisplay);
-        const singleNumber = arrivalDisplay || departureDisplay;
+        // A torn half shows only its own leg's number.
+        const displaySingleNumber = !!segment || sameNumber || isVeryNarrow || !(hasArrivalDisplay && hasDepartureDisplay);
+        const singleNumber = segment === 'departure'
+            ? (departureDisplay || arrivalDisplay)
+            : (segment === 'arrival'
+                ? (arrivalDisplay || departureDisplay)
+                : (arrivalDisplay || departureDisplay));
 
         let fontSizePx;
         if (isCompressed) {
@@ -189,7 +200,10 @@ window.TrainRenderer = {
         let numbersHTML = '';
         let singleAlignClass = '';
         if (displaySingleNumber) {
-            if (hasArrivalDisplay && !hasDepartureDisplay) {
+            if (segment) {
+                // Number sits away from the torn edge, toward the outer end.
+                singleAlignClass = segment === 'arrival' ? 'single-left' : 'single-right';
+            } else if (hasArrivalDisplay && !hasDepartureDisplay) {
                 singleAlignClass = 'single-left';
             } else if (!hasArrivalDisplay && hasDepartureDisplay) {
                 singleAlignClass = 'single-right';
@@ -208,7 +222,7 @@ window.TrainRenderer = {
             ? '<div class="status-icon" title="Konflikt! ⚠️"></div>' 
             : '';
         
-        const defaultHoverNumber = arrivalDisplay || departureDisplay || '';
+        const defaultHoverNumber = segment ? (singleNumber || '') : (arrivalDisplay || departureDisplay || '');
         const tooltipHTML = showHoverTooltip ? `
             <div class="train-tooltip">
                 <div class="train-tooltip-number">Tåg <span class="train-tooltip-number-value">${this._escape(defaultHoverNumber)}</span></div>
@@ -248,7 +262,7 @@ window.TrainRenderer = {
             trainDiv.style.zIndex = trainDiv.dataset.baseZIndex || String(10 + position);
         });
         trainDiv.addEventListener('mousemove', (e) => {
-            if (!showHoverTooltip) return;
+            if (!showHoverTooltip || segment) return;
             if (!(hasArrivalDisplay && hasDepartureDisplay) || arrivalDisplay === departureDisplay) {
                 return;
             }

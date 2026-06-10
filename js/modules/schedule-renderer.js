@@ -277,6 +277,7 @@ function prepareTrainData() {
                 lengthMeters: lengthMeters,
                 lengthClass: lengthClass,
                 trackId: parseInt(service.trackId, 10),
+                plannedTrackId: parseInt(service.trackId, 10),
                 subTrackIndex: Number.isFinite(subTrackIndex) ? subTrackIndex : 0,
                 trainSet,
                 vehicleCount,
@@ -379,6 +380,7 @@ function serviceLikeToTrain(service) {
         lengthMeters,
         lengthClass,
         trackId: parseInt(service.trackId, 10),
+        plannedTrackId: parseInt(service.trackId, 10),
         subTrackIndex: Number.isFinite(subTrackIndex) ? subTrackIndex : 0,
         trainSet,
         vehicleCount,
@@ -487,6 +489,45 @@ function handleTimeManagerChange(event) {
     }
 }
 
+/**
+ * Expand trains whose arrival and departure occupy different actual tracks
+ * (train.splitTracks, set by detectTrackChanges) into two render segments —
+ * the "torn paper" split. Each half lands on its own track so lane/overlap
+ * math treats it like any other train. Falls back to the unsplit bar when
+ * the span is too narrow to tear or a target track isn't rendered.
+ */
+function expandSplitTrains(trains) {
+    const out = [];
+    const knownTracks = new Set((cachedTracks || []).map((t) => parseInt(t.id, 10)));
+
+    for (const train of trains) {
+        const st = train.splitTracks;
+        if (!st || !train.arrTime || !train.depTime) { out.push(train); continue; }
+        if (!knownTracks.has(parseInt(st.arrivalTrack, 10)) ||
+            !knownTracks.has(parseInt(st.departureTrack, 10))) {
+            out.push(train);
+            continue;
+        }
+
+        const spanMs = train.depTime - train.arrTime;
+        const minSegMs = (45 / (window.currentPixelsPerHour || 1)) * 3600000; // ≥45px per half
+        if (spanMs < minSegMs * 2) { out.push(train); continue; }
+
+        const splitTime = new Date(train.arrTime.getTime() + spanMs / 2);
+        out.push(Object.assign({}, train, {
+            trackId: parseInt(st.arrivalTrack, 10),
+            _segment: 'arrival',
+            depTime: splitTime
+        }));
+        out.push(Object.assign({}, train, {
+            trackId: parseInt(st.departureTrack, 10),
+            _segment: 'departure',
+            arrTime: splitTime
+        }));
+    }
+    return out;
+}
+
 function renderFullSchedule() {
     const state = window.TimeManager.getState();
     let { viewTime, timeRange } = state;
@@ -528,7 +569,10 @@ function renderFullSchedule() {
         return trainStart < viewWindowEnd && trainEnd >= viewWindowStart;
     });
     
-    const trackLayouts = window.TrainPositioning.calculateTrackLayouts(cachedTracks, visibleTrains);
+    // Torn-bar expansion must happen before layout calc so each half
+    // reserves a lane on its own track.
+    const renderList = expandSplitTrains(visibleTrains);
+    const trackLayouts = window.TrainPositioning.calculateTrackLayouts(cachedTracks, renderList);
     
     window.TimelineRenderer.renderTimelineHours(timelineStart, timelineStartHours, window.currentPixelsPerHour);
     window.TimelineRenderer.renderTrackLabels(trackLayouts, cachedTracks);
@@ -538,7 +582,7 @@ function renderFullSchedule() {
     }
 
     window.TimelineRenderer.renderTimelineGrid(trackLayouts, totalCanvasWidth, window.currentPixelsPerHour);
-    window.TrainRenderer.renderTrains(visibleTrains, trackLayouts, timelineStart, window.currentPixelsPerHour, userSettings);
+    window.TrainRenderer.renderTrains(renderList, trackLayouts, timelineStart, window.currentPixelsPerHour, userSettings);
     if (window.ClosureRenderer) {
         window.ClosureRenderer.render(
             trackLayouts,

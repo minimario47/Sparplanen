@@ -135,6 +135,127 @@
     }
 }
 
+/* ───────────── Torn split bars ─────────────
+   When a train's arrival and departure end up on different actual tracks the
+   bar is rendered as two halves — like a strip of paper torn in two. The
+   jagged edges are complementary (same y-stations, mirrored x-offsets) so the
+   halves visually read as parts of one strip. All of this is static styling:
+   it must stay fully visible with reduced motion enabled. */
+
+.train-bar--torn .train-bar-visual {
+    position: relative;
+}
+
+.train-bar--torn-arrival .train-bar-visual {
+    clip-path: polygon(
+        0 0,
+        calc(100% - 2px) 0,
+        100% 9%,
+        calc(100% - 7px) 21%,
+        calc(100% - 1px) 34%,
+        calc(100% - 8px) 50%,
+        calc(100% - 2px) 63%,
+        calc(100% - 6px) 77%,
+        100% 88%,
+        calc(100% - 5px) 100%,
+        0 100%
+    );
+}
+
+.train-bar--torn-departure .train-bar-visual {
+    clip-path: polygon(
+        2px 0,
+        100% 0,
+        100% 100%,
+        5px 100%,
+        0 88%,
+        6px 77%,
+        2px 63%,
+        8px 50%,
+        1px 34%,
+        7px 21%,
+        0 9%,
+        2px 0
+    );
+}
+
+/* Warning-tinted "torn fiber" highlight along the ripped edge (clipped by the
+   polygon above, so the tint follows the jags). */
+.train-bar--torn-arrival .train-bar-visual::after,
+.train-bar--torn-departure .train-bar-visual::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 9px;
+    pointer-events: none;
+}
+
+.train-bar--torn-arrival .train-bar-visual::after {
+    right: 0;
+    background: linear-gradient(270deg, rgba(245, 158, 11, 0.45), transparent);
+}
+
+.train-bar--torn-departure .train-bar-visual::after {
+    left: 0;
+    background: linear-gradient(90deg, rgba(245, 158, 11, 0.45), transparent);
+}
+
+/* The generic pulse-ring would just outline the half's rectangle and add
+   noise — the tear, edge tint and seam already carry the message. */
+.train-bar[data-split][data-has-track-change]::after {
+    display: none;
+}
+
+/* Tear seam — jagged connector between the two halves, drawn by the
+   track-changes decorator. Static and persistent (no fade): it lives as long
+   as the API keeps reporting divergent tracks. */
+.track-change-seam {
+    position: absolute;
+    pointer-events: auto;
+    color: var(--accent-warning, #f59e0b);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.18));
+    cursor: help;
+}
+
+.track-change-seam svg {
+    overflow: visible;
+    display: block;
+}
+
+.track-change-seam__zig {
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-dasharray: 5 3;
+}
+
+.track-change-seam__end {
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+}
+
+.track-change-seam:hover .track-change-seam__zig {
+    stroke-width: 3;
+    stroke-dasharray: none;
+}
+
+/* Decorative motion only as an enhancement — never load-bearing. */
+@media (prefers-reduced-motion: no-preference) {
+    .track-change-seam__zig {
+        animation: track-change-march 900ms linear infinite;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .track-change-seam,
+    .track-change-seam__zig {
+        animation: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+
 /* ───────────── Settings mini-viz ───────────── */
 
 .setting-viz.viz-track-change {

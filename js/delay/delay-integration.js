@@ -161,25 +161,22 @@ class DelayIntegration {
      * Handle settings change
      */
     handleSettingsChange(newSettings) {
-        this.settings = { ...this.settings, ...newSettings };
-        
+        // The settings event only carries a subset of keys — drop undefined
+        // values so they don't overwrite existing settings (e.g. wiping
+        // colorThresholds, which crashes getSeverity on the next render).
+        const defined = Object.fromEntries(
+            Object.entries(newSettings || {}).filter(([, value]) => value !== undefined)
+        );
+        this.settings = { ...this.settings, ...defined };
+
         // Recreate visualizer if mode changed
         const currentMode = this.visualizer.constructor.name.toLowerCase().replace('visualizer', '');
-        if (newSettings.mode !== currentMode) {
-            logger.info('Integration', `Switching visualizer mode: ${currentMode} -> ${newSettings.mode}`);
-            this.visualizer = this.createVisualizer(newSettings.mode);
+        if (defined.mode && defined.mode !== currentMode) {
+            logger.info('Integration', `Switching visualizer mode: ${currentMode} -> ${defined.mode}`);
+            this.visualizer = this.createVisualizer(defined.mode);
         } else {
             // Update settings in current visualizer
-            this.visualizer.updateSettings({
-                colorThresholds: newSettings.colorThresholds,
-                colors: newSettings.colors,
-                showWarnings: newSettings.showWarnings,
-                visualizationStyle: newSettings.visualizationStyle,
-                turnaroundTime: newSettings.turnaroundTime,
-                conflictTolerance: newSettings.conflictTolerance,
-                turnaroundEnabled: newSettings.turnaroundEnabled,
-                conflictToleranceEnabled: newSettings.conflictToleranceEnabled
-            });
+            this.visualizer.updateSettings(defined);
         }
         
         // Re-apply visualizations with new settings
@@ -197,10 +194,21 @@ class DelayIntegration {
         const seen = new Set();
         const add = (trainNumber, leg, side, scheduledTime) => {
             const number = String(trainNumber || '').trim();
-            if (!number || seen.has(number)) return;
-            const delayInfo = this.dataManager.getDelayInfo(number);
+            // Dedupe per (number, leg) — a turnaround that keeps the same
+            // number still has two distinct legs with their own API data.
+            const dedupeKey = `${number}:${leg}`;
+            if (!number || seen.has(dedupeKey)) return;
+            const delayInfo = this.dataManager.getDelayInfo(number, leg);
             if (!delayInfo) return;
-            seen.add(number);
+            // Cross-activity fallback: when the record belongs to the other
+            // leg's activity and this bar uses the same number for both legs,
+            // let the matching leg claim it — otherwise one record would
+            // produce duplicate contexts on both legs.
+            const otherNumber = String((leg === 'arrival'
+                ? train.departureTrainNumber
+                : train.arrivalTrainNumber) || '').trim();
+            if (delayInfo.activityType && delayInfo.activityType !== leg && otherNumber === number) return;
+            seen.add(dedupeKey);
             contexts.push({
                 trainNumber: number,
                 leg,
@@ -226,6 +234,7 @@ class DelayIntegration {
 
         const userSettings = window.SettingsModal?.getCurrentSettings?.() || {};
         const autoSwitch = userSettings.trackChangesAutoSwitch !== false;
+        const splitEnabled = userSettings.trackChangesSplitBar !== false;
 
         const validTracks = new Set();
         if (Array.isArray(window.trackDefinitions)) {
@@ -239,19 +248,31 @@ class DelayIntegration {
 
         window.cachedTrains.forEach((train) => {
             if (!train) return;
+
+            // Planned track stays stable even after auto-switch mutates trackId.
+            const planned = parseInt(train.plannedTrackId ?? train.trackId, 10);
+            if (!Number.isFinite(planned)) return;
+
+            // When a previously split train loses its API data (announcements
+            // aged out of the feed), fold the bar back onto the planned track.
+            const clearSplit = () => {
+                if (train.splitTracks) {
+                    train.splitTracks = null;
+                    if (train.trackId !== planned) train.trackId = planned;
+                    mutated = true;
+                }
+            };
+
             const contexts = this.getDelayContextsForTrain(train)
                 .filter((ctx) => ctx.delayInfo && ctx.delayInfo.trackAtLocation != null);
-            if (contexts.length === 0) return;
-
-            const planned = parseInt(train.trackId, 10);
-            if (!Number.isFinite(planned)) return;
+            if (contexts.length === 0) { clearSplit(); return; }
 
             const validContexts = contexts.map((ctx) => ({
                 ...ctx,
                 apiTrack: parseInt(ctx.delayInfo.trackAtLocation, 10)
             })).filter((ctx) => Number.isFinite(ctx.apiTrack) && (validTracks.size === 0 || validTracks.has(ctx.apiTrack)));
 
-            if (validContexts.length === 0) return;
+            if (validContexts.length === 0) { clearSplit(); return; }
 
             validContexts.forEach((ctx) => {
                 if (ctx.apiTrack === planned) return;
@@ -263,17 +284,68 @@ class DelayIntegration {
                 });
             });
 
-            const changedTargets = Array.from(new Set(validContexts
-                .map((ctx) => ctx.apiTrack)
-                .filter((track) => track !== planned)));
+            // Effective track per leg. Unknown departure ⇒ the set presumably
+            // stays where it arrived; known departure + unknown arrival ⇒ the
+            // arrival still happens on the planned track.
+            const arrCtx = validContexts.find((ctx) => ctx.leg === 'arrival');
+            const depCtx = validContexts.find((ctx) => ctx.leg === 'departure');
+            const effArr = arrCtx ? arrCtx.apiTrack : planned;
+            const effDep = depCtx ? depCtx.apiTrack : effArr;
 
-            if (autoSwitch && changedTargets.length === 1) {
-                train.trackId = changedTargets[0];
-                mutated = true;
-            } else if (changedTargets.length > 1) {
+            if (effArr === effDep) {
+                if (train.splitTracks) { train.splitTracks = null; mutated = true; }
+                if (autoSwitch && train.trackId !== effArr) {
+                    if (effArr === planned) {
+                        // Moving back to plan — record it so the move is visible.
+                        validContexts.forEach((ctx) => {
+                            const changeId = `${train.id}:${ctx.leg}:${ctx.trainNumber}`;
+                            window.TrackChangesStore.recordChange(changeId, train.trackId, effArr, {
+                                trainId: train.id,
+                                trainNumber: ctx.trainNumber,
+                                leg: ctx.leg
+                            });
+                        });
+                    }
+                    train.trackId = effArr;
+                    mutated = true;
+                }
+                return;
+            }
+
+            // Divergent legs. Respect "dölj spårändring": if the user hid every
+            // recorded change for this train, don't force the split back.
+            const changeIds = validContexts
+                .filter((ctx) => ctx.apiTrack !== planned)
+                .map((ctx) => `${train.id}:${ctx.leg}:${ctx.trainNumber}`);
+            const allHidden = changeIds.length > 0 &&
+                changeIds.every((id) => window.TrackChangesStore.isHidden(id));
+
+            const canSplit = splitEnabled && !allHidden && train.arrTime && train.depTime;
+
+            if (canSplit) {
+                // The split visual supersedes the "conflicting reports" state.
                 validContexts.forEach((ctx) => {
-                    const changeId = `${train.id}:${ctx.leg}:${ctx.trainNumber}`;
-                    const raw = window.TrackChangesStore.getRaw(changeId);
+                    const raw = window.TrackChangesStore.getRaw(`${train.id}:${ctx.leg}:${ctx.trainNumber}`);
+                    if (raw && raw.discrepancy) raw.discrepancy = false;
+                });
+                const prev = train.splitTracks;
+                if (!prev || prev.arrivalTrack !== effArr || prev.departureTrack !== effDep || prev.plannedTrack !== planned) {
+                    train.splitTracks = {
+                        arrivalTrack: effArr,
+                        departureTrack: effDep,
+                        plannedTrack: planned,
+                        // Keep the original timestamp so appear-effects don't
+                        // re-fire on every 30s poll.
+                        changedAt: prev?.changedAt ?? Date.now()
+                    };
+                    mutated = true;
+                }
+                if (train.trackId !== planned) { train.trackId = planned; mutated = true; }
+            } else {
+                clearSplit();
+                validContexts.forEach((ctx) => {
+                    if (ctx.apiTrack === planned) return;
+                    const raw = window.TrackChangesStore.getRaw(`${train.id}:${ctx.leg}:${ctx.trainNumber}`);
                     if (raw) raw.discrepancy = true;
                 });
             }
@@ -325,7 +397,13 @@ class DelayIntegration {
             const train = window.cachedTrains?.find(t => String(t.id) === String(trainId));
             if (!train) return;
             
-            const delayContexts = this.getDelayContextsForTrain(train);
+            const allContexts = this.getDelayContextsForTrain(train);
+            // A torn (split) bar renders as two halves; each half only carries
+            // the visuals of its own leg.
+            const segment = trainBar.dataset.segment || null;
+            const delayContexts = segment
+                ? allContexts.filter((ctx) => ctx.leg === segment)
+                : allContexts;
             if (delayContexts.length === 0) return;
 
             const suppressedSet = window.suppressedDelays;

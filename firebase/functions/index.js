@@ -36,7 +36,10 @@ function buildTrafikverketRequest(locationSignature, hoursBack = 3, hoursAhead =
         <FILTER>
           <AND>
             <EQ name="LocationSignature" value="${locationSignature}"/>
-            <EQ name="ActivityType" value="Ankomst"/>
+            <OR>
+              <EQ name="ActivityType" value="Ankomst"/>
+              <EQ name="ActivityType" value="Avgang"/>
+            </OR>
             <AND>
               <GTE name="AdvertisedTimeAtLocation" value="${formatDate(startDate)}"/>
               <LT name="AdvertisedTimeAtLocation" value="${formatDate(endDate)}"/>
@@ -147,6 +150,7 @@ function processTrainAnnouncements(announcements) {
 
     processed.push({
       trainNumber: train.AdvertisedTrainIdent,
+      activityType: /^avg/i.test(String(train.ActivityType || '')) ? 'departure' : 'arrival',
       delayMinutes,
       delayStatus,
       isCanceled: train.Canceled === true,
@@ -157,6 +161,7 @@ function processTrainAnnouncements(announcements) {
       actualTime: train.TimeAtLocation || null,
       trackAtLocation: train.TrackAtLocation || null,
       fromLocation: train.FromLocation?.[0]?.LocationName || '',
+      toLocation: train.ToLocation?.[0]?.LocationName || '',
       lastUpdated: currentTime.toISOString(),
     });
   });

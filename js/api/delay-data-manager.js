@@ -5,7 +5,7 @@
 
 class DelayDataManager {
     constructor() {
-        this.delayData = new Map(); // trainNumber -> delayInfo
+        this.delayData = new Map(); // `${trainNumber}:${activity}` -> delayInfo
         this.lastUpdateTime = null;
         this.totalTrains = 0;
         
@@ -24,16 +24,19 @@ class DelayDataManager {
         // Clear existing data
         this.delayData.clear();
         
-        // Process each train
+        // Process each train. Feeds older than the Avgång rollout have no
+        // activityType — treat those records as arrivals (previous behavior).
         trainsArray.forEach(train => {
             const trainNumber = train.trainNumber;
             if (!trainNumber) {
                 logger.warn('DelayData', 'Train missing trainNumber', train);
                 return;
             }
-            
+
+            const activity = train.activityType === 'departure' ? 'departure' : 'arrival';
             const delayInfo = {
                 trainNumber,
+                activityType: activity,
                 delayMinutes: train.delayMinutes,
                 delayStatus: train.delayStatus,
                 isCanceled: train.isCanceled,
@@ -44,12 +47,11 @@ class DelayDataManager {
                 actualTime: train.actualTime,
                 trackAtLocation: train.trackAtLocation,
                 fromLocation: train.fromLocation,
+                toLocation: train.toLocation || '',
                 lastUpdated: train.lastUpdated
             };
-            
-            // Store with both string and numeric keys for flexible lookup
-            this.delayData.set(String(trainNumber), delayInfo);
-            this.delayData.set(Number(trainNumber), delayInfo);
+
+            this.delayData.set(`${String(trainNumber).trim()}:${activity}`, delayInfo);
         });
         
         this.totalTrains = trainsArray.length;
@@ -58,22 +60,21 @@ class DelayDataManager {
     }
     
     /**
-     * Get delay info for specific train number
+     * Get delay info for specific train number.
+     * Optional `leg` ('arrival' | 'departure') selects the matching activity;
+     * falls back to the other activity so old feeds (arrival-only) still
+     * answer departure lookups. Without `leg`, arrival is preferred.
      */
-    getDelayInfo(trainNumber) {
+    getDelayInfo(trainNumber, leg) {
         if (!trainNumber) return null;
-        
-        // Try both string and numeric lookup
-        let info = this.delayData.get(trainNumber);
-        if (!info && typeof trainNumber === 'string') {
-            info = this.delayData.get(Number(trainNumber));
-        } else if (!info && typeof trainNumber === 'number') {
-            info = this.delayData.get(String(trainNumber));
-        }
-        
-        // Verbose logging disabled for cleaner console - summary is logged in integration
-        
-        return info;
+        const n = String(trainNumber).trim();
+        if (!n) return null;
+
+        const preferred = leg === 'departure' ? 'departure' : 'arrival';
+        const fallback = preferred === 'departure' ? 'arrival' : 'departure';
+        return this.delayData.get(`${n}:${preferred}`) ||
+               this.delayData.get(`${n}:${fallback}`) ||
+               null;
     }
     
     /**
@@ -109,9 +110,10 @@ class DelayDataManager {
      */
     getDelayedTrains() {
         const delayed = [];
-        this.delayData.forEach((info, key) => {
-            // Only process string keys to avoid duplicates
-            if (typeof key === 'string' && this.hasDelay(key)) {
+        this.delayData.forEach((info) => {
+            if (info.delayMinutes !== null &&
+                info.delayMinutes !== undefined &&
+                Math.abs(info.delayMinutes) > 2) {
                 delayed.push(info);
             }
         });
@@ -123,11 +125,12 @@ class DelayDataManager {
      */
     getTrainsWithIssues() {
         const issues = [];
-        this.delayData.forEach((info, key) => {
-            if (typeof key === 'string') {
-                if (this.hasDelay(key) || info.isCanceled || info.isReplaced) {
-                    issues.push(info);
-                }
+        this.delayData.forEach((info) => {
+            const delayed = info.delayMinutes !== null &&
+                info.delayMinutes !== undefined &&
+                Math.abs(info.delayMinutes) > 2;
+            if (delayed || info.isCanceled || info.isReplaced) {
+                issues.push(info);
             }
         });
         return issues;
@@ -137,12 +140,7 @@ class DelayDataManager {
      * Get summary statistics
      */
     getSummary() {
-        const allTrains = [];
-        this.delayData.forEach((info, key) => {
-            if (typeof key === 'string') {
-                allTrains.push(info);
-            }
-        });
+        const allTrains = Array.from(this.delayData.values());
         
         return {
             total: allTrains.length,

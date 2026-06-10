@@ -139,6 +139,9 @@
         const nowMs = now.getTime();
         const suppressed = window.suppressedDelays instanceof Set ? window.suppressedDelays : null;
         for (const t of trains) {
+            // The feed now contains departure announcements too; this panel
+            // is arrivals-only. Records without activityType are arrivals.
+            if (t.activityType === 'departure') continue;
             if (t.isCanceled) continue;
             const dm = t.delayMinutes;
             if (dm == null || !Number.isFinite(dm)) continue;

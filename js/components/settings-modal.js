@@ -121,6 +121,7 @@
         trackChangesAutoSwitch: true,
         trackChangesShowArrow: true,
         trackChangesShowGhost: false,
+        trackChangesSplitBar: true,
         trackChangesDurationMin: 2
     };
 
@@ -635,6 +636,7 @@
             trackChangesAutoSwitch: getChecked('track-changes-auto-switch', defaultSettings.trackChangesAutoSwitch),
             trackChangesShowArrow: getChecked('track-changes-show-arrow', defaultSettings.trackChangesShowArrow),
             trackChangesShowGhost: getChecked('track-changes-show-ghost', defaultSettings.trackChangesShowGhost),
+            trackChangesSplitBar: getChecked('track-changes-split-bar', defaultSettings.trackChangesSplitBar),
             trackChangesDurationMin: getNumber('track-changes-duration', defaultSettings.trackChangesDurationMin)
         };
     }
@@ -761,6 +763,11 @@
         if (tcGhost) {
             tcGhost.classList.toggle('checked', !!currentSettings.trackChangesShowGhost);
             tcGhost.setAttribute('aria-checked', String(!!currentSettings.trackChangesShowGhost));
+        }
+        const tcSplit = document.getElementById('track-changes-split-bar');
+        if (tcSplit) {
+            tcSplit.classList.toggle('checked', !!currentSettings.trackChangesSplitBar);
+            tcSplit.setAttribute('aria-checked', String(!!currentSettings.trackChangesSplitBar));
         }
         const tcDuration = document.getElementById('track-changes-duration');
         if (tcDuration) {

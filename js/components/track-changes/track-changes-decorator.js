@@ -57,9 +57,17 @@
         return layouts.find((l) => parseInt(l.id, 10) === id) || null;
     }
 
-    function findBar(canvas, trainId) {
+    function findBar(canvas, trainId, leg) {
         if (!canvas || trainId == null) return null;
-        return canvas.querySelector(`.train-bar[data-train-id="${CSS.escape(String(trainId))}"]`);
+        const id = CSS.escape(String(trainId));
+        // A torn (split) train renders as two halves sharing the train id;
+        // prefer the half matching the change's leg.
+        if (leg) {
+            const half = canvas.querySelector(`.train-bar[data-train-id="${id}"][data-segment="${leg}"]`);
+            if (half) return half;
+        }
+        return canvas.querySelector(`.train-bar[data-train-id="${id}"]:not([data-segment])`) ||
+               canvas.querySelector(`.train-bar[data-train-id="${id}"]`);
     }
 
     function readPx(value, fallback = 0) {
@@ -212,6 +220,70 @@
         return wrap;
     }
 
+    const SEAM_CLASS = 'track-change-seam';
+
+    /**
+     * Draw the "tear seam" connecting the two halves of a split train —
+     * a jagged vertical zigzag between the torn edges, echoing the rip.
+     */
+    function decorateSplits(canvas, layer) {
+        const trains = Array.isArray(window.cachedTrains) ? window.cachedTrains : [];
+        trains.forEach((train) => {
+            const st = train && train.splitTracks;
+            if (!st) return;
+            const id = CSS.escape(String(train.id));
+            const arrBar = canvas.querySelector(`.train-bar[data-train-id="${id}"][data-segment="arrival"]`);
+            const depBar = canvas.querySelector(`.train-bar[data-train-id="${id}"][data-segment="departure"]`);
+            if (!arrBar || !depBar) return;
+
+            arrBar.dataset.split = 'true';
+            depBar.dataset.split = 'true';
+
+            const a = getBarMetrics(arrBar);
+            const d = getBarMetrics(depBar);
+            const aY = a.top + a.height / 2;
+            const dY = d.top + d.height / 2;
+            const seamX = a.left + a.width; // torn edge; equals depBar's left
+
+            const pad = 7;
+            const top = Math.min(aY, dY) - pad;
+            const height = Math.abs(dY - aY) + pad * 2;
+            const svgW = 18;
+            const cx = svgW / 2;
+
+            const wrap = document.createElement('div');
+            wrap.className = SEAM_CLASS;
+            wrap.dataset.trainId = String(train.id);
+            wrap.style.left = `${seamX - svgW / 2}px`;
+            wrap.style.top = `${top}px`;
+            wrap.style.width = `${svgW}px`;
+            wrap.style.height = `${height}px`;
+            wrap.title = `Ankomst spår ${st.arrivalTrack} · Avgång spår ${st.departureTrack} (planerat spår ${st.plannedTrack})`;
+
+            // Deterministic zigzag between the two bar centers.
+            const y0 = pad;
+            const y1 = height - pad;
+            const steps = Math.max(4, Math.round((y1 - y0) / 9));
+            let points = `${cx},${y0}`;
+            for (let i = 1; i < steps; i++) {
+                const y = y0 + ((y1 - y0) * i) / steps;
+                const dx = (i % 2 === 0 ? -1 : 1) * 4.5;
+                points += ` ${cx + dx},${y.toFixed(1)}`;
+            }
+            points += ` ${cx},${y1}`;
+
+            wrap.innerHTML = `
+                <svg viewBox="0 0 ${svgW} ${height}" width="${svgW}" height="${height}" aria-hidden="true">
+                    <polyline points="${points}" class="${SEAM_CLASS}__zig" fill="none" stroke-linejoin="round"></polyline>
+                    <line x1="${cx - 6}" y1="${y0}" x2="${cx + 6}" y2="${y0}" class="${SEAM_CLASS}__end"></line>
+                    <line x1="${cx - 6}" y1="${y1}" x2="${cx + 6}" y2="${y1}" class="${SEAM_CLASS}__end"></line>
+                </svg>
+            `;
+
+            layer.appendChild(wrap);
+        });
+    }
+
     function decorateAll() {
         const canvas = getCanvas();
         if (!canvas) return;
@@ -220,10 +292,17 @@
 
         layer.innerHTML = '';
 
+        const settings = getSettings();
+
+        // Tear seams for split trains are driven by trackChangesSplitBar and
+        // are independent of the auto-switch setting.
+        if (settings.trackChangesSplitBar !== false) {
+            decorateSplits(canvas, layer);
+        }
+
         const store = window.TrackChangesStore;
         if (!store) return;
 
-        const settings = getSettings();
         // The arrow/ghost visuals describe the auto-switch movement; they only
         // make sense when auto-switch is on. With auto-switch off, the train
         // bar stays on the planned track so a "ghost on old track" overlay
@@ -240,7 +319,7 @@
         const active = store.getAllActive();
 
         active.forEach((entry) => {
-            const bar = findBar(canvas, entry.trainId);
+            const bar = findBar(canvas, entry.trainId, entry.leg);
             if (!bar) return;
 
             const oldLayout = findLayout(layouts, entry.fromTrack);
@@ -270,6 +349,9 @@
         canvas.querySelectorAll('.train-bar[data-has-track-change]').forEach((bar) => {
             bar.removeAttribute('data-has-track-change');
         });
+        canvas.querySelectorAll('.train-bar[data-split]').forEach((bar) => {
+            bar.removeAttribute('data-split');
+        });
     }
 
     function refresh() {
@@ -295,7 +377,11 @@
         // even when no other event fires.
         setInterval(() => {
             if (!window.TrackChangesStore) return;
-            if (window.TrackChangesStore.getAllActive().length === 0) {
+            // Splits outlive the 2-minute arrow/ghost window — keep the seam
+            // alive as long as any train is torn.
+            const hasSplits = Array.isArray(window.cachedTrains) &&
+                window.cachedTrains.some((t) => t && t.splitTracks);
+            if (window.TrackChangesStore.getAllActive().length === 0 && !hasSplits) {
                 clearLayer();
                 return;
             }

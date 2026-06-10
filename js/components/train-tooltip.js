@@ -116,15 +116,16 @@ class TrainTooltip {
         const departure = String(train.departureTrainNumber || '').trim();
 
         if (preferred) {
-            const preferredInfo = dataManager.getDelayInfo(preferred);
+            const preferredLeg = (preferred === departure && preferred !== arrival) ? 'departure' : 'arrival';
+            const preferredInfo = dataManager.getDelayInfo(preferred, preferredLeg);
             if (preferredInfo) return preferredInfo;
         }
         if (arrival && arrival !== preferred) {
-            const arrivalInfo = dataManager.getDelayInfo(arrival);
+            const arrivalInfo = dataManager.getDelayInfo(arrival, 'arrival');
             if (arrivalInfo) return arrivalInfo;
         }
         if (departure && departure !== preferred) {
-            const departureInfo = dataManager.getDelayInfo(departure);
+            const departureInfo = dataManager.getDelayInfo(departure, 'departure');
             if (departureInfo) return departureInfo;
         }
         return null;
@@ -240,7 +241,7 @@ class TrainTooltip {
         // arrival regardless of which side of the bar was clicked.
         const dataManager = window.delayIntegration?.dataManager;
         const arrivalNum = String(train.arrivalTrainNumber || train.arrivalLabel || '').trim();
-        const arrivalDelay = (dataManager && arrivalNum) ? dataManager.getDelayInfo(arrivalNum) : null;
+        const arrivalDelay = (dataManager && arrivalNum) ? dataManager.getDelayInfo(arrivalNum, 'arrival') : null;
 
         const arrRow = train.arrTime
             ? this.buildScheduleRow('Ankomst', this.formatTime(train.arrTime), train.arrTime, arrivalDelay, true)
