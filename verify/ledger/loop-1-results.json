@@ -1,0 +1,148 @@
+[
+  {
+    "key": "2026-W19|fredag|13",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|fredag|14",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|fredag|15",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|fredag|16",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|fredag|17",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|torsdag|192",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|torsdag|193",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|torsdag|194",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|torsdag|195",
+    "verdict": "wrong",
+    "class": "page-split",
+    "reason": "167 stitched across 15:00 page edge but departure time 15:37 lost -> bar has no end (renders without proper extent)"
+  },
+  {
+    "key": "2026-W19|torsdag|196",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|torsdag|197",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|torsdag|198",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|torsdag|199",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|torsdag|200",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|torsdag|201",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|lordag|280",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|lordag|281",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|lordag|282",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|lordag|283",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|lordag|284",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|lordag|285",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|lordag|286",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|lordag|287",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|lordag|288",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W17|lordag|14",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W17|lordag|15",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W17|lordag|48",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W17|lordag|49",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W17|lordag|50",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W17|lordag|51",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W17|lordag|52",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|mandag|14",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|mandag|15",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|mandag|16",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|mandag|17",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|mandag|18",
+    "verdict": "ok"
+  }
+]

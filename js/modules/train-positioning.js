@@ -37,12 +37,13 @@ window.TrainPositioning = {
         
         tracks.forEach(track => {
             const trackTrains = trainsByTrack[track.id] || [];
-            const maxPreferredLane = trackTrains.reduce((max, train) => {
-                const laneEnd = this.getPreferredLane(train) + this.getVehicleSpan(train);
-                return Math.max(max, laneEnd);
-            }, 1);
-            const maxSimultaneousVehicles = this.calculateMaxSimultaneousTrains(trackTrains);
-            const laneCount = Math.max(1, maxPreferredLane, maxSimultaneousVehicles);
+            // Gap-free lane packing (greedy interval colouring): a track needs as
+            // many lanes as the most trains overlapping at any single instant —
+            // NOT the highest physical sub-track index. Deriving the count from
+            // the same packing used in calculateTrainPositions keeps the track
+            // height tight and guarantees overlapping trains land on consecutive
+            // lanes with no empty lane stranded between them.
+            const laneCount = Math.max(1, this._packLanes(trackTrains).laneCount);
             const height = Math.max(this.trackMinHeight, laneCount * this.laneMinHeight);
             const laneHeight = height / laneCount;
             const subTracks = Array.from({ length: laneCount }, (_, index) => ({
@@ -64,6 +65,78 @@ window.TrainPositioning = {
         });
         
         return layouts;
+    },
+
+    /**
+     * Gap-free lane assignment: overlapping trains are always packed onto a
+     * CONTIGUOUS block of lanes, so an empty lane never appears *between* two
+     * trains on the same track ("a train that isn't there" between them).
+     *
+     * Trains are placed in (start time, sub-track, id) order. Each one takes the
+     * free lane block (width = vehicle span) CLOSEST to the lanes already held by
+     * the trains it overlaps in time — lowest lane on a tie. With nothing else
+     * active that lowest lane is 0, so a track normally compacts to the top; when
+     * an earlier bar is "stuck" high (it shared a busy moment that has since
+     * cleared) the newcomer still snaps adjacent to it rather than dropping to
+     * lane 0 and stranding an empty lane in between. Physical delspår is only a
+     * tie-breaker now — two trains on non-adjacent delspår are pulled together
+     * (per the user's choice to never show a gap), and the exact delspår stays
+     * available on the bar/tooltip.
+     *
+     * Returns { byTrain: Map<train, lane>, laneCount }.
+     */
+    _packLanes(trains) {
+        const order = trains.slice().sort((a, b) => {
+            const sa = this.getTimeRange(a).start;
+            const sb = this.getTimeRange(b).start;
+            const ta = sa ? sa.getTime() : Infinity;
+            const tb = sb ? sb.getTime() : Infinity;
+            if (ta !== tb) return ta - tb;
+            const pa = this.getPreferredLane(a);
+            const pb = this.getPreferredLane(b);
+            if (pa !== pb) return pa - pb;
+            return String(a.id).localeCompare(String(b.id), undefined, { numeric: true });
+        });
+
+        const placed = [];
+        let laneCount = 1;
+        for (const train of order) {
+            const { start, end } = this.getTimeRange(train);
+            const span = this.getVehicleSpan(train);
+            const active = (start && end)
+                ? placed.filter((p) => p.start && p.end && p.start < end && start < p.end)
+                : [];
+            const laneIsFree = (lane) =>
+                !active.some((p) => lane < p.lane + p.span && p.lane < lane + span);
+
+            // Lanes the active trains occupy, so we can measure how far a
+            // candidate lane sits from that cluster (0 = flush against it).
+            const occupied = [];
+            for (const p of active) for (let l = p.lane; l < p.lane + p.span; l++) occupied.push(l);
+            const distanceToCluster = (lane) => {
+                if (!occupied.length) return 0;
+                let best = Infinity;
+                for (const o of occupied) {
+                    const d = o < lane ? lane - o - 1 : o - (lane + span - 1) - 1;
+                    best = Math.min(best, Math.max(0, d));
+                }
+                return best;
+            };
+
+            const ceiling = (occupied.length ? Math.max(...occupied) : 0) + span + 1;
+            let lane = 0;
+            let bestDist = Infinity;
+            for (let cand = 0; cand <= ceiling; cand++) {
+                if (!laneIsFree(cand)) continue;
+                const d = distanceToCluster(cand);
+                if (d < bestDist) { bestDist = d; lane = cand; }
+                if (d === 0) break; // lowest lane flush with the cluster wins
+            }
+
+            placed.push({ train, start, end, lane, span });
+            laneCount = Math.max(laneCount, lane + span);
+        }
+        return { byTrain: new Map(placed.map((p) => [p.train, p.lane])), laneCount };
     },
 
     /**
@@ -102,97 +175,38 @@ window.TrainPositioning = {
      */
     calculateTrainPositions(trains) {
         if (trains.length === 0) return [];
-        
-        const sorted = trains.slice().sort((a, b) => {
-            const aStart = this.getTimeRange(a).start;
-            const bStart = this.getTimeRange(b).start;
-            const timeDiff = aStart - bStart;
-            if (timeDiff !== 0) return timeDiff;
-            const subDiff = this.getPreferredLane(a) - this.getPreferredLane(b);
-            return subDiff !== 0 ? subDiff : String(a.id).localeCompare(String(b.id), undefined, { numeric: true });
-        });
-        
-        const result = [];
-        
-        sorted.forEach(train => {
-            const { start: trainStart, end: trainEnd } = this.getTimeRange(train);
+
+        // One gap-free packing for the whole track. laneStart and the visual
+        // lane are the SAME packed lane, so a train renders exactly where it was
+        // packed — no second, divergent visual pass that could re-introduce a
+        // gap. visualLaneCount is the track-wide packed count, so every bar
+        // scales to the same lane height and consecutive lanes stay flush.
+        const { byTrain, laneCount } = this._packLanes(trains);
+
+        return trains.map((train) => {
+            const laneStart = byTrain.get(train) ?? 0;
             const laneSpan = this.getVehicleSpan(train);
-            
-            const overlapping = sorted.filter(other => {
+            const { start: trainStart, end: trainEnd } = this.getTimeRange(train);
+
+            const overlapping = trains.filter((other) => {
                 const { start: otherStart, end: otherEnd } = this.getTimeRange(other);
-                return trainStart < otherEnd && trainEnd > otherStart;
+                return trainStart && trainEnd && otherStart && otherEnd &&
+                    trainStart < otherEnd && trainEnd > otherStart;
             });
-            
-            const maxSimultaneous = this._calculateMaxDuringPeriod(
-                overlapping, 
-                trainStart, 
-                trainEnd
-            );
-            
-            const active = result.filter(r => {
-                const { start: rStart, end: rEnd } = this.getTimeRange(r.train);
-                return rStart < trainEnd && rEnd > trainStart;
-            });
+            const maxSimultaneous = this._calculateMaxDuringPeriod(overlapping, trainStart, trainEnd);
 
-            const laneIsFree = (startLane) => {
-                for (const r of active) {
-                    const a0 = r.laneStart;
-                    const a1 = r.laneStart + r.laneSpan;
-                    const b0 = startLane;
-                    const b1 = startLane + laneSpan;
-                    if (b0 < a1 && a0 < b1) return false;
-                }
-                return true;
-            };
-
-            let laneStart = this.getPreferredLane(train);
-            if (!laneIsFree(laneStart)) {
-                laneStart = 0;
-                while (!laneIsFree(laneStart)) laneStart++;
-            }
-
-            const visualLaneCount = maxSimultaneous > 3 ? Math.max(maxSimultaneous, laneStart + laneSpan) : 3;
-            const visualLaneSpan = maxSimultaneous > 3 ? laneSpan : Math.min(laneSpan, visualLaneCount);
-            let visualLaneStart = laneStart;
-
-            if (maxSimultaneous <= 3) {
-                const activeVisual = active.filter(r => (r.totalOverlapping || 1) <= 3);
-                const visualLaneIsFree = (startLane) => {
-                    for (const r of activeVisual) {
-                        const a0 = r.visualLaneStart ?? r.laneStart;
-                        const a1 = a0 + (r.visualLaneSpan ?? r.laneSpan);
-                        const b0 = startLane;
-                        const b1 = startLane + visualLaneSpan;
-                        if (b0 < a1 && a0 < b1) return false;
-                    }
-                    return true;
-                };
-
-                const maxStart = Math.max(0, visualLaneCount - visualLaneSpan);
-                visualLaneStart = Math.min(maxStart, this.getPreferredLane(train));
-                if (!visualLaneIsFree(visualLaneStart)) {
-                    visualLaneStart = 0;
-                    while (visualLaneStart <= maxStart && !visualLaneIsFree(visualLaneStart)) {
-                        visualLaneStart++;
-                    }
-                    if (visualLaneStart > maxStart) visualLaneStart = maxStart;
-                }
-            }
-            
-            result.push({
+            return {
                 train,
                 position: laneStart,
                 laneStart,
                 laneSpan,
-                visualLaneStart,
-                visualLaneSpan,
-                visualLaneCount,
+                visualLaneStart: laneStart,
+                visualLaneSpan: laneSpan,
+                visualLaneCount: laneCount,
                 totalOverlapping: maxSimultaneous,
-                totalLanes: Math.max(maxSimultaneous, laneStart + laneSpan)
-            });
+                totalLanes: laneCount,
+            };
         });
-        
-        return result;
     },
 
     /**

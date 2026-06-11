@@ -1,0 +1,160 @@
+[
+  {
+    "key": "2026-W23|sondag|1",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|2",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|3",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|4",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|5",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|fredag|131",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|fredag|132",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|fredag|133",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|fredag|134",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|fredag|135",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|fredag|136",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|fredag|137",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|fredag|138",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|fredag|139",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|torsdag|386",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|torsdag|387",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|torsdag|388",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|torsdag|389",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|torsdag|390",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|torsdag|391",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|torsdag|392",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|torsdag|393",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|torsdag|394",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W21|torsdag|395",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|10",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|70",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|71",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|72",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|73",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|74",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|75",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|13",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|35",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|36",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|37",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|38",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|39",
+    "verdict": "ok"
+  },
+  {
+    "key": "REGRESSION 2026-W24|torsdag|418 (496)",
+    "verdict": "ok",
+    "reason": "now one merged overnight bar"
+  },
+  {
+    "key": "REGRESSION 2026-W19|torsdag|195 (167)",
+    "verdict": "ok",
+    "reason": "now has 15:37 departure, single bar"
+  }
+]

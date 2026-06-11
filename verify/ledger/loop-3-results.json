@@ -1,0 +1,143 @@
+[
+  {
+    "key": "2026-W19|onsdag|18",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|19",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|20",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|21",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|22",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|mandag|194",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|mandag|195",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|mandag|196",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|mandag|197",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|mandag|198",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|mandag|199",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|mandag|200",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|mandag|201",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|mandag|202",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|396",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|397",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|398",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|399",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|400",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|401",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|402",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|403",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|404",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|405",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|lordag|10",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|lordag|29",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|lordag|30",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|lordag|31",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|mandag|32",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|mandag|33",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|mandag|34",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|mandag|35",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W18|mandag|36",
+    "verdict": "ok"
+  },
+  {
+    "key": "REGRESSION 167 (W23 mandag instance)",
+    "verdict": "ok",
+    "reason": "167 14:23->15:37 confirmed vs PDF"
+  },
+  {
+    "key": "REGRESSION 496",
+    "verdict": "ok"
+  }
+]

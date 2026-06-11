@@ -1,0 +1,122 @@
+[
+  {
+    "key": "2026-W20|sondag|8",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|sondag|9",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|sondag|11",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|158",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|159",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|160",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|161",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|162",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|163",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|sondag|164",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|391",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|392",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|393",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|394",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|395",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|396",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|397",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|onsdag|398",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|lordag|159",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|lordag|160",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|lordag|161",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|lordag|162",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|lordag|163",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|lordag|164",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|lordag|165",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|tisdag|33",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|tisdag|34",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W23|tisdag|35",
+    "verdict": "ok"
+  },
+  {
+    "key": "REGRESSION 496",
+    "verdict": "ok"
+  },
+  {
+    "key": "REGRESSION 167",
+    "verdict": "ok"
+  }
+]

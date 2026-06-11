@@ -1,0 +1,126 @@
+[
+  {
+    "key": "2026-W19|mandag|20",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|mandag|21",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|mandag|22",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|mandag|23",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|mandag|24",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|fredag|251",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|fredag|252",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|fredag|253",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|fredag|254",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|fredag|255",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|fredag|256",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|fredag|257",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|fredag|258",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|fredag|259",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|sondag|212",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|sondag|213",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|sondag|214",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|sondag|215",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W24|sondag|216",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|sondag|23",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|sondag|45",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|sondag|46",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|sondag|47",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|sondag|48",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W19|sondag|49",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|30",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|31",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|32",
+    "verdict": "ok"
+  },
+  {
+    "key": "2026-W20|tisdag|34",
+    "verdict": "ok"
+  },
+  {
+    "key": "REGRESSION 496",
+    "verdict": "ok"
+  },
+  {
+    "key": "REGRESSION 167",
+    "verdict": "ok"
+  }
+]

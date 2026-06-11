@@ -169,11 +169,16 @@
             return byNumber[0];
         }
 
-        // Numberless fallback: only when BOTH sides are open/numberless and it
-        // is the single candidate — never let a numbered tail absorb an
-        // unrelated numberless midnight slot.
+        // Numberless fallback: a parked tail is very commonly continued by a
+        // numberless morning "D" depot move (the unit leaves the platform under
+        // a depot label, not a service number) — e.g. 496 arr 23:50 parked,
+        // continued by the numberless D/00:30 bar on the same track. Merge when
+        // that numberless continuation is the SINGLE cfp candidate on the track,
+        // so there is no ambiguity about which slot it continues. This covers a
+        // numbered tail too (previously only numberless tails could merge, which
+        // left 496-style overnight parks split into two bars at 24:00).
         const numberless = candidates.filter((m) => numbersOf(m).length === 0);
-        if (numberless.length === 1 && candidates.length === 1 && numbersOf(tail).length === 0) {
+        if (numberless.length === 1 && candidates.length === 1) {
             return numberless[0];
         }
         return null;
@@ -278,6 +283,10 @@
             const partner = findPartner(s, morning, consumed);
             if (!partner) return;
             mergedById.set(s.id, makeMerged(s, partner));
+            // Always consume the chosen partner — it may be numberless (a "D"
+            // depot continuation), which the same-number sweep below would miss,
+            // leaving it to leak through as a phantom second morning bar.
+            consumed.add(partner.id);
             // Consume EVERY same-number candidate on the track, not just the
             // chosen partner, so a duplicate tomorrow record (e.g. a second
             // 390 piece) cannot leak through the morning push below.

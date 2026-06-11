@@ -898,6 +898,114 @@ def stitch_across_pages(slots: List[Slot]) -> List[Slot]:
     return [s for s in slots if s.id not in removed]
 
 
+def _time_to_min(t: str) -> Optional[int]:
+    m = TIME_RE.match(t or "")
+    return int(m.group(1)) * 60 + int(m.group(2)) if m else None
+
+
+def repair_coupled_page_splits(slots: List[Slot]) -> None:
+    """
+    A coupled departure (two units leaving together under one train number) is
+    sometimes drawn as two separate bars on one page but a single *grouped* bar on
+    the next page, so stitch_across_pages can match only one of the page-N units
+    to the page-(N+1) continuation. The other unit is left with
+    ``continues_to_next_page`` set and its departure NUMBER (read from the
+    right-margin token) but **no departure time** — it renders as a bar with no
+    end (e.g. W19 torsdag track 4: 167→184 arr 14:23 lost its 15:37 departure,
+    while its coupled sibling kept it).
+
+    Repair in place: a still-open slot (continues_to_next_page, has a departure
+    train, no departure time) borrows the departure time from a sibling on the
+    SAME track that departs under the SAME number and already has a resolved
+    time — but only when that time is a sane same-day departure (after this
+    slot's arrival), so genuine overnight parks are never touched.
+    """
+    resolved = [s for s in slots if s.departure_train and s.departure_time]
+    for s in slots:
+        if not (s.continues_to_next_page and s.departure_train and not s.departure_time):
+            continue
+        arr_min = _time_to_min(s.arrival_time)
+        siblings = []
+        for o in resolved:
+            if o.id == s.id or o.track_num != s.track_num:
+                continue
+            # The coupled partner sits on a DIFFERENT sub-track (the pair is
+            # drawn on adjacent sub-rows). Requiring a different sub_idx avoids
+            # borrowing from a same-sub phantom duplicate (the parser sometimes
+            # emits a full-page artifact + the real bar for the same train on the
+            # same sub-row; that pair is suppressed downstream only while the
+            # artifact stays open, so we must not resolve it here).
+            if o.sub_idx == s.sub_idx:
+                continue
+            if o.departure_train != s.departure_train:
+                continue
+            dep_min = _time_to_min(o.departure_time)
+            if arr_min is not None and dep_min is not None and dep_min <= arr_min:
+                continue  # not a sane same-day forward departure
+            siblings.append(o)
+        if not siblings:
+            continue
+        best = min(siblings, key=lambda o: abs(o.sub_idx - s.sub_idx))
+        s.departure_time = best.departure_time
+        s.continues_to_next_page = False
+
+
+def drop_redundant_park_artifacts(slots: List[Slot]) -> List[Slot]:
+    """
+    A train parked across several 3h pages is drawn as one long bar, but the
+    parser only reliably detects the page-fragments that carry a real endpoint
+    (the arrival page and the departure page); faint mid-park fragments are often
+    missed, so stitch_across_pages cannot bridge the gap. The leftover page-0
+    fragment then survives as a slot that touches BOTH page edges
+    (continues_from_prev_page AND continues_to_next_page) with NO arrival or
+    departure time at all -- it renders as a full-window "all-day" bar that
+    shadows the real parked bar (the track-8 "390 stays all day" artifact; also
+    386). Unlike the track-16/3025 mid-day artifact -- whose real sibling is an
+    ordinary timed bar and is suppressed at render time -- this one's real
+    sibling is itself a morning park (continues_from_prev_page, no arrival), so
+    the runtime suppressor never matched it.
+
+    Such a fragment is provably redundant when another slot on the SAME track and
+    SAME sub-track departs under the SAME number, already carries a real
+    departure time, and itself touches the left page edge
+    (continues_from_prev_page): that sibling already renders from 00:00 to its
+    departure, fully covering the artifact's span. Drop the artifact in that
+    case. When no such sibling exists (e.g. a genuine multi-day park with no
+    same-day departure, which also carries no departure number), keep it.
+    """
+    def has_time(t: str) -> bool:
+        return bool((t or "").strip())
+
+    survivors: List[Slot] = []
+    for s in slots:
+        is_artifact = (
+            s.continues_from_prev_page
+            and s.continues_to_next_page
+            and not has_time(s.arrival_time)
+            and not has_time(s.departure_time)
+            and bool((s.departure_train or "").strip())
+        )
+        if not is_artifact:
+            survivors.append(s)
+            continue
+        sibling = next(
+            (
+                o
+                for o in slots
+                if o is not s
+                and o.track_num == s.track_num
+                and o.sub_idx == s.sub_idx
+                and (o.departure_train or "").strip() == (s.departure_train or "").strip()
+                and has_time(o.departure_time)
+                and o.continues_from_prev_page
+            ),
+            None,
+        )
+        if sibling is None:
+            survivors.append(s)  # conservative: nothing proves it redundant
+    return survivors
+
+
 def resolve_anonymous_slots(slots: List[Slot]) -> None:
     """
     A few PDF vehicle lanes are rendered as unlabeled companion bars next to a
@@ -1041,6 +1149,8 @@ def run(pdf_path: Path) -> Tuple[List[Slot], List[Closure]]:
         c.id = i
 
     all_slots = stitch_across_pages(all_slots)
+    all_slots = drop_redundant_park_artifacts(all_slots)
+    repair_coupled_page_splits(all_slots)
     resolve_anonymous_slots(all_slots)
     all_closures = stitch_closures_across_pages(all_closures)
     return all_slots, all_closures

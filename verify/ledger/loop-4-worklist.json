@@ -1,0 +1,685 @@
+{
+  "seed": 4,
+  "regions": [
+    {
+      "id": "2026-W20|sondag|0|1",
+      "week": "2026-W20",
+      "day": "sondag",
+      "page": 0,
+      "tracks": "4-6",
+      "strata": [
+        "start-of-pdf"
+      ],
+      "barCount": 3
+    },
+    {
+      "id": "2026-W23|sondag|5|2",
+      "week": "2026-W23",
+      "day": "sondag",
+      "page": 5,
+      "tracks": "7-9",
+      "strata": [
+        "mid-day"
+      ],
+      "barCount": 7
+    },
+    {
+      "id": "2026-W19|onsdag|7|0",
+      "week": "2026-W19",
+      "day": "onsdag",
+      "page": 7,
+      "tracks": "1-3",
+      "strata": [
+        "overnight"
+      ],
+      "barCount": 8
+    },
+    {
+      "id": "2026-W19|lordag|5|0",
+      "week": "2026-W19",
+      "day": "lordag",
+      "page": 5,
+      "tracks": "1-3",
+      "strata": [
+        "mid-day",
+        "page-edge"
+      ],
+      "barCount": 7
+    },
+    {
+      "id": "2026-W23|tisdag|1|3",
+      "week": "2026-W23",
+      "day": "tisdag",
+      "page": 1,
+      "tracks": "10-12",
+      "strata": [
+        "week-start"
+      ],
+      "barCount": 3
+    }
+  ],
+  "weekSpread": {
+    "2026-W20": 1,
+    "2026-W23": 2,
+    "2026-W19": 2
+  },
+  "barCount": 28,
+  "bars": [
+    {
+      "key": "2026-W20|sondag|8",
+      "regionId": "2026-W20|sondag|0|1",
+      "week": "2026-W20",
+      "day": "sondag",
+      "page": 0,
+      "trackId": 4,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "",
+        "depNum": "3402",
+        "arr": "00:00",
+        "dep": "00:37",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "synArr,cfp",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W20|sondag|9",
+      "regionId": "2026-W20|sondag|0|1",
+      "week": "2026-W20",
+      "day": "sondag",
+      "page": 0,
+      "trackId": 4,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "",
+        "depNum": "14426",
+        "arr": "02:00",
+        "dep": "08:18",
+        "arrLabel": "D",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W20|sondag|11",
+      "regionId": "2026-W20|sondag|0|1",
+      "week": "2026-W20",
+      "day": "sondag",
+      "page": 0,
+      "trackId": 6,
+      "subTrackIndex": 1,
+      "app": {
+        "arrNum": "",
+        "depNum": "168",
+        "arr": "01:00",
+        "dep": "07:37",
+        "arrLabel": "D",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W23|sondag|158",
+      "regionId": "2026-W23|sondag|5|2",
+      "week": "2026-W23",
+      "day": "sondag",
+      "page": 5,
+      "trackId": 7,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "20367",
+        "depNum": "20372",
+        "arr": "16:40",
+        "dep": "17:15",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W23|sondag|159",
+      "regionId": "2026-W23|sondag|5|2",
+      "week": "2026-W23",
+      "day": "sondag",
+      "page": 5,
+      "trackId": 7,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "173",
+        "depNum": "190",
+        "arr": "17:23",
+        "dep": "18:37",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W23|sondag|160",
+      "regionId": "2026-W23|sondag|5|2",
+      "week": "2026-W23",
+      "day": "sondag",
+      "page": 5,
+      "trackId": 8,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "",
+        "depNum": "13216",
+        "arr": "16:15",
+        "dep": "16:30",
+        "arrLabel": "OGR",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W23|sondag|161",
+      "regionId": "2026-W23|sondag|5|2",
+      "week": "2026-W23",
+      "day": "sondag",
+      "page": 5,
+      "trackId": 8,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "394",
+        "depNum": "394",
+        "arr": "17:55",
+        "dep": "18:10",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W23|sondag|162",
+      "regionId": "2026-W23|sondag|5|2",
+      "week": "2026-W23",
+      "day": "sondag",
+      "page": 5,
+      "trackId": 9,
+      "subTrackIndex": 1,
+      "app": {
+        "arrNum": "13325",
+        "depNum": "13326",
+        "arr": "16:45",
+        "dep": "17:30",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W23|sondag|163",
+      "regionId": "2026-W23|sondag|5|2",
+      "week": "2026-W23",
+      "day": "sondag",
+      "page": 5,
+      "trackId": 9,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "389",
+        "depNum": "392",
+        "arr": "15:45",
+        "dep": "16:10",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W23|sondag|164",
+      "regionId": "2026-W23|sondag|5|2",
+      "week": "2026-W23",
+      "day": "sondag",
+      "page": 5,
+      "trackId": 9,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "391",
+        "depNum": "",
+        "arr": "17:40",
+        "dep": "17:55",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|onsdag|391",
+      "regionId": "2026-W19|onsdag|7|0",
+      "week": "2026-W19",
+      "day": "onsdag",
+      "page": 7,
+      "trackId": 1,
+      "subTrackIndex": 3,
+      "app": {
+        "arrNum": "",
+        "depNum": "3588",
+        "arr": "21:40",
+        "dep": "22:23",
+        "arrLabel": "OGR",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|onsdag|392",
+      "regionId": "2026-W19|onsdag|7|0",
+      "week": "2026-W19",
+      "day": "onsdag",
+      "page": 7,
+      "trackId": 1,
+      "subTrackIndex": 3,
+      "app": {
+        "arrNum": "3583",
+        "depNum": "3592",
+        "arr": "22:37",
+        "dep": "23:23",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|onsdag|393",
+      "regionId": "2026-W19|onsdag|7|0",
+      "week": "2026-W19",
+      "day": "onsdag",
+      "page": 7,
+      "trackId": 2,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "3589",
+        "depNum": "3594",
+        "arr": "23:19",
+        "dep": "23:42",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|onsdag|394",
+      "regionId": "2026-W19|onsdag|7|0",
+      "week": "2026-W19",
+      "day": "onsdag",
+      "page": 7,
+      "trackId": 2,
+      "subTrackIndex": 3,
+      "app": {
+        "arrNum": "3581",
+        "depNum": "3586",
+        "arr": "21:19",
+        "dep": "21:42",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|onsdag|395",
+      "regionId": "2026-W19|onsdag|7|0",
+      "week": "2026-W19",
+      "day": "onsdag",
+      "page": 7,
+      "trackId": 2,
+      "subTrackIndex": 3,
+      "app": {
+        "arrNum": "3585",
+        "depNum": "3590",
+        "arr": "22:19",
+        "dep": "22:42",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|onsdag|396",
+      "regionId": "2026-W19|onsdag|7|0",
+      "week": "2026-W19",
+      "day": "onsdag",
+      "page": 7,
+      "trackId": 2,
+      "subTrackIndex": 3,
+      "app": {
+        "arrNum": "17383",
+        "depNum": "3500",
+        "arr": "23:05",
+        "dep": "00:23+1",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "depNextDay,ctn",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|onsdag|397",
+      "regionId": "2026-W19|onsdag|7|0",
+      "week": "2026-W19",
+      "day": "onsdag",
+      "page": 7,
+      "trackId": 3,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "445",
+        "depNum": "",
+        "arr": "21:42",
+        "dep": "22:25",
+        "arrLabel": "",
+        "depLabel": "D",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|onsdag|398",
+      "regionId": "2026-W19|onsdag|7|0",
+      "week": "2026-W19",
+      "day": "onsdag",
+      "page": 7,
+      "trackId": 3,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "2047",
+        "depNum": "",
+        "arr": "23:28",
+        "dep": "23:45",
+        "arrLabel": "",
+        "depLabel": "GSV",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|lordag|159",
+      "regionId": "2026-W19|lordag|5|0",
+      "week": "2026-W19",
+      "day": "lordag",
+      "page": 5,
+      "trackId": 1,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "3557",
+        "depNum": "3562",
+        "arr": "15:19",
+        "dep": "15:42",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|lordag|160",
+      "regionId": "2026-W19|lordag|5|0",
+      "week": "2026-W19",
+      "day": "lordag",
+      "page": 5,
+      "trackId": 1,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "3561",
+        "depNum": "3566",
+        "arr": "16:19",
+        "dep": "16:42",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|lordag|161",
+      "regionId": "2026-W19|lordag|5|0",
+      "week": "2026-W19",
+      "day": "lordag",
+      "page": 5,
+      "trackId": 1,
+      "subTrackIndex": 3,
+      "app": {
+        "arrNum": "3565",
+        "depNum": "3570",
+        "arr": "17:19",
+        "dep": "17:42",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|lordag|162",
+      "regionId": "2026-W19|lordag|5|0",
+      "week": "2026-W19",
+      "day": "lordag",
+      "page": 5,
+      "trackId": 2,
+      "subTrackIndex": 3,
+      "app": {
+        "arrNum": "3555",
+        "depNum": "3564",
+        "arr": "15:37",
+        "dep": "16:23",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|lordag|163",
+      "regionId": "2026-W19|lordag|5|0",
+      "week": "2026-W19",
+      "day": "lordag",
+      "page": 5,
+      "trackId": 2,
+      "subTrackIndex": 3,
+      "app": {
+        "arrNum": "3559",
+        "depNum": "3568",
+        "arr": "16:37",
+        "dep": "17:23",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|lordag|164",
+      "regionId": "2026-W19|lordag|5|0",
+      "week": "2026-W19",
+      "day": "lordag",
+      "page": 5,
+      "trackId": 2,
+      "subTrackIndex": 3,
+      "app": {
+        "arrNum": "3563",
+        "depNum": "3572",
+        "arr": "17:37",
+        "dep": "18:23",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W19|lordag|165",
+      "regionId": "2026-W19|lordag|5|0",
+      "week": "2026-W19",
+      "day": "lordag",
+      "page": 5,
+      "trackId": 3,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "437",
+        "depNum": "424",
+        "arr": "17:42",
+        "dep": "06:00+1",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "depNextDay,ctn",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W23|tisdag|33",
+      "regionId": "2026-W23|tisdag|1|3",
+      "week": "2026-W23",
+      "day": "tisdag",
+      "page": 1,
+      "trackId": 10,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "",
+        "depNum": "3620",
+        "arr": "05:05",
+        "dep": "05:20",
+        "arrLabel": "MVH",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W23|tisdag|34",
+      "regionId": "2026-W23|tisdag|1|3",
+      "week": "2026-W23",
+      "day": "tisdag",
+      "page": 1,
+      "trackId": 10,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "3617",
+        "depNum": "13670",
+        "arr": "05:25",
+        "dep": "05:35",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    },
+    {
+      "key": "2026-W23|tisdag|35",
+      "regionId": "2026-W23|tisdag|1|3",
+      "week": "2026-W23",
+      "day": "tisdag",
+      "page": 1,
+      "trackId": 10,
+      "subTrackIndex": 2,
+      "app": {
+        "arrNum": "3619",
+        "depNum": "13672",
+        "arr": "05:55",
+        "dep": "06:05",
+        "arrLabel": "",
+        "depLabel": "",
+        "flags": "",
+        "overnightSplit": false
+      },
+      "truth": null,
+      "verdict": null,
+      "reason": null
+    }
+  ]
+}

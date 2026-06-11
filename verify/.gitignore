@@ -1,0 +1,3 @@
+# Throwaway PDF ground-truth crops rendered during audits — regenerate with
+# render_region.py / sample.js on demand. Not source.
+crops/
