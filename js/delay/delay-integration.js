@@ -438,28 +438,51 @@ class DelayIntegration {
             if (this.visualizer && typeof this.visualizer.remove === 'function') {
                 this.visualizer.remove(trainBar);
             }
-            
-            // Handle canceled/replaced trains - always show overlay
-            const canceledContext = delayContexts.find((ctx) => ctx.delayInfo.isCanceled || ctx.delayInfo.isReplaced);
-            if (canceledContext) {
-                const delayInfo = canceledContext.delayInfo;
-                this.visualizer.addCancellationOverlay(trainBar, delayInfo);
+            if (trainBar.dataset.baseTitle !== undefined) {
+                trainBar.title = trainBar.dataset.baseTitle;
+            }
+
+            // Handle canceled/replaced trains — each canceled leg gets its own
+            // X above that train's number; the bar itself only fades when every
+            // numbered leg on it is canceled (a turnaround can lose one train
+            // while the other still runs).
+            const canceledContexts = delayContexts.filter((ctx) => ctx.delayInfo.isCanceled || ctx.delayInfo.isReplaced);
+            if (canceledContexts.length > 0) {
+                const legsOnBar = segment
+                    ? [segment]
+                    : [
+                        ...(arrNum ? ['arrival'] : []),
+                        ...(depNum ? ['departure'] : [])
+                    ];
+                const canceledLegs = new Set(canceledContexts.map((ctx) => ctx.leg));
+                const fullyCanceled = legsOnBar.length > 0 && legsOnBar.every((leg) => canceledLegs.has(leg));
+                this.visualizer.addCancellationOverlay(trainBar, canceledContexts, { fullyCanceled });
                 visualizedCount++;
-                
-                // Update tooltip with cancellation info
-                const currentTitle = trainBar.title || '';
-                const status = delayInfo.isCanceled ? 'INSTÄLLT' : 'ERSATT';
-                const info = delayInfo.deviationDescription || '';
-                trainBar.title = `${currentTitle}\n\nStatus: ${status}${info ? '\nInfo: ' + info : ''}`;
-                
-                logger.warn('Integration', `Train ${train.id} is ${status}`, {
-                    trainNumber: train.arrivalTrainNumber || train.departureTrainNumber,
-                    info
+
+                // Rebuild the title from its pre-cancellation base each cycle so
+                // status lines don't accumulate across refreshes.
+                if (trainBar.dataset.baseTitle === undefined) {
+                    trainBar.dataset.baseTitle = trainBar.title || '';
+                }
+                // Set dedupes a same-number turnaround (both legs canceled =
+                // two contexts with identical lines).
+                const statusLines = [...new Set(canceledContexts.map((ctx) => {
+                    const status = ctx.delayInfo.isCanceled ? 'INSTÄLLT' : 'ERSATT';
+                    const info = ctx.delayInfo.deviationDescription || '';
+                    return `Tåg ${ctx.trainNumber}: ${status}${info ? '\nInfo: ' + info : ''}`;
+                }))];
+                trainBar.title = `${trainBar.dataset.baseTitle}\n\n${statusLines.join('\n')}`.trim();
+
+                canceledContexts.forEach((ctx) => {
+                    logger.warn('Integration', `Train ${train.id} ${ctx.leg} is ${ctx.delayInfo.isCanceled ? 'INSTÄLLT' : 'ERSATT'}`, {
+                        trainNumber: ctx.trainNumber,
+                        info: ctx.delayInfo.deviationDescription || ''
+                    });
                 });
-                return;
             }
 
             const significantContexts = delayContexts.filter((ctx) => {
+                if (ctx.delayInfo.isCanceled || ctx.delayInfo.isReplaced) return false;
                 const delayMinutes = ctx.delayInfo.delayMinutes;
                 return delayMinutes && Math.abs(delayMinutes) > 2;
             });

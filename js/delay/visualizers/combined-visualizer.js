@@ -55,11 +55,11 @@ class CombinedVisualizer {
     }
     
     /**
-     * Add cancellation overlay
+     * Add per-leg cancellation marks
      */
-    addCancellationOverlay(trainBar, delayInfo) {
-        // Use offset visualizer's cancellation overlay
-        this.offsetVisualizer.addCancellationOverlay(trainBar, delayInfo);
+    addCancellationOverlay(trainBar, contexts, opts = {}) {
+        // Use offset visualizer's cancellation marks
+        this.offsetVisualizer.addCancellationOverlay(trainBar, contexts, opts);
     }
 }
 

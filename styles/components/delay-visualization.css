@@ -281,39 +281,35 @@
 .train-bar.is-replaced .train-bar-visual {
     opacity: 0.5;
     filter: grayscale(30%);
+    /* No transition: the base `transition: all` never settles (perpetual
+       style-recalc storms restart it), leaving the fade stuck at opacity 1.
+       The faded state must hold statically — also the reduced-motion rule. */
+    transition: none;
 }
 
-.cancellation-overlay {
+/* Per-leg cancellation mark: a plain red X above the canceled train's number.
+   Static on purpose — must read identically under prefers-reduced-motion. */
+.cancellation-x {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(220, 20, 60, 0.9);
-    color: #fff;
-    border-radius: 50%;
-    font-size: 20px;
-    font-weight: 700;
-    z-index: 20;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    pointer-events: none;
+    top: -16px;
+    color: #DC143C;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    z-index: 16;
+    cursor: help;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.9);
 }
 
-.cancellation-overlay::before {
-    content: '✕';
-}
+.cancellation-x--left { left: 4px; }
+.cancellation-x--right { right: 4px; }
+.cancellation-x--center { left: 50%; transform: translateX(-50%); }
 
-.cancellation-overlay.is-replaced {
-    background-color: rgba(255, 165, 0, 0.9);
-}
-
-.cancellation-overlay.is-replaced::before {
-    content: '🚌';
-    font-size: 16px;
+/* Dense stacked lanes — mirror the delay-badge density tweak */
+.train-bar.density-2 .cancellation-x,
+.train-bar.density-3 .cancellation-x {
+    font-size: 11px;
+    top: -13px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -419,9 +415,9 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-[data-theme="dark"] .cancellation-overlay {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+[data-theme="dark"] .cancellation-x {
+    color: #FF5C7A;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 }
 
 /* High-contrast theme - maximum visibility and accessibility */
@@ -511,18 +507,10 @@
     color: #000000 !important;
 }
 
-[data-theme="high-contrast"] .cancellation-overlay {
-    border: 4px solid #FFFFFF !important;
-    box-shadow: 0 0 0 3px #000000, 0 6px 12px rgba(0, 0, 0, 1) !important;
-    background-color: #FF0000 !important;
-    color: #FFFFFF !important;
-    font-size: 24px !important;
+[data-theme="high-contrast"] .cancellation-x {
+    color: #FF0000 !important;
     font-weight: 900 !important;
-}
-
-[data-theme="high-contrast"] .cancellation-overlay.is-replaced {
-    background-color: #FF8C00 !important;
-    color: #000000 !important;
+    text-shadow: 0 0 4px #FFFFFF !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════

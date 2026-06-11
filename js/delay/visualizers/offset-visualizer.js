@@ -347,9 +347,11 @@ class OffsetVisualizer {
 
         try {
             trainBar.classList.remove('early-extended', 'early-extended--arrival', 'early-extended--departure');
+            trainBar.classList.remove('is-canceled', 'is-replaced');
             const overlays = trainBar.querySelectorAll('.delay-overlay-offset');
             const warnings = trainBar.querySelectorAll('.conflict-warning-icon');
             const earlyPills = trainBar.querySelectorAll('.early-pill-floating');
+            const cancelMarks = trainBar.querySelectorAll('.cancellation-x, .cancellation-overlay');
 
             overlays.forEach(el => {
                 if (el && el.parentNode) {
@@ -362,6 +364,11 @@ class OffsetVisualizer {
                 }
             });
             earlyPills.forEach(el => {
+                if (el && el.parentNode) {
+                    el.parentNode.removeChild(el);
+                }
+            });
+            cancelMarks.forEach(el => {
                 if (el && el.parentNode) {
                     el.parentNode.removeChild(el);
                 }
@@ -483,34 +490,57 @@ class OffsetVisualizer {
     }
     
     /**
-     * Add cancellation overlay
+     * Mark canceled/replaced legs. Each canceled leg gets its own X above that
+     * train's number; the whole-bar fade classes are only applied when every
+     * numbered leg on the bar is canceled (opts.fullyCanceled).
      */
-    addCancellationOverlay(trainBar, delayInfo) {
-        if (!trainBar || !delayInfo) return;
-        
-        // Mark train bar as canceled/replaced
-        if (delayInfo.isCanceled) {
+    addCancellationOverlay(trainBar, contexts, opts = {}) {
+        if (!trainBar || !contexts) return;
+        const list = (Array.isArray(contexts) ? contexts : [contexts]).filter(Boolean);
+        if (list.length === 0) return;
+
+        if (opts.fullyCanceled) {
             trainBar.classList.add('is-canceled');
+            if (list.some((ctx) => ctx.delayInfo?.isReplaced)) {
+                trainBar.classList.add('is-replaced');
+            }
         }
-        if (delayInfo.isReplaced) {
-            trainBar.classList.add('is-replaced');
-        }
-        
-        // Add cancellation overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'cancellation-overlay';
-        if (delayInfo.isReplaced) {
-            overlay.classList.add('is-replaced');
-        }
-        
-        const trainBarVisual = trainBar.querySelector('.train-bar-visual');
-        if (trainBarVisual) {
-            trainBarVisual.appendChild(overlay);
-        }
-        
-        logger.info('Visualizer', `Added cancellation overlay`, {
-            canceled: delayInfo.isCanceled,
-            replaced: delayInfo.isReplaced
+
+        const numbers = trainBar.querySelector('.train-numbers');
+        list.forEach((ctx) => {
+            const delayInfo = ctx.delayInfo || {};
+            let position = 'center';
+            if (numbers) {
+                if (numbers.classList.contains('single-left')) {
+                    position = 'left';
+                } else if (numbers.classList.contains('single-right')) {
+                    position = 'right';
+                } else if (numbers.classList.contains('single-centered')) {
+                    position = 'center';
+                } else {
+                    // Two-number layout: arrival number sits left, departure right.
+                    position = ctx.leg === 'departure' ? 'right' : 'left';
+                }
+            }
+
+            // One X per spot — a same-number turnaround with both legs canceled
+            // shows a single X above its shared number.
+            if (trainBar.querySelector(`.cancellation-x--${position}`)) return;
+
+            const mark = document.createElement('div');
+            mark.className = `cancellation-x cancellation-x--${position}`;
+            mark.textContent = '✕';
+            const statusText = delayInfo.isCanceled ? 'inställt' : 'ersatt med buss';
+            const info = delayInfo.deviationDescription ? ` — ${delayInfo.deviationDescription}` : '';
+            mark.title = `Tåg ${ctx.trainNumber} ${statusText}${info}`;
+            // Hangs off the bar root, not .train-bar-visual, so the
+            // fully-canceled fade doesn't wash the mark out.
+            trainBar.appendChild(mark);
+        });
+
+        logger.info('Visualizer', `Added cancellation marks`, {
+            legs: list.map((ctx) => ctx.leg),
+            fullyCanceled: !!opts.fullyCanceled
         });
     }
 }
