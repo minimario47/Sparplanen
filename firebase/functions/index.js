@@ -182,7 +182,10 @@ function processTrainAnnouncements(announcements, keepArrived = false) {
     );
 
     processed.push({
+      // ATN (advertised) — what the public sees. The PDF schedule is numbered
+      // by OTN (operational), so the client indexes BOTH to bridge the gap.
       trainNumber: train.AdvertisedTrainIdent,
+      operationalTrainNumber: train.OperationalTrainNumber || null,
       activityType: /^avg/i.test(String(train.ActivityType || '')) ? 'departure' : 'arrival',
       delayMinutes,
       delayStatus,

@@ -48,8 +48,9 @@
     function hasDelayData(train) {
         const dataManager = window.delayIntegration?.dataManager;
         if (!dataManager || !train) return false;
-        const arr = train.arrivalTrainNumber ? dataManager.getDelayInfo(train.arrivalTrainNumber, 'arrival') : null;
-        const dep = train.departureTrainNumber ? dataManager.getDelayInfo(train.departureTrainNumber, 'departure') : null;
+        const dateHint = dataManager.getStockholmYmd(train.dayOffset || 0);
+        const arr = train.arrivalTrainNumber ? dataManager.getDelayInfo(train.arrivalTrainNumber, 'arrival', dateHint, train.arrTime) : null;
+        const dep = train.departureTrainNumber ? dataManager.getDelayInfo(train.departureTrainNumber, 'departure', dateHint, train.depTime) : null;
         const info = arr || dep;
         if (!info) return false;
         return Boolean(info.isCanceled || info.isReplaced || (Number.isFinite(info.delayMinutes) && Math.abs(info.delayMinutes) > 2));

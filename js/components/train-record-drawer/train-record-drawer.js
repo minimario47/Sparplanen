@@ -145,8 +145,9 @@
         try {
             const dm = window.delayIntegration?.dataManager;
             if (!dm || !train) return null;
-            const arr = train.arrivalTrainNumber ? dm.getDelayInfo(train.arrivalTrainNumber, 'arrival') : null;
-            const dep = train.departureTrainNumber ? dm.getDelayInfo(train.departureTrainNumber, 'departure') : null;
+            const dateHint = dm.getStockholmYmd(train.dayOffset || 0);
+            const arr = train.arrivalTrainNumber ? dm.getDelayInfo(train.arrivalTrainNumber, 'arrival', dateHint, train.arrTime) : null;
+            const dep = train.departureTrainNumber ? dm.getDelayInfo(train.departureTrainNumber, 'departure', dateHint, train.depTime) : null;
             return arr || dep || null;
         } catch (_) { return null; }
     }

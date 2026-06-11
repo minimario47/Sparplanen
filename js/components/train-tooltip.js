@@ -114,18 +114,20 @@ class TrainTooltip {
         const preferred = String(preferredTrainNumber || '').trim();
         const arrival = String(train.arrivalTrainNumber || '').trim();
         const departure = String(train.departureTrainNumber || '').trim();
+        const dateHint = dataManager.getStockholmYmd(train.dayOffset || 0);
 
         if (preferred) {
             const preferredLeg = (preferred === departure && preferred !== arrival) ? 'departure' : 'arrival';
-            const preferredInfo = dataManager.getDelayInfo(preferred, preferredLeg);
+            const preferredTime = preferredLeg === 'departure' ? train.depTime : train.arrTime;
+            const preferredInfo = dataManager.getDelayInfo(preferred, preferredLeg, dateHint, preferredTime);
             if (preferredInfo) return preferredInfo;
         }
         if (arrival && arrival !== preferred) {
-            const arrivalInfo = dataManager.getDelayInfo(arrival, 'arrival');
+            const arrivalInfo = dataManager.getDelayInfo(arrival, 'arrival', dateHint, train.arrTime);
             if (arrivalInfo) return arrivalInfo;
         }
         if (departure && departure !== preferred) {
-            const departureInfo = dataManager.getDelayInfo(departure, 'departure');
+            const departureInfo = dataManager.getDelayInfo(departure, 'departure', dateHint, train.depTime);
             if (departureInfo) return departureInfo;
         }
         return null;
@@ -241,7 +243,9 @@ class TrainTooltip {
         // arrival regardless of which side of the bar was clicked.
         const dataManager = window.delayIntegration?.dataManager;
         const arrivalNum = String(train.arrivalTrainNumber || train.arrivalLabel || '').trim();
-        const arrivalDelay = (dataManager && arrivalNum) ? dataManager.getDelayInfo(arrivalNum, 'arrival') : null;
+        const arrivalDelay = (dataManager && arrivalNum)
+            ? dataManager.getDelayInfo(arrivalNum, 'arrival', dataManager.getStockholmYmd(train.dayOffset || 0), train.arrTime)
+            : null;
 
         const arrRow = train.arrTime
             ? this.buildScheduleRow('Ankomst', this.formatTime(train.arrTime), train.arrTime, arrivalDelay, true)

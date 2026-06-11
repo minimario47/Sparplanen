@@ -211,7 +211,9 @@ class DelayIntegration {
             // number still has two distinct legs with their own API data.
             const dedupeKey = `${number}:${leg}`;
             if (!number || seen.has(dedupeKey)) return;
-            const delayInfo = this.dataManager.getDelayInfo(number, leg, dateHint);
+            // scheduledTime gates the match against this leg's planned time, so
+            // an OTN/ATN collision or wrong-day record can't attach here.
+            const delayInfo = this.dataManager.getDelayInfo(number, leg, dateHint, scheduledTime);
             if (!delayInfo) return;
             // Cross-activity fallback: when the record belongs to the other
             // leg's activity and this bar uses the same number for both legs,
