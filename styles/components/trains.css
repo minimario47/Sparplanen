@@ -7,7 +7,14 @@
 .train-bar {
   position: absolute;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Explicit property list — NEVER `transition: all`. The app rewrites the
+     inline geometry (left/top/width/height) of ~200 bars continuously, and
+     `all` turned every one of those writes into an animated 0.2s transition,
+     pinning the main thread in a perpetual recalc storm. Frames then never
+     advance, so any state-class transition (e.g. the canceled-bar opacity
+     fade) freezes at its start value. Only transition cosmetic properties. */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   contain: layout style; /* Performance optimization - NOT 'content' to allow delay overlays to extend */
   overflow: visible; /* CRITICAL: Allow delay overlays to extend beyond train bar boundaries */
 }
@@ -19,7 +26,14 @@
   position: relative;
   height: 100%;
   border-radius: var(--radius-md);
-  transition: all 0.2s var(--ease-in-out);
+  /* Explicit list, not `all`. Excludes opacity/filter on purpose: the
+     canceled/replaced state (delay-visualization.css) must apply its faded
+     opacity instantly, and including it in a transition leaves it stuck at 1
+     under the recalc load. Only the hover/selection/type cosmetics animate. */
+  transition: transform 0.2s var(--ease-in-out),
+              box-shadow 0.2s var(--ease-in-out),
+              background-color 0.2s var(--ease-in-out),
+              border-color 0.2s var(--ease-in-out);
   border: 2px solid; /* Visible border for all trains */
   overflow: hidden; /* Ensures content stays within rounded corners */
 }

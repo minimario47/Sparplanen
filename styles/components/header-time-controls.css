@@ -127,26 +127,28 @@
     box-shadow: none;
 }
 
-/* Pulsing animation for following mode */
+/* Pulsing animation for following mode.
+   Theme-aware via custom properties: a `[data-theme] @keyframes` block is
+   invalid CSS (silently dropped), so the per-theme ring colors are supplied
+   through --following-ring-* variables instead. */
+.btn-now.following-active {
+    --following-ring-rest: var(--success-400);
+    --following-ring-peak: rgba(34, 197, 94, 0.3);
+}
+
+[data-theme="dark"] .btn-now.following-active {
+    --following-ring-rest: var(--success-700);
+    --following-ring-peak: rgba(34, 197, 94, 0.2);
+}
+
 @keyframes pulse-following {
     0%, 100% {
         opacity: 1;
-        box-shadow: 0 0 0 2px var(--success-400);
+        box-shadow: 0 0 0 2px var(--following-ring-rest);
     }
     50% {
         opacity: 0.9;
-        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
-    }
-}
-
-[data-theme="dark"] @keyframes pulse-following {
-    0%, 100% {
-        opacity: 1;
-        box-shadow: 0 0 0 2px var(--success-700);
-    }
-    50% {
-        opacity: 0.9;
-        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+        box-shadow: 0 0 0 4px var(--following-ring-peak);
     }
 }
 
