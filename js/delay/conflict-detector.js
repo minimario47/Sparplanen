@@ -7,6 +7,21 @@ class ConflictDetector {
     constructor() {
         logger.info('Conflict', 'ConflictDetector initialized');
     }
+
+    /**
+     * 00:00 of the schedule day, in ms. All overlap math is expressed as
+     * minutes since this origin WITHOUT a %1440 wrap, so overnight/stitched
+     * trains (which legitimately exceed 1440 min) compare correctly against
+     * one another. Must match calculateActualTimes' origin.
+     */
+    _dayStartMs() {
+        if (window.TimeManager && typeof window.TimeManager.getScheduleDayBounds === 'function') {
+            return window.TimeManager.getScheduleDayBounds().start.getTime();
+        }
+        const d = new Date();
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+    }
     
     /**
      * Parse time string (HH:MM) to minutes since midnight
@@ -29,9 +44,13 @@ class ConflictDetector {
      * Calculate actual arrival and departure times considering delay
      */
     calculateActualTimes(train, delayInfo, turnaroundTime = 10) {
-        // Convert Date objects to minutes since midnight
-        const scheduledArrival = train.arrTime ? Math.floor(train.arrTime.getTime() / (1000 * 60)) % (24 * 60) : null;
-        const scheduledDeparture = train.depTime ? Math.floor(train.depTime.getTime() / (1000 * 60)) % (24 * 60) : null;
+        // Minutes since the schedule day's 00:00. Deliberately NOT wrapped
+        // modulo 1440: stitched overnight trains run past 24:00 (e.g. 1470 =
+        // 00:30 next day) and wrapping them would create phantom conflicts
+        // with early-morning trains.
+        const dayStartMs = this._dayStartMs();
+        const scheduledArrival = train.arrTime ? Math.floor((train.arrTime.getTime() - dayStartMs) / (1000 * 60)) : null;
+        const scheduledDeparture = train.depTime ? Math.floor((train.depTime.getTime() - dayStartMs) / (1000 * 60)) : null;
         const delayMinutes = delayInfo.delayMinutes || 0;
         
         if (scheduledArrival === null && scheduledDeparture === null) {
@@ -164,9 +183,12 @@ class ConflictDetector {
                 if (!(trainLaneStart < otherLaneEnd && otherLaneStart < trainLaneEnd)) return;
             }
             
-            // Get other train's times (without delay, as we're checking if delayed train affects it)
-            const otherArrival = otherTrain.arrTime ? Math.floor(otherTrain.arrTime.getTime() / (1000 * 60)) % (24 * 60) : null;
-            const otherDeparture = otherTrain.depTime ? Math.floor(otherTrain.depTime.getTime() / (1000 * 60)) % (24 * 60) : null;
+            // Get other train's times (without delay, as we're checking if delayed train affects it).
+            // Day-start-relative, unwrapped — same origin as the delayed train's
+            // times in calculateActualTimes, so overnight trains compare correctly.
+            const dayStartMs = this._dayStartMs();
+            const otherArrival = otherTrain.arrTime ? Math.floor((otherTrain.arrTime.getTime() - dayStartMs) / 60000) : null;
+            const otherDeparture = otherTrain.depTime ? Math.floor((otherTrain.depTime.getTime() - dayStartMs) / 60000) : null;
             
             if (otherArrival === null && otherDeparture === null) return;
             
@@ -259,11 +281,13 @@ class ConflictDetector {
             if (otherTrain.id === train.id) return;
             if (otherTrain.trackId !== train.trackId) return;
             
-            // Check if times overlap significantly (within 5 minutes)
-            const train1Arrival = train.arrTime ? Math.floor(train.arrTime.getTime() / (1000 * 60)) % (24 * 60) : null;
-            const train1Departure = train.depTime ? Math.floor(train.depTime.getTime() / (1000 * 60)) % (24 * 60) : null;
-            const train2Arrival = otherTrain.arrTime ? Math.floor(otherTrain.arrTime.getTime() / (1000 * 60)) % (24 * 60) : null;
-            const train2Departure = otherTrain.depTime ? Math.floor(otherTrain.depTime.getTime() / (1000 * 60)) % (24 * 60) : null;
+            // Check if times overlap significantly (within 5 minutes).
+            // Day-start-relative, unwrapped (consistent with the conflict math).
+            const dayStartMs = this._dayStartMs();
+            const train1Arrival = train.arrTime ? Math.floor((train.arrTime.getTime() - dayStartMs) / 60000) : null;
+            const train1Departure = train.depTime ? Math.floor((train.depTime.getTime() - dayStartMs) / 60000) : null;
+            const train2Arrival = otherTrain.arrTime ? Math.floor((otherTrain.arrTime.getTime() - dayStartMs) / 60000) : null;
+            const train2Departure = otherTrain.depTime ? Math.floor((otherTrain.depTime.getTime() - dayStartMs) / 60000) : null;
             
             if (train1Arrival !== null && train2Arrival !== null) {
                 if (Math.abs(train1Arrival - train2Arrival) <= 5) {

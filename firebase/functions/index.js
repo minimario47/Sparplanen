@@ -11,23 +11,58 @@ const TRAFIKVERKET_API_URL = 'https://api.trafikinfo.trafikverket.se/v2/data.jso
 const TRAFIKVERKET_API_KEY = '5de4a8d180e045fbb63fa7a32a7d6af9';
 const LOCATION_SIGNATURE = 'G'; // Gothenburg
 
-// In-memory cache (15 seconds TTL per location)
+// In-memory cache (per location + window)
 const cache = new Map();
-const CACHE_TTL = 15000; // 15 seconds
+const CACHE_TTL = 15000; // 15 seconds (near/legacy tier)
+const CACHE_TTL_FAR = 60000; // far tier changes slowly; cache longer
+
+// Fetch tiers: 'near' is polled every 30s by clients and covers the window
+// where estimates actually move; 'far' covers the rest of the schedule day
+// and is polled every ~5 minutes. No tier param = legacy 3h/6h behavior.
+const TIERS = {
+  near: {hoursBack: 2, hoursAhead: 2, includeUnarrived: true, keepArrived: true, ttl: CACHE_TTL},
+  far: {hoursBack: 24, hoursAhead: 30, includeUnarrived: false, keepArrived: true, ttl: CACHE_TTL_FAR},
+  legacy: {hoursBack: 3, hoursAhead: 6, includeUnarrived: false, keepArrived: false, ttl: CACHE_TTL},
+};
+const MAX_HOURS_BACK = 26;
+const MAX_HOURS_AHEAD = 30;
+// Long-delayed catch-up: trains advertised up to this long ago that still
+// have no actual TimeAtLocation (delayed, not yet arrived/departed).
+const UNARRIVED_LOOKBACK_HOURS = 12;
 
 /**
  * Build XML request for Trafikverket API
  * @param {string} locationSignature - Location code (e.g., "G" for Gothenburg)
- * @param {number} hoursBack - Hours to look back
- * @param {number} hoursAhead - Hours to look ahead
+ * @param {Object} opts - Window options
+ * @param {number} opts.hoursBack - Hours to look back
+ * @param {number} opts.hoursAhead - Hours to look ahead
+ * @param {boolean} opts.includeUnarrived - Also match older announcements
+ *   without an actual time (long-delayed trains outside the back window)
  * @return {string} XML request string
  */
-function buildTrafikverketRequest(locationSignature, hoursBack = 3, hoursAhead = 6) {
+function buildTrafikverketRequest(locationSignature, opts = {}) {
+  const {hoursBack = 3, hoursAhead = 6, includeUnarrived = false} = opts;
   const now = new Date();
   const startDate = new Date(now.getTime() - (hoursBack * 60 * 60 * 1000));
   const endDate = new Date(now.getTime() + (hoursAhead * 60 * 60 * 1000));
+  const unarrivedStart = new Date(now.getTime() - (UNARRIVED_LOOKBACK_HOURS * 60 * 60 * 1000));
 
   const formatDate = (date) => date.toISOString().split('.')[0];
+
+  const windowFilter = `
+            <AND>
+              <GTE name="AdvertisedTimeAtLocation" value="${formatDate(startDate)}"/>
+              <LT name="AdvertisedTimeAtLocation" value="${formatDate(endDate)}"/>
+            </AND>`;
+
+  const timeFilter = includeUnarrived ? `
+            <OR>${windowFilter}
+              <AND>
+                <EXISTS name="TimeAtLocation" value="false"/>
+                <GTE name="AdvertisedTimeAtLocation" value="${formatDate(unarrivedStart)}"/>
+                <LT name="AdvertisedTimeAtLocation" value="${formatDate(startDate)}"/>
+              </AND>
+            </OR>` : windowFilter;
 
   return `
     <REQUEST>
@@ -39,11 +74,7 @@ function buildTrafikverketRequest(locationSignature, hoursBack = 3, hoursAhead =
             <OR>
               <EQ name="ActivityType" value="Ankomst"/>
               <EQ name="ActivityType" value="Avgang"/>
-            </OR>
-            <AND>
-              <GTE name="AdvertisedTimeAtLocation" value="${formatDate(startDate)}"/>
-              <LT name="AdvertisedTimeAtLocation" value="${formatDate(endDate)}"/>
-            </AND>
+            </OR>${timeFilter}
           </AND>
         </FILTER>
       </QUERY>
@@ -124,16 +155,18 @@ function extractDeviationInfo(deviationArray, isCanceled) {
 /**
  * Process raw train announcements into normalized format
  * @param {Array} announcements - Raw train announcements
+ * @param {boolean} keepArrived - Keep finalized (arrived) announcements;
+ *   legacy clients expect them dropped after 1 hour
  * @return {Array} Processed train data
  */
-function processTrainAnnouncements(announcements) {
+function processTrainAnnouncements(announcements, keepArrived = false) {
   const currentTime = new Date();
   const processed = [];
 
   announcements.forEach((train) => {
-    // Skip trains that arrived more than 1 hour ago
+    // Legacy mode: skip trains that arrived more than 1 hour ago
     const actualTime = parseDateTime(train.TimeAtLocation);
-    if (actualTime && (currentTime - actualTime) > 3600000) {
+    if (!keepArrived && actualTime && (currentTime - actualTime) > 3600000) {
       return;
     }
 
@@ -189,21 +222,22 @@ function generateSummary(trains) {
 /**
  * Fetch train announcements from Trafikverket API
  * @param {string} locationSignature - Location code
+ * @param {Object} tier - Window/tier options (see TIERS)
  * @return {Promise<Object>} Train data with summary
  */
-async function fetchTrainAnnouncements(locationSignature) {
-  const cacheKey = locationSignature;
+async function fetchTrainAnnouncements(locationSignature, tier = TIERS.legacy) {
+  const cacheKey = `${locationSignature}:${tier.hoursBack}:${tier.hoursAhead}:${tier.includeUnarrived ? 1 : 0}`;
   const cached = cache.get(cacheKey);
 
   // Return cached data if still valid
-  if (cached && (Date.now() - cached.timestamp) < CACHE_TTL) {
-    console.log(`[Cache] Returning cached data for ${locationSignature}`);
+  if (cached && (Date.now() - cached.timestamp) < (tier.ttl || CACHE_TTL)) {
+    console.log(`[Cache] Returning cached data for ${cacheKey}`);
     return cached.data;
   }
 
-  console.log(`[API] Fetching train announcements for ${locationSignature}`);
+  console.log(`[API] Fetching train announcements for ${cacheKey}`);
 
-  const xmlRequest = buildTrafikverketRequest(locationSignature);
+  const xmlRequest = buildTrafikverketRequest(locationSignature, tier);
 
   try {
     const response = await fetch(TRAFIKVERKET_API_URL, {
@@ -233,7 +267,7 @@ async function fetchTrainAnnouncements(locationSignature) {
     console.log(`[API] Fetched ${announcements.length} train announcements`);
 
     // Process announcements
-    const trains = processTrainAnnouncements(announcements);
+    const trains = processTrainAnnouncements(announcements, tier.keepArrived === true);
     const summary = generateSummary(trains);
 
     const result = {
@@ -278,8 +312,27 @@ exports.getTrainAnnouncements = functions.https.onRequest(async (req, res) => {
 
   const locationSignature = req.query.location || LOCATION_SIGNATURE;
 
+  // Resolve fetch tier. No tier param keeps the original 3h/6h behavior so
+  // already-deployed clients are unaffected.
+  let tier = TIERS.legacy;
+  const tierName = String(req.query.tier || '');
+  if (tierName === 'near') {
+    tier = TIERS.near;
+  } else if (tierName === 'far') {
+    const clamp = (raw, fallback, max) => {
+      const n = parseInt(raw, 10);
+      if (!Number.isFinite(n)) return fallback;
+      return Math.max(1, Math.min(max, n));
+    };
+    tier = {
+      ...TIERS.far,
+      hoursBack: clamp(req.query.hoursBack, TIERS.far.hoursBack, MAX_HOURS_BACK),
+      hoursAhead: clamp(req.query.hoursAhead, TIERS.far.hoursAhead, MAX_HOURS_AHEAD),
+    };
+  }
+
   try {
-    const data = await fetchTrainAnnouncements(locationSignature);
+    const data = await fetchTrainAnnouncements(locationSignature, tier);
     res.status(200).json(data);
   } catch (error) {
     console.error('[Function] Error:', error);
@@ -300,7 +353,8 @@ exports.scheduledTrainUpdate = functions.pubsub
     .onRun(async (context) => {
       console.log('[Scheduled] Updating train data...');
       try {
-        await fetchTrainAnnouncements(LOCATION_SIGNATURE);
+        // Warm the near tier — the window clients poll every 30s.
+        await fetchTrainAnnouncements(LOCATION_SIGNATURE, TIERS.near);
         console.log('[Scheduled] Train data updated successfully');
       } catch (error) {
         console.error('[Scheduled] Error updating train data:', error);

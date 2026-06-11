@@ -17,9 +17,10 @@ class TimeManager {
     this.offsetPercentage = 20; // Percentage from left edge where red line is fixed (0-50%)
     this.updateIntervalSeconds = 60; // How often following mode updates
     
-    // Boundaries
-    this.maxPastHours = 24; // Can't go more than 24h in past
-    this.maxFutureHours = 12; // Can't go more than 12h in future
+    // Boundaries: navigation is bounded by the schedule day itself
+    // (00:00 on the anchor date to +30h = 06:00 next morning, matching the
+    // rendered timeline span), not by rolling offsets from "now".
+    this.timelineHours = 30;
     
     // Listeners for state changes
     this.listeners = [];
@@ -121,6 +122,14 @@ class TimeManager {
   }
 
   syncViewTimeToScheduleDate() {
+    // Don't fold a viewTime that already sits within the rendered schedule day
+    // — mapTimeToScheduleDate keeps only HH:MM and would collapse the
+    // 24:00–30:00 next-morning stretch (e.g. a restored "05:00 next day")
+    // back onto the anchor's 05:00 same-day.
+    const bounds = this.getScheduleDayBounds();
+    if (bounds && this.viewTime >= bounds.start && this.viewTime <= bounds.end) {
+      return false;
+    }
     const mapped = this.mapTimeToScheduleDate(this.viewTime);
     const changed = mapped.getTime() !== this.viewTime.getTime();
     if (changed) {
@@ -165,52 +174,94 @@ class TimeManager {
   }
   
   /**
+   * Bounds of the rendered schedule day: 00:00 on the anchor date through
+   * +timelineHours (06:00 the next morning).
+   */
+  getScheduleDayBounds() {
+    const anchor = this.parseAnchorYmd(this.getScheduleAnchorYmd());
+    const base = anchor
+      ? new Date(anchor.year, anchor.month - 1, anchor.day, 0, 0, 0, 0)
+      : (() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; })();
+    return {
+      start: base,
+      end: new Date(base.getTime() + this.timelineHours * 60 * 60000)
+    };
+  }
+
+  /**
+   * Clamp a candidate view time to the schedule-day bounds.
+   */
+  clampToScheduleDay(time) {
+    const { start, end } = this.getScheduleDayBounds();
+    if (time < start) return new Date(start.getTime());
+    if (time > end) return new Date(end.getTime());
+    return time;
+  }
+
+  /**
    * Navigate backward by current time range
    */
   navigatePrevious() {
     const jumpHours = this.timeRange; // Jump by current time range
-    const newTime = new Date(this.viewTime.getTime() - jumpHours * 60 * 60000);
-    
-    // Check boundary
-    const now = this.getEffectiveNow();
-    const maxPast = new Date(now.getTime() - this.maxPastHours * 60 * 60000);
-    
-    if (newTime < maxPast) {
-      this.notifyError(`Cannot go more than ${this.maxPastHours} hours in the past`);
+    // No mapTimeToScheduleDate here: it folds the time-of-day back onto the
+    // anchor date, which would wrap the 24:00–30:00 stretch (next morning)
+    // back 24 hours. The day-bounds clamp is the only guard needed.
+    const newTime = this.clampToScheduleDay(
+      new Date(this.viewTime.getTime() - jumpHours * 60 * 60000)
+    );
+
+    if (newTime.getTime() === this.viewTime.getTime()) {
+      this.notifyError('Du är redan i början av dagens graf');
       return false;
     }
-    
-    this.viewTime = this.mapTimeToScheduleDate(newTime);
+
+    this.viewTime = newTime;
     this.deactivateFollowingMode(); // User took manual control
     this.saveState();
     this.notifyChange('navigate_previous');
-    
+
     console.log(`⬅️ Navigated backward ${jumpHours}h:`, this.getStateInfo());
     return true;
   }
-  
+
   /**
    * Navigate forward by current time range
    */
   navigateNext() {
     const jumpHours = this.timeRange; // Jump by current time range
-    const newTime = new Date(this.viewTime.getTime() + jumpHours * 60 * 60000);
-    
-    // Check boundary
-    const now = this.getEffectiveNow();
-    const maxFuture = new Date(now.getTime() + this.maxFutureHours * 60 * 60000);
-    
-    if (newTime > maxFuture) {
-      this.notifyError(`Cannot go more than ${this.maxFutureHours} hours in the future`);
+    // See navigatePrevious: clamp only, no anchor-date folding.
+    const newTime = this.clampToScheduleDay(
+      new Date(this.viewTime.getTime() + jumpHours * 60 * 60000)
+    );
+
+    if (newTime.getTime() === this.viewTime.getTime()) {
+      this.notifyError('Du är redan i slutet av dagens graf');
       return false;
     }
-    
-    this.viewTime = this.mapTimeToScheduleDate(newTime);
+
+    this.viewTime = newTime;
     this.deactivateFollowingMode(); // User took manual control
     this.saveState();
     this.notifyChange('navigate_next');
-    
+
     console.log(`➡️ Navigated forward ${jumpHours}h:`, this.getStateInfo());
+    return true;
+  }
+
+  /**
+   * Sync view time from a manual scroll position. Re-renders the train
+   * window around the new time WITHOUT repositioning the scrollbar — this is
+   * what streams trains in as the user pans across the day.
+   */
+  setViewTimeFromScroll(time) {
+    if (!(time instanceof Date) || Number.isNaN(time.getTime())) return false;
+    // Scroll positions are already on the timeline calendar — clamp only.
+    const newTime = this.clampToScheduleDay(time);
+    if (Math.abs(newTime.getTime() - this.viewTime.getTime()) < 60000) return false;
+
+    this.viewTime = newTime;
+    this.saveState();
+    this.notifyChange('scroll_sync');
     return true;
   }
   
@@ -233,10 +284,13 @@ class TimeManager {
     const offsetFromCenterPercent = this.offsetPercentage - 50;
     const offsetFromCenterHours = (offsetFromCenterPercent / 100) * this.timeRange;
     
-    // View time should be offset so current time appears at red line
+    // View time should be offset so current time appears at red line.
+    // `now` is already on the schedule-day calendar (getEffectiveNow maps it),
+    // so clamp directly — do NOT re-fold through mapTimeToScheduleDate (that
+    // keeps only HH:MM and would collapse any next-morning position).
     const targetTime = new Date(now.getTime() - offsetFromCenterHours * 60 * 60000);
-    
-    this.viewTime = this.mapTimeToScheduleDate(targetTime);
+
+    this.viewTime = this.clampToScheduleDay(targetTime);
     this.saveState();
     this.notifyChange('jump_to_now');
     
@@ -258,7 +312,10 @@ class TimeManager {
     const offsetFromCenterPercent = this.offsetPercentage - 50;
     const offsetFromCenterHours = (offsetFromCenterPercent / 100) * this.timeRange;
 
-    this.viewTime = this.mapTimeToScheduleDate(
+    // targetTime is already on the timeline calendar (it comes from a clicked
+    // pixel position via timelineStart). Clamp directly — re-folding through
+    // mapTimeToScheduleDate would collapse a next-morning target to same-day.
+    this.viewTime = this.clampToScheduleDay(
       new Date(targetTime.getTime() - offsetFromCenterHours * 60 * 60000)
     );
 
@@ -369,7 +426,7 @@ class TimeManager {
    * Change time range
    */
   changeTimeRange(newRange) {
-    const validRanges = [1, 3, 4, 6, 8, 12];
+    const validRanges = [1, 3, 4, 6, 8, 12, 24];
     if (!validRanges.includes(newRange)) {
       this.notifyError('Invalid time range: ' + newRange);
       return false;

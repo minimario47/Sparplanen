@@ -203,26 +203,72 @@ function prepareTrainData() {
     if (window.TimeManager && typeof window.TimeManager.setScheduleAnchor === 'function') {
         window.TimeManager.setScheduleAnchor(resolved.anchorStr || null);
     }
-    const serviceInput = (resolved.usedBundle && Array.isArray(resolved.services)) ? resolved.services : initialServiceData;
-    
+    let serviceInput = (resolved.usedBundle && Array.isArray(resolved.services)) ? resolved.services : initialServiceData;
+
+    // Stitch tomorrow morning onto today so midnight-crossing trains render
+    // as one bar. Also reports what's missing (next week not uploaded yet)
+    // for the inactive-region overlay.
+    let stitchInfo = null;
+    if (resolved.usedBundle && window.DayStitcher && resolved.week && resolved.day) {
+        const stitched = window.DayStitcher.stitch(resolved);
+        serviceInput = stitched.services;
+        stitchInfo = stitched.info;
+    }
+    window.currentStitchInfo = stitchInfo;
+
     function parseTimeToDate(timeStr, baseDate) {
         if (!timeStr) return null;
         const [hours, minutes] = timeStr.split(':').map(Number);
         return new Date(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate(), hours, minutes);
     }
-    
+
+    const DAY_MS = 24 * 60 * 60 * 1000;
     const trainData = serviceInput
         .filter(service => service.trackId >= 1 && service.trackId <= 16)
         .map(service => {
-            let arrTime = parseTimeToDate(service.scheduledArrivalTime, timeBase);
-            let depTime = parseTimeToDate(service.scheduledDepartureTime, timeBase);
-            
+            const dayOffset = service._dayOffset || 0;
+            const serviceBase = dayOffset ? new Date(timeBase.getTime() + dayOffset * DAY_MS) : timeBase;
+            let arrTime = parseTimeToDate(service.scheduledArrivalTime, serviceBase);
+            let depTime = parseTimeToDate(service.scheduledDepartureTime, serviceBase);
+
+            // Stitched/page-edge markers from DayStitcher (exact data beats
+            // the heuristics below).
+            if (service._syntheticArrEdge && !arrTime) {
+                arrTime = new Date(serviceBase.getFullYear(), serviceBase.getMonth(), serviceBase.getDate(), 0, 0);
+            }
+            if (service._depNextDay && depTime) {
+                depTime = new Date(depTime.getTime() + DAY_MS);
+            } else if (service._syntheticDepFar) {
+                const hours = (window.TimeManager && window.TimeManager.timelineHours) || 30;
+                depTime = new Date(timeBase.getTime() + hours * 60 * 60 * 1000);
+            } else if (service._syntheticDepEdge && !depTime) {
+                depTime = new Date(serviceBase.getTime() + DAY_MS);
+            }
+
+            // Render clamp: a genuine overnight/parked merge can carry a real
+            // tomorrow departure deep into the next day (e.g. a set parked
+            // until 14:15). Honor the data, but never draw a bar past the
+            // timeline's right edge — clamp the rendered extent to the canvas
+            // end so it reads as "occupies the track to the edge" instead of
+            // overflowing far off-screen.
+            if (depTime && (service._depNextDay || service._syntheticDepEdge || service._syntheticDepFar)) {
+                const tlHours = (window.TimeManager && window.TimeManager.timelineHours) || 30;
+                const tlEnd = timeBase.getTime() + tlHours * 60 * 60 * 1000;
+                if (depTime.getTime() > tlEnd) depTime = new Date(tlEnd);
+            }
+
             if (arrTime && depTime && depTime < arrTime) {
-                depTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
-            } else if (!arrTime && depTime) {
+                depTime = new Date(depTime.getTime() + DAY_MS);
+            } else if (!arrTime && depTime && !dayOffset && !service._depNextDay &&
+                       !(stitchInfo && stitchInfo.stitched)) {
+                // Heuristic fallback ONLY when tomorrow's data is missing: a
+                // lone early-morning departure is assumed to belong to the
+                // coming night. With stitched data every service sits on its
+                // exact calendar day — shifting today's 00:xx departures
+                // would double them up with tomorrow's real records.
                 const depHour = parseInt(service.scheduledDepartureTime.split(':')[0]);
                 if (depHour >= 0 && depHour < 6) {
-                    depTime = new Date(depTime.getTime() + 24 * 60 * 60 * 1000);
+                    depTime = new Date(depTime.getTime() + DAY_MS);
                 }
             }
             
@@ -283,6 +329,8 @@ function prepareTrainData() {
                 vehicleCount,
                 arrTime: arrTime,
                 depTime: depTime,
+                dayOffset: dayOffset,
+                stitchedOvernight: !!service.stitchedOvernight,
                 origin: service.origin || '',
                 dest: service.destination || '',
                 status: 'on-time',
@@ -465,6 +513,13 @@ function handleTimeManagerChange(event) {
         case 'range_changed':
             renderFullSchedule();
             break;
+
+        case 'scroll_sync':
+            // viewTime was derived FROM the scrollbar — re-render the train
+            // window but leave the scroll position alone, or panning fights
+            // the user.
+            renderFullSchedule({ skipScroll: true });
+            break;
             
         case 'following_update':
             if (!timelineStart || !window.currentPixelsPerHour) {
@@ -528,11 +583,12 @@ function expandSplitTrains(trains) {
     return out;
 }
 
-function renderFullSchedule() {
+function renderFullSchedule(options = {}) {
+    const renderT0 = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
     const state = window.TimeManager.getState();
     let { viewTime, timeRange } = state;
-    
-    const timelineStartHours = 30;
+
+    const timelineStartHours = window.TimeManager.timelineHours || 30;
     const now = scheduleSelection?.anchorStr
         ? (() => {
             const p = String(scheduleSelection.anchorStr).split('-').map(Number);
@@ -592,10 +648,25 @@ function renderFullSchedule() {
             viewWindowEnd
         );
     }
+    if (window.InactiveRegionRenderer) {
+        window.InactiveRegionRenderer.render(timelineStart, window.currentPixelsPerHour, timelineStartHours);
+    }
+    if (window.DayBoundaryRenderer) {
+        window.DayBoundaryRenderer.render(timelineStart, window.currentPixelsPerHour, timelineStartHours);
+    }
     updateCurrentTimeLine();
-    
-    scrollToViewTime(viewTime, timelineStart, window.currentPixelsPerHour, state.isFollowingMode, state.offsetPercentage);
-    
+
+    if (!options.skipScroll) {
+        scrollToViewTime(viewTime, timelineStart, window.currentPixelsPerHour, state.isFollowingMode, state.offsetPercentage);
+    }
+
+    {
+        const renderMs = ((typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now()) - renderT0;
+        const canvas = document.getElementById('timeline-canvas');
+        const nodeCount = canvas ? canvas.getElementsByTagName('*').length : 0;
+        console.log(`⏱️ Render: ${renderList.length} trains, ${nodeCount} DOM nodes, ${renderMs.toFixed(1)} ms (${timeRange}h)`);
+    }
+
     if (window.__DEBUG_SCHEDULE_RENDER) {
         const viewWindowHours = timeRange + (bufferHours * 2);
         console.log(`🔄 View: ${viewWindowHours}h (${timeRange}h + ${bufferHours}h buffer)`);
@@ -635,7 +706,9 @@ function scrollToViewTime(viewTime, timelineStart, pixelsPerHour, isFollowingMod
         
         isProgrammaticScroll = true;
         scheduleWrapper.scrollLeft = Math.max(0, scrollLeft);
-        setTimeout(() => { isProgrammaticScroll = false; }, 100);
+        // Outlast the scroll-sync debounce (150ms) so a programmatic follow
+        // scroll is never mis-read as a user pan and nudged back.
+        setTimeout(() => { isProgrammaticScroll = false; }, 250);
     } else {
         const viewportWidth = scheduleWrapper.clientWidth;
         const scrollLeft = viewTimePosition - (viewportWidth / 2);
@@ -719,7 +792,9 @@ function updateCurrentTimeLine() {
         if (Math.abs(scheduleWrapper.scrollLeft - desiredScrollLeft) > 1) {
             isProgrammaticScroll = true;
             scheduleWrapper.scrollLeft = Math.max(0, desiredScrollLeft);
-            setTimeout(() => { isProgrammaticScroll = false; }, 100);
+            // Outlast the scroll-sync debounce (150ms) so a programmatic follow
+        // scroll is never mis-read as a user pan and nudged back.
+        setTimeout(() => { isProgrammaticScroll = false; }, 250);
         }
     }
 }
@@ -730,10 +805,35 @@ function setupScrollSynchronization() {
     const scheduleWrapper = document.querySelector('.schedule-wrapper');
     if (!scheduleWrapper) return;
 
+    let scrollSyncTimer = null;
+
     scheduleWrapper.addEventListener('scroll', () => {
-        if (window.TimeManager && window.TimeManager.isFollowingMode && !isProgrammaticScroll) {
+        if (isProgrammaticScroll) return;
+
+        if (window.TimeManager && window.TimeManager.isFollowingMode) {
             window.TimeManager.deactivateFollowingMode();
         }
+
+        // Stream trains in as the user pans: once scrolling settles, derive
+        // the time at the viewport center and, if it has drifted out of the
+        // rendered buffer, move viewTime there (re-renders without touching
+        // the scrollbar — see the scroll_sync case).
+        if (scrollSyncTimer) clearTimeout(scrollSyncTimer);
+        scrollSyncTimer = setTimeout(() => {
+            if (!timelineStart || !window.currentPixelsPerHour || !window.TimeManager) return;
+            const centerPx = scheduleWrapper.scrollLeft + scheduleWrapper.clientWidth / 2;
+            const centerTime = new Date(
+                timelineStart.getTime() + (centerPx / window.currentPixelsPerHour) * 3600000
+            );
+            const driftMs = Math.abs(centerTime.getTime() - window.TimeManager.viewTime.getTime());
+            // The rendered window extends 3h (bufferHours) past the visible
+            // range on each side, so blanks appear once the center drifts
+            // beyond 3h. Re-render at 2h drift to stay a step ahead.
+            const limitMs = 2 * 3600000;
+            if (driftMs > limitMs) {
+                window.TimeManager.setViewTimeFromScroll(centerTime);
+            }
+        }, 150);
     }, { passive: true });
 
     console.log('✅ Scroll sync ready');

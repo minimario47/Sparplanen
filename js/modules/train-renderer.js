@@ -62,13 +62,14 @@ window.TrainRenderer = {
             requestAnimationFrame(() => {
                 // Read phase (getComputedStyle) for every train first, then one
                 // write phase — interleaving the two forces a reflow per train.
-                const colors = createdDivs.map((trainDiv) =>
-                    window.ColorUtils.computeDynamicTextColor(trainDiv, userSettings)
+                // Overview bars without numbers skip the (expensive) read.
+                const numberEls = createdDivs.map((trainDiv) => trainDiv.querySelector('.train-numbers'));
+                const colors = createdDivs.map((trainDiv, i) =>
+                    numberEls[i] ? window.ColorUtils.computeDynamicTextColor(trainDiv, userSettings) : null
                 );
                 createdDivs.forEach((trainDiv, i) => {
-                    if (!colors[i]) return;
-                    const numbers = trainDiv.querySelector('.train-numbers');
-                    if (numbers) numbers.style.color = colors[i];
+                    if (!colors[i] || !numberEls[i]) return;
+                    numberEls[i].style.color = colors[i];
                 });
             });
         }
@@ -89,11 +90,16 @@ window.TrainRenderer = {
         
         const arrMinutes = train.arrTime ? (train.arrTime - startTime) / (1000 * 60) : null;
         const depMinutes = train.depTime ? (train.depTime - startTime) / (1000 * 60) : null;
-        
+
+        // Overview mode (24h zoom): thousands of bars at once, so each bar
+        // sheds its detail children (tooltip, dividers, mousemove) and the
+        // min-width clamp is relaxed so dwell times aren't exaggerated 3-4x.
+        const isOverview = pixelsPerHour < 80;
+
         let left = 0, width = 0;
-        const minWidthPx = 40;
-        const arrivalOnlyWidth = 80;
-        const departureOnlyWidth = 80;
+        const minWidthPx = isOverview ? 12 : 40;
+        const arrivalOnlyWidth = isOverview ? 30 : 80;
+        const departureOnlyWidth = isOverview ? 30 : 80;
 
         if (arrMinutes !== null && depMinutes !== null) {
             left = (arrMinutes / 60) * pixelsPerHour;
@@ -108,6 +114,16 @@ window.TrainRenderer = {
         } else {
             return null;
         }
+
+        // Clamp to the timeline canvas [0, timelineHours]. A bar can legitimately
+        // start before 00:00 (overnight from yesterday) or run past 06:00 next
+        // morning (a morning train departing after the window); the PDF itself
+        // cuts bars at the page edge, so we draw to the edge instead of letting
+        // them overflow and create blank over-scroll past the data.
+        const canvasW = ((window.TimeManager && window.TimeManager.timelineHours) || 30) * pixelsPerHour;
+        if (left < 0) { width += left; left = 0; }
+        if (left + width > canvasW) width = canvasW - left;
+        if (width <= 0) return null;
 
         const trainDiv = document.createElement('div');
         trainDiv.className = `train-bar type-${train.type}`;
@@ -164,6 +180,8 @@ window.TrainRenderer = {
 
         const isVeryNarrow = width < 60;
         const isNarrow = width < 100;
+        const showNumbers = !isOverview || width >= 48;
+        if (isOverview) trainDiv.classList.add('is-overview');
         
         const hasArrival = !!train.arrivalTrainNumber;
         const hasDeparture = !!train.departureTrainNumber;
@@ -223,7 +241,7 @@ window.TrainRenderer = {
             : '';
         
         const defaultHoverNumber = segment ? (singleNumber || '') : (arrivalDisplay || departureDisplay || '');
-        const tooltipHTML = showHoverTooltip ? `
+        const tooltipHTML = (showHoverTooltip && !isOverview) ? `
             <div class="train-tooltip">
                 <div class="train-tooltip-number">Tåg <span class="train-tooltip-number-value">${this._escape(defaultHoverNumber)}</span></div>
                 ${train.origin ? `<div class="train-tooltip-meta">Från: ${this._escape(train.origin)}</div>` : ''}
@@ -233,20 +251,22 @@ window.TrainRenderer = {
         ` : '';
 
         const densityClass = lanePressure >= 3 ? 'density-3' : (lanePressure === 2 ? 'density-2' : 'density-1');
-        const dividerHTML = laneSpan > 1
+        const dividerHTML = (laneSpan > 1 && !isOverview)
             ? Array.from({ length: laneSpan - 1 }, (_, idx) => {
                 const top = ((idx + 1) / laneSpan) * 100;
                 return `<div class="train-vehicle-divider" style="top:${top}%"></div>`;
             }).join('')
             : '';
 
+        const numbersContainerHTML = showNumbers ? `
+                <div class="train-numbers ${displaySingleNumber ? singleAlignClass : ''}" style="font-size: ${fontSize};">
+                    ${numbersHTML}
+                </div>` : '';
+
         trainDiv.innerHTML = `
             <div class="train-bar-visual">
                 ${dividerHTML}
-                ${statusIconHTML}
-                <div class="train-numbers ${displaySingleNumber ? singleAlignClass : ''}" style="font-size: ${fontSize};">
-                    ${numbersHTML}
-                </div>
+                ${statusIconHTML}${numbersContainerHTML}
             </div>
             ${tooltipHTML}
         `;
@@ -259,10 +279,10 @@ window.TrainRenderer = {
         });
         trainDiv.addEventListener('mouseleave', () => {
             trainDiv.classList.remove('is-hovered');
-            trainDiv.style.zIndex = trainDiv.dataset.baseZIndex || String(10 + position);
+            trainDiv.style.zIndex = trainDiv.dataset.baseZIndex || String(10 + laneStart);
         });
         trainDiv.addEventListener('mousemove', (e) => {
-            if (!showHoverTooltip || segment) return;
+            if (!showHoverTooltip || segment || isOverview) return;
             if (!(hasArrivalDisplay && hasDepartureDisplay) || arrivalDisplay === departureDisplay) {
                 return;
             }

@@ -98,7 +98,7 @@ class DelayIntegration {
         // Listen to API data updates
         this.apiClient.on('data-updated', (data) => {
             if (window.__DEBUG_DELAY_FEED) {
-                console.groupCollapsed(`🔄 Delay Update: ${data.trains.length} trains`);
+                console.groupCollapsed(`🔄 Delay Update: ${data.trains.length} trains (${data.tier || 'near'})`);
                 console.log('📊 Summary:', {
                     total: data.trains.length,
                     delayed: data.summary?.delayed || 0,
@@ -109,7 +109,17 @@ class DelayIntegration {
 
             this.dataManager.updateData(data.trains);
             try {
-                window.dispatchEvent(new CustomEvent('delay-feed-updated', { detail: data }));
+                // Listeners get the merged store, not the raw tier payload —
+                // a far-tier response alone would otherwise wipe near-window
+                // trains from e.g. the late-arrivals panel.
+                window.dispatchEvent(new CustomEvent('delay-feed-updated', {
+                    detail: {
+                        trains: this.dataManager.getAllTrains(),
+                        summary: this.dataManager.getSummary(),
+                        lastUpdated: data.lastUpdated,
+                        tier: data.tier || 'near'
+                    }
+                }));
             } catch (e) {
                 logger.warn('Integration', 'delay-feed-updated dispatch failed', e);
             }
@@ -192,13 +202,16 @@ class DelayIntegration {
         if (!train || !this.dataManager) return [];
         const contexts = [];
         const seen = new Set();
+        // Stitched next-day trains (dayOffset = 1) must match tomorrow's
+        // announcements, not today's same-numbered train.
+        const dateHint = this.dataManager.getStockholmYmd(train.dayOffset || 0);
         const add = (trainNumber, leg, side, scheduledTime) => {
             const number = String(trainNumber || '').trim();
             // Dedupe per (number, leg) — a turnaround that keeps the same
             // number still has two distinct legs with their own API data.
             const dedupeKey = `${number}:${leg}`;
             if (!number || seen.has(dedupeKey)) return;
-            const delayInfo = this.dataManager.getDelayInfo(number, leg);
+            const delayInfo = this.dataManager.getDelayInfo(number, leg, dateHint);
             if (!delayInfo) return;
             // Cross-activity fallback: when the record belongs to the other
             // leg's activity and this bar uses the same number for both legs,

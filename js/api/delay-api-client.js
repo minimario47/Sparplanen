@@ -8,25 +8,59 @@ class DelayAPIClient {
         this.cloudFunctionUrl = cloudFunctionUrl;
         this.connectionState = 'disconnected'; // connecting, connected, disconnected, error
         this.updateInterval = null;
-        this.updateIntervalMs = 30000; // 30 seconds
+        this.updateIntervalMs = 30000; // 30 seconds (near tier: now ±2h, where estimates move)
+        this.farUpdateInterval = null;
+        this.farUpdateIntervalMs = 300000; // 5 minutes (far tier: rest of the schedule day)
         this.lastUpdateTime = null;
         this.lastData = null;
         this.retryCount = 0;
         this.maxRetries = 5;
         this.listeners = [];
-        
+
         logger.info('DelayAPI', 'DelayAPIClient initialized', { url: cloudFunctionUrl });
     }
-    
+
+    /**
+     * Current hour in Europe/Stockholm (announcement times are Swedish local).
+     */
+    getStockholmHour() {
+        try {
+            const h = new Intl.DateTimeFormat('sv-SE', {
+                timeZone: 'Europe/Stockholm', hour: '2-digit', hour12: false
+            }).format(new Date());
+            const n = parseInt(h, 10);
+            return Number.isFinite(n) ? n : new Date().getHours();
+        } catch (e) {
+            return new Date().getHours();
+        }
+    }
+
+    /**
+     * Build the request URL for a fetch tier. Far-tier hours are integers so
+     * the Cloud Function cache key only changes once per hour.
+     */
+    buildTierUrl(location, tier) {
+        const base = `${this.cloudFunctionUrl}?location=${location}`;
+        if (tier === 'near') return `${base}&tier=near`;
+        if (tier === 'far') {
+            const hour = this.getStockholmHour();
+            // Back to 00:00 today, ahead to 06:00 tomorrow (matches the 30h timeline)
+            const hoursBack = Math.max(2, Math.min(26, hour + 1));
+            const hoursAhead = Math.max(2, Math.min(30, (24 - hour) + 6));
+            return `${base}&tier=far&hoursBack=${hoursBack}&hoursAhead=${hoursAhead}`;
+        }
+        return base;
+    }
+
     /**
      * Fetch delay data from Firebase Cloud Function
      */
-    async fetchDelayData(location = 'G') {
+    async fetchDelayData(location = 'G', tier = 'near') {
         this.setConnectionState('connecting');
-        logger.info('DelayAPI', `Fetching delay data for location: ${location}`);
-        
+        logger.info('DelayAPI', `Fetching delay data for location: ${location} (${tier})`);
+
         try {
-            const url = `${this.cloudFunctionUrl}?location=${location}`;
+            const url = this.buildTierUrl(location, tier);
             // No custom headers on GET: "Content-Type: application/json" triggers a CORS preflight
             // (OPTIONS). If the function is down or cold, edge 503 responses often lack CORS headers,
             // and the browser surfaces a generic "Load failed" instead of status text.
@@ -43,26 +77,31 @@ class DelayAPIClient {
                 throw new Error('Invalid response structure: missing trains array');
             }
             
-            this.lastData = data;
+            // Keep lastData as the near-window snapshot; far payloads are
+            // merged into the data manager but make a poor "latest" fallback.
+            if (tier !== 'far') {
+                this.lastData = data;
+            }
             this.lastUpdateTime = new Date();
             this.retryCount = 0;
-            
+
             this.setConnectionState('connected');
-            logger.info('DelayAPI', `Successfully fetched data for ${data.trains.length} trains`, {
+            logger.info('DelayAPI', `Successfully fetched data for ${data.trains.length} trains (${tier})`, {
                 summary: data.summary
             });
-            
+
             // Emit data-updated event
-            this.emit('data-updated', data);
-            
+            this.emit('data-updated', { ...data, tier });
+
             return data;
-            
+
         } catch (error) {
             this.retryCount++;
             const message = error?.message || String(error);
             const logData = {
                 error: message,
                 name: error?.name,
+                tier,
                 url: `${this.cloudFunctionUrl}?location=${location}`
             };
             if (message === 'Load failed') {
@@ -78,7 +117,7 @@ class DelayAPIClient {
                 // Exponential backoff
                 const backoffTime = Math.min(1000 * Math.pow(2, this.retryCount), 30000);
                 logger.warn('DelayAPI', `Will retry in ${backoffTime}ms`);
-                setTimeout(() => this.fetchDelayData(location), backoffTime);
+                setTimeout(() => this.fetchDelayData(location, tier), backoffTime);
             }
 
             this.emit('error', { error, retryCount: this.retryCount });
@@ -96,14 +135,18 @@ class DelayAPIClient {
         }
         
         this.updateIntervalMs = intervalMs;
-        logger.info('DelayAPI', `Starting auto-update with interval: ${intervalMs}ms`);
-        
-        // Initial fetch
+        logger.info('DelayAPI', `Starting auto-update with interval: ${intervalMs}ms (near) / ${this.farUpdateIntervalMs}ms (far)`);
+
+        // Initial fetches: near first (drives the connection indicator), then
+        // the whole-day far window.
         this.fetchDelayData().catch(err => {
             logger.error('DelayAPI', 'Initial fetch failed', err);
         });
+        this.fetchDelayData('G', 'far').catch(err => {
+            logger.error('DelayAPI', 'Initial far fetch failed', err);
+        });
 
-        // Set up interval
+        // Set up intervals
         this.updateInterval = setInterval(() => {
             try {
                 this.fetchDelayData().catch(err => {
@@ -115,10 +158,20 @@ class DelayAPIClient {
                 // Don't let synchronous errors bubble up - they might cause page reloads
             }
         }, intervalMs);
-        
+
+        this.farUpdateInterval = setInterval(() => {
+            try {
+                this.fetchDelayData('G', 'far').catch(err => {
+                    logger.error('DelayAPI', 'Scheduled far fetch failed', err);
+                });
+            } catch (error) {
+                logger.error('DelayAPI', 'Synchronous error in scheduled far fetch', error);
+            }
+        }, this.farUpdateIntervalMs);
+
         logger.info('DelayAPI', 'Auto-update started');
     }
-    
+
     /**
      * Stop auto-update polling
      */
@@ -127,6 +180,10 @@ class DelayAPIClient {
             clearInterval(this.updateInterval);
             this.updateInterval = null;
             logger.info('DelayAPI', 'Auto-update stopped');
+        }
+        if (this.farUpdateInterval) {
+            clearInterval(this.farUpdateInterval);
+            this.farUpdateInterval = null;
         }
     }
     
