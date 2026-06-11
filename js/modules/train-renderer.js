@@ -146,7 +146,13 @@ window.TrainRenderer = {
         const visualLaneHeight = isCompressed ? laneHeight : (trackLayout.height / visualLaneCount);
         const visibleTrainHeight = Math.max(visualLaneHeight * visualLaneSpan - verticalPadding * 2, 8);
         trainDiv.style.height = `${visibleTrainHeight}px`;
-        trainDiv.style.top = `${trackLayout.top + (visualLaneStart * visualLaneHeight) + verticalPadding}px`;
+        // Anchor the packed lane stack to the BOTTOM of the track: lane 0 rests on
+        // the floor and extra trains stack upward, so any breathing room (from the
+        // min-lane padding on quiet tracks) sits empty at the top rather than the
+        // bars floating up there. laneFromTop flips the lane index within the
+        // track's visual lane count.
+        const laneFromTop = Math.max(0, visualLaneCount - visualLaneStart - visualLaneSpan);
+        trainDiv.style.top = `${trackLayout.top + (laneFromTop * visualLaneHeight) + verticalPadding}px`;
         trainDiv.style.zIndex = 10 + laneStart;
         trainDiv.dataset.baseZIndex = String(10 + laneStart);
         
