@@ -71,6 +71,21 @@ document.addEventListener('DOMContentLoaded', async function() {
             console.warn('LateArrivalsPanel init failed', e);
         }
     }
+
+    if (window.WorkloadPanel && window.WorkloadPanel.init) {
+        try {
+            window.WorkloadPanel.init();
+        } catch (e) {
+            console.warn('WorkloadPanel init failed', e);
+        }
+    }
+    if (window.WorkloadOverlay && window.WorkloadOverlay.init) {
+        try {
+            window.WorkloadOverlay.init();
+        } catch (e) {
+            console.warn('WorkloadOverlay init failed', e);
+        }
+    }
     
     console.log('🎨 SpårplanV2 loaded successfully!');
     console.log('📋 All systems initialized:');

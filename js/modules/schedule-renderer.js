@@ -232,17 +232,24 @@ function prepareTrainData() {
             let depTime = parseTimeToDate(service.scheduledDepartureTime, serviceBase);
 
             // Stitched/page-edge markers from DayStitcher (exact data beats
-            // the heuristics below).
+            // the heuristics below). Synthesized edge times are canvas
+            // artifacts, not real movements — flag them so consumers that
+            // count movements (workload aggregator) can skip them.
+            let arrSynthetic = false;
+            let depSynthetic = false;
             if (service._syntheticArrEdge && !arrTime) {
                 arrTime = new Date(serviceBase.getFullYear(), serviceBase.getMonth(), serviceBase.getDate(), 0, 0);
+                arrSynthetic = true;
             }
             if (service._depNextDay && depTime) {
                 depTime = new Date(depTime.getTime() + DAY_MS);
             } else if (service._syntheticDepFar) {
                 const hours = (window.TimeManager && window.TimeManager.timelineHours) || 30;
                 depTime = new Date(timeBase.getTime() + hours * 60 * 60 * 1000);
+                depSynthetic = true;
             } else if (service._syntheticDepEdge && !depTime) {
                 depTime = new Date(serviceBase.getTime() + DAY_MS);
+                depSynthetic = true;
             }
 
             // Render clamp: a genuine overnight/parked merge can carry a real
@@ -254,7 +261,10 @@ function prepareTrainData() {
             if (depTime && (service._depNextDay || service._syntheticDepEdge || service._syntheticDepFar)) {
                 const tlHours = (window.TimeManager && window.TimeManager.timelineHours) || 30;
                 const tlEnd = timeBase.getTime() + tlHours * 60 * 60 * 1000;
-                if (depTime.getTime() > tlEnd) depTime = new Date(tlEnd);
+                if (depTime.getTime() > tlEnd) {
+                    depTime = new Date(tlEnd);
+                    depSynthetic = true;
+                }
             }
 
             if (arrTime && depTime && depTime < arrTime) {
@@ -330,6 +340,8 @@ function prepareTrainData() {
                 arrTime: arrTime,
                 depTime: depTime,
                 dayOffset: dayOffset,
+                arrSynthetic: arrSynthetic,
+                depSynthetic: depSynthetic,
                 stitchedOvernight: !!service.stitchedOvernight,
                 origin: service.origin || '',
                 dest: service.destination || '',

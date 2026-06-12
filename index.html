@@ -84,6 +84,7 @@
     <link rel="stylesheet" href="styles/components/header-status.css">
     <link rel="stylesheet" href="styles/components/header-time-controls.css">
     <link rel="stylesheet" href="styles/components/late-arrivals-panel.css">
+    <link rel="stylesheet" href="styles/components/workload-panel.css">
     <link rel="stylesheet" href="styles/components/logo.css">
     <link rel="stylesheet" href="styles/components/notifications.css">
     <link rel="stylesheet" href="styles/components/schedule.css">
@@ -209,6 +210,15 @@
                 <button type="button" class="btn btn-secondary btn-icon" id="late-arrivals-toggle"
                     aria-label="Sen ankomst till Göteborg" title="Sen ankomst G (försenade)" aria-pressed="false">
                     <img src="assets/Icons/+3.png" alt="" class="late-arrivals-toggle-icon" width="22" height="22" decoding="async">
+                </button>
+                <button type="button" class="btn btn-secondary btn-icon" id="workload-toggle"
+                    aria-label="Belastning – rörelser per kvart" title="Belastning (ankomster + avgångar)" aria-pressed="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <line x1="4" y1="20" x2="4" y2="14"/>
+                        <line x1="9" y1="20" x2="9" y2="6"/>
+                        <line x1="14" y1="20" x2="14" y2="10"/>
+                        <line x1="19" y1="20" x2="19" y2="4"/>
+                    </svg>
                 </button>
                 <button type="button" class="btn btn-secondary btn-icon" id="onskemal-btn" aria-label="Önskemål" title="Önskemål">
                     <svg class="onskemal-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -919,6 +929,9 @@
     <script src="js/delay/visualizers/combined-visualizer.js"></script>
     <script src="js/delay/delay-integration.js"></script>
     <script src="js/components/late-arrivals-panel.js"></script>
+    <script src="js/components/workload/workload-aggregator.js"></script>
+    <script src="js/components/workload/workload-panel.js"></script>
+    <script src="js/components/workload/workload-overlay.js"></script>
     
     <!-- 7. Header & Schedule -->
     <script src="js/modules/header-controls.js"></script>
