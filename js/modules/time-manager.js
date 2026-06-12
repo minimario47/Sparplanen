@@ -115,10 +115,26 @@ class TimeManager {
   }
 
   /**
-   * Clock "now" on the schedule calendar day (real time-of-day, PDF anchor date).
+   * Clock "now" expressed on the schedule's 30h render canvas.
+   *
+   * When the real instant actually falls within the rendered window — including
+   * the 24:00–30:00 post-midnight stretch of a bundle whose anchor is
+   * "yesterday" (the service day rolls over at 06:00, see
+   * schedule-timezone-helpers) — return it verbatim so "now" lands at the
+   * correct 24:xx position. Folding it onto the anchor day here was the midnight
+   * bug: at 00:01 it collapsed "now" back to the far-left 00:01.
+   *
+   * Only when the bundle is genuinely stale (a past PDF whose canvas no longer
+   * contains the real clock, e.g. a week-old schedule) do we fold the
+   * time-of-day onto the anchor day so "now" still shows somewhere usable.
    */
   getEffectiveNow() {
-    return this.mapTimeToScheduleDate(new Date());
+    const real = new Date();
+    const bounds = this.getScheduleDayBounds();
+    if (bounds && real >= bounds.start && real < bounds.end) {
+      return real;
+    }
+    return this.mapTimeToScheduleDate(real);
   }
 
   syncViewTimeToScheduleDate() {
@@ -415,7 +431,11 @@ class TimeManager {
       strategy = 'animate'; // Visible but smooth
     }
     
-    this.viewTime = this.mapTimeToScheduleDate(targetTime);
+    // Clamp only — do NOT re-fold through mapTimeToScheduleDate. `now` already
+    // sits on the canvas (getEffectiveNow), so folding would wrap a 24:00–30:00
+    // post-midnight follow position back 24h onto the anchor day (same reason
+    // jumpToNow clamps directly).
+    this.viewTime = this.clampToScheduleDay(targetTime);
     this.saveState();
     this.notifyChange('following_update', { strategy, diffMinutes });
     

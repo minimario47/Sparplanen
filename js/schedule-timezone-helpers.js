@@ -16,27 +16,40 @@
         'söndag': 'sondag',
     };
 
-    function formatStockholmYMD() {
+    // The operational "service day" rolls over at 06:00, matching the 30-hour
+    // render canvas (00:00 anchor → 06:00 the next morning). Between 00:00 and
+    // 05:59 the trains physically at the platform — and the schedule context
+    // around "now" — still belong to the PREVIOUS calendar day's bundle, whose
+    // canvas extends through 06:00. Selecting the bundle (and judging staleness)
+    // by this shifted instant keeps the overnight tail visible and navigable
+    // instead of snapping to an empty new day the moment the clock passes 00:00.
+    const SERVICE_DAY_ROLLOVER_HOUR = 6;
+    function serviceNow() {
+        return new Date(Date.now() - SERVICE_DAY_ROLLOVER_HOUR * 60 * 60 * 1000);
+    }
+
+    function formatStockholmYMD(date) {
         return new Intl.DateTimeFormat('en-CA', {
             timeZone: 'Europe/Stockholm',
             year: 'numeric',
             month: '2-digit',
             day: '2-digit',
-        }).format(new Date());
+        }).format(date || new Date());
     }
 
-    function getStockholmSwedishDayKey() {
+    function getStockholmSwedishDayKey(date) {
         const w = new Intl.DateTimeFormat('sv-SE', {
             timeZone: 'Europe/Stockholm',
             weekday: 'long',
-        }).format(new Date());
+        }).format(date || new Date());
         const k = w.toLowerCase().trim();
         return SWE_DAY_TO_KEY[k] || 'mandag';
     }
 
-    // ISO-8601 week key (e.g. "2026-W23") for "now" in Europe/Stockholm.
-    function getStockholmIsoWeekKey() {
-        const ymd = formatStockholmYMD();
+    // ISO-8601 week key (e.g. "2026-W23") for the given instant (default now)
+    // in Europe/Stockholm.
+    function getStockholmIsoWeekKey(date) {
+        const ymd = formatStockholmYMD(date);
         const parts = ymd.split('-').map(Number);
         // Work in UTC so DST shifts can't move us across a day boundary.
         const d = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
@@ -79,8 +92,9 @@
         const qa = getQaOverride(weeks, anchors);
         if (qa) return qa;
 
-        const ymd = formatStockholmYMD();
-        const dayKey = getStockholmSwedishDayKey();
+        const ref = serviceNow();
+        const ymd = formatStockholmYMD(ref);
+        const dayKey = getStockholmSwedishDayKey(ref);
         const list = Object.keys(weeks).sort(compareWeekKeysDesc);
         for (const wk of list) {
             if (anchors && anchors[wk] && anchors[wk][dayKey] === ymd) {
@@ -129,8 +143,10 @@
                 : null;
             // Staleness: the bundle we picked is from a different ISO week than
             // the real current week (e.g. this week's PDF hasn't arrived yet).
-            // Suppressed when a QA week/day override is active.
-            const currentWeek = getStockholmIsoWeekKey();
+            // Suppressed when a QA week/day override is active. Compared on the
+            // service day (06:00 rollover) so an early-morning bundle that is
+            // correctly "yesterday's" is not mis-flagged as a week behind.
+            const currentWeek = getStockholmIsoWeekKey(serviceNow());
             const cur = parseWeekKey(currentWeek);
             const used = parseWeekKey(p.week);
             const isStale = !p.qaOverride && (used.y !== cur.y || used.w !== cur.w);
