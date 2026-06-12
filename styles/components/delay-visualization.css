@@ -291,25 +291,27 @@
    Static on purpose — must read identically under prefers-reduced-motion. */
 .cancellation-x {
     position: absolute;
-    top: -16px;
+    top: 50%;
     color: #DC143C;
-    font-size: 14px;
+    font-size: 22px;
     font-weight: 900;
     line-height: 1;
     z-index: 16;
     cursor: help;
-    text-shadow: 0 0 3px rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.95), 0 0 2px rgba(255, 255, 255, 0.95);
 }
 
-.cancellation-x--left { left: 4px; }
-.cancellation-x--right { right: 4px; }
-.cancellation-x--center { left: 50%; transform: translateX(-50%); }
+/* Sit centered ON the canceled leg's number (overlaid, partially covering it).
+   The number block is padded var(--spacing-2) from the bar edge, so the X is
+   nudged in to match. */
+.cancellation-x--left { left: var(--spacing-2); transform: translate(-50%, -50%); }
+.cancellation-x--right { right: var(--spacing-2); transform: translate(50%, -50%); }
+.cancellation-x--center { left: 50%; transform: translate(-50%, -50%); }
 
 /* Dense stacked lanes — mirror the delay-badge density tweak */
 .train-bar.density-2 .cancellation-x,
 .train-bar.density-3 .cancellation-x {
-    font-size: 11px;
-    top: -13px;
+    font-size: 16px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════

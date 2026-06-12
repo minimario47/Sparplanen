@@ -242,16 +242,21 @@ class TrainTooltip {
         // the arrival train number specifically so the status always reflects
         // arrival regardless of which side of the bar was clicked.
         const dataManager = window.delayIntegration?.dataManager;
+        const dateHint = dataManager ? dataManager.getStockholmYmd(train.dayOffset || 0) : null;
         const arrivalNum = String(train.arrivalTrainNumber || train.arrivalLabel || '').trim();
+        const departureNum = String(train.departureTrainNumber || train.departureLabel || '').trim();
         const arrivalDelay = (dataManager && arrivalNum)
-            ? dataManager.getDelayInfo(arrivalNum, 'arrival', dataManager.getStockholmYmd(train.dayOffset || 0), train.arrTime)
+            ? dataManager.getDelayInfo(arrivalNum, 'arrival', dateHint, train.arrTime)
+            : null;
+        const departureDelay = (dataManager && departureNum)
+            ? dataManager.getDelayInfo(departureNum, 'departure', dateHint, train.depTime)
             : null;
 
         const arrRow = train.arrTime
-            ? this.buildScheduleRow('Ankomst', this.formatTime(train.arrTime), train.arrTime, arrivalDelay, true)
+            ? this.buildScheduleRow('Ankomst', arrivalNum, this.formatTime(train.arrTime), train.arrTime, arrivalDelay, true)
             : '';
         const depRow = train.depTime
-            ? this.buildScheduleRow('Avgång', this.formatTime(train.depTime), train.depTime, null, false)
+            ? this.buildScheduleRow('Avgång', departureNum, this.formatTime(train.depTime), train.depTime, departureDelay, true)
             : '';
         const scheduleHTML = (arrRow || depRow)
             ? `<div class="tooltip-schedule">${arrRow}${depRow}</div>`
@@ -507,7 +512,17 @@ class TrainTooltip {
      * train is off-schedule. Red for late, green for early; cancelled/replaced
      * shown as text. Nothing extra is added when the train runs on time.
      */
-    buildScheduleRow(label, scheduledStr, baseTimeString, delayInfo, showStatus) {
+    buildScheduleRow(label, trainNum, scheduledStr, baseTimeString, delayInfo, showStatus) {
+        // Leg's own train number, "D" when the leg carries no number. A canceled
+        // (or bus-replaced) leg gets a red ✕ stacked above its number.
+        const isCanceled = !!(delayInfo && (delayInfo.isCanceled || delayInfo.isReplaced));
+        const numLabel = trainNum || 'D';
+        const numberHTML = `
+            <span class="schedule-train-number${isCanceled ? ' is-canceled' : ''}">
+                ${isCanceled ? '<span class="schedule-cancel-x" aria-hidden="true">✕</span>' : ''}
+                <span class="schedule-train-number-value">${numLabel}</span>
+            </span>`;
+
         let statusHTML = '';
         if (showStatus) {
             if (!delayInfo) {
@@ -541,7 +556,10 @@ class TrainTooltip {
         }
         return `
             <div class="schedule-item">
-                <span class="schedule-label">${label}</span>
+                <span class="schedule-label-group">
+                    <span class="schedule-label">${label}</span>
+                    ${numberHTML}
+                </span>
                 <span class="schedule-time-group">
                     <span class="schedule-time">${scheduledStr}</span>
                     ${statusHTML}

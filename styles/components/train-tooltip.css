@@ -168,6 +168,49 @@
     line-height: 24px; /* match scheduled time height so the label aligns */
 }
 
+/* Label + this leg's own train number, side by side. */
+.schedule-label-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.schedule-train-number {
+    position: relative;
+    font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--text-primary);
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: var(--surface-secondary);
+}
+
+.schedule-train-number.is-canceled {
+    color: var(--status-delayed);
+}
+
+.schedule-train-number.is-canceled .schedule-train-number-value {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+
+/* Red ✕ stacked directly above the canceled leg's number. Static on purpose —
+   reads identically under prefers-reduced-motion. */
+.schedule-cancel-x {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #DC143C;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+}
+
 .schedule-time-group {
     display: flex;
     flex-direction: column;
