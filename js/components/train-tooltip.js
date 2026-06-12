@@ -514,12 +514,11 @@ class TrainTooltip {
      */
     buildScheduleRow(label, trainNum, scheduledStr, baseTimeString, delayInfo, showStatus) {
         // Leg's own train number, "D" when the leg carries no number. A canceled
-        // (or bus-replaced) leg gets a red ✕ stacked above its number.
+        // (or bus-replaced) leg shows its number struck-through in red.
         const isCanceled = !!(delayInfo && (delayInfo.isCanceled || delayInfo.isReplaced));
         const numLabel = trainNum || 'D';
         const numberHTML = `
             <span class="schedule-train-number${isCanceled ? ' is-canceled' : ''}">
-                ${isCanceled ? '<span class="schedule-cancel-x" aria-hidden="true">✕</span>' : ''}
                 <span class="schedule-train-number-value">${numLabel}</span>
             </span>`;
 
