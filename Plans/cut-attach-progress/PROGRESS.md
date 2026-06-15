@@ -8,6 +8,8 @@ handoff file in this folder so work resumes cleanly after a context reset.
 - Execution plan (phases, decisions, reuse map): `/Users/mikailyenigun/.claude/plans/perfect-please-plan-the-purring-llama.md`
 - Memory: `cut-attach-edit-feature-design` (load-bearing decisions)
 
+**Branch:** all work lives on `feature/cut-attach-editing` (off `main`). Stay on this branch through Phase 5; do not merge to `main` until the feature is done. Phase 0 committed as `6103df48`.
+
 **Locked decisions:** (1) edits are **device-local only** (localStorage; no Firestore). (2) **No hard blocks — soft-warn only**; negative/zero-duration bars are allowed and must stay visible.
 
 | Phase | Title | Status | Handoff |
