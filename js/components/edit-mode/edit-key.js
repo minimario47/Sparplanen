@@ -9,8 +9,10 @@
  *
  * where arrPart/depPart prefer the train NUMBER ("3593@00:19"), fall back to a
  * label for numberless operation bars ("L:MVH@00:34"), and finally to time
- * only. `plannedTrackId` is the FROZEN planned track (never the live/edited
- * `trackId`) so the key stays valid across a manual re-track.
+ * only. The track AND the times are the FROZEN planned values
+ * (`plannedTrackId`/`plannedSubTrackIndex`/`plannedArrTime`/`plannedDepTime`),
+ * never the live/edited fields, so the key stays valid across a re-track OR a
+ * re-time that mutates them.
  *
  * Public API (window.EditKey):
  *   buildEditKey(train)        → string
@@ -48,8 +50,12 @@
         // planned one (falls back to live for records predating the freeze).
         const subSource = train.plannedSubTrackIndex ?? train.subTrackIndex;
         const sub = Number.isFinite(subSource) ? subSource : 0;
-        const arrPart = legPart(train.arrivalTrainNumber, train.arrivalLabel, train.arrTime);
-        const depPart = legPart(train.departureTrainNumber, train.departureLabel, train.depTime);
+        // Frozen planned times: a re-time mutates arrTime/depTime, so key off the
+        // planned ones (falls back to live for records predating the freeze).
+        const arrTimeKey = train.plannedArrTime ?? train.arrTime;
+        const depTimeKey = train.plannedDepTime ?? train.depTime;
+        const arrPart = legPart(train.arrivalTrainNumber, train.arrivalLabel, arrTimeKey);
+        const depPart = legPart(train.departureTrainNumber, train.departureLabel, depTimeKey);
         return `${week}|${day}|${track}|${sub}|${arrPart}|${depPart}`;
     }
 

@@ -348,6 +348,11 @@ function prepareTrainData() {
                 vehicleCount,
                 arrTime: arrTime,
                 depTime: depTime,
+                // Frozen planned times, parallel to plannedTrackId: the edit key
+                // embeds HH:MM, so a re-time (which mutates arrTime/depTime) would
+                // drift the key unless buildEditKey reads these frozen originals.
+                plannedArrTime: arrTime,
+                plannedDepTime: depTime,
                 dayOffset: dayOffset,
                 arrSynthetic: arrSynthetic,
                 depSynthetic: depSynthetic,
@@ -464,6 +469,8 @@ function serviceLikeToTrain(service) {
         vehicleCount,
         arrTime,
         depTime,
+        plannedArrTime: arrTime,
+        plannedDepTime: depTime,
         origin: service.origin || '',
         dest: service.destination || '',
         status: 'on-time',
@@ -650,8 +657,14 @@ function renderFullSchedule(options = {}) {
     
     const visibleTrains = window.cachedTrains.filter(train => {
         if (!train.arrTime && !train.depTime) return false;
-        const trainStart = train.arrTime || train.depTime;
-        const trainEnd = train.depTime || train.arrTime;
+        // Normalize to [earlier, later]: a manual re-time can push departure
+        // before arrival (allowed — soft-warn, decision #2). A raw arr/dep order
+        // would make the overlap test false-negative on that inverted footprint
+        // and drop the bar, but inverted bars MUST stay visible.
+        const a = train.arrTime || train.depTime;
+        const b = train.depTime || train.arrTime;
+        const trainStart = a <= b ? a : b;
+        const trainEnd = a <= b ? b : a;
         return trainStart < viewWindowEnd && trainEnd >= viewWindowStart;
     });
     

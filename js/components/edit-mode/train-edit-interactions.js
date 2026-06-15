@@ -1,23 +1,29 @@
 /**
- * Train Edit Interactions — the re-track engine (Phase 1).
+ * Train Edit Interactions — the re-track + re-time engine (Phases 1–2).
  *
  * Owns direct manipulation of a `.train-bar` while an edit session is open:
- *   • pointer drag (vertical only → change TRACK, not time) with a ghost moved
+ *   • pointer drag on the bar BODY (vertical → change TRACK) with a ghost moved
  *     by `transform` alone (never left/top — avoids the transition-storm);
- *   • click-to-select + keyboard re-track (type a track number, ↑/↓ to an
- *     adjacent track) — the WCAG 2.5.7 non-drag path;
- *   • the single shared `retrack(train, params)` entry point used by drag,
+ *   • pointer drag on an EDGE handle (horizontal → change arrival/departure
+ *     TIME); the ghost is resized in px live, snapped to 5 min on drop (Alt
+ *     bypasses snap → round to the minute);
+ *   • click-to-select + keyboard: ↑/↓ re-track to an adjacent track, ←/→ re-time
+ *     the active edge ±5 min (Shift = ±1), [ / ] pick the edge, digits jump to a
+ *     track — the WCAG 2.5.7 non-drag path;
+ *   • the single shared `retrack()` / `retime()` entry points used by drag,
  *     keyboard, AND the context-menu twin;
- *   • the live-truce toast shown on a train's first manual re-track, with a
- *     "Följ live igen" relink and a "Visa inte igen" opt-out.
+ *   • the live-truce toast shown on a train's first manual edit.
  *
- * A re-track appends a `retrack` op to the EditSession (draft) when a session is
- * open, or commits one directly to TrainEditsStore when invoked outside a
- * session (the context menu). The op-log projection does the actual move; this
- * file never mutates trains.js or the base data.
+ * An edit appends a draft op to the EditSession when a session is open, or
+ * commits one directly to TrainEditsStore when invoked outside a session (the
+ * context menu). The op-log projection does the actual move; this file never
+ * mutates trains.js or the base data. Re-time params are minute deltas from the
+ * FROZEN planned time per edge, so replays are order-independent (last-wins).
  *
  * Public API (window.EditModeInteractions):
  *   retrack(train, params, opts?)   // params:{trackId, subTrackIndex}; opts.commitNow
+ *   retime(train, params, opts?)    // params:{arrDeltaMin?, depDeltaMin?}; opts.commitNow
+ *   nudgeEdge(deltaMin, edge?)      // keyboard-style nudge of the selected train
  *   select(trainOrId)  clearSelection()  getSelectedId()
  *   followLiveAgain(train, editKey)
  */
@@ -32,6 +38,7 @@
     let drag = null;                     // active drag state
     let numBuffer = '';
     let numTimer = null;
+    let activeEdge = 'dep';              // which edge keyboard re-time targets ('arr'|'dep')
 
     // ── small helpers ────────────────────────────────────────────────────────
     function getCanvas() { return document.getElementById('timeline-canvas'); }
@@ -57,9 +64,17 @@
         const canvas = getCanvas();
         if (!canvas) return;
         canvas.querySelectorAll('.train-bar.edit-selected').forEach((el) => el.classList.remove('edit-selected'));
+        canvas.querySelectorAll('.edit-resize-handle.is-active-edge').forEach((el) => el.classList.remove('is-active-edge'));
         if (selectedId == null) return;
         const bar = canvas.querySelector(`.train-bar[data-train-id="${CSS.escape(String(selectedId))}"]`);
-        if (bar) bar.classList.add('edit-selected');
+        if (!bar) return;
+        bar.classList.add('edit-selected');
+        // Highlight the handle the keyboard nudges will move, so [ / ] gives
+        // visible feedback even before the first nudge.
+        const edge = effectiveEdge(selectedTrain(), activeEdge);
+        const handle = bar.querySelector(edge === 'arr'
+            ? '.edit-resize-handle--start' : '.edit-resize-handle--end');
+        if (handle) handle.classList.add('is-active-edge');
     }
     function select(trainOrId) {
         selectedId = (trainOrId && typeof trainOrId === 'object') ? trainOrId.id : trainOrId;
@@ -114,6 +129,94 @@
             window.TrackChangesStore.suppress(train.id);
         }
         if (!wasOverridden) maybeShowTruceToast(train, editKey);
+    }
+
+    // ── the one true re-time ─────────────────────────────────────────────────
+    // Params are minute deltas FROM THE FROZEN PLANNED time per edge (the same
+    // absolute-from-planned form the projection replays). Edits store only the
+    // edge that moved; the projection composes them (last write per edge wins).
+    function currentDeltas(train) {
+        const d = {};
+        const pArr = train.plannedArrTime || train.arrTime;
+        const pDep = train.plannedDepTime || train.depTime;
+        if (train.arrTime instanceof Date && pArr instanceof Date) {
+            d.arrDeltaMin = Math.round((train.arrTime.getTime() - pArr.getTime()) / 60000);
+        }
+        if (train.depTime instanceof Date && pDep instanceof Date) {
+            d.depDeltaMin = Math.round((train.depTime.getTime() - pDep.getTime()) / 60000);
+        }
+        return d;
+    }
+
+    function retime(train, params, opts) {
+        opts = opts || {};
+        if (!train || !window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return;
+        const editKey = window.EditKey.buildEditKey(train);
+        if (!editKey) return;
+
+        const p = {};
+        if (Number.isFinite(params.arrDeltaMin)) p.arrDeltaMin = params.arrDeltaMin;
+        if (Number.isFinite(params.depDeltaMin)) p.depDeltaMin = params.depDeltaMin;
+        if (p.arrDeltaMin == null && p.depDeltaMin == null) return;
+
+        const wasOverridden = train.manualOverride === true;
+        const op = { op: 'retime', editKey, params: p, before: currentDeltas(train) };
+
+        const session = window.EditSession;
+        if (session && session.active && !opts.commitNow) {
+            session.addOp(op);
+        } else if (window.TrainEditsStore && typeof window.TrainEditsStore.addMany === 'function') {
+            const sel = window.currentScheduleSelection || {};
+            const scope = { week: sel.week || null, day: sel.day || null, anchorStr: sel.anchorStr || null };
+            window.TrainEditsStore.addMany([{ ...op, scope }]);
+        } else {
+            return;
+        }
+
+        if (train.id != null && window.TrackChangesStore && typeof window.TrackChangesStore.suppress === 'function') {
+            window.TrackChangesStore.suppress(train.id);
+        }
+        if (!wasOverridden) maybeShowTruceToast(train, editKey);
+    }
+
+    // Move one edge to an absolute wall-clock time (from a drop) → delta-from-
+    // planned, with a no-op guard so re-dropping at the same minute logs nothing.
+    function retimeEdgeAbsolute(train, edge, newAbs) {
+        if (!train || !(newAbs instanceof Date)) return;
+        const planned = edge === 'arr'
+            ? (train.plannedArrTime || train.arrTime)
+            : (train.plannedDepTime || train.depTime);
+        if (!(planned instanceof Date)) return;
+        const newDelta = Math.round((newAbs.getTime() - planned.getTime()) / 60000);
+        const cur = currentDeltas(train);
+        const curDelta = (edge === 'arr' ? cur.arrDeltaMin : cur.depDeltaMin) || 0;
+        if (newDelta === curDelta) return; // no-op
+        retime(train, edge === 'arr' ? { arrDeltaMin: newDelta } : { depDeltaMin: newDelta });
+    }
+
+    // Which edge a keyboard nudge targets: the requested one if it exists on this
+    // train, else fall back to whichever edge the bar actually has.
+    function effectiveEdge(train, requested) {
+        const want = requested || activeEdge;
+        const hasArr = train && train.arrTime instanceof Date;
+        const hasDep = train && train.depTime instanceof Date;
+        if (want === 'arr' && hasArr) return 'arr';
+        if (want === 'dep' && hasDep) return 'dep';
+        return hasDep ? 'dep' : 'arr';
+    }
+
+    function nudgeEdge(deltaMin, requestedEdge) {
+        const train = selectedTrain();
+        if (!train) return;
+        const edge = effectiveEdge(train, requestedEdge);
+        const cur = edge === 'arr' ? train.arrTime : train.depTime;
+        if (!(cur instanceof Date)) return;
+        retimeEdgeAbsolute(train, edge, new Date(cur.getTime() + deltaMin * 60000));
+    }
+
+    function roundToMinute(date) {
+        if (!(date instanceof Date)) return date;
+        return new Date(Math.round(date.getTime() / 60000) * 60000);
     }
 
     // ── live-truce toast ─────────────────────────────────────────────────────
@@ -195,8 +298,18 @@
         const train = trainFromBar(bar);
         if (!train) return;
         e.stopPropagation(); // claim the gesture from the normal bar click/tooltip
-        drag = { train, bar, ghost: null, startY: e.clientY, startX: e.clientX,
-                 moved: false, lastDy: 0, raf: 0, pointerId: e.pointerId, capture: canvas };
+        // An edge handle → horizontal re-time of that edge; the bar body →
+        // vertical re-track. Capture the bar's pixel geometry so an edge drag can
+        // resize the ghost live without recomputing it from times every frame.
+        const handle = e.target.closest && e.target.closest('.edit-resize-handle');
+        const mode = handle
+            ? (handle.classList.contains('edit-resize-handle--end') ? 'dep' : 'arr')
+            : 'track';
+        drag = { mode, train, bar, ghost: null, startY: e.clientY, startX: e.clientX,
+                 moved: false, lastDy: 0, lastDx: 0, raf: 0, alt: e.altKey,
+                 baseLeft: parseFloat(bar.style.left) || 0,
+                 baseWidth: parseFloat(bar.style.width) || 0,
+                 pointerId: e.pointerId, capture: canvas };
         // Capture the pointer so move/up land here and, crucially, so the other
         // bars stop firing hover/tooltip work for the duration of the drag.
         try { canvas.setPointerCapture(e.pointerId); } catch (_) { /* ignore */ }
@@ -219,18 +332,36 @@
 
     function paintGhost() {
         drag.raf = 0;
-        if (drag && drag.ghost) drag.ghost.style.transform = `translateY(${drag.lastDy}px)`;
+        if (!drag || !drag.ghost) return;
+        if (drag.mode === 'track') {
+            // Vertical only: a re-track changes track, never time.
+            drag.ghost.style.transform = `translateY(${drag.lastDy}px)`;
+            return;
+        }
+        // Edge re-time: resize the ghost horizontally. The left edge moves both
+        // left & width; the right edge moves width only. No hard clamp on the
+        // committed time (decision #2) — only floor the ghost's *visual* width so
+        // an inverted drag still shows a thin stub instead of vanishing.
+        let left = drag.baseLeft;
+        let width = drag.baseWidth;
+        if (drag.mode === 'arr') { left = drag.baseLeft + drag.lastDx; width = drag.baseWidth - drag.lastDx; }
+        else { width = drag.baseWidth + drag.lastDx; }
+        if (width < 2) { if (drag.mode === 'arr') left = drag.baseLeft + drag.baseWidth - 2; width = 2; }
+        drag.ghost.style.left = `${left}px`;
+        drag.ghost.style.width = `${width}px`;
     }
 
     function onPointerMove(e) {
         if (!drag) return;
+        drag.alt = e.altKey;                 // Alt (held at drop) bypasses snap
         const dy = e.clientY - drag.startY;
         const dx = e.clientX - drag.startX;
         if (!drag.moved && Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
         if (!drag.moved) { drag.moved = true; startGhost(); }
-        // Vertical only: a re-track changes track, never time. Batch the write to
-        // one per frame so a flurry of pointermove events can't thrash the layout.
+        // Batch the write to one per frame so a flurry of pointermove events can't
+        // thrash the layout.
         drag.lastDy = dy;
+        drag.lastDx = dx;
         if (!drag.raf) drag.raf = requestAnimationFrame(paintGhost);
     }
 
@@ -252,18 +383,29 @@
         endDrag();
         if (!d.moved) {                       // a click → select for keyboard editing
             select(d.train);
+            if (d.mode !== 'track') { activeEdge = d.mode; paintSelection(); }
             drag = null;
             return;
-        }
-        let target = null;
-        if (window.GridCoords && typeof window.GridCoords.fromEvent === 'function') {
-            target = window.GridCoords.fromEvent(e);
         }
         if (d.ghost && d.ghost.parentNode) d.ghost.parentNode.removeChild(d.ghost);
         d.bar.classList.remove('edit-dragging'); // restores the bar if we snap back
         drag = null;
-        if (target && Number.isFinite(Number(target.trackId))) {
-            retrack(d.train, { trackId: target.trackId, subTrackIndex: target.subTrackIndex || 0 });
+        const coords = (window.GridCoords && typeof window.GridCoords.fromEvent === 'function')
+            ? window.GridCoords.fromEvent(e) : null;
+        if (d.mode === 'track') {
+            if (coords && Number.isFinite(Number(coords.trackId))) {
+                retrack(d.train, { trackId: coords.trackId, subTrackIndex: coords.subTrackIndex || 0 });
+                select(d.train);
+            }
+            return;
+        }
+        // Edge re-time: drop x → new edge time. Alt bypasses the 5-min snap.
+        if (coords && coords.time instanceof Date) {
+            const newTime = d.alt
+                ? roundToMinute(coords.time)
+                : (coords.snappedTime instanceof Date ? coords.snappedTime : window.GridCoords.snapTime(coords.time));
+            retimeEdgeAbsolute(d.train, d.mode, newTime);
+            activeEdge = d.mode;
             select(d.train);
         }
     }
@@ -316,6 +458,12 @@
         }
         if (e.key === 'ArrowUp') { e.preventDefault(); nudgeTrack(-1); return; }
         if (e.key === 'ArrowDown') { e.preventDefault(); nudgeTrack(1); return; }
+        // Re-time the active edge: ←/→ = ±5 min, Shift+←/→ = ±1 min.
+        if (e.key === 'ArrowLeft') { e.preventDefault(); nudgeEdge(e.shiftKey ? -1 : -5); return; }
+        if (e.key === 'ArrowRight') { e.preventDefault(); nudgeEdge(e.shiftKey ? 1 : 5); return; }
+        // [ / ] pick which edge (arrival / departure) the nudges target.
+        if (e.key === '[') { e.preventDefault(); activeEdge = 'arr'; paintSelection(); return; }
+        if (e.key === ']') { e.preventDefault(); activeEdge = 'dep'; paintSelection(); return; }
     }
 
     // ── wiring ───────────────────────────────────────────────────────────────
@@ -347,5 +495,5 @@
         init();
     }
 
-    window.EditModeInteractions = { retrack, select, clearSelection, getSelectedId, followLiveAgain };
+    window.EditModeInteractions = { retrack, retime, nudgeEdge, select, clearSelection, getSelectedId, followLiveAgain };
 })();

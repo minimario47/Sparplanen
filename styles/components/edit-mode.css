@@ -165,6 +165,61 @@ body.is-editing .train-bar.edit-dragging { opacity: 0.3; }
 body.is-editing .train-bar { cursor: grab; }
 body.is-editing .train-bar.edit-dragging { cursor: grabbing; }
 
+/* ───────────── Re-time edge handles (Phase 2) ─────────────
+   Two grab zones at the bar's left (arrival) and right (departure) edges, only
+   present while editing (injected by the decorator). The bar is overflow:visible
+   so the zones can sit slightly outside the bar for easier targeting. */
+.edit-resize-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    z-index: 26;
+    cursor: ew-resize;
+    touch-action: none; /* claim touch drags from the scroller */
+}
+.edit-resize-handle--start { left: -4px; }
+.edit-resize-handle--end { right: -4px; }
+/* Visible grip — hidden until the bar is hovered or selected so the board stays
+   clean, but always grabbable. The active (keyboard-targeted) edge stays lit. */
+.edit-resize-handle::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    bottom: 15%;
+    width: 3px;
+    border-radius: 2px;
+    background: var(--primary-600, #2563eb);
+    opacity: 0;
+}
+.edit-resize-handle--start::after { left: 4px; }
+.edit-resize-handle--end::after { right: 4px; }
+body.is-editing .train-bar:hover .edit-resize-handle::after,
+body.is-editing .train-bar.edit-selected .edit-resize-handle::after { opacity: 0.85; }
+.edit-resize-handle.is-active-edge::after {
+    opacity: 1;
+    width: 4px;
+    background: var(--primary-700, #1d4ed8);
+    box-shadow: 0 0 0 1px var(--surface-base, #fff);
+}
+
+/* Inverted-duration warn chip: departure at/before arrival (allowed, soft-warn).
+   Sits top-left, distinct from the top-right live chip. */
+.train-bar__warn-chip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-35%, -35%);
+    font-size: 10px;
+    line-height: 1;
+    padding: 1px 3px;
+    border-radius: 6px;
+    background: var(--warning-600, #d97706);
+    color: #fff;
+    pointer-events: none;
+    z-index: 30;
+}
+
 /* Live-disagreement chip: live feed reports a different track than the manual
    placement. Sits top-right of the bar, non-interactive. */
 .train-bar__live-chip {

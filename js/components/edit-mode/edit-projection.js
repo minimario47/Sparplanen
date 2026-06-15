@@ -12,7 +12,7 @@
  * never auto-applied to a wrong/ambiguous bar.
  *
  * Transforms are pure mutations of a single projected train object. New op
- * types register a case here per phase. Phase 0 ships `retrack`.
+ * types register a case here per phase. Phase 1 ships `retrack`; Phase 2 `retime`.
  *
  * Public API:
  *   window.applyTrainEdits(trains) → trains (mutated in place)
@@ -32,6 +32,31 @@
             // A manual placement is a single, deliberate track — drop any live
             // split visual so the bar doesn't render torn across two tracks.
             if (train.splitTracks) train.splitTracks = null;
+        },
+
+        // Re-time: shift arrival and/or departure. Params carry a delta in
+        // MINUTES FROM THE FROZEN PLANNED time per edge, so replaying is
+        // order-independent and last-write-wins (each op is absolute-from-planned,
+        // not incremental). Reassigning to a fresh Date — never mutating in place —
+        // keeps plannedArrTime/plannedDepTime (the edit-key source) intact. Date
+        // arithmetic crosses midnight naturally, so a time pushed past the 06:00
+        // service-day edge lands at the right wall-clock position on the canvas.
+        retime(train, params) {
+            const pArr = train.plannedArrTime || train.arrTime;
+            const pDep = train.plannedDepTime || train.depTime;
+            if (params.arrDeltaMin != null && pArr instanceof Date) {
+                train.arrTime = new Date(pArr.getTime() + params.arrDeltaMin * 60000);
+            }
+            if (params.depDeltaMin != null && pDep instanceof Date) {
+                train.depTime = new Date(pDep.getTime() + params.depDeltaMin * 60000);
+            }
+            // Soft-warn only (locked decision #2): a departure at/ before arrival
+            // is allowed and must stay visible — flag it so the decorator can hatch
+            // it and chip a warning. Never block, never clamp the time.
+            if (train.arrTime instanceof Date && train.depTime instanceof Date
+                && train.depTime.getTime() <= train.arrTime.getTime()) {
+                train._inverted = true;
+            }
         }
     };
 
