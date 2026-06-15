@@ -92,7 +92,6 @@
             <div class="late-arrivals-panel__header" data-drag-handle>
                 <div class="late-arrivals-panel__title-wrap">
                     <h2 class="late-arrivals-panel__title">Sen ankomst</h2>
-                    <span class="late-arrivals-panel__subtitle">Göteborg C · signatur G · ankomster</span>
                 </div>
                 <button type="button" class="late-arrivals-panel__close" aria-label="Stäng panel" title="Stäng">×</button>
             </div>
@@ -103,7 +102,6 @@
                 <span style="font-size:var(--font-size-xs);color:var(--text-secondary)">min</span>
             </div>
             <div class="late-arrivals-panel__list" id="late-arrivals-list"></div>
-            <div class="late-arrivals-panel__footer">Uppdateras med förseningsdata · rader döljs 1 min efter faktisk ankomst, annars 1 min efter beräknad tid, annars 2 min efter plan + försening om G saknar avläsning</div>
         `;
         document.body.appendChild(el);
         return el;
