@@ -1,0 +1,146 @@
+/* Edit Mode — pen-toggle bounded editing chrome + bar state language.
+   The palette and action bar are hidden until body.is-editing. All affordances
+   have a static, fully-visible end-state; motion is opt-in only (the user's
+   work machines run prefers-reduced-motion). */
+
+/* ───────────── Pen toggle (header) ───────────── */
+.edit-mode-toggle.is-active {
+    background: var(--primary-600, #2563eb);
+    color: var(--text-inverse, #fff);
+    border-color: var(--primary-700, #1d4ed8);
+}
+
+/* ───────────── Tool palette (left dock) ───────────── */
+.edit-palette {
+    position: fixed;
+    top: calc(var(--header-height, 70px) + 12px);
+    left: 12px;
+    z-index: 1200;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px;
+    background: var(--surface-raised, var(--surface-base, #fff));
+    border: 1px solid var(--border-DEFAULT, rgba(0, 0, 0, 0.14));
+    border-radius: var(--radius-lg, 8px);
+    box-shadow: var(--shadow-md, 0 4px 12px rgba(0, 0, 0, 0.12));
+}
+body.is-editing .edit-palette { display: flex; }
+
+.edit-palette__tool {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 152px;
+    padding: 7px 9px;
+    border: 0;
+    border-radius: var(--radius-DEFAULT, 6px);
+    background: transparent;
+    color: var(--text-secondary, #555);
+    font-size: var(--font-size-xs, 12px);
+    text-align: left;
+    cursor: pointer;
+}
+.edit-palette__tool:hover:not(:disabled) { background: var(--neutral-100, rgba(0, 0, 0, 0.05)); }
+.edit-palette__tool:disabled { opacity: 0.4; cursor: not-allowed; }
+.edit-palette__tool.is-active {
+    background: var(--primary-50, #eff6ff);
+    color: var(--primary-700, #1d4ed8);
+}
+.edit-palette__icon { display: inline-flex; flex: 0 0 auto; }
+.edit-palette__label { flex: 1 1 auto; }
+.edit-palette__key {
+    flex: 0 0 auto;
+    font-size: var(--font-size-2xs, 10px);
+    color: var(--text-tertiary, #999);
+}
+
+/* ───────────── Action bar (bottom) ───────────── */
+.edit-action-bar {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    z-index: 1200;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    min-width: 360px;
+    background: var(--surface-raised, var(--surface-base, #fff));
+    border: 1px solid var(--border-DEFAULT, rgba(0, 0, 0, 0.14));
+    border-radius: var(--radius-lg, 8px);
+    box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.16));
+}
+body.is-editing .edit-action-bar { display: flex; }
+
+.edit-action-bar__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--font-size-sm, 14px);
+    color: var(--text-primary, #1a1a1a);
+    white-space: nowrap;
+}
+.edit-action-bar__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--danger-500, #ef4444);
+}
+.edit-action-bar__spacer { flex: 1 1 auto; }
+.edit-action-bar__btn {
+    padding: 6px 12px;
+    border: 1px solid var(--border-DEFAULT, rgba(0, 0, 0, 0.14));
+    border-radius: var(--radius-DEFAULT, 6px);
+    background: transparent;
+    color: var(--text-secondary, #555);
+    font-size: var(--font-size-xs, 12px);
+    cursor: pointer;
+}
+.edit-action-bar__btn:hover:not(:disabled) { background: var(--neutral-100, rgba(0, 0, 0, 0.05)); }
+.edit-action-bar__btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.edit-action-bar__btn--primary {
+    background: var(--primary-600, #2563eb);
+    border-color: var(--primary-700, #1d4ed8);
+    color: var(--text-inverse, #fff);
+}
+.edit-action-bar__btn--primary:hover:not(:disabled) { background: var(--primary-700, #1d4ed8); }
+
+/* ───────────── Bar state language (applied in later phases) ───────────── */
+/* Draft = uncommitted this session: dashed outline + corner glyph. */
+body.is-editing .train-bar.is-draft {
+    outline: 2px dashed var(--primary-600, #2563eb);
+    outline-offset: -2px;
+}
+/* Committed manual edit: persistent left accent rail. */
+.train-bar.is-edited {
+    box-shadow: inset 3px 0 0 0 var(--primary-600, #2563eb);
+}
+/* Conflict: red outline on both offending bars. */
+.train-bar.is-conflict {
+    outline: 2px solid var(--danger-500, #ef4444);
+    outline-offset: -2px;
+}
+/* Inverted/zero-duration cut or re-time: warn hatch so the clamped stub reads
+   as intentional, not a glitch (negative durations are allowed — soft-warn). */
+.train-bar.is-inverted {
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent 0 4px,
+        var(--warning-500, #f59e0b) 4px 6px
+    );
+    outline: 1.5px solid var(--warning-600, #d97706);
+    outline-offset: -1.5px;
+}
+
+/* During editing, dim live-data overlays so the draft dominates. */
+body.is-editing #track-changes-layer { opacity: 0.4; }
+
+/* Motion is opt-in only. */
+@media (prefers-reduced-motion: no-preference) {
+    .edit-palette,
+    .edit-action-bar {
+        transition: opacity var(--transition-fast, 120ms ease);
+    }
+}

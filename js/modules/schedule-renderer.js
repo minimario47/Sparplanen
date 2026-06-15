@@ -72,6 +72,12 @@ function initializeSchedule() {
     window.addEventListener('user-closures-changed', () => {
         renderFullSchedule();
     });
+    // Manual edits (committed store changes + active session draft changes)
+    // funnel through here so the projection re-applies on every change.
+    window.addEventListener('train-edits-changed', () => {
+        prepareTrainData();
+        renderFullSchedule();
+    });
     
     if (window.__DEBUG_SCHEDULE_RENDER) {
         console.log('✅ Schedule initialized:', cachedTrains.length, 'trains');
@@ -361,6 +367,14 @@ function prepareTrainData() {
         : [];
 
     const mergedTrains = trainData.concat(userTrains.map(serviceLikeToTrain).filter(Boolean));
+
+    // Overlay manual board edits (re-track/re-time/cut/…) onto the projected
+    // copy only — base data + trains.js stay read-only. Replays the op log
+    // (committed + active draft) keyed by stable editKey. See edit-projection.js.
+    if (typeof window.applyTrainEdits === 'function') {
+        window.applyTrainEdits(mergedTrains);
+    }
+
     assignConnectionGroups(mergedTrains);
 
     window.cachedTrains = mergedTrains;
