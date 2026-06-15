@@ -9,7 +9,9 @@ Reads ``ingest-manifest.json`` and writes root ``trains.js`` + ``closures.js`` w
 
 from __future__ import annotations
 
+import hashlib
 import json
+import re
 import sys
 from collections import defaultdict
 from datetime import date
@@ -19,6 +21,26 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 TRAINS_JS = ROOT / "trains.js"
 CLOSURES_JS = ROOT / "closures.js"
+INDEX_HTML = ROOT / "index.html"
+DATA_VERSION_JSON = ROOT / "data-version.json"
+
+
+def _bump_index_cache_busters(build_id: str) -> None:
+    """Rewrite ``?v=<build_id>`` onto the trains.js / closures.js <script> tags in
+    index.html so a browser reload is forced to re-download the data (a stale
+    cached copy would otherwise survive a normal refresh — see
+    js/modules/schedule-update-checker.js). Idempotent; leaves the file
+    untouched when the token already matches."""
+    if not INDEX_HTML.is_file():
+        return
+    html = INDEX_HTML.read_text(encoding="utf-8")
+    original = html
+    for name in ("trains.js", "closures.js"):
+        # Matches  src="trains.js"  or  src="trains.js?v=anything"
+        pattern = re.compile(r'(src="' + re.escape(name) + r')(\?v=[^"]*)?"')
+        html = pattern.sub(r'\1?v=' + build_id + '"', html)
+    if html != original:
+        INDEX_HTML.write_text(html, encoding="utf-8")
 
 DAY_ORDER = {
     "mandag": 1,
@@ -180,20 +202,34 @@ def main() -> int:
                 legacy_clo = c[d]  # type: ignore[assignment]
                 break
 
+    weeks_json = json.dumps(by_week, ensure_ascii=False, indent=2)
+    clo_json = json.dumps(by_clo, ensure_ascii=False, indent=2)
+    anchors_json = json.dumps(anchors, ensure_ascii=False, indent=2)
+    legacy_json = json.dumps(legacy_trains, ensure_ascii=False, indent=2)
+
+    # Content version: a short hash over the actual data payload. It changes iff
+    # the schedule data changes, so it is deterministic (a no-op re-run produces
+    # a byte-identical trains.js) yet bumps the moment a new week lands. Used to
+    # cache-bust the data URLs and to signal open tabs that newer data is live.
+    build_id = hashlib.sha1(
+        (weeks_json + clo_json + anchors_json).encode("utf-8")
+    ).hexdigest()[:12]
+
     lines = [
         "// Auto-generated — DO NOT EDIT MANUALLY (week bundle from ingest_incoming + emit_week_bundle)\n"
         "// Generated from TrainData/incoming PDFs.\n"
+        'window.SPARPLANEN_BUILD = "' + build_id + '";\n'
         "window.SPARPLANEN_WEEKS = "
-        + json.dumps(by_week, ensure_ascii=False, indent=2)
+        + weeks_json
         + ";\n"
         "window.SPARPLANEN_CLOSURES_WEEKS = "
-        + json.dumps(by_clo, ensure_ascii=False, indent=2)
+        + clo_json
         + ";\n"
         "window.SPARPLANEN_ANCHORS = "
-        + json.dumps(anchors, ensure_ascii=False, indent=2)
+        + anchors_json
         + ";\n"
         "const initialServiceData = "
-        + json.dumps(legacy_trains, ensure_ascii=False, indent=2)
+        + legacy_json
         + ";\n"
         "window.initialServiceData = initialServiceData;\n"
     ]
@@ -207,7 +243,21 @@ def main() -> int:
         "window.initialTrackClosures = initialTrackClosures;\n"
     ]
     CLOSURES_JS.write_text("".join(c_lines), encoding="utf-8")
-    print(f"Wrote {TRAINS_JS.name} and {CLOSURES_JS.name}")
+
+    # Always-fresh manifest the running app polls (fetched no-store) to learn
+    # whether a newer build is deployed than the one it loaded. Kept minimal and
+    # deterministic so a no-op re-run leaves it byte-identical.
+    DATA_VERSION_JSON.write_text(
+        json.dumps({"build": build_id, "primaryWeek": primary}, ensure_ascii=False, indent=2)
+        + "\n",
+        encoding="utf-8",
+    )
+
+    # Point index.html at trains.js?v=<build_id> / closures.js?v=<build_id> so a
+    # plain browser refresh re-downloads the data instead of reusing a stale cache.
+    _bump_index_cache_busters(build_id)
+
+    print(f"Wrote {TRAINS_JS.name} and {CLOSURES_JS.name} (build {build_id})")
     return 0
 
 

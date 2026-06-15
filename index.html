@@ -89,6 +89,7 @@
     <link rel="stylesheet" href="styles/components/notifications.css">
     <link rel="stylesheet" href="styles/components/schedule.css">
     <link rel="stylesheet" href="styles/components/schedule-staleness-banner.css">
+    <link rel="stylesheet" href="styles/components/schedule-update-banner.css">
     <link rel="stylesheet" href="styles/components/inactive-region.css">
     <link rel="stylesheet" href="styles/components/search-highlights.css">
     <link rel="stylesheet" href="styles/components/search-inline.css">
@@ -118,8 +119,10 @@
     <!-- Data Files -->
     <script src="vehicleTypes.js"></script>
     <script src="tracks.js"></script>
-    <script src="trains.js"></script>
-    <script src="closures.js"></script>
+    <!-- ?v= is rewritten per data build by emit_week_bundle.py so a plain
+         refresh re-downloads new schedule data instead of reusing a stale cache. -->
+    <script src="trains.js?v=5881bc5b7057"></script>
+    <script src="closures.js?v=5881bc5b7057"></script>
     <script src="js/schedule-timezone-helpers.js"></script>
     
 </head>
@@ -946,6 +949,7 @@
     <script src="js/modules/day-boundary-renderer.js"></script>
     <script src="js/modules/schedule-renderer.js"></script>
     <script src="js/modules/schedule-staleness-banner.js"></script>
+    <script src="js/modules/schedule-update-checker.js"></script>
 
     <!-- 8. Main app -->
     <script src="js/app.js"></script>
