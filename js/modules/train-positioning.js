@@ -103,8 +103,14 @@ window.TrainPositioning = {
         for (const train of order) {
             const { start, end } = this.getTimeRange(train);
             const span = this.getVehicleSpan(train);
+            // A manual time-split's two halves (shared `_splitSibling`) are ONE
+            // logical occupancy — never let one steal a separate lane from the
+            // other. (Clean cuts are consecutive and wouldn't overlap anyway;
+            // this also covers a delay/edit that nudges them into a touch.)
             const active = (start && end)
-                ? placed.filter((p) => p.start && p.end && p.start < end && start < p.end)
+                ? placed.filter((p) => p.start && p.end && p.start < end && start < p.end
+                    && !(train._splitSibling && p.train._splitSibling
+                        && train._splitSibling === p.train._splitSibling))
                 : [];
             const laneIsFree = (lane) =>
                 !active.some((p) => lane < p.lane + p.span && p.lane < lane + span);

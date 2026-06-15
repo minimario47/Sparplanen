@@ -169,9 +169,15 @@ class ConflictDetector {
         allTrains.forEach(otherTrain => {
             // Skip self
             if (otherTrain.id === train.id) return;
-            
+
             // Skip if not on same track
             if (otherTrain.trackId !== train.trackId) return;
+
+            // Skip a manual time-split's own two halves: they share a
+            // `_splitSibling` id and are ONE logical occupancy (they touch at the
+            // cut boundary; a delay shift must not flag them as a self-conflict).
+            if (train._splitSibling && otherTrain._splitSibling
+                && train._splitSibling === otherTrain._splitSibling) return;
 
             const trainLaneStart = parseInt(train.subTrackIndex, 10);
             const otherLaneStart = parseInt(otherTrain.subTrackIndex, 10);

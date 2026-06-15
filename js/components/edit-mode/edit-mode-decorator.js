@@ -39,9 +39,13 @@
 
     // Re-time handles only exist while editing; they're rebuilt each render so
     // they track the bar's current left/width without any geometry math here.
+    // Cut-derived records (a split half / loose departure / severed stub) are
+    // NOT re-timeable yet — their editKey doesn't resolve to a base record — so
+    // they get no handles.
     function syncHandles(bar, train) {
         bar.querySelectorAll(`.${HANDLE_CLASS}`).forEach((el) => el.remove());
         if (!isEditing()) return;
+        if (train.editDerived || train._cutLooseDeparture || train._cutSevered) return;
         if (train.arrTime instanceof Date) bar.appendChild(makeHandle('start'));
         if (train.depTime instanceof Date) bar.appendChild(makeHandle('end'));
     }
@@ -54,6 +58,15 @@
         bar.classList.toggle('is-edited', train._edited === true);
         bar.classList.toggle('is-draft', train._draft === true);
         bar.classList.toggle('is-inverted', train._inverted === true);
+
+        // Manual cut seam (tinted distinctly from the live-API split tear). A
+        // time-split half carries the seam on its synthetic-boundary edge.
+        bar.classList.toggle('is-edit-cut', train.editDerived === true);
+        if (train.editDerived === true) {
+            bar.dataset.cutSeam = train.depSynthetic ? 'right' : (train.arrSynthetic ? 'left' : 'none');
+        } else {
+            bar.removeAttribute('data-cut-seam');
+        }
 
         // Inverted-duration warn chip (soft-warn only — the bar stays visible).
         const warn = bar.querySelector(`.${WARN_CHIP_CLASS}`);

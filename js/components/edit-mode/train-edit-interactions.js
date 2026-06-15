@@ -91,6 +91,9 @@
     function retrack(train, params, opts) {
         opts = opts || {};
         if (!train || !window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return;
+        // Cut products are read-only until Phase 4 — their editKey is built from
+        // blanked fields and won't survive removal of the cut op (see phase-3 #1).
+        if (isCutDerived(train)) return;
         const editKey = window.EditKey.buildEditKey(train);
         if (!editKey) return;
 
@@ -151,6 +154,7 @@
     function retime(train, params, opts) {
         opts = opts || {};
         if (!train || !window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return;
+        if (isCutDerived(train)) return;   // cut products read-only until Phase 4
         const editKey = window.EditKey.buildEditKey(train);
         if (!editKey) return;
 
@@ -217,6 +221,132 @@
     function roundToMinute(date) {
         if (!(date instanceof Date)) return date;
         return new Date(Math.round(date.getTime() / 60000) * 60000);
+    }
+
+    // ── the one true cut ─────────────────────────────────────────────────────
+    const MIN_SPLIT_DWELL_MS = 10 * 60000;   // room for two visible halves
+
+    function notify(msg) {
+        if (typeof window.showNotification === 'function') {
+            try { window.showNotification(msg); return; } catch (_) { /* fall through */ }
+        }
+        console.warn('[edit-cut]', msg);
+    }
+
+    // A cut product (split half / loose departure / severed stub) is read-only:
+    // its editKey is built from blanked/mutated fields and won't resolve to a base
+    // record, so any retrack/retime/cut on it would silently fail. Until Phase 4
+    // teaches ops to target the original-through-bar + a segment, these select only.
+    function isCutDerived(train) {
+        return !!(train && (train.editDerived || train._cutLooseDeparture || train._cutSevered));
+    }
+
+    // Scissors is allowed only on a real through bar — never on a synthetic
+    // canvas edge, a page fragment, a single-ended bar, or an inverted dwell.
+    function canCut(train) {
+        if (!train) return false;
+        if (train.movementKind !== 'through') return false;
+        if (train.arrSynthetic || train.depSynthetic) return false;
+        if (train.continuesFromPrevPage || train.continuesToNextPage) return false;
+        // Stitched-overnight bars span two day-records under a volatile d1- runtime
+        // id; cutting one needs to persist against both underlying records (design
+        // §8). Until that's built, refuse rather than risk a mis-keyed edit.
+        if (train.stitchedOvernight) return false;
+        if (!(train.arrTime instanceof Date) || !(train.depTime instanceof Date)) return false;
+        if (train.depTime.getTime() <= train.arrTime.getTime()) return false;
+        return true;
+    }
+
+    function cutRefusalReason(train) {
+        if (!train) return null;
+        if (train.arrSynthetic || train.depSynthetic) return 'Syntetisk kant — kan inte klippas.';
+        if (train.continuesFromPrevPage || train.continuesToNextPage) return 'Sidkant — kan inte klippas.';
+        if (train.stitchedOvernight) return 'Nattstitchad stapel — klippning stöds inte än.';
+        if (train.movementKind !== 'through') return 'Bara genomgående tåg kan klippas.';
+        return 'Den här stapeln kan inte klippas.';
+    }
+
+    // The cut VARIANT is inferred from where on the bar (in TIME, never pixels —
+    // edge-clamped bars lie) the cut lands: middle third = time-split, the
+    // left/right thirds = sever the turn.
+    function cutZone(train, cutTime) {
+        if (!(cutTime instanceof Date) || !(train.arrTime instanceof Date) || !(train.depTime instanceof Date)) return 'sever';
+        const a = train.arrTime.getTime();
+        const d = train.depTime.getTime();
+        if (d <= a) return 'sever';
+        const f = (cutTime.getTime() - a) / (d - a);
+        return (f > 1 / 3 && f < 2 / 3) ? 'split' : 'sever';
+    }
+
+    function cut(train, params, opts) {
+        opts = opts || {};
+        params = params || {};
+        if (!train || !window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return false;
+        if (!canCut(train)) { notify(cutRefusalReason(train)); return false; }
+
+        const variant = params.variant === 'split' ? 'split' : 'sever';
+        const p = { variant };
+        if (variant === 'split') {
+            if (train.depTime.getTime() - train.arrTime.getTime() < MIN_SPLIT_DWELL_MS) {
+                notify('Uppehållet är för kort för att delas (minst 10 min).');
+                return false;
+            }
+            const pArr = train.plannedArrTime instanceof Date ? train.plannedArrTime : train.arrTime;
+            if (Number.isFinite(params.cutOffsetMin)) p.cutOffsetMin = params.cutOffsetMin;
+            else if (params.cutTime instanceof Date) p.cutOffsetMin = Math.round((params.cutTime.getTime() - pArr.getTime()) / 60000);
+        }
+
+        const editKey = window.EditKey.buildEditKey(train);
+        if (!editKey) return false;
+        const wasOverridden = train.manualOverride === true;
+        const op = { op: 'cut', editKey, params: p, before: {} };
+
+        const session = window.EditSession;
+        if (session && session.active && !opts.commitNow) {
+            session.addOp(op);
+        } else if (window.TrainEditsStore && typeof window.TrainEditsStore.addMany === 'function') {
+            const sel = window.currentScheduleSelection || {};
+            const scope = { week: sel.week || null, day: sel.day || null, anchorStr: sel.anchorStr || null };
+            window.TrainEditsStore.addMany([{ ...op, scope }]);
+        } else {
+            return false;
+        }
+
+        if (train.id != null && window.TrackChangesStore && typeof window.TrackChangesStore.suppress === 'function') {
+            window.TrackChangesStore.suppress(train.id);
+        }
+        if (!wasOverridden) maybeShowTruceToast(train, editKey);
+        return true;
+    }
+
+    function activeTool() {
+        return (window.EditModeController && typeof window.EditModeController.getActiveTool === 'function')
+            ? window.EditModeController.getActiveTool() : 'select';
+    }
+
+    // ── cut-guide (hover affordance for the scissors) ────────────────────────
+    let cutGuide = null;
+    function hideCutGuide() { if (cutGuide && cutGuide.parentNode) cutGuide.parentNode.removeChild(cutGuide); }
+    function onCutHover(e) {
+        if (!isEditing() || activeTool() !== 'cut') { hideCutGuide(); return; }
+        const bar = e.target.closest && e.target.closest('.train-bar');
+        const canvas = getCanvas();
+        if (!bar || !canvas) { hideCutGuide(); return; }
+        const train = trainFromBar(bar);
+        if (!train || !canCut(train)) { hideCutGuide(); return; }
+        const coords = (window.GridCoords && typeof window.GridCoords.fromEvent === 'function') ? window.GridCoords.fromEvent(e) : null;
+        if (!coords) { hideCutGuide(); return; }
+        const cutTime = coords.snappedTime instanceof Date ? coords.snappedTime : coords.time;
+        if (!cutGuide) {
+            cutGuide = document.createElement('div');
+            cutGuide.className = 'edit-cut-guide';
+            cutGuide.setAttribute('aria-hidden', 'true');
+        }
+        cutGuide.dataset.zone = cutZone(train, cutTime);
+        cutGuide.style.left = `${coords.x}px`;
+        cutGuide.style.top = `${parseFloat(bar.style.top) || 0}px`;
+        cutGuide.style.height = `${parseFloat(bar.style.height) || 0}px`;
+        if (!cutGuide.parentNode) canvas.appendChild(cutGuide);
     }
 
     // ── live-truce toast ─────────────────────────────────────────────────────
@@ -297,6 +427,28 @@
         }
         const train = trainFromBar(bar);
         if (!train) return;
+
+        // Cut products are read-only — a press just selects, never drags/cuts.
+        if (isCutDerived(train)) {
+            e.stopPropagation();
+            select(train);
+            return;
+        }
+
+        // Scissors tool: a press on a through bar cuts it (variant inferred from
+        // where in TIME the press lands) — it never starts a drag.
+        if (activeTool() === 'cut') {
+            e.stopPropagation();
+            const coords = (window.GridCoords && typeof window.GridCoords.fromEvent === 'function')
+                ? window.GridCoords.fromEvent(e) : null;
+            const cutTime = coords ? (coords.snappedTime instanceof Date ? coords.snappedTime : coords.time) : null;
+            const variant = cutZone(train, cutTime);
+            cut(train, variant === 'split' ? { variant: 'split', cutTime } : { variant: 'sever' });
+            hideCutGuide();
+            select(train);
+            return;
+        }
+
         e.stopPropagation(); // claim the gesture from the normal bar click/tooltip
         // An edge handle → horizontal re-time of that edge; the bar body →
         // vertical re-track. Capture the bar's pixel geometry so an edge drag can
@@ -448,22 +600,39 @@
         if (!isEditing() || isTypingTarget(e.target)) return;
         if (e.metaKey || e.ctrlKey || e.altKey) return; // leave undo/redo etc. alone
         if (selectedId == null) return;
+        if (drag) return;                  // a pointer gesture is mid-flight — ignore keyboard edits
+
+        // Cut products are read-only: allow edge-select navigation but no mutation.
+        const derived = isCutDerived(selectedTrain());
+
         if (e.key >= '0' && e.key <= '9') {
             e.preventDefault();
+            if (derived) return;
             numBuffer += e.key;
             if (numTimer) clearTimeout(numTimer);
             if (numBuffer.length >= 2) { commitNumberBuffer(); return; }
             numTimer = setTimeout(commitNumberBuffer, NUM_BUFFER_MS);
             return;
         }
-        if (e.key === 'ArrowUp') { e.preventDefault(); nudgeTrack(-1); return; }
-        if (e.key === 'ArrowDown') { e.preventDefault(); nudgeTrack(1); return; }
+        if (e.key === 'ArrowUp') { e.preventDefault(); if (!derived) nudgeTrack(-1); return; }
+        if (e.key === 'ArrowDown') { e.preventDefault(); if (!derived) nudgeTrack(1); return; }
         // Re-time the active edge: ←/→ = ±5 min, Shift+←/→ = ±1 min.
-        if (e.key === 'ArrowLeft') { e.preventDefault(); nudgeEdge(e.shiftKey ? -1 : -5); return; }
-        if (e.key === 'ArrowRight') { e.preventDefault(); nudgeEdge(e.shiftKey ? 1 : 5); return; }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); if (!derived) nudgeEdge(e.shiftKey ? -1 : -5); return; }
+        if (e.key === 'ArrowRight') { e.preventDefault(); if (!derived) nudgeEdge(e.shiftKey ? 1 : 5); return; }
         // [ / ] pick which edge (arrival / departure) the nudges target.
         if (e.key === '[') { e.preventDefault(); activeEdge = 'arr'; paintSelection(); return; }
         if (e.key === ']') { e.preventDefault(); activeEdge = 'dep'; paintSelection(); return; }
+        // Keyboard cut (non-pointer path): Enter = time-split at the midpoint,
+        // Shift+Enter = sever the turn, on the selected bar. Always prevent the
+        // default so Enter never bubbles to other handlers while editing.
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const t = selectedTrain();
+            if (t && !derived && canCut(t)) {
+                cut(t, e.shiftKey ? { variant: 'sever' } : { variant: 'split' });
+            }
+            return;
+        }
     }
 
     // ── wiring ───────────────────────────────────────────────────────────────
@@ -477,6 +646,8 @@
                     e.stopPropagation(); // suppress normal selection while editing
                 }
             }, true);
+            // Scissors hover guide (passive — never blocks the drag listeners).
+            canvas.addEventListener('pointermove', onCutHover, { passive: true });
         }
         document.addEventListener('keydown', onKeydown);
         // Re-apply the selection ring after every re-render (bars are rebuilt).
@@ -484,7 +655,7 @@
         // Leaving edit mode drops the selection.
         if (window.EditSession && typeof window.EditSession.subscribe === 'function') {
             window.EditSession.subscribe((evt) => {
-                if (evt && (evt.type === 'discard' || evt.type === 'commit')) clearSelection();
+                if (evt && (evt.type === 'discard' || evt.type === 'commit')) { clearSelection(); hideCutGuide(); }
             });
         }
     }
@@ -495,5 +666,5 @@
         init();
     }
 
-    window.EditModeInteractions = { retrack, retime, nudgeEdge, select, clearSelection, getSelectedId, followLiveAgain };
+    window.EditModeInteractions = { retrack, retime, nudgeEdge, cut, canCut, select, clearSelection, getSelectedId, followLiveAgain };
 })();

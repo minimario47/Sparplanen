@@ -203,6 +203,36 @@ body.is-editing .train-bar.edit-selected .edit-resize-handle::after { opacity: 0
     box-shadow: 0 0 0 1px var(--surface-base, #fff);
 }
 
+/* ───────────── Cut / scissors (Phase 3) ─────────────
+   While the scissors tool is active the bars take a cut cursor; a vertical guide
+   tracks the snapped cut point and is tinted by the inferred variant (middle =
+   time-split, edges = sever-turn). */
+body.is-editing[data-edit-tool="cut"] .train-bar { cursor: crosshair; }
+
+.edit-cut-guide {
+    position: absolute;
+    width: 0;
+    border-left: 2px solid var(--primary-600, #2563eb);
+    pointer-events: none;
+    z-index: 40;
+}
+/* Time-split (middle third) — a solid accent line. */
+.edit-cut-guide[data-zone="split"] { border-left-style: solid; border-color: var(--violet-600, #7c3aed); }
+/* Sever-turn (left/right third) — dashed, so the two readings look different. */
+.edit-cut-guide[data-zone="sever"] { border-left-style: dashed; border-color: var(--primary-600, #2563eb); }
+
+/* Manual cut seam — a distinct VIOLET edge so "I cut this" reads differently
+   from the live-API torn-paper tear (amber/track-change tinted). Placed on the
+   synthetic-boundary edge of each time-split half. */
+.train-bar.is-edit-cut[data-cut-seam="right"] {
+    /* violet seam on the cut edge + keep the primary edit accent on the left */
+    box-shadow: inset -3px 0 0 0 var(--violet-600, #7c3aed),
+                inset 3px 0 0 0 var(--primary-600, #2563eb);
+}
+.train-bar.is-edit-cut[data-cut-seam="left"] {
+    box-shadow: inset 3px 0 0 0 var(--violet-600, #7c3aed);
+}
+
 /* Inverted-duration warn chip: departure at/before arrival (allowed, soft-warn).
    Sits top-left, distinct from the top-right live chip. */
 .train-bar__warn-chip {

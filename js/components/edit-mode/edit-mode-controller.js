@@ -14,7 +14,7 @@
     // Palette tools. `enabled` flips on per phase as the tool lands.
     const TOOLS = [
         { tool: 'select', label: 'Markera', key: 'V', icon: 'M4 4l7 16 2-7 7-2z', enabled: true },
-        { tool: 'cut', label: 'Klipp', key: 'C', icon: 'M6 6l12 12M6 18L18 6', enabled: false },
+        { tool: 'cut', label: 'Klipp', key: 'C', icon: 'M6 6l12 12M6 18L18 6', enabled: true },
         { tool: 'attach', label: 'Koppla', key: 'A', icon: 'M9 12h6M7 8a4 4 0 000 8M17 8a4 4 0 010 8', enabled: false },
         { tool: 'retrack', label: 'Flytta spår', key: '', icon: 'M12 4v16M8 8l4-4 4 4M8 16l4 4 4-4', enabled: true },
         { tool: 'retime', label: 'Ändra tid', key: '', icon: 'M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4', enabled: true },
@@ -80,6 +80,9 @@
     }
 
     function paintActiveTool() {
+        // Reflect the active tool on the body so CSS can switch affordances
+        // (e.g. the scissors cursor while the cut tool is selected).
+        document.body.dataset.editTool = activeTool;
         if (!paletteEl) return;
         paletteEl.querySelectorAll('.edit-palette__tool').forEach((btn) => {
             btn.classList.toggle('is-active', btn.dataset.tool === activeTool);

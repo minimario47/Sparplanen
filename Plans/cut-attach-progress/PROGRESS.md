@@ -22,8 +22,8 @@ not every compression).
 | 0 | Scaffolding & inert overlay | ✅ done & verified | `phase-0-handoff.md` |
 | 1 | Re-track + live truce | ✅ done & verified | `phase-1.md` (Handoff) |
 | 2 | Re-time | ✅ done & verified | `phase-2.md` (Handoff) |
-| 3 | Cut (sever-turn / time-split) | ⏭️ next | `phase-3.md` |
-| 4 | Attach / couple | pending | `phase-4.md` |
+| 3 | Cut (sever-turn / time-split) | ✅ done & verified | `phase-3.md` (Handoff) |
+| 4 | Attach / couple | ⏭️ next | `phase-4.md` |
 | 5 | Polish & resilience | pending | `phase-5.md` |
 
 **Current state:** re-track AND re-time are live and verified. In edit mode you can:
