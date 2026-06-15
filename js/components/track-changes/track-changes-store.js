@@ -17,6 +17,8 @@
  *   getAllActive()                   → Array<entry>
  *   hide(trainId) / unhide(trainId)  → boolean
  *   isHidden(trainId)                → boolean
+ *   suppress(trainId) / unsuppress(trainId) → boolean (manual re-track truce)
+ *   isSuppressed(trainId)            → boolean
  *   clearHidden()                    → number (count cleared)
  *   prune()                          → number (entries removed)
  *   getDurationMs()                  → number
@@ -31,6 +33,7 @@
     const subscribers = new Set();
     const changes = new Map(); // changeId(string) → { trainId, trainNumber, leg, fromTrack, toTrack, changedAt }
     const hidden = new Set();  // changeId(string)
+    const suppressed = new Set(); // trainId(string) — manually re-tracked: never show live changes
     let pruneTimer = null;
 
     function key(id) {
@@ -99,11 +102,13 @@
     function getActive(trainId) {
         const k = key(trainId);
         if (!k) return null;
+        if (suppressed.has(k)) return null;
         let entry = changes.get(k) || null;
         if (!entry) {
             entry = Array.from(changes.values()).find((candidate) => candidate.trainId === k) || null;
         }
         if (!entry) return null;
+        if (suppressed.has(entry.trainId)) return null;
         if (hidden.has(entry.changeId || k)) return null;
         if (isExpired(entry)) return null;
         return entry;
@@ -145,8 +150,34 @@
     function isHidden(trainId) {
         const k = key(trainId);
         if (!k) return false;
+        if (suppressed.has(k)) return true;
         if (hidden.has(k)) return true;
         return Array.from(changes.values()).some((entry) => entry.trainId === k && hidden.has(entry.changeId));
+    }
+
+    // Suppression — a manual re-track (edit mode) silences the live track-change
+    // indicator for that train so the overlay never fights the controller. Keyed
+    // by trainId, in-memory (the persistent truce lives in the edit op-log's
+    // manualOverride flag, which re-suppresses on each render).
+    function suppress(trainId) {
+        const k = key(trainId);
+        if (!k || suppressed.has(k)) return false;
+        suppressed.add(k);
+        notify({ type: 'suppressed', trainId: k });
+        return true;
+    }
+
+    function unsuppress(trainId) {
+        const k = key(trainId);
+        if (!k || !suppressed.has(k)) return false;
+        suppressed.delete(k);
+        notify({ type: 'unsuppressed', trainId: k });
+        return true;
+    }
+
+    function isSuppressed(trainId) {
+        const k = key(trainId);
+        return !!k && suppressed.has(k);
     }
 
     function clearHidden() {
@@ -200,6 +231,9 @@
         hide,
         unhide,
         isHidden,
+        suppress,
+        unsuppress,
+        isSuppressed,
         clearHidden,
         prune,
         getDurationMs,

@@ -341,6 +341,9 @@ function prepareTrainData() {
                 trackId: parseInt(service.trackId, 10),
                 plannedTrackId: parseInt(service.trackId, 10),
                 subTrackIndex: Number.isFinite(subTrackIndex) ? subTrackIndex : 0,
+                // Frozen sub-lane, parallel to plannedTrackId: the edit key keys
+                // off this so it survives a re-track that mutates live subTrackIndex.
+                plannedSubTrackIndex: Number.isFinite(subTrackIndex) ? subTrackIndex : 0,
                 trainSet,
                 vehicleCount,
                 arrTime: arrTime,
@@ -456,6 +459,7 @@ function serviceLikeToTrain(service) {
         trackId: parseInt(service.trackId, 10),
         plannedTrackId: parseInt(service.trackId, 10),
         subTrackIndex: Number.isFinite(subTrackIndex) ? subTrackIndex : 0,
+        plannedSubTrackIndex: Number.isFinite(subTrackIndex) ? subTrackIndex : 0,
         trainSet,
         vehicleCount,
         arrTime,

@@ -44,7 +44,10 @@
         const track = Number.isFinite(train.plannedTrackId)
             ? train.plannedTrackId
             : parseInt(train.plannedTrackId ?? train.trackId, 10);
-        const sub = Number.isFinite(train.subTrackIndex) ? train.subTrackIndex : 0;
+        // Frozen sub-lane: a re-track mutates live subTrackIndex, so key off the
+        // planned one (falls back to live for records predating the freeze).
+        const subSource = train.plannedSubTrackIndex ?? train.subTrackIndex;
+        const sub = Number.isFinite(subSource) ? subSource : 0;
         const arrPart = legPart(train.arrivalTrainNumber, train.arrivalLabel, train.arrTime);
         const depPart = legPart(train.departureTrainNumber, train.departureLabel, train.depTime);
         return `${week}|${day}|${track}|${sub}|${arrPart}|${depPart}`;

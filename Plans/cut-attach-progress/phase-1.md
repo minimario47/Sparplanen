@@ -1,4 +1,4 @@
-# Phase 1 — Re-track + the live truce  ·  status: NOT STARTED
+# Phase 1 — Re-track + the live truce  ·  status: DONE & verified
 
 > Resuming? Read `README.md` → `PROGRESS.md` → `phase-0-handoff.md` first, then
 > verify the ground (git log/status + grep the seams below). Phase 0 already
@@ -9,22 +9,55 @@
 live poll. This is the headline MVP and the highest-risk wiring — land and verify
 the live truce before anything else.
 
-## Todo (tick as completed; this is the durable list)
-- [ ] **Interactions file** `js/components/edit-mode/train-edit-interactions.js` (new; add `<script>` after edit-mode-controller in index.html). Pointer Events with `setPointerCapture`; hit-test `.train-bar` → `dataset.trainId` → `cachedTrains.find`. Coords via `window.GridCoords.fromEvent(e)` → `{trackId, subTrackIndex, snappedTime}` / `resolveTrack(y)`. Move the ghost with `transform: translate()` ONLY (never left/top — transition-storm risk). On drop → `EditSession.addOp({op:'retrack', editKey: EditKey.buildEditKey(train), params:{trackId, subTrackIndex}, before:{trackId, subTrackIndex}})`. Add a small drag-threshold so a stray click never nudges.
-- [ ] **Palette wiring**: flip `TOOLS` `select` + `retrack` to `enabled:true` in edit-mode-controller.js; add active-tool state (class `is-active`) and click handlers.
-- [ ] **Keyboard**: number-key track-jump (`1`–`9`, `0`+digit → 10–16) and `↑/↓` lane nudge on the selected bar (add to the controller's keydown, guard against typing targets). This is also the WCAG 2.5.7 non-drag path.
-- [ ] **Context-menu twin** "Flytta till spår…": `TrainContextMenu.register({id:'edits.retrack', order:~250, build(train,ctx)})` + `createItem(label, action, {icon})` (pattern at `train-context-menu-actions.js:23`). Opens a small track picker → adds the retrack op.
-- [ ] **Live truce** in `js/delay/delay-integration.js#detectTrackChanges`: insert a gate right after `let mutated = false;` (verify line — was ~:262). If `window.editSession.active` OR the train carries `manualOverride` (the projection already sets `train.manualOverride=true` on edited bars), **skip the mutation branches** (`clearSplit`, `recordChange`, the auto-switch `train.trackId=...`, split-create) but STILL run the API-vs-`planned` compare; on divergence from the manual track, set `train._liveDisagrees=true`. Do NOT early-return before the compare.
-- [ ] **Indicator suppression** in `js/components/track-changes/track-changes-store.js`: add `suppress(trainId)/unsuppress(trainId)/isSuppressed(trainId)` (a `suppressed` Set keyed by trainId), honored in `getActive()` (~:99) and `isHidden()` (~:145). Export in the public API.
-- [ ] **Toast**: on first manual re-track of a train, `window.showNotification('Live spårändringar avstängda för tåg X — ...', 'info')` with a "Följ live igen" relink (clears manualOverride + unsuppress). "Don't show again" lives on the toast only.
-- [ ] **Decorator** `js/components/edit-mode/edit-mode-decorator.js` (new; mirror `train-notes-decorator.js`): on `schedule:rendered`, add `.is-draft` to bars with `_draft` and `.is-edited` to bars with `_edited` (CSS already defined in edit-mode.css). Add the `_liveDisagrees` chip.
-- [ ] **Polish**: reposition the palette so it doesn't overlap the leftmost track labels (Spår 1–4).
+## Todo (all complete)
+- [x] **Interactions file** `js/components/edit-mode/train-edit-interactions.js` — pointer drag (vertical only → re-track), ghost moved by `transform: translateY()` only, drag-threshold, drop → `EditSession.addOp({op:'retrack', editKey, params, before})`. Shared `retrack(train, params, {commitNow})` used by drag/keyboard/context-menu.
+- [x] **Palette wiring** — `select` + `retrack` flipped to `enabled:true`; active-tool state (`.is-active`) + click handlers in `edit-mode-controller.js`; default `select` on enter; exports `window.EditModeController`.
+- [x] **Keyboard** — type a track number (digit buffer, 500 ms / 2-digit commit) + `↑/↓` adjacent-track nudge on the selected bar (own keydown in the interactions file, guarded by `isTypingTarget` + `editSession.active` + a selection). WCAG 2.5.7 non-drag path.
+- [x] **Context-menu twin** `js/components/edit-mode/edit-mode-context.js` — registers `edits.retrack` (order 250, "⇅ Flytta till spår…") + a 16-track picker popover; commits via `retrack(..., {commitNow:true})` (works outside edit mode).
+- [x] **Live truce** in `delay-integration.js#detectTrackChanges` — per-train gate after `let mutated=false`: `editSession.active` OR `train.manualOverride` ⇒ skip clearSplit/recordChange/auto-switch/split-create; compare still runs; `_liveDisagrees` + `suppress()` only for `manualOverride` trains (session-wide truce just freezes everything else — no chip/suppress on untouched bars).
+- [x] **Indicator suppression** in `track-changes-store.js` — `suppress/unsuppress/isSuppressed` (a `suppressed` Set), honored in `getActive()` + `isHidden()`.
+- [x] **Toast** — custom `.edit-truce-toast` (top-center) on a train's first manual re-track: "Live-spårändringar pausade för tåg X", with "Följ live igen" (removes that train's committed+draft ops + unsuppress) and "Visa inte igen" (localStorage opt-out).
+- [x] **Decorator** `js/components/edit-mode/edit-mode-decorator.js` — on `schedule:rendered`, `.is-edited`/`.is-draft` + the `_liveDisagrees` ⚡ chip.
+- [x] **Polish** — palette repositioned to a horizontal strip bottom-center (above the action bar); no longer covers the Spår-labels column.
 
-## Verification (don't skip — this phase is the risk)
-- Enter edit mode, drag a bar to a new track; confirm `cachedTrains` trackId moved, `plannedTrackId` frozen, key resolves to 1. Reload → edit persists (localStorage).
-- **Live truce:** inject a fake track change for the edited train via the console fake-delay-feed trick (memory `split-bar-feature-and-deploy`); wait past one 30s poll; confirm the bar does NOT snap back and the toast/relink works.
-- Undo (`⌘Z`) and Avbryt revert cleanly; number-key + arrow paths work; reduced-motion shows all affordances.
-- `verify/` PDF-bar-accuracy harness: base (unedited) bars unchanged.
+## Verification (done — all green)
+- Drag a bar to a new track → `cachedTrains` trackId moved, `plannedTrackId` frozen, key resolves to 1, persists across reload (localStorage). ✔
+- **Live truce:** injected a divergent live report (track 8) on an overridden train → bar stayed on the manual track across two polls (no snap-back), `_liveDisagrees=true`, indicator suppressed (`getActive`→null). ✔
+- Keyboard (↑/↓ nudge + number jump), context-menu picker, undo (12→9→1), Avbryt/discard all revert. ✔
+- **Second edit of the same train resolves** (was the latent key-drift bug — see handoff). ✔
+- No console errors; reduced-motion safe (chrome/toast reach visible end-state without animation; ghost `transition:none`). ✔
+- Base (unedited) bars unchanged — empty store ⇒ projection is a no-op; board renders 474 trains identically.
 
-## Handoff (fill in on completion, for Phase 2)
-_← write here when done: what shipped (files+anchors), the gate behavior as landed (skip-all vs compare-still-runs), the suppression flag lifecycle, the drag/keyboard interaction seam Phase 2 extends, gotchas, and verification results. Then flip the status line at top to DONE and update PROGRESS.md._
+## Handoff (for Phase 2)
+
+### What shipped
+**New files** (`js/components/edit-mode/`):
+- `train-edit-interactions.js` → `window.EditModeInteractions = { retrack, select, clearSelection, getSelectedId, followLiveAgain }`. Owns: pointer drag (canvas capture-phase `pointerdown`; ghost = `cloneNode(true)` moved by `translateY` only, rAF-batched, `setPointerCapture` so other bars stop firing hover/tooltip mid-drag), click-select (`.edit-selected`, re-applied on `schedule:rendered`), keyboard (number/arrow), the shared `retrack()`, and the truce toast.
+- `edit-mode-context.js` → context-menu entry `edits.retrack` (order 250) + the track-picker popover.
+- `edit-mode-decorator.js` → `.is-edited`/`.is-draft` + the `_liveDisagrees` ⚡ chip on `schedule:rendered`.
+
+**Modified:**
+- `edit-projection.js` — `retrack` transform now also clears `train.splitTracks` (a manual placement is single-track).
+- `edit-session.js` — added `removeByKey(editKey)` (drops a train's draft ops; used by the relink).
+- `edit-key.js` — `buildEditKey` now keys off **frozen `plannedSubTrackIndex`**, not live `subTrackIndex` (see gotcha).
+- `schedule-renderer.js` — added `plannedSubTrackIndex` to BOTH record builders (base map ~:344 + `serviceLikeToTrain` ~:462), parallel to `plannedTrackId`.
+- `delay-integration.js#detectTrackChanges` — the live-truce gate.
+- `track-changes-store.js` — suppression API.
+- `edit-mode-controller.js` — enabled tools + active-tool state + `window.EditModeController`.
+- `edit-mode.css` — palette → horizontal bottom-center; `.edit-selected`, `.edit-ghost` (`transition:none !important` + `will-change:transform`), `.train-bar__live-chip`, `.edit-truce-toast` (top-center), `.edit-track-picker`.
+- `index.html` — 3 new scripts after the controller (interactions → context → decorator).
+
+### Gate behaviour as landed
+**Skip-all-mutations, compare-still-runs.** When `editSession.active` OR `train.manualOverride`: return before clearSplit/recordChange/auto-switch/split-create. The API-vs-track compare still runs, but `_liveDisagrees` (chip) and `suppress()` are applied **only for `manualOverride` trains** — a session-wide truce must not light up / suppress bars the controller never touched.
+
+### Suppression flag lifecycle
+`suppress(trainId)` is in-memory (per session). It's (re)applied on every retrack and on every poll for overridden trains, so the indicator stays hidden across reloads even though `suppressed` resets — the durable signal is `manualOverride`, re-derived from the op-log each render. `followLiveAgain` removes the train's committed+draft ops AND unsuppresses.
+
+### The seam Phase 2 extends
+Phase 2 (re-time) reuses the same pointer infra in `train-edit-interactions.js` but on the **X axis**: add edge-resize handles (left=arrival, right=departure), keep `transform`-only ghosting (or direct edge drag) and the same `transition:none` discipline. Mirror the shared `retrack()` with a `retime()` apply; register a `retime` transform in `edit-projection.js`; add `←/→` / `[`/`]` keyboard. The gate already truces edited trains, so a re-timed bar is protected for free.
+
+### Gotchas (read before Phase 2)
+1. **Edit keys MUST key off frozen planned fields.** A re-track mutates live `trackId`/`subTrackIndex`; `buildEditKey` reads `plannedTrackId` + `plannedSubTrackIndex` so a *second* edit of the same train still resolves. Any new op type that changes an identity-bearing field must follow this rule (re-time changes arr/dep times, which ARE in the key — if a future op re-times, freeze a planned-time too, or the key drifts).
+2. **The ghost must stay `transition:none`.** `.train-bar` carries `transition: transform 0.2s` (trains.css:16); a cloned ghost inherits it and *chases* the cursor → the "laggy/shaky" drag the user hit. Killed via `.train-bar.edit-ghost { transition:none !important }` + rAF + pointer-capture. (See memory `transition-all-recalc-storm`.)
+3. **Grab bars AFTER entering edit mode** — `EditSession.start()` re-renders and replaces every `.train-bar` node.
+4. **Context-menu retrack commits directly** (`commitNow:true`) — it's a complete action and works with no open session.

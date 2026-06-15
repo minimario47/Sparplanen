@@ -13,10 +13,10 @@
 
     // Palette tools. `enabled` flips on per phase as the tool lands.
     const TOOLS = [
-        { tool: 'select', label: 'Markera', key: 'V', icon: 'M4 4l7 16 2-7 7-2z', enabled: false },
+        { tool: 'select', label: 'Markera', key: 'V', icon: 'M4 4l7 16 2-7 7-2z', enabled: true },
         { tool: 'cut', label: 'Klipp', key: 'C', icon: 'M6 6l12 12M6 18L18 6', enabled: false },
         { tool: 'attach', label: 'Koppla', key: 'A', icon: 'M9 12h6M7 8a4 4 0 000 8M17 8a4 4 0 010 8', enabled: false },
-        { tool: 'retrack', label: 'Flytta spår', key: '', icon: 'M12 4v16M8 8l4-4 4 4M8 16l4 4 4-4', enabled: false },
+        { tool: 'retrack', label: 'Flytta spår', key: '', icon: 'M12 4v16M8 8l4-4 4 4M8 16l4 4 4-4', enabled: true },
         { tool: 'retime', label: 'Ändra tid', key: '', icon: 'M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4', enabled: false },
         { tool: 'unit', label: 'Dela/ihop', key: 'K', icon: 'M7 7h4v10H7zM13 7h4v10h-4z', enabled: false },
         { tool: 'delete', label: 'Ta bort', key: '', icon: 'M6 7h12M9 7V5h6v2M8 7l1 12h6l1-12', enabled: false }
@@ -28,6 +28,7 @@
     let statusEl = null;
     let undoBtn = null;
     let redoBtn = null;
+    let activeTool = 'select';
 
     function svgIcon(path) {
         return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${path}"/></svg>`;
@@ -78,6 +79,20 @@
         return el;
     }
 
+    function paintActiveTool() {
+        if (!paletteEl) return;
+        paletteEl.querySelectorAll('.edit-palette__tool').forEach((btn) => {
+            btn.classList.toggle('is-active', btn.dataset.tool === activeTool);
+        });
+    }
+
+    function setActiveTool(tool) {
+        const def = TOOLS.find((t) => t.tool === tool);
+        if (!def || !def.enabled) return;
+        activeTool = tool;
+        paintActiveTool();
+    }
+
     function updateChrome() {
         const s = window.EditSession;
         if (!s) return;
@@ -97,6 +112,8 @@
 
     function enter() {
         if (!window.EditSession) return;
+        activeTool = 'select';
+        paintActiveTool();
         window.EditSession.start();
     }
 
@@ -147,6 +164,12 @@
         actionBarEl = buildActionBar();
         document.body.appendChild(paletteEl);
         document.body.appendChild(actionBarEl);
+        paletteEl.addEventListener('click', (e) => {
+            const btn = e.target.closest('.edit-palette__tool');
+            if (!btn || btn.disabled) return;
+            setActiveTool(btn.dataset.tool);
+        });
+        paintActiveTool();
 
         if (window.EditSession && typeof window.EditSession.subscribe === 'function') {
             window.EditSession.subscribe(updateChrome);
@@ -160,4 +183,9 @@
     } else {
         init();
     }
+
+    window.EditModeController = {
+        getActiveTool: () => activeTool,
+        setActiveTool
+    };
 })();

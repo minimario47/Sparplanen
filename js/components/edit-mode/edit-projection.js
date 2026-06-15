@@ -29,6 +29,9 @@
             const s = parseInt(params.subTrackIndex, 10);
             if (Number.isFinite(t)) train.trackId = t;
             if (Number.isFinite(s)) train.subTrackIndex = s;
+            // A manual placement is a single, deliberate track — drop any live
+            // split visual so the bar doesn't render torn across two tracks.
+            if (train.splitTracks) train.splitTracks = null;
         }
     };
 

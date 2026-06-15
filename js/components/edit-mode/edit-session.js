@@ -18,6 +18,7 @@
  *   active                 (boolean)
  *   start()  commit()  discard()
  *   addOp(op)              → op            // op: {op, editKey, params, before?, after?}
+ *   removeByKey(editKey)   → count         // drop all draft ops for one train
  *   undo()   redo()
  *   canUndo()  canRedo()  getOps()  pendingCount()
  *   subscribe(cb)          → unsubscribe()  // cb({type}) on any state change
@@ -79,6 +80,20 @@
         _refresh('undo');
     }
 
+    // Drop every draft op for one editKey (used by the "follow live again"
+    // relink, which reverts a train's in-progress manual edits). Not part of the
+    // undo stack — these are gone, not undoable.
+    function removeByKey(editKey) {
+        if (!api.active || !editKey) return 0;
+        const keep = ops.filter((o) => o.editKey !== editKey);
+        const removed = ops.length - keep.length;
+        if (!removed) return 0;
+        ops = keep;
+        redo = [];
+        _refresh('remove');
+        return removed;
+    }
+
     function redoOp() {
         if (!api.active || !redo.length) return;
         ops.push(redo.pop());
@@ -124,6 +139,7 @@
     api.commit = commit;
     api.discard = discard;
     api.addOp = addOp;
+    api.removeByKey = removeByKey;
     api.undo = undo;
     api.redo = redoOp;
     api.canUndo = () => api.active && ops.length > 0;

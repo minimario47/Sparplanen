@@ -10,16 +10,23 @@
     border-color: var(--primary-700, #1d4ed8);
 }
 
-/* ───────────── Tool palette (left dock) ───────────── */
+/* ───────────── Tool palette (bottom dock, above the action bar) ─────────────
+   Horizontal + centred so it never covers the always-needed track-label column
+   or the time axis — only a thin strip at the bottom of the board, mirroring
+   the action bar directly beneath it. */
 .edit-palette {
     position: fixed;
-    top: calc(var(--header-height, 70px) + 12px);
-    left: 12px;
+    bottom: 68px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1200;
     display: none;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2px;
     padding: 6px;
+    max-width: calc(100vw - 24px);
     background: var(--surface-raised, var(--surface-base, #fff));
     border: 1px solid var(--border-DEFAULT, rgba(0, 0, 0, 0.14));
     border-radius: var(--radius-lg, 8px);
@@ -30,15 +37,15 @@ body.is-editing .edit-palette { display: flex; }
 .edit-palette__tool {
     display: flex;
     align-items: center;
-    gap: 8px;
-    width: 152px;
-    padding: 7px 9px;
+    gap: 6px;
+    padding: 7px 10px;
     border: 0;
     border-radius: var(--radius-DEFAULT, 6px);
     background: transparent;
     color: var(--text-secondary, #555);
     font-size: var(--font-size-xs, 12px);
     text-align: left;
+    white-space: nowrap;
     cursor: pointer;
 }
 .edit-palette__tool:hover:not(:disabled) { background: var(--neutral-100, rgba(0, 0, 0, 0.05)); }
@@ -133,6 +140,122 @@ body.is-editing .train-bar.is-draft {
     outline: 1.5px solid var(--warning-600, #d97706);
     outline-offset: -1.5px;
 }
+
+/* Selected-for-edit bar: a clear focus ring distinct from the normal blue
+   .is-selected highlight (which we suppress while editing). */
+body.is-editing .train-bar.edit-selected {
+    outline: 2px solid var(--primary-500, #3b82f6);
+    outline-offset: 1px;
+    box-shadow: 0 0 0 4px var(--primary-200, rgba(59, 130, 246, 0.3));
+}
+/* The dragged bar dims in place; the ghost is the thing that moves. */
+body.is-editing .train-bar.edit-dragging { opacity: 0.3; }
+.train-bar.edit-ghost {
+    opacity: 0.85;
+    pointer-events: none;
+    box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.28));
+    outline: 2px solid var(--primary-600, #2563eb);
+    /* The bar carries `transition: transform 0.2s` — fatal for a per-frame
+       drag (the ghost animates toward each new position and never catches up,
+       which reads as lag/shake). The ghost moves instantly; promote to its own
+       layer so transform updates stay off the main thread. */
+    transition: none !important;
+    will-change: transform;
+}
+body.is-editing .train-bar { cursor: grab; }
+body.is-editing .train-bar.edit-dragging { cursor: grabbing; }
+
+/* Live-disagreement chip: live feed reports a different track than the manual
+   placement. Sits top-right of the bar, non-interactive. */
+.train-bar__live-chip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(35%, -35%);
+    font-size: 10px;
+    line-height: 1;
+    padding: 1px 3px;
+    border-radius: 6px;
+    background: var(--warning-500, #f59e0b);
+    color: #fff;
+    pointer-events: none;
+    z-index: 30;
+}
+
+/* ───────────── Live-truce toast (richer than showNotification) ───────────── */
+.edit-truce-toast {
+    position: fixed;
+    left: 50%;
+    top: calc(var(--header-height, 70px) + 12px); /* top-center, clear of the bottom editing chrome */
+    transform: translateX(-50%);
+    z-index: 1300;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: min(92vw, 560px);
+    padding: 10px 14px;
+    background: var(--surface-raised, #1f2937);
+    color: var(--text-inverse, #fff);
+    border-radius: var(--radius-lg, 8px);
+    box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.32));
+    font-size: var(--font-size-sm, 14px);
+}
+.edit-truce-toast__msg { flex: 1 1 auto; }
+.edit-truce-toast__action,
+.edit-truce-toast__dismiss {
+    flex: 0 0 auto;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: var(--font-size-xs, 12px);
+    white-space: nowrap;
+    padding: 4px 6px;
+    border-radius: var(--radius-DEFAULT, 6px);
+}
+.edit-truce-toast__action {
+    color: var(--primary-200, #bfdbfe);
+    font-weight: 600;
+    text-decoration: underline;
+}
+.edit-truce-toast__dismiss { color: var(--text-tertiary, #9ca3af); }
+.edit-truce-toast__action:hover,
+.edit-truce-toast__dismiss:hover { background: rgba(255, 255, 255, 0.12); }
+
+/* ───────────── Track picker (context-menu twin) ───────────── */
+.edit-track-picker {
+    position: fixed;
+    z-index: 1300;
+    min-width: 140px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 6px;
+    background: var(--surface-raised, var(--surface-base, #fff));
+    border: 1px solid var(--border-DEFAULT, rgba(0, 0, 0, 0.14));
+    border-radius: var(--radius-lg, 8px);
+    box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.18));
+}
+.edit-track-picker__head {
+    padding: 4px 8px 6px;
+    font-size: var(--font-size-2xs, 10px);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary, #999);
+}
+.edit-track-picker__item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 6px 8px;
+    border: 0;
+    border-radius: var(--radius-DEFAULT, 6px);
+    background: transparent;
+    color: var(--text-primary, #1a1a1a);
+    font-size: var(--font-size-sm, 14px);
+    cursor: pointer;
+}
+.edit-track-picker__item:hover,
+.edit-track-picker__item:focus { background: var(--neutral-100, rgba(0, 0, 0, 0.06)); outline: none; }
+.edit-track-picker__item.is-current { font-weight: 600; color: var(--primary-700, #1d4ed8); }
 
 /* During editing, dim live-data overlays so the draft dominates. */
 body.is-editing #track-changes-layer { opacity: 0.4; }

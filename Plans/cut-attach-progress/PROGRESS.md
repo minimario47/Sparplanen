@@ -20,12 +20,14 @@ not every compression).
 | Phase | Title | Status | Todo / record |
 |---|---|---|---|
 | 0 | Scaffolding & inert overlay | ✅ done & verified | `phase-0-handoff.md` |
-| 1 | Re-track + live truce | ⏭️ next | `phase-1.md` |
-| 2 | Re-time | pending | `phase-2.md` |
+| 1 | Re-track + live truce | ✅ done & verified | `phase-1.md` (Handoff) |
+| 2 | Re-time | ⏭️ next | `phase-2.md` |
 | 3 | Cut (sever-turn / time-split) | pending | `phase-3.md` |
 | 4 | Attach / couple | pending | `phase-4.md` |
 | 5 | Polish & resilience | pending | `phase-5.md` |
 
-**Current state:** the edit-mode skeleton is live. Pen toggle (header, `#edit-mode-toggle`, key `E`) enters a bounded session: `is-editing` body class, left tool palette (all tools disabled), bottom action bar (Ångra/Gör om/Avbryt/Slutför working). An append-only op-log overlay (`TrainEditsStore` + `applyTrainEdits` projection) is wired and proven end-to-end with a `retrack` transform; `plannedTrackId` stays frozen so edit keys survive re-tracks. No UI yet creates ops — that's Phase 1.
+**Current state:** re-track is live and verified. In edit mode you can move a bar to another track by **drag** (vertical ghost), **keyboard** (click to select → type a track number or `↑/↓`), or the **context menu** ("⇅ Flytta till spår…", works even outside edit mode). The move sticks against the 30s live poll — the `detectTrackChanges` **live-truce gate** skips all mutations for `manualOverride`/in-session trains and flags `_liveDisagrees` (⚡ chip) when the feed reports a different track. The live indicator is suppressed for edited trains; a top-center toast offers "Följ live igen" / "Visa inte igen". Edits persist across reload and survive repeated edits of the same train. Palette is now a horizontal strip bottom-center (no label overlap).
 
-**Open polish items (non-blocking):** the palette currently overlaps the leftmost track labels (Spår 1–4); reposition in Phase 1.
+**Ground change to note:** records now carry a frozen **`plannedSubTrackIndex`** (parallel to `plannedTrackId`, set in both builders in `schedule-renderer.js`). Edit keys MUST key off the frozen planned fields, never the live `trackId`/`subTrackIndex` (a re-track mutates those). See `phase-1.md` Handoff → Gotchas.
+
+**Open polish items (non-blocking):** the bottom-center palette + action bar float over the lowest track rows (Spår 15–16) during editing — same trade-off as the pre-existing action bar; acceptable, refine later if needed.

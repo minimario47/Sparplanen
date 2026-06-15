@@ -268,6 +268,40 @@ class DelayIntegration {
             const planned = parseInt(train.plannedTrackId ?? train.trackId, 10);
             if (!Number.isFinite(planned)) return;
 
+            // ── Live truce ──────────────────────────────────────────────────
+            // While an edit session is open, or for a train the controller has
+            // manually re-tracked (manualOverride, set by the edit projection),
+            // the live feed must not fight the manual placement. Skip ALL the
+            // mutation branches below (clearSplit, recordChange, auto-switch,
+            // split-create) — but STILL run the API-vs-track compare so we can
+            // flag disagreement for a chip. Do not early-return before the
+            // compare. (Edits are device-local; the gate is the live half.)
+            const overridden = train.manualOverride === true;
+            const truce = (window.editSession && window.editSession.active) || overridden;
+            if (truce) {
+                // The "live disagrees" chip + indicator-suppression only make sense
+                // for a train the controller actually placed. A session-wide truce
+                // (editSession.active) just freezes mutations for everything else —
+                // no chip, no suppression on bars the controller never touched.
+                if (overridden) {
+                    const liveTracks = this.getDelayContextsForTrain(train)
+                        .filter((ctx) => ctx.delayInfo && ctx.delayInfo.trackAtLocation != null)
+                        .map((ctx) => parseInt(ctx.delayInfo.trackAtLocation, 10))
+                        .filter((n) => Number.isFinite(n) && (validTracks.size === 0 || validTracks.has(n)));
+                    const manualTrack = parseInt(train.trackId, 10);
+                    const disagrees = liveTracks.length > 0 && liveTracks.some((n) => n !== manualTrack);
+                    if (train._liveDisagrees !== disagrees) { train._liveDisagrees = disagrees; mutated = true; }
+                    // Kill any indicator recorded before the override took effect.
+                    if (train.id != null && window.TrackChangesStore?.suppress) {
+                        window.TrackChangesStore.suppress(train.id);
+                    }
+                } else if (train._liveDisagrees) {
+                    train._liveDisagrees = false; mutated = true;
+                }
+                return;
+            }
+            if (train._liveDisagrees) { train._liveDisagrees = false; mutated = true; }
+
             // When a previously split train loses its API data (announcements
             // aged out of the feed), fold the bar back onto the planned track.
             const clearSplit = () => {
