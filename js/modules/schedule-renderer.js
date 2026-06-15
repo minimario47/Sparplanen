@@ -76,7 +76,11 @@ function initializeSchedule() {
     // funnel through here so the projection re-applies on every change.
     window.addEventListener('train-edits-changed', () => {
         prepareTrainData();
-        renderFullSchedule();
+        // skipScroll: an edit must NOT yank the horizontal view back to viewTime.
+        // scrollToViewTime() resets scrollLeft every render, so without this a
+        // move/re-time snaps the board back to "now" and scrolls away whatever
+        // the controller had panned to — bars they were looking at "disappear".
+        renderFullSchedule({ skipScroll: true });
     });
     
     if (window.__DEBUG_SCHEDULE_RENDER) {

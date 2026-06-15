@@ -61,3 +61,13 @@
    wins). Editing code must convert any absolute target or relative nudge to a
    delta-from-planned before calling `retime()` (`retimeEdgeAbsolute`/`nudgeEdge`
    already do this). Storing an incremental delta would compound wrongly on undo.
+5. **Edit re-renders MUST pass `skipScroll:true`.** `renderFullSchedule()` calls
+   `scrollToViewTime()` every render, which resets `scrollLeft` to `viewTime`.
+   The `train-edits-changed` handler (schedule-renderer.js ~:77) re-renders on
+   every edit — without `skipScroll` it yanked the horizontal view back to "now",
+   scrolling away whatever the controller had panned to, so bars they were
+   looking at appeared to "disappear" (they stayed in the DOM — only the viewport
+   jumped). The scroll-sync only resyncs `viewTime` after a >2h pan + 150ms
+   debounce, so a normal pan-then-edit left `viewTime` stale and the snap-back
+   fired. Any future edit re-render path must keep `skipScroll`. Following-mode
+   scroll is still maintained by the 1 s `updateCurrentTimeLine` interval.
