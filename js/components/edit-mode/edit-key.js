@@ -40,6 +40,12 @@
 
     function buildEditKey(train) {
         if (!train || typeof train !== 'object') return '';
+        // Edit-derived products (cut halves, loose departures, re-paired/consumed
+        // records) carry a stable `_editKeyBase` handle stamped by the projection.
+        // cut/attach mutate the number/label fields this natural key is built from,
+        // so without the handle a re-edit op could not bind to the product, and a
+        // second op on the same in-place record would mis-key (phase-3/4 gotcha #2).
+        if (typeof train._editKeyBase === 'string' && train._editKeyBase) return train._editKeyBase;
         const sel = window.currentScheduleSelection || {};
         const week = sel.week || '?';
         const day = sel.day || '?';

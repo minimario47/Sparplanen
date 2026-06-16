@@ -396,6 +396,41 @@ body.is-editing[data-edit-attach="picking"] .train-bar:not(.edit-attach-candidat
 /* During editing, dim live-data overlays so the draft dominates. */
 body.is-editing #track-changes-layer { opacity: 0.4; }
 
+/* ───────────── Re-time delay-decoupled chip (Phase 5) ─────────────
+   A re-time shifts the bar off its planned schedule slot, so the live-delay
+   match (keyed on number + scheduled time ±5 min) re-derives against the new
+   position. The truce already protects the bar; this chip just explains why an
+   overlay may move/vanish. Shown only when NOT inverted (which already warns).
+   Sits top-left, blue, distinct from the amber warn chip and teal reattach chip. */
+.train-bar__retime-chip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-35%, -120%);
+    font-size: 10px;
+    line-height: 1;
+    padding: 1px 2px;
+    border-radius: 6px;
+    background: var(--primary-600, #2563eb);
+    color: #fff;
+    pointer-events: none;
+    z-index: 30;
+}
+
+/* ───────────── Lås (look-only) toggle (Phase 5) ─────────────
+   A per-device safety valve: when engaged, the editing feature is disarmed.
+   The lock button lights up; the pen toggle reads disabled. */
+.edit-lock-toggle.is-locked {
+    background: var(--warning-500, #f59e0b);
+    color: var(--text-inverse, #fff);
+    border-color: var(--warning-600, #d97706);
+}
+/* When locked, the pen can't arm — show it inert (still focusable for the hint). */
+body.is-locked .edit-mode-toggle {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
 /* Motion is opt-in only. */
 @media (prefers-reduced-motion: no-preference) {
     .edit-palette,

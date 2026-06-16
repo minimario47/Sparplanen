@@ -59,6 +59,11 @@
                 && train.depTime.getTime() <= train.arrTime.getTime()) {
                 train._inverted = true;
             }
+            // A re-time shifts the bar off its planned slot, so the live-delay match
+            // (number + scheduled time ±5 min) re-derives. Flag it so the decorator
+            // can chip the "förseningsdata frikopplad" note (the truce already
+            // protects the bar; the chip only explains a moving/missing overlay).
+            train._retimed = true;
         },
 
         // Cut: sever a turn or split a dwell. RETURNS the extra record(s) the
@@ -74,9 +79,12 @@
         //    keyed on the real number) counts/looks-up each real leg exactly once
         //    with NO changes to those consumers. `_splitSibling` only defends the
         //    overlap-based consumers (conflict-detector, _packLanes).
-        cut(train, params) {
+        cut(train, params, op) {
             params = params || {};
             const variant = params.variant === 'split' ? 'split' : 'sever';
+            // The parent op's stable key — the base for each product's `_editKeyBase`
+            // handle, so a Phase-5 re-edit op can bind to a product (see edit-key.js).
+            const baseKey = (op && typeof op.editKey === 'string') ? op.editKey : '';
 
             if (variant === 'sever') {
                 const dep = Object.assign({}, train);
@@ -88,7 +96,12 @@
                 dep.movementKind = 'departure';
                 dep.splitTracks = null;
                 dep._cutLooseDeparture = true;
-                // The matched record becomes the arrival-only stub.
+                // A CLONE must carry a suffixed key so it never collides with the
+                // in-place stub or the parent op (which would double-resolve).
+                if (baseKey) dep._editKeyBase = `${baseKey}|dep`;
+                // The matched record becomes the arrival-only stub. It is in-place,
+                // but still suffixed ('|stub') so a revert by editKey equality
+                // (followLiveAgain / removeByKey) doesn't collapse stub+cut+attach.
                 train.depTime = null;
                 train.departureTrainNumber = '';
                 train.departureLabel = '';
@@ -96,6 +109,7 @@
                 train.movementKind = 'arrival';
                 train.splitTracks = null;
                 train._cutSevered = true;
+                if (baseKey) train._editKeyBase = `${baseKey}|stub`;
                 return [dep];
             }
 
@@ -125,6 +139,7 @@
             b.splitTracks = null;
             b._splitSibling = sib;
             b.editDerived = true;
+            if (baseKey) b._editKeyBase = `${baseKey}|b`;
 
             // The matched record becomes the first half [arr .. cutTime].
             train.depTime = cutTime;
@@ -135,6 +150,7 @@
             train.splitTracks = null;
             train._splitSibling = sib;
             train.editDerived = true;
+            if (baseKey) train._editKeyBase = `${baseKey}|a`;
             return [b];
         },
 
@@ -165,7 +181,7 @@
         //   • depTime is stored as `depOffsetMin` = minutes from THIS record's
         //     frozen planned arrival, so the dwell is midnight-safe (Date math)
         //     and rides along if the arrival is later re-timed.
-        attach(train, params) {
+        attach(train, params, op) {
             params = params || {};
             if (!(train.arrTime instanceof Date)) return false;   // need an arrival to turn
             if (params.departureTrainNumber != null) train.departureTrainNumber = params.departureTrainNumber;
@@ -183,6 +199,11 @@
                 if (train.depTime.getTime() <= train.arrTime.getTime()) train._inverted = true;
             }
             train._repaired = true;
+            // Pin the source's key (attach rewrote departureTrainNumber, which would
+            // otherwise drift the natural key) so a re-edit op binds to the re-paired
+            // bar. In-place mutation of the source → its own op.editKey is unique.
+            // If the source was a severed stub it keeps its '…|stub' key.
+            if (op && typeof op.editKey === 'string' && op.editKey) train._editKeyBase = op.editKey;
             return null;                          // consume handled by applyList
         }
     };
@@ -235,19 +256,41 @@
         // appended siblings are in the array. Carry the op so an ambiguous
         // consumeKey can be flagged like the main loop's `_unresolved`.
         const consumeReqs = [];
-        ops.forEach((op) => {
-            if (!op || !op.editKey) return;
-            const { matches, count } = EditKey.resolveEditKey(op.editKey, trains);
-            if (count !== 1) { op._unresolved = count; return; }
-            delete op._unresolved;
-            const extra = applyOne(matches[0], op, isDraft);
-            if (extra) appended.push(...extra);
+        // A re-edit op keyed on an APPENDED cut product (loose departure / split-b)
+        // resolves to 0 in phase 1 (the product isn't in the array yet). Defer those
+        // to phase 2 after the append, rather than flagging them unresolved.
+        const retry = [];
+
+        function maybeConsume(op) {
             if (op.op === 'attach' && op._declined !== true && op.params
                 && op.params.consumeKey && op.params.consumeKey !== op.editKey) {
                 consumeReqs.push(op);
             }
+        }
+
+        // Phase 1: apply every op that binds against the current set; collect appends.
+        ops.forEach((op) => {
+            if (!op || !op.editKey) return;
+            const { matches, count } = EditKey.resolveEditKey(op.editKey, trains);
+            if (count === 0) { retry.push(op); return; }       // may target an appended product
+            if (count > 1) { op._unresolved = count; return; } // ambiguous — never auto-apply
+            delete op._unresolved;
+            const extra = applyOne(matches[0], op, isDraft);
+            if (extra) appended.push(...extra);
+            maybeConsume(op);
         });
         if (appended.length) trains.push(...appended);
+
+        // Phase 2: re-resolve the deferred ops now that appended products are in the
+        // array (re-editability of cut products). Re-edit ops never append, so one
+        // retry pass suffices. Still-zero → genuine orphan flag for the reconcile tray.
+        retry.forEach((op) => {
+            const { matches, count } = EditKey.resolveEditKey(op.editKey, trains);
+            if (count !== 1) { op._unresolved = count; return; }
+            delete op._unresolved;
+            applyOne(matches[0], op, isDraft);
+            maybeConsume(op);
+        });
 
         // Consume pass (attach): the departure leg the re-pair adopted now lives
         // on the source record, so strip it from its original provider. If that
@@ -272,6 +315,9 @@
                 rec._edited = true;
                 rec.manualOverride = true;
                 rec._repairConsumed = true;
+                // Pin the provider's key (its departure was just blanked, which would
+                // drift the natural key) so a re-edit op can bind to it.
+                if (op.params.consumeKey) rec._editKeyBase = op.params.consumeKey;
                 if (rec.arrTime instanceof Date) {
                     rec.movementKind = 'arrival';
                 } else {

@@ -21,6 +21,7 @@
     const CHIP_CLASS = 'train-bar__live-chip';
     const WARN_CHIP_CLASS = 'train-bar__warn-chip';
     const REATTACH_CHIP_CLASS = 'train-bar__reattach-chip';
+    const RETIME_CHIP_CLASS = 'train-bar__retime-chip';
     const HANDLE_CLASS = 'edit-resize-handle';
 
     function getCanvas() { return document.getElementById('timeline-canvas'); }
@@ -40,16 +41,21 @@
 
     // Re-time handles only exist while editing; they're rebuilt each render so
     // they track the bar's current left/width without any geometry math here.
-    // Cut-derived records (a split half / loose departure / severed stub) are
-    // NOT re-timeable yet — their editKey doesn't resolve to a base record — so
-    // they get no handles.
+    // Which edges are re-timeable is owned by the interactions module's single
+    // `retimeableEdges` gate (Phase 5): cut/re-paired products expose only the
+    // edge anchored to a real planned time — never a synthetic cut boundary or a
+    // re-paired bar's adopted departure.
+    function retimeableEdges(train) {
+        const I = window.EditModeInteractions;
+        if (I && typeof I.retimeableEdges === 'function') return I.retimeableEdges(train);
+        return { start: train.arrTime instanceof Date, end: train.depTime instanceof Date };
+    }
     function syncHandles(bar, train) {
         bar.querySelectorAll(`.${HANDLE_CLASS}`).forEach((el) => el.remove());
         if (!isEditing()) return;
-        if (train.editDerived || train._cutLooseDeparture || train._cutSevered
-            || train._repaired || train._repairConsumed) return;
-        if (train.arrTime instanceof Date) bar.appendChild(makeHandle('start'));
-        if (train.depTime instanceof Date) bar.appendChild(makeHandle('end'));
+        const edges = retimeableEdges(train);
+        if (edges.start) bar.appendChild(makeHandle('start'));
+        if (edges.end) bar.appendChild(makeHandle('end'));
     }
 
     function decorateBar(bar) {
@@ -90,6 +96,23 @@
             }
         } else if (reChip) {
             reChip.remove();
+        }
+
+        // Re-time delay-decoupled chip: a re-timed bar sits off its planned slot,
+        // so the live-delay match re-derives. Explanatory only (the truce protects
+        // the bar). Suppressed when inverted — the ⚠ warn chip already speaks.
+        const retimeChip = bar.querySelector(`.${RETIME_CHIP_CLASS}`);
+        if (train._retimed === true && train._inverted !== true) {
+            if (!retimeChip) {
+                const chip = document.createElement('span');
+                chip.className = RETIME_CHIP_CLASS;
+                chip.setAttribute('aria-hidden', 'true');
+                chip.title = 'Tid ändrad — förseningsdata frikopplad (matchas mot nytt schemaläge).';
+                chip.textContent = '⏱';
+                bar.appendChild(chip);
+            }
+        } else if (retimeChip) {
+            retimeChip.remove();
         }
 
         // Inverted-duration warn chip (soft-warn only — the bar stays visible).

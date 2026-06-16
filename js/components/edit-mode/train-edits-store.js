@@ -85,9 +85,16 @@
         return nextId;
     }
 
+    // The projection stamps transient runtime flags on the shared op objects
+    // (`_unresolved`, `_consumeUnresolved`, `_declined`). They are re-derived on
+    // every render, so never persist them — strip underscore-prefixed keys.
+    function stripRuntime(key, value) {
+        return (typeof key === 'string' && key.charAt(0) === '_') ? undefined : value;
+    }
+
     function persistList() {
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(cache || []));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(cache || [], stripRuntime));
         } catch (error) {
             console.warn('[TrainEditsStore] persist failed', error);
         }

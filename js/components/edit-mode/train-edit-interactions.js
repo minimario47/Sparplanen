@@ -70,11 +70,13 @@
         if (!bar) return;
         bar.classList.add('edit-selected');
         // Highlight the handle the keyboard nudges will move, so [ / ] gives
-        // visible feedback even before the first nudge.
+        // visible feedback even before the first nudge. Skip if no re-timeable edge.
         const edge = effectiveEdge(selectedTrain(), activeEdge);
-        const handle = bar.querySelector(edge === 'arr'
-            ? '.edit-resize-handle--start' : '.edit-resize-handle--end');
-        if (handle) handle.classList.add('is-active-edge');
+        if (edge) {
+            const handle = bar.querySelector(edge === 'arr'
+                ? '.edit-resize-handle--start' : '.edit-resize-handle--end');
+            if (handle) handle.classList.add('is-active-edge');
+        }
     }
     function select(trainOrId) {
         selectedId = (trainOrId && typeof trainOrId === 'object') ? trainOrId.id : trainOrId;
@@ -91,9 +93,9 @@
     function retrack(train, params, opts) {
         opts = opts || {};
         if (!train || !window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return;
-        // Cut products are read-only until Phase 4 — their editKey is built from
-        // blanked fields and won't survive removal of the cut op (see phase-3 #1).
-        if (isCutDerived(train)) return;
+        // Phase 5: cut/re-paired products are re-trackable. They carry a stable
+        // `_editKeyBase` so buildEditKey returns a key a re-edit op can bind to
+        // (the two-phase projection resolves it against the appended product).
         const editKey = window.EditKey.buildEditKey(train);
         if (!editKey) return;
 
@@ -154,13 +156,17 @@
     function retime(train, params, opts) {
         opts = opts || {};
         if (!train || !window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return;
-        if (isCutDerived(train)) return;   // cut products read-only until Phase 4
         const editKey = window.EditKey.buildEditKey(train);
         if (!editKey) return;
 
+        // Phase 5: only re-time edges anchored to a real planned time (the single
+        // `retimeableEdges` gate). Drag/keyboard already constrain to those edges;
+        // this is the authoritative guard so a stray delta can't mis-anchor a
+        // product (e.g. a split half's synthetic cut boundary).
+        const edges = retimeableEdges(train);
         const p = {};
-        if (Number.isFinite(params.arrDeltaMin)) p.arrDeltaMin = params.arrDeltaMin;
-        if (Number.isFinite(params.depDeltaMin)) p.depDeltaMin = params.depDeltaMin;
+        if (Number.isFinite(params.arrDeltaMin) && edges.start) p.arrDeltaMin = params.arrDeltaMin;
+        if (Number.isFinite(params.depDeltaMin) && edges.end) p.depDeltaMin = params.depDeltaMin;
         if (p.arrDeltaMin == null && p.depDeltaMin == null) return;
 
         const wasOverridden = train.manualOverride === true;
@@ -198,21 +204,43 @@
         retime(train, edge === 'arr' ? { arrDeltaMin: newDelta } : { depDeltaMin: newDelta });
     }
 
-    // Which edge a keyboard nudge targets: the requested one if it exists on this
-    // train, else fall back to whichever edge the bar actually has.
+    // ── which edges may be re-timed (Phase 5: anchored re-time on products) ──
+    // A re-time op stores a delta from the FROZEN PLANNED time per edge, so only an
+    // edge whose planned anchor equals the displayed reality is safe to nudge. For
+    // cut/re-paired products that means: the real (non-synthetic) leg only — never
+    // a synthetic cut boundary, never a re-paired bar's ADOPTED departure (that
+    // needs a segment-relative delta, deferred). Normal base records: unchanged
+    // from Phase 2 (any time edge). This is the single gate the decorator's handle
+    // injection AND the keyboard/drag paths consult.
+    function retimeableEdges(train) {
+        if (!train) return { start: false, end: false };
+        const hasArr = train.arrTime instanceof Date;
+        const hasDep = train.depTime instanceof Date;
+        if (train._cutSevered)        return { start: hasArr && !train.arrSynthetic, end: false };
+        if (train._cutLooseDeparture) return { start: false, end: hasDep && !train.depSynthetic };
+        if (train._repaired)          return { start: hasArr && !train.arrSynthetic, end: false };
+        if (train._repairConsumed)    return { start: hasArr && !train.arrSynthetic, end: false };
+        if (train.editDerived)        return { start: hasArr && !train.arrSynthetic, end: hasDep && !train.depSynthetic };
+        return { start: hasArr, end: hasDep };
+    }
+
+    // Which edge a keyboard nudge targets: the requested one if it is re-timeable on
+    // this train, else fall back to whichever re-timeable edge the bar has (or null).
     function effectiveEdge(train, requested) {
+        const edges = retimeableEdges(train);
         const want = requested || activeEdge;
-        const hasArr = train && train.arrTime instanceof Date;
-        const hasDep = train && train.depTime instanceof Date;
-        if (want === 'arr' && hasArr) return 'arr';
-        if (want === 'dep' && hasDep) return 'dep';
-        return hasDep ? 'dep' : 'arr';
+        if (want === 'arr' && edges.start) return 'arr';
+        if (want === 'dep' && edges.end) return 'dep';
+        if (edges.end) return 'dep';
+        if (edges.start) return 'arr';
+        return null;
     }
 
     function nudgeEdge(deltaMin, requestedEdge) {
         const train = selectedTrain();
         if (!train) return;
         const edge = effectiveEdge(train, requestedEdge);
+        if (!edge) return;                          // nothing re-timeable on this bar
         const cur = edge === 'arr' ? train.arrTime : train.depTime;
         if (!(cur instanceof Date)) return;
         retimeEdgeAbsolute(train, edge, new Date(cur.getTime() + deltaMin * 60000));
@@ -233,13 +261,11 @@
         console.warn('[edit-cut]', msg);
     }
 
-    // An edit-derived product (cut split half / loose departure / severed stub,
-    // or a Phase-4 re-paired / consumed record) is read-only for the geometry
-    // tools: its identity has been mutated/blanked so a retrack/retime/cut/couple
-    // on it would mis-key. These select only (re-editability is a Phase-5 item).
-    // NOTE: attach (form-a-turn) is the ONE exception — a severed stub IS a valid
-    // attach SOURCE and a loose departure a valid TARGET — so the attach gesture
-    // paths run BEFORE this guard rather than being blocked by it.
+    // An edit-derived product (cut split half / loose departure / severed stub, or
+    // a re-paired / consumed record). As of Phase 5 these ARE re-editable — they
+    // carry a stable `_editKeyBase` so retrack / couple / anchored-retime bind to
+    // them. The only thing still refused on a product is CUT (it isn't a `through`
+    // bar), so this predicate now gates just the keyboard cut path.
     function isCutDerived(train) {
         return !!(train && (train.editDerived || train._cutLooseDeparture
             || train._cutSevered || train._repaired || train._repairConsumed));
@@ -343,7 +369,8 @@
     function couple(train, dir, opts) {
         opts = opts || {};
         if (!train || !window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return false;
-        if (isCutDerived(train)) { notify('Klippta/omkopplade delar kan inte multipelkopplas än.'); return false; }
+        // Phase 5: cut/re-paired products are couplable — count is an absolute,
+        // anchor-free param and binds via the product's `_editKeyBase`.
         const cur = unitCount(train);
         const next = Math.max(1, Math.min(MAX_UNITS, cur + (dir < 0 ? -1 : 1)));
         if (next === cur) { notify(dir < 0 ? 'Redan minst en enhet.' : `Max ${MAX_UNITS} enheter.`); return false; }
@@ -652,13 +679,6 @@
             return;
         }
 
-        // Cut products & re-paired records are read-only — a press just selects.
-        if (isCutDerived(train)) {
-            e.stopPropagation();
-            select(train);
-            return;
-        }
-
         // Scissors tool: a press on a through bar cuts it (variant inferred from
         // where in TIME the press lands) — it never starts a drag.
         if (activeTool() === 'cut') {
@@ -836,12 +856,14 @@
         if (selectedId == null) return;
         if (drag) return;                  // a pointer gesture is mid-flight — ignore keyboard edits
 
-        // Cut products are read-only: allow edge-select navigation but no mutation.
+        // Phase 5: cut/re-paired products are re-editable (retrack / couple /
+        // anchored retime). The op entry points self-gate (couple is absolute;
+        // retime honours `retimeableEdges`), so the keyboard no longer blanket-
+        // blocks them. CUT is the one thing still refused on a product.
         const derived = isCutDerived(selectedTrain());
 
         // Attach (form-a-turn): A or J opens target-pick on the selected arrival-
-        // bearer. Allowed on a severed stub (a valid re-pair SOURCE), so it runs
-        // before the read-only `derived` guards below.
+        // bearer. Allowed on a severed stub (a valid re-pair SOURCE).
         const k = e.key.toLowerCase();
         if (k === 'a' || k === 'j') {
             e.preventDefault();
@@ -849,28 +871,28 @@
             if (t && canBeAttachSource(t)) enterAttachPick(t);
             return;
         }
-        // Couple (K) / decouple (Shift+K) the selected unit.
+        // Couple (K) / decouple (Shift+K) the selected unit (allowed on products).
         if (k === 'k') {
             e.preventDefault();
             const t = selectedTrain();
-            if (t && !derived) couple(t, e.shiftKey ? -1 : 1);
+            if (t) couple(t, e.shiftKey ? -1 : 1);
             return;
         }
 
         if (e.key >= '0' && e.key <= '9') {
             e.preventDefault();
-            if (derived) return;
             numBuffer += e.key;
             if (numTimer) clearTimeout(numTimer);
             if (numBuffer.length >= 2) { commitNumberBuffer(); return; }
             numTimer = setTimeout(commitNumberBuffer, NUM_BUFFER_MS);
             return;
         }
-        if (e.key === 'ArrowUp') { e.preventDefault(); if (!derived) nudgeTrack(-1); return; }
-        if (e.key === 'ArrowDown') { e.preventDefault(); if (!derived) nudgeTrack(1); return; }
-        // Re-time the active edge: ←/→ = ±5 min, Shift+←/→ = ±1 min.
-        if (e.key === 'ArrowLeft') { e.preventDefault(); if (!derived) nudgeEdge(e.shiftKey ? -1 : -5); return; }
-        if (e.key === 'ArrowRight') { e.preventDefault(); if (!derived) nudgeEdge(e.shiftKey ? 1 : 5); return; }
+        if (e.key === 'ArrowUp') { e.preventDefault(); nudgeTrack(-1); return; }
+        if (e.key === 'ArrowDown') { e.preventDefault(); nudgeTrack(1); return; }
+        // Re-time the active edge: ←/→ = ±5 min, Shift+←/→ = ±1 min. nudgeEdge
+        // no-ops when the bar has no re-timeable edge (e.g. a re-paired right edge).
+        if (e.key === 'ArrowLeft') { e.preventDefault(); nudgeEdge(e.shiftKey ? -1 : -5); return; }
+        if (e.key === 'ArrowRight') { e.preventDefault(); nudgeEdge(e.shiftKey ? 1 : 5); return; }
         // [ / ] pick which edge (arrival / departure) the nudges target.
         if (e.key === '[') { e.preventDefault(); activeEdge = 'arr'; paintSelection(); return; }
         if (e.key === ']') { e.preventDefault(); activeEdge = 'dep'; paintSelection(); return; }
@@ -924,5 +946,5 @@
 
     window.EditModeInteractions = { retrack, retime, nudgeEdge, cut, canCut,
         couple, attach, isAttachPicking, cancelAttachPick: exitAttachPick,
-        select, clearSelection, getSelectedId, followLiveAgain };
+        select, clearSelection, getSelectedId, followLiveAgain, retimeableEdges };
 })();

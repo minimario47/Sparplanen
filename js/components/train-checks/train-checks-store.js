@@ -1,11 +1,13 @@
 /**
  * Train Checks Store
  *
- * Tracks "controlled / signed off" status per train, persisted in
- * localStorage. The set of checked train IDs is exposed as a small,
- * lightweight store similar to TrainNotesStore.
+ * Tracks "controlled / signed off" status per train, persisted in localStorage.
+ * Stored under `train.id` but RESOLVED by occurrence IDENTITY (the stable
+ * `editKey`), exactly like TrainNotesStore: a checkmark belongs to ONE train
+ * occurrence, is shown only on the train whose identity matches (never on another
+ * train / another day), and follows its train across an id renumber.
  *
- * Storage format: { "[trainId]": { checkedAt: ISO-8601 } }
+ * Storage format: { "[trainId]": { checkedAt: ISO-8601, editKey } }
  *
  * Public API (window.TrainChecksStore):
  *   isChecked(id)          → boolean
@@ -65,32 +67,57 @@
         return String(id);
     }
 
+    // Occurrence identity of the train currently at `id` (see TrainNotesStore).
+    function identityFor(id) {
+        if (!window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return null;
+        const t = Array.isArray(window.cachedTrains)
+            ? window.cachedTrains.find((x) => String(x.id) === String(id)) : null;
+        return t ? (window.EditKey.buildEditKey(t) || null) : null;
+    }
+
+    // Resolve the entry belonging to the occurrence currently at `id`, BY IDENTITY
+    // → { key, meta } | null. Same rules as TrainNotesStore.resolveRef.
+    function resolveRef(k) {
+        const data = load();
+        const ek = identityFor(k);
+        if (!ek) return data[k] ? { key: k, meta: data[k] } : null;
+        if (data[k] && data[k].editKey === ek) return { key: k, meta: data[k] };
+        for (const kk in data) {
+            if (data[kk] && data[kk].editKey === ek) return { key: kk, meta: data[kk] };
+        }
+        if (data[k] && !data[k].editKey) { data[k].editKey = ek; persist(); return { key: k, meta: data[k] }; }
+        return null;
+    }
+
     function isChecked(id) {
         const k = key(id);
         if (!k) return false;
-        return Boolean(load()[k]);
+        return Boolean(resolveRef(k));
     }
 
     function getMeta(id) {
         const k = key(id);
         if (!k) return null;
-        return load()[k] || null;
+        const ref = resolveRef(k);
+        return ref ? ref.meta : null;
     }
 
     function set(id, checked) {
         const k = key(id);
         if (!k) return false;
         const data = load();
-        const exists = Boolean(data[k]);
+        const ref = resolveRef(k);            // entry for THIS occurrence (any id)
+        const exists = Boolean(ref);
         const next = Boolean(checked);
         if (next === exists) return false;
         if (next) {
-            data[k] = { checkedAt: new Date().toISOString() };
+            const editKey = identityFor(k) || null;
+            data[k] = { checkedAt: new Date().toISOString(), editKey };
         } else {
-            delete data[k];
+            delete data[ref.key];
         }
         persist();
-        notify({ id: k, checked: next });
+        notify({ id: next ? k : ref.key, checked: next });
         return true;
     }
 

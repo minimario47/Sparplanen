@@ -15,7 +15,7 @@ not every compression).
 
 **Branch:** all work lives on `feature/cut-attach-editing` (off `main`). Stay on this branch through Phase 5; do not merge to `main` until the feature is done. Phase 0 committed as `6103df48`, Phase 1 as `d4a093ab`.
 
-**Locked decisions:** (1) edits are **device-local only** (localStorage; no Firestore). (2) **No hard blocks — soft-warn only**; negative/zero-duration bars are allowed and must stay visible.
+**Locked decisions:** (1) edits are **device-local only** (localStorage; no Firestore). (2) **No hard blocks — soft-warn only**; negative/zero-duration bars are allowed and must stay visible. (3) **[Phase 5, owner] An edit/note belongs to ONE train occurrence (`week|day|track|sub|number|time`) and must NEVER carry or rebind to another train** — a repeating number on another day/week is a *different* train. So an op that doesn't resolve simply doesn't apply (no reconcile tray, no cross-occurrence migration).
 
 | Phase | Title | Status | Todo / record |
 |---|---|---|---|
@@ -24,7 +24,7 @@ not every compression).
 | 2 | Re-time | ✅ done & verified | `phase-2.md` (Handoff) |
 | 3 | Cut (sever-turn / time-split) | ✅ done & verified | `phase-3.md` (Handoff) |
 | 4 | Attach / couple | ✅ done & verified | `phase-4.md` (Handoff) |
-| 5 | Polish & resilience | ⏭️ next | `phase-5.md` |
+| 5 | Polish & resilience | ✅ done (re-scoped) | `phase-5.md` |
 
 **Current state:** re-track, re-time, cut, AND attach/couple are live and verified. In edit mode you can:
 - **Re-track** a bar to another track by drag (vertical ghost), keyboard (select → type a track number or `↑/↓`), or the context menu ("⇅ Flytta till spår…", works outside edit mode).

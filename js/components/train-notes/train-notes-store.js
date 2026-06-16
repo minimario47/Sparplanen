@@ -1,11 +1,14 @@
 /**
  * Train Notes Store
  *
- * Persists per-train free-text notes in localStorage. Notes are keyed by
- * the stable `train.id` (which corresponds to `service.id` in trains.js,
- * or to the negative IDs used by user-added trains).
+ * Persists per-train free-text notes in localStorage. Notes are STORED under
+ * `train.id` but RESOLVED by occurrence IDENTITY (the stable `editKey` =
+ * week|day|track|sub|number|time). A note therefore belongs to ONE specific train
+ * occurrence and is shown only on the train whose identity matches — never on
+ * another train (a repeating number on another day/week is a different train), and
+ * it follows its train if the positional id renumbers within the same occurrence.
  *
- * Storage format:  { "[trainId]": { text: string, updatedAt: ISO-8601 } }
+ * Storage format:  { "[trainId]": { text, updatedAt, editKey } }
  *
  * Public API (window.TrainNotesStore):
  *   get(id)        → string | ''
@@ -70,6 +73,40 @@
         return String(id);
     }
 
+    // The occurrence identity of the train currently at `id` (from the rendered
+    // set). editKey embeds week|day|track|sub|number|time, so it is unique to one
+    // train occurrence and stable across an id renumber within that occurrence.
+    function identityFor(id) {
+        if (!window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return null;
+        const t = Array.isArray(window.cachedTrains)
+            ? window.cachedTrains.find((x) => String(x.id) === String(id)) : null;
+        return t ? (window.EditKey.buildEditKey(t) || null) : null;
+    }
+
+    // Resolve the stored entry that belongs to the occurrence currently at `id`,
+    // BY IDENTITY → { key, meta } | null:
+    //   • entry under this id whose editKey matches            → it (common case)
+    //   • entry under ANY id whose editKey matches             → it (id renumbered)
+    //   • legacy entry under this id with no editKey           → adopt it once
+    //   • entry under this id with a DIFFERENT editKey, or none → null (never show
+    //     a note on a train it doesn't belong to)
+    // Falls back to plain id lookup only when identity is unavailable (e.g.
+    // cachedTrains not ready yet) — the decorator re-runs once it is.
+    function resolveRef(k) {
+        const data = load();
+        const ek = identityFor(k);
+        if (!ek) return data[k] ? { key: k, meta: data[k] } : null;
+        if (data[k] && data[k].editKey === ek) return { key: k, meta: data[k] };
+        for (const kk in data) {
+            if (data[kk] && data[kk].editKey === ek) return { key: kk, meta: data[kk] };
+        }
+        if (data[k] && !data[k].editKey) {                 // legacy → adopt to this occurrence
+            data[k].editKey = ek; persist();
+            return { key: k, meta: data[k] };
+        }
+        return null;
+    }
+
     function get(id) {
         const meta = getMeta(id);
         return meta ? meta.text : '';
@@ -78,8 +115,8 @@
     function getMeta(id) {
         const k = key(id);
         if (!k) return null;
-        const data = load();
-        return data[k] || null;
+        const ref = resolveRef(k);
+        return ref ? ref.meta : null;
     }
 
     function has(id) {
@@ -91,19 +128,24 @@
         if (!k) return false;
         const trimmed = String(text || '').slice(0, MAX_LENGTH);
         const data = load();
-        const current = data[k];
+        const ref = resolveRef(k);            // the entry for THIS occurrence (any id)
 
         if (!trimmed.trim()) {
-            if (!current) return false;
-            delete data[k];
+            if (!ref) return false;
+            delete data[ref.key];
             persist();
-            notify({ id: k, text: '', removed: true });
+            notify({ id: ref.key, text: '', removed: true });
             return true;
         }
 
-        if (current && current.text === trimmed) return false;
+        if (ref && ref.meta.text === trimmed && ref.key === k) return false;
 
-        data[k] = { text: trimmed, updatedAt: new Date().toISOString() };
+        // Capture the occurrence identity now (the id is valid in the current
+        // build — the user is annotating a visible bar) and consolidate the entry
+        // under the current id so the note can never split across two slots.
+        const editKey = identityFor(k) || (ref && ref.meta.editKey) || null;
+        if (ref && ref.key !== k) delete data[ref.key];
+        data[k] = { text: trimmed, updatedAt: new Date().toISOString(), editKey };
         persist();
         notify({ id: k, text: trimmed, removed: false });
         return true;
