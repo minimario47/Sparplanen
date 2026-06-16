@@ -15,10 +15,10 @@
     const TOOLS = [
         { tool: 'select', label: 'Markera', key: 'V', icon: 'M4 4l7 16 2-7 7-2z', enabled: true },
         { tool: 'cut', label: 'Klipp', key: 'C', icon: 'M6 6l12 12M6 18L18 6', enabled: true },
-        { tool: 'attach', label: 'Koppla', key: 'A', icon: 'M9 12h6M7 8a4 4 0 000 8M17 8a4 4 0 010 8', enabled: false },
+        { tool: 'attach', label: 'Koppla', key: 'A', icon: 'M9 12h6M7 8a4 4 0 000 8M17 8a4 4 0 010 8', enabled: true },
         { tool: 'retrack', label: 'Flytta spår', key: '', icon: 'M12 4v16M8 8l4-4 4 4M8 16l4 4 4-4', enabled: true },
         { tool: 'retime', label: 'Ändra tid', key: '', icon: 'M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4', enabled: true },
-        { tool: 'unit', label: 'Dela/ihop', key: 'K', icon: 'M7 7h4v10H7zM13 7h4v10h-4z', enabled: false },
+        { tool: 'unit', label: 'Dela/ihop', key: 'K', icon: 'M7 7h4v10H7zM13 7h4v10h-4z', enabled: true },
         { tool: 'delete', label: 'Ta bort', key: '', icon: 'M6 7h12M9 7V5h6v2M8 7l1 12h6l1-12', enabled: false }
     ];
 
@@ -92,6 +92,14 @@
     function setActiveTool(tool) {
         const def = TOOLS.find((t) => t.tool === tool);
         if (!def || !def.enabled) return;
+        // Switching tools must cancel any open attach target-pick — otherwise the
+        // dim-everything pick state (and its live JS pick) would stick, since the
+        // palette lives outside the canvas and never reaches the canvas cancel path.
+        const I = window.EditModeInteractions;
+        if (tool !== activeTool && I && typeof I.isAttachPicking === 'function'
+            && I.isAttachPicking() && typeof I.cancelAttachPick === 'function') {
+            I.cancelAttachPick();
+        }
         activeTool = tool;
         paintActiveTool();
     }
@@ -155,7 +163,13 @@
             if (e.shiftKey) s.redo(); else s.undo();
             return;
         }
-        if (s.active && e.key === 'Escape') { e.preventDefault(); requestExit(); return; }
+        if (s.active && e.key === 'Escape') {
+            // An in-flight attach target-pick owns Escape (cancel the pick, not
+            // the whole session); let the interactions handler take it.
+            const I = window.EditModeInteractions;
+            if (I && typeof I.isAttachPicking === 'function' && I.isAttachPicking()) return;
+            e.preventDefault(); requestExit(); return;
+        }
         if (!meta && (e.key === 'e' || e.key === 'E')) { e.preventDefault(); toggle(); }
     }
 

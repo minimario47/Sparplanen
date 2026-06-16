@@ -233,12 +233,16 @@
         console.warn('[edit-cut]', msg);
     }
 
-    // A cut product (split half / loose departure / severed stub) is read-only:
-    // its editKey is built from blanked/mutated fields and won't resolve to a base
-    // record, so any retrack/retime/cut on it would silently fail. Until Phase 4
-    // teaches ops to target the original-through-bar + a segment, these select only.
+    // An edit-derived product (cut split half / loose departure / severed stub,
+    // or a Phase-4 re-paired / consumed record) is read-only for the geometry
+    // tools: its identity has been mutated/blanked so a retrack/retime/cut/couple
+    // on it would mis-key. These select only (re-editability is a Phase-5 item).
+    // NOTE: attach (form-a-turn) is the ONE exception — a severed stub IS a valid
+    // attach SOURCE and a loose departure a valid TARGET — so the attach gesture
+    // paths run BEFORE this guard rather than being blocked by it.
     function isCutDerived(train) {
-        return !!(train && (train.editDerived || train._cutLooseDeparture || train._cutSevered));
+        return !!(train && (train.editDerived || train._cutLooseDeparture
+            || train._cutSevered || train._repaired || train._repairConsumed));
     }
 
     // Scissors is allowed only on a real through bar — never on a synthetic
@@ -322,6 +326,200 @@
     function activeTool() {
         return (window.EditModeController && typeof window.EditModeController.getActiveTool === 'function')
             ? window.EditModeController.getActiveTool() : 'select';
+    }
+
+    // ── couple / decouple (Phase 4) ──────────────────────────────────────────
+    const MAX_UNITS = 6;
+    function vehDef(train) {
+        const id = train && train.trainSet && train.trainSet.vehicleTypeID;
+        return (id && typeof getVehicleDefinition === 'function') ? getVehicleDefinition(id) : null;
+    }
+    function unitCount(train) {
+        const n = parseInt(train && (train.vehicleCount != null ? train.vehicleCount : train.trainSet && train.trainSet.count), 10);
+        return Math.max(1, Math.min(MAX_UNITS, Number.isFinite(n) ? n : 1));
+    }
+    // Strengthen (+1) / weaken (−1) a unit. Soft-warn only (decision #2): a
+    // vehicle flagged canBeMultiple:false still couples, it just warns.
+    function couple(train, dir, opts) {
+        opts = opts || {};
+        if (!train || !window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return false;
+        if (isCutDerived(train)) { notify('Klippta/omkopplade delar kan inte multipelkopplas än.'); return false; }
+        const cur = unitCount(train);
+        const next = Math.max(1, Math.min(MAX_UNITS, cur + (dir < 0 ? -1 : 1)));
+        if (next === cur) { notify(dir < 0 ? 'Redan minst en enhet.' : `Max ${MAX_UNITS} enheter.`); return false; }
+        if (dir > 0) {
+            const d = vehDef(train);
+            if (d && d.canBeMultiple === false) notify(`⚠ ${d.name} kan normalt inte multipelkopplas — tillåts ändå.`);
+        }
+        const editKey = window.EditKey.buildEditKey(train);
+        if (!editKey) return false;
+        const op = { op: 'couple', editKey, params: { count: next }, before: { count: cur } };
+        if (!logOp(op, opts)) return false;
+        if (train.id != null && window.TrackChangesStore && typeof window.TrackChangesStore.suppress === 'function') {
+            window.TrackChangesStore.suppress(train.id);
+        }
+        return true;
+    }
+
+    // ── attach / form-a-turn (Phase 4) ───────────────────────────────────────
+    const TURNAROUND_FLOOR_MIN = 10;     // commuter vändningstid floor (soft warn)
+
+    // A source must have an arrival to "turn" — a through (re-pair its departure),
+    // an arrival-only bar, or a severed stub. A pure departure-only bar cannot.
+    function canBeAttachSource(train) {
+        return !!(train && train.arrTime instanceof Date && !train._repairConsumed);
+    }
+    function hasDepartureLeg(train) {
+        return !!(train && train.depTime instanceof Date
+            && (String(train.departureTrainNumber || '').trim()
+                || String(train.departureLabel || '').trim()
+                || train._cutLooseDeparture));
+    }
+    // Candidate departures the source could adopt, ranked by how close the onward
+    // departure sits to the unit's arrival (the natural turn), within a window.
+    function attachCandidatesFor(source) {
+        if (!source || !Array.isArray(window.cachedTrains)) return [];
+        const sa = source.arrTime instanceof Date ? source.arrTime.getTime() : null;
+        const list = window.cachedTrains.filter((t) => {
+            if (t === source) return false;
+            if (!hasDepartureLeg(t)) return false;
+            if (sa != null) {
+                const gapMin = (t.depTime.getTime() - sa) / 60000;
+                if (gapMin < -120 || gapMin > 360) return false;   // [-2h, +6h] of arrival
+            }
+            return true;
+        });
+        if (sa != null) list.sort((a, b) => Math.abs(a.depTime.getTime() - sa) - Math.abs(b.depTime.getTime() - sa));
+        return list.slice(0, 12);
+    }
+
+    // Pick state is held by ID, never by object reference: prepareTrainData
+    // rebuilds cachedTrains from scratch on every render (a live delay poll can
+    // fire mid-pick), so holding stale objects would dim the wrong bars and
+    // capture a stale departure time. Re-resolve live from cachedTrains instead.
+    let attachSourceId = null;
+    let attachCandidateIds = [];
+    let attachIdx = 0;
+    function isAttachPicking() { return attachSourceId != null; }
+    function trainByCacheId(id) {
+        if (id == null || !Array.isArray(window.cachedTrains)) return null;
+        return window.cachedTrains.find((t) => String(t.id) === String(id)) || null;
+    }
+
+    function barById(id) {
+        const canvas = getCanvas();
+        return canvas ? canvas.querySelector(`.train-bar[data-train-id="${CSS.escape(String(id))}"]`) : null;
+    }
+    function paintAttach() {
+        const canvas = getCanvas();
+        if (!canvas) return;
+        canvas.querySelectorAll('.edit-attach-source,.edit-attach-candidate,.edit-attach-focus')
+            .forEach((el) => el.classList.remove('edit-attach-source', 'edit-attach-candidate', 'edit-attach-focus'));
+        if (attachSourceId == null) { document.body.removeAttribute('data-edit-attach'); return; }
+        document.body.dataset.editAttach = 'picking';
+        const sBar = barById(attachSourceId);
+        if (sBar) sBar.classList.add('edit-attach-source');
+        attachCandidateIds.forEach((id, i) => {
+            const bar = barById(id);
+            if (!bar) return;
+            bar.classList.add('edit-attach-candidate');
+            if (i === attachIdx) bar.classList.add('edit-attach-focus');
+        });
+    }
+    function enterAttachPick(source) {
+        if (!canBeAttachSource(source)) { notify('Välj ett tåg med ankomst att vända.'); return; }
+        const cands = attachCandidatesFor(source);
+        if (!cands.length) { notify('Inga giltiga avgångar att koppla till i närheten.'); return; }
+        attachSourceId = source.id;
+        attachCandidateIds = cands.map((c) => c.id);
+        attachIdx = 0;
+        select(source);
+        paintAttach();
+        notify('Välj avgång att vända till — Tab växlar, Enter bekräftar, Esc avbryter.');
+    }
+    function cycleAttach(dir) {
+        if (!attachCandidateIds.length) return;
+        const n = attachCandidateIds.length;
+        attachIdx = ((attachIdx + (dir < 0 ? -1 : 1)) % n + n) % n;
+        paintAttach();
+    }
+    function exitAttachPick() {
+        attachSourceId = null;
+        attachCandidateIds = [];
+        attachIdx = 0;
+        paintAttach();
+    }
+    function commitAttach() {
+        // Re-resolve by id so we read the CURRENT departure time, not a stale
+        // snapshot from before an intervening re-render.
+        const source = trainByCacheId(attachSourceId);
+        const target = trainByCacheId(attachCandidateIds[attachIdx]);
+        exitAttachPick();
+        if (source && target) attach(source, target);
+    }
+
+    // Soft validations (decision #2): surface Swedish warnings, never block.
+    function warnAttach(source, target) {
+        const msgs = [];
+        const sd = vehDef(source), td = vehDef(target);
+        if (sd && td && sd.category && td.category && sd.category !== td.category) {
+            msgs.push(`Fordonstyperna (${sd.name}/${td.name}) kan kanske inte kopplas`);
+        }
+        if (source.arrTime instanceof Date && target.depTime instanceof Date) {
+            const gap = Math.round((target.depTime.getTime() - source.arrTime.getTime()) / 60000);
+            if (gap < 0) msgs.push('Avgång före ankomst');
+            else if (gap < TURNAROUND_FLOOR_MIN) msgs.push(`Vändningstid ${gap} min (under ${TURNAROUND_FLOOR_MIN})`);
+        }
+        if (msgs.length) notify('⚠ ' + msgs.join(' · ') + ' — tillåts ändå.');
+    }
+
+    // Write target's departure leg onto the source (form a turn). The source's
+    // editKey (frozen planned fields) keys the op; consumeKey points the
+    // projection at the record whose departure was adopted, to strip it.
+    function attach(source, target, opts) {
+        opts = opts || {};
+        if (!source || !target || !window.EditKey || typeof window.EditKey.buildEditKey !== 'function') return false;
+        if (!canBeAttachSource(source)) { notify('Källan saknar ankomst att vända.'); return false; }
+        if (!hasDepartureLeg(target)) { notify('Målet saknar avgång att överta.'); return false; }
+        const editKey = window.EditKey.buildEditKey(source);
+        const consumeKey = window.EditKey.buildEditKey(target);
+        if (!editKey || !consumeKey || editKey === consumeKey) { notify('Kan inte vända till sig själv.'); return false; }
+        warnAttach(source, target);
+
+        const pArr = source.plannedArrTime instanceof Date ? source.plannedArrTime : source.arrTime;
+        let depOffsetMin = null;
+        if (pArr instanceof Date && target.depTime instanceof Date) {
+            depOffsetMin = Math.round((target.depTime.getTime() - pArr.getTime()) / 60000);
+        }
+        const params = {
+            departureTrainNumber: target.departureTrainNumber || '',
+            departureLabel: target.departureLabel || '',
+            depOffsetMin,
+            consumeKey
+        };
+        const wasOverridden = source.manualOverride === true;
+        const op = { op: 'attach', editKey, params, before: {} };
+        if (!logOp(op, opts)) return false;
+        if (source.id != null && window.TrackChangesStore && typeof window.TrackChangesStore.suppress === 'function') {
+            window.TrackChangesStore.suppress(source.id);
+        }
+        if (!wasOverridden) maybeShowTruceToast(source, editKey);
+        return true;
+    }
+
+    // Shared op-sink: append to the live session, or commit straight to the store
+    // when invoked outside a session. Returns false if neither sink exists.
+    function logOp(op, opts) {
+        opts = opts || {};
+        const session = window.EditSession;
+        if (session && session.active && !opts.commitNow) { session.addOp(op); return true; }
+        if (window.TrainEditsStore && typeof window.TrainEditsStore.addMany === 'function') {
+            const sel = window.currentScheduleSelection || {};
+            const scope = { week: sel.week || null, day: sel.day || null, anchorStr: sel.anchorStr || null };
+            window.TrainEditsStore.addMany([{ ...op, scope }]);
+            return true;
+        }
+        return false;
     }
 
     // ── cut-guide (hover affordance for the scissors) ────────────────────────
@@ -421,14 +619,40 @@
         const bar = e.target.closest && e.target.closest('.train-bar');
         const canvas = getCanvas();
         if (!bar || !canvas || !canvas.contains(bar)) {
-            // empty-grid press in edit mode clears the current selection
-            if (!bar) clearSelection();
+            // empty-grid press: cancel an in-flight attach pick, else clear selection
+            if (!bar) { if (isAttachPicking()) exitAttachPick(); else clearSelection(); }
             return;
         }
         const train = trainFromBar(bar);
         if (!train) return;
 
-        // Cut products are read-only — a press just selects, never drags/cuts.
+        // Attach target-pick in progress: a press on a candidate commits it; a
+        // press elsewhere cancels. Compare by id (candidate set is held by id).
+        if (isAttachPicking()) {
+            e.stopPropagation();
+            const idx = attachCandidateIds.findIndex((id) => String(id) === String(train.id));
+            if (idx !== -1) { attachIdx = idx; commitAttach(); }
+            else if (String(train.id) !== String(attachSourceId)) exitAttachPick();
+            return;
+        }
+
+        // Koppla tool: first press on an arrival-bearing bar opens target-pick.
+        if (activeTool() === 'attach') {
+            e.stopPropagation();
+            if (canBeAttachSource(train)) enterAttachPick(train);
+            else { select(train); notify('Välj ett tåg med ankomst att vända.'); }
+            return;
+        }
+
+        // Dela/ihop tool: a press couples (+1); decouple via Shift+K on the keyboard.
+        if (activeTool() === 'unit') {
+            e.stopPropagation();
+            select(train);
+            couple(train, 1);
+            return;
+        }
+
+        // Cut products & re-paired records are read-only — a press just selects.
         if (isCutDerived(train)) {
             e.stopPropagation();
             select(train);
@@ -598,12 +822,40 @@
     }
     function onKeydown(e) {
         if (!isEditing() || isTypingTarget(e.target)) return;
+
+        // Attach target-pick owns Tab/Enter/Esc while active (before the meta
+        // guard so a stray modifier can't leak the keys to other handlers).
+        if (isAttachPicking()) {
+            if (e.key === 'Tab') { e.preventDefault(); cycleAttach(e.shiftKey ? -1 : 1); return; }
+            if (e.key === 'Enter') { e.preventDefault(); commitAttach(); return; }
+            if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); exitAttachPick(); return; }
+            return; // swallow everything else so nothing mutates mid-pick
+        }
+
         if (e.metaKey || e.ctrlKey || e.altKey) return; // leave undo/redo etc. alone
         if (selectedId == null) return;
         if (drag) return;                  // a pointer gesture is mid-flight — ignore keyboard edits
 
         // Cut products are read-only: allow edge-select navigation but no mutation.
         const derived = isCutDerived(selectedTrain());
+
+        // Attach (form-a-turn): A or J opens target-pick on the selected arrival-
+        // bearer. Allowed on a severed stub (a valid re-pair SOURCE), so it runs
+        // before the read-only `derived` guards below.
+        const k = e.key.toLowerCase();
+        if (k === 'a' || k === 'j') {
+            e.preventDefault();
+            const t = selectedTrain();
+            if (t && canBeAttachSource(t)) enterAttachPick(t);
+            return;
+        }
+        // Couple (K) / decouple (Shift+K) the selected unit.
+        if (k === 'k') {
+            e.preventDefault();
+            const t = selectedTrain();
+            if (t && !derived) couple(t, e.shiftKey ? -1 : 1);
+            return;
+        }
 
         if (e.key >= '0' && e.key <= '9') {
             e.preventDefault();
@@ -650,12 +902,16 @@
             canvas.addEventListener('pointermove', onCutHover, { passive: true });
         }
         document.addEventListener('keydown', onKeydown);
-        // Re-apply the selection ring after every re-render (bars are rebuilt).
-        window.addEventListener('schedule:rendered', paintSelection);
+        // Re-apply the selection ring AND any open attach-pick highlight after
+        // every re-render (bars are rebuilt; a live poll can fire mid-pick, so
+        // without this the dim-everything CSS would have no candidates to spare).
+        window.addEventListener('schedule:rendered', () => { paintSelection(); paintAttach(); });
         // Leaving edit mode drops the selection.
         if (window.EditSession && typeof window.EditSession.subscribe === 'function') {
             window.EditSession.subscribe((evt) => {
-                if (evt && (evt.type === 'discard' || evt.type === 'commit')) { clearSelection(); hideCutGuide(); }
+                if (evt && (evt.type === 'discard' || evt.type === 'commit')) {
+                    clearSelection(); hideCutGuide(); exitAttachPick();
+                }
             });
         }
     }
@@ -666,5 +922,7 @@
         init();
     }
 
-    window.EditModeInteractions = { retrack, retime, nudgeEdge, cut, canCut, select, clearSelection, getSelectedId, followLiveAgain };
+    window.EditModeInteractions = { retrack, retime, nudgeEdge, cut, canCut,
+        couple, attach, isAttachPicking, cancelAttachPick: exitAttachPick,
+        select, clearSelection, getSelectedId, followLiveAgain };
 })();

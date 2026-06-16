@@ -20,6 +20,7 @@
 
     const CHIP_CLASS = 'train-bar__live-chip';
     const WARN_CHIP_CLASS = 'train-bar__warn-chip';
+    const REATTACH_CHIP_CLASS = 'train-bar__reattach-chip';
     const HANDLE_CLASS = 'edit-resize-handle';
 
     function getCanvas() { return document.getElementById('timeline-canvas'); }
@@ -45,7 +46,8 @@
     function syncHandles(bar, train) {
         bar.querySelectorAll(`.${HANDLE_CLASS}`).forEach((el) => el.remove());
         if (!isEditing()) return;
-        if (train.editDerived || train._cutLooseDeparture || train._cutSevered) return;
+        if (train.editDerived || train._cutLooseDeparture || train._cutSevered
+            || train._repaired || train._repairConsumed) return;
         if (train.arrTime instanceof Date) bar.appendChild(makeHandle('start'));
         if (train.depTime instanceof Date) bar.appendChild(makeHandle('end'));
     }
@@ -66,6 +68,28 @@
             bar.dataset.cutSeam = train.depSynthetic ? 'right' : (train.arrSynthetic ? 'left' : 'none');
         } else {
             bar.removeAttribute('data-cut-seam');
+        }
+
+        // Phase-4 attach state: a re-paired turn (adopted a new departure) and a
+        // consumed provider (gave its departure away). Both read-only for now.
+        bar.classList.toggle('is-reattached', train._repaired === true);
+        bar.classList.toggle('is-consumed', train._repairConsumed === true);
+        bar.classList.toggle('is-coupled', train._coupled === true);
+
+        // Re-pair chip: the departure number changed, so the live-delay match is
+        // re-derived against the adopted number (the truce protects the bar).
+        const reChip = bar.querySelector(`.${REATTACH_CHIP_CLASS}`);
+        if (train._repaired === true) {
+            if (!reChip) {
+                const chip = document.createElement('span');
+                chip.className = REATTACH_CHIP_CLASS;
+                chip.setAttribute('aria-hidden', 'true');
+                chip.title = 'Vändning ändrad — förseningsdata omkopplad till nytt avgångsnummer.';
+                chip.textContent = '🔗';
+                bar.appendChild(chip);
+            }
+        } else if (reChip) {
+            reChip.remove();
         }
 
         // Inverted-duration warn chip (soft-warn only — the bar stays visible).

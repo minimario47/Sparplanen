@@ -136,6 +136,54 @@
             train._splitSibling = sib;
             train.editDerived = true;
             return [b];
+        },
+
+        // Couple / decouple (Phase 4) — strengthen or weaken a unit by setting an
+        // ABSOLUTE target count (`params.count`, last-write-wins like retime). The
+        // renderer derives the bar's vertical lane span from `vehicleCount`
+        // (train-positioning.js#getVehicleSpan, clamped 1..6), so raising the
+        // count draws a taller multi-unit bar with no other change. Both
+        // `vehicleCount` and `trainSet.count` are set so every reader agrees.
+        couple(train, params) {
+            const n = parseInt(params.count, 10);
+            if (!Number.isFinite(n)) return false;
+            const count = Math.max(1, Math.min(6, n));
+            train.vehicleCount = count;
+            train.trainSet = (train.trainSet && typeof train.trainSet === 'object')
+                ? Object.assign({}, train.trainSet, { count })
+                : { vehicleTypeID: 'X40', count };
+            train._coupled = count > 1;
+            return null;
+        },
+
+        // Attach / form-a-turn (Phase 4) — the inverse of `cut`'s sever. Adopt a
+        // departure leg (number/label/time, captured at gesture time) onto THIS
+        // arrival-bearing record, so the arriving unit now departs as that number
+        // (vändning). The departure-PROVIDING record is consumed separately in
+        // applyList's post-pass (params.consumeKey) — deferred so it can resolve
+        // against a record a sibling cut op appended (a loose departure).
+        //   • depTime is stored as `depOffsetMin` = minutes from THIS record's
+        //     frozen planned arrival, so the dwell is midnight-safe (Date math)
+        //     and rides along if the arrival is later re-timed.
+        attach(train, params) {
+            params = params || {};
+            if (!(train.arrTime instanceof Date)) return false;   // need an arrival to turn
+            if (params.departureTrainNumber != null) train.departureTrainNumber = params.departureTrainNumber;
+            if (params.departureLabel != null) train.departureLabel = params.departureLabel;
+            const pArr = (train.plannedArrTime instanceof Date) ? train.plannedArrTime : train.arrTime;
+            if (Number.isFinite(params.depOffsetMin) && pArr instanceof Date) {
+                train.depTime = new Date(pArr.getTime() + params.depOffsetMin * 60000);
+            }
+            train.depSynthetic = false;
+            train._cutSevered = false;            // re-paired: no longer a bare stub
+            if (train.depTime instanceof Date) {
+                train.movementKind = 'through';
+                // Soft-warn only (decision #2): a re-pair whose adopted departure
+                // lands at/before arrival stays visible, hatched + chipped.
+                if (train.depTime.getTime() <= train.arrTime.getTime()) train._inverted = true;
+            }
+            train._repaired = true;
+            return null;                          // consume handled by applyList
         }
     };
 
@@ -182,6 +230,11 @@
         // AFTER the loop, so an op's editKey never resolves against a sibling a
         // prior op in the same pass produced.
         const appended = [];
+        // attach ops record the editKey of the departure they adopted, so the
+        // post-pass can blank that record's departure (consume it) once any
+        // appended siblings are in the array. Carry the op so an ambiguous
+        // consumeKey can be flagged like the main loop's `_unresolved`.
+        const consumeReqs = [];
         ops.forEach((op) => {
             if (!op || !op.editKey) return;
             const { matches, count } = EditKey.resolveEditKey(op.editKey, trains);
@@ -189,8 +242,46 @@
             delete op._unresolved;
             const extra = applyOne(matches[0], op, isDraft);
             if (extra) appended.push(...extra);
+            if (op.op === 'attach' && op._declined !== true && op.params
+                && op.params.consumeKey && op.params.consumeKey !== op.editKey) {
+                consumeReqs.push(op);
+            }
         });
         if (appended.length) trains.push(...appended);
+
+        // Consume pass (attach): the departure leg the re-pair adopted now lives
+        // on the source record, so strip it from its original provider. If that
+        // leaves the provider with no arrival either (a loose departure fully
+        // absorbed into a turn), drop the record entirely. Runs after `appended`
+        // is merged so a committed cut's loose-departure product is visible here.
+        if (consumeReqs.length) {
+            const drop = [];
+            consumeReqs.forEach((op) => {
+                const res = EditKey.resolveEditKey(op.params.consumeKey, trains);
+                // count 0 (provider already gone) or >1 (ambiguous): do NOT blank a
+                // wrong/absent bar. Flag it (mirrors `_unresolved`) for the Phase-5
+                // reconcile tray rather than silently leaving a duplicate departure.
+                if (res.count !== 1) { op._consumeUnresolved = res.count; return; }
+                delete op._consumeUnresolved;
+                const rec = res.matches[0];
+                rec.departureTrainNumber = '';
+                rec.departureLabel = '';
+                rec.depTime = null;
+                rec.depSynthetic = false;
+                rec._cutLooseDeparture = false;
+                rec._edited = true;
+                rec.manualOverride = true;
+                rec._repairConsumed = true;
+                if (rec.arrTime instanceof Date) {
+                    rec.movementKind = 'arrival';
+                } else {
+                    drop.push(rec);               // nothing left to draw
+                }
+            });
+            for (let i = trains.length - 1; i >= 0; i--) {
+                if (drop.indexOf(trains[i]) !== -1) trains.splice(i, 1);
+            }
+        }
     }
 
     function applyTrainEdits(trains) {
