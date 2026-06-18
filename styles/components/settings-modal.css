@@ -103,16 +103,6 @@
     position: relative;
 }
 
-.settings-header::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 48px;
-    height: 2px;
-    background: var(--modal-accent);
-}
-
 .settings-header-text {
     display: flex;
     flex-direction: column;
@@ -218,13 +208,12 @@
     transform: translateX(2px);
 }
 
+/* Active tab uses the palette's marking language: the same light-blue pill as
+   the palette's active tool and the segmented controls — not a solid-blue fill. */
 .settings-tab.active {
-    background: var(--modal-accent-bg);
-    color: var(--modal-accent-text);
+    background: var(--primary-50);
+    color: var(--primary-700);
     font-weight: 600;
-    box-shadow:
-        0 2px 6px rgba(59, 130, 246, 0.3),
-        0 1px 3px rgba(59, 130, 246, 0.2);
     transform: translateX(0);
 }
 
@@ -307,6 +296,7 @@
     margin-bottom: 0;
 }
 
+/* Section title = the dock's header band, flush to the rounded top edge. */
 .settings-section-title {
     font-family: var(--modal-font-body);
     font-size: 11px;
@@ -314,101 +304,69 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--modal-section-title-color);
-    margin: 0 0 14px 0;
-    padding: 0 0 10px 10px;
+    margin: 0;
+    padding: 12px 14px 10px;
     border-bottom: 1px solid var(--border-secondary);
-    border-left: 3px solid var(--modal-accent);
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
+/* Section content = the dock body. Rows carry their own padding + hairline
+   dividers (.control-row), so the body itself has no inter-row gap. */
 .settings-section-content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 0;
+    padding: 2px 14px 8px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FORM CONTROL OVERRIDES (modal-specific)
-   Inline layout for boolean (toggle) controls
+   FORM CONTROL LAYOUT (modal-specific)
+   Controls are compact rows inside a raised dock (.control-dock / .control-row
+   from control-surface.css). These rules just place each control type within
+   the row — label left, control right (toggle) or on its own full-width line
+   below (slider, segmented control, help text, viz). No per-control cards.
 ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Toggle controls: label left, switch right — help text wraps below */
-.settings-tab-panel .form-control.fc-toggle {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 16px;
-    background: var(--surface-secondary);
-    border: 1.5px solid var(--border-secondary);
-    border-radius: 12px;
-    transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
-}
-
-.settings-tab-panel .form-control.fc-toggle:hover {
-    border-color: var(--primary-300);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.06);
-}
-
-/* Checked state — left accent stripe */
-.settings-tab-panel .form-control.fc-checked {
-    border-left: 3px solid var(--modal-accent);
-    background: var(--primary-50);
-}
-
-[data-theme="dark"] .settings-tab-panel .form-control.fc-checked {
-    background: rgba(59, 130, 246, 0.08);
-    border-left-color: var(--primary-400);
-}
-
-.settings-tab-panel .form-control.fc-toggle .form-label-wrapper {
-    flex: 1;
+/* Left side of every row: the label + its ⓘ help-toggle. */
+.settings-tab-panel .form-control .form-label-wrapper {
+    flex: 1 1 auto;
     min-width: 0;
-    margin-right: 16px;
+    margin-right: 12px;
 }
 
+.settings-tab-panel .form-control .form-label {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Toggle: the small switch sits at the right of the row. (Size comes from
+   `.control-dock .toggle-switch` in control-surface.css — same as the workload
+   panel's toggles.) */
 .settings-tab-panel .form-control.fc-toggle .toggle-switch {
-    flex-shrink: 0;
+    flex: 0 0 auto;
 }
 
-.settings-tab-panel .form-control.fc-toggle .form-label {
-    font-size: 13px;
-    font-weight: 500;
-}
-
-/* Help text goes full-width on its own line below the label+toggle row */
-.settings-tab-panel .form-control.fc-toggle .form-help {
-    flex: 0 0 100%;
-    width: 100%;
-    margin-top: 2px;
-}
-
-.settings-tab-panel .form-control.fc-toggle .setting-viz {
-    flex: 0 0 100%;
+/* Slider + segmented controls take their own full-width line below the label. */
+.settings-tab-panel .form-control.fc-slider .slider-wrapper,
+.settings-tab-panel .form-control.fc-radio .radio-group {
+    flex: 1 1 100%;
     width: 100%;
 }
 
-/* Slider controls */
-.settings-tab-panel .form-control.fc-slider {
-    padding: 14px 16px;
-    background: var(--surface-secondary);
-    border: 1.5px solid var(--border-secondary);
-    border-radius: 12px;
-    transition: border-color 150ms ease, box-shadow 150ms ease;
+.settings-tab-panel .form-control.fc-radio .form-label-wrapper {
+    margin-bottom: 8px;
 }
 
-.settings-tab-panel .form-control.fc-slider:hover {
-    border-color: var(--primary-300);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.06);
+/* Help text + inline visualizations wrap full-width under the control. */
+.settings-tab-panel .form-control .form-help,
+.settings-tab-panel .form-control .setting-viz {
+    flex: 0 0 100%;
+    width: 100%;
 }
 
-.settings-tab-panel .form-control.fc-slider .form-label {
-    font-size: 13px;
-    font-weight: 500;
-}
-
+/* Disabled (toggleable) sliders dim their control + viz. */
 .settings-tab-panel .toggleable-setting.is-disabled .slider-wrapper,
 .settings-tab-panel .toggleable-setting.is-disabled .setting-viz {
     opacity: 0.45;
@@ -418,7 +376,7 @@
     cursor: not-allowed;
 }
 
-/* Slider value: monospaced and right-aligned */
+/* Slider value: monospaced pill. */
 .settings-tab-panel .slider-value {
     font-family: var(--font-mono, monospace);
     font-size: 12px;
@@ -430,26 +388,6 @@
     padding: 3px 10px;
     border-radius: 20px;
     letter-spacing: 0.02em;
-}
-
-/* Radio group controls */
-.settings-tab-panel .form-control.fc-radio {
-    padding: 14px 16px;
-    background: var(--surface-secondary);
-    border: 1.5px solid var(--border-secondary);
-    border-radius: 12px;
-}
-
-.settings-tab-panel .form-control.fc-radio .form-label {
-    font-size: 13px;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-/* Dropdown controls */
-.settings-tab-panel .form-control.fc-select .form-label {
-    font-size: 13px;
-    font-weight: 500;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -467,10 +405,6 @@
     background: var(--surface-secondary);
     border: 1.5px solid var(--border-secondary);
     border-radius: 14px;
-}
-
-.display-settings-brief {
-    border-left: 3px solid var(--modal-accent);
 }
 
 .display-settings-kicker {
@@ -553,16 +487,22 @@
    RADIO GROUP REFINEMENTS (modal-specific)
 ═══════════════════════════════════════════════════════════════════════════ */
 
+/* Segmented controls speak the edit palette's "button text" language: a
+   transparent track where the selected option is marked with the SAME light-blue
+   pill (--primary-50 bg + --primary-700 text) the palette uses for its active
+   tool. Unselected options are quiet, like the palette's idle buttons. */
 .settings-tab-panel .radio-group {
-    background: var(--surface-secondary);
-    border: 1px solid var(--border-secondary);
-    border-radius: 10px;
-    padding: 3px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-DEFAULT);
+    padding: 2px;
+    gap: 2px;
 }
 
 .settings-tab-panel .radio-group::before {
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+    background: var(--primary-50);
+    border-radius: var(--radius-DEFAULT);
+    box-shadow: none;
 }
 
 .settings-tab-panel .radio-group-label {
@@ -571,6 +511,27 @@
     font-weight: 500;
     padding: 8px 10px;
     min-height: 34px;
+    color: var(--text-secondary);
+}
+
+.settings-tab-panel .radio-group-input:hover + .radio-group-label {
+    color: var(--text-primary);
+}
+
+.settings-tab-panel .radio-group-input:checked + .radio-group-label {
+    color: var(--primary-700);
+    font-weight: 600;
+}
+
+/* The palette has no dark override — its active tool stays the light-blue pill —
+   so force the same in dark mode instead of the generic grey radio highlight. */
+[data-theme="dark"] .settings-tab-panel .radio-group::before {
+    background: var(--primary-50);
+    border: none;
+}
+
+[data-theme="dark"] .settings-tab-panel .radio-group-input:checked + .radio-group-label {
+    color: var(--primary-700);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -815,24 +776,8 @@
     background: rgba(0, 0, 0, 0.75);
 }
 
-[data-theme="dark"] .settings-tab.active {
-    box-shadow:
-        0 2px 6px rgba(59, 130, 246, 0.4),
-        0 1px 3px rgba(59, 130, 246, 0.3);
-}
-
-[data-theme="dark"] .settings-tab-panel .form-control.fc-toggle:not(.fc-checked) {
-    background: var(--surface-tertiary);
-}
-
-[data-theme="dark"] .settings-tab-panel .form-control.fc-slider {
-    background: var(--surface-tertiary);
-}
-
-[data-theme="dark"] .settings-tab-panel .form-control.fc-radio {
-    background: var(--surface-tertiary);
-}
-
+/* Rows are transparent in every theme — the dock surface (.control-dock,
+   --surface-raised) carries the background. */
 [data-theme="dark"] .settings-tab-panel .radio-group {
     background: transparent;
     border-color: var(--border-primary);
@@ -886,16 +831,6 @@
     font-size: 11px;
 }
 
-[data-theme="high-contrast"] .settings-tab-panel .form-control.fc-toggle {
-    border-width: 2px;
-    border-radius: 0;
-}
-
-[data-theme="high-contrast"] .settings-tab-panel .form-control.fc-slider {
-    border-width: 2px;
-    border-radius: 0;
-}
-
 [data-theme="high-contrast"] .settings-tab-panel .radio-group {
     border-width: 2px;
     border-radius: 0;
@@ -937,9 +872,8 @@
     }
 
     .settings-tab.active {
-        background: var(--modal-accent-bg);
-        color: var(--modal-accent-text);
-        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        background: var(--primary-50);
+        color: var(--primary-700);
     }
 
     .settings-nav-footer {
@@ -1004,9 +938,7 @@
     }
 
     .settings-tab,
-    .settings-close-btn,
-    .settings-tab-panel .form-control.fc-toggle,
-    .settings-tab-panel .form-control.fc-slider {
+    .settings-close-btn {
         transition: none;
     }
 }

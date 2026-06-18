@@ -102,9 +102,6 @@
             order: 250,
             build: (train, ctx) => {
                 if (!train) return null;
-                // Look-only lock disarms the one commitNow path that runs outside an
-                // edit session — hide the item entirely rather than CSS-disable it.
-                if (window.EditLock && typeof window.EditLock.isLocked === 'function' && window.EditLock.isLocked()) return null;
                 const anchor = ctx && ctx.trainBar ? ctx.trainBar.getBoundingClientRect() : null;
                 return createItem('Flytta till spår…', () => openPicker(train, anchor), { icon: '⇅' });
             }

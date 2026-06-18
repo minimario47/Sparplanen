@@ -90,7 +90,7 @@
                 const chip = document.createElement('span');
                 chip.className = REATTACH_CHIP_CLASS;
                 chip.setAttribute('aria-hidden', 'true');
-                chip.title = 'Vändning ändrad — förseningsdata omkopplad till nytt avgångsnummer.';
+                chip.title = 'Vändning ändrad: förseningsdata omkopplad till nytt avgångståg.';
                 chip.textContent = '🔗';
                 bar.appendChild(chip);
             }
@@ -107,7 +107,7 @@
                 const chip = document.createElement('span');
                 chip.className = RETIME_CHIP_CLASS;
                 chip.setAttribute('aria-hidden', 'true');
-                chip.title = 'Tid ändrad — förseningsdata frikopplad (matchas mot nytt schemaläge).';
+                chip.title = 'Tid ändrad.';
                 chip.textContent = '⏱';
                 bar.appendChild(chip);
             }
@@ -122,7 +122,7 @@
                 const chip = document.createElement('span');
                 chip.className = WARN_CHIP_CLASS;
                 chip.setAttribute('aria-hidden', 'true');
-                chip.title = 'Negativ varaktighet — avgång före ankomst. Kontrollera.';
+                chip.title = 'Avgång före ankomst. Kontrollera.';
                 chip.textContent = '⚠';
                 bar.appendChild(chip);
             }

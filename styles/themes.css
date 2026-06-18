@@ -40,6 +40,7 @@ LAST UPDATED: 2025-01-09
     --surface-primary: var(--surface-base);              /* #fafafa - near-white base */
     --surface-secondary: var(--surface-elevated);        /* #ffffff - cards, elevated */
     --surface-tertiary: var(--surface-sunken);          /* #f5f5f6 - sunken areas */
+    --surface-raised: var(--surface-elevated);           /* #ffffff - raised docks (palette, workload, settings) */
     --surface-overlay: var(--surface-overlay);           /* Modal overlays */
     
     /* Text colors - from design-system.css */
@@ -138,6 +139,7 @@ LAST UPDATED: 2025-01-09
     --surface-primary: var(--surface-base-dark);       /* #1a1a1a - near-black base */
     --surface-secondary: var(--surface-elevated-dark); /* #252a31 - elevated (12% lighter) */
     --surface-tertiary: var(--surface-sunken-dark);    /* #0a0a0a - sunken (darker) */
+    --surface-raised: var(--surface-elevated-dark);    /* #252a31 - raised docks */
     --surface-overlay: var(--surface-overlay-dark);    /* Dark modal overlay */
     
     /* Text colors - inverted for dark backgrounds */
@@ -261,6 +263,7 @@ LAST UPDATED: 2025-01-09
     --surface-primary: #000000;      /* Pure black for max contrast */
     --surface-secondary: #1a1a1a;    /* Slightly lighter */
     --surface-tertiary: #0a0a0a;     /* Darker */
+    --surface-raised: #1a1a1a;       /* Raised docks - lifted off pure black */
     --surface-overlay: rgba(0, 0, 0, 0.95);
     
     /* Text - maximum contrast */
@@ -489,6 +492,7 @@ select,
     [data-theme="high-contrast"] {
         --surface-primary: #ffffff !important;
         --surface-secondary: #fafafa !important;
+        --surface-raised: #ffffff !important;
         --text-primary: #1a1a1a !important;
         --text-secondary: #475569 !important;
         --border-primary: #e2e8f0 !important;
@@ -518,6 +522,7 @@ select,
         --surface-primary: var(--surface-base-dark);
         --surface-secondary: var(--surface-elevated-dark);
         --surface-tertiary: var(--surface-sunken-dark);
+        --surface-raised: var(--surface-elevated-dark);
         --surface-overlay: var(--surface-overlay-dark);
 
         --text-primary: var(--text-primary-dark);

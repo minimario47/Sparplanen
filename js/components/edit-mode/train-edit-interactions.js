@@ -289,9 +289,9 @@
 
     function cutRefusalReason(train) {
         if (!train) return null;
-        if (train.arrSynthetic || train.depSynthetic) return 'Syntetisk kant — kan inte klippas.';
-        if (train.continuesFromPrevPage || train.continuesToNextPage) return 'Sidkant — kan inte klippas.';
-        if (train.stitchedOvernight) return 'Nattstitchad stapel — klippning stöds inte än.';
+        if (train.arrSynthetic || train.depSynthetic) return 'Kant utan tågnummer: kan inte klippas.';
+        if (train.continuesFromPrevPage || train.continuesToNextPage) return 'Kant utan tågnummer: kan inte klippas.';
+        if (train.stitchedOvernight) return 'Klippning stöds inte för tåg som parkeras över natten än.';
         if (train.movementKind !== 'through') return 'Bara genomgående tåg kan klippas.';
         return 'Den här stapeln kan inte klippas.';
     }
@@ -376,7 +376,7 @@
         if (next === cur) { notify(dir < 0 ? 'Redan minst en enhet.' : `Max ${MAX_UNITS} enheter.`); return false; }
         if (dir > 0) {
             const d = vehDef(train);
-            if (d && d.canBeMultiple === false) notify(`⚠ ${d.name} kan normalt inte multipelkopplas — tillåts ändå.`);
+            if (d && d.canBeMultiple === false) notify(`⚠ ${d.name} kan normalt inte multipelkopplas: tillåts ändå.`);
         }
         const editKey = window.EditKey.buildEditKey(train);
         if (!editKey) return false;
@@ -462,7 +462,7 @@
         attachIdx = 0;
         select(source);
         paintAttach();
-        notify('Välj avgång att vända till — Tab växlar, Enter bekräftar, Esc avbryter.');
+        notify('Välj avgång att vända till:  Tab växlar, Enter bekräftar, Esc avbryter.');
     }
     function cycleAttach(dir) {
         if (!attachCandidateIds.length) return;
@@ -497,7 +497,7 @@
             if (gap < 0) msgs.push('Avgång före ankomst');
             else if (gap < TURNAROUND_FLOOR_MIN) msgs.push(`Vändningstid ${gap} min (under ${TURNAROUND_FLOOR_MIN})`);
         }
-        if (msgs.length) notify('⚠ ' + msgs.join(' · ') + ' — tillåts ändå.');
+        if (msgs.length) notify('⚠ ' + msgs.join(' · ') + ': tillåts ändå.');
     }
 
     // Write target's departure leg onto the source (form a turn). The source's
@@ -593,7 +593,7 @@
 
         const msg = document.createElement('span');
         msg.className = 'edit-truce-toast__msg';
-        msg.textContent = `Live-spårändringar pausade för tåg ${num} — manuell placering gäller.`;
+        msg.textContent = `Live-spårändringar pausade för tåg ${num}: manuell placering gäller.`;
         toast.appendChild(msg);
 
         const relink = document.createElement('button');

@@ -75,7 +75,7 @@
         const el = document.createElement('aside');
         el.className = 'workload-panel';
         el.setAttribute('role', 'complementary');
-        el.setAttribute('aria-label', 'Belastning – rörelser per kvart');
+        el.setAttribute('aria-label', 'Belastning: rörelser per kvart');
         el.hidden = true;
         el.innerHTML = `
             <div class="workload-panel__header" data-drag-handle>

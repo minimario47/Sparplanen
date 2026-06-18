@@ -125,18 +125,9 @@
     color: var(--text-secondary);
 }
 
-/* Compact toggle variant (checked state is size-agnostic: margin auto). */
-.toggle-switch--small {
-    height: 22px;
-    width: 40px;
-    border-radius: 11px;
-    flex-shrink: 0;
-}
-
-.toggle-switch--small .toggle-thumb {
-    width: 18px;
-    height: 18px;
-}
+/* Compact toggle variant (.toggle-switch--small) now lives in the shared
+   control-surface.css so any dock can reuse it. The workload panel keeps using
+   that class on its toggle rows. */
 
 /* --- Chart --- */
 

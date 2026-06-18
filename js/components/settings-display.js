@@ -11,29 +11,35 @@
         themeSets.single = config.singleThemes || {};
         onThemeChange = config.onThemeChange || null;
 
+        elements.panel = document.getElementById('panel-display');
         elements.stage = document.getElementById('display-stage');
-        elements.themeStrip = document.getElementById('display-theme-strip');
-        elements.customPanel = document.getElementById('display-custom-panel');
-        elements.singleControls = document.getElementById('single-color-controls');
-        elements.lengthControls = document.getElementById('length-custom-controls');
-        elements.themeControl = document.getElementById('display-theme-control');
+        elements.singleStrip = document.getElementById('display-theme-strip');
+        elements.lengthStrip = document.getElementById('display-length-theme-strip');
+        elements.singleEditor = document.getElementById('single-color-controls');
+        elements.lengthCustom = document.getElementById('length-custom-controls');
 
-        if (!elements.stage || !elements.themeStrip) {
+        if (!elements.stage || !elements.singleStrip) {
             return;
         }
 
-        bindThemeStrip();
+        bindThemeStrip(elements.singleStrip, 'single');
+        bindThemeStrip(elements.lengthStrip, 'length');
     }
 
-    function bindThemeStrip() {
-        elements.themeStrip.addEventListener('click', (event) => {
+    // A gallery is a radiogroup of look-cards. A click reports both the mode the
+    // gallery represents and the chosen theme id, so the controller can flip the
+    // active colour mode and apply the palette in one go.
+    function bindThemeStrip(strip, mode) {
+        if (!strip) return;
+
+        strip.addEventListener('click', (event) => {
             const button = event.target.closest('[data-theme-option]');
             if (!button || !onThemeChange) return;
-            onThemeChange(button.getAttribute('data-theme-option'));
+            onThemeChange(mode, button.getAttribute('data-theme-option'));
         });
 
-        elements.themeStrip.addEventListener('keydown', (event) => {
-            const buttons = Array.from(elements.themeStrip.querySelectorAll('[data-theme-option]'));
+        strip.addEventListener('keydown', (event) => {
+            const buttons = Array.from(strip.querySelectorAll('[data-theme-option]'));
             const currentIndex = buttons.indexOf(document.activeElement);
             if (currentIndex === -1) return;
 
@@ -52,13 +58,23 @@
     }
 
     function render(settings) {
-        if (!elements.stage || !elements.themeStrip) return;
+        if (!elements.stage || !elements.singleStrip) return;
 
+        setActiveMode(settings);
         renderStage(settings);
-        renderThemeStrip(settings);
-        renderCustomPanel(settings);
+        renderGallery(settings, 'single');
+        renderGallery(settings, 'length');
+        renderSingleEditor(settings);
+        renderLengthCustom(settings);
         renderLengthRuler(settings);
         renderClassRows(settings);
+    }
+
+    // Drives the dim/active styling — whichever mode isn't live fades out.
+    function setActiveMode(settings) {
+        if (elements.panel) {
+            elements.panel.setAttribute('data-active-color-mode', settings.trainColorMode || 'single');
+        }
     }
 
     function renderStage(settings) {
@@ -69,14 +85,18 @@
         });
     }
 
-    function renderThemeStrip(settings) {
-        const mode = settings.trainColorMode;
+    function renderGallery(settings, mode) {
+        const strip = mode === 'single' ? elements.singleStrip : elements.lengthStrip;
+        if (!strip) return;
+
         const themes = getOrderedThemes(mode);
-        const activeThemeId = getActiveThemeId(settings);
-        const helpEl = elements.themeControl ? elements.themeControl.querySelector('.form-help') : null;
+        const activeThemeId = mode === 'single' ? settings.singleTheme : settings.lengthTheme;
+        const helpEl = strip.closest('.form-control')
+            ? strip.closest('.form-control').querySelector('.form-help')
+            : null;
         const helpId = (helpEl && helpEl.id) || '';
 
-        elements.themeStrip.innerHTML = themes.map(([themeId, theme]) => {
+        strip.innerHTML = themes.map(([themeId, theme]) => {
             const name = shortenThemeName(theme.name);
             const sample = buildThemeSample(settings, mode, themeId, theme);
             return `
@@ -98,19 +118,20 @@
         }).join('');
     }
 
-    function renderCustomPanel(settings) {
-        const activeThemeId = getActiveThemeId(settings);
-        const isCustom = activeThemeId === 'custom';
-        const isSingle = settings.trainColorMode === 'single';
+    // Inline editor for the single "Egen färg" card — visible only when that card
+    // is the selected one, so editing a swatch can never surprise-switch a named
+    // theme to custom (you're already on custom to reach the pickers).
+    function renderSingleEditor(settings) {
+        if (elements.singleEditor) {
+            elements.singleEditor.hidden = !(settings.trainColorMode === 'single'
+                && settings.singleTheme === 'custom');
+        }
+    }
 
-        if (elements.customPanel) {
-            elements.customPanel.hidden = !isCustom;
-        }
-        if (elements.singleControls) {
-            elements.singleControls.hidden = !(isCustom && isSingle);
-        }
-        if (elements.lengthControls) {
-            elements.lengthControls.hidden = !(isCustom && !isSingle);
+    // The per-class colour matrix is the length mode's "Egen färg" — same rule.
+    function renderLengthCustom(settings) {
+        if (elements.lengthCustom) {
+            elements.lengthCustom.hidden = settings.lengthTheme !== 'custom';
         }
     }
 
@@ -128,7 +149,7 @@
     function renderClassRows(settings) {
         document.querySelectorAll('[data-class-row]').forEach((row) => {
             const bucket = row.getAttribute('data-class-row');
-            const colors = getBucketColors(settings, bucket);
+            const colors = getLengthBucketColors(settings, bucket);
             const bar = row.querySelector('.display-class-bar');
             if (!bar) return;
             applyTrainColors(bar, colors);
@@ -173,10 +194,16 @@
         return theme.colors;
     }
 
+    // Colours that drive the stage/ruler — reflect the ACTIVE mode.
     function getBucketColors(settings, bucket) {
         if (settings.trainColorMode === 'single') {
             return settings.singleColor;
         }
+        return settings.lenColors[bucket];
+    }
+
+    // The per-class matrix always shows length colours regardless of active mode.
+    function getLengthBucketColors(settings, bucket) {
         return settings.lenColors[bucket];
     }
 
@@ -185,12 +212,6 @@
         return Object.entries(themeSet)
             .filter(([themeId]) => themeId !== 'custom')
             .concat(themeSet.custom ? [['custom', themeSet.custom]] : []);
-    }
-
-    function getActiveThemeId(settings) {
-        return settings.trainColorMode === 'single'
-            ? settings.singleTheme
-            : settings.lengthTheme;
     }
 
     function shortenThemeName(name) {

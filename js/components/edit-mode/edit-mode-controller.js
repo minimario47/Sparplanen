@@ -116,20 +116,13 @@
         if (statusEl) {
             const n = s.pendingCount();
             statusEl.textContent = n > 0
-                ? `Redigerar — ${n} ${n === 1 ? 'ändring' : 'ändringar'}`
+                ? `Redigerar: ${n} ${n === 1 ? 'ändring' : 'ändringar'}`
                 : 'Redigerar';
         }
     }
 
     function enter() {
         if (!window.EditSession) return;
-        // Look-only lock disarms the editing feature (Phase 5). Don't enter; hint.
-        if (window.EditLock && typeof window.EditLock.isLocked === 'function' && window.EditLock.isLocked()) {
-            if (typeof window.showNotification === 'function') {
-                try { window.showNotification('Spårplanen är låst. Lås upp för att redigera.', 'info'); } catch (_) { /* ignore */ }
-            }
-            return;
-        }
         activeTool = 'select';
         paintActiveTool();
         window.EditSession.start();

@@ -417,20 +417,6 @@ body.is-editing #track-changes-layer { opacity: 0.4; }
     z-index: 30;
 }
 
-/* ───────────── Lås (look-only) toggle (Phase 5) ─────────────
-   A per-device safety valve: when engaged, the editing feature is disarmed.
-   The lock button lights up; the pen toggle reads disabled. */
-.edit-lock-toggle.is-locked {
-    background: var(--warning-500, #f59e0b);
-    color: var(--text-inverse, #fff);
-    border-color: var(--warning-600, #d97706);
-}
-/* When locked, the pen can't arm — show it inert (still focusable for the hint). */
-body.is-locked .edit-mode-toggle {
-    opacity: 0.45;
-    cursor: not-allowed;
-}
-
 /* Motion is opt-in only. */
 @media (prefers-reduced-motion: no-preference) {
     .edit-palette,

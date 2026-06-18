@@ -174,7 +174,7 @@
             if (!window.delayIntegration || !window.delayIntegration.isInitialized) {
                 empty.textContent = 'Förseningsdata är inte ansluten. Kontrollera nätverk eller att molnfunktionen svarar.';
             } else if (!lastTrains.length) {
-                empty.textContent = 'Ingen aktiv data ännu — väntar på första uppdatering…';
+                empty.textContent = 'Ingen aktiv data ännu. Väntar på första uppdatering…';
             } else {
                 empty.textContent = `Inga tåg med minst ${minM} minuters försening till G just nu.`;
             }

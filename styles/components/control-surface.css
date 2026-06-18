@@ -1,0 +1,117 @@
+/* Control Surface — the shared "raised dock + compact control row" vocabulary.
+
+   Extracted from the edit palette (.edit-palette) and the Belastning / workload
+   panel (.workload-panel) so the Settings modal — and, next, the header toggles
+   and other panels — all speak ONE design language: a raised, shadowed dock that
+   holds compact label-left / control-right rows.
+
+   Tokens are theme-aware: themes.css resolves --surface-raised / --border-* per
+   theme (light shadow, dark border, high-contrast hard edges). Every affordance
+   has a static, fully-visible end-state — nothing's visibility depends on an
+   animation (the work machines run prefers-reduced-motion). No `transition: all`
+   anywhere (explicit property lists only — avoids the recalc storm). */
+
+/* ───────────── Raised dock (mirrors .edit-palette / .workload-panel) ───────────── */
+.control-dock {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-raised);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+/* Header band — uppercase label with a leading accent stripe. */
+.control-dock__header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: 11px 14px 10px;
+    border-bottom: 1px solid var(--border-secondary);
+}
+
+.control-dock__title {
+    margin: 0;
+    padding-left: 10px;
+    border-left: 3px solid var(--interactive-primary);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    line-height: 1.1;
+}
+
+.control-dock__body {
+    display: flex;
+    flex-direction: column;
+    padding: 2px 14px 10px;
+}
+
+/* ───────────── Compact control row (mirrors .workload-panel__toggle-row) ─────────────
+   Rows separate by spacing, like the palette's buttons — no divider lines. */
+.control-row {
+    display: flex;
+    flex-direction: row;   /* override .form-control's column when both classes share an element */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+    padding: 11px 0;
+}
+
+.control-row__label {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.control-row__control {
+    flex: 0 0 auto;
+}
+
+/* Content that occupies its own full-width line below the label (sliders,
+   segmented controls, help text, inline visualizations). */
+.control-row__full {
+    flex: 0 0 100%;
+    width: 100%;
+}
+
+/* ───────────── Canonical inline controls for docks ─────────────
+   The small toggle (was scoped to workload-panel.css) lives here now so any
+   dock can use it without depending on the workload stylesheet. Any plain
+   .toggle-switch placed inside a .control-dock is automatically the small
+   variant, so callers don't have to add a modifier class. The segmented choice
+   control stays .radio-group (forms-radio-group.css). */
+.toggle-switch--small,
+.control-dock .toggle-switch {
+    height: 22px;
+    width: 40px;
+    border-radius: 11px;
+    flex-shrink: 0;
+}
+
+.toggle-switch--small .toggle-thumb,
+.control-dock .toggle-switch .toggle-thumb {
+    width: 18px;
+    height: 18px;
+}
+
+/* ───────────── Theme variants ───────────── */
+/* Dark mode: lean on borders, not shadows (app-wide Anthony-Hobday rule). */
+[data-theme="dark"] .control-dock {
+    box-shadow: none;
+}
+
+/* High contrast: hard edges, no rounding. */
+[data-theme="high-contrast"] .control-dock {
+    border-width: 2px;
+    border-radius: 0;
+}
+
+[data-theme="high-contrast"] .control-dock__header {
+    border-bottom-width: 2px;
+}

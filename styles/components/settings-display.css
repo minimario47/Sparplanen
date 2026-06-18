@@ -1,13 +1,26 @@
-.display-settings-flow {
+/* The Tågfärger tab is a bespoke visual editor, not a list of divider-rows.
+   Keep its gap-based spacing (the compound selector beats the dock body's
+   gap:0), and give it its own vertical padding inside the dock. */
+.settings-section-content.display-settings-flow {
     gap: 16px;
+    padding: 12px 14px 14px;
 }
 
+/* Its controls still get .control-row from JS — neutralise the row dividers +
+   padding here so they rely on the flow gap instead. */
+.display-settings-flow > .control-row,
+.display-custom-panel .control-row {
+    padding: 0;
+    border-bottom: 0;
+}
+
+/* These sit directly on the dock surface now — drop the old per-control card. */
 .display-theme-control,
 .display-custom-panel .form-control {
-    padding: 14px 16px;
-    background: var(--surface-secondary);
-    border: 1.5px solid var(--border-secondary);
-    border-radius: 12px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
 }
 
 .display-theme-control .form-label,
@@ -16,12 +29,13 @@
     font-weight: 500;
 }
 
+/* Preview stage reads as a recessed well inside the white dock. */
 .display-stage {
     position: relative;
     padding: 16px;
-    border: 1.5px solid var(--border-secondary);
-    border-radius: 16px;
-    background: var(--surface-secondary);
+    border: 1px solid var(--border-secondary);
+    border-radius: 12px;
+    background: var(--surface-tertiary);
     overflow: hidden;
 }
 
@@ -192,8 +206,25 @@
 
 .display-theme-option[aria-checked="true"] {
     border-color: var(--modal-accent);
-    background: var(--surface-primary);
-    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.14);
+    background: var(--primary-50);
+    box-shadow: 0 0 0 1px var(--modal-accent);
+}
+
+/* Selected card carries a check badge (the one light-blue marking language). */
+.display-theme-option[aria-checked="true"]::after {
+    content: '';
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: var(--modal-accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-11'/%3E%3C/svg%3E") center / 11px 11px no-repeat;
+}
+
+/* The check badge replaces the "custom" notch on the selected card. */
+.display-theme-option[aria-checked="true"] .display-theme-notch {
+    display: none;
 }
 
 .display-theme-option:focus-visible {
@@ -326,7 +357,164 @@
 
 @media (prefers-reduced-motion: reduce) {
     .display-stage-bar,
-    .display-theme-option {
+    .display-theme-option,
+    .display-single-live,
+    .display-length-live,
+    .display-advanced-chevron {
         transition: none;
     }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GALLERY + EXPERIMENTAL LENGTH SECTION  (the rethought Tågfärg flow)
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* The look-picker is a wrapping grid of cards (not a horizontal scroller). */
+.display-gallery {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+    grid-auto-columns: initial;
+    gap: 10px;
+    overflow: visible;
+}
+
+/* Visual-editor fields stack label / control / help. Block flow (not flex column)
+   on purpose: a wrapping gallery grid inside a flex column resolves its flex-basis
+   to max-content and balloons the row tracks — block sizing keeps it honest. This
+   also overrides the row-direction that tagFormControlVariants() bestows via
+   .control-row. */
+.display-settings-flow .display-field,
+.display-advanced-body .display-field {
+    display: block;
+    padding: 0;
+    border-bottom: 0;
+}
+
+.display-settings-flow .display-field > * + *,
+.display-advanced-body .display-field > * + * {
+    margin-top: 8px;
+}
+
+.display-custom-editor {
+    padding-top: 2px;
+}
+
+/* ───────────── Experimental "Färga efter tåglängd" disclosure ───────────── */
+.display-advanced {
+    border: 1px solid var(--border-secondary);
+    border-radius: 12px;
+    background: var(--surface-secondary);
+    overflow: hidden;
+}
+
+.display-advanced-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+.display-advanced-summary::-webkit-details-marker {
+    display: none;
+}
+
+.display-advanced-summary:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: -2px;
+}
+
+.display-advanced-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.display-advanced-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--warning-100);
+    color: var(--warning-700);
+}
+
+.display-advanced-chevron {
+    margin-left: auto;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--text-tertiary);
+    border-bottom: 2px solid var(--text-tertiary);
+    transform: rotate(45deg);
+    transition: transform 160ms ease;
+}
+
+.display-advanced[open] .display-advanced-chevron {
+    transform: rotate(225deg);
+}
+
+.display-advanced-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 14px 14px 16px;
+    border-top: 1px solid var(--border-secondary);
+}
+
+.display-advanced-body .control-row,
+.display-length-live .control-row {
+    padding: 0;
+    border-bottom: 0;
+}
+
+.display-length-live {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ───────────── Active-mode emphasis ─────────────
+   Whichever colour mode isn't live fades back, but stays clickable so a card
+   in the faded gallery can switch to it. Hover restores it to full strength. */
+.display-single-live,
+.display-length-live {
+    transition: opacity 160ms ease;
+}
+
+#panel-display[data-active-color-mode="length"] .display-single-live {
+    opacity: 0.5;
+}
+
+#panel-display[data-active-color-mode="single"] .display-length-live {
+    opacity: 0.5;
+}
+
+#panel-display[data-active-color-mode="length"] .display-single-live:hover,
+#panel-display[data-active-color-mode="single"] .display-length-live:hover {
+    opacity: 1;
+}
+
+/* ───────────── Theme parity ───────────── */
+[data-theme="dark"] .display-advanced {
+    background: var(--surface-tertiary);
+}
+
+[data-theme="dark"] .display-advanced-tag {
+    background: rgba(245, 158, 11, 0.14);
+    color: var(--warning-300);
+}
+
+[data-theme="high-contrast"] .display-advanced {
+    border-width: 2px;
+    border-radius: 0;
+}
+
+/* High contrast keeps hard black surfaces — the selected card leans on its border
+   + check badge, not a light-blue fill that would dull the label. */
+[data-theme="high-contrast"] .display-theme-option[aria-checked="true"] {
+    background: var(--surface-secondary);
 }

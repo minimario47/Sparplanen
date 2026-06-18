@@ -10,7 +10,7 @@
     // Predefined color themes for length-based coloring
     const lengthThemes = {
         custom: {
-            name: 'Anpassad',
+            name: 'Egen färg',
             colors: {
                 b1: { bg: '#f0f4f8', border: '#7c8c9e', text: '#1a2332' },
                 b2: { bg: '#e8eef5', border: '#6b7d91', text: '#1a2332' },
@@ -64,23 +64,23 @@
     // Predefined color themes for single-color mode
     const singleThemes = {
         custom: {
-            name: 'Anpassad',
+            name: 'Egen färg',
             color: { bg: '#e8eef5', border: '#6b7d91', text: '#1a2332' }
         },
         neutral: {
-            name: 'Neutral grå',
+            name: 'Grå',
             color: { bg: '#e8eef5', border: '#6b7d91', text: '#1a2332' }
         },
         blue: {
-            name: 'Klassiskt blå',
+            name: 'Blå',
             color: { bg: '#cfe2ff', border: '#0d6efd', text: '#052c65' }
         },
         green: {
-            name: 'Trafikgrön',
+            name: 'Grön',
             color: { bg: '#d1e7dd', border: '#28a745', text: '#0f5132' }
         },
         amber: {
-            name: 'Varningsgul',
+            name: 'Gul',
             color: { bg: '#fff3cd', border: '#ffc107', text: '#664d03' }
         },
         simon: {
@@ -95,7 +95,7 @@
         followMode: false,
         updateInterval: '60',
         // Train coloring
-        trainColorMode: 'length',
+        trainColorMode: 'single',
         trainColorDimension: 'base',
         canonicalLengths: [50, 75, 80, 107, 135],
         lengthTheme: 'modern',
@@ -153,6 +153,7 @@
         elements.resetBtn = document.getElementById('settings-reset-btn');
         elements.cancelBtn = document.getElementById('settings-cancel-btn');
         elements.saveBtn = document.getElementById('settings-save-btn');
+        elements.panel = document.getElementById('panel-display');
 
         if (!elements.backdrop || !elements.modal) {
             console.warn('Settings modal elements not found');
@@ -198,7 +199,12 @@
      * older browsers (Citrix/locked-down Chromium) don't support.
      */
     function tagFormControlVariants() {
+        // Each settings section is a raised "dock"; each control a compact row.
+        // (Shared vocabulary from control-surface.css — see .control-dock / .control-row.)
+        document.querySelectorAll('.settings-tab-panel .settings-section')
+            .forEach(section => section.classList.add('control-dock'));
         document.querySelectorAll('.settings-tab-panel .form-control').forEach(control => {
+            control.classList.add('control-row');
             const toggle = control.querySelector('.toggle-switch');
             if (toggle) {
                 control.classList.add('fc-toggle');
@@ -218,21 +224,31 @@
     /**
      * Set up event listeners for the color mode and theme selects
      */
-    // Längdfärgning är inte färdigutvecklad — visa noteringen bara i det läget
-    function updateLengthColorWarning() {
-        const note = document.getElementById('length-color-warning');
-        if (note) note.hidden = currentSettings.trainColorMode !== 'length';
+    // The colour mode (single ↔ length) is driven by one place: the
+    // "Använd längdfärgning" toggle. Setting it keeps the toggle, the active-mode
+    // data attribute, and currentSettings in sync.
+    function setColorMode(mode) {
+        currentSettings.trainColorMode = mode;
+        const toggle = document.getElementById('length-coloring-enabled');
+        if (toggle) {
+            toggle.classList.toggle('checked', mode === 'length');
+            toggle.setAttribute('aria-checked', String(mode === 'length'));
+        }
+        if (elements.panel) {
+            elements.panel.setAttribute('data-active-color-mode', mode);
+        }
     }
 
     function setupColorModeListener() {
-        document.querySelectorAll('input[name="train-color-mode"]').forEach(input => {
-            input.addEventListener('change', () => {
-                if (!input.checked) return;
-                currentSettings.trainColorMode = input.value;
-                updateLengthColorWarning();
+        // The "Använd längdfärgning" toggle IS the colour-mode switch.
+        // (FormComponents.initToggles already flips .checked + dispatches `change`.)
+        const lengthToggle = document.getElementById('length-coloring-enabled');
+        if (lengthToggle) {
+            lengthToggle.addEventListener('change', () => {
+                setColorMode(lengthToggle.classList.contains('checked') ? 'length' : 'single');
                 syncDisplaySettings();
             });
-        });
+        }
 
         document.querySelectorAll('input[name="train-color-dimension"]').forEach(input => {
             input.addEventListener('change', () => {
@@ -362,7 +378,7 @@
         }
         if (!elements.backdrop || !elements.modal) {
             console.error('Modal elements not found');
-            var msg = 'Inställningar kunde inte öppnas — ladda om sidan';
+            var msg = 'Inställningar kunde inte öppnas. Ladda om sidan';
             if (window.showNotification) {
                 window.showNotification(msg, 'error');
             } else {
@@ -610,7 +626,7 @@
             offsetPercentage: getNumber('offset-slider', defaultSettings.offsetPercentage),
             followMode: getChecked('follow-mode', defaultSettings.followMode),
             updateInterval: getRadio('update-interval', defaultSettings.updateInterval),
-            trainColorMode: getRadio('train-color-mode', defaultSettings.trainColorMode),
+            trainColorMode: getChecked('length-coloring-enabled', false) ? 'length' : 'single',
             trainColorDimension: getRadio('train-color-dimension', defaultSettings.trainColorDimension),
             canonicalLengths: canonical,
             lengthTheme: getVal('length-theme', defaultSettings.lengthTheme),
@@ -663,10 +679,8 @@
         const uiInput = document.querySelector(`input[name="update-interval"][value="${currentSettings.updateInterval}"]`);
         if (uiInput) uiInput.checked = true;
 
-        // Train color mode radio group
-        const cmInput = document.querySelector(`input[name="train-color-mode"][value="${currentSettings.trainColorMode}"]`);
-        if (cmInput) cmInput.checked = true;
-        updateLengthColorWarning();
+        // Colour mode → the length-coloring enable toggle + active-mode attribute
+        setColorMode(currentSettings.trainColorMode);
 
         setHiddenThemeValue('length', currentSettings.lengthTheme || defaultSettings.lengthTheme);
         setHiddenThemeValue('single', currentSettings.singleTheme || defaultSettings.singleTheme);
@@ -842,8 +856,10 @@
         });
     }
 
-    function handleThemeSelection(themeId) {
-        const mode = currentSettings.trainColorMode || defaultSettings.trainColorMode;
+    // Picking a card also picks its paradigm: a single look turns length-colouring
+    // off, a length look turns it on — keeping the toggle and galleries in sync.
+    function handleThemeSelection(mode, themeId) {
+        setColorMode(mode);
 
         if (mode === 'single') {
             if (themeId === 'custom') {
@@ -902,8 +918,8 @@
                 const caption = document.getElementById('viz-follow-caption');
                 if (viz) viz.dataset.follow = isChecked;
                 if (caption) caption.textContent = isChecked
-                    ? 'Auto — vyn följer nu-linjen automatiskt'
-                    : 'Manuellt — nu-linjen kan glida ur bild';
+                    ? 'Auto: vyn följer nu-linjen automatiskt'
+                    : 'Manuellt: nu-linjen kan glida ur bild';
             };
             // Observe class changes on the toggle
             const observer = new MutationObserver(updateFollowViz);
@@ -946,7 +962,7 @@
                 if (viz) viz.dataset.warnings = isChecked;
                 if (caption) caption.textContent = isChecked
                     ? 'Tåg 3545 anländer för nära 3429'
-                    : 'Varningar inaktiverade — inga zoner visas';
+                    : 'Varningar inaktiverade';
             };
             const observer = new MutationObserver(updateWarningsViz);
             observer.observe(warningsToggle, { attributes: true, attributeFilter: ['class'] });
