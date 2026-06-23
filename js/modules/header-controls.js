@@ -251,6 +251,9 @@ function handleTimeStateChange(event) {
         case 'navigate_next':
         case 'jump_to_now':
         case 'range_changed':
+        case 'scroll_sync':
+            // Keep the header centre-time in sync when the user pans the
+            // timeline by hand (the main way to navigate in archive mode).
             updateAllDisplays();
             break;
             

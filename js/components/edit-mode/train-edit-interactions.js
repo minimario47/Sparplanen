@@ -671,11 +671,11 @@
             return;
         }
 
-        // Dela/ihop tool: a press couples (+1); decouple via Shift+K on the keyboard.
+        // multa tool: click couples (+1); Shift+click or Shift+K decouples (−1).
         if (activeTool() === 'unit') {
             e.stopPropagation();
             select(train);
-            couple(train, 1);
+            couple(train, e.shiftKey ? -1 : 1);
             return;
         }
 

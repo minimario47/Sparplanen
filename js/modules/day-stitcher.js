@@ -321,5 +321,20 @@
         };
     }
 
-    window.DayStitcher = { stitch, resolveTomorrow, isoWeekKeyOf };
+    /**
+     * One day in isolation, with NO cross-day merge: drop phantom page-edge
+     * duplicates and synthesize the genuine 00:00 / 24:00 page-edge spans.
+     * Archive mode uses this to lay every day of a week onto one continuous
+     * canvas (each offset by its calendar day) — an overnight train then shows
+     * as two bars that abut at midnight rather than a single merged bar, which
+     * is the right trade for a browse-the-week view and needs no de-duplication
+     * across days.
+     */
+    function prepareStandaloneDay(services) {
+        const raw = Array.isArray(services) ? services : [];
+        const cleaned = raw.filter((s) => !isPhantomDuplicate(s, raw));
+        return cleaned.map(synthesizeEdges);
+    }
+
+    window.DayStitcher = { stitch, resolveTomorrow, isoWeekKeyOf, prepareStandaloneDay };
 })();

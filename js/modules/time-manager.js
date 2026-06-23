@@ -28,7 +28,39 @@ class TimeManager {
     // Initialize
     this.restoreState();
     this.applyQaOverrideFromUrl();
+    this.applyArchiveOverride();
     console.log('✅ TimeManager initialized:', this.getStateInfo());
+  }
+
+  /**
+   * Archive mode: the user picked a past week from the header label. Pin the
+   * view onto that week's schedule day and reuse the qaOverride lock so
+   * following-mode, jump-to-now and the staleness banner stay disabled.
+   * Mirrors applyQaOverrideFromUrl but is driven by sessionStorage, not the URL.
+   */
+  applyArchiveOverride() {
+    const resolve = window.SparplanenResolve;
+    if (!resolve || typeof resolve.getArchiveSelection !== 'function') return;
+    const sel = resolve.getArchiveSelection();
+    if (!sel || !sel.anchor) return;
+
+    const [year, month, date] = String(sel.anchor).split('-').map(Number);
+    if (![year, month, date].every(Number.isFinite)) return;
+
+    // Preserve a scroll position the user already had within this archived day
+    // (e.g. across a manual reload); only reset to the default hour when the
+    // restored viewTime belongs to a different calendar day.
+    const ARCHIVE_DEFAULT_HOUR = 7;
+    const sameDay =
+      this.viewTime instanceof Date &&
+      this.viewTime.getFullYear() === year &&
+      this.viewTime.getMonth() === month - 1 &&
+      this.viewTime.getDate() === date;
+    if (!sameDay) {
+      this.viewTime = new Date(year, month - 1, date, ARCHIVE_DEFAULT_HOUR, 0, 0, 0);
+    }
+    this.isFollowingMode = false;
+    this.qaOverrideActive = true;
   }
 
   applyQaOverrideFromUrl() {

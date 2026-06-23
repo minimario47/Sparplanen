@@ -103,6 +103,13 @@
     }
 
     function start() {
+        // In archive mode the user has deliberately pinned a past week; a reload
+        // would just drop them back into the same archived view, so suppress the
+        // "new spårplan" nag until they return to live.
+        if (window.SparplanenResolve && window.SparplanenResolve.isArchiveActive &&
+            window.SparplanenResolve.isArchiveActive()) {
+            return;
+        }
         check();
         setInterval(function () {
             if (document.hidden) return; // don't poll a backgrounded tab

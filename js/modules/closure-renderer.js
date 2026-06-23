@@ -32,6 +32,50 @@ window.ClosureRenderer = (() => {
         return new Date(base.getFullYear(), base.getMonth(), base.getDate(), h, m);
     }
 
+    const DAY_MS = 24 * 60 * 60 * 1000;
+    const ARCHIVE_DAY_KEYS = ['mandag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lordag', 'sondag'];
+
+    function toMin(str) {
+        if (!str) return null;
+        const [h, m] = String(str).split(':').map(Number);
+        return (Number.isFinite(h) && Number.isFinite(m)) ? h * 60 + m : null;
+    }
+
+    /**
+     * Merge closure fragments the PDF extractor split across 3h pages back into
+     * one continuous band per track+sub-track. A track shut all day arrives as
+     * several abutting slices (e.g. 00:00–06:05, 06:00–12:05, … each flagged
+     * continuesTo/FromPrevPage); fragments that overlap or touch (≤1 min gap) on
+     * the same track are the same physical closure and are joined. Genuinely
+     * separate closures with a real gap stay distinct.
+     */
+    function mergeClosures(list) {
+        const byKey = new Map();
+        (list || []).forEach((c) => {
+            const s = toMin(c.startTime);
+            const e = toMin(c.endTime);
+            if (s == null || e == null) return;
+            const key = `${c.trackId}|${c.subTrackIndex ?? 0}`;
+            if (!byKey.has(key)) byKey.set(key, []);
+            byKey.get(key).push({ ...c, _s: s, _e: e });
+        });
+        const out = [];
+        byKey.forEach((arr) => {
+            arr.sort((a, b) => a._s - b._s);
+            let cur = null;
+            arr.forEach((c) => {
+                if (cur && c._s <= cur._e + 1) {
+                    if (c._e > cur._e) { cur._e = c._e; cur.endTime = c.endTime; }
+                } else {
+                    if (cur) out.push(cur);
+                    cur = { ...c };
+                }
+            });
+            if (cur) out.push(cur);
+        });
+        return out;
+    }
+
     /**
      * Converts closure data into timeline-relative minute offsets, then
      * draws one DIV per closure into `#timeline-canvas`.
@@ -47,31 +91,62 @@ window.ClosureRenderer = (() => {
         // `closures.js`, which does NOT attach to `window` in browsers; we
         // therefore reach for the bare identifier.  Wrapped in typeof so we
         // don't throw when the file failed to load.
-        let baseClosures = (typeof initialTrackClosures !== 'undefined' && Array.isArray(initialTrackClosures))
-            ? initialTrackClosures
-            : [];
-        if (window.SparplanenResolve && typeof window.SparplanenResolve.parseScheduleNow === 'function'
-            && typeof window.SparplanenResolve.parseClosuresNow === 'function') {
-            const r = window.SparplanenResolve.parseScheduleNow();
-            if (r && r.usedBundle && r.week && r.day) {
-                const fromBundle = window.SparplanenResolve.parseClosuresNow(r.week, r.day);
-                if (Array.isArray(fromBundle)) {
-                    baseClosures = fromBundle;
+        const resolve = window.SparplanenResolve;
+        const sel = window.currentScheduleSelection || {};
+
+        // Gather closures as { closures, base } day-groups. Live mode: the one
+        // resolved day at timelineStart. Archive mode: every available day of the
+        // week, each offset to its own day on the wide canvas — so e.g. Saturday's
+        // all-day closures show when you scroll to Saturday (not just the first
+        // day's).
+        const groups = [];
+        if (sel.archive && sel.week && sel.anchorStr && resolve
+            && typeof resolve.parseClosuresNow === 'function') {
+            const anchors = (window.SPARPLANEN_ANCHORS || {})[sel.week] || {};
+            const fp = String(sel.anchorStr).split('-').map(Number);
+            const firstNoon = new Date(fp[0], fp[1] - 1, fp[2], 12, 0, 0, 0);
+            ARCHIVE_DAY_KEYS.forEach((dk) => {
+                const cs = resolve.parseClosuresNow(sel.week, dk);
+                const aStr = anchors[dk];
+                if (!Array.isArray(cs) || !cs.length || !aStr) return;
+                const p = String(aStr).split('-').map(Number);
+                const offset = Math.round(
+                    (new Date(p[0], p[1] - 1, p[2], 12, 0, 0, 0) - firstNoon) / DAY_MS);
+                groups.push({ closures: cs, base: new Date(timelineStart.getTime() + offset * DAY_MS) });
+            });
+        } else {
+            let baseClosures = (typeof initialTrackClosures !== 'undefined' && Array.isArray(initialTrackClosures))
+                ? initialTrackClosures
+                : [];
+            if (resolve && typeof resolve.parseScheduleNow === 'function'
+                && typeof resolve.parseClosuresNow === 'function') {
+                const r = resolve.parseScheduleNow();
+                if (r && r.usedBundle && r.week && r.day) {
+                    const fromBundle = resolve.parseClosuresNow(r.week, r.day);
+                    if (Array.isArray(fromBundle)) baseClosures = fromBundle;
                 }
             }
+            groups.push({ closures: baseClosures, base: timelineStart });
         }
+
         const userClosures = (window.UserClosuresStore && typeof window.UserClosuresStore.getAll === 'function')
             ? window.UserClosuresStore.getAll()
             : [];
-        const source = baseClosures.concat(userClosures);
+        if (userClosures.length) groups.push({ closures: userClosures, base: timelineStart });
+
+        // Merge page-split fragments within each day, then flatten to {c, base}.
+        const source = [];
+        groups.forEach(({ closures, base }) => {
+            mergeClosures(closures).forEach((c) => source.push({ c, base }));
+        });
         if (source.length === 0) return;
 
-        source.forEach(c => {
+        source.forEach(({ c, base }) => {
             const track = trackLayouts.find(t => t.id === c.trackId);
             if (!track) return;
 
-            const start = parseTime(c.startTime, timelineStart);
-            const end = parseTime(c.endTime, timelineStart);
+            const start = parseTime(c.startTime, base);
+            const end = parseTime(c.endTime, base);
             if (!start || !end) return;
 
             // Viewport cull for performance.

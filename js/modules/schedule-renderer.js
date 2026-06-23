@@ -190,6 +190,39 @@ function assignConnectionGroups(trains) {
     return seenGroups;
 }
 
+// Archive mode: build one continuous service list spanning every available day
+// of `week`, each day offset by its calendar distance from the first day (so a
+// missing mid-week day leaves a real gap). Reuses the renderer's existing
+// `_dayOffset` day-stacking. Returns { services, spanHours } where spanHours is
+// the canvas width (last day + the same 6h overnight tail the live 30h view has).
+const ARCHIVE_DAY_KEYS = ['mandag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lordag', 'sondag'];
+function buildArchiveWeek(week, firstAnchorStr) {
+    const DAY_MS = 24 * 60 * 60 * 1000;
+    const weeks = window.SPARPLANEN_WEEKS || {};
+    const anchors = (window.SPARPLANEN_ANCHORS || {})[week] || {};
+    const wmap = weeks[week] || {};
+    const fp = String(firstAnchorStr).split('-').map(Number);
+    // Noon avoids any DST midnight edge when differencing calendar days.
+    const firstNoon = new Date(fp[0], fp[1] - 1, fp[2], 12, 0, 0, 0);
+
+    const out = [];
+    let maxOffset = 0;
+    ARCHIVE_DAY_KEYS.forEach((dk) => {
+        const svcs = wmap[dk];
+        const aStr = anchors[dk];
+        if (!Array.isArray(svcs) || !svcs.length || !aStr) return;
+        const p = String(aStr).split('-').map(Number);
+        const offset = Math.round((new Date(p[0], p[1] - 1, p[2], 12, 0, 0, 0) - firstNoon) / DAY_MS);
+        if (offset < 0) return;
+        if (offset > maxOffset) maxOffset = offset;
+        const prepared = (window.DayStitcher && window.DayStitcher.prepareStandaloneDay)
+            ? window.DayStitcher.prepareStandaloneDay(svcs)
+            : svcs;
+        prepared.forEach((s) => out.push({ ...s, id: `arc${offset}-${s.id}`, _dayOffset: offset }));
+    });
+    return { services: out, spanHours: maxOffset * 24 + 30 };
+}
+
 function prepareTrainData() {
     const resolved = (window.SparplanenResolve && typeof window.SparplanenResolve.parseScheduleNow === 'function')
         ? window.SparplanenResolve.parseScheduleNow()
@@ -206,7 +239,8 @@ function prepareTrainData() {
         day: resolved.day || null,
         anchorStr: resolved.anchorStr || null,
         qaOverride: !!resolved.qaOverride,
-        qaTime: resolved.qaTime || null
+        qaTime: resolved.qaTime || null,
+        archive: !!resolved.archive
     };
     window.currentScheduleSelection = scheduleSelection;
 
@@ -215,14 +249,25 @@ function prepareTrainData() {
     }
     let serviceInput = (resolved.usedBundle && Array.isArray(resolved.services)) ? resolved.services : initialServiceData;
 
-    // Stitch tomorrow morning onto today so midnight-crossing trains render
-    // as one bar. Also reports what's missing (next week not uploaded yet)
-    // for the inactive-region overlay.
+    // Archive mode lays the WHOLE chosen week on one wide, scrollable canvas;
+    // live mode shows a single 30h service day (today + stitched tomorrow
+    // morning). Keep TimeManager.timelineHours in sync since it drives both the
+    // canvas width and the scroll clamp (getScheduleDayBounds).
     let stitchInfo = null;
-    if (resolved.usedBundle && window.DayStitcher && resolved.week && resolved.day) {
-        const stitched = window.DayStitcher.stitch(resolved);
-        serviceInput = stitched.services;
-        stitchInfo = stitched.info;
+    if (resolved.archive && resolved.week && resolved.anchorStr && window.SPARPLANEN_WEEKS) {
+        const built = buildArchiveWeek(resolved.week, resolved.anchorStr);
+        serviceInput = built.services;
+        if (window.TimeManager) window.TimeManager.timelineHours = built.spanHours;
+    } else {
+        if (window.TimeManager) window.TimeManager.timelineHours = 30;
+        // Stitch tomorrow morning onto today so midnight-crossing trains render
+        // as one bar. Also reports what's missing (next week not uploaded yet)
+        // for the inactive-region overlay.
+        if (resolved.usedBundle && window.DayStitcher && resolved.week && resolved.day) {
+            const stitched = window.DayStitcher.stitch(resolved);
+            serviceInput = stitched.services;
+            stitchInfo = stitched.info;
+        }
     }
     window.currentStitchInfo = stitchInfo;
 
@@ -637,7 +682,13 @@ function renderFullSchedule(options = {}) {
         })()
         : new Date();
 
-    if (scheduleSelection?.qaOverride && scheduleSelection.anchorStr) {
+    // QA URL override pins the initial view to ?time=. Skip it for (a) archive
+    // mode, which drives viewTime through TimeManager so the user can scroll the
+    // whole day, and (b) any scroll-driven re-render (skipScroll), where viewTime
+    // already reflects the scrollbar — re-deriving it here would snap the train
+    // visibility window back to the qaTime and blank out the panned-to hours.
+    if (scheduleSelection?.qaOverride && !scheduleSelection.archive &&
+        scheduleSelection.anchorStr && !options.skipScroll) {
         const [h, m] = String(scheduleSelection.qaTime || '19:00').split(':').map(Number);
         if (Number.isFinite(h) && Number.isFinite(m)) {
             viewTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0, 0);

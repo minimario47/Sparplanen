@@ -18,7 +18,7 @@
         { tool: 'attach', label: 'Koppla', key: 'A', icon: 'M9 12h6M7 8a4 4 0 000 8M17 8a4 4 0 010 8', enabled: true },
         { tool: 'retrack', label: 'Flytta spår', key: '', icon: 'M12 4v16M8 8l4-4 4 4M8 16l4 4 4-4', enabled: true },
         { tool: 'retime', label: 'Ändra tid', key: '', icon: 'M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4', enabled: true },
-        { tool: 'unit', label: 'Dela/ihop', key: 'K', icon: 'M7 7h4v10H7zM13 7h4v10h-4z', enabled: true },
+        { tool: 'unit', label: 'multa', key: 'K', icon: 'M7 7h4v10H7zM13 7h4v10h-4z', enabled: true },
         { tool: 'delete', label: 'Ta bort', key: '', icon: 'M6 7h12M9 7V5h6v2M8 7l1 12h6l1-12', enabled: false }
     ];
 

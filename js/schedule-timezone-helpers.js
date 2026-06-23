@@ -73,6 +73,58 @@
         return B.w - A.w;
     }
 
+    // ---- Archive mode ------------------------------------------------------
+    // The user can pick any loaded week from the header week label. The choice
+    // is stored in sessionStorage and, on the reload that follows, forces the
+    // schedule to render that week instead of the live one. It rides on the
+    // same `qaOverride` flag as the URL QA override, so following-mode,
+    // jump-to-now and the staleness banner are all suppressed automatically.
+    const ARCHIVE_KEY = 'sparplanen.archive';
+    const DAY_ORDER = ['mandag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lordag', 'sondag'];
+
+    function readArchiveRaw() {
+        try {
+            if (typeof sessionStorage === 'undefined') return null;
+            const raw = sessionStorage.getItem(ARCHIVE_KEY);
+            if (!raw) return null;
+            const sel = JSON.parse(raw);
+            return (sel && sel.week) ? sel : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    // First day of `week` that actually has services, preferring an explicitly
+    // requested day, then Monday→Sunday order.
+    function firstDayWithServices(weeks, week, preferDay) {
+        const wmap = weeks && weeks[week];
+        if (!wmap) return null;
+        if (preferDay && Array.isArray(wmap[preferDay]) && wmap[preferDay].length) return preferDay;
+        for (const dk of DAY_ORDER) {
+            if (Array.isArray(wmap[dk]) && wmap[dk].length) return dk;
+        }
+        return null;
+    }
+
+    function getArchiveOverride(weeks, anchors) {
+        const sel = readArchiveRaw();
+        if (!sel || !weeks || !weeks[sel.week]) return null;
+        const dayKey = firstDayWithServices(weeks, sel.week, sel.day);
+        if (!dayKey) return null;
+        const anchor = (anchors && anchors[sel.week] && anchors[sel.week][dayKey]) || null;
+        return { week: sel.week, day: dayKey, anchor: anchor, qaOverride: true, archive: true };
+    }
+
+    // Validated { week, day, anchor } of the active archive selection, or null.
+    // Exposed so the picker/banner UI and the live subsystems (delay API,
+    // update checker) can gate themselves without re-reading sessionStorage.
+    function getArchiveSelection() {
+        const weeks = (typeof window !== 'undefined') ? window.SPARPLANEN_WEEKS : null;
+        const anchors = (typeof window !== 'undefined') ? window.SPARPLANEN_ANCHORS : null;
+        const o = getArchiveOverride(weeks, anchors);
+        return o ? { week: o.week, day: o.day, anchor: o.anchor } : null;
+    }
+
     function getQaOverride(weeks, anchors) {
         if (typeof window === 'undefined' || !window.location || !window.URLSearchParams) return null;
         const params = new URLSearchParams(window.location.search || '');
@@ -87,10 +139,10 @@
         return { week, day: dayKey, anchor, qaOverride: true, qaTime: params.get('time') || null };
     }
 
-    function pickWeekAndDay(weeks, anchors) {
+    // Natural (live) selection: the bundle for "now", ignoring archive/QA
+    // overrides. Exposed so the week picker can mark which week is the live one.
+    function pickNaturalWeekAndDay(weeks, anchors) {
         if (!weeks || typeof weeks !== 'object') return { week: null, day: null, anchor: null };
-        const qa = getQaOverride(weeks, anchors);
-        if (qa) return qa;
 
         const ref = serviceNow();
         const ymd = formatStockholmYMD(ref);
@@ -111,8 +163,7 @@
         for (const wk of list) {
             const wmap = weeks[wk];
             if (!wmap) continue;
-            const days = Object.keys(wmap);
-            for (const dk of ['mandag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lordag', 'sondag']) {
+            for (const dk of DAY_ORDER) {
                 if (wmap[dk] && wmap[dk].length) {
                     const anc = (anchors && anchors[wk] && anchors[wk][dk]) || null;
                     return { week: wk, day: dk, anchor: anc };
@@ -122,11 +173,24 @@
         return { week: null, day: null, anchor: null };
     }
 
+    function pickWeekAndDay(weeks, anchors) {
+        if (!weeks || typeof weeks !== 'object') return { week: null, day: null, anchor: null };
+        const arch = getArchiveOverride(weeks, anchors);
+        if (arch) return arch;
+        const qa = getQaOverride(weeks, anchors);
+        if (qa) return qa;
+        return pickNaturalWeekAndDay(weeks, anchors);
+    }
+
     window.SparplanenResolve = {
         formatStockholmYMD: formatStockholmYMD,
         getStockholmSwedishDayKey: getStockholmSwedishDayKey,
         getStockholmIsoWeekKey: getStockholmIsoWeekKey,
         pickWeekAndDay: pickWeekAndDay,
+        pickNaturalWeekAndDay: pickNaturalWeekAndDay,
+        getArchiveSelection: getArchiveSelection,
+        isArchiveActive: function () { return !!getArchiveSelection(); },
+        ARCHIVE_KEY: ARCHIVE_KEY,
         parseScheduleNow: function () {
             const weeks = typeof window !== 'undefined' ? window.SPARPLANEN_WEEKS : null;
             const anchors = typeof window !== 'undefined' ? window.SPARPLANEN_ANCHORS : null;
@@ -164,6 +228,7 @@
                 anchor: a,
                 qaOverride: !!p.qaOverride,
                 qaTime: p.qaTime || null,
+                archive: !!p.archive,
             };
         },
         parseClosuresNow: function (week, day) {

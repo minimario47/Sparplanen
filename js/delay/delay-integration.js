@@ -50,9 +50,20 @@ class DelayIntegration {
             // Set initial status to disconnected (red) - assume failure first
             this.updateConnectionStatus();
 
-            // Start auto-update
-            this.apiClient.startAutoUpdate(30000); // 30 seconds
-            logger.info('Integration', 'Auto-update started');
+            // Archive mode: the user is viewing a past week, so the live delay
+            // feed is meaningless. Skip polling entirely (no conflicts, no
+            // late-arrivals churn, no network traffic) and leave the rest of the
+            // integration wired up so tooltips/visualizers still resolve.
+            const archiveActive = !!(window.SparplanenResolve &&
+                window.SparplanenResolve.isArchiveActive &&
+                window.SparplanenResolve.isArchiveActive());
+            if (archiveActive) {
+                logger.info('Integration', 'Archive mode active — live delay polling disabled');
+            } else {
+                // Start auto-update
+                this.apiClient.startAutoUpdate(30000); // 30 seconds
+                logger.info('Integration', 'Auto-update started');
+            }
 
             this.isInitialized = true;
             logger.info('Integration', '✅ Initialization complete');

@@ -49,11 +49,17 @@
 
         const fadeW = (FADE_MINUTES / 60) * pixelsPerHour;
         const stitched = !!(window.currentStitchInfo && window.currentStitchInfo.stitched);
+        const archive = !!(window.currentScheduleSelection && window.currentScheduleSelection.archive);
 
-        // Midnight hour offsets within the view. Hour 24 only when tomorrow is
-        // stitched in (otherwise the inactive region owns that edge).
+        // Midnight hour offsets within the view. Archive mode spans a whole week
+        // so it marks every midnight; the live 30h view marks hour 24 only when
+        // tomorrow is stitched in (otherwise the inactive region owns that edge).
         const midnights = [0];
-        if (timelineHours > 24 && stitched) midnights.push(24);
+        if (archive) {
+            for (let h = 24; h < timelineHours; h += 24) midnights.push(h);
+        } else if (timelineHours > 24 && stitched) {
+            midnights.push(24);
+        }
 
         midnights.forEach((hour) => {
             const mark = document.createElement('div');
