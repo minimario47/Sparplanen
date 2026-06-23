@@ -1,144 +1,236 @@
-/* Notification Toast System */
+/* Toast notifications — "platform-board" stack.
 
-.notification {
+   Speaks the same edit-palette vocabulary as the control dock: a neutral
+   --surface-raised card with --border-primary + --shadow-md, never a solid
+   semantic colour fill. Type is signalled by a small coloured signal-aspect dot
+   (and the matching countdown rail) — the only place colour appears.
+
+   Reduced-motion safe: the resting state is fully visible without any JS class
+   toggle, and the rail / pulse animations are inert under prefers-reduced-motion.
+   No `transition: all` anywhere (explicit property lists only). */
+
+/* ───────────── The stack (top-right, under the header) ───────────── */
+.notification-stack {
     position: fixed;
-    top: calc(var(--space-6) + 60px); /* Below header */
+    top: calc(var(--space-6) + 60px);
     right: var(--space-6);
     z-index: 9999;
-    
-    min-width: 280px;
-    max-width: 400px;
-    padding: var(--space-4) var(--space-5);
-    
-    background: var(--surface-secondary);
+
+    display: flex;
+    flex-direction: column;   /* newest is inserted first → sits on top */
+    gap: var(--space-3);
+
+    width: min(360px, calc(100vw - 2 * var(--space-6)));
+
+    /* Let clicks fall through the gaps to the grid behind; toasts re-enable it. */
+    pointer-events: none;
+}
+
+/* ───────────── A toast ───────────── */
+.notification {
+    --notif-accent: var(--primary-500);
+
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    column-gap: var(--space-3);
+
+    padding: 12px 14px 13px;
+    overflow: hidden;
+
+    background: var(--surface-raised);
     border: 1px solid var(--border-primary);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    
-    font-size: var(--text-base);
-    font-weight: var(--font-medium);
+    box-shadow: var(--shadow-md);
+
+    font-size: 13px;
+    font-weight: 500;
     color: var(--text-primary);
-    
-    opacity: 0;
-    transform: translateX(400px);
-    transition: all 0.3s var(--ease-out);
-    
-    /* Prevent text selection */
+
+    pointer-events: auto;
     user-select: none;
     -webkit-user-select: none;
+
+    /* Enter/exit motion. Resting state is visible; --in returns it to rest. */
+    opacity: 0;
+    transform: translateX(16px);
+    transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
 }
 
-.notification.show {
+.notification--in {
     opacity: 1;
-    transform: translateX(0);
+    transform: none;
 }
 
-/* Notification types */
-.notification-success {
-    border-left: 4px solid var(--success-500);
-    background: var(--success-50);
-    color: var(--success-800);
+.notification--out {
+    opacity: 0;
+    transform: translateX(16px);
 }
 
-[data-theme="dark"] .notification-success {
-    background: var(--success-900);
-    color: var(--success-100);
-    border-color: var(--success-400);
+/* ───────────── Signal dot ───────────── */
+.notification__dot {
+    width: 9px;
+    height: 9px;
+    margin-top: 5px;
+    border-radius: var(--radius-full);
+    background: var(--notif-accent);
+    /* Soft halo so the dot reads as a lit signal aspect, not a flat bullet. */
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--notif-accent) 20%, transparent);
+    flex-shrink: 0;
 }
 
-[data-theme="high-contrast"] .notification-success {
-    background: #001a00;
-    color: #00ff00;
-    border-color: #00ff00;
+/* ───────────── Message body + repeat counter ───────────── */
+.notification__body {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 0;
+    line-height: 1.4;
+    padding-top: 1px;
 }
 
-.notification-error {
-    border-left: 4px solid var(--danger-500);
-    background: var(--danger-50);
-    color: var(--danger-800);
+.notification__text {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
-[data-theme="dark"] .notification-error {
-    background: var(--danger-900);
-    color: var(--danger-100);
-    border-color: var(--danger-400);
+.notification__count {
+    flex-shrink: 0;
+    padding: 1px 7px;
+    border-radius: var(--radius-full);
+    background: var(--primary-50);
+    color: var(--primary-700);
+    font-size: 11px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
 }
 
-[data-theme="high-contrast"] .notification-error {
-    background: #1a0000;
-    color: #ff0000;
-    border-color: #ff0000;
+/* ───────────── Close button ───────────── */
+.notification__close {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    margin: -2px -4px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: none;
+    border: none;
+    border-radius: var(--radius-DEFAULT);
+    color: var(--text-tertiary);
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.notification-warning {
-    border-left: 4px solid var(--warning-500);
-    background: var(--warning-50);
-    color: var(--warning-800);
+.notification__close:hover {
+    background: var(--surface-tertiary);
+    color: var(--text-primary);
 }
 
-[data-theme="dark"] .notification-warning {
-    background: var(--warning-900);
-    color: var(--warning-100);
-    border-color: var(--warning-400);
+.notification__close:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 1px;
 }
 
-[data-theme="high-contrast"] .notification-warning {
-    background: #1a1a00;
-    color: #ffff00;
-    border-color: #ffff00;
+/* ───────────── Countdown rail (bottom edge) ───────────── */
+.notification__rail {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: color-mix(in srgb, var(--notif-accent) 14%, transparent);
 }
 
-.notification-info {
-    border-left: 4px solid var(--info-500);
-    background: var(--info-50);
-    color: var(--info-800);
+.notification__rail-fill {
+    height: 100%;
+    background: var(--notif-accent);
+    transform-origin: left center;
+    animation: notif-countdown var(--notif-duration, 4500ms) linear forwards;
 }
 
-[data-theme="dark"] .notification-info {
-    background: var(--info-900);
-    color: var(--info-100);
-    border-color: var(--info-400);
+.notification--paused .notification__rail-fill {
+    animation-play-state: paused;
 }
 
-[data-theme="high-contrast"] .notification-info {
-    background: #00001a;
-    color: #00ccff;
-    border-color: #00ccff;
+@keyframes notif-countdown {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(0); }
 }
 
-/* Responsive adjustments */
+/* Brief pulse when a repeat coalesces into the counter. */
+.notification--pulse {
+    animation: notif-pulse 0.4s var(--ease-out);
+}
+
+@keyframes notif-pulse {
+    0%   { transform: none; }
+    35%  { transform: scale(1.015); }
+    100% { transform: none; }
+}
+
+/* ───────────── Type accents (dot + rail colour only) ───────────── */
+.notification--success { --notif-accent: var(--success-500); }
+.notification--error   { --notif-accent: var(--danger-500); }
+.notification--warning { --notif-accent: var(--warning-500); }
+.notification--info    { --notif-accent: var(--info-500); }
+
+/* ───────────── Theme variants ───────────── */
+/* Dark: lean on borders, not shadows (app-wide rule). */
+[data-theme="dark"] .notification {
+    box-shadow: none;
+    border-color: var(--border-primary);
+}
+
+/* High contrast: hard edges, strong border, no rounding, bold text. */
+[data-theme="high-contrast"] .notification {
+    box-shadow: none;
+    border: 2px solid var(--notif-accent);
+    border-radius: 0;
+    font-weight: 700;
+}
+
+[data-theme="high-contrast"] .notification__count {
+    background: transparent;
+    border: 1px solid currentColor;
+}
+
+/* ───────────── Small screens: full-width banners ───────────── */
 @media (max-width: 768px) {
-    .notification {
+    .notification-stack {
         top: var(--space-4);
         right: var(--space-4);
         left: var(--space-4);
-        min-width: auto;
-        max-width: none;
+        width: auto;
     }
 }
 
-/* Respect reduced motion */
+/* ───────────── Reduced motion: static, fully visible end-states ───────────── */
 @media (prefers-reduced-motion: reduce) {
     .notification {
-        transition: opacity 0.2s ease;
+        transition: none;
         transform: none;
+        opacity: 1;            /* visible regardless of the --in toggle */
     }
-    
-    .notification.show {
+
+    .notification--out {
         transform: none;
+        opacity: 0;
+    }
+
+    /* No depleting animation — show a static full rail so the accent still reads. */
+    .notification__rail-fill {
+        animation: none;
+        transform: scaleX(1);
+    }
+
+    .notification--pulse {
+        animation: none;
     }
 }
-
-/* Dark mode: remove shadows, use borders */
-[data-theme="dark"] .notification {
-    box-shadow: none;
-    border: 2px solid var(--border-primary);
-}
-
-/* High contrast: strong borders */
-[data-theme="high-contrast"] .notification {
-    box-shadow: none;
-    border: 3px solid;
-    font-weight: var(--font-bold);
-}
-

@@ -323,35 +323,152 @@ function updateCurrentTimeDisplay() {
 */
 
 /**
- * Show notification with visual toast
+ * Toast notifications — "platform-board" stack.
+ *
+ * One fixed stack (top-right, under the header) holds every toast in a column,
+ * so multiple notifications queue instead of overlapping. Each toast is a
+ * neutral raised card that speaks the edit-palette vocabulary; type is signalled
+ * by a small coloured signal-aspect dot, not a full colour fill. A countdown
+ * rail depletes as the auto-dismiss timer runs and pauses while hovered.
+ * Repeated identical messages coalesce into a ×N counter.
+ *
+ * Reduced-motion safe: the card's resting state is fully visible without any
+ * JS class toggle, and the rail/animations are inert under prefers-reduced-motion.
  */
-function showNotification(message, type = 'info') {
-    console.log(`📢 [${type.toUpperCase()}] ${message}`);
-    
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-    notification.setAttribute('role', 'status');
-    notification.setAttribute('aria-live', 'polite');
-    
-    // Add to body
-    document.body.appendChild(notification);
-    
-    // Trigger animation after a small delay to ensure styles are applied
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 10);
-    
-    // Remove after 3 seconds
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
-    }, 3000);
+const NOTIFICATION_MAX_VISIBLE = 5;
+const NOTIFICATION_DEFAULT_DURATION = 4500;
+const NOTIFICATION_ERROR_DURATION = 7000;
+
+function getNotificationStack() {
+    let stack = document.getElementById('notification-stack');
+    if (!stack) {
+        stack = document.createElement('div');
+        stack.id = 'notification-stack';
+        stack.className = 'notification-stack';
+        // The stack itself is the live region; additions are announced once.
+        stack.setAttribute('role', 'region');
+        stack.setAttribute('aria-label', 'Aviseringar');
+        stack.setAttribute('aria-live', 'polite');
+        stack.setAttribute('aria-relevant', 'additions');
+        document.body.appendChild(stack);
+    }
+    return stack;
+}
+
+function dismissNotification(toast) {
+    if (!toast || toast.dataset.dismissing === 'true') return;
+    toast.dataset.dismissing = 'true';
+    if (toast._notifTimer) clearTimeout(toast._notifTimer);
+    toast.classList.remove('notification--in');
+    toast.classList.add('notification--out');
+    const remove = () => { if (toast.parentNode) toast.remove(); };
+    // Fall back to a timer in case transitionend never fires (reduced motion).
+    toast.addEventListener('transitionend', remove, { once: true });
+    setTimeout(remove, 320);
+}
+
+function startNotificationTimer(toast, duration) {
+    toast._notifRemaining = duration;
+    const begin = () => {
+        toast._notifStart = Date.now();
+        toast._notifTimer = setTimeout(() => dismissNotification(toast), toast._notifRemaining);
+        toast.classList.remove('notification--paused');
+    };
+    const pause = () => {
+        if (!toast._notifTimer) return;
+        clearTimeout(toast._notifTimer);
+        toast._notifTimer = null;
+        toast._notifRemaining -= (Date.now() - toast._notifStart);
+        toast.classList.add('notification--paused');
+    };
+    toast.addEventListener('mouseenter', pause);
+    toast.addEventListener('mouseleave', begin);
+    begin();
+}
+
+function showNotification(message, type = 'info', duration) {
+    console.log(`📢 [${String(type).toUpperCase()}] ${message}`);
+
+    if (duration == null) {
+        duration = type === 'error' ? NOTIFICATION_ERROR_DURATION : NOTIFICATION_DEFAULT_DURATION;
+    }
+
+    const stack = getNotificationStack();
+
+    // Coalesce a repeat of the most recent, same-type message into a ×N counter
+    // instead of stacking a duplicate.
+    const newest = stack.firstElementChild;
+    if (newest && newest.dataset.dismissing !== 'true' &&
+        newest.dataset.type === type && newest.dataset.message === message) {
+        const count = (parseInt(newest.dataset.count || '1', 10)) + 1;
+        newest.dataset.count = String(count);
+        let badge = newest.querySelector('.notification__count');
+        if (!badge) {
+            badge = document.createElement('span');
+            badge.className = 'notification__count';
+            newest.querySelector('.notification__body').appendChild(badge);
+        }
+        badge.textContent = `×${count}`;
+        // Re-pulse and restart the countdown.
+        newest.classList.remove('notification--pulse');
+        void newest.offsetWidth; // reflow so the animation can re-trigger
+        newest.classList.add('notification--pulse');
+        if (newest._notifTimer) clearTimeout(newest._notifTimer);
+        startNotificationTimer(newest, duration);
+        return;
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `notification notification--${type}`;
+    toast.dataset.type = type;
+    toast.dataset.message = message;
+    toast.dataset.count = '1';
+    toast.style.setProperty('--notif-duration', `${duration}ms`);
+
+    const dot = document.createElement('span');
+    dot.className = 'notification__dot';
+    dot.setAttribute('aria-hidden', 'true');
+
+    const body = document.createElement('div');
+    body.className = 'notification__body';
+    const text = document.createElement('span');
+    text.className = 'notification__text';
+    text.textContent = message;
+    body.appendChild(text);
+
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'notification__close';
+    close.setAttribute('aria-label', 'Stäng');
+    close.textContent = '✕';
+    close.addEventListener('click', () => dismissNotification(toast));
+
+    const rail = document.createElement('div');
+    rail.className = 'notification__rail';
+    rail.setAttribute('aria-hidden', 'true');
+    const railFill = document.createElement('div');
+    railFill.className = 'notification__rail-fill';
+    rail.appendChild(railFill);
+
+    toast.append(dot, body, close, rail);
+
+    // Newest on top.
+    stack.insertBefore(toast, stack.firstChild);
+
+    // Trim the oldest past the cap. Work from a snapshot of the live (not
+    // already-dismissing) toasts — dismissNotification removes asynchronously,
+    // so we must not loop on the live children count.
+    const live = Array.prototype.filter.call(
+        stack.children, (c) => c.dataset.dismissing !== 'true'
+    );
+    for (let i = NOTIFICATION_MAX_VISIBLE; i < live.length; i++) {
+        dismissNotification(live[i]); // newest-first, so these are the oldest
+    }
+
+    // Reveal on the next frame so the enter transition runs.
+    requestAnimationFrame(() => toast.classList.add('notification--in'));
+
+    startNotificationTimer(toast, duration);
 }
 
 // Export globally
