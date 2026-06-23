@@ -259,9 +259,12 @@
         label.setAttribute('aria-haspopup', 'menu');
         label.setAttribute('aria-expanded', 'false');
         label.setAttribute('title', 'Visa/byt spårplansvecka');
-        label.addEventListener('click', function (e) { e.stopPropagation(); openPicker(); });
+        // The label lives inside the logo's <a href="/">. preventDefault stops
+        // that anchor from navigating to site root (a 404 on GitHub Pages, whose
+        // root isn't this project's path) when the label is clicked/activated.
+        label.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); openPicker(); });
         label.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPicker(); }
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); openPicker(); }
         });
     }
 
